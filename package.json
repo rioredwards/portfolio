@@ -5,7 +5,6 @@
   "version": "0.1.0",
   "homepage": "https://github.com/rioredwards/portfolio#readme",
   "private": true,
-  "main": "dist/index.js",
   "scripts": {
     "dev": "next",
     "build": "next build",
