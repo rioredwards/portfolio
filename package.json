@@ -5,6 +5,18 @@
   "version": "0.1.0",
   "homepage": "https://github.com/rioredwards/portfolio#readme",
   "private": true,
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
   "scripts": {
     "dev": "next",
     "build": "next build",
@@ -35,11 +47,16 @@
     "@types/react": "^18.2.20",
     "@types/react-dom": "^18.2.7",
     "autoprefixer": "10.4.15",
-    "eslint": "^8",
+    "eslint": "^8.50.0",
     "eslint-config-next": "13.5.4",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-plugin-prettier": "^5.0.0",
+    "eslint-plugin-react": "^7.33.2",
+    "eslint-plugin-react-hooks": "^4.6.0",
     "jest": "^29.7.0",
     "jest-environment-jsdom": "^29.7.0",
     "postcss": "^8",
+    "prettier": "^3.0.3",
     "tailwindcss": "^3",
     "typescript": "^5"
   }

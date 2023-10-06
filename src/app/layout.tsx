@@ -1,20 +1,20 @@
-import { Metadata } from "next";
-import "./globals.css";
-import { Inter } from "next/font/google";
-import Footer from "@/components/Footer";
-import Header from "@/components/Header";
+import { Metadata } from 'next';
+import './globals.css';
+import { Inter as interFont } from 'next/font/google';
+import Footer from '@/components/Footer';
+import Header from '@/components/Header';
 
 export const metadata: Metadata = {
   title: `Rio Edwards | Web Developer`,
   description: `Rio Edwards, a web developer based in the PNW.`,
   keywords:
-    "Software, Engineer, Front-End, Back-End, Web, Developer, React, Next.js, TypeScript, JavaScript, CSS, HTML, Node.js, Portland, USA",
+    'Software, Engineer, Front-End, Back-End, Web, Developer, React, Next.js, TypeScript, JavaScript, CSS, HTML, Node.js, Portland, USA',
 };
 
-const inter = Inter({
-  variable: "--font-inter",
-  subsets: ["latin"],
-  display: "swap",
+const inter = interFont({
+  variable: '--font-inter',
+  subsets: ['latin'],
+  display: 'swap',
 });
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

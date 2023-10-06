@@ -1,9 +1,9 @@
-import Avatar from "./Avatar";
+import Avatar from './Avatar';
 
 interface HeroProps {
   PrimaryText: string;
   SecondaryText: string;
-  AvatarURL: URL;
+  AvatarURL: string;
 }
 
 const Hero: React.FC<HeroProps> = ({ PrimaryText, SecondaryText, AvatarURL }) => {
@@ -12,7 +12,7 @@ const Hero: React.FC<HeroProps> = ({ PrimaryText, SecondaryText, AvatarURL }) =>
       <h1>Rio Edwards</h1>
       <h2>{PrimaryText}</h2>
       <h3>{SecondaryText}</h3>
-      <Avatar URL={AvatarURL} />
+      <Avatar name="Avatar" url={AvatarURL} />
     </section>
   );
 };

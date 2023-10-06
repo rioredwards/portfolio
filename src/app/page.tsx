@@ -1,6 +1,6 @@
-import Link from "next/link";
-import { draftMode } from "next/headers";
-import { getHeroContent } from "@/lib/api";
+import { draftMode } from 'next/headers';
+import { getHeroContent } from '@/lib/api';
+import Hero from '@/components/Hero';
 
 export default async function Page() {
   const { isEnabled: draftModeIsEnabled } = draftMode();
@@ -10,13 +10,11 @@ export default async function Page() {
     secondaryText,
     avatar: { url },
   } = heroContent;
-  console.log(heroContent);
 
   return (
     <div className="container mx-auto px-5">
-      <h1>{title}</h1>
-      <h2>{secondaryText}</h2>
-      <img src={url} />
+      <h1>My Page</h1>
+      <Hero PrimaryText={title} SecondaryText={secondaryText} AvatarURL={url} />
     </div>
   );
 }
