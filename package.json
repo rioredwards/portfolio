@@ -5,6 +5,9 @@
   "version": "0.1.0",
   "homepage": "https://github.com/rioredwards/portfolio#readme",
   "private": true,
+  "engines": {
+    "node": ">=14.0.0"
+  },
   "browserslist": {
     "production": [
       ">0.2%",
