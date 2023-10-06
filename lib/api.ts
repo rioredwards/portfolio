@@ -28,6 +28,22 @@ const POST_GRAPHQL_FIELDS = `
   }
 `;
 
+const HERO_GRAPHQL_FIELDS = `
+  title
+  secondaryText
+  avatar {
+    url
+  }
+`;
+
+interface HeroContent {
+  title: string;
+  secondaryText: string;
+  avatar: {
+    url: string;
+  };
+}
+
 async function fetchGraphQL(query: string, preview = false): Promise<any> {
   return fetch(
     `https://graphql.contentful.com/content/v1/spaces/${process.env.CONTENTFUL_SPACE_ID}`,
@@ -53,6 +69,25 @@ function extractPost(fetchResponse: any): any {
 
 function extractPostEntries(fetchResponse: any): any[] {
   return fetchResponse?.data?.postCollection?.items;
+}
+
+function extractHeroContent(content: any): any {
+  return content?.data?.heroContentCollection?.items?.[0];
+}
+
+export async function getHeroContent(isDraftMode: boolean): Promise<HeroContent> {
+  const content = await fetchGraphQL(
+    `query {
+      heroContentCollection(preview: ${isDraftMode ? "true" : "false"}) {
+        items {
+          ${HERO_GRAPHQL_FIELDS}
+        }
+      }
+    }`,
+    isDraftMode
+  );
+
+  return extractHeroContent(content);
 }
 
 export async function getPreviewPostBySlug(slug: string | null): Promise<any> {
