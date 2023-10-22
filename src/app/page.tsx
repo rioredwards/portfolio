@@ -1,6 +1,7 @@
 import { draftMode } from 'next/headers';
-import { getHeroContent } from '@/lib/api';
+import { getFeaturedProjectThumbnails, getHeroContent } from '@/lib/api';
 import Hero from '@/components/Hero';
+import FeaturedCodeProjectThumbnail from '@/components/FeaturedCodeProjectThumbnail';
 
 export default async function Page() {
   const { isEnabled: draftModeIsEnabled } = draftMode();
@@ -11,10 +12,18 @@ export default async function Page() {
     avatar: { url },
   } = heroContent;
 
+  const featuredCodeProjectThumbnails = await getFeaturedProjectThumbnails(draftModeIsEnabled);
+
   return (
     <div className="container mx-auto px-5">
-      <h1>My Page</h1>
       <Hero PrimaryText={title} SecondaryText={secondaryText} AvatarURL={url} />
+      <hr />
+      {featuredCodeProjectThumbnails.map((featuredCodeProjectThumbnail) => (
+        <FeaturedCodeProjectThumbnail
+          key={featuredCodeProjectThumbnail.slug}
+          {...featuredCodeProjectThumbnail}
+        />
+      ))}
     </div>
   );
 }
