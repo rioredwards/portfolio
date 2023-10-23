@@ -1,4 +1,4 @@
-const FEATURED_PROJECT_THUMBNAIL_GRAPHQL_FIELDS = `
+const CODE_PROJECT_CARDS_GRAPHQL_FIELDS = `
   title
   slug
   preview {
@@ -28,7 +28,7 @@ interface HeroContent {
   };
 }
 
-interface FeaturedProjectThumbnail {
+interface CodeProjectCard {
   title: string;
   slug: string;
   preview: {
@@ -57,11 +57,7 @@ async function fetchGraphQL(query: string, preview = false): Promise<any> {
   ).then((response) => response.json());
 }
 
-function extractPost(fetchResponse: any): any {
-  return fetchResponse?.data?.postCollection?.items?.[0];
-}
-
-function extractFeaturedProjectEntries(fetchResponse: any): any[] {
+function extractCodeProjectCardEntries(fetchResponse: any): any[] {
   const entries = fetchResponse?.data?.featuredCodeProjectCollection?.items;
   const entiresWithExtractedTags = entries?.map((entry: any) => {
     const tags = entry?.tagsCollection?.items?.map((item: any) => item?.text);
@@ -93,9 +89,7 @@ export async function getHeroContent(isDraftMode: boolean): Promise<HeroContent>
   return extractHeroContent(content);
 }
 
-export async function getFeaturedProjectThumbnails(
-  isDraftMode: boolean
-): Promise<FeaturedProjectThumbnail[]> {
+export async function getCodeProjectCardsContent(isDraftMode: boolean): Promise<CodeProjectCard[]> {
   const entries = await fetchGraphQL(
     `query {
       featuredCodeProjectCollection(
@@ -103,42 +97,11 @@ export async function getFeaturedProjectThumbnails(
         preview: ${isDraftMode ? 'true' : 'false'}
       ) {
         items {
-          ${FEATURED_PROJECT_THUMBNAIL_GRAPHQL_FIELDS}
+          ${CODE_PROJECT_CARDS_GRAPHQL_FIELDS}
         }
       }
     }`,
     isDraftMode
   );
-  return extractFeaturedProjectEntries(entries);
+  return extractCodeProjectCardEntries(entries);
 }
-
-// export async function getPostAndMorePosts(slug: string, preview: boolean): Promise<any> {
-//   const entry = await fetchGraphQL(
-//     `query {
-//       postCollection(where: { slug: "${slug}" }, preview: ${preview ? 'true' : 'false'}, limit: 1) {
-//         items {
-//           ${POST_GRAPHQL_FIELDS}
-//         }
-//       }
-//     }`,
-//     preview
-//   );
-//   const entries = await fetchGraphQL(
-//     `query {
-//       postCollection(
-//         where: { slug_not_in: "${slug}" },
-//         order: date_DESC,
-//         preview: ${preview ? 'true' : 'false'},
-//         limit: 2) {
-//         items {
-//           ${POST_GRAPHQL_FIELDS}
-//         }
-//       }
-//     }`,
-//     preview
-//   );
-//   return {
-//     post: extractPost(entry),
-//     morePosts: extractPostEntries(entries),
-//   };
-// }

@@ -1,6 +1,6 @@
 import ContentfulImage from '@/lib/contentful-image';
 
-interface FeaturedCodeProjectThumbnailProps {
+interface CodeProjectCardProps {
   title: string;
   preview: {
     url: string;
@@ -9,11 +9,7 @@ interface FeaturedCodeProjectThumbnailProps {
   tags: string[];
 }
 
-const FeaturedCodeProjectThumbnail: React.FC<FeaturedCodeProjectThumbnailProps> = ({
-  title,
-  preview,
-  tags,
-}) => {
+const CodeProjectCard: React.FC<CodeProjectCardProps> = ({ title, preview, tags }) => {
   return (
     <section>
       <h3 className="text-lg font-bold">{title}</h3>
@@ -33,4 +29,4 @@ const FeaturedCodeProjectThumbnail: React.FC<FeaturedCodeProjectThumbnailProps> 
   );
 };
 
-export default FeaturedCodeProjectThumbnail;
+export default CodeProjectCard;
