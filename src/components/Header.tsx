@@ -1,11 +1,18 @@
+import Link from 'next/link';
+
 const Header: React.FC = () => {
   return (
-    <header className="bg-accent-1 border-t border-accent-2">
-      <div className="container mx-auto px-5">
-        <h3 className="text-4xl lg:text-5xl font-bold tracking-tighter leading-tight text-center lg:text-left mb-10 lg:mb-0 lg:pr-4 lg:w-1/2">
-          Rio Edwards
-        </h3>
-      </div>
+    <header className="bg-slate-100 flex justify-start py-3 px-5 w-full border-b">
+      <Link href="/">
+        <span className="font-semibold text-2xl whitespace-nowrap">RIO EDWARDS</span>
+      </Link>
+      <nav className="ml-auto flex justify-around w-96 align-middle items-center">
+        <Link href="/">HOME</Link>
+        <Link href="/code">CODE</Link>
+        <Link href="/art">ART</Link>
+        <Link href="/about">ABOUT</Link>
+        <Link href="/contact">CONTACT</Link>
+      </nav>
     </header>
   );
 };
