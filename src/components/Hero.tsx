@@ -1,5 +1,4 @@
 import ContentfulImage from '@/lib/contentful-image';
-import Avatar from './Avatar';
 
 interface HeroProps {
   PrimaryText: string;

@@ -1,6 +1,7 @@
 import ContentfulImage from '@/lib/contentful-image';
+import Link from 'next/link';
 
-interface CodeProjectCardProps {
+interface NewCodeProjectCardProps {
   title: string;
   preview: {
     url: string;
@@ -9,24 +10,31 @@ interface CodeProjectCardProps {
   tags: string[];
 }
 
-const CodeProjectCard: React.FC<CodeProjectCardProps> = ({ title, preview, tags }) => {
+const NewCodeProjectCard: React.FC<NewCodeProjectCardProps> = ({ title, preview, tags }) => {
   return (
-    <section>
-      <h3 className="text-lg font-bold">{title}</h3>
-      <ContentfulImage
-        alt={preview.title}
-        className="object-cover h-full rounded-s-sm"
-        height={480}
-        width={480}
-        src={preview.url}
-      />
-      <ul className="list-disc">
-        {tags.map((tag, idx) => (
-          <li key={idx}>{tag}</li>
-        ))}
-      </ul>
-    </section>
+    <div className="my-1 px-1 w-full md:w-1/2 lg:my-4 lg:px-4 lg:w-1/3">
+      <article className="overflow-hidden rounded-lg shadow-lg">
+        <Link href={`/${title}`}>
+          <ContentfulImage
+            width={600}
+            height={600}
+            alt={preview.title}
+            className="block h-auto w-full"
+            src={preview.url}
+          />
+        </Link>
+
+        <header className="flex items-center justify-between leading-tight p-2 md:p-4">
+          <h1 className="text-lg">
+            <a className="no-underline hover:underline text-black" href="#">
+              {title}
+            </a>
+          </h1>
+          <p className="text-grey-darker text-sm">11/1/19</p>
+        </header>
+      </article>
+    </div>
   );
 };
 
-export default CodeProjectCard;
+export default NewCodeProjectCard;
