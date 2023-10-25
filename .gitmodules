@@ -1,0 +1,3 @@
+[submodule "scripts/gifProcessor"]
+	path = scripts/gifProcessor
+	url = https://github.com/rioredwards/gifProcessor.git
