@@ -13,24 +13,22 @@ interface NewCodeProjectCardProps {
 const NewCodeProjectCard: React.FC<NewCodeProjectCardProps> = ({ title, preview, tags }) => {
   return (
     <div className="my-1 px-1 w-full md:w-1/2 lg:my-4 lg:px-4 lg:w-1/3">
-      <article className="overflow-hidden rounded-lg shadow-lg">
-        <Link href={`/${title}`}>
+      <article className="group relative flex flex-col items-center h-[260px] overflow-hidden rounded-lg hover:shadow-lg">
+        <Link href={`/${title}`} className="w-full h-full">
           <ContentfulImage
-            width={600}
-            height={600}
+            width={400}
+            height={260}
             alt={preview.title}
-            className="block h-auto w-full"
+            className="inset-0 object-cover w-full h-full"
             src={preview.url}
           />
         </Link>
-
-        <header className="flex items-center justify-between leading-tight p-2 md:p-4">
+        <header className="hidden group-hover:flex items-center justify-between p-2 md:p-4 z-10 absolute top-1/2">
           <h1 className="text-lg">
-            <a className="no-underline hover:underline text-black" href="#">
+            <a className="no-underline text-white text-2xl font-bold" href="#">
               {title}
             </a>
           </h1>
-          <p className="text-grey-darker text-sm">11/1/19</p>
         </header>
       </article>
     </div>
