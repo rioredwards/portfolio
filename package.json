@@ -27,7 +27,8 @@
     "lint": "next lint",
     "test": "jest",
     "test:watch": "jest --watch",
-    "test:ci": "jest --ci"
+    "test:ci": "jest --ci",
+    "downloadPngsFromGifs": "ts-node-esm ./scripts/downloadProjectThumbnails/src/index.ts /Users/rioedwards/Documents/Coding/portfolio/projectThumbnails"
   },
   "dependencies": {
     "@contentful/rich-text-react-renderer": "^15.17.1",
@@ -65,6 +66,7 @@
     "prettier": "^3.0.3",
     "prettier-plugin-tailwindcss": "^0.5.6",
     "tailwindcss": "^3",
+    "ts-node": "^10.9.1",
     "typescript": "^5"
   }
 }
