@@ -15,17 +15,21 @@ export default async function Page() {
   const codeProjectCards = await getCodeProjectCardsContent(draftModeIsEnabled);
 
   return (
-    <div className="container mx-auto px-5">
-      <Hero PrimaryText={title} SecondaryText={secondaryText} AvatarURL={url} />
+    <div className="w-full">
+      <div className="container px-5">
+        <Hero PrimaryText={title} SecondaryText={secondaryText} AvatarURL={url} />
+      </div>
       <hr />
-      <section className="container my-12 mx-auto px-4 md:px-12 ">
-        <h1 className="w-full text-center font-bold text-3xl mb-12">CODE</h1>
-        <div className="flex flex-wrap -mx-1 lg:-mx-4">
-          {codeProjectCards.map((codeProjectCard) => (
-            <CodeProjectCard key={codeProjectCard.slug} {...codeProjectCard} />
-          ))}
-        </div>
-      </section>
+      <div className="w-full bg-slate-200 flex items-center justify-center">
+        <section className="w-full container py-6 px-5 md:px-1">
+          <h1 className="w-full text-center font-bold text-3xl mb-4">CODE</h1>
+          <div className="flex flex-wrap px-6">
+            {codeProjectCards.map((codeProjectCard) => (
+              <CodeProjectCard key={codeProjectCard.slug} {...codeProjectCard} />
+            ))}
+          </div>
+        </section>
+      </div>
     </div>
   );
 }
