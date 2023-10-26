@@ -16,30 +16,40 @@ const NewCodeProjectCard: React.FC<NewCodeProjectCardProps> = async ({ title, pr
 
   return (
     <div className="my-1 px-1 w-full md:w-1/2 lg:my-4 lg:px-4 lg:w-1/3">
-      <article className="group relative flex flex-col items-center h-[260px] overflow-hidden rounded-lg hover:shadow-lg">
-        <Link href={`/${title}`} className="w-full h-full">
+      <article className="group relative flex flex-col items-center h-[260px] overflow-hidden rounded-lg hover:shadow-sm">
+        <Link href={`/${title}`} className="w-full h-full overflow-hidden">
           <ContentfulImage
             width={400}
             height={260}
             alt={preview.title}
-            className="block group-hover:hidden inset-0 object-cover w-full h-full"
-            src={previewPng}
-          />
-          <ContentfulImage
-            width={400}
-            height={260}
-            alt={preview.title}
-            className="hidden group-hover:block z-10 inset-0 object-cover w-full h-full"
+            className="block group-hover:hidden z-10 inset-0 object-cover w-full h-full"
             src={preview.url}
           />
+          <ContentfulImage
+            width={400}
+            height={260}
+            alt={preview.title}
+            className="hidden group-hover:block blur-sm inset-0 object-cover w-full h-full"
+            src={previewPng}
+          />
         </Link>
-        <header className="flex group-hover:hidden items-center justify-between p-2 md:p-4 z-10 absolute top-1/2">
+        <div className="hidden z-30 group-hover:flex flex-col items-center justify-between p-2 md:p-4 text-white absolute top-8 w-full">
           <h1 className="text-lg">
-            <a className="no-underline text-white text-2xl font-bold" href="#">
+            <a className="block no-underline text-2xl font-extrabold text-center" href="#">
               {title}
             </a>
           </h1>
-        </header>
+          <div className="flex w-2/3 mt-12 items-center justify-center flex-wrap">
+            {tags.map((tag) => (
+              <span
+                key={tag}
+                className="text-sm font-semibold text-gray-200 bg-gray-700 mx-4 px-3 py-1 mt-2 rounded-full"
+              >
+                {tag}
+              </span>
+            ))}
+          </div>
+        </div>
       </article>
     </div>
   );

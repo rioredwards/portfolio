@@ -19,6 +19,7 @@ export default async function Page() {
       <Hero PrimaryText={title} SecondaryText={secondaryText} AvatarURL={url} />
       <hr />
       <section className="container my-12 mx-auto px-4 md:px-12 ">
+        <h1 className="w-full text-center font-bold text-3xl mb-12">CODE</h1>
         <div className="flex flex-wrap -mx-1 lg:-mx-4">
           {codeProjectCards.map((codeProjectCard) => (
             <CodeProjectCard key={codeProjectCard.slug} {...codeProjectCard} />
