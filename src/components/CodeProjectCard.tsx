@@ -25,18 +25,20 @@ const NewCodeProjectCard: React.FC<NewCodeProjectCardProps> = async ({ title, pr
 
   return (
     <div className="my-1 px-1 w-full md:w-1/2 lg:my-4 lg:px-4 lg:w-1/3">
-      <article className="group relative flex flex-col items-center h-[260px] overflow-hidden rounded-lg hover:shadow-sm cursor-pointer">
+      <article className="group relative flex flex-col items-center h-[260px] overflow-hidden rounded-lg hover:shadow-md cursor-pointer">
         <Link href={`/${title}`} className="w-full h-full">
           <CodeCardPreview key={title} title={title} gifUrl={preview.url} pngStr={previewPng} />
         </Link>
-        <div className="hidden z-30 group-hover:flex flex-col items-center justify-between p-2 md:p-4 text-white absolute top-8 w-full">
-          <h1 className={titleFontSize}>
-            <a className="block no-underline font-extrabold text-center" href="#">
-              {title}
-            </a>
-          </h1>
-          <div className="h-[1px] w-full mt-4 bg-white" />
-          <div className="flex w-2/3 mt-12 items-center justify-center flex-wrap">
+        <div className="hidden group-hover:flex z-30 flex-col items-center justify-between p-2 md:p-4 text-white absolute w-full h-full">
+          <div className="h-16 w-full">
+            <h1 className={titleFontSize}>
+              <a className="block no-underline font-extrabold text-center" href="#">
+                {title}
+              </a>
+            </h1>
+            <div className="h-[1px] w-full mt-2 bg-white" />
+          </div>
+          <div className="flex w-2/3 mt-4 items-center justify-center flex-wrap">
             {tags.map((tag) => (
               <span
                 key={tag}

@@ -8,7 +8,7 @@ interface CodeCardPreviewProps {
 
 const CodeCardPreview: React.FC<CodeCardPreviewProps> = async ({ title, gifUrl, pngStr }) => {
   return (
-    <div className="w-full h-full overflow-hidden pointer-events-none">
+    <div className="w-full h-full overflow-hidden pointer-events-none border">
       <ContentfulImage
         width={400}
         height={260}
@@ -17,10 +17,10 @@ const CodeCardPreview: React.FC<CodeCardPreviewProps> = async ({ title, gifUrl, 
         src={gifUrl}
       />
       <ContentfulImage
-        width={400}
-        height={260}
+        width={10}
+        height={10}
         alt={title}
-        className="hidden group-hover:block blur-sm inset-0 object-cover w-full h-full"
+        className="hidden group-hover:block blur-sm inset-0 object-cover w-[101%] h-[101%]"
         src={pngStr}
       />
     </div>
