@@ -1,9 +1,17 @@
+import { Document, Text } from '@contentful/rich-text-types';
+
 const CODE_PROJECT_CARDS_GRAPHQL_FIELDS = `
   title
   slug
   preview {
     title
     url
+  }
+  description {
+      json
+  }
+  slogan {
+    json
   }
   tagsCollection {
     items {
@@ -28,7 +36,7 @@ interface HeroContent {
   };
 }
 
-interface CodeProjectCard {
+export interface CodeProjectCard {
   title: string;
   slug: string;
   preview: {
@@ -36,6 +44,8 @@ interface CodeProjectCard {
     url: string;
   };
   tags: string[];
+  description: Document;
+  slogan: Document | null;
 }
 
 async function fetchGraphQL(query: string, preview = false): Promise<any> {
@@ -59,15 +69,19 @@ async function fetchGraphQL(query: string, preview = false): Promise<any> {
 
 function extractCodeProjectCardEntries(fetchResponse: any): any[] {
   const entries = fetchResponse?.data?.featuredCodeProjectCollection?.items;
-  const entiresWithExtractedTags = entries?.map((entry: any) => {
+  const formattedEntries = entries?.map((entry: any) => {
     const tags = entry?.tagsCollection?.items?.map((item: any) => item?.text);
+    const description = entry?.description?.json;
+    const slogan = entry?.slogan?.json;
     delete entry.tagsCollection;
     return {
       ...entry,
+      description,
+      slogan,
       tags,
     };
   });
-  return entiresWithExtractedTags;
+  return formattedEntries;
 }
 
 function extractHeroContent(content: any): any {

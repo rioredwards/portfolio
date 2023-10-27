@@ -30,7 +30,7 @@
     "test:ci": "jest --ci"
   },
   "dependencies": {
-    "@contentful/rich-text-react-renderer": "^15.17.1",
+    "@contentful/rich-text-react-renderer": "^15.18.0",
     "@contentful/rich-text-types": "^16.2.1",
     "@tailwindcss/typography": "0.5.9",
     "contentful-import": "^9.0.4",
