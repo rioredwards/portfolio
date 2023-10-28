@@ -1,27 +1,32 @@
+'use client';
 // import { base64StrPngFromGif } from 'gif-png-converter';
 import Link from 'next/link';
-import CodeCardPreview from './CodeCardPreview';
-import CodeCardText from './CodeCardText';
 import { CodeProject } from '@/lib/api';
+import CodeCardContainer from './CodeCardContainer';
+import ContentfulImage from '../lib/contentful-image';
+import { useState } from 'react';
 
-const CodeProjectCard: React.FC<CodeProject> = async ({
-  title,
-  preview,
-  tags,
-  description,
-  slogan,
-}) => {
-  // const previewPng = await base64StrPngFromGif(preview.url);
+const CodeProjectCard: React.FC<CodeProject> = ({ title, codeCardIcon }) => {
+  const [isHover, setIsHover] = useState(false);
+  const type = codeCardIcon?.type || 'website';
+  const image = isHover ? codeCardIcon?.iconColored.url : codeCardIcon?.iconGrayscale.url;
 
   return (
-    <div className="my-1 px-1 w-full md:w-1/2 lg:my-4 lg:px-4 lg:w-1/3">
-      <article className="group relative flex flex-col items-center h-[260px] overflow-hidden rounded-lg hover:shadow-md cursor-pointer">
-        <Link href={`/${title}`} className="w-full h-full">
-          <CodeCardPreview key={title} title={title} gifUrl={preview.url} />
-        </Link>
-        <CodeCardText key={title} title={title} bodyText={slogan ?? description} tags={tags} />
-      </article>
-    </div>
+    <article
+      onMouseEnter={() => setIsHover(true)}
+      onMouseLeave={() => setIsHover(false)}
+      className="my-1 w-full group hover:bg-gradient-to-br from-cyan-200 to-blue-300 bg-slate-50 border-solid border-8 border-gray-300 relative flex flex-col items-center h-[260px] overflow-hidden rounded-4xl hover:shadow-lg cursor-pointer"
+    >
+      <Link href={`/${title}`} className="w-full h-full flex flex-col items-center justify-start">
+        <CodeCardContainer type={type}>
+          {codeCardIcon && (
+            <div className="h-full w-full flex flex-col items-center justify-center">
+              <ContentfulImage src={image} alt={codeCardIcon.title} height={150} width={150} />
+            </div>
+          )}
+        </CodeCardContainer>
+      </Link>
+    </article>
   );
 };
 

@@ -1,4 +1,4 @@
-import { Document, Text } from '@contentful/rich-text-types';
+import { Document } from '@contentful/rich-text-types';
 
 const CODE_PROJECT_CARDS_GRAPHQL_FIELDS = `
   title
@@ -16,6 +16,16 @@ const CODE_PROJECT_CARDS_GRAPHQL_FIELDS = `
   tagsCollection {
     items {
       text
+    }
+  }
+  codeCardIcon {
+    title
+    type
+    iconGrayscale {
+      url
+    }
+    iconColored {
+      url
     }
   }
 `;
@@ -36,6 +46,8 @@ interface HeroContent {
   };
 }
 
+export type CodeCardType = 'website' | 'cli' | 'plugin';
+
 export interface CodeProject {
   title: string;
   slug: string;
@@ -46,6 +58,16 @@ export interface CodeProject {
   tags: string[];
   description: Document;
   slogan: Document | null;
+  codeCardIcon: {
+    title: string;
+    type: CodeCardType;
+    iconGrayscale: {
+      url: string;
+    };
+    iconColored: {
+      url: string;
+    };
+  };
 }
 
 async function fetchGraphQL(query: string, preview = false): Promise<any> {
