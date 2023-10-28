@@ -3,26 +3,24 @@ import Link from 'next/link';
 import CodeCardPreview from './CodeCardPreview';
 import CodeCardText from './CodeCardText';
 import { CodeProject } from '@/lib/api';
+import NewCodeCardContainer from './NewCodeCardContainer';
 
-const CodeProjectCard: React.FC<CodeProject> = async ({
+const NewCodeProjectCard: React.FC<CodeProject> = async ({
   title,
   preview,
   tags,
   description,
   slogan,
 }) => {
-  // const previewPng = await base64StrPngFromGif(preview.url);
-
   return (
     <div className="my-1 px-1 w-full md:w-1/2 lg:my-4 lg:px-4 lg:w-1/3">
-      <article className="group relative flex flex-col items-center h-[260px] overflow-hidden rounded-lg hover:shadow-md cursor-pointer">
+      <article className="group bg-slate-50 border-solid border-8 border-gray-300 relative flex flex-col items-center h-[260px] overflow-hidden rounded-4xl hover:shadow-lg cursor-pointer">
         <Link href={`/${title}`} className="w-full h-full">
-          <CodeCardPreview key={title} title={title} gifUrl={preview.url} />
+          <NewCodeCardContainer />
         </Link>
-        <CodeCardText key={title} title={title} bodyText={slogan ?? description} tags={tags} />
       </article>
     </div>
   );
 };
 
-export default CodeProjectCard;
+export default NewCodeProjectCard;

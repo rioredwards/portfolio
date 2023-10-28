@@ -36,7 +36,7 @@ interface HeroContent {
   };
 }
 
-export interface CodeProjectCard {
+export interface CodeProject {
   title: string;
   slug: string;
   preview: {
@@ -103,7 +103,7 @@ export async function getHeroContent(isDraftMode: boolean): Promise<HeroContent>
   return extractHeroContent(content);
 }
 
-export async function getCodeProjectCardsContent(isDraftMode: boolean): Promise<CodeProjectCard[]> {
+export async function getCodeProjectCardsContent(isDraftMode: boolean): Promise<CodeProject[]> {
   const entries = await fetchGraphQL(
     `query {
       featuredCodeProjectCollection(

@@ -2,6 +2,8 @@ import { draftMode } from 'next/headers';
 import { getCodeProjectCardsContent, getHeroContent } from '@/lib/api';
 import Hero from '@/components/Hero';
 import CodeProjectCard from '@/components/CodeProjectCard';
+import NewCodeCardContainer from '@/components/NewCodeCardContainer';
+import NewCodeProjectCard from '@/components/NewCodeProjectCard';
 
 export default async function Page() {
   const { isEnabled: draftModeIsEnabled } = draftMode();
@@ -25,7 +27,7 @@ export default async function Page() {
           <h1 className="w-full text-center font-bold text-3xl mb-4">CODE</h1>
           <div className="flex flex-wrap px-6">
             {codeProjectCards.map((codeProjectCard) => (
-              <CodeProjectCard key={codeProjectCard.slug} {...codeProjectCard} />
+              <NewCodeProjectCard key={codeProjectCard.slug} {...codeProjectCard} />
             ))}
           </div>
         </section>

@@ -17,6 +17,9 @@ const config: Config = {
         '2r': '2rem',
         '3r': '3rem',
       },
+      borderRadius: {
+        '4xl': '3rem',
+      },
     },
   },
   plugins: [],
