@@ -14,7 +14,7 @@ const NewCodeProjectCard: React.FC<CodeProject> = async ({
 }) => {
   return (
     <div className="my-1 px-1 w-full md:w-1/2 lg:my-4 lg:px-4 lg:w-1/3">
-      <article className="group bg-slate-50 border-solid border-8 border-gray-300 relative flex flex-col items-center h-[260px] overflow-hidden rounded-4xl hover:shadow-lg cursor-pointer">
+      <article className="group hover:bg-gradient-to-br from-cyan-200 to-blue-300 bg-slate-50 border-solid border-8 border-gray-300 relative flex flex-col items-center h-[260px] overflow-hidden rounded-4xl hover:shadow-lg cursor-pointer">
         <Link href={`/${title}`} className="w-full h-full">
           <NewCodeCardContainer />
         </Link>

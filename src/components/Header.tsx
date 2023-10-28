@@ -2,7 +2,7 @@ import Link from 'next/link';
 
 const Header: React.FC = () => {
   return (
-    <header className="flex justify-start py-3 px-5 w-full border-b shadow-sm">
+    <header className="flex justify-start py-3 px-5 w-full border-b-8 border-gray-200">
       <Link href="/">
         <span className="font-semibold text-2xl whitespace-nowrap">RIO EDWARDS</span>
       </Link>
