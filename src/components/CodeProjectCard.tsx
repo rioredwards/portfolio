@@ -3,13 +3,12 @@
 import Link from 'next/link';
 import { CodeProject } from '@/lib/api';
 import CodeCardContainer from './CodeCardContainer';
-import ContentfulImage from '../lib/contentful-image';
 import { useState } from 'react';
+import CodeCardImage from './CodeCardImage';
 
 const CodeProjectCard: React.FC<CodeProject> = ({ title, codeCardIcon }) => {
   const [isHover, setIsHover] = useState(false);
   const type = codeCardIcon?.type || 'website';
-  const image = isHover ? codeCardIcon?.iconColored.url : codeCardIcon?.iconGrayscale.url;
 
   return (
     <article
@@ -19,11 +18,7 @@ const CodeProjectCard: React.FC<CodeProject> = ({ title, codeCardIcon }) => {
     >
       <Link href={`/${title}`} className="w-full h-full flex flex-col items-center justify-start">
         <CodeCardContainer type={type}>
-          {codeCardIcon && (
-            <div className="h-full w-full flex flex-col items-center justify-center">
-              <ContentfulImage src={image} alt={codeCardIcon.title} height={150} width={150} />
-            </div>
-          )}
+          {codeCardIcon && <CodeCardImage key={title} isHover={isHover} {...codeCardIcon} />}
         </CodeCardContainer>
       </Link>
     </article>
