@@ -14,7 +14,7 @@ const CodeProjectCard: React.FC<CodeProject> = ({ title, codeCardIcon }) => {
     <article
       onMouseEnter={() => setIsHover(true)}
       onMouseLeave={() => setIsHover(false)}
-      className="my-1 w-full group hover:bg-gradient-to-br from-cyan-200 to-blue-300 bg-slate-50 border-solid border-8 border-gray-300 relative flex flex-col items-center h-[260px] overflow-hidden rounded-4xl hover:shadow-lg cursor-pointer"
+      className="my-1 w-full group hover:bg-gradient-to-br from-cyan-200 to-blue-300 bg-slate-50 relative flex flex-col items-center h-[260px] overflow-hidden rounded-4xl hover:shadow-lg cursor-pointer"
     >
       <Link href={`/${title}`} className="w-full h-full flex flex-col items-center justify-start">
         <CodeCardContainer type={type}>
