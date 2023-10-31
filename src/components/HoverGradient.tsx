@@ -1,5 +1,5 @@
-'use client';
-import { MouseEvent, useRef, useState } from 'react';
+import { MouseEvent, useEffect, useRef, useState } from 'react';
+import { motion, useSpring } from 'framer-motion';
 
 interface HoverGradientProps {
   color?: string;
@@ -9,14 +9,22 @@ interface HoverGradientProps {
 
 const HoverGradient: React.FC<HoverGradientProps> = ({ color = '#FF560D', style, classes }) => {
   const containerRef = useRef<HTMLDivElement | null>(null);
-  const [coords, setCoords] = useState({ x: '0px', y: '0px', size: '0px' });
+  const [x, setX] = useState(0);
+  const [y, setY] = useState(0);
+
+  const springX = useSpring(x, { stiffness: 50, damping: 5 });
+  const springY = useSpring(y, { stiffness: 50, damping: 5 });
+
+  useEffect(() => {
+    springX.set(x);
+    springY.set(y);
+  }, [x, y]);
 
   const handleMouseMove = (e: MouseEvent<HTMLDivElement, globalThis.MouseEvent>) => {
     if (!containerRef.current) return;
     const rect = containerRef.current.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-    setCoords({ x: `${x}px`, y: `${y}px`, size: '1200px' });
+    setX(e.clientX - rect.left);
+    setY(e.clientY - rect.top);
   };
 
   return (
@@ -30,13 +38,13 @@ const HoverGradient: React.FC<HoverGradientProps> = ({ color = '#FF560D', style,
         ...style,
       }}
     >
-      <div
+      <motion.div
         style={{
           position: 'absolute',
           minHeight: '200px',
           minWidth: '200px',
-          left: coords.x,
-          top: coords.y,
+          left: springX,
+          top: springY,
           background: `radial-gradient(circle closest-side, ${color}, transparent)`,
           transform: 'translate(-50%, -50%)',
         }}
