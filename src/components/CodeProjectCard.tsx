@@ -6,7 +6,6 @@ import CodeCardImage from './CodeCardImage';
 import { adjustColor } from '@/utils/colorUtils';
 import WebsiteCard from './WebsiteCard';
 import CLICard from './CLICard';
-import HoverGradient from './HoverGradient';
 
 const MAX_TITLE_LENGTH = 28;
 
@@ -21,7 +20,6 @@ const generateBgGradientColors = (bgColor: string): string[] => {
   const topRightColor = adjustColor(bgColor, 10, -20);
   const middleColor = bgColor;
   const bottomLeftColor = adjustColor(bgColor, -10, 15);
-  // const gradientStr = `linear-gradient(to bottom right, ${topRightColor}, ${middleColor}, ${bottomLeftColor})`;
   return [topRightColor, middleColor, bottomLeftColor];
 };
 
@@ -49,7 +47,7 @@ const CodeProjectCard: React.FC<CodeProject> = ({ title, codeCardIcon }) => {
           </WebsiteCard>
         )}
         {type === 'cli' && (
-          <CLICard title={titleLimited}>
+          <CLICard title={titleLimited} color={codeCardIcon?.bgColor} isHover={isHover}>
             {codeCardIcon && <CodeCardImage key={title} isHover={isHover} {...codeCardIcon} />}
           </CLICard>
         )}
