@@ -1,30 +1,34 @@
-const POST_GRAPHQL_FIELDS = `
-  slug
+import { Document } from '@contentful/rich-text-types';
+
+const CODE_PROJECT_CARDS_GRAPHQL_FIELDS = `
   title
-  coverImage {
+  slug
+  preview {
+    title
     url
   }
-  date
-  author {
-    name
-    picture {
-      url
+  description {
+      json
+  }
+  slogan {
+    json
+  }
+  tagsCollection {
+    items {
+      text
     }
   }
-  excerpt
-  content {
-    json
-    links {
-      assets {
-        block {
-          sys {
-            id
-          }
-          url
-          description
-        }
-      }
+  codeCardIcon {
+    title
+    type
+    iconGrayscale {
+      url
     }
+    iconColored {
+      url
+    }
+    animation
+    bgColor
   }
 `;
 
@@ -41,6 +45,34 @@ interface HeroContent {
   secondaryText: string;
   avatar: {
     url: string;
+  };
+}
+
+export type CodeCardType = 'website' | 'cli' | 'plugin';
+
+export type CodeCardIconAnimation = 'none' | 'spin' | 'pulse' | 'wiggle';
+
+export interface CodeProject {
+  title: string;
+  slug: string;
+  preview: {
+    title: string;
+    url: string;
+  };
+  tags: string[];
+  description: Document;
+  slogan: Document | null;
+  codeCardIcon: {
+    title: string;
+    type: CodeCardType;
+    iconGrayscale: {
+      url: string;
+    };
+    iconColored: {
+      url: string;
+    };
+    animation: CodeCardIconAnimation;
+    bgColor: string;
   };
 }
 
@@ -63,12 +95,21 @@ async function fetchGraphQL(query: string, preview = false): Promise<any> {
   ).then((response) => response.json());
 }
 
-function extractPost(fetchResponse: any): any {
-  return fetchResponse?.data?.postCollection?.items?.[0];
-}
-
-function extractPostEntries(fetchResponse: any): any[] {
-  return fetchResponse?.data?.postCollection?.items;
+function extractCodeProjectCardEntries(fetchResponse: any): any[] {
+  const entries = fetchResponse?.data?.featuredCodeProjectCollection?.items;
+  const formattedEntries = entries?.map((entry: any) => {
+    const tags = entry?.tagsCollection?.items?.map((item: any) => item?.text);
+    const description = entry?.description?.json;
+    const slogan = entry?.slogan?.json;
+    delete entry.tagsCollection;
+    return {
+      ...entry,
+      description,
+      slogan,
+      tags,
+    };
+  });
+  return formattedEntries;
 }
 
 function extractHeroContent(content: any): any {
@@ -90,65 +131,19 @@ export async function getHeroContent(isDraftMode: boolean): Promise<HeroContent>
   return extractHeroContent(content);
 }
 
-export async function getPreviewPostBySlug(slug: string | null): Promise<any> {
-  const entry = await fetchGraphQL(
-    `query {
-      postCollection(where: { slug: "${slug}" }, preview: true, limit: 1) {
-        items {
-          ${POST_GRAPHQL_FIELDS}
-        }
-      }
-    }`,
-    true
-  );
-  return extractPost(entry);
-}
-
-export async function getAllPosts(isDraftMode: boolean): Promise<any[]> {
+export async function getCodeProjectCardsContent(isDraftMode: boolean): Promise<CodeProject[]> {
   const entries = await fetchGraphQL(
     `query {
-      postCollection(
-        where: { slug_exists: true }, 
-        order: date_DESC, 
+      featuredCodeProjectCollection(
+        order: sys_publishedAt_DESC,
         preview: ${isDraftMode ? 'true' : 'false'}
       ) {
         items {
-          ${POST_GRAPHQL_FIELDS}
+          ${CODE_PROJECT_CARDS_GRAPHQL_FIELDS}
         }
       }
     }`,
     isDraftMode
   );
-  return extractPostEntries(entries);
-}
-
-export async function getPostAndMorePosts(slug: string, preview: boolean): Promise<any> {
-  const entry = await fetchGraphQL(
-    `query {
-      postCollection(where: { slug: "${slug}" }, preview: ${preview ? 'true' : 'false'}, limit: 1) {
-        items {
-          ${POST_GRAPHQL_FIELDS}
-        }
-      }
-    }`,
-    preview
-  );
-  const entries = await fetchGraphQL(
-    `query {
-      postCollection(
-        where: { slug_not_in: "${slug}" }, 
-        order: date_DESC, 
-        preview: ${preview ? 'true' : 'false'}, 
-        limit: 2) {
-        items {
-          ${POST_GRAPHQL_FIELDS}
-        }
-      }
-    }`,
-    preview
-  );
-  return {
-    post: extractPost(entry),
-    morePosts: extractPostEntries(entries),
-  };
+  return extractCodeProjectCardEntries(entries);
 }
