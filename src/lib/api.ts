@@ -28,6 +28,7 @@ const CODE_PROJECT_CARDS_GRAPHQL_FIELDS = `
       url
     }
     animation
+    bgColor
   }
 `;
 
@@ -49,6 +50,8 @@ interface HeroContent {
 
 export type CodeCardType = 'website' | 'cli' | 'plugin';
 
+export type CodeCardIconAnimation = 'none' | 'spin' | 'pulse' | 'wiggle';
+
 export interface CodeProject {
   title: string;
   slug: string;
@@ -68,7 +71,8 @@ export interface CodeProject {
     iconColored: {
       url: string;
     };
-    animation: 'none' | 'spin' | 'pulse' | 'wiggle';
+    animation: CodeCardIconAnimation;
+    bgColor: string;
   };
 }
 
@@ -98,7 +102,6 @@ function extractCodeProjectCardEntries(fetchResponse: any): any[] {
     const description = entry?.description?.json;
     const slogan = entry?.slogan?.json;
     delete entry.tagsCollection;
-    console.log(entry?.codeCardIcon?.animation);
     return {
       ...entry,
       description,

@@ -15,7 +15,7 @@ export default async function Page() {
   const codeProjectCards = await getCodeProjectCardsContent(draftModeIsEnabled);
 
   return (
-    <div className="w-full flex flex-col items-center justify-start gradient bg-gradient-to-tr to-white from-slate-200">
+    <div className="w-full flex flex-col items-center justify-start">
       <div className="container px-5">
         <Hero PrimaryText={title} SecondaryText={secondaryText} AvatarURL={url} />
       </div>

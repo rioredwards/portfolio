@@ -14,6 +14,10 @@ const config: Config = {
           '0%, 100%': { transform: 'rotate(-3deg)' },
           '50%': { transform: 'rotate(3deg)' },
         },
+        pulsate: {
+          '0%, 100%': { scale: '1' },
+          '50%': { scale: '1.05' },
+        },
       },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
@@ -35,6 +39,7 @@ const config: Config = {
       animation: {
         wiggle: 'wiggle 1s ease-in-out infinite',
         spin: 'spin 3s linear infinite',
+        pulsate: 'pulsate 1s ease-in-out infinite',
       },
     },
   },
@@ -53,7 +58,7 @@ const config: Config = {
   ],
   purge: {
     options: {
-      safelist: ['animate-spin', 'animate-wiggle', 'animate-pulse'],
+      safelist: ['animate-spin', 'animate-wiggle', 'animate-pulse', 'animate-pulsate'],
     },
   },
 };
