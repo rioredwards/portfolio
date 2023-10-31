@@ -12,14 +12,14 @@ const Hero: React.FC<HeroProps> = ({ PrimaryText, SecondaryText, AvatarURL }) =>
       <div>
         <ContentfulImage
           alt="Rio Edwards"
-          className="object-contain h-full rounded-full mt-20"
+          className="object-cover lg:h-80 lg:w-80 xl:h-92 xl:w-92 2xl:h-96 2xl:lg:w-96 rounded-full mt-20 lg:mt-16 xl:mt-20 2xl:mt-48 mb-12 lg:mb-16"
           height={384}
           width={260}
           src={AvatarURL}
         />
       </div>
-      <span className="text-4xl mt-12">{PrimaryText}</span>
-      <span className="text-2xl mt-8 mb-28">{SecondaryText}</span>
+      <span className="text-4xl lg:text-5xl mb-8 lg:mb-12 font-bold">{PrimaryText}</span>
+      <span className="text-2xl lg:text-3xl mb-28 lg:mb-36">{SecondaryText}</span>
     </section>
   );
 };

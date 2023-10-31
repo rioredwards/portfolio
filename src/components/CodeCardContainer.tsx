@@ -18,7 +18,7 @@ function limitTitle(title: string) {
 const CodeCardContainer: React.FC<Props> = ({ title, children }) => {
   return (
     <>
-      <div className="w-full h-16 bg-slate-100 flex items-center px-8 gap-3">
+      <div className="w-full h-16 bg-slate-100 flex items-center px-8 gap-3 group-hover:border-b-2">
         <div className="h-full w-28 flex items-center justify-between">
           <div className="h-8 w-8 rounded-full group-hover:h-7 group-hover:w-7 bg-white group-hover:bg-gradient-to-br group-hover:from-red-200 group-hover:to-red-400" />
           <div className="h-8 w-8 rounded-full group-hover:h-7 group-hover:w-7 bg-white group-hover:bg-gradient-to-br group-hover:from-yellow-200 group-hover:to-yellow-400" />
