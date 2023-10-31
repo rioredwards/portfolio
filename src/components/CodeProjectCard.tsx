@@ -17,7 +17,7 @@ function limitTitle(title: string) {
   return title;
 }
 
-const generateBgGradient = (bgColor: string): string[] => {
+const generateBgGradientColors = (bgColor: string): string[] => {
   const topRightColor = adjustColor(bgColor, 10, -20);
   const middleColor = bgColor;
   const bottomLeftColor = adjustColor(bgColor, -10, 15);
@@ -25,33 +25,36 @@ const generateBgGradient = (bgColor: string): string[] => {
   return [topRightColor, middleColor, bottomLeftColor];
 };
 
+const generateBgGradient = ([color1, color2, color3]: string[]): string => {
+  return `linear-gradient(to bottom right, ${color1}, ${color2}, ${color3})`;
+};
+
 const CodeProjectCard: React.FC<CodeProject> = ({ title, codeCardIcon }) => {
   const [isHover, setIsHover] = useState(false);
-  const bgGradient = generateBgGradient(codeCardIcon?.bgColor);
+  const bgGradient = generateBgGradientColors(codeCardIcon?.bgColor);
   const titleLimited = limitTitle(title);
   const type = codeCardIcon?.type || 'website';
 
   return (
-    <HoverGradient gradientColors={bgGradient} key={title} classes="rounded-4xl">
-      <article
-        onMouseEnter={() => setIsHover(true)}
-        onMouseLeave={() => setIsHover(false)}
-        className={`w-full group relative flex flex-col items-center h-[260px] overflow-hidden rounded-4xl hover:shadow-lg cursor-pointer`}
-      >
-        <Link href={`/${title}`} className="w-full h-full flex flex-col items-center justify-start">
-          {type === 'website' && (
-            <WebsiteCard title={titleLimited}>
-              {codeCardIcon && <CodeCardImage key={title} isHover={isHover} {...codeCardIcon} />}
-            </WebsiteCard>
-          )}
-          {type === 'cli' && (
-            <CLICard title={titleLimited}>
-              {codeCardIcon && <CodeCardImage key={title} isHover={isHover} {...codeCardIcon} />}
-            </CLICard>
-          )}
-        </Link>
-      </article>
-    </HoverGradient>
+    <article
+      style={{ backgroundImage: isHover ? generateBgGradient(bgGradient) : undefined }}
+      onMouseEnter={() => setIsHover(true)}
+      onMouseLeave={() => setIsHover(false)}
+      className={`w-full group relative flex flex-col items-center h-[260px] overflow-hidden rounded-4xl hover:shadow-lg cursor-pointer`}
+    >
+      <Link href={`/${title}`} className="w-full h-full flex flex-col items-center justify-start">
+        {type === 'website' && (
+          <WebsiteCard title={titleLimited} color={codeCardIcon?.bgColor} isHover={isHover}>
+            {codeCardIcon && <CodeCardImage key={title} isHover={isHover} {...codeCardIcon} />}
+          </WebsiteCard>
+        )}
+        {type === 'cli' && (
+          <CLICard title={titleLimited}>
+            {codeCardIcon && <CodeCardImage key={title} isHover={isHover} {...codeCardIcon} />}
+          </CLICard>
+        )}
+      </Link>
+    </article>
   );
 };
 

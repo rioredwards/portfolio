@@ -12,7 +12,7 @@ const CodeCardImage: React.FC<Props> = ({
 }) => {
   return (
     <div
-      className={`h-full w-full flex flex-col items-center justify-center ${
+      className={`z-10 h-full w-full flex flex-col items-center justify-center pointer-events-none ${
         isHover ? 'drop-shadow-xl' : ''
       }`}
     >
@@ -20,14 +20,14 @@ const CodeCardImage: React.FC<Props> = ({
         key={title + 'grayscale'}
         title={title}
         url={iconGrayscale.url}
-        containerClasses="h-36 w-36 group-hover:hidden flex items-center justify-center"
+        containerClasses="z-10 h-36 w-36 group-hover:hidden flex items-center justify-center pointer-events-none"
         animation="none"
       />
       <SVGFromUrl
         key={title + 'colored'}
         title={title}
         url={iconColored.url}
-        containerClasses="h-36 w-36 hidden group-hover:flex items-center justify-center"
+        containerClasses="z-10 h-36 w-36 hidden group-hover:flex items-center justify-center pointer-events-none"
         animation={animation}
       />
     </div>
