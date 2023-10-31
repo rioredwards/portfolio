@@ -22,9 +22,9 @@ const HoverGradient: React.FC<HoverGradientProps> = ({
   const springY = useSpring(y, { stiffness: 50, damping: 5 });
 
   useEffect(() => {
-    springX.set(x);
-    springY.set(y);
-  }, [x, y]);
+    if (springX.get() !== x) springX.set(x);
+    if (springX.get() !== y) springY.set(y);
+  }, [x, y, springX, springY]);
 
   const handleMouseMove = (e: MouseEvent<HTMLDivElement, globalThis.MouseEvent>) => {
     if (!containerRef.current) return;
