@@ -9,6 +9,12 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      keyframes: {
+        wiggle: {
+          '0%, 100%': { transform: 'rotate(-3deg)' },
+          '50%': { transform: 'rotate(3deg)' },
+        },
+      },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
         'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
@@ -27,7 +33,8 @@ const config: Config = {
         lg: '0 8px 16px var(--tw-shadow-color)',
       },
       animation: {
-        'spin-slow': 'spin 3s linear infinite',
+        wiggle: 'wiggle 1s ease-in-out infinite',
+        spin: 'spin 3s linear infinite',
       },
     },
   },
@@ -44,5 +51,10 @@ const config: Config = {
       );
     }),
   ],
+  purge: {
+    options: {
+      safelist: ['animate-spin', 'animate-wiggle', 'animate-pulse'],
+    },
+  },
 };
 export default config;

@@ -27,6 +27,7 @@ const CODE_PROJECT_CARDS_GRAPHQL_FIELDS = `
     iconColored {
       url
     }
+    animation
   }
 `;
 
@@ -67,6 +68,7 @@ export interface CodeProject {
     iconColored: {
       url: string;
     };
+    animation: 'none' | 'spin' | 'pulse' | 'wiggle';
   };
 }
 
@@ -96,6 +98,7 @@ function extractCodeProjectCardEntries(fetchResponse: any): any[] {
     const description = entry?.description?.json;
     const slogan = entry?.slogan?.json;
     delete entry.tagsCollection;
+    console.log(entry?.codeCardIcon?.animation);
     return {
       ...entry,
       description,

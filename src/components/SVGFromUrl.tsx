@@ -1,28 +1,27 @@
+import { CodeProject } from '@/lib/api';
 import { useEffect, useState } from 'react';
 
 interface Props {
   url: string;
   title: string;
   containerClasses?: string;
-  spin?: boolean;
+  animation: CodeProject['codeCardIcon']['animation'];
 }
 
-const SVGFromUrl: React.FC<Props> = ({ url, title, containerClasses, spin }) => {
+const SVGFromUrl: React.FC<Props> = ({ url, title, containerClasses, animation }) => {
   const [svg, setSvg] = useState<string | null>(null);
 
   useEffect(() => {
     async function getSvg() {
       const res = await fetch(url);
-      let svgRes = await res.text();
+      const svgRes = await res.text();
 
-      if (spin) {
-        svgRes = svgRes.replace('<svg ', '<svg class="animate-spin-slow" ');
-      }
+      const svgWithAddedClasses = svgRes.replace('<svg ', `<svg class="animate-${animation}" `);
 
-      setSvg(svgRes);
+      setSvg(svgWithAddedClasses);
     }
     getSvg();
-  }, [url, title, spin]);
+  }, [url, title, animation]);
 
   return (
     <>
