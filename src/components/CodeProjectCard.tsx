@@ -5,6 +5,7 @@ import { useState } from 'react';
 import CodeCardImage from './CodeCardImage';
 import { adjustColor } from '@/utils/colorUtils';
 import WebsiteCard from './WebsiteCard';
+import CLICard from './CLICard';
 
 const MAX_TITLE_LENGTH = 28;
 
@@ -45,9 +46,9 @@ const CodeProjectCard: React.FC<CodeProject> = ({ title, codeCardIcon }) => {
           </WebsiteCard>
         )}
         {type === 'cli' && (
-          <WebsiteCard title={titleLimited}>
+          <CLICard title={titleLimited}>
             {codeCardIcon && <CodeCardImage key={title} isHover={isHover} {...codeCardIcon} />}
-          </WebsiteCard>
+          </CLICard>
         )}
       </Link>
     </article>
