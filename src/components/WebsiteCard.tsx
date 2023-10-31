@@ -22,7 +22,12 @@ const WebsiteCard: React.FC<Props> = ({ title, children, color, isHover }) => {
       </div>
       {children}
       {isHover && (
-        <HoverGradient key={title + 'gradient'} color={color} classes="w-full h-full rounded-4xl" />
+        <HoverGradient
+          radius={500}
+          key={title + 'gradient'}
+          color={color}
+          classes="w-full h-full rounded-4xl"
+        />
       )}
     </>
   );
