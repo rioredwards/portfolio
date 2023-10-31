@@ -2,6 +2,7 @@ import { draftMode } from 'next/headers';
 import { getCodeProjectCardsContent, getHeroContent } from '@/lib/api';
 import Hero from '@/components/Hero';
 import CodeProjectCard from '@/components/CodeProjectCard';
+import HoverButton from '@/components/HoverButton';
 
 export default async function Page() {
   const { isEnabled: draftModeIsEnabled } = draftMode();
@@ -19,6 +20,7 @@ export default async function Page() {
       <div className="container px-5">
         <Hero PrimaryText={title} SecondaryText={secondaryText} AvatarURL={url} />
       </div>
+      <HoverButton />
       <hr />
       <div className="w-full flex items-center justify-center">
         <section className="w-full container py-6 px-5 md:px-1">
