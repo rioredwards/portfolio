@@ -1,13 +1,19 @@
 'use client';
 import Link from 'next/link';
-import { CodeProject } from '@/lib/api';
-import { useState } from 'react';
+import { CodeCardType, CodeProject } from '@/lib/api';
+import { FC, useState } from 'react';
 import CodeCardImage from './CodeCardImage';
 import { adjustColor } from '@/utils/colorUtils';
 import WebsiteCard from './WebsiteCard';
 import CLICard from './CLICard';
 
 const MAX_TITLE_LENGTH = 28;
+
+const CARD_TYPE_MAP: Record<CodeCardType, FC<any>> = {
+  website: WebsiteCard,
+  cli: CLICard,
+  plugin: WebsiteCard,
+};
 
 function limitTitle(title: string) {
   if (title.length > MAX_TITLE_LENGTH) {
@@ -31,7 +37,7 @@ const CodeProjectCard: React.FC<CodeProject> = ({ title, codeCardIcon }) => {
   const [isHover, setIsHover] = useState(false);
   const bgGradient = generateBgGradientColors(codeCardIcon?.bgColor);
   const titleLimited = limitTitle(title);
-  const type = codeCardIcon?.type || 'website';
+  const CardComponent = CARD_TYPE_MAP[codeCardIcon?.type || 'website'];
 
   return (
     <article
@@ -41,16 +47,9 @@ const CodeProjectCard: React.FC<CodeProject> = ({ title, codeCardIcon }) => {
       className={`w-full group relative flex flex-col items-center h-[260px] overflow-hidden rounded-4xl hover:shadow-lg cursor-pointer`}
     >
       <Link href={`/${title}`} className="w-full h-full flex flex-col items-center justify-start">
-        {type === 'website' && (
-          <WebsiteCard title={titleLimited} color={codeCardIcon?.bgColor} isHover={isHover}>
-            {codeCardIcon && <CodeCardImage key={title} isHover={isHover} {...codeCardIcon} />}
-          </WebsiteCard>
-        )}
-        {type === 'cli' && (
-          <CLICard title={titleLimited} color={codeCardIcon?.bgColor} isHover={isHover}>
-            {codeCardIcon && <CodeCardImage key={title} isHover={isHover} {...codeCardIcon} />}
-          </CLICard>
-        )}
+        <CardComponent title={titleLimited} color={codeCardIcon?.bgColor} isHover={isHover}>
+          {codeCardIcon && <CodeCardImage key={title} isHover={isHover} {...codeCardIcon} />}
+        </CardComponent>
       </Link>
     </article>
   );
