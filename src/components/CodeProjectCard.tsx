@@ -54,7 +54,7 @@ const CodeProjectCard: React.FC<CodeProject & { idx: number }> = ({ title, codeC
     >
       <div
         style={{
-          animationDelay: `${idx * 100}ms`,
+          animationDelay: `${idx * 200}ms`,
         }}
         className="group-hover:-z-10 z-0 pointer-events-none absolute inset-0 animate-pulse-2 bg-gray-200"
       />
