@@ -7,6 +7,7 @@ import { adjustColor } from '@/utils/colorUtils';
 import WebsiteCard from './WebsiteCard';
 import CLICard from './CLICard';
 import PluginCard from './PluginCard';
+import CodeModal from '@/components/CodeModal';
 
 const MAX_TITLE_LENGTH = 28;
 
@@ -35,6 +36,7 @@ const generateBgGradient = ([color1, color2, color3]: string[]): string => {
 };
 
 const CodeProjectCard: React.FC<CodeProject & { idx: number }> = ({ title, codeCardIcon, idx }) => {
+  const [modalIsOpen, setModalIsOpen] = useState(false);
   const [isHover, setIsHover] = useState(false);
   const bgGradient = generateBgGradientColors(codeCardIcon?.bgColor);
   const titleLimited = limitTitle(title);
@@ -50,15 +52,17 @@ const CodeProjectCard: React.FC<CodeProject & { idx: number }> = ({ title, codeC
       }}
       onMouseEnter={() => setIsHover(true)}
       onMouseLeave={() => setIsHover(false)}
+      onClick={() => setModalIsOpen(true)}
       className={`w-full group relative bg-gray-200 flex flex-col items-center h-[260px] overflow-hidden rounded-4xl hover:shadow-lg cursor-pointer`}
     >
+      <CodeModal key={title + 'modal'} isOpen={modalIsOpen} setIsOpen={setModalIsOpen} />
       <div
         style={{
           animationDelay: `${idx * 200}ms`,
         }}
         className="group-hover:-z-10 z-0 pointer-events-none absolute inset-0 animate-pulse-2 bg-gray-200"
       />
-      <Link href={`/${title}`} className="w-full h-full flex flex-col items-center justify-start">
+      <div className="w-full h-full flex flex-col items-center justify-start">
         <CardComponent
           title={titleLimited}
           color={codeCardIcon?.bgColor}
@@ -67,7 +71,7 @@ const CodeProjectCard: React.FC<CodeProject & { idx: number }> = ({ title, codeC
         >
           {codeCardIcon && <CodeCardImage key={title} isHover={isHover} {...codeCardIcon} />}
         </CardComponent>
-      </Link>
+      </div>
     </article>
   );
 };
