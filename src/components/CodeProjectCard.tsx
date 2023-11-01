@@ -6,13 +6,14 @@ import CodeCardImage from './CodeCardImage';
 import { adjustColor } from '@/utils/colorUtils';
 import WebsiteCard from './WebsiteCard';
 import CLICard from './CLICard';
+import PluginCard from './PluginCard';
 
 const MAX_TITLE_LENGTH = 28;
 
 const CARD_TYPE_MAP: Record<CodeCardType, FC<any>> = {
   website: WebsiteCard,
   cli: CLICard,
-  plugin: WebsiteCard,
+  plugin: PluginCard,
 };
 
 function limitTitle(title: string) {
@@ -38,6 +39,9 @@ const CodeProjectCard: React.FC<CodeProject & { idx: number }> = ({ title, codeC
   const bgGradient = generateBgGradientColors(codeCardIcon?.bgColor);
   const titleLimited = limitTitle(title);
   const CardComponent = CARD_TYPE_MAP[codeCardIcon?.type || 'website'];
+  const pluginIcons = codeCardIcon.pluginIconGrayscale
+    ? [codeCardIcon.pluginIconGrayscale, codeCardIcon.pluginIconColored]
+    : undefined;
 
   return (
     <article
@@ -55,7 +59,12 @@ const CodeProjectCard: React.FC<CodeProject & { idx: number }> = ({ title, codeC
         className="group-hover:-z-10 z-0 pointer-events-none absolute inset-0 animate-pulse-2 bg-gray-200"
       />
       <Link href={`/${title}`} className="w-full h-full flex flex-col items-center justify-start">
-        <CardComponent title={titleLimited} color={codeCardIcon?.bgColor} isHover={isHover}>
+        <CardComponent
+          title={titleLimited}
+          color={codeCardIcon?.bgColor}
+          isHover={isHover}
+          pluginIcons={pluginIcons}
+        >
           {codeCardIcon && <CodeCardImage key={title} isHover={isHover} {...codeCardIcon} />}
         </CardComponent>
       </Link>

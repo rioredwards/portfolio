@@ -29,6 +29,14 @@ const CODE_PROJECT_CARDS_GRAPHQL_FIELDS = `
     }
     animation
     bgColor
+    pluginIconGrayscale {
+      title
+      url
+    }
+    pluginIconColored {
+      title
+      url
+    }
   }
 `;
 
@@ -73,6 +81,14 @@ export interface CodeProject {
     };
     animation: CodeCardIconAnimation;
     bgColor: string;
+    pluginIconGrayscale: {
+      title: string;
+      url: string;
+    };
+    pluginIconColored: {
+      title: string;
+      url: string;
+    };
   };
 }
 
