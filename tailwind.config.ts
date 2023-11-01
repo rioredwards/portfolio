@@ -18,6 +18,10 @@ const config: Config = {
           '0%, 100%': { scale: '1' },
           '50%': { scale: '1.05' },
         },
+        'pulse-2': {
+          '0%, 100%': { filter: 'brightness(1.05)' },
+          '50%': { filter: 'brightness(1)' },
+        },
       },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
@@ -40,6 +44,7 @@ const config: Config = {
         wiggle: 'wiggle 1s ease-in-out infinite',
         spin: 'spin 3s linear infinite',
         pulsate: 'pulsate 1s ease-in-out infinite',
+        'pulse-2': 'pulse-2 2s ease-in-out infinite',
       },
     },
   },
@@ -58,7 +63,13 @@ const config: Config = {
   ],
   purge: {
     options: {
-      safelist: ['animate-spin', 'animate-wiggle', 'animate-pulse', 'animate-pulsate'],
+      safelist: [
+        'animate-spin',
+        'animate-wiggle',
+        'animate-pulse',
+        'animate-pulsate',
+        'animate-pulse-2',
+      ],
     },
   },
 };

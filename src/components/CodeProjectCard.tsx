@@ -33,7 +33,7 @@ const generateBgGradient = ([color1, color2, color3]: string[]): string => {
   return `linear-gradient(to bottom right, ${color1}, ${color2}, ${color3})`;
 };
 
-const CodeProjectCard: React.FC<CodeProject> = ({ title, codeCardIcon }) => {
+const CodeProjectCard: React.FC<CodeProject & { idx: number }> = ({ title, codeCardIcon, idx }) => {
   const [isHover, setIsHover] = useState(false);
   const bgGradient = generateBgGradientColors(codeCardIcon?.bgColor);
   const titleLimited = limitTitle(title);
@@ -41,11 +41,19 @@ const CodeProjectCard: React.FC<CodeProject> = ({ title, codeCardIcon }) => {
 
   return (
     <article
-      style={{ backgroundImage: isHover ? generateBgGradient(bgGradient) : undefined }}
+      style={{
+        backgroundImage: isHover ? generateBgGradient(bgGradient) : undefined,
+      }}
       onMouseEnter={() => setIsHover(true)}
       onMouseLeave={() => setIsHover(false)}
-      className={`w-full group relative flex flex-col items-center h-[260px] overflow-hidden rounded-4xl hover:shadow-lg cursor-pointer`}
+      className={`w-full group relative bg-gray-200 flex flex-col items-center h-[260px] overflow-hidden rounded-4xl hover:shadow-lg cursor-pointer`}
     >
+      <div
+        style={{
+          animationDelay: `${idx * 100}ms`,
+        }}
+        className="group-hover:-z-10 z-0 pointer-events-none absolute inset-0 animate-pulse-2 bg-gray-200"
+      />
       <Link href={`/${title}`} className="w-full h-full flex flex-col items-center justify-start">
         <CardComponent title={titleLimited} color={codeCardIcon?.bgColor} isHover={isHover}>
           {codeCardIcon && <CodeCardImage key={title} isHover={isHover} {...codeCardIcon} />}

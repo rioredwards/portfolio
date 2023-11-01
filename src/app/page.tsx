@@ -24,8 +24,8 @@ export default async function Page() {
         <section className="w-full container py-6 px-5 md:px-1">
           <h1 className="w-full text-center font-bold text-3xl mb-12 xl:mb-16">CODE</h1>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 px-6">
-            {codeProjectCards.map((codeProjectCard) => (
-              <CodeProjectCard key={codeProjectCard.slug} {...codeProjectCard} />
+            {codeProjectCards.map((codeProjectCard, idx) => (
+              <CodeProjectCard key={codeProjectCard.slug} {...codeProjectCard} idx={idx} />
             ))}
           </div>
         </section>
