@@ -2,6 +2,7 @@ import { draftMode } from 'next/headers';
 import { getCodeProjectCardsContent, getHeroContent } from '@/lib/api';
 import Hero from '@/components/Hero';
 import CodeProjectCard from '@/components/CodeProjectCard';
+import ExampleModal from '@/components/CodeModal';
 
 export default async function Page() {
   const { isEnabled: draftModeIsEnabled } = draftMode();
@@ -20,6 +21,7 @@ export default async function Page() {
         <Hero primaryText={title} secondaryText={secondaryText} avatarURL={url} />
       </div>
       <hr />
+      <ExampleModal />
       <div className="w-full flex items-center justify-center">
         <section className="w-full container py-6 px-5 md:px-1">
           <h1 className="w-full text-center font-bold text-3xl mb-12 xl:mb-16">CODE</h1>
