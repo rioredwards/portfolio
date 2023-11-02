@@ -1,19 +1,31 @@
 'use client';
-import { Dispatch, Fragment, SetStateAction, useRef, useState } from 'react';
+import { Dispatch, Fragment, SetStateAction, useRef } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 import { ExclamationTriangleIcon } from '@heroicons/react/24/outline';
 
 interface Props {
   isOpen: boolean;
   setIsOpen: Dispatch<SetStateAction<boolean>>;
+  onModalClose?: () => void;
 }
 
-const CodeModal: React.FC<Props> = ({ isOpen, setIsOpen }) => {
+const CodeModal: React.FC<Props> = ({ isOpen, setIsOpen, onModalClose }) => {
   const cancelButtonRef = useRef(null);
+
+  const onClose = () => {
+    setIsOpen(false);
+    onModalClose && onModalClose();
+  };
 
   return (
     <Transition.Root show={isOpen} as={Fragment}>
-      <Dialog as="div" className="relative z-10" initialFocus={cancelButtonRef} onClose={setIsOpen}>
+      <Dialog
+        as="div"
+        className="relative z-10"
+        initialFocus={cancelButtonRef}
+        onClose={onClose}
+        open={isOpen}
+      >
         <Transition.Child
           as={Fragment}
           enter="ease-out duration-300"
@@ -59,19 +71,8 @@ const CodeModal: React.FC<Props> = ({ isOpen, setIsOpen }) => {
                           permanently removed. This action cannot be undone. Lorem ipsum dolor sit
                           amet, consectetur adipiscing elit. Sed euismod, velit eu bibendum
                           bibendum, velit magna bibendum sapien, vel bibendum sapien sapien vel
-                          sapien. Sed euismod, velit eu bibendum bibendum, velit magna bibendum
-                          sapien, vel bibendum sapien sapien vel sapien. Sed euismod, velit eu
-                          bibendum bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                          Sed euismod, velit eu bibendum bibendum, velit magna bibendum sapien, vel
-                          bibendum sapien sapien vel sapien. Sed euismod, velit eu bibendum
-                          bibendum, velit magna bibendum sapien, vel bibendum sapien sapien vel
-                          sapien. Sed euismod, velit eu bibendum bibendum.Lorem ipsum dolor sit
-                          amet, consectetur adipiscing elit. Sed euismod, velit eu bibendum
-                          bibendum, velit magna bibendum sapien, vel bibendum sapien sapien vel
-                          sapien. Sed euismod, velit eu bibendum bibendum, velit magna bibendum
-                          sapien, vel bibendum sapien sapien vel sapien. Sed euismod, velit eu
-                          bibendum bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                          Sed euismod, velit eu bibendum bibendum, velit magna bibendum sapien, vel
+                          sapien. Sed euismod, velit eu bibendum bibendum, velit magna bibendum Sed
+                          euismod, velit eu bibendum bibendum, velit magna bibendum sapien, vel
                           bibendum sapien sapien vel sapien. Sed euismod, velit eu bibendum
                           bibendum, velit magna bibendum sapien, vel bibendum sapien sapien vel
                           sapien. Sed euismod, velit eu bibendum bibendum.Lorem ipsum dolor sit

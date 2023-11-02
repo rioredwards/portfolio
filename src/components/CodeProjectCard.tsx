@@ -1,7 +1,7 @@
 'use client';
-import Link from 'next/link';
+// import Link from 'next/link';
 import { CodeCardType, CodeProject } from '@/lib/api';
-import { FC, useState } from 'react';
+import { FC, useRef, useState } from 'react';
 import CodeCardImage from './CodeCardImage';
 import { adjustColor } from '@/utils/colorUtils';
 import WebsiteCard from './WebsiteCard';
@@ -36,6 +36,7 @@ const generateBgGradient = ([color1, color2, color3]: string[]): string => {
 };
 
 const CodeProjectCard: React.FC<CodeProject & { idx: number }> = ({ title, codeCardIcon, idx }) => {
+  const hoverDisabled = useRef(false);
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [isHover, setIsHover] = useState(false);
   const bgGradient = generateBgGradientColors(codeCardIcon?.bgColor);
@@ -45,21 +46,37 @@ const CodeProjectCard: React.FC<CodeProject & { idx: number }> = ({ title, codeC
     ? [codeCardIcon.pluginIconGrayscale, codeCardIcon.pluginIconColored]
     : undefined;
 
+  const onModalClose = () => (hoverDisabled.current = false);
+
+  const onHoverStart = () => {
+    if (hoverDisabled.current) return;
+    setIsHover(true);
+  };
+
+  const onClick = () => {
+    setIsHover(false);
+    hoverDisabled.current = true;
+    setModalIsOpen(true);
+  };
+
   return (
     <article
       style={{
         backgroundImage: isHover ? generateBgGradient(bgGradient) : undefined,
       }}
-      onMouseEnter={() => setIsHover(true)}
+      onMouseEnter={onHoverStart}
       onMouseLeave={() => setIsHover(false)}
-      onClick={() => setModalIsOpen(true)}
+      onClick={onClick}
       className={`w-full group relative bg-gray-200 flex flex-col items-center h-[260px] overflow-hidden rounded-4xl hover:shadow-lg cursor-pointer`}
     >
-      <CodeModal key={title + 'modal'} isOpen={modalIsOpen} setIsOpen={setModalIsOpen} />
+      <CodeModal
+        key={title + 'modal'}
+        isOpen={modalIsOpen}
+        setIsOpen={setModalIsOpen}
+        onModalClose={onModalClose}
+      />
       <div
-        style={{
-          animationDelay: `${idx * 200}ms`,
-        }}
+        style={{ animationDelay: `${idx * 200}ms` }}
         className="group-hover:-z-10 z-0 pointer-events-none absolute inset-0 animate-pulse-2 bg-gray-200"
       />
       <div className="w-full h-full flex flex-col items-center justify-start">
