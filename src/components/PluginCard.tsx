@@ -34,7 +34,9 @@ const PluginCard: React.FC<Props> = ({ title, children, color, isHover, pluginIc
           />
         </div>
         <div className="flex items-center grow h-8 px-2">
-          <h3 className="text-xl font-bold text-gray-500 whitespace-nowrap">{title}</h3>
+          <h3 className="text-xl font-extrabold text-[#a8a8a8] group-hover:text-gray-500 whitespace-nowrap">
+            {title}
+          </h3>
         </div>
       </div>
       {children}

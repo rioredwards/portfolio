@@ -17,7 +17,9 @@ const WebsiteCard: React.FC<Props> = ({ title, children, color, isHover }) => {
           <div className="h-8 w-8 rounded-full group-hover:h-7 group-hover:w-7 bg-white group-hover:bg-gradient-to-br group-hover:from-green-200 group-hover:to-green-400" />
         </div>
         <div className="flex items-center grow bg-white h-8 rounded-md px-2">
-          <h3 className="text-xl font-bold text-gray-500 whitespace-nowrap">{title}</h3>
+          <h3 className="text-xl font-extrabold text-[#a8a8a8] group-hover:text-gray-500 whitespace-nowrap">
+            {title}
+          </h3>
         </div>
       </div>
       {children}
