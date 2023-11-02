@@ -46,7 +46,13 @@ const CodeProjectCard: React.FC<CodeProject & { idx: number }> = ({ title, codeC
     ? [codeCardIcon.pluginIconGrayscale, codeCardIcon.pluginIconColored]
     : undefined;
 
-  const onModalClose = () => (hoverDisabled.current = false);
+  const onModalClose = () => {
+    // Wait for 1ms to prevent the modal from reopening immediately
+    setTimeout(() => {
+      setModalIsOpen(false);
+      hoverDisabled.current = false;
+    }, 1);
+  };
 
   const onHoverStart = () => {
     if (hoverDisabled.current) return;

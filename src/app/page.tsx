@@ -2,8 +2,6 @@ import { draftMode } from 'next/headers';
 import { getCodeProjectCardsContent, getHeroContent } from '@/lib/api';
 import Hero from '@/components/Hero';
 import CodeProjectCard from '@/components/CodeProjectCard';
-import ExampleModal from '@/components/ExampleModal';
-import CodeModal from '@/components/CodeModal';
 
 export default async function Page() {
   const { isEnabled: draftModeIsEnabled } = draftMode();

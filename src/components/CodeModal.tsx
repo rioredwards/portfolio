@@ -13,7 +13,6 @@ const CodeModal: React.FC<Props> = ({ isOpen, setIsOpen, onModalClose }) => {
   const cancelButtonRef = useRef(null);
 
   const onClose = () => {
-    setIsOpen(false);
     onModalClose && onModalClose();
   };
 
@@ -24,7 +23,7 @@ const CodeModal: React.FC<Props> = ({ isOpen, setIsOpen, onModalClose }) => {
         className="relative z-10"
         initialFocus={cancelButtonRef}
         onClose={onClose}
-        open={isOpen}
+        // open={isOpen}
       >
         <Transition.Child
           as={Fragment}
