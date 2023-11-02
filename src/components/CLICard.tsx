@@ -1,5 +1,3 @@
-import HoverGradient from './HoverGradient';
-
 interface Props {
   title: string;
   isHover: boolean;
@@ -7,11 +5,11 @@ interface Props {
   children: React.ReactNode;
 }
 
-const CLICard: React.FC<Props> = ({ title, children, isHover, color }) => {
+const CLICard: React.FC<Props> = ({ title, children }) => {
   return (
     <>
-      <div className="pointer-events-none z-10 w-full h-full flex flex-col items-center justify-start px-4 py-4 group-hover:border-8 border-gray-400 hover:py-2 rounded-4xl">
-        <h3 className="pointer-events-none z-10 text-xl font-bold text-gray-500 group-hover:-mt-2 whitespace-nowrap">
+      <div className="pointer-events-none group-hover:bg-gray-500 z-10 w-full h-full flex flex-col items-center justify-start px-4 py-4 group-hover:border-8 border-gray-400 hover:py-2 rounded-4xl">
+        <h3 className="pointer-events-none z-10 text-xl font-bold text-gray-500 group-hover:text-gray-50 group-hover:-mt-2 whitespace-nowrap">
           {title}
         </h3>
         {children}
