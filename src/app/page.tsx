@@ -7,11 +7,6 @@ import GradientText from '@/components/GradientText';
 export default async function Page() {
   const { isEnabled: draftModeIsEnabled } = draftMode();
   const heroContent = await getHeroContent(draftModeIsEnabled);
-  const {
-    title,
-    secondaryText,
-    avatar: { url },
-  } = heroContent;
 
   const codeProjectCards = await getCodeProjectCardsContent(draftModeIsEnabled);
 
@@ -23,7 +18,7 @@ export default async function Page() {
       className="w-full flex flex-col items-center justify-start"
     >
       <div className="container px-5">
-        <Hero primaryText={title} secondaryText={secondaryText} avatarURL={url} />
+        <Hero {...heroContent} />
       </div>
       <hr />
       <div className="w-full flex items-center justify-center">

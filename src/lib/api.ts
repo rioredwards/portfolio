@@ -43,14 +43,16 @@ const CODE_PROJECT_CARDS_GRAPHQL_FIELDS = `
 const HERO_GRAPHQL_FIELDS = `
   title
   secondaryText
+  tertiaryText
   avatar {
     url
   }
 `;
 
-interface HeroContent {
+export interface HeroContent {
   title: string;
   secondaryText: string;
+  tertiaryText: string;
   avatar: {
     url: string;
   };

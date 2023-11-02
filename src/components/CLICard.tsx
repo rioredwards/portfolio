@@ -11,7 +11,7 @@ const CLICard: React.FC<Props> = ({ title, children, isHover, color }) => {
   return (
     <>
       <div className="pointer-events-none z-10 w-full h-full flex flex-col items-center justify-start px-4 py-4 group-hover:border-8 border-gray-400 hover:py-2 rounded-4xl">
-        <h3 className="pointer-events-none z-10 text-xl font-bold text-gray-500 group-hover:-mt-2 group-hover:text-green-400 whitespace-nowrap">
+        <h3 className="pointer-events-none z-10 text-xl font-bold text-gray-500 group-hover:-mt-2 whitespace-nowrap">
           {title}
         </h3>
         {children}
@@ -19,14 +19,6 @@ const CLICard: React.FC<Props> = ({ title, children, isHover, color }) => {
           {'>_'}
         </pre>
       </div>
-      {isHover && (
-        <HoverGradient
-          radius={500}
-          key={title + 'gradient'}
-          color={color}
-          classes="w-full h-full rounded-4xl"
-        />
-      )}
     </>
   );
 };
