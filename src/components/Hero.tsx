@@ -21,13 +21,13 @@ const Hero: React.FC<HeroProps> = ({ primaryText, secondaryText, avatarURL }) =>
       </div>
       <GradientText
         elementType="h1"
-        startColor="#878787"
-        endColor="#333"
+        direction="to bottom right"
+        colors={['#4CEA82', '#6D88EE']}
         className="text-4xl lg:text-5xl mb-8 lg:mb-12 font-black"
       >
         {primaryText}
       </GradientText>
-      <span className="text-2xl lg:text-3xl mb-28 lg:mb-36">{secondaryText}</span>
+      <span className="text-2xl text-gray-500 lg:text-3xl mb-28 lg:mb-36">{secondaryText}</span>
     </section>
   );
 };
