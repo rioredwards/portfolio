@@ -4,12 +4,13 @@ import { Dialog, Transition } from '@headlessui/react';
 import { ExclamationTriangleIcon } from '@heroicons/react/24/outline';
 
 interface Props {
+  title: string;
   isOpen: boolean;
   setIsOpen: Dispatch<SetStateAction<boolean>>;
   onModalClose?: () => void;
 }
 
-const CodeModal: React.FC<Props> = ({ isOpen, setIsOpen, onModalClose }) => {
+const CodeModal: React.FC<Props> = ({ title = 'TEST TITLE', isOpen, setIsOpen, onModalClose }) => {
   const cancelButtonRef = useRef(null);
 
   const onClose = () => {
@@ -56,7 +57,7 @@ const CodeModal: React.FC<Props> = ({ isOpen, setIsOpen, onModalClose }) => {
                         as="h3"
                         className="text-base font-semibold leading-6 text-gray-900"
                       >
-                        Deactivate account
+                        {title}
                       </Dialog.Title>
                       <div className="mt-2">
                         <p className="text-sm text-gray-500">

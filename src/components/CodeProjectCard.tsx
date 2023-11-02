@@ -76,6 +76,7 @@ const CodeProjectCard: React.FC<CodeProject & { idx: number }> = ({ title, codeC
       className={`w-full border-4 border-gray-50/80 hover:border-none hover:-translate-y-2 group relative hover:bg-gray-200 hover:bg-opacity-100 flex flex-col items-center h-[260px] overflow-hidden rounded-4xl hover:shadow-lg cursor-pointer`}
     >
       <CodeModal
+        title={title}
         key={title + 'modal'}
         isOpen={modalIsOpen}
         setIsOpen={setModalIsOpen}
