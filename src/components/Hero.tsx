@@ -24,6 +24,8 @@ const Hero: React.FC<HeroProps> = ({ primaryText, secondaryText, avatarURL }) =>
         direction="to bottom right"
         colors={['#4CEA82', '#6D88EE']}
         className="text-4xl lg:text-5xl mb-8 lg:mb-12 font-black"
+        offset={{ x: 0, y: -2 }}
+        shadowColor="#ffffff"
       >
         {primaryText}
       </GradientText>
