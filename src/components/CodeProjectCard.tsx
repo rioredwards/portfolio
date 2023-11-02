@@ -73,7 +73,7 @@ const CodeProjectCard: React.FC<CodeProject & { idx: number }> = ({ title, codeC
       onMouseEnter={onHoverStart}
       onMouseLeave={() => setIsHover(false)}
       onClick={onClick}
-      className={`w-full group relative bg-gray-200 flex flex-col items-center h-[260px] overflow-hidden rounded-4xl hover:shadow-lg cursor-pointer`}
+      className={`w-full border-4 border-gray-50/80 hover:border-none hover:-translate-y-2 group relative hover:bg-gray-200 hover:bg-opacity-100 flex flex-col items-center h-[260px] overflow-hidden rounded-4xl hover:shadow-lg cursor-pointer`}
     >
       <CodeModal
         key={title + 'modal'}
@@ -83,7 +83,7 @@ const CodeProjectCard: React.FC<CodeProject & { idx: number }> = ({ title, codeC
       />
       <div
         style={{ animationDelay: `${idx * 200}ms` }}
-        className="group-hover:-z-10 z-0 pointer-events-none absolute inset-0 animate-pulse-2 bg-gray-200"
+        className="group-hover:-z-10 z-0 pointer-events-none absolute inset-0 animate-pulse-3 group-hover:animate-none bg-gray-200/50 group-hover:bg-opacity-0"
       />
       <div className="w-full h-full flex flex-col items-center justify-start">
         <CardComponent

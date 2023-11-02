@@ -22,6 +22,12 @@ const config: Config = {
           '0%, 100%': { filter: 'brightness(1.05)' },
           '50%': { filter: 'brightness(1)' },
         },
+        'pulse-3': {
+          '0%, 100%': { backdropFilter: 'saturate(300%) brightness(1.1) hue-rotate(60deg)' },
+          '25%': { backdropFilter: 'saturate(100%)' },
+          '50%': { backdropFilter: 'saturate(300%) hue-rotate(30deg)' },
+          '75%': { backdropFilter: 'saturate(100%)' },
+        },
       },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
@@ -45,6 +51,7 @@ const config: Config = {
         spin: 'spin 3s linear infinite',
         pulsate: 'pulsate 1s ease-in-out infinite',
         'pulse-2': 'pulse-2 2s ease-in-out infinite',
+        'pulse-3': 'pulse-3 6s ease-in-out infinite',
       },
     },
   },
@@ -69,6 +76,7 @@ const config: Config = {
         'animate-pulse',
         'animate-pulsate',
         'animate-pulse-2',
+        'animate-pulse-3',
       ],
     },
   },

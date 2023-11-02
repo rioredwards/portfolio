@@ -106,7 +106,8 @@ async function fetchGraphQL(query: string, preview = false): Promise<any> {
         }`,
       },
       body: JSON.stringify({ query }),
-      next: { tags: ['posts'] },
+      // TODO: Decide on caching strategy / change revalidate time for deployment
+      next: { tags: ['codeProjects'], revalidate: 30 },
     }
   ).then((response) => response.json());
 }
