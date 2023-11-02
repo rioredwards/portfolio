@@ -1,4 +1,5 @@
 import ContentfulImage from '@/lib/contentful-image';
+import GradientText from './GradientText';
 
 interface HeroProps {
   primaryText: string;
@@ -18,7 +19,14 @@ const Hero: React.FC<HeroProps> = ({ primaryText, secondaryText, avatarURL }) =>
           src={avatarURL}
         />
       </div>
-      <span className="text-4xl lg:text-5xl mb-8 lg:mb-12 font-bold">{primaryText}</span>
+      <GradientText
+        elementType="h1"
+        startColor="#878787"
+        endColor="#333"
+        className="text-4xl lg:text-5xl mb-8 lg:mb-12 font-black"
+      >
+        {primaryText}
+      </GradientText>
       <span className="text-2xl lg:text-3xl mb-28 lg:mb-36">{secondaryText}</span>
     </section>
   );
