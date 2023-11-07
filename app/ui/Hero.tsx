@@ -1,16 +1,25 @@
 import ContentfulImage from '@/lib/contentful-image';
 import GradientText from '@/ui/GradientText';
 import { HeroContent } from '@/lib/api';
+import params from '@/ui/params';
+import { breakPointsToClass } from '@/utils/twClassHelpers';
 
 interface HeroProps extends HeroContent {}
 
-const Hero: React.FC<HeroProps> = ({ title, secondaryText, tertiaryText, avatar }) => {
+const Hero: React.FC<HeroProps> = ({ title, secondaryText, avatar }) => {
+  const imageSizes = `${breakPointsToClass(params.AVATAR_SIZES, 'h')} ${breakPointsToClass(
+    params.AVATAR_SIZES,
+    'w'
+  )}`;
+
+  const imageTopMargins = breakPointsToClass(params.AVATAR_TOP_MARGINS, 'mt');
+
   return (
     <section className="w-full flex justify-around items-center flex-col">
       <div>
         <ContentfulImage
           alt="Rio Edwards"
-          className="object-cover lg:h-80 lg:w-80 xl:h-92 xl:w-92 2xl:h-96 2xl:lg:w-96 rounded-full mt-20 lg:mt-16 xl:mt-20 2xl:mt-48 mb-12 lg:mb-16"
+          className={`object-cover rounded-full mb-12 lg:mb-16 ${imageSizes} ${imageTopMargins}`}
           height={384}
           width={260}
           src={avatar.url}
