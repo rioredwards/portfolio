@@ -5,6 +5,8 @@ import { HeroContent } from '@/lib/api';
 interface HeroProps extends HeroContent {}
 
 const Hero: React.FC<HeroProps> = ({ title, secondaryText, tertiaryText, avatar }) => {
+  console.log('avatar.url: ', avatar.url);
+
   return (
     <section className="w-full flex justify-around items-center flex-col">
       <div>

@@ -5,9 +5,9 @@ import { describe } from 'node:test';
 // import { fetch } from 'react-testing-library/fetch';
 
 const mockHeroContent = {
-  primaryText: 'Rio Edwards',
-  secondaryText: 'Software Engineer',
-  avatarURL: 'https://avatars.githubusercontent.com/u/10982878?v=4',
+  title: 'My Name Is Rio',
+  secondaryText: "I'm an Artist and Web-Developer.",
+  avatar: { url: 'https://avatars.githubusercontent.com/u/10982878?v=4' },
 };
 
 describe('Hero', () => {
