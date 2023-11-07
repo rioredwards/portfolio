@@ -29,20 +29,30 @@ const CODE_PROJECT_CARDS_GRAPHQL_FIELDS = `
     }
     animation
     bgColor
+    pluginIconGrayscale {
+      title
+      url
+    }
+    pluginIconColored {
+      title
+      url
+    }
   }
 `;
 
 const HERO_GRAPHQL_FIELDS = `
   title
   secondaryText
+  tertiaryText
   avatar {
     url
   }
 `;
 
-interface HeroContent {
+export interface HeroContent {
   title: string;
   secondaryText: string;
+  tertiaryText: string;
   avatar: {
     url: string;
   };
@@ -73,6 +83,14 @@ export interface CodeProject {
     };
     animation: CodeCardIconAnimation;
     bgColor: string;
+    pluginIconGrayscale: {
+      title: string;
+      url: string;
+    };
+    pluginIconColored: {
+      title: string;
+      url: string;
+    };
   };
 }
 
@@ -90,7 +108,8 @@ async function fetchGraphQL(query: string, preview = false): Promise<any> {
         }`,
       },
       body: JSON.stringify({ query }),
-      next: { tags: ['posts'] },
+      // TODO: Decide on caching strategy / change revalidate time for deployment
+      next: { tags: ['codeProjects'], revalidate: 30 },
     }
   ).then((response) => response.json());
 }

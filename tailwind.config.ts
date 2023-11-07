@@ -3,9 +3,17 @@ import plugin from 'tailwindcss/plugin';
 
 const config: Config = {
   content: [
-    './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
-    './src/components/**/*.{js,ts,jsx,tsx,mdx}',
-    './src/app/**/*.{js,ts,jsx,tsx,mdx}',
+    './pages/**/*.{js,ts,jsx,tsx,mdx}',
+    './components/**/*.{js,ts,jsx,tsx,mdx}',
+    './app/**/*.{js,ts,jsx,tsx,mdx}',
+  ],
+  safelist: [
+    'animate-spin',
+    'animate-wiggle',
+    'animate-pulse',
+    'animate-pulsate',
+    'animate-pulse-2',
+    'animate-pulse-3',
   ],
   theme: {
     extend: {
@@ -17,6 +25,16 @@ const config: Config = {
         pulsate: {
           '0%, 100%': { scale: '1' },
           '50%': { scale: '1.05' },
+        },
+        'pulse-2': {
+          '0%, 100%': { filter: 'brightness(1.05)' },
+          '50%': { filter: 'brightness(1)' },
+        },
+        'pulse-3': {
+          '0%, 100%': { backdropFilter: 'saturate(300%) brightness(1.1) hue-rotate(60deg)' },
+          '25%': { backdropFilter: 'saturate(100%)' },
+          '50%': { backdropFilter: 'saturate(300%) hue-rotate(30deg)' },
+          '75%': { backdropFilter: 'saturate(100%)' },
         },
       },
       backgroundImage: {
@@ -40,6 +58,8 @@ const config: Config = {
         wiggle: 'wiggle 1s ease-in-out infinite',
         spin: 'spin 3s linear infinite',
         pulsate: 'pulsate 1s ease-in-out infinite',
+        'pulse-2': 'pulse-2 2s ease-in-out infinite',
+        'pulse-3': 'pulse-3 6s ease-in-out infinite',
       },
     },
   },
@@ -56,10 +76,5 @@ const config: Config = {
       );
     }),
   ],
-  purge: {
-    options: {
-      safelist: ['animate-spin', 'animate-wiggle', 'animate-pulse', 'animate-pulsate'],
-    },
-  },
 };
 export default config;

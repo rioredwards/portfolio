@@ -1,5 +1,5 @@
-import { CodeProject } from '../lib/api';
-import SVGFromUrl from './SVGFromUrl';
+import { CodeProject } from '@/lib/api';
+import SVGFromUrl from '@/ui/SVGFromUrl';
 
 type Props = CodeProject['codeCardIcon'] & { isHover: boolean };
 
