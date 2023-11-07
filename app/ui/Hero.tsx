@@ -1,5 +1,5 @@
 import ContentfulImage from '@/lib/contentful-image';
-import GradientText from './GradientText';
+import GradientText from '@/ui/GradientText';
 import { HeroContent } from '@/lib/api';
 
 interface HeroProps extends HeroContent {}

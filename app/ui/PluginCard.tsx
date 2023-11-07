@@ -1,6 +1,6 @@
 import { CodeProject } from '@/lib/api';
-import HoverGradient from './HoverGradient';
-import SVGFromUrl from './SVGFromUrl';
+import HoverGradient from '@/ui/HoverGradient';
+import SVGFromUrl from '@/ui/SVGFromUrl';
 
 interface Props {
   title: string;

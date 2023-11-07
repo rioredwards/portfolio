@@ -1,8 +1,8 @@
 import { draftMode } from 'next/headers';
 import { getCodeProjectCardsContent, getHeroContent } from '@/lib/api';
-import Hero from '@/components/Hero';
-import CodeProjectCard from '@/components/CodeProjectCard';
-import GradientText from '@/components/GradientText';
+import GradientText from '@/ui/GradientText';
+import Hero from '@/ui/Hero';
+import CodeProjectCard from '@/ui/CodeProjectCard';
 
 export default async function Page() {
   const { isEnabled: draftModeIsEnabled } = draftMode();

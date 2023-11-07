@@ -1,7 +1,13 @@
 /** @type {import('next').NextConfig} */
-module.exports = {
-  images: {
-    loader: 'custom',
-    formats: ['image/avif', 'image/webp'],
+const path = require('path');
+
+const nextConfig = {
+  webpack: (config, { isServer }) => {
+    if (!isServer) {
+      config.resolve.alias['@'] = path.resolve(__dirname, 'path/to/ui/');
+    }
+    return config;
   },
 };
+
+module.exports = nextConfig;

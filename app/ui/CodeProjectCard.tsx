@@ -2,12 +2,12 @@
 // import Link from 'next/link';
 import { CodeCardType, CodeProject } from '@/lib/api';
 import { FC, useRef, useState } from 'react';
-import CodeCardImage from './CodeCardImage';
+import CodeCardImage from '@/ui/CodeCardImage';
 import { adjustColor } from '@/utils/colorUtils';
-import WebsiteCard from './WebsiteCard';
-import CLICard from './CLICard';
-import PluginCard from './PluginCard';
-import CodeModal from '@/components/CodeModal';
+import WebsiteCard from '@/ui/WebsiteCard';
+import CLICard from '@/ui/CLICard';
+import PluginCard from '@/ui/PluginCard';
+import CodeModal from '@/ui/CodeModal';
 
 const MAX_TITLE_LENGTH = 28;
 

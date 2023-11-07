@@ -3,9 +3,17 @@ import plugin from 'tailwindcss/plugin';
 
 const config: Config = {
   content: [
-    './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
-    './src/components/**/*.{js,ts,jsx,tsx,mdx}',
-    './src/app/**/*.{js,ts,jsx,tsx,mdx}',
+    './pages/**/*.{js,ts,jsx,tsx,mdx}',
+    './components/**/*.{js,ts,jsx,tsx,mdx}',
+    './app/**/*.{js,ts,jsx,tsx,mdx}',
+  ],
+  safelist: [
+    'animate-spin',
+    'animate-wiggle',
+    'animate-pulse',
+    'animate-pulsate',
+    'animate-pulse-2',
+    'animate-pulse-3',
   ],
   theme: {
     extend: {
@@ -68,17 +76,5 @@ const config: Config = {
       );
     }),
   ],
-  purge: {
-    options: {
-      safelist: [
-        'animate-spin',
-        'animate-wiggle',
-        'animate-pulse',
-        'animate-pulsate',
-        'animate-pulse-2',
-        'animate-pulse-3',
-      ],
-    },
-  },
 };
 export default config;
