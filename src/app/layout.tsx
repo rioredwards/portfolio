@@ -19,7 +19,7 @@ const inter = interFont({
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={inter.variable}>
+    <html lang="en" className={`${inter.variable} antialiased`}>
       <body>
         <section className="min-h-screen">
           <Header />
