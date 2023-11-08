@@ -3,7 +3,6 @@ import { getCodeProjectCardsContent, getHeroContent } from '@/lib/api';
 import GradientText from '@/ui/GradientText';
 import Hero from '@/ui/Hero';
 import CodeProjectCard from '@/ui/CodeProjectCard';
-import params from '@/ui/params';
 
 export default async function Page() {
   const { isEnabled: draftModeIsEnabled } = draftMode();
@@ -12,12 +11,7 @@ export default async function Page() {
   const codeProjectCards = await getCodeProjectCardsContent(draftModeIsEnabled);
 
   return (
-    <div
-      style={{
-        background: `linear-gradient(to bottom right, ${params.BG_GRADIENT_COLORS.join(', ')})`,
-      }}
-      className="w-full flex flex-col items-center justify-start"
-    >
+    <div className="w-full flex flex-col items-center justify-start">
       <div className="container px-5">
         <Hero {...heroContent} />
       </div>
