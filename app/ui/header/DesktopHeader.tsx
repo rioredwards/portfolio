@@ -1,11 +1,13 @@
 import Link from 'next/link';
 
-const Header: React.FC = () => {
+interface Props {
+  className: string;
+}
+
+const DesktopHeader: React.FC<Props> = ({ className: cssClasses }) => {
   return (
-    <header className="mx-auto container flex justify-start py-3 px-5 w-full">
-      <Link href="/">
-        <span className="font-semibold text-2xl whitespace-nowrap">RIO EDWARDS</span>
-      </Link>
+    <header className={`mx-auto container flex justify-start py-3 px-5 w-full ${cssClasses}`}>
+      <h1 className="font-semibold text-2xl whitespace-nowrap">RIO EDWARDS</h1>
       <nav className="ml-auto flex justify-around w-96 align-middle items-center">
         <Link href="/">HOME</Link>
         <Link href="/code">CODE</Link>
@@ -17,4 +19,4 @@ const Header: React.FC = () => {
   );
 };
 
-export default Header;
+export default DesktopHeader;

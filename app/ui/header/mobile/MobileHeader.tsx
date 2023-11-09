@@ -1,16 +1,17 @@
 'use client';
-import { AnimatePresence, motion } from 'framer-motion';
+import { motion } from 'framer-motion';
 import Hamburger from './Hamburger';
-import MobileNavModal from './MobileNavModal';
+import MobileNavModal from './MobileNavMenu';
 import { useState } from 'react';
 
 interface Props {
   avatar: {
     url: string;
   };
+  className: string;
 }
 
-export const MobileHeader: React.FC<Props> = ({ avatar }) => {
+export const MobileHeader: React.FC<Props> = ({ avatar, className: cssClasses }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleOpen = () => setIsOpen((prev) => !prev);
@@ -19,13 +20,12 @@ export const MobileHeader: React.FC<Props> = ({ avatar }) => {
     <motion.header
       initial={false}
       animate={isOpen ? 'open' : 'closed'}
-      className="w-full mx-auto px-6 s:px-8 py-3 flex align-middle justify-between"
+      className={`w-full mx-auto px-4 py-3 flex align-middle justify-between ${cssClasses}`}
     >
       <h1 className="font-semibold text-3xl leading-loose whitespace-nowrap align-middle">
         RIO EDWARDS
       </h1>
       <Hamburger toggle={toggleOpen} />
-      {/* <AnimatePresence>{isOpen && <MobileNavMenu />}</AnimatePresence> */}
       <MobileNavModal avatar={avatar} isOpen={isOpen} setIsOpen={setIsOpen} />
     </motion.header>
   );

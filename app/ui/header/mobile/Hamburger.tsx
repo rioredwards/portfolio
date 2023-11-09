@@ -18,7 +18,7 @@ const Hamburger: React.FC<Props> = ({ toggle }) => {
   return (
     <button
       onClick={toggle as any}
-      className="hover:bg-slate-100 z-40 w-16 outline-none cursor-pointer flex justify-center items-center rounded-full"
+      className="z-40 w-16 outline-none cursor-pointer flex justify-center items-center rounded-full"
     >
       <svg viewBox="0 0 23 23" className="w-8 h-8 translate-y-[2px] translate-x-[1px]">
         <Path

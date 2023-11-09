@@ -3,9 +3,6 @@ import Header from '@/ui/header/Header';
 import Footer from '@/ui/Footer';
 import { Metadata } from 'next';
 import { Inter as interFont } from 'next/font/google';
-import { MobileHeader } from '@/ui/header/mobile/MobileHeader';
-import Sidebar from '@/ui/flowbite-sidebar/Sidebar';
-import { Example } from '@/ui/framer-header/Example';
 
 export const metadata: Metadata = {
   title: `Rio Edwards | Web Developer`,
