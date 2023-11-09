@@ -94,12 +94,12 @@ const MobileNavModal: React.FC<Props> = ({ avatar, isOpen, setIsOpen }) => {
   return (
     <Dialog
       as="div"
-      className="z-10"
+      className="z-20"
       initialFocus={closeButtonRef}
       open={isOpen}
       onClose={hideMenu}
     >
-      <Dialog.Panel className="fixed inset-0 w-screen h-screen overflow-hidden bg-white text-center">
+      <Dialog.Panel className="z-20 fixed inset-0 w-screen h-screen overflow-hidden bg-white text-center">
         {/* Close Button */}
         <div className="h-20 w-full flex items-center justify-end pr-8">
           <button
