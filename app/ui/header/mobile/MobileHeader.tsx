@@ -1,29 +1,16 @@
 'use client';
-import { AnimatePresence, motion, useCycle } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 import Hamburger from './Hamburger';
-import MobileNavMenu from './MobileNavMenu';
 import MobileNavModal from './MobileNavModal';
 import { useState } from 'react';
 
-const variants = {
-  open: {
-    transition: {
-      type: 'spring',
-      stiffness: 20,
-      restDelta: 2,
-    },
-  },
-  closed: {
-    transition: {
-      delay: 0.5,
-      type: 'spring',
-      stiffness: 400,
-      damping: 40,
-    },
-  },
-};
+interface Props {
+  avatar: {
+    url: string;
+  };
+}
 
-export const MobileHeader = () => {
+export const MobileHeader: React.FC<Props> = ({ avatar }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleOpen = () => setIsOpen((prev) => !prev);
@@ -39,9 +26,7 @@ export const MobileHeader = () => {
       </h1>
       <Hamburger toggle={toggleOpen} />
       {/* <AnimatePresence>{isOpen && <MobileNavMenu />}</AnimatePresence> */}
-      <AnimatePresence>
-        <MobileNavModal isOpen={isOpen} setIsOpen={setIsOpen} />
-      </AnimatePresence>
+      <MobileNavModal avatar={avatar} isOpen={isOpen} setIsOpen={setIsOpen} />
     </motion.header>
   );
 };

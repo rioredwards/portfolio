@@ -1,9 +1,9 @@
 import '@/ui/globals.css';
-import Header from '@/ui/Header';
+import Header from '@/ui/header/Header';
 import Footer from '@/ui/Footer';
 import { Metadata } from 'next';
 import { Inter as interFont } from 'next/font/google';
-import { MobileHeader } from '@/ui/header/MobileHeader';
+import { MobileHeader } from '@/ui/header/mobile/MobileHeader';
 import Sidebar from '@/ui/flowbite-sidebar/Sidebar';
 import { Example } from '@/ui/framer-header/Example';
 
@@ -26,7 +26,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className="min-h-screen">
         {/* <Header /> */}
         {/* <Example /> */}
-        <MobileHeader />
+        <Header />
         <main>{children}</main>
         <Footer />
       </body>

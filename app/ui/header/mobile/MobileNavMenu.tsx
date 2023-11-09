@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { MobileNavBtn } from '@/ui/header/MobileNavBtn';
+import { MobileNavBtn } from '@/ui/header/mobile/MobileNavBtn';
 
 const variants = {
   open: {

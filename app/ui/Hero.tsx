@@ -1,4 +1,4 @@
-import ContentfulImage from '@/lib/contentful-image';
+import ContentfulImage from '@/ui/imageComponents/ContentfulImage';
 import GradientText from '@/ui/GradientText';
 import { HeroContent } from '@/lib/api';
 
