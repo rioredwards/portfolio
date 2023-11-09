@@ -1,5 +1,5 @@
 'use client';
-// import Link from 'next/link';
+import cssStyles from '@/ui/code/codeCard.module.css';
 import { CodeCardType, CodeProject } from '@/lib/api';
 import { FC, useRef, useState } from 'react';
 import CodeCardImage from '@/ui/code/CodeCardImage';
@@ -68,12 +68,14 @@ const CodeProjectCard: React.FC<CodeProject & { idx: number }> = ({ title, codeC
   return (
     <article
       style={{
-        backgroundImage: isHover ? generateBgGradient(bgGradient) : undefined,
+        // backgroundImage: isHover ? generateBgGradient(bgGradient) : undefined,
+        ['--gradient' as any]: generateBgGradient(bgGradient),
+        ['--border-width' as any]: '4px',
       }}
       onMouseEnter={onHoverStart}
       onMouseLeave={() => setIsHover(false)}
       onClick={onClick}
-      className={`w-full border-4 border-gray-50/80 hover:border-none hover:-translate-y-2 group relative hover:bg-gray-200 hover:bg-opacity-100 flex flex-col items-center h-[260px] overflow-hidden rounded-4xl hover:shadow-lg cursor-pointer`}
+      className={`group ${cssStyles.codeCardContainer}`}
     >
       <CodeModal
         title={title}
@@ -81,10 +83,6 @@ const CodeProjectCard: React.FC<CodeProject & { idx: number }> = ({ title, codeC
         isOpen={modalIsOpen}
         setIsOpen={setModalIsOpen}
         onModalClose={onModalClose}
-      />
-      <div
-        style={{ animationDelay: `${idx * 200}ms` }}
-        className="group-hover:-z-10 z-0 pointer-events-none absolute inset-0 animate-pulse-3 group-hover:animate-none bg-gray-200/50 group-hover:bg-opacity-0"
       />
       <div className="w-full h-full flex flex-col items-center justify-start">
         <CardComponent
