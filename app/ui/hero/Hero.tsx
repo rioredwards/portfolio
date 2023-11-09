@@ -1,4 +1,4 @@
-import ContentfulImage from '@/ui/imageComponents/ContentfulImage';
+import ContentfulImage from '@/ui/ContentfulImage';
 import GradientText from '@/ui/GradientText';
 import { HeroContent } from '@/lib/api';
 
@@ -20,9 +20,9 @@ const Hero: React.FC<HeroProps> = ({ title, secondaryText, avatar }) => {
         elementType="h1"
         direction="to bottom right"
         colors={['#4CEA82', '#6D88EE']}
-        className="text-4xl lg:text-5xl mb-8 lg:mb-12 font-black"
-        offset={{ x: 0, y: -2 }}
-        shadowColor="#ffffff"
+        className="text-4xl lg:text-5xl mb-8 lg:mb-12 font-black leading-loose mt-6"
+        offset={{ x: 0, y: -1 }}
+        shadowColor="#245B5C"
       >
         {title}
       </GradientText>

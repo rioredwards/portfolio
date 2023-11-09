@@ -22,7 +22,7 @@ export const MobileHeader: React.FC<Props> = ({ avatar, className: cssClasses })
       animate={isOpen ? 'open' : 'closed'}
       className={`w-full mx-auto px-4 py-3 flex align-middle justify-between ${cssClasses}`}
     >
-      <h1 className="font-semibold text-3xl leading-loose whitespace-nowrap align-middle">
+      <h1 className="font-semibold text-2xl leading-loose whitespace-nowrap align-middle text-gray-800">
         RIO EDWARDS
       </h1>
       <Hamburger toggle={toggleOpen} />
