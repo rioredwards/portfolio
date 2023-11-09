@@ -1,23 +1,16 @@
 'use client';
-import * as React from 'react';
-import { useRef } from 'react';
 import { motion, useCycle } from 'framer-motion';
-import { useDimensions } from './use-dimensions';
-import { MenuToggle } from './MenuToggle';
-import { Navigation } from './Navigation';
-import styles from './Header.module.css';
+import Hamburger from './Hamburger';
 
-const sidebar = {
-  open: (height = 1000) => ({
-    clipPath: `circle(${height * 2 + 200}px at 40px 40px)`,
+const variants = {
+  open: {
     transition: {
       type: 'spring',
       stiffness: 20,
       restDelta: 2,
     },
-  }),
+  },
   closed: {
-    clipPath: 'circle(30px at 40px 40px)',
     transition: {
       delay: 0.5,
       type: 'spring',
@@ -29,20 +22,17 @@ const sidebar = {
 
 export const MobileHeader = () => {
   const [isOpen, toggleOpen] = useCycle(false, true);
-  const containerRef = useRef(null);
-  const { height } = useDimensions(containerRef);
 
   return (
-    <motion.nav
-      className={styles.nav}
+    <motion.header
       initial={false}
       animate={isOpen ? 'open' : 'closed'}
-      custom={height}
-      ref={containerRef}
+      className="w-full mx-auto px-8 py-3 flex align-middle justify-between bg-red-100"
     >
-      <motion.div className={styles.background} variants={sidebar} />
-      <Navigation />
-      <MenuToggle toggle={() => toggleOpen()} />
-    </motion.nav>
+      <h1 className="font-semibold text-3xl leading-loose whitespace-nowrap align-middle">
+        Rio Edwards
+      </h1>
+      <Hamburger toggle={() => toggleOpen()} />
+    </motion.header>
   );
 };
