@@ -1,6 +1,9 @@
 'use client';
-import { motion, useCycle } from 'framer-motion';
+import { AnimatePresence, motion, useCycle } from 'framer-motion';
 import Hamburger from './Hamburger';
+import MobileNavMenu from './MobileNavMenu';
+import MobileNavModal from './MobileNavModal';
+import { useState } from 'react';
 
 const variants = {
   open: {
@@ -21,18 +24,24 @@ const variants = {
 };
 
 export const MobileHeader = () => {
-  const [isOpen, toggleOpen] = useCycle(false, true);
+  const [isOpen, setIsOpen] = useState(false);
+
+  const toggleOpen = () => setIsOpen((prev) => !prev);
 
   return (
     <motion.header
       initial={false}
       animate={isOpen ? 'open' : 'closed'}
-      className="w-full mx-auto px-8 py-3 flex align-middle justify-between bg-red-100"
+      className="w-full mx-auto px-6 s:px-8 py-3 flex align-middle justify-between"
     >
       <h1 className="font-semibold text-3xl leading-loose whitespace-nowrap align-middle">
-        Rio Edwards
+        RIO EDWARDS
       </h1>
-      <Hamburger toggle={() => toggleOpen()} />
+      <Hamburger toggle={toggleOpen} />
+      {/* <AnimatePresence>{isOpen && <MobileNavMenu />}</AnimatePresence> */}
+      <AnimatePresence>
+        <MobileNavModal isOpen={isOpen} setIsOpen={setIsOpen} />
+      </AnimatePresence>
     </motion.header>
   );
 };
