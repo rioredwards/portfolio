@@ -41,7 +41,7 @@ const WebsiteCard: React.FC<Props> = ({ title, preview, icon, color, isHover }) 
           <h3 className="text-xl font-extrabold text-gray-500 whitespace-nowrap">{title}</h3>
         </div>
       </div>
-      <div className="h-52">
+      <div className="h-[80%]">
         {!isHover ? (
           <CodeCardIcon icon={icon} isHover={isHover} />
         ) : (

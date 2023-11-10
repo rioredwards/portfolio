@@ -16,7 +16,10 @@ const SVGFromUrl: React.FC<Props> = ({ url, title, containerClasses, animation }
       const res = await fetch(url);
       const svgRes = await res.text();
 
-      const svgWithAddedClasses = svgRes.replace('<svg ', `<svg class="animate-${animation}" `);
+      const svgWithAddedClasses = svgRes.replace(
+        '<svg ',
+        `<svg class="animate-intermittent-${animation}" `
+      );
 
       setSvg(svgWithAddedClasses);
     }

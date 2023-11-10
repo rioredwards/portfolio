@@ -14,17 +14,10 @@ const CodeCardIcon: React.FC<Props> = ({ isHover, icon }) => {
       }`}
     >
       <SVGFromUrl
-        key={icon.title + 'grayscale'}
-        title={icon.title}
-        url={icon.iconColored.url}
-        containerClasses="z-10 h-32 w-32 group-hover:hidden flex items-center justify-center pointer-events-none"
-        animation="none"
-      />
-      <SVGFromUrl
         key={icon.title + 'colored'}
         title={icon.title}
         url={icon.iconColored.url}
-        containerClasses="z-10 h-32 w-32 hidden group-hover:flex items-center justify-center pointer-events-none"
+        containerClasses="z-10 h-[60%] w-full pointer-events-none flex flex-col items-center justify-center"
         animation={icon.animation}
       />
     </div>

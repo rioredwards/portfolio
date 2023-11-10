@@ -9,7 +9,9 @@ const config: Config = {
   ],
   safelist: [
     'animate-spin',
+    'animate-intermittent-spin',
     'animate-wiggle',
+    'animate-intermittent-wiggle',
     'animate-pulse',
     'animate-pulsate',
     'animate-pulse-2',
@@ -27,6 +29,20 @@ const config: Config = {
         wiggle: {
           '0%, 100%': { transform: 'rotate(-3deg)' },
           '50%': { transform: 'rotate(3deg)' },
+        },
+        'intermittent-wiggle': {
+          '0%, 100%': { transform: 'rotate(0deg)' },
+          '50%': { transform: 'rotate(0deg)' },
+          '60%': { transform: 'rotate(-4deg)' },
+          '70%': { transform: 'rotate(3deg)' },
+          '80%': { transform: 'rotate(-2deg)' },
+          '90%': { transform: 'rotate(1deg)' },
+        },
+        'intermittent-spin': {
+          '0%': { transform: 'rotate(0deg)' },
+          '50%': { transform: 'rotate(0deg)' },
+          '55%': { transform: 'rotate(-5deg)' },
+          '100%': { transform: 'rotate(180deg)' },
         },
         pulsate: {
           '0%, 100%': { scale: '1' },
@@ -61,6 +77,8 @@ const config: Config = {
         lg: '0 8px 16px var(--tw-shadow-color)',
       },
       animation: {
+        'intermittent-wiggle': 'intermittent-wiggle 5s ease-in-out infinite',
+        'intermittent-spin': 'intermittent-spin 5s ease-in-out infinite',
         wiggle: 'wiggle 1s ease-in-out infinite',
         spin: 'spin 3s linear infinite',
         pulsate: 'pulsate 1s ease-in-out infinite',
