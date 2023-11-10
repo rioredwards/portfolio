@@ -48,8 +48,8 @@ const avatarVariants = {
     },
   },
   closed: {
-    scale: 0,
-    opacity: 0,
+    scale: 1,
+    opacity: 1,
     transition: {
       scale: { stiffness: 1000 },
     },

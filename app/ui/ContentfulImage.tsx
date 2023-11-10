@@ -15,10 +15,11 @@ const contentfulLoader = ({ src, width, quality }: Props) => {
   return `${src}?w=${width}&q=${quality || 75}`;
 };
 
-export default function ContentfulImage(props: Props) {
+// eslint-disable-next-line
+export default function ContentfulImage(props: Props, ref: any) {
   return <Image alt={props.alt} loader={contentfulLoader} {...props} />;
 }
 
 const RefContentfulImage = forwardRef<HTMLDivElement, Props>(ContentfulImage);
 
-export const MotionContentfulImage = motion(RefContentfulImage);
+export const MotionContentfulImage = motion(RefContentfulImage, { forwardMotionProps: true });
