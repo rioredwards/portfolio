@@ -1,6 +1,7 @@
 import { CodeProject } from '@/lib/api';
 import CodeCardIcon from '@/ui/code/CodeCardIcon';
-import CodeCardPreview from '@/ui/code/CodeCardPreview';
+import { MotionCodeCardPreview } from '@/ui/code/CodeCardPreview';
+import { AnimatePresence } from 'framer-motion';
 
 interface Props {
   title: string;
@@ -45,7 +46,14 @@ const WebsiteCard: React.FC<Props> = ({ title, preview, icon, color, isHover }) 
         {!isHover ? (
           <CodeCardIcon icon={icon} isHover={isHover} />
         ) : (
-          <CodeCardPreview preview={preview} />
+          <AnimatePresence>
+            <MotionCodeCardPreview
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              preview={preview}
+            />
+          </AnimatePresence>
         )}
       </div>
     </div>
