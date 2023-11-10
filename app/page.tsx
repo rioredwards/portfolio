@@ -30,7 +30,7 @@ export default async function Page() {
               CODE
             </GradientText>
           </div>
-          <div className="max-w-[1506px] mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 px-0 sm:px-2 justify-center items-center justify-items-center content-center">
+          <div className="container mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 px-0 sm:px-2 justify-center items-center justify-items-center content-center">
             {codeProjectCards.map((codeProjectCard, idx) => (
               <CodeProjectCard key={codeProjectCard.slug} {...codeProjectCard} idx={idx} />
             ))}
