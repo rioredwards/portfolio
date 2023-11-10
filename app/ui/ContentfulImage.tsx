@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion';
 import Image from 'next/image';
-import { forwardRef } from 'react';
+import { ForwardRefRenderFunction, forwardRef } from 'react';
 
 interface Props {
   src: string;
@@ -15,11 +15,12 @@ const contentfulLoader = ({ src, width, quality }: Props) => {
   return `${src}?w=${width}&q=${quality || 75}`;
 };
 
-// eslint-disable-next-line
-export default function ContentfulImage(props: Props, ref: any) {
-  return <Image alt={props.alt} loader={contentfulLoader} {...props} />;
-}
+export const ContentfulImage: ForwardRefRenderFunction<HTMLDivElement, Props> = (props, ref) => {
+  return <Image ref={ref as any} alt={props.alt} loader={contentfulLoader} {...props} />;
+};
 
 const RefContentfulImage = forwardRef<HTMLDivElement, Props>(ContentfulImage);
 
-export const MotionContentfulImage = motion(RefContentfulImage, { forwardMotionProps: true });
+export const MotionContentfulImage = motion(RefContentfulImage);
+
+export default MotionContentfulImage;

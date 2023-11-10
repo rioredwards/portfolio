@@ -48,8 +48,8 @@ const avatarVariants = {
     },
   },
   closed: {
-    scale: 1,
-    opacity: 1,
+    scale: 0,
+    opacity: 0,
     transition: {
       scale: { stiffness: 1000 },
     },
@@ -101,7 +101,7 @@ const MobileNavModal: React.FC<Props> = ({ avatar, isOpen, setIsOpen }) => {
     >
       <Dialog.Panel className="z-20 fixed inset-0 w-screen h-screen overflow-hidden bg-white text-center">
         {/* Close Button */}
-        <div className="h-20 w-full flex items-center justify-end pr-8">
+        <div className="h-[73px] w-full flex items-center justify-end pr-[26px]">
           <button
             type="button"
             className="h-12 w-12 rounded-full"
