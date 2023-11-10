@@ -79,9 +79,9 @@ const CodeProjectCard: React.FC<CodeProject & { idx: number }> = ({
           onMouseEnter={onHoverStart}
           onMouseLeave={() => setIsHover(false)}
           onClick={onClick}
-          className="group w-full h-full rounded-4xl overflow-hidden relative"
+          className="group w-full h-full hover:-translate-y-1 rounded-[8vw] sm:rounded-[4vw] lg:rounded-[3vw] overflow-hidden relative shadow-sm hover:shadow-sm"
         >
-          <div className="absolute inset-0 rounded-4xl overflow-hidden">
+          <div className="absolute inset-0 rounded-[8vw] sm:rounded-[4vw] lg:rounded-[3vw] overflow-hidden">
             <CodeModal
               title={title}
               key={title + 'modal'}

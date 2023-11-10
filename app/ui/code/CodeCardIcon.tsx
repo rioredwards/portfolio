@@ -8,11 +8,7 @@ interface Props {
 
 const CodeCardIcon: React.FC<Props> = ({ isHover, icon }) => {
   return (
-    <div
-      className={`overflow-hidden z-10 h-full w-full flex flex-col items-center justify-center pointer-events-none ${
-        isHover ? 'drop-shadow-xl' : ''
-      }`}
-    >
+    <div className="overflow-hidden z-10 h-full w-full flex flex-col items-center justify-center pointer-events-none drop-shadow-xl">
       <SVGFromUrl
         key={icon.title + 'colored'}
         title={icon.title}
