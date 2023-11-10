@@ -3,7 +3,7 @@ import { useRef } from 'react';
 import { Dialog } from '@headlessui/react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { MobileNavLink } from './MobileNavLink';
-import MotionContentfulImage from '@/ui/motion/MotionContentfulImage';
+import { MotionContentfulImage } from '@/ui/ContentfulImage';
 
 interface Props {
   isOpen: boolean;

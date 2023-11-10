@@ -17,6 +17,12 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      spacing: {
+        '100': '28rem',
+        '112': '30rem',
+        '128': '32rem',
+        '144': '36rem',
+      },
       keyframes: {
         wiggle: {
           '0%, 100%': { transform: 'rotate(-3deg)' },

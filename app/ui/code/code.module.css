@@ -1,0 +1,26 @@
+.codeCardContainer {
+  width: 100%;
+  position: relative;
+  padding-top: 62.5%; /* This sets the top padding to 62.5% of the element's width */
+}
+
+/* Inner content should be positioned absolutely within .codeCardContainer */
+.codeCardContent {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  cursor: pointer;
+  border-radius: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  min-height: 195px;
+  min-width: 312px;
+
+  max-height: 300px;
+  max-width: 480px;
+}

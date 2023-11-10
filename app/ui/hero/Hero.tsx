@@ -22,7 +22,7 @@ const Hero: React.FC<HeroProps> = ({ title, secondaryText, avatar }) => {
         colors={['#4CEA82', '#6D88EE']}
         className="text-4xl lg:text-5xl mb-8 lg:mb-12 font-black leading-loose mt-6"
         offset={{ x: 0, y: -1 }}
-        shadowColor="#245B5C"
+        shadowColor="#245B5C40"
       >
         {title}
       </GradientText>

@@ -17,20 +17,20 @@ export default async function Page() {
       </div>
       <hr />
       <div className="w-full flex items-center justify-center">
-        <section className="w-full container py-6 px-5 md:px-1">
+        <section className="w-screen py-6 px-0">
           <div className="flex justify-center items-center">
             <GradientText
               direction="to bottom right"
               elementType="h2"
               colors={['#EABC4C', '#EA4C4C']}
-              className="font-black text-4xl lg:text-5xl mb-12 xl:mb-16"
-              offset={{ x: 0, y: -2 }}
-              shadowColor="#ffffff"
+              className="text-4xl lg:text-5xl mb-8 lg:mb-12 font-black leading-loose mt-6"
+              offset={{ x: 0, y: -1 }}
+              shadowColor="#633E2740"
             >
               CODE
             </GradientText>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 px-6">
+          <div className="max-w-[1506px] mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 px-0 sm:px-2 justify-center items-center justify-items-center content-center">
             {codeProjectCards.map((codeProjectCard, idx) => (
               <CodeProjectCard key={codeProjectCard.slug} {...codeProjectCard} idx={idx} />
             ))}

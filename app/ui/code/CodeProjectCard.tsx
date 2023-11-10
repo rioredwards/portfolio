@@ -1,8 +1,7 @@
 'use client';
-import cssStyles from '@/ui/code/codeCard.module.css';
+import cssStyles from '@/ui/code/code.module.css';
 import { CodeCardType, CodeProject } from '@/lib/api';
 import { FC, useRef, useState } from 'react';
-import CodeCardImage from '@/ui/code/CodeCardImage';
 import { adjustColor } from '@/utils/colorUtils';
 import WebsiteCard from '@/ui/code/WebsiteCard';
 import CLICard from '@/ui/code/CLICard';
@@ -35,7 +34,12 @@ const generateBgGradient = ([color1, color2, color3]: string[]): string => {
   return `linear-gradient(to bottom right, ${color1}, ${color2}, ${color3})`;
 };
 
-const CodeProjectCard: React.FC<CodeProject & { idx: number }> = ({ title, codeCardIcon, idx }) => {
+const CodeProjectCard: React.FC<CodeProject & { idx: number }> = ({
+  title,
+  codeCardIcon,
+  preview,
+  idx,
+}) => {
   const hoverDisabled = useRef(false);
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [isHover, setIsHover] = useState(false);
@@ -66,36 +70,44 @@ const CodeProjectCard: React.FC<CodeProject & { idx: number }> = ({ title, codeC
   };
 
   return (
-    <article
-      style={{
-        // backgroundImage: isHover ? generateBgGradient(bgGradient) : undefined,
-        ['--gradient' as any]: generateBgGradient(bgGradient),
-        ['--border-width' as any]: '4px',
-      }}
-      onMouseEnter={onHoverStart}
-      onMouseLeave={() => setIsHover(false)}
-      onClick={onClick}
-      className={`group ${cssStyles.codeCardContainer}`}
-    >
-      <CodeModal
-        title={title}
-        key={title + 'modal'}
-        isOpen={modalIsOpen}
-        setIsOpen={setModalIsOpen}
-        onModalClose={onModalClose}
-      />
-      <div className="w-full h-full flex flex-col items-center justify-start">
-        <CardComponent
-          title={titleLimited}
-          color={codeCardIcon?.bgColor}
-          isHover={isHover}
-          pluginIcons={pluginIcons}
+    <div className={`${cssStyles.codeCardContainer}`}>
+      <div className={`${cssStyles.codeCardContent}`}>
+        <article
+          style={{
+            background: generateBgGradient(bgGradient),
+          }}
+          onMouseEnter={onHoverStart}
+          onMouseLeave={() => setIsHover(false)}
+          onClick={onClick}
+          className="group w-full h-full rounded-4xl overflow-hidden relative"
         >
-          {codeCardIcon && <CodeCardImage key={title} isHover={isHover} {...codeCardIcon} />}
-        </CardComponent>
+          <div className="absolute inset-0 rounded-4xl overflow-hidden">
+            <CodeModal
+              title={title}
+              key={title + 'modal'}
+              isOpen={modalIsOpen}
+              setIsOpen={setModalIsOpen}
+              onModalClose={onModalClose}
+            />
+            <div className="w-full h-full flex flex-col items-center justify-start">
+              <CardComponent
+                title={titleLimited}
+                color={codeCardIcon?.bgColor}
+                isHover={isHover}
+                pluginIcons={pluginIcons}
+                preview={preview}
+                icon={codeCardIcon}
+              />
+            </div>
+          </div>
+        </article>
       </div>
-    </article>
+    </div>
   );
 };
 
 export default CodeProjectCard;
+
+// Code Card Aspect Ratio: 0.625
+// Small Screens: 320w x 200h
+// Medium Screens: 360w x 225h
