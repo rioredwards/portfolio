@@ -89,16 +89,14 @@ const CodeProjectCard: React.FC<CodeProject & { idx: number }> = ({
               setIsOpen={setModalIsOpen}
               onModalClose={onModalClose}
             />
-            <div className="w-full h-full flex flex-col items-center justify-start">
-              <CardComponent
-                title={titleLimited}
-                color={codeCardIcon?.bgColor}
-                isHover={isHover}
-                pluginIcons={pluginIcons}
-                preview={preview}
-                icon={codeCardIcon}
-              />
-            </div>
+            <CardComponent
+              title={titleLimited}
+              color={codeCardIcon?.bgColor}
+              isHover={isHover}
+              pluginIcons={pluginIcons}
+              preview={preview}
+              icon={codeCardIcon}
+            />
           </div>
         </article>
       </div>
