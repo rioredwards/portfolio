@@ -13,9 +13,12 @@ export const CodeCardPreview: ForwardRefRenderFunction<HTMLDivElement, Props> = 
   const { preview } = props;
 
   return (
-    <motion.div ref={ref} className="overflow-hidden z-10 h-full pointer-events-none">
+    <motion.div
+      ref={ref}
+      className="group-hover:block top-[20%] left-0 absolute overflow-hidden z-10 w-full h-full pointer-events-none"
+    >
       <MotionContentfulImage
-        className="z-0 absolute h-full w-full"
+        className="z-0 relative w-full h-[80%] object-cover"
         alt={preview.title}
         src={preview.url}
         width={200}

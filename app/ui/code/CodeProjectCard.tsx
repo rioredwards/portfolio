@@ -88,7 +88,7 @@ const CodeProjectCard: React.FC<CodeProject & { idx: number }> = ({
               isOpen={modalIsOpen}
               setIsOpen={setModalIsOpen}
               onModalClose={onModalClose}
-            />
+              />
             <CardComponent
               title={titleLimited}
               color={codeCardIcon?.bgColor}

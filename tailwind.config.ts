@@ -42,7 +42,7 @@ const config: Config = {
           '0%': { transform: 'rotate(0deg)' },
           '50%': { transform: 'rotate(0deg)' },
           '55%': { transform: 'rotate(-5deg)' },
-          '100%': { transform: 'rotate(180deg)' },
+          '100%': { transform: 'rotate(360deg)' },
         },
         pulsate: {
           '0%, 100%': { scale: '1' },

@@ -1,7 +1,7 @@
 import { CodeProject } from '@/lib/api';
-import CodeCardIcon from '@/ui/code/CodeCardIcon';
+import { CodeCardIcon, MotionCodeCardIcon } from '@/ui/code/CodeCardIcon';
 import { MotionCodeCardPreview } from '@/ui/code/CodeCardPreview';
-import { AnimatePresence } from 'framer-motion';
+import { AnimatePresence, Variants } from 'framer-motion';
 
 interface Props {
   title: string;
@@ -10,6 +10,47 @@ interface Props {
   icon: CodeProject['codeCardIcon'];
   preview: CodeProject['preview'];
 }
+
+const iconVariants: Variants = {
+  displayed: {
+    x: [410, 410, 0, 0],
+    scale: [0.8, 0.8, 0.9, 1],
+    transition: {
+      duration: 0.5,
+      ease: 'easeInOut',
+    },
+  },
+  hidden: {
+    x: [null, 0, 410, 410],
+    scale: [null, 0.9, 0.8, 0.8],
+    transition: {
+      duration: 0.5,
+      ease: 'easeInOut',
+    },
+  },
+};
+
+const previewVariants = {
+  displayed: {
+    x: [-410, -410, 0, 0],
+    scale: [0.8, 0.8, 0.9, 1],
+    transition: {
+      duration: 0.5,
+      ease: 'easeInOut',
+    },
+  },
+  hidden: {
+    x: [null, 0, -410, -410],
+    scale: [null, 0.9, 0.8, 0.8],
+    transition: {
+      duration: 0.5,
+      ease: 'easeInOut',
+    },
+  },
+};
+
+// display: [null, same, slide, scale]
+// hidden: [null, scale, slide, same]
 
 const WebsiteCard: React.FC<Props> = ({ title, preview, icon, color, isHover }) => {
   return (
@@ -43,18 +84,28 @@ const WebsiteCard: React.FC<Props> = ({ title, preview, icon, color, isHover }) 
         </div>
       </div>
       <div className="h-[80%]">
-        {!isHover ? (
-          <CodeCardIcon icon={icon} isHover={isHover} />
-        ) : (
-          <AnimatePresence>
-            <MotionCodeCardPreview
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              preview={preview}
+        <AnimatePresence>
+          {!isHover ? (
+            <MotionCodeCardIcon
+              key={icon.title + 'icon'}
+              initial={'displayed'}
+              animate={'displayed'}
+              exit={'hidden'}
+              icon={icon}
+              isHover={isHover}
+              variants={iconVariants}
             />
-          </AnimatePresence>
-        )}
+          ) : (
+            <MotionCodeCardPreview
+              key={preview.title + 'preview'}
+              variants={previewVariants}
+              preview={preview}
+              initial={'hidden'}
+              animate={'displayed'}
+              exit={'hidden'}
+            />
+          )}
+        </AnimatePresence>
       </div>
     </div>
   );

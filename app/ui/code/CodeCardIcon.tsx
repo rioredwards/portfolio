@@ -1,23 +1,38 @@
 import { CodeProject } from '@/lib/api';
-import SVGFromUrl from '@/ui/code/SVGFromUrl';
+import { MotionSVGFromUrl } from '@/ui/code/SVGFromUrl';
+import { ForwardRefRenderFunction, forwardRef, useEffect } from 'react';
+import { motion, usePresence } from 'framer-motion';
 
 interface Props {
   icon: CodeProject['codeCardIcon'];
   isHover: boolean;
 }
 
-const CodeCardIcon: React.FC<Props> = ({ isHover, icon }) => {
+export const CodeCardIcon: ForwardRefRenderFunction<HTMLDivElement, Props> = (props, ref) => {
+  const { icon, isHover } = props;
+
+  const [isPresent, safeToRemove] = usePresence();
+
+  useEffect(() => {
+    !isPresent && setTimeout(safeToRemove, 8000);
+  }, [isPresent]);
+
   return (
-    <div className="overflow-hidden z-10 h-full w-full flex flex-col items-center justify-center pointer-events-none drop-shadow-xl">
-      <SVGFromUrl
+    <motion.div
+      ref={ref}
+      className="absolute top-[35%] left-0 overflow-hidden z-10 h-full w-full flex flex-col items-center justify-center pointer-events-none drop-shadow-xl"
+    >
+      <MotionSVGFromUrl
         key={icon.title + 'colored'}
         title={icon.title}
         url={icon.iconColored.url}
-        containerClasses="z-10 h-[60%] w-full pointer-events-none flex flex-col items-center justify-center"
+        containerClasses="z-10 h-[50%] w-full pointer-events-none flex flex-col items-center justify-center"
         animation={icon.animation}
       />
-    </div>
+    </motion.div>
   );
 };
 
-export default CodeCardIcon;
+const RefCodeCardIcon = forwardRef<HTMLDivElement, Props>(CodeCardIcon);
+
+export const MotionCodeCardIcon = motion(RefCodeCardIcon);

@@ -1,5 +1,6 @@
 import { CodeProject } from '@/lib/api';
-import { useEffect, useState } from 'react';
+import { motion } from 'framer-motion';
+import { ForwardRefRenderFunction, forwardRef, useEffect, useState } from 'react';
 
 interface Props {
   url: string;
@@ -8,7 +9,8 @@ interface Props {
   animation: CodeProject['codeCardIcon']['animation'];
 }
 
-const SVGFromUrl: React.FC<Props> = ({ url, title, containerClasses, animation }) => {
+export const SVGFromUrl: ForwardRefRenderFunction<HTMLDivElement, Props> = (props, ref) => {
+  const { url, title, containerClasses, animation } = props;
   const [svg, setSvg] = useState<string | null>(null);
 
   useEffect(() => {
@@ -27,11 +29,13 @@ const SVGFromUrl: React.FC<Props> = ({ url, title, containerClasses, animation }
   }, [url, title, animation]);
 
   return (
-    <>
-      <span className="sr-only">{title}</span>
-      {<div className={containerClasses} dangerouslySetInnerHTML={{ __html: svg || '' }} />}
-    </>
+    <motion.div ref={ref} className="h-full w-full">
+      <motion.span className="sr-only">{title}</motion.span>
+      {<motion.div className={containerClasses} dangerouslySetInnerHTML={{ __html: svg || '' }} />}
+    </motion.div>
   );
 };
 
-export default SVGFromUrl;
+const RefSVGFromUrl = forwardRef<HTMLDivElement, Props>(SVGFromUrl);
+
+export const MotionSVGFromUrl = motion(RefSVGFromUrl);
