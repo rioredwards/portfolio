@@ -6,53 +6,48 @@ import { AnimatePresence, Variants } from 'framer-motion';
 interface Props {
   title: string;
   color: string;
-  isHover: boolean;
   icon: CodeProject['codeCardIcon'];
   preview: CodeProject['preview'];
 }
 
 const iconVariants: Variants = {
-  displayed: {
-    x: [410, 410, 0, 0],
-    scale: [0.8, 0.8, 0.9, 1],
+  isNotHover: {
+    opacity: [null, 1],
+    scale: [null, 1],
     transition: {
-      duration: 0.5,
+      delay: 0.1,
+      duration: 0.1,
       ease: 'easeInOut',
     },
   },
-  hidden: {
-    x: [null, 0, 410, 410],
-    scale: [null, 0.9, 0.8, 0.8],
+  isHover: {
+    opacity: [null, 0],
+    scale: [null, 0.8],
     transition: {
-      duration: 0.5,
-      ease: 'easeInOut',
-    },
-  },
-};
-
-const previewVariants = {
-  displayed: {
-    x: [-410, -410, 0, 0],
-    scale: [0.8, 0.8, 0.9, 1],
-    transition: {
-      duration: 0.5,
-      ease: 'easeInOut',
-    },
-  },
-  hidden: {
-    x: [null, 0, -410, -410],
-    scale: [null, 0.9, 0.8, 0.8],
-    transition: {
-      duration: 0.5,
+      duration: 0.1,
       ease: 'easeInOut',
     },
   },
 };
 
-// display: [null, same, slide, scale]
-// hidden: [null, scale, slide, same]
+const previewVariants: Variants = {
+  isHover: {
+    opacity: [null, 1],
+    transition: {
+      duration: 0.1,
+      ease: 'easeInOut',
+    },
+  },
+  isNotHover: {
+    opacity: [null, 0],
+    transition: {
+      duration: 0.2,
+      ease: 'easeInOut',
+    },
+  },
+};
 
-const WebsiteCard: React.FC<Props> = ({ title, preview, icon, color, isHover }) => {
+const WebsiteCard: React.FC<Props> = ({ title, preview, icon, color }) => {
   return (
     <div className="h-full w-full overflow-hidden">
       {/* Website Top Panel */}
@@ -85,26 +80,12 @@ const WebsiteCard: React.FC<Props> = ({ title, preview, icon, color, isHover }) 
       </div>
       <div className="h-[80%]">
         <AnimatePresence>
-          {!isHover ? (
-            <MotionCodeCardIcon
-              key={icon.title + 'icon'}
-              initial={'displayed'}
-              animate={'displayed'}
-              exit={'hidden'}
-              icon={icon}
-              isHover={isHover}
-              variants={iconVariants}
-            />
-          ) : (
-            <MotionCodeCardPreview
-              key={preview.title + 'preview'}
-              variants={previewVariants}
-              preview={preview}
-              initial={'hidden'}
-              animate={'displayed'}
-              exit={'hidden'}
-            />
-          )}
+          <MotionCodeCardIcon key={icon.title + 'icon'} icon={icon} variants={iconVariants} />
+          <MotionCodeCardPreview
+            key={preview.title + 'preview'}
+            variants={previewVariants}
+            preview={preview}
+          />
         </AnimatePresence>
       </div>
     </div>

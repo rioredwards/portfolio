@@ -7,6 +7,7 @@ import WebsiteCard from '@/ui/code/WebsiteCard';
 import CLICard from '@/ui/code/CLICard';
 import PluginCard from '@/ui/code/PluginCard';
 import CodeModal from '@/ui/code/CodeModal';
+import { Variants, motion } from 'framer-motion';
 
 const MAX_TITLE_LENGTH = 28;
 
@@ -32,6 +33,25 @@ const generateBgGradientColors = (bgColor: string): string[] => {
 
 const generateBgGradient = ([color1, color2, color3]: string[]): string => {
   return `linear-gradient(to bottom right, ${color1}, ${color2}, ${color3})`;
+};
+
+const codeCardVariants: Variants = {
+  isHover: {
+    scale: [null, 1.03, 1.02],
+    boxShadow: ['4px 11px 24px 0px rgba(0,0,0,0.34)', '3px 8px 20px 0px rgba(0,0,0,0.39)'],
+    transition: {
+      duration: 0.2,
+      ease: 'easeInOut',
+    },
+  },
+  isNotHover: {
+    scale: 1,
+    boxShadow: '1px 3px 4px 0px rgba(0,0,0,0.20)',
+    transition: {
+      duration: 0.1,
+      ease: 'easeInOut',
+    },
+  },
 };
 
 const CodeProjectCard: React.FC<CodeProject & { idx: number }> = ({
@@ -63,6 +83,11 @@ const CodeProjectCard: React.FC<CodeProject & { idx: number }> = ({
     setIsHover(true);
   };
 
+  const onHoverEnd = () => {
+    if (hoverDisabled.current) return;
+    setIsHover(false);
+  };
+
   const onClick = () => {
     setIsHover(false);
     hoverDisabled.current = true;
@@ -72,14 +97,14 @@ const CodeProjectCard: React.FC<CodeProject & { idx: number }> = ({
   return (
     <div className={`${cssStyles.codeCardContainer}`}>
       <div className={`${cssStyles.codeCardContent}`}>
-        <article
-          style={{
-            background: generateBgGradient(bgGradient),
-          }}
-          onMouseEnter={onHoverStart}
-          onMouseLeave={() => setIsHover(false)}
+        <motion.article
+          style={{ background: generateBgGradient(bgGradient) }}
           onClick={onClick}
-          className="group w-full h-full hover:-translate-y-1 rounded-[8vw] sm:rounded-[4vw] lg:rounded-[3vw] overflow-hidden relative shadow-sm hover:shadow-lg transition-all duration-300 ease-in-out"
+          animate={isHover ? 'isHover' : 'isNotHover'}
+          variants={codeCardVariants}
+          onHoverStart={onHoverStart}
+          onHoverEnd={onHoverEnd}
+          className="group w-full h-full rounded-[8vw] sm:rounded-[4vw] lg:rounded-[3vw] overflow-hidden relative shadow-sm"
         >
           <div className="absolute inset-0 rounded-[8vw] sm:rounded-[4vw] lg:rounded-[3vw] overflow-hidden">
             <CodeModal
@@ -88,17 +113,16 @@ const CodeProjectCard: React.FC<CodeProject & { idx: number }> = ({
               isOpen={modalIsOpen}
               setIsOpen={setModalIsOpen}
               onModalClose={onModalClose}
-              />
+            />
             <CardComponent
               title={titleLimited}
               color={codeCardIcon?.bgColor}
-              isHover={isHover}
               pluginIcons={pluginIcons}
               preview={preview}
               icon={codeCardIcon}
             />
           </div>
-        </article>
+        </motion.article>
       </div>
     </div>
   );

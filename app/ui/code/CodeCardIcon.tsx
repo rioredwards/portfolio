@@ -1,21 +1,14 @@
 import { CodeProject } from '@/lib/api';
 import { MotionSVGFromUrl } from '@/ui/code/SVGFromUrl';
-import { ForwardRefRenderFunction, forwardRef, useEffect } from 'react';
-import { motion, usePresence } from 'framer-motion';
+import { ForwardRefRenderFunction, forwardRef } from 'react';
+import { motion } from 'framer-motion';
 
 interface Props {
   icon: CodeProject['codeCardIcon'];
-  isHover: boolean;
 }
 
 export const CodeCardIcon: ForwardRefRenderFunction<HTMLDivElement, Props> = (props, ref) => {
-  const { icon, isHover } = props;
-
-  const [isPresent, safeToRemove] = usePresence();
-
-  useEffect(() => {
-    !isPresent && setTimeout(safeToRemove, 8000);
-  }, [isPresent]);
+  const { icon } = props;
 
   return (
     <motion.div
