@@ -37,11 +37,10 @@ const generateBgGradient = ([color1, color2, color3]: string[]): string => {
 
 const codeCardVariants: Variants = {
   isHover: {
-    scale: [null, 1.03, 1.02],
-    boxShadow: ['4px 11px 24px 0px rgba(0,0,0,0.34)', '3px 8px 20px 0px rgba(0,0,0,0.39)'],
+    scale: [null, 1.03],
+    boxShadow: [null, '4px 11px 24px 0px rgba(0,0,0,0.34)'],
     transition: {
-      duration: 0.2,
-      ease: 'easeInOut',
+      duration: 0.1,
     },
   },
   isNotHover: {
@@ -49,7 +48,6 @@ const codeCardVariants: Variants = {
     boxShadow: '1px 3px 4px 0px rgba(0,0,0,0.20)',
     transition: {
       duration: 0.1,
-      ease: 'easeInOut',
     },
   },
 };
