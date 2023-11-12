@@ -127,7 +127,3 @@ const CodeProjectCard: React.FC<CodeProject & { idx: number }> = ({
 };
 
 export default CodeProjectCard;
-
-// Code Card Aspect Ratio: 0.625
-// Small Screens: 320w x 200h
-// Medium Screens: 360w x 225h

@@ -1,4 +1,10 @@
+/* Code Card Aspect Ratio: 0.625 */
+
 .codeCardContainer {
+  --aspect-ratio: 0.625;
+  --min-width: 260px;
+  --max-width: 480px;
+
   width: 100%;
   position: relative;
   padding-top: 62.5%; /* This sets the top padding to 62.5% of the element's width */
@@ -18,9 +24,9 @@
   flex-direction: column;
   align-items: center;
 
-  min-height: 195px;
-  min-width: 312px;
+  min-width: var(--min-width);
+  min-height: calc(var(--min-width) * var(--aspect-ratio));
 
-  max-height: 300px;
-  max-width: 480px;
+  max-width: var(--max-width);
+  max-height: calc(var(--max-width) * var(--aspect-ratio));
 }
