@@ -3,6 +3,7 @@ import Header from '@/ui/header/Header';
 import Footer from '@/ui/Footer';
 import { Metadata } from 'next';
 import { Inter as interFont } from 'next/font/google';
+import UnderConstruction from '@/ui/UnderConstruction';
 
 export const metadata: Metadata = {
   title: `Rio Edwards | Web Developer`,
@@ -23,6 +24,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className="min-h-screen">
         <Header />
         <main>{children}</main>
+        <UnderConstruction />
         <Footer />
       </body>
     </html>

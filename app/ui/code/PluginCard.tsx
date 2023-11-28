@@ -15,7 +15,7 @@ interface Props {
 
 const PluginCard: React.FC<Props> = ({ title, children, color, pluginIcons }) => {
   return (
-    <>
+    <div className="h-full w-full overflow-hidden">
       <div className="z-10 w-full h-16 flex items-center gap-3">
         <div className="mt-4 h-[130%] w-24 flex items-center justify-center group-hover:border-gray-300 group-hover:bg-gray-200 group-hover:border-b-2 group-hover:border-r-2 rounded-br-4xl">
           <SVGFromUrl
@@ -33,7 +33,7 @@ const PluginCard: React.FC<Props> = ({ title, children, color, pluginIcons }) =>
         </div>
       </div>
       {children}
-    </>
+    </div>
   );
 };
 

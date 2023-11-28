@@ -37,15 +37,15 @@ const generateBgGradient = ([color1, color2, color3]: string[]): string => {
 
 const codeCardVariants: Variants = {
   isHover: {
-    scale: [null, 1.03],
-    boxShadow: [null, '4px 11px 24px 0px rgba(0,0,0,0.34)'],
+    scale: [null, 1.01],
+    boxShadow: [null, '2px 8px 18px 0px rgba(0,0,0,0.34)'],
     transition: {
       duration: 0.1,
     },
   },
   isNotHover: {
     scale: 1,
-    boxShadow: '1px 3px 4px 0px rgba(0,0,0,0.20)',
+    boxShadow: '1px 3px 6px 0px rgba(0,0,0,0.10)',
     transition: {
       duration: 0.1,
     },
@@ -102,7 +102,7 @@ const CodeProjectCard: React.FC<CodeProject & { idx: number }> = ({
           variants={codeCardVariants}
           onHoverStart={onHoverStart}
           onHoverEnd={onHoverEnd}
-          className="group w-full h-full rounded-[8vw] sm:rounded-[4vw] lg:rounded-[3vw] overflow-hidden relative shadow-sm"
+          className="group w-full h-full rounded-[8vw] sm:rounded-[4vw] lg:rounded-[3vw] overflow-hidden relative"
         >
           <div className="absolute inset-0 rounded-[8vw] sm:rounded-[4vw] lg:rounded-[3vw] overflow-hidden">
             <CodeModal

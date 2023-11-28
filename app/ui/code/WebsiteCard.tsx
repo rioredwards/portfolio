@@ -1,5 +1,5 @@
 import { CodeProject } from '@/lib/api';
-import { CodeCardIcon, MotionCodeCardIcon } from '@/ui/code/CodeCardIcon';
+import { MotionCodeCardIcon } from '@/ui/code/CodeCardIcon';
 import { MotionCodeCardPreview } from '@/ui/code/CodeCardPreview';
 import { AnimatePresence, Variants } from 'framer-motion';
 
@@ -78,6 +78,7 @@ const WebsiteCard: React.FC<Props> = ({ title, preview, icon, color }) => {
           <h3 className="text-xl font-extrabold text-gray-500 whitespace-nowrap">{title}</h3>
         </div>
       </div>
+      {/* Icon + Preview */}
       <div className="h-[80%]">
         <AnimatePresence>
           <MotionCodeCardIcon key={icon.title + 'icon'} icon={icon} variants={iconVariants} />
