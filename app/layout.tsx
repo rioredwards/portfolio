@@ -1,8 +1,9 @@
 import '@/ui/globals.css';
-import Header from '@/ui/Header';
+import Header from '@/ui/header/Header';
 import Footer from '@/ui/Footer';
 import { Metadata } from 'next';
 import { Inter as interFont } from 'next/font/google';
+import UnderConstruction from '@/ui/UnderConstruction';
 
 export const metadata: Metadata = {
   title: `Rio Edwards | Web Developer`,
@@ -20,12 +21,11 @@ const inter = interFont({
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={`${inter.variable} antialiased`}>
-      <body>
-        <section className="min-h-screen">
-          <Header />
-          <main>{children}</main>
-          <Footer />
-        </section>
+      <body className="min-h-screen">
+        <Header />
+        <main>{children}</main>
+        <UnderConstruction />
+        <Footer />
       </body>
     </html>
   );

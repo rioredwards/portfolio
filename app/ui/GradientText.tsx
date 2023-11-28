@@ -1,5 +1,6 @@
 import cssStyles from './GradientText.module.css';
 import { ReactNode, ElementType, CSSProperties } from 'react';
+import clsx from 'clsx';
 
 type GradientDirection =
   | 'to top'
@@ -43,11 +44,9 @@ const GradientText: React.FC<Props> = ({
     ['--shadow-color' as any]: shadowColor,
   };
 
-  const combinedClassName = `${cssStyles.gradientText} ${className || ''}`;
-
   return (
     <Component
-      className={`${combinedClassName} ${className}`}
+      className={clsx(cssStyles.gradientText, className)}
       style={{ ...inlineStyles, ...styles }}
       data-text={typeof children === 'string' ? children : ''}
     >
