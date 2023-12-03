@@ -1,12 +1,15 @@
 'use client';
 import cssStyles from '@/ui/code/code.module.css';
-import { CodeCardType, CodeProject } from '@/lib/api';
-import { FC, useRef, useState } from 'react';
+import { CodeProject } from '@/lib/api';
+import { useRef, useState } from 'react';
 import { adjustColor } from '@/utils/colorUtils';
 import CodeModal from '@/ui/code/CodeModal';
 import { AnimatePresence, Variants, motion } from 'framer-motion';
-import { MotionCodeCardIcon } from './CodeCardIcon';
-import { MotionCodeCardPreview } from './CodeCardPreview';
+import { MotionCodeCardIcon } from '@/ui/code/CodeCardIcon';
+import { MotionCodeCardPreview } from '@/ui/code/CodeCardPreview';
+import WebsiteCardIcon from '@/ui/code/WebsiteCardIcon';
+import CLICardIcon from '@/ui/code/CLICardIcon';
+import PluginCardIcon from '@/ui/code/PluginCardIcon';
 
 const MAX_TITLE_LENGTH = 28;
 
@@ -92,7 +95,7 @@ const CodeProjectCard: React.FC<CodeProject & { idx: number }> = ({
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [isHover, setIsHover] = useState(false);
   const bgGradient = generateBgGradientColors(codeCardIcon?.bgColor);
-  const titleLimited = limitTitle(title);
+  const titleTruncated = limitTitle(title);
   const pluginIcon = codeCardIcon.pluginIconColored;
 
   const onModalClose = () => {
@@ -119,6 +122,19 @@ const CodeProjectCard: React.FC<CodeProject & { idx: number }> = ({
     setModalIsOpen(true);
   };
 
+  const codeCardTypeIcon = () => {
+    switch (codeCardIcon.type) {
+      case 'website':
+        return <WebsiteCardIcon />;
+      case 'plugin':
+        return <PluginCardIcon {...codeCardIcon.pluginIconColored} />;
+      case 'cli':
+        return <CLICardIcon />;
+      default:
+        return <WebsiteCardIcon />;
+    }
+  };
+
   return (
     <div className={`${cssStyles.codeCardContainer}`}>
       <div className={`${cssStyles.codeCardContent}`}>
@@ -140,33 +156,14 @@ const CodeProjectCard: React.FC<CodeProject & { idx: number }> = ({
               onModalClose={onModalClose}
             />
             <div className="h-full w-full overflow-hidden">
-              {/* Website Top Panel */}
+              {/* Top Panel */}
               <div className="z-10 w-full h-[20%] pt-[1%] bg-gray-100 flex items-center pr-[8%] pl-[8%] border-b-2">
-                {/* Circles */}
-                <div className="flex-shrink-0 h-full w-[25%] flex items-center justify-between">
-                  {/* Red */}
-                  <div className="w-[30%]">
-                    <div className="relative w-full pt-[100%]">
-                      <div className="absolute top-0 left-0 right-0 bottom-0 m-auto rounded-full bg-white bg-gradient-to-br from-red-200 to-red-400" />
-                    </div>
-                  </div>
-                  {/* Yellow */}
-                  <div className="w-[30%]">
-                    <div className="relative w-full pt-[100%]">
-                      <div className="absolute top-0 left-0 right-0 bottom-0 m-auto rounded-full bg-white bg-gradient-to-br from-yellow-200 to-yellow-300" />
-                    </div>
-                  </div>
-                  {/* Green */}
-                  <div className="w-[30%]">
-                    <div className="relative w-full pt-[100%]">
-                      <div className="absolute top-0 left-0 right-0 bottom-0 m-auto rounded-full bg-white bg-gradient-to-br from-green-200 to-green-400" />
-                    </div>
-                  </div>
-                </div>
-                {/* Searchbar */}
-                <div className="flex items-center grow bg-white h-[70%] rounded-[10px] px-2 ml-[3%]">
-                  <h3 className="text-xl font-extrabold text-gray-500 whitespace-nowrap">
-                    {title}
+                {/* Icon */}
+                {codeCardTypeIcon()}
+                {/* Title */}
+                <div className="flex items-center grow h-[70%] px-2 ml-[3%]">
+                  <h3 className="text-xl text-gray-600 font-extrabold whitespace-nowrap">
+                    {titleTruncated}
                   </h3>
                 </div>
               </div>

@@ -6,7 +6,7 @@ interface Props {
   url: string;
   title: string;
   containerClasses?: string;
-  animation: CodeProject['codeCardIcon']['animation'];
+  animation?: CodeProject['codeCardIcon']['animation'];
 }
 
 export const SVGFromUrl: ForwardRefRenderFunction<HTMLDivElement, Props> = (props, ref) => {
@@ -18,12 +18,17 @@ export const SVGFromUrl: ForwardRefRenderFunction<HTMLDivElement, Props> = (prop
       const res = await fetch(url);
       const svgRes = await res.text();
 
-      const svgWithAddedClasses = svgRes.replace(
+      if (!animation) {
+        setSvg(svgRes);
+        return;
+      }
+
+      const svgWithAnimation = svgRes.replace(
         '<svg ',
         `<svg class="animate-intermittent-${animation}" `
       );
 
-      setSvg(svgWithAddedClasses);
+      setSvg(svgWithAnimation);
     }
     getSvg();
   }, [url, title, animation]);
