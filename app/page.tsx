@@ -17,7 +17,7 @@ export default async function Page() {
       </div>
       <hr />
       <div className="w-full flex items-center justify-center">
-        <section className="w-screen py-6 px-0">
+        <section className="w-screen py-6 px-0" id="code">
           <div className="flex justify-center items-center">
             <GradientText
               direction="to bottom right"

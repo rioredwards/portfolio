@@ -8,10 +8,10 @@ export const Header = async () => {
   const heroContent = await getHeroContent(draftModeIsEnabled);
 
   return (
-    <>
+    <section id="home">
       <MobileHeader className="flex md:hidden" avatar={heroContent.avatar} />
       <DesktopHeader className="hidden md:flex" />
-    </>
+    </section>
   );
 };
 

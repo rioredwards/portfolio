@@ -59,27 +59,27 @@ const avatarVariants = {
 const links = [
   {
     text: 'HOME',
-    url: '/',
+    url: '#home',
     color: '#FF008C',
   },
   {
     text: 'CODE',
-    url: '/',
+    url: '#code',
     color: '#D309E1',
   },
   {
     text: 'ART',
-    url: '/',
+    url: '#art',
     color: '#9C1AFF',
   },
   {
     text: 'ABOUT',
-    url: '/',
+    url: '#about',
     color: '#7700FF',
   },
   {
     text: 'CONTACT',
-    url: '/',
+    url: '#contact',
     color: '#4400FF',
   },
 ];
