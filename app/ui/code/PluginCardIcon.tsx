@@ -7,17 +7,17 @@ interface PluginCardIconProps {
 
 const PluginCardIcon: React.FC<PluginCardIconProps> = ({ title, url }) => {
   return (
-    <div className="flex-shrink-0 h-full w-[25%] flex items-center justify-between">
+    <>
       <div>
         <SVGFromUrl
           key={title + 'colored'}
           animation="wiggle"
           title={title}
           url={url}
-          containerClasses="h-6 w-6"
+          containerClasses="h-5 w-5"
         />
       </div>
-    </div>
+    </>
   );
 };
 

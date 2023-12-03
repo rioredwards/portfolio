@@ -159,9 +159,11 @@ const CodeProjectCard: React.FC<CodeProject & { idx: number }> = ({
             />
             <div className="h-full w-full overflow-hidden">
               {/* Top Panel */}
-              <div className="z-10 w-full h-[20%] pt-[1%] bg-gray-100 flex items-center pr-[8%] pl-[8%] border-b-2">
-                {/* Icon */}
-                {codeCardTypeIcon()}
+              <div className="z-10 w-full h-[18%] pt-[1%] bg-gray-100 flex items-center pr-[8%] pl-[8%] border-b-2">
+                {/* Panel Icon */}
+                <div className="flex-shrink-0 h-full w-[18%] flex items-center justify-between">
+                  {codeCardTypeIcon()}
+                </div>
                 {/* Title */}
                 <div className="flex items-center grow h-[70%] px-2 ml-[3%]">
                   <h3 className="text-xl text-gray-600 font-extrabold whitespace-nowrap">
@@ -170,7 +172,7 @@ const CodeProjectCard: React.FC<CodeProject & { idx: number }> = ({
                 </div>
               </div>
               {/* Icon + Preview */}
-              <div className="h-[80%]">
+              <div className="h-[82%]">
                 <AnimatePresence>
                   <MotionCodeCardIcon
                     key={codeCardIcon.title + 'icon'}
