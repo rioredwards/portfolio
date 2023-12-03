@@ -18,7 +18,7 @@ export const CodeCardIcon: ForwardRefRenderFunction<HTMLDivElement, Props> = (pr
       <MotionSVGFromUrl
         key={icon.title + 'colored'}
         title={icon.title}
-        url={icon.iconColored.url}
+        url={icon.image.url}
         containerClasses="z-10 h-[50%] w-full pointer-events-none flex flex-col items-center justify-center"
         animation={icon.animation}
       />

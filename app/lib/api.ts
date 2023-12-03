@@ -3,6 +3,7 @@ import { Document } from '@contentful/rich-text-types';
 const CODE_PROJECT_CARDS_GRAPHQL_FIELDS = `
   title
   slug
+  type
   preview {
     title
     url
@@ -20,23 +21,15 @@ const CODE_PROJECT_CARDS_GRAPHQL_FIELDS = `
   }
   codeCardIcon {
     title
-    type
-    iconGrayscale {
-      url
-    }
-    iconColored {
+    image {
       url
     }
     animation
     bgColor
-    pluginIconGrayscale {
-      title
-      url
-    }
-    pluginIconColored {
-      title
-      url
-    }
+  }
+  pluginIcon {
+    title
+    url
   }
 `;
 
@@ -65,33 +58,26 @@ export type CodeCardIconAnimation = 'none' | 'spin' | 'pulse' | 'wiggle';
 export interface CodeProject {
   title: string;
   slug: string;
-  preview: {
-    title: string;
-    url: string;
-  };
+  type: CodeCardType;
   tags: string[];
-  description: Document;
-  slogan: Document | null;
   codeCardIcon: {
     title: string;
-    type: CodeCardType;
-    iconGrayscale: {
-      url: string;
-    };
-    iconColored: {
+    image: {
       url: string;
     };
     animation: CodeCardIconAnimation;
     bgColor: string;
-    pluginIconGrayscale: {
-      title: string;
-      url: string;
-    };
-    pluginIconColored: {
-      title: string;
-      url: string;
-    };
   };
+  pluginIcon?: {
+    title: string;
+    url: string;
+  };
+  preview: {
+    title: string;
+    url: string;
+  };
+  slogan: Document | null;
+  description: Document;
 }
 
 async function fetchGraphQL(query: string, preview = false): Promise<any> {

@@ -87,7 +87,9 @@ const previewVariants: Variants = {
 
 const CodeProjectCard: React.FC<CodeProject & { idx: number }> = ({
   title,
+  type,
   codeCardIcon,
+  pluginIcon,
   preview,
   idx,
 }) => {
@@ -96,7 +98,6 @@ const CodeProjectCard: React.FC<CodeProject & { idx: number }> = ({
   const [isHover, setIsHover] = useState(false);
   const bgGradient = generateBgGradientColors(codeCardIcon?.bgColor);
   const titleTruncated = limitTitle(title);
-  const pluginIcon = codeCardIcon.pluginIconColored;
 
   const onModalClose = () => {
     // Wait for 1ms to prevent the modal from reopening immediately
@@ -123,11 +124,12 @@ const CodeProjectCard: React.FC<CodeProject & { idx: number }> = ({
   };
 
   const codeCardTypeIcon = () => {
-    switch (codeCardIcon.type) {
+    switch (type) {
       case 'website':
         return <WebsiteCardIcon />;
       case 'plugin':
-        return <PluginCardIcon {...codeCardIcon.pluginIconColored} />;
+        if (!pluginIcon) throw new Error(`plugin icon is undefined for ${title}}`);
+        return <PluginCardIcon {...pluginIcon} />;
       case 'cli':
         return <CLICardIcon />;
       default:
