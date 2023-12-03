@@ -14,6 +14,7 @@ const config: Config = {
     'animate-intermittent-wiggle',
     'animate-pulse',
     'animate-pulsate',
+    'animate-intermittent-pulsate',
     'animate-pulse-2',
     'animate-pulse-3',
   ],
@@ -43,6 +44,12 @@ const config: Config = {
           '50%': { transform: 'rotate(0deg)' },
           '55%': { transform: 'rotate(-5deg)' },
           '100%': { transform: 'rotate(360deg)' },
+        },
+        'intermittent-pulsate': {
+          '0%': { scale: '1' },
+          '50%': { scale: '1' },
+          '75%': { scale: '1.05' },
+          '100%': { scale: '1' },
         },
         pulsate: {
           '0%, 100%': { scale: '1' },
@@ -79,6 +86,7 @@ const config: Config = {
       animation: {
         'intermittent-wiggle': 'intermittent-wiggle 5s ease-in-out infinite',
         'intermittent-spin': 'intermittent-spin 5s ease-in-out infinite',
+        'intermittent-pulsate': 'intermittent-pulsate 5s ease-in-out infinite',
         wiggle: 'wiggle 1s ease-in-out infinite',
         spin: 'spin 3s linear infinite',
         pulsate: 'pulsate 1s ease-in-out infinite',
