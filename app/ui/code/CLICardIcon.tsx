@@ -1,7 +1,7 @@
 const WebsiteCardIcon = () => {
   return (
     <>
-      <span>{'>_'}</span>
+      <span className="font-black text-green-500">{'>_'}</span>
     </>
   );
 };
