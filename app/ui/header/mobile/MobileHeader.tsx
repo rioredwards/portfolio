@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import Hamburger from './Hamburger';
 import MobileNavModal from './MobileNavMenu';
 import { useState } from 'react';
+import Link from 'next/link';
 
 interface Props {
   avatar: {
@@ -22,9 +23,12 @@ export const MobileHeader: React.FC<Props> = ({ avatar, className: cssClasses })
       animate={isOpen ? 'open' : 'closed'}
       className={`w-full mx-auto px-4 py-3 flex align-middle justify-between ${cssClasses}`}
     >
-      <h1 className="font-semibold text-2xl leading-loose whitespace-nowrap align-middle text-gray-800">
-        RIO EDWARDS
-      </h1>
+      <Link href="#home">
+        <h1 className="font-semibold text-2xl leading-loose whitespace-nowrap align-middle text-gray-800">
+          RIO EDWARDS
+        </h1>
+      </Link>
+
       <Hamburger toggle={toggleOpen} />
       <MobileNavModal avatar={avatar} isOpen={isOpen} setIsOpen={setIsOpen} />
     </motion.header>

@@ -13,7 +13,7 @@ import PluginCardIcon from '@/ui/code/PluginCardIcon';
 
 const MAX_TITLE_LENGTH = 28;
 
-function limitTitle(title: string) {
+function truncateTitle(title: string) {
   if (title.length > MAX_TITLE_LENGTH) {
     return title.slice(0, MAX_TITLE_LENGTH) + '...';
   }
@@ -97,7 +97,7 @@ const CodeProjectCard: React.FC<CodeProject & { idx: number }> = ({
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [isHover, setIsHover] = useState(false);
   const bgGradient = generateBgGradientColors(codeCardIcon?.bgColor);
-  const titleTruncated = limitTitle(title);
+  const titleTruncated = truncateTitle(title);
 
   const onModalClose = () => {
     // Wait for 1ms to prevent the modal from reopening immediately
@@ -145,6 +145,7 @@ const CodeProjectCard: React.FC<CodeProject & { idx: number }> = ({
           onClick={onClick}
           animate={isHover ? 'isHover' : 'isNotHover'}
           variants={codeCardVariants}
+          initial={'isNotHover'}
           onHoverStart={onHoverStart}
           onHoverEnd={onHoverEnd}
           className="group w-full h-full rounded-[8vw] sm:rounded-[4vw] lg:rounded-[3vw] overflow-hidden relative"
