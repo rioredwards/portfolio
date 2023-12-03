@@ -6,7 +6,9 @@ interface Props {
 
 const DesktopHeader: React.FC<Props> = ({ className: cssClasses }) => {
   return (
-    <header className={`mx-auto container flex justify-start py-3 px-5 w-full ${cssClasses}`}>
+    <header
+      className={`fixed top-0 left-0 z-40 bg-white/80 backdrop-blur-lg mx-auto container flex justify-start py-3 px-5 w-full ${cssClasses}`}
+    >
       <h1 className="font-semibold text-2xl whitespace-nowrap text-gray-800">RIO EDWARDS</h1>
       <nav className="ml-auto flex justify-around w-96 align-middle items-center text-gray-800">
         <Link href="#home">HOME</Link>
