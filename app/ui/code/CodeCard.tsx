@@ -89,14 +89,15 @@ const CodeProjectCard: React.FC<CodeCard & { idx: number }> = ({
   title,
   type,
   codeCardIcon,
+  preview,
   pluginIcon,
   idx,
 }) => {
   const hoverDisabled = useRef(false);
   const [modalIsOpen, setModalIsOpen] = useState(false);
-  const [isHover, setIsHover] = useState(false);
   const bgGradient = generateBgGradientColors(codeCardIcon?.bgColor);
   const titleTruncated = truncateTitle(title);
+  const [isHover, setIsHover] = useState(false);
 
   const onModalClose = () => {
     // Wait for 1ms to prevent the modal from reopening immediately
@@ -178,11 +179,11 @@ const CodeProjectCard: React.FC<CodeCard & { idx: number }> = ({
                     variants={iconVariants}
                     {...codeCardIcon}
                   />
-                  {/* <MotionCodeCardPreview
+                  <MotionCodeCardPreview
                     key={title + 'preview'}
                     variants={previewVariants}
-                    preview={preview}
-                  /> */}
+                    {...preview}
+                  />
                 </AnimatePresence>
               </div>
             </div>

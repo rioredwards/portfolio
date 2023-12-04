@@ -1,15 +1,15 @@
 'use client';
 
-import { CodePreview } from '@/lib/api';
+import { CodeCard } from '@/lib/api';
 import { motion } from 'framer-motion';
 import { ForwardRefRenderFunction, forwardRef } from 'react';
 import MotionContentfulImage from '@/ui/ContentfulImage';
 
-export const CodeCardPreview: ForwardRefRenderFunction<HTMLDivElement, CodePreview> = (
+export const CodeCardPreview: ForwardRefRenderFunction<HTMLDivElement, CodeCard['preview']> = (
   props,
   ref
 ) => {
-  const { title, url } = props.preview;
+  const { title, url } = props;
 
   return (
     <motion.div
@@ -30,6 +30,6 @@ export const CodeCardPreview: ForwardRefRenderFunction<HTMLDivElement, CodePrevi
   );
 };
 
-const RefCodeCardPreview = forwardRef<HTMLDivElement, CodePreview>(CodeCardPreview);
+const RefCodeCardPreview = forwardRef<HTMLDivElement, CodeCard['preview']>(CodeCardPreview);
 
 export const MotionCodeCardPreview = motion(RefCodeCardPreview);

@@ -21,16 +21,11 @@ const CODE_CARDS_GRAPHQL_FIELDS = `
     animation
     bgColor
   }
-  pluginIcon {
+  preview {
     title
     url
   }
-`;
-
-const CODE_PREVIEW_GRAPHQL_FIELDS = `
-  title
-  slug
-  preview {
+  pluginIcon {
     title
     url
   }
@@ -84,16 +79,11 @@ export interface CodeCard {
     animation: CodeCardIconAnimation;
     bgColor: string;
   };
-  pluginIcon: {
+  preview: {
     title: string;
     url: string;
   };
-}
-
-export interface CodePreview {
-  title: string;
-  slug: string;
-  preview: {
+  pluginIcon: {
     title: string;
     url: string;
   };
@@ -144,6 +134,27 @@ export async function getHeroContent(isDraftMode: boolean): Promise<HeroContent>
 }
 
 export async function getCodeCardsContent(isDraftMode: boolean): Promise<CodeCard[]> {
+  const entries = await fetchGraphQL(
+    `query {
+      featuredCodeProjectCollection(
+        order: sys_publishedAt_DESC,
+        preview: ${isDraftMode ? 'true' : 'false'}
+      ) {
+        items {
+          ${CODE_CARDS_GRAPHQL_FIELDS}
+        }
+      }
+    }`,
+    isDraftMode
+  );
+
+  return extractCodeCardsContent(entries);
+}
+
+export async function getCodePreviewContent(
+  isDraftMode: boolean,
+  slug: string
+): Promise<CodeCard[]> {
   const entries = await fetchGraphQL(
     `query {
       featuredCodeProjectCollection(
