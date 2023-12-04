@@ -145,7 +145,6 @@ const CodeProjectCard: React.FC<CodeProject & { idx: number }> = ({
           onClick={onClick}
           animate={isHover ? 'isHover' : 'isNotHover'}
           variants={codeCardVariants}
-          initial={'isNotHover'}
           onHoverStart={onHoverStart}
           onHoverEnd={onHoverEnd}
           className="group w-full h-full rounded-[8vw] sm:rounded-[4vw] lg:rounded-[3vw] overflow-hidden relative"

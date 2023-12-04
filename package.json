@@ -37,6 +37,7 @@
     "@heroicons/react": "^2.0.18",
     "@tailwindcss/typography": "0.5.9",
     "@types/node": "20.5.7",
+    "gif-png-converter": "link:/Users/rioedwards/Documents/Coding/tools/gif-png-converter",
     "clsx": "^2.0.0",
     "contentful-import": "^9.0.4",
     "date-fns": "2.30.0",

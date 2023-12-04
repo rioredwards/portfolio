@@ -100,7 +100,7 @@ async function fetchGraphQL(query: string, preview = false): Promise<any> {
   ).then((response) => response.json());
 }
 
-function extractCodeProjectCardEntries(fetchResponse: any): any[] {
+function extractCodeCardEntries(fetchResponse: any): any[] {
   const entries = fetchResponse?.data?.featuredCodeProjectCollection?.items;
   const formattedEntries = entries?.map((entry: any) => {
     const tags = entry?.tagsCollection?.items?.map((item: any) => item?.text);
@@ -136,7 +136,7 @@ export async function getHeroContent(isDraftMode: boolean): Promise<HeroContent>
   return extractHeroContent(content);
 }
 
-export async function getCodeProjectCardsContent(isDraftMode: boolean): Promise<CodeProject[]> {
+export async function getCodeCardsContent(isDraftMode: boolean): Promise<CodeProject[]> {
   const entries = await fetchGraphQL(
     `query {
       featuredCodeProjectCollection(
@@ -150,5 +150,5 @@ export async function getCodeProjectCardsContent(isDraftMode: boolean): Promise<
     }`,
     isDraftMode
   );
-  return extractCodeProjectCardEntries(entries);
+  return extractCodeCardEntries(entries);
 }

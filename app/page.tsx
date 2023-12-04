@@ -1,14 +1,15 @@
 import { draftMode } from 'next/headers';
-import { getCodeProjectCardsContent, getHeroContent } from '@/lib/api';
+import { getCodeCardsContent, getHeroContent } from '@/lib/api';
 import GradientText from '@/ui/GradientText';
 import Hero from '@/ui/hero/Hero';
-import CodeProjectCard from '@/ui/code/CodeCard';
+import { Suspense, lazy } from 'react';
+const CodeCard = lazy(() => import('@/ui/code/CodeCard'));
 
 export default async function Page() {
   const { isEnabled: draftModeIsEnabled } = draftMode();
   const heroContent = await getHeroContent(draftModeIsEnabled);
 
-  const codeProjectCards = await getCodeProjectCardsContent(draftModeIsEnabled);
+  const codeProjectCards = await getCodeCardsContent(draftModeIsEnabled);
 
   return (
     <div className="w-full flex flex-col items-center justify-start">
@@ -31,11 +32,13 @@ export default async function Page() {
             </GradientText>
           </div>
           {/* Grid */}
-          <div className="w-full max-w-[448px] sm:max-w-[720px] md:max-w-[900px] lg:max-w-[1200px] xl:max-w-[1600px] px-8 sm:px-12 md:px-16 mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 justify-center items-center justify-items-center content-center">
-            {codeProjectCards.map((codeProjectCard, idx) => (
-              <CodeProjectCard key={codeProjectCard.slug} {...codeProjectCard} idx={idx} />
-            ))}
-          </div>
+          <Suspense fallback={<div>Loading...</div>}>
+            <div className="w-full max-w-[448px] sm:max-w-[720px] md:max-w-[900px] lg:max-w-[1200px] xl:max-w-[1600px] px-8 sm:px-12 md:px-16 mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 justify-center items-center justify-items-center content-center">
+              {codeProjectCards.map((codeProjectCard, idx) => (
+                <CodeCard key={codeProjectCard.slug} {...codeProjectCard} idx={idx} />
+              ))}
+            </div>
+          </Suspense>
         </section>
       </div>
     </div>

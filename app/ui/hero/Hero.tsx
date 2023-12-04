@@ -14,6 +14,7 @@ const Hero: React.FC<HeroProps> = ({ title, secondaryText, avatar }) => {
           height={384}
           width={260}
           src={avatar.url}
+          priority={true}
         />
       </div>
       <GradientText
