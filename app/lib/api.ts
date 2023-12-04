@@ -1,6 +1,6 @@
 import { Document } from '@contentful/rich-text-types';
 
-const CODE_PROJECT_CARDS_GRAPHQL_FIELDS = `
+const CODE_CARDS_GRAPHQL_FIELDS = `
   title
   slug
   type
@@ -144,7 +144,7 @@ export async function getCodeCardsContent(isDraftMode: boolean): Promise<CodePro
         preview: ${isDraftMode ? 'true' : 'false'}
       ) {
         items {
-          ${CODE_PROJECT_CARDS_GRAPHQL_FIELDS}
+          ${CODE_CARDS_GRAPHQL_FIELDS}
         }
       }
     }`,
