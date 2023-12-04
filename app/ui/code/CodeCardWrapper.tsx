@@ -1,4 +1,3 @@
-'use client';
 import cssStyles from '@/ui/code/code.module.css';
 import { CodeCard } from '@/lib/api';
 import { useRef, useState } from 'react';

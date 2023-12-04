@@ -150,24 +150,3 @@ export async function getCodeCardsContent(isDraftMode: boolean): Promise<CodeCar
 
   return extractCodeCardsContent(entries);
 }
-
-export async function getCodePreviewContent(
-  isDraftMode: boolean,
-  slug: string
-): Promise<CodeCard[]> {
-  const entries = await fetchGraphQL(
-    `query {
-      featuredCodeProjectCollection(
-        order: sys_publishedAt_DESC,
-        preview: ${isDraftMode ? 'true' : 'false'}
-      ) {
-        items {
-          ${CODE_CARDS_GRAPHQL_FIELDS}
-        }
-      }
-    }`,
-    isDraftMode
-  );
-
-  return extractCodeCardsContent(entries);
-}

@@ -21,7 +21,7 @@ export const MobileHeader: React.FC<Props> = ({ avatar, className: cssClasses })
     <motion.header
       initial={false}
       animate={isOpen ? 'open' : 'closed'}
-      className={`w-full mx-auto px-4 py-3 flex align-middle justify-between ${cssClasses}`}
+      className={`fixed top-0 left-0 z-40 w-full bg-white/80 backdrop-blur-lg mx-auto px-4 py-3 flex align-middle justify-between ${cssClasses}`}
     >
       <Link href="#home">
         <h1 className="font-semibold text-2xl leading-loose whitespace-nowrap align-middle text-gray-800">
