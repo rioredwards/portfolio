@@ -1,16 +1,15 @@
 'use client';
 
-import { CodeProject } from '@/lib/api';
+import { CodePreview } from '@/lib/api';
 import { motion } from 'framer-motion';
 import { ForwardRefRenderFunction, forwardRef } from 'react';
 import MotionContentfulImage from '@/ui/ContentfulImage';
 
-interface Props {
-  preview: CodeProject['preview'];
-}
-
-export const CodeCardPreview: ForwardRefRenderFunction<HTMLDivElement, Props> = (props, ref) => {
-  const { preview } = props;
+export const CodeCardPreview: ForwardRefRenderFunction<HTMLDivElement, CodePreview> = (
+  props,
+  ref
+) => {
+  const { title, url } = props.preview;
 
   return (
     <motion.div
@@ -20,17 +19,17 @@ export const CodeCardPreview: ForwardRefRenderFunction<HTMLDivElement, Props> = 
     >
       <MotionContentfulImage
         className="z-0 relative w-full h-[82%] object-cover"
-        alt={preview.title}
-        src={preview.url}
+        alt={title}
+        src={url}
         width={200}
         height={160}
         placeholder="blur"
-        blurDataURL={preview.url}
+        blurDataURL={url}
       />
     </motion.div>
   );
 };
 
-const RefCodeCardPreview = forwardRef<HTMLDivElement, Props>(CodeCardPreview);
+const RefCodeCardPreview = forwardRef<HTMLDivElement, CodePreview>(CodeCardPreview);
 
 export const MotionCodeCardPreview = motion(RefCodeCardPreview);

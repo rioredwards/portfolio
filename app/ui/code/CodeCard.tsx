@@ -1,6 +1,6 @@
 'use client';
 import cssStyles from '@/ui/code/code.module.css';
-import { CodeProject } from '@/lib/api';
+import { CodeCard } from '@/lib/api';
 import { useRef, useState } from 'react';
 import { adjustColor } from '@/utils/colorUtils';
 import CodeModal from '@/ui/code/CodeModal';
@@ -85,12 +85,11 @@ const previewVariants: Variants = {
   },
 };
 
-const CodeProjectCard: React.FC<CodeProject & { idx: number }> = ({
+const CodeProjectCard: React.FC<CodeCard & { idx: number }> = ({
   title,
   type,
   codeCardIcon,
   pluginIcon,
-  preview,
   idx,
 }) => {
   const hoverDisabled = useRef(false);
@@ -175,15 +174,15 @@ const CodeProjectCard: React.FC<CodeProject & { idx: number }> = ({
               <div className="h-[82%]">
                 <AnimatePresence>
                   <MotionCodeCardIcon
-                    key={codeCardIcon.title + 'icon'}
-                    icon={codeCardIcon}
+                    key={title + 'icon'}
                     variants={iconVariants}
+                    {...codeCardIcon}
                   />
-                  <MotionCodeCardPreview
-                    key={preview.title + 'preview'}
+                  {/* <MotionCodeCardPreview
+                    key={title + 'preview'}
                     variants={previewVariants}
                     preview={preview}
-                  />
+                  /> */}
                 </AnimatePresence>
               </div>
             </div>

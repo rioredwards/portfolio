@@ -1,6 +1,42 @@
-import { Document } from '@contentful/rich-text-types';
+const HERO_GRAPHQL_FIELDS = `
+  title
+  secondaryText
+  tertiaryText
+  avatar {
+    title
+    url
+  }
+`;
 
 const CODE_CARDS_GRAPHQL_FIELDS = `
+  title
+  slug
+  type
+  codeCardIcon {
+    title
+    image {
+      title
+      url
+    }
+    animation
+    bgColor
+  }
+  pluginIcon {
+    title
+    url
+  }
+`;
+
+const CODE_PREVIEW_GRAPHQL_FIELDS = `
+  title
+  slug
+  preview {
+    title
+    url
+  }
+`;
+
+const CODE_DETAIL_GRAPHQL_FIELDS = `
   title
   slug
   type
@@ -19,27 +55,6 @@ const CODE_CARDS_GRAPHQL_FIELDS = `
       text
     }
   }
-  codeCardIcon {
-    title
-    image {
-      url
-    }
-    animation
-    bgColor
-  }
-  pluginIcon {
-    title
-    url
-  }
-`;
-
-const HERO_GRAPHQL_FIELDS = `
-  title
-  secondaryText
-  tertiaryText
-  avatar {
-    url
-  }
 `;
 
 export interface HeroContent {
@@ -47,6 +62,7 @@ export interface HeroContent {
   secondaryText: string;
   tertiaryText: string;
   avatar: {
+    title: string;
     url: string;
   };
 }
@@ -55,29 +71,32 @@ export type CodeCardType = 'website' | 'cli' | 'plugin';
 
 export type CodeCardIconAnimation = 'none' | 'spin' | 'pulse' | 'wiggle';
 
-export interface CodeProject {
+export interface CodeCard {
   title: string;
   slug: string;
   type: CodeCardType;
-  tags: string[];
   codeCardIcon: {
     title: string;
     image: {
+      title: string;
       url: string;
     };
     animation: CodeCardIconAnimation;
     bgColor: string;
   };
-  pluginIcon?: {
+  pluginIcon: {
     title: string;
     url: string;
   };
+}
+
+export interface CodePreview {
+  title: string;
+  slug: string;
   preview: {
     title: string;
     url: string;
   };
-  slogan: Document | null;
-  description: Document;
 }
 
 async function fetchGraphQL(query: string, preview = false): Promise<any> {
@@ -100,25 +119,13 @@ async function fetchGraphQL(query: string, preview = false): Promise<any> {
   ).then((response) => response.json());
 }
 
-function extractCodeCardEntries(fetchResponse: any): any[] {
-  const entries = fetchResponse?.data?.featuredCodeProjectCollection?.items;
-  const formattedEntries = entries?.map((entry: any) => {
-    const tags = entry?.tagsCollection?.items?.map((item: any) => item?.text);
-    const description = entry?.description?.json;
-    const slogan = entry?.slogan?.json;
-    delete entry.tagsCollection;
-    return {
-      ...entry,
-      description,
-      slogan,
-      tags,
-    };
-  });
-  return formattedEntries;
-}
-
 function extractHeroContent(content: any): any {
   return content?.data?.heroContentCollection?.items?.[0];
+}
+
+function extractCodeCardsContent(fetchResponse: any): any[] {
+  const entries = fetchResponse?.data?.featuredCodeProjectCollection?.items;
+  return entries;
 }
 
 export async function getHeroContent(isDraftMode: boolean): Promise<HeroContent> {
@@ -136,7 +143,7 @@ export async function getHeroContent(isDraftMode: boolean): Promise<HeroContent>
   return extractHeroContent(content);
 }
 
-export async function getCodeCardsContent(isDraftMode: boolean): Promise<CodeProject[]> {
+export async function getCodeCardsContent(isDraftMode: boolean): Promise<CodeCard[]> {
   const entries = await fetchGraphQL(
     `query {
       featuredCodeProjectCollection(
@@ -150,5 +157,6 @@ export async function getCodeCardsContent(isDraftMode: boolean): Promise<CodePro
     }`,
     isDraftMode
   );
-  return extractCodeCardEntries(entries);
+
+  return extractCodeCardsContent(entries);
 }

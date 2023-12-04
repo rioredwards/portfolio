@@ -1,4 +1,4 @@
-import { CodeProject } from '@/lib/api';
+import { CodeCard } from '@/lib/api';
 import { motion } from 'framer-motion';
 import { ForwardRefRenderFunction, forwardRef, useEffect, useState } from 'react';
 
@@ -6,7 +6,7 @@ interface Props {
   url: string;
   title: string;
   containerClasses?: string;
-  animation?: CodeProject['codeCardIcon']['animation'];
+  animation?: CodeCard['codeCardIcon']['animation'];
 }
 
 export const SVGFromUrl: ForwardRefRenderFunction<HTMLDivElement, Props> = (props, ref) => {
