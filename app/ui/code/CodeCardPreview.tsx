@@ -21,10 +21,8 @@ export const CodeCardPreview: ForwardRefRenderFunction<HTMLDivElement, CodeCard[
         className="z-0 relative w-full h-[82%] object-cover"
         alt={title}
         src={url}
-        width={200}
-        height={160}
-        placeholder="blur"
-        blurDataURL={url}
+        width={475}
+        height={243}
       />
     </motion.div>
   );

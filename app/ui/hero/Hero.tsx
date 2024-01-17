@@ -7,7 +7,7 @@ interface HeroProps extends HeroContent {}
 const Hero: React.FC<HeroProps> = ({ title, secondaryText, avatar }) => {
   return (
     <section className="w-full flex justify-around items-center flex-col">
-      <div>
+      <div className="mt-40">
         <ContentfulImage
           alt="Rio Edwards"
           className="mt-28 object-cover rounded-full"
