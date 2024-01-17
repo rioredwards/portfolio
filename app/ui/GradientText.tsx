@@ -1,6 +1,8 @@
+'use client';
 import cssStyles from './GradientText.module.css';
-import { ReactNode, ElementType, CSSProperties } from 'react';
+import { ReactNode, ElementType, CSSProperties, ForwardRefRenderFunction, forwardRef } from 'react';
 import clsx from 'clsx';
+import { motion } from 'framer-motion';
 
 type GradientDirection =
   | 'to top'
@@ -23,16 +25,18 @@ interface Props {
   shadowColor?: string;
 }
 
-const GradientText: React.FC<Props> = ({
-  colors,
-  children,
-  className,
-  styles,
-  elementType: Component = 'span',
-  direction = 'to right',
-  offset = { x: -2, y: -2 },
-  shadowColor = '#000000',
-}) => {
+export const GradientText: ForwardRefRenderFunction<HTMLDivElement, Props> = (props, ref) => {
+  const {
+    colors,
+    children,
+    className,
+    styles,
+    elementType: Component = 'span',
+    direction = 'to right',
+    offset = { x: -2, y: -2 },
+    shadowColor = '#000000',
+  } = props;
+
   const inlineStyles: CSSProperties = {
     lineHeight: 1.2,
     position: 'relative',
@@ -46,6 +50,7 @@ const GradientText: React.FC<Props> = ({
 
   return (
     <Component
+      ref={ref}
       className={clsx(cssStyles.gradientText, className)}
       style={{ ...inlineStyles, ...styles }}
       data-text={typeof children === 'string' ? children : ''}
@@ -55,4 +60,8 @@ const GradientText: React.FC<Props> = ({
   );
 };
 
-export default GradientText;
+const RefGradientText = forwardRef<HTMLDivElement, Props>(GradientText);
+
+export const MotionGradientText = motion(RefGradientText);
+
+export default MotionGradientText;

@@ -9,11 +9,11 @@ export default async function Page() {
 
   return (
     <div className="w-full flex flex-col items-center justify-start">
-      <section className="mt-24 md:mt-36 xl:mt-48 container px-5 flex justify-around items-center flex-col">
+      <section className="mt-44 2xl:mt-72 container px-5 flex justify-around items-center flex-col">
         <Hero {...heroContent} />
       </section>
       <hr />
-      <div className="mt-24 md:mt-36 xl:mt-48 w-full flex items-center justify-center">
+      <div className="mt-24 2xl:mt-36 w-full flex items-center justify-center">
         <section className="w-screen py-6 px-0" id="code">
           <CodeCardsSection />
         </section>
