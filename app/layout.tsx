@@ -23,9 +23,8 @@ export default function RootLayout(props: { children: React.ReactNode; modal: Re
     <html lang="en" className={`${inter.variable} antialiased`}>
       <body className="min-h-screen">
         <Header />
-        <main>{props.children}</main>
         {props.modal}
-        <div id="modal-root" />
+        <main>{props.children}</main>
         <UnderConstruction />
         <Footer />
       </body>

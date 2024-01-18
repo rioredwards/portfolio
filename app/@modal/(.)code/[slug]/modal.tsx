@@ -31,16 +31,14 @@ export function Modal({ children }: { children: React.ReactNode }) {
   }
 
   return createPortal(
-    <div className="modal-bg">
-      <dialog
-        ref={dialogRef}
-        className="h-72 w-72 text-5xl mt-72 flex items-center justify-center text-red-500 bg-white font-black"
-        onClose={onDismiss}
-      >
-        {children}
-        <button onClick={onDismiss} className="h-12 w-12 bg-blue-700" />
-      </dialog>
-    </div>,
+    <dialog
+      ref={dialogRef}
+      className="h-72 w-72 text-5xl mt-72 flex items-center justify-center text-red-500 bg-white font-black"
+      onClose={onDismiss}
+    >
+      {children}
+      <button onClick={onDismiss} className="h-12 w-12 bg-blue-700" />
+    </dialog>,
     document.getElementById('modal-root')!
   );
 }
