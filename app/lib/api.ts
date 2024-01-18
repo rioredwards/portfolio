@@ -36,22 +36,73 @@ const CODE_CARDS_GRAPHQL_FIELDS = `
 
 const CODE_DETAIL_GRAPHQL_FIELDS = `
   title
-  slug
   type
+  headerImage {
+    title
+    url
+  }
   preview {
     title
     url
   }
-  description {
-      json
+  logo {
+    title
+    url
+  }
+  linksCollection {
+    items {
+      url
+      displayText
+      name
+    }
+  }
+  madeWithCollection {
+    items {
+      name
+      text
+      backgroundColor
+      logoName
+      logoColor
+      style
+    }
   }
   slogan {
+    json
+  }
+  description {
     json
   }
   tagsCollection {
     items {
       text
     }
+  }
+  features {
+    json
+  }
+  usage {
+    json
+  }
+  configure {
+    json
+  }
+  lessonsLearned {
+    json
+  }
+  reflection {
+    json
+  }
+  reflection {
+    json
+  }
+  authors {
+    json
+  }
+  acknowledgements {
+    json
+  }
+  custom {
+    json
   }
 `;
 
@@ -126,6 +177,14 @@ function extractCodeCardsContent(fetchResponse: any): any[] {
   return entries;
 }
 
+function extractCodeDetailContent(fetchResponse: any): any[] {
+  const entries = fetchResponse?.data?.featuredCodeProjectCollection?.items.map((entry: any) => {
+    // TODO: format the data here
+    return entry;
+  });
+  return entries;
+}
+
 export async function getHeroContent(isDraftMode: boolean): Promise<HeroContent> {
   const content = await fetchGraphQL(
     `query {
@@ -159,20 +218,17 @@ export async function getCodeCardsContent(isDraftMode: boolean): Promise<CodeCar
   return extractCodeCardsContent(entries);
 }
 
-export async function getCodeDetailContent(isDraftMode: boolean): Promise<CodeCard[]> {
-  const entries = await fetchGraphQL(
+export async function getCodeDetailContent(isDraftMode: boolean, slug: string): Promise<any[]> {
+  const entry = await fetchGraphQL(
     `query {
-      featuredCodeProjectCollection(
-        order: sys_publishedAt_DESC,
-        preview: ${isDraftMode ? 'true' : 'false'}
-      ) {
+        featuredCodeProjectCollection (where: { slug: "${slug}" }, limit: 1) {
         items {
-          ${CODE_CARDS_GRAPHQL_FIELDS}
+          ${CODE_DETAIL_GRAPHQL_FIELDS}
         }
       }
     }`,
     isDraftMode
   );
 
-  return extractCodeCardsContent(entries);
+  return extractCodeDetailContent(entry);
 }
