@@ -39,6 +39,7 @@
     "@types/node": "20.5.7",
     "clsx": "^2.0.0",
     "contentful-import": "^9.0.4",
+    "contentful-rich-text-to-markdown-converter": "^1.2.2",
     "date-fns": "2.30.0",
     "framer-motion": "^10.16.4",
     "next": "14.0.1",

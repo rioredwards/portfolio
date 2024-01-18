@@ -1,6 +1,7 @@
 import { draftMode } from 'next/headers';
 import { Modal } from './modal';
 import { getCodeDetailContent } from '@/lib/api';
+import { convertContentfulDocumentToHTML } from 'contentful-rich-text-to-markdown-converter';
 
 export default async function CodeModal({
   params: { slug: codeCardSlug },
@@ -10,7 +11,13 @@ export default async function CodeModal({
   const { isEnabled: draftModeIsEnabled } = draftMode();
   const codeCardsContent = await getCodeDetailContent(draftModeIsEnabled, codeCardSlug);
 
-  console.log(codeCardsContent);
+  const html = convertContentfulDocumentToHTML(codeCardsContent[0]?.slogan?.json);
+  console.log(html);
 
-  return <Modal>{codeCardSlug}</Modal>;
+  return (
+    <Modal>
+      {/* <h1>{JSON.stringify(codeCardsContent[0]?.slogan?.json)}</h1> */}
+      <span dangerouslySetInnerHTML={{ __html: html }}></span>
+    </Modal>
+  );
 }
