@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import Hero from '@/ui/Hero';
+import Hero from '@/ui/hero/Hero';
 import { describe } from 'node:test';
 // import { fetch } from 'react-testing-library/fetch';
 
