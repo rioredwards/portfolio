@@ -9,6 +9,9 @@ const HERO_GRAPHQL_FIELDS = `
 `;
 
 const CODE_CARDS_GRAPHQL_FIELDS = `
+  sys {
+    id
+  }
   title
   slug
   type
@@ -67,6 +70,7 @@ export type CodeCardType = 'website' | 'cli' | 'plugin';
 export type CodeCardIconAnimation = 'none' | 'spin' | 'pulse' | 'wiggle';
 
 export interface CodeCard {
+  id: string;
   title: string;
   slug: string;
   type: CodeCardType;
@@ -114,7 +118,11 @@ function extractHeroContent(content: any): any {
 }
 
 function extractCodeCardsContent(fetchResponse: any): any[] {
-  const entries = fetchResponse?.data?.featuredCodeProjectCollection?.items;
+  const entries = fetchResponse?.data?.featuredCodeProjectCollection?.items.map((entry: any) => {
+    // for each entry, extract the id from the sys property and remove the sys property
+    const { sys, ...rest } = entry;
+    return { id: sys.id, ...rest };
+  });
   return entries;
 }
 
@@ -134,6 +142,24 @@ export async function getHeroContent(isDraftMode: boolean): Promise<HeroContent>
 }
 
 export async function getCodeCardsContent(isDraftMode: boolean): Promise<CodeCard[]> {
+  const entries = await fetchGraphQL(
+    `query {
+      featuredCodeProjectCollection(
+        order: sys_publishedAt_DESC,
+        preview: ${isDraftMode ? 'true' : 'false'}
+      ) {
+        items {
+          ${CODE_CARDS_GRAPHQL_FIELDS}
+        }
+      }
+    }`,
+    isDraftMode
+  );
+
+  return extractCodeCardsContent(entries);
+}
+
+export async function getCodeDetailContent(isDraftMode: boolean): Promise<CodeCard[]> {
   const entries = await fetchGraphQL(
     `query {
       featuredCodeProjectCollection(

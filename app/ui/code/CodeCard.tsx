@@ -87,6 +87,7 @@ const previewVariants: Variants = {
 };
 
 const CodeProjectCard: React.FC<CodeCard & { idx: number }> = ({
+  id,
   title,
   type,
   codeCardIcon,
