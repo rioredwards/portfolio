@@ -94,34 +94,24 @@ const CodeProjectCard: React.FC<CodeCard & { idx: number }> = ({
   pluginIcon,
   slug,
 }) => {
-  const hoverDisabled = useRef(false);
-  const [modalIsOpen, setModalIsOpen] = useState(false);
+  // const hoverDisabled = useRef(false);
   const bgGradient = generateBgGradientColors(codeCardIcon?.bgColor);
   const titleTruncated = truncateTitle(title);
   const [isHover, setIsHover] = useState(false);
 
-  const onModalClose = () => {
-    // Wait for 1ms to prevent the modal from reopening immediately
-    setTimeout(() => {
-      setModalIsOpen(false);
-      hoverDisabled.current = false;
-    }, 1);
-  };
-
   const onHoverStart = () => {
-    if (hoverDisabled.current) return;
+    // if (hoverDisabled.current) return;
     setIsHover(true);
   };
 
   const onHoverEnd = () => {
-    if (hoverDisabled.current) return;
+    // if (hoverDisabled.current) return;
     setIsHover(false);
   };
 
   const onClick = () => {
     setIsHover(false);
-    hoverDisabled.current = true;
-    setModalIsOpen(true);
+    // hoverDisabled.current = true;
   };
 
   const codeCardTypeIcon = () => {
@@ -140,7 +130,50 @@ const CodeProjectCard: React.FC<CodeCard & { idx: number }> = ({
 
   return (
     <Link key={slug} href={`/code/${slug}`} passHref className={`${cssStyles.codeCardContainer}`}>
-      {slug}
+      <div className={`${cssStyles.codeCardContent}`}>
+        <motion.article
+          style={{ background: generateBgGradient(bgGradient) }}
+          onClick={onClick}
+          animate={isHover ? 'isHover' : 'isNotHover'}
+          variants={codeCardVariants}
+          onHoverStart={onHoverStart}
+          onHoverEnd={onHoverEnd}
+          className="group w-full h-full rounded-[8vw] sm:rounded-[4vw] lg:rounded-[3vw] overflow-hidden relative"
+        >
+          <div className="absolute inset-0 rounded-[8vw] sm:rounded-[4vw] lg:rounded-[3vw] overflow-hidden">
+            <div className="h-full w-full overflow-hidden">
+              {/* Top Panel */}
+              <div className="z-10 w-full h-[18%] pt-[1%] bg-gray-100 flex items-center pr-[8%] pl-[8%] border-b-2">
+                {/* Panel Icon */}
+                <div className="flex-shrink-0 h-full w-[18%] flex items-center justify-between">
+                  {codeCardTypeIcon()}
+                </div>
+                {/* Title */}
+                <div className="flex items-center grow h-[70%] px-2 ml-[3%]">
+                  <h3 className="text-xl text-gray-600 font-extrabold whitespace-nowrap">
+                    {titleTruncated}
+                  </h3>
+                </div>
+              </div>
+              {/* Icon + Preview */}
+              <div className="h-[82%]">
+                <AnimatePresence>
+                  <MotionCodeCardIcon
+                    key={title + 'icon'}
+                    variants={iconVariants}
+                    {...codeCardIcon}
+                  />
+                  <MotionCodeCardPreview
+                    key={title + 'preview'}
+                    variants={previewVariants}
+                    {...preview}
+                  />
+                </AnimatePresence>
+              </div>
+            </div>
+          </div>
+        </motion.article>
+      </div>
     </Link>
   );
 };
