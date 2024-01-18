@@ -1,0 +1,9 @@
+.modal::backdrop {
+  background-color: rgba(0, 0, 0, 0.192);
+}
+
+.modal {
+  background-color: white;
+  height: fit-content;
+  width: 40rem;
+}

@@ -6,4 +6,8 @@
   html {
     @apply scroll-smooth;
   }
+
+  body:has(dialog[open]) {
+    overflow: hidden;
+  }
 }
