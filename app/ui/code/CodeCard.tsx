@@ -10,6 +10,7 @@ import { MotionCodeCardPreview } from '@/ui/code/CodeCardPreview';
 import WebsiteCardIcon from '@/ui/code/WebsiteCardIcon';
 import CLICardIcon from '@/ui/code/CLICardIcon';
 import PluginCardIcon from '@/ui/code/PluginCardIcon';
+import Link from 'next/link';
 
 const MAX_TITLE_LENGTH = 28;
 
@@ -91,6 +92,7 @@ const CodeProjectCard: React.FC<CodeCard & { idx: number }> = ({
   codeCardIcon,
   preview,
   pluginIcon,
+  slug,
 }) => {
   const hoverDisabled = useRef(false);
   const [modalIsOpen, setModalIsOpen] = useState(false);
@@ -137,59 +139,9 @@ const CodeProjectCard: React.FC<CodeCard & { idx: number }> = ({
   };
 
   return (
-    <div className={`${cssStyles.codeCardContainer}`}>
-      <div className={`${cssStyles.codeCardContent}`}>
-        <motion.article
-          style={{ background: generateBgGradient(bgGradient) }}
-          onClick={onClick}
-          animate={isHover ? 'isHover' : 'isNotHover'}
-          variants={codeCardVariants}
-          onHoverStart={onHoverStart}
-          onHoverEnd={onHoverEnd}
-          className="group w-full h-full rounded-[8vw] sm:rounded-[4vw] lg:rounded-[3vw] overflow-hidden relative"
-        >
-          <div className="absolute inset-0 rounded-[8vw] sm:rounded-[4vw] lg:rounded-[3vw] overflow-hidden">
-            <CodeModal
-              title={title}
-              key={title + 'modal'}
-              isOpen={modalIsOpen}
-              setIsOpen={setModalIsOpen}
-              onModalClose={onModalClose}
-            />
-            <div className="h-full w-full overflow-hidden">
-              {/* Top Panel */}
-              <div className="z-10 w-full h-[18%] pt-[1%] bg-gray-100 flex items-center pr-[8%] pl-[8%] border-b-2">
-                {/* Panel Icon */}
-                <div className="flex-shrink-0 h-full w-[18%] flex items-center justify-between">
-                  {codeCardTypeIcon()}
-                </div>
-                {/* Title */}
-                <div className="flex items-center grow h-[70%] px-2 ml-[3%]">
-                  <h3 className="text-xl text-gray-600 font-extrabold whitespace-nowrap">
-                    {titleTruncated}
-                  </h3>
-                </div>
-              </div>
-              {/* Icon + Preview */}
-              <div className="h-[82%]">
-                <AnimatePresence>
-                  <MotionCodeCardIcon
-                    key={title + 'icon'}
-                    variants={iconVariants}
-                    {...codeCardIcon}
-                  />
-                  <MotionCodeCardPreview
-                    key={title + 'preview'}
-                    variants={previewVariants}
-                    {...preview}
-                  />
-                </AnimatePresence>
-              </div>
-            </div>
-          </div>
-        </motion.article>
-      </div>
-    </div>
+    <Link key={slug} href={`/code/${slug}`} passHref className={`${cssStyles.codeCardContainer}`}>
+      {slug}
+    </Link>
   );
 };
 

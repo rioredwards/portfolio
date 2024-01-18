@@ -1,23 +1,15 @@
-import { draftMode } from 'next/headers';
-import { getHeroContent } from '@/lib/api';
-import Hero from '@/ui/hero/Hero';
-import CodeCardsSection from './ui/code/CodeCardsSection';
+import Link from 'next/link';
 
-export default async function Page() {
-  const { isEnabled: draftModeIsEnabled } = draftMode();
-  const heroContent = await getHeroContent(draftModeIsEnabled);
+export default function Page() {
+  let codeCards = Array.from({ length: 6 }, (_, i) => i + 1);
 
   return (
-    <div className="w-full flex flex-col items-center justify-start">
-      <section className="mt-44 2xl:mt-72 container px-5 flex justify-around items-center flex-col">
-        <Hero {...heroContent} />
-      </section>
-      <hr />
-      <div className="mt-24 2xl:mt-36 w-full flex items-center justify-center">
-        <section className="w-screen py-6 px-0" id="code">
-          <CodeCardsSection />
-        </section>
-      </div>
-    </div>
+    <section className="cards-container mt-48 flex items-center text-6xl justify-center">
+      {codeCards.map((id) => (
+        <Link className="card" key={id} href={`/code/${id}`} passHref>
+          {id}
+        </Link>
+      ))}
+    </section>
   );
 }
