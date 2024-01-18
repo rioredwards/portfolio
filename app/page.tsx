@@ -1,45 +1,21 @@
 import { draftMode } from 'next/headers';
-import { getCodeProjectCardsContent, getHeroContent } from '@/lib/api';
-import GradientText from '@/ui/GradientText';
-import Hero from '@/ui/Hero';
-import CodeProjectCard from '@/ui/CodeProjectCard';
+import { getHeroContent } from '@/lib/api';
+import Hero from '@/ui/hero/Hero';
+import CodeCardsSection from './ui/code/CodeCardsSection';
 
 export default async function Page() {
   const { isEnabled: draftModeIsEnabled } = draftMode();
   const heroContent = await getHeroContent(draftModeIsEnabled);
 
-  const codeProjectCards = await getCodeProjectCardsContent(draftModeIsEnabled);
-
   return (
-    <div
-      style={{
-        background: 'linear-gradient(to bottom right, #E7FEE6, #E6FEFE, #FBD5CC)',
-      }}
-      className="w-full flex flex-col items-center justify-start"
-    >
-      <div className="container px-5">
+    <div className="w-full flex flex-col items-center justify-start">
+      <section className="mt-44 2xl:mt-72 container px-5 flex justify-around items-center flex-col">
         <Hero {...heroContent} />
-      </div>
+      </section>
       <hr />
-      <div className="w-full flex items-center justify-center">
-        <section className="w-full container py-6 px-5 md:px-1">
-          <div className="flex justify-center items-center">
-            <GradientText
-              direction="to bottom right"
-              elementType="h2"
-              colors={['#EABC4C', '#EA4C4C']}
-              className="font-black text-4xl lg:text-5xl mb-12 xl:mb-16"
-              offset={{ x: 0, y: -2 }}
-              shadowColor="#ffffff"
-            >
-              CODE
-            </GradientText>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 px-6">
-            {codeProjectCards.map((codeProjectCard, idx) => (
-              <CodeProjectCard key={codeProjectCard.slug} {...codeProjectCard} idx={idx} />
-            ))}
-          </div>
+      <div className="mt-24 2xl:mt-36 w-full flex items-center justify-center">
+        <section className="w-screen py-6 px-0" id="code">
+          <CodeCardsSection />
         </section>
       </div>
     </div>
