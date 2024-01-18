@@ -87,12 +87,10 @@ const previewVariants: Variants = {
 
 const CodeProjectCard: React.FC<CodeCard & { idx: number }> = ({
   title,
-  slug,
   type,
   codeCardIcon,
   preview,
   pluginIcon,
-  idx,
 }) => {
   const hoverDisabled = useRef(false);
   const [modalIsOpen, setModalIsOpen] = useState(false);
