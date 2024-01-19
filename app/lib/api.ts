@@ -53,6 +53,9 @@ const CODE_DETAIL_GRAPHQL_FIELDS = `
       displayText
     }
   }
+  description {
+    json
+  }
 `;
 
 export interface Asset {
@@ -115,7 +118,8 @@ export interface CodeDetail {
   headerImage?: ContentfulImage;
   slogan?: RichTextContent;
   logo?: ContentfulImage;
-  links: ContentfulLink[];
+  links?: ContentfulLink[];
+  description?: RichTextContent;
 }
 
 async function fetchGraphQL(query: string, preview = false): Promise<any> {

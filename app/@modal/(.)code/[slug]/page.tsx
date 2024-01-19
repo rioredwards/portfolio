@@ -18,6 +18,7 @@ export default async function CodeModal({
   const slogan = codeCardsContent.slogan;
   const logo = codeCardsContent.logo;
   const links = codeCardsContent.links;
+  const description = codeCardsContent.description;
 
   return (
     <Modal>
@@ -38,6 +39,7 @@ export default async function CodeModal({
           ))}
         </ul>
       )}
+      {description && <Markdown content={description}></Markdown>}
     </Modal>
   );
 }
