@@ -24,6 +24,7 @@ export default async function CodeModal({
   const features = codeCardsContent.features;
   const preview = codeCardsContent.preview;
   const usage = codeCardsContent.usage;
+  const configure = codeCardsContent.configure;
 
   return (
     <Modal>
@@ -73,6 +74,12 @@ export default async function CodeModal({
         <>
           <h2>Usage</h2>
           <Markdown content={usage} />
+        </>
+      )}
+      {configure && (
+        <>
+          <h2>Configure</h2>
+          <Markdown content={configure} />
         </>
       )}
     </Modal>
