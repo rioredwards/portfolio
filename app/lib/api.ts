@@ -36,6 +36,10 @@ const CODE_CARDS_GRAPHQL_FIELDS = `
 
 const CODE_DETAIL_GRAPHQL_FIELDS = `
   title
+  headerImage {
+    title
+    url
+  }
 `;
 
 export interface HeroContent {
@@ -78,6 +82,10 @@ export interface CodeCard {
 
 export interface CodeDetail {
   title: string;
+  headerImage: {
+    title: string;
+    url: string;
+  };
 }
 
 async function fetchGraphQL(query: string, preview = false): Promise<any> {
@@ -113,12 +121,10 @@ function extractCodeCardsContent(fetchResponse: any): any[] {
   return entries;
 }
 
-function extractCodeDetailContent(fetchResponse: any): any[] {
-  const entries = fetchResponse?.data?.featuredCodeProjectCollection?.items.map((entry: any) => {
-    // TODO: format the data here
-    return entry;
-  });
-  return entries;
+function extractCodeDetailContent(fetchResponse: any): CodeDetail {
+  const codeDetailContent = fetchResponse?.data?.featuredCodeProjectCollection?.items[0];
+  // TODO: format the data here
+  return codeDetailContent as CodeDetail;
 }
 
 export async function getHeroContent(isDraftMode: boolean): Promise<HeroContent> {
@@ -154,7 +160,10 @@ export async function getCodeCardsContent(isDraftMode: boolean): Promise<CodeCar
   return extractCodeCardsContent(entries);
 }
 
-export async function getCodeDetailContent(isDraftMode: boolean, slug: string): Promise<any[]> {
+export async function getCodeDetailContent(
+  isDraftMode: boolean,
+  slug: string
+): Promise<CodeDetail> {
   const entry = await fetchGraphQL(
     `query {
         featuredCodeProjectCollection (where: { slug: "${slug}" }, limit: 1) {

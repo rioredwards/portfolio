@@ -37,8 +37,18 @@ export function Modal({ children }: { children: React.ReactNode }) {
 
   return createPortal(
     <dialog ref={dialogRef} className={cssStyles.modal} onClose={onDismiss}>
-      {children}
-      <button autoFocus onClick={onDismiss} className="h-12 w-12 bg-blue-700" />
+      <div className="p-4">
+        <div className="flex justify-end">
+          <button
+            autoFocus
+            onClick={onDismiss}
+            className="h-6 w-6 text-gray-500 bg-gray-100 rounded-full font-black"
+          >
+            X
+          </button>
+        </div>
+        {children}
+      </div>
     </dialog>,
     document.getElementById('modal-root')!
   );
