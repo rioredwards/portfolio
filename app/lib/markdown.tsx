@@ -9,7 +9,7 @@ function RichTextAsset({ id, assets }: { id: string; assets: Asset[] | undefined
   const asset = assets?.find((asset) => asset.sys.id === id);
 
   if (asset?.url) {
-    return <Image src={asset.url} layout="fill" alt={asset.title} />;
+    return <Image src={asset.url} alt={asset.title} width={800} height={800} />;
   }
 
   return null;

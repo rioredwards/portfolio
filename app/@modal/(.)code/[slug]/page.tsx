@@ -23,6 +23,7 @@ export default async function CodeModal({
   const madeWith = codeCardsContent.madeWith;
   const features = codeCardsContent.features;
   const preview = codeCardsContent.preview;
+  const usage = codeCardsContent.usage;
 
   return (
     <Modal>
@@ -31,7 +32,7 @@ export default async function CodeModal({
       </div>
       {logo && <MotionContentfulImage src={logo.url} height={64} width={64} />}
       {headerImage && <MotionContentfulImage src={headerImage.url} height={220} width={730} />}
-      {slogan && <Markdown content={slogan}></Markdown>}
+      {slogan && <Markdown content={slogan} />}
       {!!links?.length && (
         <ul className="w-full flex items-center justify-center gap-8">
           {links.map((link, idx) => (
@@ -43,7 +44,7 @@ export default async function CodeModal({
           ))}
         </ul>
       )}
-      {description && <Markdown content={description}></Markdown>}
+      {description && <Markdown content={description} />}
       {!!madeWith?.length && (
         <>
           <h2>Made With</h2>
@@ -62,7 +63,18 @@ export default async function CodeModal({
           <Markdown content={features} />
         </>
       )}
-      {preview && <MotionContentfulImage src={preview.url} height={220} width={730} />}
+      {preview && (
+        <>
+          <h2>Preview</h2>
+          <MotionContentfulImage src={preview.url} height={220} width={730} />
+        </>
+      )}
+      {usage && (
+        <>
+          <h2>Usage</h2>
+          <Markdown content={usage} />
+        </>
+      )}
     </Modal>
   );
 }
