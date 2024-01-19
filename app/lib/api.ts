@@ -80,6 +80,10 @@ const CODE_DETAIL_GRAPHQL_FIELDS = `
       }
     }
   }
+  preview {
+    title
+    url
+  }
 `;
 
 export interface Asset {
@@ -155,6 +159,7 @@ export interface CodeDetail {
   description?: RichTextContent;
   madeWith: Shield[];
   features?: RichTextContent;
+  preview?: ContentfulImage;
 }
 
 async function fetchGraphQL(query: string, preview = false): Promise<any> {

@@ -22,6 +22,7 @@ export default async function CodeModal({
   const description = codeCardsContent.description;
   const madeWith = codeCardsContent.madeWith;
   const features = codeCardsContent.features;
+  const preview = codeCardsContent.preview;
 
   return (
     <Modal>
@@ -61,6 +62,7 @@ export default async function CodeModal({
           <Markdown content={features} />
         </>
       )}
+      {preview && <MotionContentfulImage src={preview.url} height={220} width={730} />}
     </Modal>
   );
 }
