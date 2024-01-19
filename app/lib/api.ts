@@ -82,6 +82,20 @@ const CODE_DETAIL_GRAPHQL_FIELDS = `
   }
   usage {
     json
+    links {
+      assets {
+        block {
+          sys {
+            id
+          }
+          title
+          description
+          fileName
+          contentType
+          url
+        }
+      }
+    }
   }
   configure {
     json

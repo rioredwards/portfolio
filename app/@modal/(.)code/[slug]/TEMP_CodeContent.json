@@ -1,0 +1,684 @@
+{
+  "slogan": {
+    "json": {
+      "data": {},
+      "content": [
+        {
+          "data": {},
+          "content": [
+            {
+              "data": {},
+              "marks": [{ "type": "italic" }],
+              "value": "\"You are ",
+              "nodeType": "text"
+            },
+            {
+              "data": {},
+              "marks": [{ "type": "italic" }, { "type": "bold" }],
+              "value": "not",
+              "nodeType": "text"
+            },
+            {
+              "data": {},
+              "marks": [{ "type": "italic" }],
+              "value": " defined by your code\"",
+              "nodeType": "text"
+            }
+          ],
+          "nodeType": "paragraph"
+        }
+      ],
+      "nodeType": "document"
+    }
+  },
+  "description": {
+    "json": {
+      "data": {},
+      "content": [
+        {
+          "data": {},
+          "content": [
+            { "data": {}, "marks": [], "value": "Receive all your favorite ", "nodeType": "text" },
+            {
+              "data": {},
+              "marks": [{ "type": "italic" }],
+              "value": "Error Affirmations",
+              "nodeType": "text"
+            },
+            { "data": {}, "marks": [], "value": ", when you need them most!", "nodeType": "text" }
+          ],
+          "nodeType": "paragraph"
+        },
+        {
+          "data": {},
+          "content": [
+            {
+              "data": {},
+              "marks": [],
+              "value": "With an easy install and a variety of options for customization, our Jest Reporter is sure to help soften the blow from any failing tests and give you the confidence to carry on!",
+              "nodeType": "text"
+            }
+          ],
+          "nodeType": "paragraph"
+        }
+      ],
+      "nodeType": "document"
+    }
+  },
+  "features": {
+    "json": {
+      "data": {},
+      "content": [
+        {
+          "data": {},
+          "content": [
+            {
+              "data": {},
+              "content": [
+                {
+                  "data": {},
+                  "content": [
+                    { "data": {}, "marks": [], "value": "Affirmations are ", "nodeType": "text" },
+                    {
+                      "data": {},
+                      "marks": [{ "type": "bold" }],
+                      "value": "automatically displayed",
+                      "nodeType": "text"
+                    },
+                    {
+                      "data": {},
+                      "marks": [],
+                      "value": " alongside your Jest test report, whenever your tests fail.",
+                      "nodeType": "text"
+                    }
+                  ],
+                  "nodeType": "paragraph"
+                }
+              ],
+              "nodeType": "list-item"
+            },
+            {
+              "data": {},
+              "content": [
+                {
+                  "data": {},
+                  "content": [
+                    {
+                      "data": {},
+                      "marks": [],
+                      "value": "Affirmations are fetched from the ",
+                      "nodeType": "text"
+                    },
+                    {
+                      "data": {
+                        "uri": "https://github.com/VSCode-Empaths/VSCode-Affirmations-Backend"
+                      },
+                      "content": [
+                        {
+                          "data": {},
+                          "marks": [{ "type": "bold" }],
+                          "value": "Error Affirmations API",
+                          "nodeType": "text"
+                        }
+                      ],
+                      "nodeType": "hyperlink"
+                    },
+                    {
+                      "data": {},
+                      "marks": [],
+                      "value": ", which uses Affirmations submitted from users worldwide.",
+                      "nodeType": "text"
+                    }
+                  ],
+                  "nodeType": "paragraph"
+                }
+              ],
+              "nodeType": "list-item"
+            },
+            {
+              "data": {},
+              "content": [
+                {
+                  "data": {},
+                  "content": [
+                    {
+                      "data": {},
+                      "marks": [{ "type": "bold" }],
+                      "value": "Customize",
+                      "nodeType": "text"
+                    },
+                    {
+                      "data": {},
+                      "marks": [],
+                      "value": " the look and feel with our large selection of color palettes and border themes!",
+                      "nodeType": "text"
+                    }
+                  ],
+                  "nodeType": "paragraph"
+                }
+              ],
+              "nodeType": "list-item"
+            },
+            {
+              "data": {},
+              "content": [
+                {
+                  "data": {},
+                  "content": [
+                    {
+                      "data": {},
+                      "marks": [],
+                      "value": "Change mode to \"info\" to reveal ",
+                      "nodeType": "text"
+                    },
+                    {
+                      "data": {},
+                      "marks": [{ "type": "bold" }],
+                      "value": "instructions",
+                      "nodeType": "text"
+                    },
+                    {
+                      "data": {},
+                      "marks": [],
+                      "value": " and configuration options in your terminal.",
+                      "nodeType": "text"
+                    }
+                  ],
+                  "nodeType": "paragraph"
+                }
+              ],
+              "nodeType": "list-item"
+            }
+          ],
+          "nodeType": "unordered-list"
+        },
+        {
+          "data": {},
+          "content": [{ "data": {}, "marks": [], "value": "", "nodeType": "text" }],
+          "nodeType": "paragraph"
+        }
+      ],
+      "nodeType": "document"
+    }
+  },
+  "usage": {
+    "json": {
+      "data": {},
+      "content": [
+        {
+          "data": {},
+          "content": [
+            { "data": {}, "marks": [], "value": "1. ", "nodeType": "text" },
+            { "data": {}, "marks": [{ "type": "bold" }], "value": "Install", "nodeType": "text" },
+            { "data": {}, "marks": [], "value": " using npm", "nodeType": "text" }
+          ],
+          "nodeType": "paragraph"
+        },
+        {
+          "data": {
+            "target": {
+              "sys": { "id": "kQ6BaVx4Ca7QzMZ8moRsO", "type": "Link", "linkType": "Entry" }
+            }
+          },
+          "content": [],
+          "nodeType": "embedded-entry-block"
+        },
+        {
+          "data": {},
+          "content": [
+            { "data": {}, "marks": [], "value": "2. ", "nodeType": "text" },
+            { "data": {}, "marks": [{ "type": "bold" }], "value": "Configure", "nodeType": "text" },
+            { "data": {}, "marks": [], "value": " Jest to use our custom ", "nodeType": "text" },
+            {
+              "data": {
+                "uri": "https://jestjs.io/docs/configuration#reporters-arraymodulename--modulename-options"
+              },
+              "content": [{ "data": {}, "marks": [], "value": "reporter", "nodeType": "text" }],
+              "nodeType": "hyperlink"
+            },
+            {
+              "data": {},
+              "marks": [],
+              "value": " by putting the following in your package.json",
+              "nodeType": "text"
+            }
+          ],
+          "nodeType": "paragraph"
+        },
+        {
+          "data": {
+            "target": {
+              "sys": { "id": "5QidbQpsks29Zc1MpvRDt5", "type": "Link", "linkType": "Entry" }
+            }
+          },
+          "content": [],
+          "nodeType": "embedded-entry-block"
+        },
+        {
+          "data": {},
+          "content": [
+            { "data": {}, "marks": [], "value": "3. ", "nodeType": "text" },
+            { "data": {}, "marks": [{ "type": "bold" }], "value": "Run", "nodeType": "text" },
+            { "data": {}, "marks": [], "value": " Jest as usual", "nodeType": "text" }
+          ],
+          "nodeType": "paragraph"
+        },
+        {
+          "data": {
+            "target": {
+              "sys": { "id": "3DSVsR9yODt2hNsPl1ODcf", "type": "Link", "linkType": "Entry" }
+            }
+          },
+          "content": [],
+          "nodeType": "embedded-entry-block"
+        },
+        {
+          "data": {},
+          "content": [
+            { "data": {}, "marks": [], "value": "4. ", "nodeType": "text" },
+            { "data": {}, "marks": [{ "type": "bold" }], "value": "Receive", "nodeType": "text" },
+            { "data": {}, "marks": [], "value": " an Error Affirmation!", "nodeType": "text" }
+          ],
+          "nodeType": "paragraph"
+        },
+        {
+          "data": {
+            "target": {
+              "sys": { "id": "1ryCjATuECJw1xJGJlXHT3", "type": "Link", "linkType": "Asset" }
+            }
+          },
+          "content": [],
+          "nodeType": "embedded-asset-block"
+        },
+        {
+          "data": {},
+          "content": [{ "data": {}, "marks": [], "value": "", "nodeType": "text" }],
+          "nodeType": "paragraph"
+        }
+      ],
+      "nodeType": "document"
+    }
+  },
+  "configure": {
+    "json": {
+      "data": {},
+      "content": [
+        {
+          "data": {},
+          "content": [
+            { "data": {}, "marks": [], "value": "Optionally change the ", "nodeType": "text" },
+            {
+              "data": {},
+              "marks": [{ "type": "bold" }],
+              "value": "Color-Palette",
+              "nodeType": "text"
+            },
+            { "data": {}, "marks": [], "value": " and ", "nodeType": "text" },
+            {
+              "data": {},
+              "marks": [{ "type": "bold" }],
+              "value": "Border-Theme",
+              "nodeType": "text"
+            },
+            {
+              "data": {},
+              "marks": [],
+              "value": " by adding an extra config in your package.json",
+              "nodeType": "text"
+            }
+          ],
+          "nodeType": "paragraph"
+        },
+        {
+          "data": {
+            "target": {
+              "sys": { "id": "7AEaIDdSjnAE2E757xVFWp", "type": "Link", "linkType": "Entry" }
+            }
+          },
+          "content": [],
+          "nodeType": "embedded-entry-block"
+        },
+        {
+          "data": {},
+          "content": [
+            { "data": {}, "marks": [], "value": "Here, we have selected ", "nodeType": "text" },
+            {
+              "data": {},
+              "marks": [{ "type": "italic" }],
+              "value": "\"driven\"",
+              "nodeType": "text"
+            },
+            { "data": {}, "marks": [], "value": " as the color theme and ", "nodeType": "text" },
+            {
+              "data": {},
+              "marks": [{ "type": "italic" }],
+              "value": "\"waves\"",
+              "nodeType": "text"
+            },
+            {
+              "data": {},
+              "marks": [],
+              "value": " as the border theme. You may change these values to suit your own preferences!",
+              "nodeType": "text"
+            }
+          ],
+          "nodeType": "paragraph"
+        },
+        {
+          "data": {},
+          "content": [
+            {
+              "data": {},
+              "marks": [],
+              "value": "To see a list of all the available colors and borders, change the ",
+              "nodeType": "text"
+            },
+            { "data": {}, "marks": [{ "type": "code" }], "value": "\"mode\"", "nodeType": "text" },
+            { "data": {}, "marks": [], "value": " to ", "nodeType": "text" },
+            { "data": {}, "marks": [{ "type": "code" }], "value": "\"info\"", "nodeType": "text" },
+            {
+              "data": {},
+              "marks": [],
+              "value": " and the next time your affirmation is displayed, the following info will appear:",
+              "nodeType": "text"
+            }
+          ],
+          "nodeType": "paragraph"
+        },
+        {
+          "data": {
+            "target": {
+              "sys": { "id": "6zhnXM4Q5oM8dUnnK1d9IW", "type": "Link", "linkType": "Asset" }
+            }
+          },
+          "content": [],
+          "nodeType": "embedded-asset-block"
+        },
+        {
+          "data": {},
+          "content": [
+            { "data": {}, "marks": [], "value": "The ", "nodeType": "text" },
+            { "data": {}, "marks": [{ "type": "code" }], "value": "\"mode\"", "nodeType": "text" },
+            { "data": {}, "marks": [], "value": " may also be set to ", "nodeType": "text" },
+            {
+              "data": {},
+              "marks": [{ "type": "code" }],
+              "value": "\"minimal\"",
+              "nodeType": "text"
+            },
+            {
+              "data": {},
+              "marks": [],
+              "value": " which will hide any borders and just show the affirmations.",
+              "nodeType": "text"
+            }
+          ],
+          "nodeType": "paragraph"
+        }
+      ],
+      "nodeType": "document"
+    }
+  },
+  "lessonsLearned": null,
+  "reflection": null,
+  "authors": {
+    "json": {
+      "data": {},
+      "content": [
+        {
+          "data": {},
+          "content": [
+            {
+              "data": {},
+              "content": [
+                {
+                  "data": {},
+                  "content": [
+                    { "data": {}, "marks": [], "value": "", "nodeType": "text" },
+                    {
+                      "data": { "uri": "https://github.com/rioredwards" },
+                      "content": [
+                        { "data": {}, "marks": [], "value": "Rio Edwards", "nodeType": "text" }
+                      ],
+                      "nodeType": "hyperlink"
+                    },
+                    { "data": {}, "marks": [], "value": "", "nodeType": "text" }
+                  ],
+                  "nodeType": "paragraph"
+                }
+              ],
+              "nodeType": "list-item"
+            },
+            {
+              "data": {},
+              "content": [
+                {
+                  "data": {},
+                  "content": [
+                    { "data": {}, "marks": [], "value": "", "nodeType": "text" },
+                    {
+                      "data": {
+                        "uri": "https://github.com/orgs/VSCode-Empaths/people/karlwernsman"
+                      },
+                      "content": [
+                        { "data": {}, "marks": [], "value": "Karl Wernsman", "nodeType": "text" }
+                      ],
+                      "nodeType": "hyperlink"
+                    },
+                    { "data": {}, "marks": [], "value": "", "nodeType": "text" }
+                  ],
+                  "nodeType": "paragraph"
+                }
+              ],
+              "nodeType": "list-item"
+            },
+            {
+              "data": {},
+              "content": [
+                {
+                  "data": {},
+                  "content": [
+                    { "data": {}, "marks": [], "value": "", "nodeType": "text" },
+                    {
+                      "data": { "uri": "https://github.com/orgs/VSCode-Empaths/people/kevinnail" },
+                      "content": [
+                        { "data": {}, "marks": [], "value": "Kevin Nail", "nodeType": "text" }
+                      ],
+                      "nodeType": "hyperlink"
+                    },
+                    { "data": {}, "marks": [], "value": "", "nodeType": "text" }
+                  ],
+                  "nodeType": "paragraph"
+                }
+              ],
+              "nodeType": "list-item"
+            },
+            {
+              "data": {},
+              "content": [
+                {
+                  "data": {},
+                  "content": [
+                    { "data": {}, "marks": [], "value": "", "nodeType": "text" },
+                    {
+                      "data": { "uri": "https://github.com/Zacharyjsultan" },
+                      "content": [
+                        { "data": {}, "marks": [], "value": "Zach Sultan", "nodeType": "text" }
+                      ],
+                      "nodeType": "hyperlink"
+                    },
+                    { "data": {}, "marks": [], "value": "", "nodeType": "text" }
+                  ],
+                  "nodeType": "paragraph"
+                }
+              ],
+              "nodeType": "list-item"
+            }
+          ],
+          "nodeType": "unordered-list"
+        },
+        {
+          "data": {},
+          "content": [{ "data": {}, "marks": [], "value": "", "nodeType": "text" }],
+          "nodeType": "paragraph"
+        }
+      ],
+      "nodeType": "document"
+    }
+  },
+  "acknowledgements": null,
+  "custom": {
+    "json": {
+      "data": {},
+      "content": [
+        {
+          "data": {},
+          "content": [
+            { "data": {}, "marks": [], "value": "Check Out Our Other Apps!", "nodeType": "text" }
+          ],
+          "nodeType": "heading-2"
+        },
+        {
+          "data": {},
+          "content": [{ "data": {}, "marks": [], "value": "VSCode Extension", "nodeType": "text" }],
+          "nodeType": "heading-3"
+        },
+        {
+          "data": {},
+          "content": [
+            { "data": {}, "marks": [], "value": "", "nodeType": "text" },
+            {
+              "data": {
+                "uri": "https://marketplace.visualstudio.com/items?itemName=VSCodeEmpaths.erroraffirmations"
+              },
+              "content": [{ "data": {}, "marks": [], "value": "Try", "nodeType": "text" }],
+              "nodeType": "hyperlink"
+            },
+            { "data": {}, "marks": [], "value": " - ", "nodeType": "text" },
+            {
+              "data": {
+                "uri": "https://github.com/VSCode-Empaths/VSCode-Affirmations-Extension-Frontend"
+              },
+              "content": [{ "data": {}, "marks": [], "value": "GitHub", "nodeType": "text" }],
+              "nodeType": "hyperlink"
+            },
+            { "data": {}, "marks": [], "value": "", "nodeType": "text" }
+          ],
+          "nodeType": "paragraph"
+        },
+        {
+          "data": {
+            "target": {
+              "sys": { "id": "50zPgkffkFaV5X6WKY6giK", "type": "Link", "linkType": "Asset" }
+            }
+          },
+          "content": [],
+          "nodeType": "embedded-asset-block"
+        },
+        {
+          "data": {},
+          "content": [{ "data": {}, "marks": [], "value": "Website", "nodeType": "text" }],
+          "nodeType": "heading-3"
+        },
+        {
+          "data": {},
+          "content": [
+            { "data": {}, "marks": [], "value": "", "nodeType": "text" },
+            {
+              "data": { "uri": "https://error-affirmations.netlify.app/" },
+              "content": [{ "data": {}, "marks": [], "value": "Try", "nodeType": "text" }],
+              "nodeType": "hyperlink"
+            },
+            { "data": {}, "marks": [], "value": " - ", "nodeType": "text" },
+            {
+              "data": {
+                "uri": "https://github.com/VSCode-Empaths/VSCode-Affirmations-Web-Frontend"
+              },
+              "content": [{ "data": {}, "marks": [], "value": "GitHub", "nodeType": "text" }],
+              "nodeType": "hyperlink"
+            },
+            { "data": {}, "marks": [], "value": "", "nodeType": "text" }
+          ],
+          "nodeType": "paragraph"
+        },
+        {
+          "data": {
+            "target": {
+              "sys": { "id": "4snceedw6gQPzWu0bm9HII", "type": "Link", "linkType": "Asset" }
+            }
+          },
+          "content": [],
+          "nodeType": "embedded-asset-block"
+        },
+        {
+          "data": {},
+          "content": [{ "data": {}, "marks": [], "value": "Backend", "nodeType": "text" }],
+          "nodeType": "heading-3"
+        },
+        {
+          "data": {},
+          "content": [
+            { "data": {}, "marks": [], "value": "", "nodeType": "text" },
+            {
+              "data": { "uri": "https://github.com/VSCode-Empaths/VSCode-Affirmations-Backend" },
+              "content": [{ "data": {}, "marks": [], "value": "GitHub", "nodeType": "text" }],
+              "nodeType": "hyperlink"
+            },
+            { "data": {}, "marks": [], "value": "", "nodeType": "text" }
+          ],
+          "nodeType": "paragraph"
+        }
+      ],
+      "nodeType": "document"
+    }
+  },
+  "title": "Error Affirmations",
+  "type": "plugin",
+  "headerImage": {
+    "title": "Error Affirmations Jest Reporter Header",
+    "url": "https://images.ctfassets.net/l329ngjcm8m3/3zNFV6QcnZkYnGuvTVASE4/645ebae9837b4d4d94efffe61e3b650f/Error-Affirmations-Header_2.png"
+  },
+  "preview": {
+    "title": "Error-Affirmations-Preview",
+    "url": "https://images.ctfassets.net/l329ngjcm8m3/46HMP3qNSvaO4wcKCom1aQ/6eee6a8b3c8b655256aa6e7637c00671/Error_Affirmations_Jest_Reporter_Preview.gif"
+  },
+  "logo": {
+    "title": "Error Affirmations Logo",
+    "url": "https://images.ctfassets.net/l329ngjcm8m3/1n5aECVm3Nu6lpJi1H4F5w/ca43de0856320da8a482011b056187bf/Error-Affirmations-Logo-BG.jpg"
+  },
+  "linksCollection": {
+    "items": [
+      {
+        "url": "https://www.npmjs.com/package/error-affirmations",
+        "displayText": "npm",
+        "name": "Error Affirmations npm link"
+      },
+      {
+        "url": "https://github.com/VSCode-Empaths/VSCode-Affirmations-Jest-Reporter",
+        "displayText": "GitHub",
+        "name": "Error Affirmations GitHub Link"
+      }
+    ]
+  },
+  "madeWithCollection": {
+    "items": [
+      {
+        "name": "JavaScript",
+        "text": "JavaScript",
+        "backgroundColor": "F7DF1E",
+        "logoName": "Javascript",
+        "logoColor": "black",
+        "style": "for-the-badge"
+      },
+      {
+        "name": "Node.js",
+        "text": "Node.js",
+        "backgroundColor": "339933",
+        "logoName": "Node.js",
+        "logoColor": "black",
+        "style": "for-the-badge"
+      }
+    ]
+  },
+  "tagsCollection": { "items": [{ "text": "CLI" }] }
+}
