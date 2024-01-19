@@ -15,6 +15,7 @@ export default async function CodeModal({
 
   const title = codeCardsContent.title;
   const headerImage = codeCardsContent.headerImage;
+  const slogan = codeCardsContent.slogan;
 
   return (
     <Modal>
@@ -22,6 +23,7 @@ export default async function CodeModal({
         <h1 className="font-bold text-4xl text-gray-600">{title}</h1>
       </div>
       <MotionContentfulImage src={headerImage.url} height={220} width={730} />
+      {slogan && <Markdown content={slogan}></Markdown>}
     </Modal>
   );
 }

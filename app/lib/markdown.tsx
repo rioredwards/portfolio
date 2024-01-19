@@ -1,27 +1,11 @@
 import Image from 'next/image';
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
 import { BLOCKS } from '@contentful/rich-text-types';
-
-interface Asset {
-  sys: {
-    id: string;
-  };
-  url: string;
-  description: string;
-}
-
-interface AssetLink {
-  block: Asset[];
-}
-
-interface Content {
-  json: any;
-  links: {
-    assets: AssetLink;
-  };
-}
+import { Asset, RichTextContent } from './api';
 
 function RichTextAsset({ id, assets }: { id: string; assets: Asset[] | undefined }) {
+  if (!assets) throw new Error('embedded-asset-block in markdown has no assets');
+
   const asset = assets?.find((asset) => asset.sys.id === id);
 
   if (asset?.url) {
@@ -31,11 +15,11 @@ function RichTextAsset({ id, assets }: { id: string; assets: Asset[] | undefined
   return null;
 }
 
-export function Markdown({ content }: { content: Content }) {
-  return documentToReactComponents(content.json, {
+export function Markdown({ content }: { content: RichTextContent }) {
+  return documentToReactComponents(content.json as any, {
     renderNode: {
       [BLOCKS.EMBEDDED_ASSET]: (node: any) => (
-        <RichTextAsset id={node.data.target.sys.id} assets={content.links.assets.block} />
+        <RichTextAsset id={node.data.target.sys.id} assets={content.links?.assets?.block} />
       ),
     },
   });

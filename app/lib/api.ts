@@ -40,7 +40,29 @@ const CODE_DETAIL_GRAPHQL_FIELDS = `
     title
     url
   }
+  slogan {
+    json
+  }
 `;
+
+export interface Asset {
+  sys: {
+    id: string;
+  };
+  url: string;
+  description: string;
+}
+
+export interface AssetLink {
+  block: Asset[];
+}
+
+export interface RichTextContent {
+  json: string;
+  links?: {
+    assets: AssetLink;
+  };
+}
 
 export interface HeroContent {
   title: string;
@@ -86,6 +108,7 @@ export interface CodeDetail {
     title: string;
     url: string;
   };
+  slogan?: RichTextContent;
 }
 
 async function fetchGraphQL(query: string, preview = false): Promise<any> {
