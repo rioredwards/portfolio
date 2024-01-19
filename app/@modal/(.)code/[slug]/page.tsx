@@ -26,6 +26,7 @@ export default async function CodeModal({
   const usage = codeCardsContent.usage;
   const configure = codeCardsContent.configure;
   const lessonsLearned = codeCardsContent.lessonsLearned;
+  const reflection = codeCardsContent.reflection;
 
   return (
     <Modal>
@@ -87,6 +88,12 @@ export default async function CodeModal({
         <>
           <h2>Lessons Learned</h2>
           <Markdown content={lessonsLearned} />
+        </>
+      )}
+      {reflection && (
+        <>
+          <h2>Reflection</h2>
+          <Markdown content={reflection} />
         </>
       )}
     </Modal>
