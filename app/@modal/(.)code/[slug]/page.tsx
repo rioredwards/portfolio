@@ -21,6 +21,7 @@ export default async function CodeModal({
   const links = codeCardsContent.links;
   const description = codeCardsContent.description;
   const madeWith = codeCardsContent.madeWith;
+  const features = codeCardsContent.features;
 
   return (
     <Modal>
@@ -43,13 +44,22 @@ export default async function CodeModal({
       )}
       {description && <Markdown content={description}></Markdown>}
       {!!madeWith?.length && (
-        <ul className="w-full max-w-xl flex flex-wrap items-center justify-center gap-1">
-          {madeWith.map((shield, idx) => (
-            <li key={idx}>
-              <Shield shield={shield} />
-            </li>
-          ))}
-        </ul>
+        <>
+          <h2>Made With</h2>
+          <ul className="w-full max-w-xl flex flex-wrap items-center justify-center gap-1">
+            {madeWith.map((shield, idx) => (
+              <li key={idx}>
+                <Shield shield={shield} />
+              </li>
+            ))}
+          </ul>
+        </>
+      )}
+      {features && (
+        <>
+          <h2>Features</h2>
+          <Markdown content={features} />
+        </>
       )}
     </Modal>
   );
