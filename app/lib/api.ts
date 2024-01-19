@@ -36,88 +36,6 @@ const CODE_CARDS_GRAPHQL_FIELDS = `
 
 const CODE_DETAIL_GRAPHQL_FIELDS = `
   title
-  type
-  headerImage {
-    title
-    url
-  }
-  preview {
-    title
-    url
-  }
-  logo {
-    title
-    url
-  }
-  linksCollection {
-    items {
-      url
-      displayText
-      name
-    }
-  }
-  madeWithCollection {
-    items {
-      name
-      text
-      backgroundColor
-      logoName
-      logoColor
-      style
-    }
-  }
-  slogan {
-    json
-  }
-  description {
-    json
-  }
-  tagsCollection {
-    items {
-      text
-    }
-  }
-  features {
-    json
-  }
-  usage {
-    json
-    links {
-      assets {
-        block {
-          sys {
-            id
-          }
-          title
-          description
-          fileName
-          contentType
-          url
-        }
-      }
-    }
-  }
-  configure {
-    json
-  }
-  lessonsLearned {
-    json
-  }
-  reflection {
-    json
-  }
-  reflection {
-    json
-  }
-  authors {
-    json
-  }
-  acknowledgements {
-    json
-  }
-  custom {
-    json
-  }
 `;
 
 export interface HeroContent {
@@ -156,6 +74,10 @@ export interface CodeCard {
     title: string;
     url: string;
   };
+}
+
+export interface CodeDetail {
+  title: string;
 }
 
 async function fetchGraphQL(query: string, preview = false): Promise<any> {
@@ -246,3 +168,89 @@ export async function getCodeDetailContent(isDraftMode: boolean, slug: string): 
 
   return extractCodeDetailContent(entry);
 }
+
+// const CODE_DETAIL_GRAPHQL_FIELDS = `
+//   title
+//   type
+//   headerImage {
+//     title
+//     url
+//   }
+//   preview {
+//     title
+//     url
+//   }
+//   logo {
+//     title
+//     url
+//   }
+//   linksCollection {
+//     items {
+//       url
+//       displayText
+//       name
+//     }
+//   }
+//   madeWithCollection {
+//     items {
+//       name
+//       text
+//       backgroundColor
+//       logoName
+//       logoColor
+//       style
+//     }
+//   }
+//   slogan {
+//     json
+//   }
+//   description {
+//     json
+//   }
+//   tagsCollection {
+//     items {
+//       text
+//     }
+//   }
+//   features {
+//     json
+//   }
+//   usage {
+//     json
+//     links {
+//       assets {
+//         block {
+//           sys {
+//             id
+//           }
+//           title
+//           description
+//           fileName
+//           contentType
+//           url
+//         }
+//       }
+//     }
+//   }
+//   configure {
+//     json
+//   }
+//   lessonsLearned {
+//     json
+//   }
+//   reflection {
+//     json
+//   }
+//   reflection {
+//     json
+//   }
+//   authors {
+//     json
+//   }
+//   acknowledgements {
+//     json
+//   }
+//   custom {
+//     json
+//   }
+// `;
