@@ -43,6 +43,10 @@ const CODE_DETAIL_GRAPHQL_FIELDS = `
   slogan {
     json
   }
+  logo {
+    title
+    url
+  }
 `;
 
 export interface Asset {
@@ -68,15 +72,17 @@ export interface HeroContent {
   title: string;
   secondaryText: string;
   tertiaryText: string;
-  avatar: {
-    title: string;
-    url: string;
-  };
+  avatar: ContentfulImage;
 }
 
 export type CodeCardType = 'website' | 'cli' | 'plugin';
 
 export type CodeCardIconAnimation = 'none' | 'spin' | 'pulse' | 'wiggle';
+
+interface ContentfulImage {
+  title: string;
+  url: string;
+}
 
 export interface CodeCard {
   id: string;
@@ -85,30 +91,19 @@ export interface CodeCard {
   type: CodeCardType;
   codeCardIcon: {
     title: string;
-    image: {
-      title: string;
-      url: string;
-    };
+    image: ContentfulImage;
     animation: CodeCardIconAnimation;
     bgColor: string;
   };
-  preview: {
-    title: string;
-    url: string;
-  };
-  pluginIcon: {
-    title: string;
-    url: string;
-  };
+  preview: ContentfulImage;
+  pluginIcon: ContentfulImage;
 }
 
 export interface CodeDetail {
   title: string;
-  headerImage: {
-    title: string;
-    url: string;
-  };
+  headerImage?: ContentfulImage;
   slogan?: RichTextContent;
+  logo?: ContentfulImage;
 }
 
 async function fetchGraphQL(query: string, preview = false): Promise<any> {

@@ -16,13 +16,15 @@ export default async function CodeModal({
   const title = codeCardsContent.title;
   const headerImage = codeCardsContent.headerImage;
   const slogan = codeCardsContent.slogan;
+  const logo = codeCardsContent.logo;
 
   return (
     <Modal>
       <div className="flex justify-center mb-4">
         <h1 className="font-bold text-4xl text-gray-600">{title}</h1>
       </div>
-      <MotionContentfulImage src={headerImage.url} height={220} width={730} />
+      {logo && <MotionContentfulImage src={logo.url} height={64} width={64} />}
+      {headerImage && <MotionContentfulImage src={headerImage.url} height={220} width={730} />}
       {slogan && <Markdown content={slogan}></Markdown>}
     </Modal>
   );
