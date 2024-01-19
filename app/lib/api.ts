@@ -168,6 +168,20 @@ const CODE_DETAIL_GRAPHQL_FIELDS = `
       }
     }
   }
+  custom {
+    json
+    links {
+      assets {
+        block {
+          sys {
+            id
+          }
+          title
+          url
+        }
+      }
+    }
+  }
 `;
 
 export interface Asset {
@@ -250,6 +264,7 @@ export interface CodeDetail {
   reflection?: RichTextContent;
   authors?: RichTextContent;
   acknowledgements?: RichTextContent;
+  custom?: RichTextContent;
 }
 
 async function fetchGraphQL(query: string, preview = false): Promise<any> {
