@@ -56,6 +56,16 @@ const CODE_DETAIL_GRAPHQL_FIELDS = `
   description {
     json
   }
+  madeWithCollection {
+    items {
+      name
+      text
+      backgroundColor
+      logoName
+      logoColor
+      style
+    }
+  }
 `;
 
 export interface Asset {
@@ -82,6 +92,15 @@ export interface HeroContent {
   secondaryText: string;
   tertiaryText: string;
   avatar: ContentfulImage;
+}
+
+export interface Shield {
+  name: string;
+  text: string;
+  backgroundColor: string;
+  logoName: string;
+  logoColor: string;
+  style: string;
 }
 
 export type CodeCardType = 'website' | 'cli' | 'plugin';
@@ -120,6 +139,7 @@ export interface CodeDetail {
   logo?: ContentfulImage;
   links?: ContentfulLink[];
   description?: RichTextContent;
+  madeWith: Shield[];
 }
 
 async function fetchGraphQL(query: string, preview = false): Promise<any> {
@@ -157,12 +177,12 @@ function extractCodeCardsContent(fetchResponse: any): any[] {
 
 function extractCodeDetailContent(fetchResponse: any): CodeDetail {
   const codeDetailContent = fetchResponse?.data?.featuredCodeProjectCollection?.items[0];
-  // TODO: format the data here
   const {
     linksCollection: { items: links },
+    madeWithCollection: { items: madeWith },
     ...rest
   } = codeDetailContent;
-  const formattedCodeDetailContent = { ...rest, links };
+  const formattedCodeDetailContent = { ...rest, links, madeWith };
   return formattedCodeDetailContent as CodeDetail;
 }
 

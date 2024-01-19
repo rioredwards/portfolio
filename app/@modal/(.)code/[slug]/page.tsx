@@ -4,6 +4,7 @@ import { getCodeDetailContent } from '@/lib/api';
 import { Markdown } from '../../../lib/markdown';
 import MotionContentfulImage from '@/ui/ContentfulImage';
 import Link from 'next/link';
+import Shield from '@/ui/code/Shield';
 
 export default async function CodeModal({
   params: { slug: codeCardSlug },
@@ -19,6 +20,7 @@ export default async function CodeModal({
   const logo = codeCardsContent.logo;
   const links = codeCardsContent.links;
   const description = codeCardsContent.description;
+  const madeWith = codeCardsContent.madeWith;
 
   return (
     <Modal>
@@ -40,6 +42,15 @@ export default async function CodeModal({
         </ul>
       )}
       {description && <Markdown content={description}></Markdown>}
+      {!!madeWith?.length && (
+        <ul className="w-full max-w-xl flex flex-wrap items-center justify-center gap-1">
+          {madeWith.map((shield, idx) => (
+            <li key={idx}>
+              <Shield shield={shield} />
+            </li>
+          ))}
+        </ul>
+      )}
     </Modal>
   );
 }
