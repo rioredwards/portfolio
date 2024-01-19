@@ -47,6 +47,12 @@ const CODE_DETAIL_GRAPHQL_FIELDS = `
     title
     url
   }
+  linksCollection {
+    items {
+      url
+      displayText
+    }
+  }
 `;
 
 export interface Asset {
@@ -79,6 +85,11 @@ export type CodeCardType = 'website' | 'cli' | 'plugin';
 
 export type CodeCardIconAnimation = 'none' | 'spin' | 'pulse' | 'wiggle';
 
+interface ContentfulLink {
+  url: string;
+  displayText: string;
+}
+
 interface ContentfulImage {
   title: string;
   url: string;
@@ -104,6 +115,7 @@ export interface CodeDetail {
   headerImage?: ContentfulImage;
   slogan?: RichTextContent;
   logo?: ContentfulImage;
+  links: ContentfulLink[];
 }
 
 async function fetchGraphQL(query: string, preview = false): Promise<any> {
@@ -142,7 +154,12 @@ function extractCodeCardsContent(fetchResponse: any): any[] {
 function extractCodeDetailContent(fetchResponse: any): CodeDetail {
   const codeDetailContent = fetchResponse?.data?.featuredCodeProjectCollection?.items[0];
   // TODO: format the data here
-  return codeDetailContent as CodeDetail;
+  const {
+    linksCollection: { items: links },
+    ...rest
+  } = codeDetailContent;
+  const formattedCodeDetailContent = { ...rest, links };
+  return formattedCodeDetailContent as CodeDetail;
 }
 
 export async function getHeroContent(isDraftMode: boolean): Promise<HeroContent> {

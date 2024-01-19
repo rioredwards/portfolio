@@ -1,9 +1,8 @@
 'use client';
 import cssStyles from '@/ui/code/code.module.css';
 import { CodeCard } from '@/lib/api';
-import { useRef, useState } from 'react';
+import { useState } from 'react';
 import { adjustColor } from '@/utils/colorUtils';
-import CodeModal from '@/ui/code/CodeModal';
 import { AnimatePresence, Variants, motion } from 'framer-motion';
 import { MotionCodeCardIcon } from '@/ui/code/CodeCardIcon';
 import { MotionCodeCardPreview } from '@/ui/code/CodeCardPreview';
@@ -87,7 +86,6 @@ const previewVariants: Variants = {
 };
 
 const CodeProjectCard: React.FC<CodeCard & { idx: number }> = ({
-  id,
   title,
   type,
   codeCardIcon,
