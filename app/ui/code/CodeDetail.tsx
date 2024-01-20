@@ -4,6 +4,7 @@ import { Markdown } from '@/lib/markdown';
 import MotionContentfulImage from '@/ui/ContentfulImage';
 import Link from 'next/link';
 import Shield from '@/ui/code/Shield';
+import CodeDetailSection from './CodeDetailSection';
 
 const CodeDetail: React.FC<CodeDetailType> = ({
   title,
@@ -55,60 +56,20 @@ const CodeDetail: React.FC<CodeDetailType> = ({
           </ul>
         </>
       )}
-      {features && (
-        <>
-          <h2>Features</h2>
-          <Markdown content={features} />
-        </>
-      )}
+      {features && <CodeDetailSection name="Features" content={features} />}
       {preview && (
         <>
           <h2>Preview</h2>
           <MotionContentfulImage src={preview.url} height={220} width={730} />
         </>
       )}
-      {usage && (
-        <>
-          <h2>Usage</h2>
-          <Markdown content={usage} />
-        </>
-      )}
-      {configure && (
-        <>
-          <h2>Configure</h2>
-          <Markdown content={configure} />
-        </>
-      )}
-      {lessonsLearned && (
-        <>
-          <h2>Lessons Learned</h2>
-          <Markdown content={lessonsLearned} />
-        </>
-      )}
-      {reflection && (
-        <>
-          <h2>Reflection</h2>
-          <Markdown content={reflection} />
-        </>
-      )}
-      {authors && (
-        <>
-          <h2>Authors</h2>
-          <Markdown content={authors} />
-        </>
-      )}
-      {acknowledgements && (
-        <>
-          <h2>Acknowledgements</h2>
-          <Markdown content={acknowledgements} />
-        </>
-      )}
-      {custom && (
-        <>
-          <h2>Custom</h2>
-          <Markdown content={custom} />
-        </>
-      )}
+      {usage && <CodeDetailSection name="Usage" content={usage} />}
+      {configure && <CodeDetailSection name="Configure" content={configure} />}
+      {lessonsLearned && <CodeDetailSection name="Lessons Learned" content={lessonsLearned} />}
+      {reflection && <CodeDetailSection name="Reflection" content={reflection} />}
+      {authors && <CodeDetailSection name="Authors" content={authors} />}
+      {acknowledgements && <CodeDetailSection name="Acknowledgements" content={acknowledgements} />}
+      {custom && <CodeDetailSection name="Custom" content={custom} />}
     </section>
   );
 };
