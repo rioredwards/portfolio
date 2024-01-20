@@ -4,6 +4,7 @@ import cssStyles from './Modal.module.css';
 import { type ElementRef, useEffect, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import { createPortal } from 'react-dom';
+import ExIcon from '@/ui/icons/ExIcon';
 
 export function Modal({ children }: { children: React.ReactNode }) {
   const router = useRouter();
@@ -38,13 +39,13 @@ export function Modal({ children }: { children: React.ReactNode }) {
   return createPortal(
     <dialog ref={dialogRef} className={cssStyles.modal} onClose={onDismiss}>
       <div>
-        <div className="flex justify-end">
+        <div className="flex justify-end h-0">
           <button
             autoFocus
             onClick={onDismiss}
-            className="h-7 w-7 text-gray-500 hover:bg-gray-100 rounded-full font-bold text-xl mr-4 translate-y-4"
+            className="h-10 w-10 text-gray-500 hover:bg-gray-100 rounded-full font-bold text-xl mr-4 translate-y-4 p-1 pt-[9px] pl-[9px]"
           >
-            X
+            <ExIcon className="h-6 w-6" />
           </button>
         </div>
         {children}

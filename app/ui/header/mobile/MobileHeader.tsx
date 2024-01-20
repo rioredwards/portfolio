@@ -1,6 +1,6 @@
 'use client';
 import { motion } from 'framer-motion';
-import Hamburger from './Hamburger';
+import Hamburger from '../../icons/Hamburger';
 import MobileNavModal from './MobileNavMenu';
 import { useState } from 'react';
 import Link from 'next/link';

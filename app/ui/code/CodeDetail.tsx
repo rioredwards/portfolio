@@ -34,7 +34,7 @@ const CodeDetail: React.FC<Props> = ({
 }) => {
   return (
     <section>
-      <div className="flex justify-start items-center mb-4 ml-8">
+      <div className="flex justify-start items-center mb-4 mt-6 ml-8">
         <h1 className="font-bold text-4xl text-gray-600 mb-1 whitespace-nowrap mr-6">{title}</h1>
         {!!links?.length && (
           <ul className="w-full flex items-center justify-start gap-4 h-6 mt-0.5 align-baseline">
