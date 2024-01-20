@@ -1,5 +1,5 @@
 import { RichTextContent } from '@/lib/api';
-import { Markdown } from '@/lib/markdown';
+import { Markdown } from '@/ui/code/Markdown';
 
 interface Props {
   name?: string;
@@ -9,7 +9,11 @@ interface Props {
 const CodeDetailMarkdown: React.FC<Props> = ({ name, content }) => {
   return (
     <div>
-      {name && <h2>{name}</h2>}
+      {name && (
+        <div className="flex justify-center mb-2 mt-4">
+          <h2 className="font-bold text-2xl text-gray-600 mb-1">{name}</h2>
+        </div>
+      )}
       <Markdown content={content} />
     </div>
   );

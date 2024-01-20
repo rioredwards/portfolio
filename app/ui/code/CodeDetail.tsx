@@ -1,11 +1,10 @@
 import { CodeDetail as CodeDetailType } from '@/lib/api';
-import './CodeDetail.css';
-import { Markdown } from '@/lib/markdown';
 import MotionContentfulImage from '@/ui/ContentfulImage';
 import Link from 'next/link';
 import Shield from '@/ui/code/Shield';
 import CodeDetailSection from './CodeDetailMarkdown';
 import clsx from 'clsx';
+import { Markdown } from '@/ui/code/Markdown';
 
 interface Props {
   content: CodeDetailType;
@@ -38,7 +37,7 @@ const CodeDetail: React.FC<Props> = ({
         <h1 className="font-bold text-4xl text-gray-600 mb-1">{title}</h1>
       </div>
       <section
-        className={clsx(renderContext === 'modal' && 'max-h-112 overflow-y-scroll rounded-md')}
+        className={clsx(renderContext === 'modal' && 'max-h-112 overflow-y-scroll rounded-md px-4')}
       >
         {headerImage && (
           <MotionContentfulImage
@@ -50,23 +49,24 @@ const CodeDetail: React.FC<Props> = ({
           />
         )}
         {slogan && (
-          <div className="flex items-center justify-center text-lg">
+          <div className="flex items-center justify-center text-lg mb-1">
             <Markdown content={slogan} />
           </div>
         )}
-
         {description && <Markdown content={description} />}
         {!!madeWith?.length && (
-          <>
-            <h2>Made With</h2>
-            <ul className="w-full max-w-xl flex flex-wrap items-center justify-center gap-1">
+          <div className="mb-2">
+            <div className="flex justify-center mb-2">
+              <h2 className="font-bold text-2xl text-gray-600 mb-1">Made With</h2>
+            </div>
+            <ul className="w-full flex flex-wrap items-center justify-center gap-1">
               {madeWith.map((shield, idx) => (
                 <li key={idx}>
                   <Shield shield={shield} />
                 </li>
               ))}
             </ul>
-          </>
+          </div>
         )}
         {features && <CodeDetailSection name="Features" content={features} />}
         {preview && (
@@ -86,7 +86,7 @@ const CodeDetail: React.FC<Props> = ({
         {custom && <CodeDetailSection name="Custom" content={custom} />}
       </section>
       {!!links?.length && (
-        <ul className="w-full flex items-center justify-center gap-8 h-6">
+        <ul className="w-full flex items-center justify-center gap-8 h-6 mt-0.5">
           {links.map((link, idx) => (
             <li key={idx}>
               <Link href={link.url} target="_blank" className="text-sky-600">
