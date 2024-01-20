@@ -13,7 +13,7 @@ export default async function CodeModal({
 
   return (
     <Modal>
-      <CodeDetail {...codeCardsContent} />
+      <CodeDetail content={codeCardsContent} renderContext="modal" />
     </Modal>
   );
 }
