@@ -37,7 +37,7 @@ const CodeDetail: React.FC<Props> = ({
         <h1 className="font-bold text-4xl text-gray-600 mb-1">{title}</h1>
       </div>
       <section
-        className={clsx(renderContext === 'modal' && 'max-h-112 overflow-y-scroll rounded-md px-4')}
+        className={clsx(renderContext === 'modal' && 'max-h-112 overflow-y-scroll rounded-md px-8')}
       >
         {headerImage && (
           <MotionContentfulImage
@@ -63,7 +63,7 @@ const CodeDetail: React.FC<Props> = ({
         {!!madeWith?.length && (
           <div className="mb-2">
             <CodeDetailSection name={'Made With'}>
-              <ul className="w-full flex flex-wrap items-center justify-center gap-1">
+              <ul className="w-full flex flex-wrap items-center justify-start gap-1">
                 {madeWith.map((shield, idx) => (
                   <li key={idx}>
                     <Shield shield={shield} />
