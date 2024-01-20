@@ -34,11 +34,11 @@ const CodeDetail: React.FC<Props> = ({
 }) => {
   return (
     <section>
-      <div className="flex justify-center mb-4">
-        <h1 className="font-bold text-4xl text-gray-600">{title}</h1>
+      <div className="flex flex-col justify-center items-center mb-4">
+        <h1 className="font-bold text-4xl text-gray-600 mb-1">{title}</h1>
       </div>
       <section
-        className={clsx(renderContext === 'modal' && 'max-h-112 overflow-y-scroll rounded-sm')}
+        className={clsx(renderContext === 'modal' && 'max-h-112 overflow-y-scroll rounded-md')}
       >
         {headerImage && (
           <MotionContentfulImage
@@ -46,20 +46,15 @@ const CodeDetail: React.FC<Props> = ({
             height={220}
             width={730}
             alt={headerImage.title}
+            className="rounded-md w-full h-auto mb-4"
           />
         )}
-        {slogan && <Markdown content={slogan} />}
-        {!!links?.length && (
-          <ul className="w-full flex items-center justify-center gap-8">
-            {links.map((link, idx) => (
-              <li key={idx}>
-                <Link href={link.url} target="_blank">
-                  {link.displayText}
-                </Link>
-              </li>
-            ))}
-          </ul>
+        {slogan && (
+          <div className="flex items-center justify-center text-lg">
+            <Markdown content={slogan} />
+          </div>
         )}
+
         {description && <Markdown content={description} />}
         {!!madeWith?.length && (
           <>
@@ -90,6 +85,17 @@ const CodeDetail: React.FC<Props> = ({
         )}
         {custom && <CodeDetailSection name="Custom" content={custom} />}
       </section>
+      {!!links?.length && (
+        <ul className="w-full flex items-center justify-center gap-8 h-6">
+          {links.map((link, idx) => (
+            <li key={idx}>
+              <Link href={link.url} target="_blank" className="text-sky-600">
+                {link.displayText}
+              </Link>
+            </li>
+          ))}
+        </ul>
+      )}
     </section>
   );
 };

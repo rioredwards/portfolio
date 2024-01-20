@@ -42,7 +42,7 @@ export function Modal({ children }: { children: React.ReactNode }) {
           <button
             autoFocus
             onClick={onDismiss}
-            className="h-6 w-6 text-gray-500 bg-gray-100 rounded-full font-black"
+            className="h-7 w-7 text-gray-500 hover:bg-gray-100 rounded-full font-bold text-xl"
           >
             X
           </button>
