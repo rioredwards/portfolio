@@ -37,6 +37,7 @@
     "@heroicons/react": "^2.0.18",
     "@tailwindcss/typography": "0.5.9",
     "@types/node": "20.5.7",
+    "@types/react-syntax-highlighter": "^15.5.11",
     "clsx": "^2.0.0",
     "contentful-import": "^9.0.4",
     "contentful-rich-text-to-markdown-converter": "^1.2.2",
@@ -46,6 +47,7 @@
     "postcss": "8.4.31",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-syntax-highlighter": "^15.5.0",
     "tailwindcss": "^3.3.3",
     "typescript": "^5.2.3"
   },

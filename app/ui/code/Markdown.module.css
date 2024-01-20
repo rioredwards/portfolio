@@ -30,3 +30,18 @@
   --tw-text-opacity: 1;
   color: rgb(2 132 199 / var(--tw-text-opacity));
 }
+
+.markdown a:hover {
+  --tw-text-opacity: 1;
+  color: rgb(3 106 161 / var(--tw-text-opacity));
+}
+
+.markdown .embeddedCodeBlock {
+  margin: 0.2rem 1rem;
+}
+
+.markdown .embeddedCodeBlock pre {
+  margin: 0;
+  background-color: rgb(243, 243, 243) !important;
+  border-radius: 0.5rem;
+}

@@ -4,6 +4,8 @@ import { BLOCKS } from '@contentful/rich-text-types';
 import { Asset, RichTextContent, getCodeBlockContent } from '@/lib/api';
 import cssStyles from '@/ui/code/Markdown.module.css';
 import { draftMode } from 'next/headers';
+import SyntaxHighlighter from 'react-syntax-highlighter';
+import { vs } from 'react-syntax-highlighter/dist/esm/styles/hljs';
 
 const EmbeddedImage = ({ id, assets }: { id: string; assets: Asset[] | undefined }) => {
   if (!assets) throw new Error('embedded-asset-block in markdown has no assets');
@@ -21,12 +23,19 @@ const EmbeddedCodeBlock = async ({ id }: { id: string }) => {
   const { isEnabled: draftModeIsEnabled } = draftMode();
   const codeCardsContent = await getCodeBlockContent(draftModeIsEnabled, id);
 
+  // has newLines
+  const hasNewLines = codeCardsContent?.content?.includes('\n');
+
   if (codeCardsContent?.content) {
     return (
       <div className={cssStyles.embeddedCodeBlock}>
-        <code>
-          <pre>{`${codeCardsContent.content}`}</pre>
-        </code>
+        <SyntaxHighlighter
+          language={codeCardsContent.language}
+          style={vs}
+          showLineNumbers={hasNewLines}
+        >
+          {codeCardsContent.content}
+        </SyntaxHighlighter>
       </div>
     );
   }
