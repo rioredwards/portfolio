@@ -49,6 +49,7 @@ export function Modal({ children }: { children: React.ReactNode }) {
           </button>
         </div>
         {children}
+        <div className="h-4 bg-white" />
       </div>
     </dialog>,
     document.getElementById('modal-root')!

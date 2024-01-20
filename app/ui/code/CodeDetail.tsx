@@ -54,7 +54,9 @@ const CodeDetail: React.FC<Props> = ({
         )}
       </div>
       <section
-        className={clsx(renderContext === 'modal' && 'max-h-112 overflow-y-scroll rounded-md px-8')}
+        className={clsx(
+          renderContext === 'modal' && 'max-h-[80vh] overflow-y-scroll rounded-md px-8'
+        )}
       >
         {headerImage && (
           <MotionContentfulImage
@@ -67,9 +69,7 @@ const CodeDetail: React.FC<Props> = ({
         )}
         {slogan && (
           <CodeDetailSection>
-            <div className="flex items-center justify-center text-lg">
-              <Markdown content={slogan} />
-            </div>
+            <Markdown content={slogan} />
           </CodeDetailSection>
         )}
         {description && (

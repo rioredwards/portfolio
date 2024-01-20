@@ -8,6 +8,21 @@ const HERO_GRAPHQL_FIELDS = `
   }
 `;
 
+const RICH_TEXT_GRAPHQL_FIELDS = `
+  json
+  links {
+    assets {
+      block {
+        sys {
+          id
+        }
+        title
+        url
+      }
+    }
+  }
+`;
+
 const CODE_CARDS_GRAPHQL_FIELDS = `
   sys {
     id
@@ -66,122 +81,24 @@ const CODE_DETAIL_GRAPHQL_FIELDS = `
       style
     }
   }
-  features {
-    json
-    links {
-      assets {
-        block {
-          sys {
-            id
-          }
-          title
-          url
-        }
-      }
-    }
-  }
+  features {${RICH_TEXT_GRAPHQL_FIELDS}}
   preview {
     title
     url
   }
-  usage {
-    json
-    links {
-      assets {
-        block {
-          sys {
-            id
-          }
-          title
-          url
-        }
-      }
-    }
-  }
-  configure {
-    json
-    links {
-      assets {
-        block {
-          sys {
-            id
-          }
-          title
-          url
-        }
-      }
-    }
-  }
-  lessonsLearned {
-    json
-    links {
-      assets {
-        block {
-          sys {
-            id
-          }
-          title
-          url
-        }
-      }
-    }
-  }
-  reflection {
-    json
-    links {
-      assets {
-        block {
-          sys {
-            id
-          }
-          title
-          url
-        }
-      }
-    }
-  }
-  authors {
-    json
-    links {
-      assets {
-        block {
-          sys {
-            id
-          }
-          title
-          url
-        }
-      }
-    }
-  }
-  acknowledgements {
-    json
-    links {
-      assets {
-        block {
-          sys {
-            id
-          }
-          title
-          url
-        }
-      }
-    }
-  }
-  custom {
-    json
-    links {
-      assets {
-        block {
-          sys {
-            id
-          }
-          title
-          url
-        }
-      }
-    }
-  }
+  usage  {${RICH_TEXT_GRAPHQL_FIELDS}}
+  configure  {${RICH_TEXT_GRAPHQL_FIELDS}}
+  lessonsLearned  {${RICH_TEXT_GRAPHQL_FIELDS}}
+  reflection  {${RICH_TEXT_GRAPHQL_FIELDS}}
+  authors  {${RICH_TEXT_GRAPHQL_FIELDS}}
+  acknowledgements  {${RICH_TEXT_GRAPHQL_FIELDS}}
+  custom  {${RICH_TEXT_GRAPHQL_FIELDS}}
+`;
+
+const CODE_BLOCK_GRAPHQL_FIELDS = `
+  title
+  content
+  language
 `;
 
 export interface Asset {
@@ -267,6 +184,12 @@ export interface CodeDetail {
   custom?: RichTextContent;
 }
 
+export interface CodeBlock {
+  title: string;
+  content: string;
+  language: string;
+}
+
 async function fetchGraphQL(query: string, preview = false): Promise<any> {
   return fetch(
     `https://graphql.contentful.com/content/v1/spaces/${process.env.CONTENTFUL_SPACE_ID}`,
@@ -309,6 +232,11 @@ function extractCodeDetailContent(fetchResponse: any): CodeDetail {
   } = codeDetailContent;
   const formattedCodeDetailContent = { ...rest, links, madeWith };
   return formattedCodeDetailContent as CodeDetail;
+}
+
+function extractCodeBlockContent(fetchResponse: any): CodeBlock {
+  const codeBlockContent = fetchResponse?.data?.codeBlockCollection?.items[0];
+  return codeBlockContent as CodeBlock;
 }
 
 export async function getHeroContent(isDraftMode: boolean): Promise<HeroContent> {
@@ -360,4 +288,22 @@ export async function getCodeDetailContent(
   );
 
   return extractCodeDetailContent(entry);
+}
+
+export async function getCodeBlockContent(
+  isDraftMode: boolean,
+  blockId: string
+): Promise<CodeBlock> {
+  const entry = await fetchGraphQL(
+    `query {
+        codeBlockCollection (where: { sys: { id: "${blockId}" } }, limit: 1) {
+        items {
+          ${CODE_BLOCK_GRAPHQL_FIELDS}
+        }
+      }
+    }`,
+    isDraftMode
+  );
+
+  return extractCodeBlockContent(entry);
 }
