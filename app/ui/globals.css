@@ -9,5 +9,6 @@
 
   body:has(dialog[open]) {
     overflow: hidden;
+    padding-right: 1rem;
   }
 }

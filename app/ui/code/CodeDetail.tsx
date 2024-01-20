@@ -5,6 +5,7 @@ import Shield from '@/ui/code/Shield';
 import clsx from 'clsx';
 import { Markdown } from '@/ui/code/Markdown';
 import CodeDetailSection from '@/ui/code/CodeDetailSection';
+import ExternalLinkIcon from '../icons/ExternalLinkIcon';
 
 interface Props {
   content: CodeDetailType;
@@ -33,8 +34,24 @@ const CodeDetail: React.FC<Props> = ({
 }) => {
   return (
     <section>
-      <div className="flex flex-col justify-center items-center mb-4">
-        <h1 className="font-bold text-4xl text-gray-600 mb-1">{title}</h1>
+      <div className="flex justify-start items-center mb-4 ml-8">
+        <h1 className="font-bold text-4xl text-gray-600 mb-1 whitespace-nowrap mr-6">{title}</h1>
+        {!!links?.length && (
+          <ul className="w-full flex items-center justify-start gap-4 h-6 mt-0.5 align-baseline">
+            {links.map((link, idx) => (
+              <li key={idx}>
+                <Link
+                  href={link.url}
+                  target="_blank"
+                  className="hover:text-white hover:bg-sky-400 text-sky-600 border border-sky-300 rounded-full min-w-[3rem] whitespace-nowrap py-1 px-2 flex items-center justify-center gap-1 cursor-pointer"
+                >
+                  {link.displayText}
+                  <ExternalLinkIcon className="h-4 w-4" />
+                </Link>
+              </li>
+            ))}
+          </ul>
+        )}
       </div>
       <section
         className={clsx(renderContext === 'modal' && 'max-h-112 overflow-y-scroll rounded-md px-8')}
@@ -45,7 +62,7 @@ const CodeDetail: React.FC<Props> = ({
             height={220}
             width={730}
             alt={headerImage.title}
-            className="rounded-md w-full h-auto mb-4"
+            className="rounded-md w-full h-auto my-4"
           />
         )}
         {slogan && (
@@ -119,17 +136,6 @@ const CodeDetail: React.FC<Props> = ({
           </CodeDetailSection>
         )}
       </section>
-      {!!links?.length && (
-        <ul className="w-full flex items-center justify-center gap-8 h-6 mt-0.5">
-          {links.map((link, idx) => (
-            <li key={idx}>
-              <Link href={link.url} target="_blank" className="text-sky-600">
-                {link.displayText}
-              </Link>
-            </li>
-          ))}
-        </ul>
-      )}
     </section>
   );
 };

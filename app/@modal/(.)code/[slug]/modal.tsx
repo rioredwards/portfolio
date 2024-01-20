@@ -37,12 +37,12 @@ export function Modal({ children }: { children: React.ReactNode }) {
 
   return createPortal(
     <dialog ref={dialogRef} className={cssStyles.modal} onClose={onDismiss}>
-      <div className="p-4">
+      <div>
         <div className="flex justify-end">
           <button
             autoFocus
             onClick={onDismiss}
-            className="h-7 w-7 text-gray-500 hover:bg-gray-100 rounded-full font-bold text-xl"
+            className="h-7 w-7 text-gray-500 hover:bg-gray-100 rounded-full font-bold text-xl mr-4 translate-y-4"
           >
             X
           </button>
