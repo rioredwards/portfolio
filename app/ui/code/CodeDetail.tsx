@@ -4,7 +4,7 @@ import { Markdown } from '@/lib/markdown';
 import MotionContentfulImage from '@/ui/ContentfulImage';
 import Link from 'next/link';
 import Shield from '@/ui/code/Shield';
-import CodeDetailSection from './CodeDetailSection';
+import CodeDetailSection from './CodeDetailMarkdown';
 
 const CodeDetail: React.FC<CodeDetailType> = ({
   title,
