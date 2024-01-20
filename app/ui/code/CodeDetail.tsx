@@ -2,9 +2,9 @@ import { CodeDetail as CodeDetailType } from '@/lib/api';
 import MotionContentfulImage from '@/ui/ContentfulImage';
 import Link from 'next/link';
 import Shield from '@/ui/code/Shield';
-import CodeDetailSection from './CodeDetailMarkdown';
 import clsx from 'clsx';
 import { Markdown } from '@/ui/code/Markdown';
+import CodeDetailSection from '@/ui/code/CodeDetailSection';
 
 interface Props {
   content: CodeDetailType;
@@ -49,41 +49,75 @@ const CodeDetail: React.FC<Props> = ({
           />
         )}
         {slogan && (
-          <div className="flex items-center justify-center text-lg mb-1">
-            <Markdown content={slogan} />
-          </div>
+          <CodeDetailSection>
+            <div className="flex items-center justify-center text-lg">
+              <Markdown content={slogan} />
+            </div>
+          </CodeDetailSection>
         )}
-        {description && <Markdown content={description} />}
+        {description && (
+          <CodeDetailSection>
+            <Markdown content={description} />
+          </CodeDetailSection>
+        )}
         {!!madeWith?.length && (
           <div className="mb-2">
-            <div className="flex justify-center mb-2">
-              <h2 className="font-bold text-2xl text-gray-600 mb-1">Made With</h2>
-            </div>
-            <ul className="w-full flex flex-wrap items-center justify-center gap-1">
-              {madeWith.map((shield, idx) => (
-                <li key={idx}>
-                  <Shield shield={shield} />
-                </li>
-              ))}
-            </ul>
+            <CodeDetailSection name={'Made With'}>
+              <ul className="w-full flex flex-wrap items-center justify-center gap-1">
+                {madeWith.map((shield, idx) => (
+                  <li key={idx}>
+                    <Shield shield={shield} />
+                  </li>
+                ))}
+              </ul>
+            </CodeDetailSection>
           </div>
         )}
-        {features && <CodeDetailSection name="Features" content={features} />}
+        {features && (
+          <CodeDetailSection name={'Features'}>
+            <Markdown content={features} />
+          </CodeDetailSection>
+        )}
         {preview && (
-          <>
-            <h2>Preview</h2>
-            <MotionContentfulImage src={preview.url} alt={preview.title} height={220} width={730} />
-          </>
+          <CodeDetailSection name={'Preview'}>
+            <MotionContentfulImage src={preview.url} height={220} width={730} alt={preview.title} />
+          </CodeDetailSection>
         )}
-        {usage && <CodeDetailSection name="Usage" content={usage} />}
-        {configure && <CodeDetailSection name="Configure" content={configure} />}
-        {lessonsLearned && <CodeDetailSection name="Lessons Learned" content={lessonsLearned} />}
-        {reflection && <CodeDetailSection name="Reflection" content={reflection} />}
-        {authors && <CodeDetailSection name="Authors" content={authors} />}
+        {usage && (
+          <CodeDetailSection name={'Usage'}>
+            <Markdown content={usage} />
+          </CodeDetailSection>
+        )}
+        {configure && (
+          <CodeDetailSection name={'Configure'}>
+            <Markdown content={configure} />
+          </CodeDetailSection>
+        )}
+        {lessonsLearned && (
+          <CodeDetailSection name={'Lessons Learned'}>
+            <Markdown content={lessonsLearned} />
+          </CodeDetailSection>
+        )}
+        {reflection && (
+          <CodeDetailSection name={'Reflection'}>
+            <Markdown content={reflection} />
+          </CodeDetailSection>
+        )}
+        {authors && (
+          <CodeDetailSection name={'Authors'}>
+            <Markdown content={authors} />
+          </CodeDetailSection>
+        )}
         {acknowledgements && (
-          <CodeDetailSection name="Acknowledgements" content={acknowledgements} />
+          <CodeDetailSection name={'Acknowledgements'}>
+            <Markdown content={acknowledgements} />
+          </CodeDetailSection>
         )}
-        {custom && <CodeDetailSection name="Custom" content={custom} />}
+        {custom && (
+          <CodeDetailSection>
+            <Markdown content={custom} />
+          </CodeDetailSection>
+        )}
       </section>
       {!!links?.length && (
         <ul className="w-full flex items-center justify-center gap-8 h-6 mt-0.5">
