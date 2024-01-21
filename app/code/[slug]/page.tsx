@@ -11,7 +11,7 @@ export default async function CodeModal({
   const codeCardsContent = await getCodeDetailContent(draftModeIsEnabled, codeCardSlug);
 
   return (
-    <div className="mt-32">
+    <div className="mt-24 px-4 w-full lg:w-4/5 mx-auto">
       <CodeDetail content={codeCardsContent} renderContext="page" />
     </div>
   );

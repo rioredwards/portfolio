@@ -5,16 +5,12 @@ import { type ElementRef, useEffect, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import { createPortal } from 'react-dom';
 import ExIcon from '@/ui/icons/ExIcon';
-import CodeModalHeader from './CodeModalHeader';
-import { ContentfulLink } from '@/lib/api';
 
 interface Props {
   children: React.ReactNode;
-  projectTitle: string;
-  projectLinks?: ContentfulLink[];
 }
 
-export function Modal({ children, projectTitle, projectLinks }: Props) {
+export function Modal({ children }: Props) {
   const router = useRouter();
   const dialogRef = useRef<ElementRef<'dialog'>>(null);
 
