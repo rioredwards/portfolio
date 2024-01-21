@@ -58,7 +58,7 @@ const Hero: React.FC<HeroProps> = ({ title, secondaryText, avatar }) => {
         <MotionContentfulImage
           variants={avatarVariants}
           alt="Rio Edwards"
-          className="xl:w-80 rounded-full"
+          className="2xl:w-80 xl:w-64 md:w-56 rounded-full"
           height={300}
           width={300}
           src={avatar.url}

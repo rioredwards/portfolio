@@ -18,12 +18,13 @@ const inter = interFont({
   display: 'swap',
 });
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout(props: { children: React.ReactNode; modal: React.ReactNode }) {
   return (
     <html lang="en" className={`${inter.variable} antialiased`}>
       <body className="min-h-screen">
         <Header />
-        <main>{children}</main>
+        {props.modal}
+        <main>{props.children}</main>
         <UnderConstruction />
         <Footer />
       </body>

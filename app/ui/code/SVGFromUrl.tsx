@@ -1,3 +1,4 @@
+'use client';
 import { CodeCard } from '@/lib/api';
 import { motion } from 'framer-motion';
 import { ForwardRefRenderFunction, forwardRef, useEffect, useState } from 'react';

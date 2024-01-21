@@ -1,15 +1,15 @@
 'use client';
 import cssStyles from '@/ui/code/code.module.css';
 import { CodeCard } from '@/lib/api';
-import { useRef, useState } from 'react';
+import { useState } from 'react';
 import { adjustColor } from '@/utils/colorUtils';
-import CodeModal from '@/ui/code/CodeModal';
 import { AnimatePresence, Variants, motion } from 'framer-motion';
 import { MotionCodeCardIcon } from '@/ui/code/CodeCardIcon';
 import { MotionCodeCardPreview } from '@/ui/code/CodeCardPreview';
 import WebsiteCardIcon from '@/ui/code/WebsiteCardIcon';
 import CLICardIcon from '@/ui/code/CLICardIcon';
 import PluginCardIcon from '@/ui/code/PluginCardIcon';
+import Link from 'next/link';
 
 const MAX_TITLE_LENGTH = 28;
 
@@ -91,35 +91,26 @@ const CodeProjectCard: React.FC<CodeCard & { idx: number }> = ({
   codeCardIcon,
   preview,
   pluginIcon,
+  slug,
 }) => {
-  const hoverDisabled = useRef(false);
-  const [modalIsOpen, setModalIsOpen] = useState(false);
+  // const hoverDisabled = useRef(false);
   const bgGradient = generateBgGradientColors(codeCardIcon?.bgColor);
   const titleTruncated = truncateTitle(title);
   const [isHover, setIsHover] = useState(false);
 
-  const onModalClose = () => {
-    // Wait for 1ms to prevent the modal from reopening immediately
-    setTimeout(() => {
-      setModalIsOpen(false);
-      hoverDisabled.current = false;
-    }, 1);
-  };
-
   const onHoverStart = () => {
-    if (hoverDisabled.current) return;
+    // if (hoverDisabled.current) return;
     setIsHover(true);
   };
 
   const onHoverEnd = () => {
-    if (hoverDisabled.current) return;
+    // if (hoverDisabled.current) return;
     setIsHover(false);
   };
 
   const onClick = () => {
     setIsHover(false);
-    hoverDisabled.current = true;
-    setModalIsOpen(true);
+    // hoverDisabled.current = true;
   };
 
   const codeCardTypeIcon = () => {
@@ -137,7 +128,7 @@ const CodeProjectCard: React.FC<CodeCard & { idx: number }> = ({
   };
 
   return (
-    <div className={`${cssStyles.codeCardContainer}`}>
+    <Link key={slug} href={`/code/${slug}`} passHref className={`${cssStyles.codeCardContainer}`}>
       <div className={`${cssStyles.codeCardContent}`}>
         <motion.article
           style={{ background: generateBgGradient(bgGradient) }}
@@ -149,13 +140,6 @@ const CodeProjectCard: React.FC<CodeCard & { idx: number }> = ({
           className="group w-full h-full rounded-[8vw] sm:rounded-[4vw] lg:rounded-[3vw] overflow-hidden relative"
         >
           <div className="absolute inset-0 rounded-[8vw] sm:rounded-[4vw] lg:rounded-[3vw] overflow-hidden">
-            <CodeModal
-              title={title}
-              key={title + 'modal'}
-              isOpen={modalIsOpen}
-              setIsOpen={setModalIsOpen}
-              onModalClose={onModalClose}
-            />
             <div className="h-full w-full overflow-hidden">
               {/* Top Panel */}
               <div className="z-10 w-full h-[18%] pt-[1%] bg-gray-100 flex items-center pr-[8%] pl-[8%] border-b-2">
@@ -189,7 +173,7 @@ const CodeProjectCard: React.FC<CodeCard & { idx: number }> = ({
           </div>
         </motion.article>
       </div>
-    </div>
+    </Link>
   );
 };
 
