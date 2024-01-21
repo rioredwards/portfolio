@@ -1,11 +1,12 @@
 import Image from 'next/image';
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
 import { BLOCKS } from '@contentful/rich-text-types';
-import { Asset, RichTextContent, getCodeBlockContent } from '@/lib/api';
+import { getCodeBlockContent } from '@/lib/api';
 import cssStyles from '@/ui/code/Markdown.module.css';
 import { draftMode } from 'next/headers';
 import SyntaxHighlighter from 'react-syntax-highlighter';
 import { vs } from 'react-syntax-highlighter/dist/esm/styles/hljs';
+import { Asset, RichTextContent } from '@/lib/dataTypes';
 
 const EmbeddedImage = ({ id, assets }: { id: string; assets: Asset[] | undefined }) => {
   if (!assets) throw new Error('embedded-asset-block in markdown has no assets');

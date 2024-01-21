@@ -1,4 +1,4 @@
-import { CodeDetail as CodeDetailType } from '@/lib/api';
+import { CodeDetail as CodeDetailType } from '@/lib/dataTypes';
 import MotionContentfulImage from '@/ui/ContentfulImage';
 import Shield from '@/ui/code/Shield';
 import clsx from 'clsx';

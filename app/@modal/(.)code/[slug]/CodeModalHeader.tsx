@@ -1,6 +1,6 @@
 'use client';
 
-import { ContentfulImage as ContentfulImageType } from '@/lib/api';
+import { ContentfulImage as ContentfulImageType } from '@/lib/dataTypes';
 import MotionContentfulImage from '@/ui/ContentfulImage';
 
 interface Props {

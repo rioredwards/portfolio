@@ -1,4 +1,4 @@
-import { ContentfulImage as ContentfulImageType } from '@/lib/api';
+import { ContentfulImage as ContentfulImageType } from '@/lib/dataTypes';
 import MotionContentfulImage from '@/ui/ContentfulImage';
 
 interface Props {
@@ -18,7 +18,7 @@ const CodeDetailPageHeader: React.FC<Props> = ({ title, logo }) => {
           className="rounded-md w-auto h-10 mr-4"
         />
       )}
-      <h1 className="font-bold text-4xl text-gray-600 mb-1 whitespace-nowrap mr-6">{title}</h1>;
+      <h1 className="font-bold text-4xl text-gray-600 mb-1 whitespace-nowrap mr-6">{title}</h1>
     </>
   );
 };
