@@ -145,7 +145,7 @@ export interface ContentfulLink {
   displayText: string;
 }
 
-interface ContentfulImage {
+export interface ContentfulImage {
   title: string;
   url: string;
 }

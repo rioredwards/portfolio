@@ -17,6 +17,7 @@ interface Props {
 const CodeDetail: React.FC<Props> = ({
   content: {
     title,
+    logo,
     links,
     headerImage,
     slogan,
@@ -37,6 +38,15 @@ const CodeDetail: React.FC<Props> = ({
   return (
     <div>
       <div className="flex justify-start items-center mb-4 mt-6 ml-8">
+        {logo && (
+          <MotionContentfulImage
+            src={logo.url}
+            height={64}
+            width={64}
+            alt={logo.title}
+            className="rounded-md w-auto h-10 mr-4"
+          />
+        )}
         {renderContext === 'modal' ? (
           <CodeModalHeader title={title} />
         ) : (

@@ -14,7 +14,7 @@ const CodeModalHeader: React.FC<Props> = ({ title }) => {
         });
         window.location.reload();
       }}
-      className="cursor-pointer hover:text-sky-400 font-bold text-4xl text-gray-600 mb-1 whitespace-nowrap mr-6"
+      className="cursor-pointer hover:text-sky-400 font-bold text-4xl text-gray-600 whitespace-nowrap mr-6"
     >
       {title}
     </h1>
