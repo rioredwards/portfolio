@@ -140,7 +140,7 @@ export type CodeCardType = 'website' | 'cli' | 'plugin';
 
 export type CodeCardIconAnimation = 'none' | 'spin' | 'pulse' | 'wiggle';
 
-interface ContentfulLink {
+export interface ContentfulLink {
   url: string;
   displayText: string;
 }

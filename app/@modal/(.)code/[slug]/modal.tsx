@@ -5,8 +5,16 @@ import { type ElementRef, useEffect, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import { createPortal } from 'react-dom';
 import ExIcon from '@/ui/icons/ExIcon';
+import CodeModalHeader from './CodeModalHeader';
+import { ContentfulLink } from '@/lib/api';
 
-export function Modal({ children }: { children: React.ReactNode }) {
+interface Props {
+  children: React.ReactNode;
+  projectTitle: string;
+  projectLinks?: ContentfulLink[];
+}
+
+export function Modal({ children, projectTitle, projectLinks }: Props) {
   const router = useRouter();
   const dialogRef = useRef<ElementRef<'dialog'>>(null);
 
@@ -37,7 +45,7 @@ export function Modal({ children }: { children: React.ReactNode }) {
   }
 
   return createPortal(
-    <dialog ref={dialogRef} className={cssStyles.modal} onClose={onDismiss}>
+    <dialog ref={dialogRef} className={cssStyles.modal + ' shadow-lg'} onClose={onDismiss}>
       <div>
         <div className="flex justify-end h-0">
           <button
@@ -48,6 +56,7 @@ export function Modal({ children }: { children: React.ReactNode }) {
             <ExIcon className="h-6 w-6" />
           </button>
         </div>
+        <CodeModalHeader title={projectTitle} links={projectLinks} />
         {children}
         <div className="h-4 bg-white" />
       </div>

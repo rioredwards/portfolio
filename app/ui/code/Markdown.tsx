@@ -33,6 +33,7 @@ const EmbeddedCodeBlock = async ({ id }: { id: string }) => {
           language={codeCardsContent.language}
           style={vs}
           showLineNumbers={hasNewLines}
+          lineNumberStyle={{ color: '#9CA3AF' }}
         >
           {codeCardsContent.content}
         </SyntaxHighlighter>
