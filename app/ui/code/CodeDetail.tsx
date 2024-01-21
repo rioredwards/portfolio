@@ -17,6 +17,7 @@ interface Props {
 const CodeDetail: React.FC<Props> = ({
   content: {
     title,
+    tags,
     logo,
     links,
     headerImage,
@@ -56,6 +57,13 @@ const CodeDetail: React.FC<Props> = ({
                   <ExternalLinkIcon className="h-4 w-4" />
                 </Link>
               </li>
+            ))}
+          </ul>
+        )}
+        {!!tags?.length && (
+          <ul className="w-full flex items-center justify-start gap-1 h-6 mt-0.5 align-baseline">
+            {tags.map((tag, idx) => (
+              <li key={idx}>{`#${tag}`}</li>
             ))}
           </ul>
         )}

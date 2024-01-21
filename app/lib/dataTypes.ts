@@ -1,4 +1,4 @@
-export interface Asset {
+interface Asset {
   sys: {
     id: string;
   };
@@ -6,25 +6,25 @@ export interface Asset {
   title: string;
 }
 
-export interface AssetLink {
+interface AssetLink {
   block: Asset[];
 }
 
-export interface RichTextContent {
+interface RichTextContent {
   json: string;
   links?: {
     assets: AssetLink;
   };
 }
 
-export interface HeroContent {
+interface HeroContent {
   title: string;
   secondaryText: string;
   tertiaryText: string;
   avatar: ContentfulImage;
 }
 
-export interface Shield {
+interface Shield {
   name: string;
   text: string;
   backgroundColor: string;
@@ -33,21 +33,21 @@ export interface Shield {
   style: string;
 }
 
-export type CodeCardType = 'website' | 'cli' | 'plugin';
+type CodeCardType = 'website' | 'cli' | 'plugin';
 
-export type CodeCardIconAnimation = 'none' | 'spin' | 'pulse' | 'wiggle';
+type CodeCardIconAnimation = 'none' | 'spin' | 'pulse' | 'wiggle';
 
-export interface ContentfulLink {
+interface ContentfulLink {
   url: string;
   displayText: string;
 }
 
-export interface ContentfulImage {
+interface ContentfulImage {
   title: string;
   url: string;
 }
 
-export interface CodeCard {
+interface CodeCard {
   id: string;
   title: string;
   slug: string;
@@ -62,8 +62,9 @@ export interface CodeCard {
   pluginIcon: ContentfulImage;
 }
 
-export interface CodeDetail {
+interface CodeDetail {
   title: string;
+  tags: string[];
   headerImage?: ContentfulImage;
   slogan?: RichTextContent;
   logo?: ContentfulImage;
@@ -81,8 +82,23 @@ export interface CodeDetail {
   custom?: RichTextContent;
 }
 
-export interface CodeBlock {
+interface CodeBlock {
   title: string;
   content: string;
   language: string;
 }
+
+export type {
+  Asset,
+  AssetLink,
+  RichTextContent,
+  HeroContent,
+  Shield,
+  CodeCardType,
+  CodeCardIconAnimation,
+  ContentfulLink,
+  ContentfulImage,
+  CodeCard,
+  CodeDetail,
+  CodeBlock,
+};

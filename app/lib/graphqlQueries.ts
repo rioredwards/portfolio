@@ -51,6 +51,11 @@ const CODE_CARDS_GRAPHQL_FIELDS = `
 
 const CODE_DETAIL_GRAPHQL_FIELDS = `
   title
+  tagsCollection {
+    items {
+      text
+    }
+  }
   headerImage {
     title
     url

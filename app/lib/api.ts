@@ -41,12 +41,13 @@ function extractCodeCardsContent(fetchResponse: any): any[] {
 
 function extractCodeDetailContent(fetchResponse: any): CodeDetail {
   const codeDetailContent = fetchResponse?.data?.featuredCodeProjectCollection?.items[0];
+  const tags = codeDetailContent?.tagsCollection?.items?.map((tag: any) => tag.text);
   const {
     linksCollection: { items: links },
     madeWithCollection: { items: madeWith },
     ...rest
   } = codeDetailContent;
-  const formattedCodeDetailContent = { ...rest, links, madeWith };
+  const formattedCodeDetailContent = { ...rest, links, madeWith, tags };
   return formattedCodeDetailContent as CodeDetail;
 }
 
