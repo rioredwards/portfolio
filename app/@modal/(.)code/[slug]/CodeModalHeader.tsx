@@ -18,7 +18,7 @@ const CodeModalHeader: React.FC<Props> = ({ title, logo }) => {
         });
         window.location.reload();
       }}
-      className="flex cursor-pointer group mr-6 ml-2 flex-shrink-0"
+      className="flex cursor-pointer group"
     >
       {logo && (
         <MotionContentfulImage

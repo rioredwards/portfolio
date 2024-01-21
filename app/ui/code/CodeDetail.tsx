@@ -38,14 +38,16 @@ const CodeDetail: React.FC<Props> = ({
 }) => {
   return (
     <div>
-      <div className="flex justify-start items-center mb-4 mt-6 ml-8">
-        {renderContext === 'modal' ? (
-          <CodeModalHeader title={title} logo={logo} />
-        ) : (
-          <CodeDetailPageHeader title={title} logo={logo} />
-        )}
+      <div className="grid grid-cols-[auto_1fr] grid-rows-[auto_auto] items-center justify-items-start mb-4 mt-6 ml-8">
+        <div className="mr-6 ml-2">
+          {renderContext === 'modal' ? (
+            <CodeModalHeader title={title} logo={logo} />
+          ) : (
+            <CodeDetailPageHeader title={title} logo={logo} />
+          )}
+        </div>
         {!!links?.length && (
-          <ul className="w-full flex items-center justify-start gap-4 h-6 mt-0.5 align-baseline">
+          <ul className="col-span-1 flex items-center justify-start gap-4 h-6 mt-0.5 align-baseline">
             {links.map((link, idx) => (
               <li key={idx}>
                 <Link
@@ -61,7 +63,7 @@ const CodeDetail: React.FC<Props> = ({
           </ul>
         )}
         {!!tags?.length && (
-          <ul className="w-full flex items-center justify-start gap-1 h-6 mt-0.5 align-baseline">
+          <ul className="col-span-2 row-start-2 w-full flex items-center justify-start gap-1 h-6 mt-0.5 ml-2 align-baseline">
             {tags.map((tag, idx) => (
               <li key={idx}>{`#${tag}`}</li>
             ))}

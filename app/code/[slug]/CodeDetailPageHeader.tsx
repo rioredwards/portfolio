@@ -8,7 +8,7 @@ interface Props {
 
 const CodeDetailPageHeader: React.FC<Props> = ({ title, logo }) => {
   return (
-    <>
+    <div className="flex">
       {logo && (
         <MotionContentfulImage
           src={logo.url}
@@ -19,7 +19,7 @@ const CodeDetailPageHeader: React.FC<Props> = ({ title, logo }) => {
         />
       )}
       <h1 className="font-bold text-4xl text-gray-600 mb-1 whitespace-nowrap mr-6">{title}</h1>
-    </>
+    </div>
   );
 };
 
