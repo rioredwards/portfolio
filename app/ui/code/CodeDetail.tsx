@@ -38,19 +38,10 @@ const CodeDetail: React.FC<Props> = ({
   return (
     <div>
       <div className="flex justify-start items-center mb-4 mt-6 ml-8">
-        {logo && (
-          <MotionContentfulImage
-            src={logo.url}
-            height={64}
-            width={64}
-            alt={logo.title}
-            className="rounded-md w-auto h-10 mr-4"
-          />
-        )}
         {renderContext === 'modal' ? (
-          <CodeModalHeader title={title} />
+          <CodeModalHeader title={title} logo={logo} />
         ) : (
-          <CodeDetailPageHeader title={title} />
+          <CodeDetailPageHeader title={title} logo={logo} />
         )}
         {!!links?.length && (
           <ul className="w-full flex items-center justify-start gap-4 h-6 mt-0.5 align-baseline">

@@ -1,12 +1,16 @@
 'use client';
 
+import { ContentfulImage as ContentfulImageType } from '@/lib/api';
+import MotionContentfulImage from '@/ui/ContentfulImage';
+
 interface Props {
   title: string;
+  logo?: ContentfulImageType;
 }
 
-const CodeModalHeader: React.FC<Props> = ({ title }) => {
+const CodeModalHeader: React.FC<Props> = ({ title, logo }) => {
   return (
-    <h1
+    <div
       onClick={() => {
         window.scrollTo({
           top: 0,
@@ -14,10 +18,21 @@ const CodeModalHeader: React.FC<Props> = ({ title }) => {
         });
         window.location.reload();
       }}
-      className="cursor-pointer hover:text-sky-400 font-bold text-4xl text-gray-600 whitespace-nowrap mr-6"
+      className="flex cursor-pointer group mr-6 ml-2 flex-shrink-0"
     >
-      {title}
-    </h1>
+      {logo && (
+        <MotionContentfulImage
+          src={logo.url}
+          height={64}
+          width={64}
+          alt={logo.title}
+          className="rounded-md w-auto h-10 mr-4"
+        />
+      )}
+      <h1 className="group-hover:text-sky-400 font-bold text-4xl text-gray-600 whitespace-nowrap">
+        {title}
+      </h1>
+    </div>
   );
 };
 
