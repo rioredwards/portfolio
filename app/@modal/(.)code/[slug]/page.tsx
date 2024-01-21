@@ -12,7 +12,7 @@ export default async function CodeModal({
   const codeCardsContent = await getCodeDetailContent(draftModeIsEnabled, codeCardSlug);
 
   return (
-    <Modal projectTitle={codeCardsContent.title} projectLinks={codeCardsContent.links}>
+    <Modal>
       <CodeDetail content={codeCardsContent} renderContext="modal" />
     </Modal>
   );
