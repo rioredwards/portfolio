@@ -44,6 +44,9 @@ export function Modal({ children, projectTitle, projectLinks }: Props) {
     router.back();
   }
 
+  const modalRootEl = document.getElementById('modal-root');
+  if (!modalRootEl) return null;
+
   return createPortal(
     <dialog ref={dialogRef} className={cssStyles.modal + ' shadow-lg'} onClose={onDismiss}>
       <div>
@@ -56,11 +59,10 @@ export function Modal({ children, projectTitle, projectLinks }: Props) {
             <ExIcon className="h-6 w-6" />
           </button>
         </div>
-        <CodeModalHeader title={projectTitle} links={projectLinks} />
         {children}
         <div className="h-4 bg-white" />
       </div>
     </dialog>,
-    document.getElementById('modal-root')!
+    modalRootEl
   );
 }
