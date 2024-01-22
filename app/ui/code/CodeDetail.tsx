@@ -5,8 +5,6 @@ import clsx from 'clsx';
 import { Markdown } from '@/ui/code/Markdown';
 import CodeDetailSection from '@/ui/code/CodeDetailSection';
 import CodeModalHeader from '../../@modal/(.)code/[slug]/CodeModalHeader';
-import Link from 'next/link';
-import ExternalLinkIcon from '../icons/ExternalLinkIcon';
 import CodeDetailPageHeader from '@/code/[slug]/CodeDetailPageHeader';
 import Chip from '../Chip';
 
@@ -57,7 +55,7 @@ const CodeDetail: React.FC<Props> = ({
           </ul>
         )}
         {!!tags?.length && (
-          <ul className="col-span-2 row-start-2 w-full flex items-center justify-start gap-1 h-6 mt-0.5 ml-2 align-baseline">
+          <ul className="col-span-2 row-start-2 w-full flex items-center justify-start gap-1 h-6 mt-2 ml-2 align-baseline">
             {tags.map((tag, idx) => (
               <li key={idx}>{<Chip style="tag" text={`#${tag}`} size="small" />}</li>
             ))}

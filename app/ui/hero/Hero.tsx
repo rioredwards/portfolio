@@ -1,7 +1,7 @@
 'use client';
 import { MotionContentfulImage } from '@/ui/ContentfulImage';
 import { MotionGradientText } from '@/ui/GradientText';
-import { HeroContent } from '@/lib/api';
+import { HeroContent } from '@/lib/dataTypes';
 import { motion, AnimatePresence } from 'framer-motion';
 
 interface HeroProps extends HeroContent {}
