@@ -106,7 +106,13 @@ const CodeDetail: React.FC<Props> = ({
         )}
         {preview && (
           <CodeDetailSection name={'Preview'}>
-            <MotionContentfulImage src={preview.url} height={220} width={730} alt={preview.title} />
+            <MotionContentfulImage
+              src={preview.url}
+              height={220}
+              width={730}
+              alt={preview.title}
+              className="rounded-md"
+            />
           </CodeDetailSection>
         )}
         {usage && (

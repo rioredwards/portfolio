@@ -14,7 +14,9 @@ const EmbeddedImage = ({ id, assets }: { id: string; assets: Asset[] | undefined
   const image = assets?.find((asset) => asset.sys.id === id);
 
   if (image?.url) {
-    return <Image src={image.url} alt={image.title} width={800} height={800} />;
+    return (
+      <Image src={image.url} alt={image.title} width={800} height={800} className="rounded-md" />
+    );
   }
 
   return null;
