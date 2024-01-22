@@ -8,6 +8,7 @@ import CodeModalHeader from '../../@modal/(.)code/[slug]/CodeModalHeader';
 import Link from 'next/link';
 import ExternalLinkIcon from '../icons/ExternalLinkIcon';
 import CodeDetailPageHeader from '@/code/[slug]/CodeDetailPageHeader';
+import Chip from '../Chip';
 
 interface Props {
   content: CodeDetailType;
@@ -50,14 +51,7 @@ const CodeDetail: React.FC<Props> = ({
           <ul className="col-span-1 flex items-center justify-start gap-4 h-6 mt-0.5 align-baseline">
             {links.map((link, idx) => (
               <li key={idx}>
-                <Link
-                  href={link.url}
-                  target="_blank"
-                  className="hover:text-white hover:bg-sky-400 text-sky-600 border border-sky-300 rounded-full min-w-[3rem] whitespace-nowrap py-1 px-2 flex items-center justify-center gap-1 cursor-pointer"
-                >
-                  {link.displayText}
-                  <ExternalLinkIcon className="h-4 w-4" />
-                </Link>
+                <Chip style="link" text={link.displayText} href={link.url} size="medium" />
               </li>
             ))}
           </ul>
@@ -65,7 +59,7 @@ const CodeDetail: React.FC<Props> = ({
         {!!tags?.length && (
           <ul className="col-span-2 row-start-2 w-full flex items-center justify-start gap-1 h-6 mt-0.5 ml-2 align-baseline">
             {tags.map((tag, idx) => (
-              <li key={idx}>{`#${tag}`}</li>
+              <li key={idx}>{<Chip style="tag" text={`#${tag}`} size="small" />}</li>
             ))}
           </ul>
         )}
