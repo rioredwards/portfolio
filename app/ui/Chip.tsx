@@ -20,7 +20,7 @@ const Chip: React.FC<Props> = ({ text, style, size, href }) => {
   });
 
   if (style === 'tag') {
-    const tagClasses = clsx('hover:bg-gray-400 bg-gray-500 text-white');
+    const tagClasses = clsx('hover:bg-gray-500 bg-gray-400 text-white');
 
     return <span className={clsx(baseClasses, sizeClasses, tagClasses)}>{text}</span>;
   }
