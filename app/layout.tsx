@@ -4,6 +4,7 @@ import Footer from '@/ui/Footer';
 import { Metadata } from 'next';
 import { Inter as interFont } from 'next/font/google';
 import UnderConstruction from '@/ui/UnderConstruction';
+import ContactForm from './ui/contact/ContactForm';
 
 export const metadata: Metadata = {
   title: `Rio Edwards | Web Developer`,
@@ -25,6 +26,7 @@ export default function RootLayout(props: { children: React.ReactNode; modal: Re
         <Header />
         {props.modal}
         <main>{props.children}</main>
+        <ContactForm />
         <UnderConstruction />
         <Footer />
       </body>
