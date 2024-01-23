@@ -1,4 +1,7 @@
+import Image from 'next/image';
 import MotionGradientText from '../GradientText';
+import Link from 'next/link';
+
 const ContactForm: React.FC = () => {
   return (
     <section>
@@ -14,10 +17,44 @@ const ContactForm: React.FC = () => {
           Say Hi
         </MotionGradientText>
       </div>
-      <form className="container px-4 mx-auto max-w-[50rem]">
-        <div className="flex flex-col">
+      <form className="container px-4 mx-auto max-w-[60rem] grid grid-cols-[auto_1fr_1fr] grid-rows-[repeat(3,_auto)]">
+        <div className="col-start-1 row-span-2 self-end max-w-min flex flex-col items-center justify-between gap-8 mb-6 mr-16">
+          <Link
+            className="w-10 self-center"
+            href="mailto:rioredwards@gmail.com"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <Image src="/gmail_icon.png" width={64} height={64} alt="Gmail Icon" />
+          </Link>
+          <Link
+            className="w-10 self-center"
+            href="https://www.linkedin.com/in/rio-edwards/"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <Image src="/linkedIn_icon.png" width={64} height={64} alt="Gmail Icon" />
+          </Link>
+          <Link
+            className="w-10 self-center"
+            href="https://github.com/rioredwards/"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <Image src="/github_icon.svg" width={64} height={64} alt="Gmail Icon" />
+          </Link>
+          <Link
+            className="w-10 self-center"
+            href="https://www.youtube.com/channel/UCZdVYjS_Os_4e7DZAZSRxBQ"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <Image src="/youtube_icon.svg" width={64} height={64} alt="Gmail Icon" />
+          </Link>
+        </div>
+        <div className="col-start-2 flex flex-col mr-4">
           <label htmlFor="name" className="text-gray-600 text-xl font-bold mb-2">
-            Name
+            Full Name
           </label>
           <input
             type="text"
@@ -26,7 +63,7 @@ const ContactForm: React.FC = () => {
             className="border border-gray-300 rounded-md p-2 mb-4"
           />
         </div>
-        <div className="flex flex-col">
+        <div className="col-start-3 flex flex-col">
           <label htmlFor="email" className="text-gray-600 text-xl font-bold mb-2">
             Email
           </label>
@@ -37,7 +74,7 @@ const ContactForm: React.FC = () => {
             className="border border-gray-300 rounded-md p-2 mb-4"
           />
         </div>
-        <div className="flex flex-col">
+        <div className="col-start-2 col-span-2 flex flex-col">
           <label htmlFor="message" className="text-gray-600 text-xl font-bold mb-2">
             Message
           </label>
@@ -50,9 +87,9 @@ const ContactForm: React.FC = () => {
         </div>
         <button
           type="submit"
-          className="bg-gradient-to-r from-yellow-400 via-red-500 to-pink-500 hover:from-pink-500 hover:via-red-500 hover:to-yellow-400 text-white font-bold py-2 px-4 rounded-md"
+          className="col-start-3 row-start-3 w-32 place-self-end bg-gradient-to-r from-yellow-400 via-red-500 to-pink-500 hover:from-pink-500 hover:via-red-500 hover:to-yellow-400 text-white font-bold py-2 px-4 rounded-md"
         >
-          Submit
+          Send
         </button>
       </form>
     </section>
