@@ -26,7 +26,6 @@ export default function RootLayout(props: { children: React.ReactNode; modal: Re
         <Header />
         {props.modal}
         <main>{props.children}</main>
-        <ContactForm />
         <UnderConstruction />
         <Footer />
       </body>

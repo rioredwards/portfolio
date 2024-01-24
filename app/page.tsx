@@ -2,6 +2,7 @@ import { draftMode } from 'next/headers';
 import { getHeroContent } from '@/lib/api';
 import Hero from '@/ui/hero/Hero';
 import CodeCardsSection from './ui/code/CodeCardsSection';
+import ContactForm from './ui/contact/ContactForm';
 
 export default async function Page() {
   const { isEnabled: draftModeIsEnabled } = draftMode();
@@ -18,6 +19,7 @@ export default async function Page() {
           <CodeCardsSection />
         </section>
       </div>
+      <ContactForm />
     </div>
   );
 }

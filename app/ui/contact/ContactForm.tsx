@@ -4,7 +4,7 @@ import Link from 'next/link';
 
 const ContactForm: React.FC = () => {
   return (
-    <section>
+    <section className="w-full">
       <div className="flex justify-center items-center">
         <MotionGradientText
           elementType="h1"
