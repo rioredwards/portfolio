@@ -58,9 +58,6 @@ export async function handleEmailSubmit(_: State, formData: FormData) {
     };
   }
 
-  // Wait 1/2 second to simulate network latency
-  await new Promise((resolve) => setTimeout(resolve, 500));
-
   return {
     success: true,
     message: 'Email sent successfully.',

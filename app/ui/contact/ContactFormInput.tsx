@@ -1,3 +1,4 @@
+import clsx from 'clsx';
 import { useFormStatus } from 'react-dom';
 
 interface ContactFormInputProps {
@@ -7,7 +8,7 @@ interface ContactFormInputProps {
   errorMessages?: string[];
   placeholder?: string;
   value: string;
-  setInput: (value: string) => void;
+  setInput: Function;
 }
 
 const ContactFormInput: React.FC<ContactFormInputProps> = ({
@@ -21,6 +22,11 @@ const ContactFormInput: React.FC<ContactFormInputProps> = ({
 }) => {
   const { pending } = useFormStatus();
 
+  const cssClasses = clsx(
+    { 'disabled pointer-events-none bg-gray-100': pending },
+    'border border-gray-300 rounded-lg p-2'
+  );
+
   return (
     <>
       <label htmlFor={name} className="text-gray-600 text-xl font-bold mb-2">
@@ -31,7 +37,7 @@ const ContactFormInput: React.FC<ContactFormInputProps> = ({
           name={name}
           id={name}
           placeholder={placeholder}
-          className="border border-gray-300 rounded-md p-2"
+          className={cssClasses}
           rows={5}
           value={value}
           onChange={(e) => setInput(e.target.value)}
@@ -42,7 +48,7 @@ const ContactFormInput: React.FC<ContactFormInputProps> = ({
           name={name}
           id={name}
           placeholder={placeholder}
-          className="border border-gray-300 rounded-md p-2"
+          className={cssClasses}
           value={value}
           onChange={(e) => setInput(e.target.value)}
         />

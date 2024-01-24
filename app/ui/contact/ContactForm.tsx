@@ -21,7 +21,7 @@ const ContactForm: React.FC = () => {
       setEmailInput('');
       setMessageInput('');
     }
-  }, [state?.success]);
+  }, [state]);
 
   return (
     <section className="w-full">
