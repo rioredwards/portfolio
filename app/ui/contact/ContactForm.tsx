@@ -1,14 +1,27 @@
 'use client';
 
-import Image from 'next/image';
 import MotionGradientText from '../GradientText';
-import Link from 'next/link';
 import { useFormState } from 'react-dom';
-import { handleEmailSubmit } from '@/lib/actions';
+import { State, handleEmailSubmit } from '@/lib/actions';
+import { SubmitButton } from './SubmitButton';
+import SocialIcons from './SocialIcons';
+import ContactFormInput from './ContactFormInput';
+import { useEffect, useState } from 'react';
 
 const ContactForm: React.FC = () => {
-  const initialState = { message: null, errors: {} };
+  const initialState: State = {};
   const [state, dispatch] = useFormState(handleEmailSubmit, initialState);
+  const [nameInput, setNameInput] = useState('');
+  const [emailInput, setEmailInput] = useState('');
+  const [messageInput, setMessageInput] = useState('');
+
+  useEffect(() => {
+    if (state.success) {
+      setNameInput('');
+      setEmailInput('');
+      setMessageInput('');
+    }
+  }, [state?.success]);
 
   return (
     <section className="w-full">
@@ -29,99 +42,42 @@ const ContactForm: React.FC = () => {
         action={dispatch}
       >
         <div className="col-start-1 row-span-2 self-end max-w-min flex flex-col items-center justify-between gap-8 mb-6 mr-16">
-          <Link
-            className="w-10 self-center"
-            href="mailto:rioredwards@gmail.com"
-            target="_blank"
-            rel="noreferrer"
-          >
-            <Image src="/gmail_icon.png" width={64} height={64} alt="Gmail Icon" />
-          </Link>
-          <Link
-            className="w-10 self-center"
-            href="https://www.linkedin.com/in/rio-edwards/"
-            target="_blank"
-            rel="noreferrer"
-          >
-            <Image src="/linkedIn_icon.png" width={64} height={64} alt="Gmail Icon" />
-          </Link>
-          <Link
-            className="w-10 self-center"
-            href="https://github.com/rioredwards/"
-            target="_blank"
-            rel="noreferrer"
-          >
-            <Image src="/github_icon.svg" width={64} height={64} alt="Gmail Icon" />
-          </Link>
-          <Link
-            className="w-10 self-center"
-            href="https://www.youtube.com/channel/UCZdVYjS_Os_4e7DZAZSRxBQ"
-            target="_blank"
-            rel="noreferrer"
-          >
-            <Image src="/youtube_icon.svg" width={64} height={64} alt="Gmail Icon" />
-          </Link>
+          <SocialIcons />
         </div>
         <div className="col-start-2 flex flex-col mr-4">
-          <label htmlFor="name" className="text-gray-600 text-xl font-bold mb-2">
-            Full Name
-          </label>
-          <input
-            type="text"
+          <ContactFormInput
+            displayText="Full Name"
             name="name"
-            id="name"
-            className="border border-gray-300 rounded-md p-2 mb-4"
+            type="text"
+            errorMessages={state.errors?.name}
+            placeholder="Appa Suki"
+            value={nameInput}
+            setInput={setNameInput}
           />
-          {state.errors?.name ? (
-            <div id="name-error" aria-live="polite" className="mt-2 text-sm text-red-500">
-              {state.errors.name.map((error: string) => (
-                <p key={error}>{error}</p>
-              ))}
-            </div>
-          ) : null}
         </div>
         <div className="col-start-3 flex flex-col">
-          <label htmlFor="email" className="text-gray-600 text-xl font-bold mb-2">
-            Email
-          </label>
-          <input
-            type="email"
+          <ContactFormInput
+            displayText="Email"
             name="email"
-            id="email"
-            className="border border-gray-300 rounded-md p-2 mb-4"
+            type="email"
+            errorMessages={state.errors?.email}
+            placeholder="appasuki@avatar.com"
+            value={emailInput}
+            setInput={setEmailInput}
           />
         </div>
-        {state.errors?.email ? (
-          <div id="email-error" aria-live="polite" className="mt-2 text-sm text-red-500">
-            {state.errors.email.map((error: string) => (
-              <p key={error}>{error}</p>
-            ))}
-          </div>
-        ) : null}
         <div className="col-start-2 col-span-2 flex flex-col">
-          <label htmlFor="message" className="text-gray-600 text-xl font-bold mb-2">
-            Message
-          </label>
-          <textarea
+          <ContactFormInput
+            displayText="Message"
             name="message"
-            id="message"
-            className="border border-gray-300 rounded-md p-2 mb-4"
-            rows={5}
+            type="textarea"
+            errorMessages={state.errors?.message}
+            placeholder="Hi Rio..."
+            value={messageInput}
+            setInput={setMessageInput}
           />
-          {state.errors?.message ? (
-            <div id="message-error" aria-live="polite" className="mt-2 text-sm text-red-500">
-              {state.errors.message.map((error: string) => (
-                <p key={error}>{error}</p>
-              ))}
-            </div>
-          ) : null}
         </div>
-        <button
-          type="submit"
-          className="col-start-3 row-start-3 w-32 place-self-end bg-gradient-to-r from-yellow-400 via-red-500 to-pink-500 hover:from-pink-500 hover:via-red-500 hover:to-yellow-400 text-white font-bold py-2 px-4 rounded-md"
-        >
-          Send
-        </button>
+        <SubmitButton showSuccess={state.success} />
       </form>
     </section>
   );

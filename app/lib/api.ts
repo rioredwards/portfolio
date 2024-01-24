@@ -1,3 +1,5 @@
+'use server';
+
 import { CodeBlock, CodeCard, CodeDetail, HeroContent } from './dataTypes';
 import {
   CODE_BLOCK_GRAPHQL_FIELDS,
