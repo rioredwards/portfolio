@@ -1,8 +1,15 @@
+'use client';
+
 import Image from 'next/image';
 import MotionGradientText from '../GradientText';
 import Link from 'next/link';
+import { useFormState } from 'react-dom';
+import { handleEmailSubmit } from '@/lib/actions';
 
 const ContactForm: React.FC = () => {
+  const initialState = { message: null, errors: {} };
+  const [state, dispatch] = useFormState(handleEmailSubmit, initialState);
+
   return (
     <section className="w-full">
       <div className="flex justify-center items-center">
@@ -17,7 +24,10 @@ const ContactForm: React.FC = () => {
           Say Hi
         </MotionGradientText>
       </div>
-      <form className="container px-4 mx-auto max-w-[60rem] grid grid-cols-[auto_1fr_1fr] grid-rows-[repeat(3,_auto)]">
+      <form
+        className="container px-4 mx-auto max-w-[60rem] grid grid-cols-[auto_1fr_1fr] grid-rows-[repeat(3,_auto)]"
+        action={dispatch}
+      >
         <div className="col-start-1 row-span-2 self-end max-w-min flex flex-col items-center justify-between gap-8 mb-6 mr-16">
           <Link
             className="w-10 self-center"
@@ -62,6 +72,13 @@ const ContactForm: React.FC = () => {
             id="name"
             className="border border-gray-300 rounded-md p-2 mb-4"
           />
+          {state.errors?.name ? (
+            <div id="name-error" aria-live="polite" className="mt-2 text-sm text-red-500">
+              {state.errors.name.map((error: string) => (
+                <p key={error}>{error}</p>
+              ))}
+            </div>
+          ) : null}
         </div>
         <div className="col-start-3 flex flex-col">
           <label htmlFor="email" className="text-gray-600 text-xl font-bold mb-2">
@@ -74,6 +91,13 @@ const ContactForm: React.FC = () => {
             className="border border-gray-300 rounded-md p-2 mb-4"
           />
         </div>
+        {state.errors?.email ? (
+          <div id="email-error" aria-live="polite" className="mt-2 text-sm text-red-500">
+            {state.errors.email.map((error: string) => (
+              <p key={error}>{error}</p>
+            ))}
+          </div>
+        ) : null}
         <div className="col-start-2 col-span-2 flex flex-col">
           <label htmlFor="message" className="text-gray-600 text-xl font-bold mb-2">
             Message
@@ -84,6 +108,13 @@ const ContactForm: React.FC = () => {
             className="border border-gray-300 rounded-md p-2 mb-4"
             rows={5}
           />
+          {state.errors?.message ? (
+            <div id="message-error" aria-live="polite" className="mt-2 text-sm text-red-500">
+              {state.errors.message.map((error: string) => (
+                <p key={error}>{error}</p>
+              ))}
+            </div>
+          ) : null}
         </div>
         <button
           type="submit"

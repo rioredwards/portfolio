@@ -88,6 +88,12 @@ interface CodeBlock {
   language: string;
 }
 
+interface EmailProps {
+  name: string;
+  email: string;
+  message: string;
+}
+
 export type {
   Asset,
   AssetLink,
@@ -101,4 +107,5 @@ export type {
   CodeCard,
   CodeDetail,
   CodeBlock,
+  EmailProps,
 };
