@@ -34,7 +34,7 @@ const ContactForm: React.FC = () => {
           offset={{ x: 0, y: -1 }}
           shadowColor="#245B5C40"
         >
-          Say Hi
+          SAY HI
         </MotionGradientText>
       </div>
       <form
@@ -76,6 +76,11 @@ const ContactForm: React.FC = () => {
             value={messageInput}
             setInput={setMessageInput}
           />
+        </div>
+        <div className="col-start-2 text-xl flex items-center">
+          <a href="Rio_Edwards-Resume.pdf" target="_blank">
+            My Resume
+          </a>
         </div>
         <SubmitButton showSuccess={state.success} />
       </form>
