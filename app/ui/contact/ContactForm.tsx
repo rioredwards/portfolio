@@ -24,7 +24,7 @@ const ContactForm: React.FC = () => {
   }, [state]);
 
   return (
-    <section className="w-full">
+    <>
       <div className="flex justify-center items-center">
         <MotionGradientText
           elementType="h1"
@@ -84,7 +84,7 @@ const ContactForm: React.FC = () => {
         </div>
         <SubmitButton showSuccess={state.success} />
       </form>
-    </section>
+    </>
   );
 };
 
