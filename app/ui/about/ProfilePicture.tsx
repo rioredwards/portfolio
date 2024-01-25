@@ -8,7 +8,7 @@ const ProfilePicture: React.FC = () => {
         alt="Rio Edwards Profile Picture"
         height={200}
         width={200}
-        className="rounded-full h-[96%] w-[96%] object-cover"
+        className="rounded-full h-[94%] w-[94%] object-cover"
       />
     </div>
   );

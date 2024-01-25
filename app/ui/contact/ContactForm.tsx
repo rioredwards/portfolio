@@ -30,7 +30,7 @@ const ContactForm: React.FC = () => {
           elementType="h1"
           direction="to bottom right"
           colors={['#FED237', '#FEAD2A']}
-          className="mt-12 text-4xl md:text-5xl mb-8 md:mb-12 font-black leading-loose"
+          className="mt-12 text-4xl md:text-5xl mb-8 md:mb-12 font-black leading-loose drop-shadow-md"
           offset={{ x: 0, y: -1 }}
           shadowColor="#245B5C40"
         >

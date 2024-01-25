@@ -69,7 +69,7 @@ const Hero: React.FC<HeroProps> = ({ title, secondaryText, avatar }) => {
           elementType="h1"
           direction="to bottom right"
           colors={['#4CEA82', '#6D88EE']}
-          className="opacity-0 mt-12 text-4xl md:text-5xl mb-8 md:mb-12 font-black leading-loose"
+          className="opacity-0 mt-12 text-4xl md:text-5xl mb-8 md:mb-12 font-black leading-loose drop-shadow-md"
           offset={{ x: 0, y: -1 }}
           shadowColor="#245B5C40"
         >
