@@ -16,7 +16,7 @@ const About: React.FC = () => {
           ABOUT
         </MotionGradientText>
       </div>
-      <div className="flex items-start justify-center gap-12 rounded-4xl bg-gray-200 p-8 drop-shadow-md">
+      <div className="flex items-start justify-center gap-12 rounded-4xl bg-gray-200 p-12 drop-shadow-md">
         <ProfilePicture />
         <div className="flex flex-col items-start justify-center gap-6 max-w-xl mt-8">
           <h3 className="text-4xl text-gray-500">Hello 👋</h3>

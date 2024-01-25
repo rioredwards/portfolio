@@ -4,6 +4,7 @@ import Hero from '@/ui/hero/Hero';
 import CodeCardsSection from './ui/code/CodeCardsSection';
 import ContactForm from './ui/contact/ContactForm';
 import About from './ui/about/About';
+import Art from './ui/art/Art';
 
 export default async function Page() {
   const { isEnabled: draftModeIsEnabled } = draftMode();
@@ -20,6 +21,9 @@ export default async function Page() {
           <CodeCardsSection />
         </section>
       </div>
+      <section className="w-full py-6 px-0 mb-28 flex flex-col items-center justify-start" id="art">
+        <Art />
+      </section>
       <section
         className="w-full py-6 px-0 mb-28 flex flex-col items-center justify-start"
         id="about"
