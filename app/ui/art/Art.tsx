@@ -16,9 +16,18 @@ const Art: React.FC = () => {
         ART
       </MotionGradientText>
       <div className={clsx('w-full h-[30rem] flex items-start justify-center gap-8')}>
-        <AnimatedGridColumn initialExpandedBox={3} columnNum={1} />
-        <AnimatedGridColumn initialExpandedBox={2} columnNum={2} />
-        <AnimatedGridColumn initialExpandedBox={1} columnNum={3} />
+        <AnimatedGridColumn
+          imgUrls={['/Temp/1.png', '/Temp/2.png', '/Temp/3.png']}
+          initialExpandedBox={3}
+        />
+        <AnimatedGridColumn
+          imgUrls={['/Temp/4.png', '/Temp/5.png', '/Temp/6.png']}
+          initialExpandedBox={2}
+        />
+        <AnimatedGridColumn
+          imgUrls={['/Temp/7.png', '/Temp/8.png', '/Temp/9.png']}
+          initialExpandedBox={1}
+        />
       </div>
     </>
   );

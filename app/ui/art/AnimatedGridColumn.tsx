@@ -7,7 +7,7 @@ import ArtCardTitle from './ArtCardTitle';
 
 interface Props {
   initialExpandedBox: number;
-  columnNum: number;
+  imgUrls: string[];
 }
 
 const Spring = {
@@ -29,8 +29,10 @@ const artCardContainerVariants: Variants = {
   },
 };
 
-const AnimatedGridColumn: React.FC<Props> = ({ initialExpandedBox, columnNum }) => {
+const AnimatedGridColumn: React.FC<Props> = ({ initialExpandedBox, imgUrls }) => {
   const [expandedBox, setExpandedBox] = useState<number | null>(initialExpandedBox);
+
+  if (imgUrls.length !== 3) throw new Error('imgUrls must be length 3');
 
   const gridBoxCSSClasses = 'relative w-full bg-gray-200 rounded-2xl overflow-hidden';
 
@@ -48,7 +50,7 @@ const AnimatedGridColumn: React.FC<Props> = ({ initialExpandedBox, columnNum }) 
           initial={false}
           animate={expandedBox === 1 ? 'isHover' : 'isNotHover'}
           variants={artCardContainerVariants}
-          src="/Temp/2.png"
+          src={imgUrls[0]}
           alt="img"
           className="w-full object-cover"
         />
@@ -59,7 +61,7 @@ const AnimatedGridColumn: React.FC<Props> = ({ initialExpandedBox, columnNum }) 
           initial={false}
           animate={expandedBox === 2 ? 'isHover' : 'isNotHover'}
           variants={artCardContainerVariants}
-          src="/Temp/1.png"
+          src={imgUrls[1]}
           alt="img"
           className="w-full object-cover"
         />
@@ -70,7 +72,7 @@ const AnimatedGridColumn: React.FC<Props> = ({ initialExpandedBox, columnNum }) 
           initial={false}
           animate={expandedBox === 3 ? 'isHover' : 'isNotHover'}
           variants={artCardContainerVariants}
-          src="/Temp/8.png"
+          src={imgUrls[2]}
           alt="img"
           className="w-full object-cover"
         />
