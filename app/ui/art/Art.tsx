@@ -1,10 +1,8 @@
 import MotionGradientText from '../GradientText';
 import clsx from 'clsx';
-import cssStyles from '@/ui/art/Art.module.css';
+import AnimatedGridColumn from './AnimatedGridColumn';
 
 const Art: React.FC = () => {
-  const gridBoxCSSClasses = 'bg-gray-200 rounded-2xl w-full h-full';
-
   return (
     <>
       <MotionGradientText
@@ -17,15 +15,10 @@ const Art: React.FC = () => {
       >
         ART
       </MotionGradientText>
-      <div
-        className={clsx(
-          'w-full max-w-[65rem] h-[30rem] grid grid-cols-3 grid-rows-8 gap-y-4 gap-x-4',
-          cssStyles.gridContainer
-        )}
-      >
-        <div className={clsx(gridBoxCSSClasses, cssStyles.gridBox1)} />
-        <div className={clsx(gridBoxCSSClasses, cssStyles.gridBox2)} />
-        <div className={clsx(gridBoxCSSClasses, cssStyles.gridBox3)} />
+      <div className={clsx('w-full max-w-[65rem] h-[30rem] flex items-start justify-center gap-4')}>
+        <AnimatedGridColumn initialExpandedBox={3} />
+        <AnimatedGridColumn initialExpandedBox={2} />
+        <AnimatedGridColumn initialExpandedBox={1} />
       </div>
     </>
   );
