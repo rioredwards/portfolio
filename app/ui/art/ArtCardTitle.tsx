@@ -13,13 +13,17 @@ const spring = {
   stiffness: 100,
 };
 
-const ArtCardTitleVariants: Variants = {
+const ArtCardTitleContainerVariants: Variants = {
   isExpanded: {
-    y: -140,
+    y: -146,
+    height: 56,
+    paddingBottom: 16,
     transition: spring,
   },
   isNotExpanded: {
-    y: -96,
+    y: -156,
+    height: 130,
+    paddingBottom: 60,
     transition: spring,
   },
 };
@@ -29,8 +33,11 @@ const ArtCardTitle: React.FC<Props> = ({ isExpanded, title, width }) => {
     <motion.div
       initial={false}
       animate={isExpanded ? 'isExpanded' : 'isNotExpanded'}
-      variants={ArtCardTitleVariants}
-      className={clsx(width, 'absolute -translate-y-40 z-10 flex items-center justify-center')}
+      variants={ArtCardTitleContainerVariants}
+      className={clsx(
+        width,
+        'absolute z-10 flex items-end justify-center bg-gradient-to-b from-transparent to-black/75'
+      )}
     >
       <motion.h3 className="text-3xl font-black text-white">{title}</motion.h3>
     </motion.div>

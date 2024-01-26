@@ -32,7 +32,7 @@ const artCardContainerVariants: Variants = {
 const AnimatedGridColumn: React.FC<Props> = ({ initialExpandedBox, columnNum }) => {
   const [expandedBox, setExpandedBox] = useState<number | null>(initialExpandedBox);
 
-  const gridBoxCSSClasses = 'inset-0 bg-gray-200 rounded-2xl overflow-hidden';
+  const gridBoxCSSClasses = 'relative w-full bg-gray-200 rounded-2xl overflow-hidden';
 
   const width = 'w-80';
 
@@ -48,7 +48,7 @@ const AnimatedGridColumn: React.FC<Props> = ({ initialExpandedBox, columnNum }) 
           initial={false}
           animate={expandedBox === 1 ? 'isHover' : 'isNotHover'}
           variants={artCardContainerVariants}
-          src="/Temp/1.png"
+          src="/Temp/2.png"
           alt="img"
           className="w-full object-cover"
         />
@@ -70,7 +70,7 @@ const AnimatedGridColumn: React.FC<Props> = ({ initialExpandedBox, columnNum }) 
           initial={false}
           animate={expandedBox === 3 ? 'isHover' : 'isNotHover'}
           variants={artCardContainerVariants}
-          src="/Temp/1.png"
+          src="/Temp/8.png"
           alt="img"
           className="w-full object-cover"
         />
