@@ -3,32 +3,38 @@
 import { useState } from 'react';
 import clsx from 'clsx';
 import { Variants, motion } from 'framer-motion';
-import Image from 'next/image';
+import ArtCardTitle from './ArtCardTitle';
 
 interface Props {
   initialExpandedBox: number;
   columnNum: number;
 }
 
+const Spring = {
+  type: 'spring',
+  damping: 20,
+  stiffness: 100,
+};
+
 const artCardContainerVariants: Variants = {
   isHover: {
     height: [null, 300],
-    transition: {
-      duration: 0.3,
-    },
+    filter: [null, 'none'],
+    transition: Spring,
   },
   isNotHover: {
     height: [null, 170],
-    transition: {
-      duration: 0.3,
-    },
+    filter: [null, 'blur(4px) opacity(0.8)'],
+    transition: Spring,
   },
 };
 
 const AnimatedGridColumn: React.FC<Props> = ({ initialExpandedBox, columnNum }) => {
   const [expandedBox, setExpandedBox] = useState<number | null>(initialExpandedBox);
 
-  const gridBoxCSSClasses = 'bg-gray-200 rounded-2xl w-full overflow-hidden';
+  const gridBoxCSSClasses = 'inset-0 bg-gray-200 rounded-2xl overflow-hidden';
+
+  const width = 'w-80';
 
   const onHoverStart = (boxId: number) => {
     if (expandedBox === boxId) return;
@@ -36,7 +42,7 @@ const AnimatedGridColumn: React.FC<Props> = ({ initialExpandedBox, columnNum }) 
   };
 
   return (
-    <div className="h-full w-full flex flex-col items-center justify-center gap-4">
+    <div className={clsx(width, 'h-full flex flex-col items-center justify-center gap-4')}>
       <motion.div layout onHoverStart={() => onHoverStart(1)} className={clsx(gridBoxCSSClasses)}>
         <motion.img
           initial={false}
@@ -46,6 +52,7 @@ const AnimatedGridColumn: React.FC<Props> = ({ initialExpandedBox, columnNum }) 
           alt="img"
           className="w-full object-cover"
         />
+        <ArtCardTitle title="Title" width={width} isExpanded={expandedBox === 1} />
       </motion.div>
       <motion.div layout onHoverStart={() => onHoverStart(2)} className={clsx(gridBoxCSSClasses)}>
         <motion.img
@@ -56,6 +63,7 @@ const AnimatedGridColumn: React.FC<Props> = ({ initialExpandedBox, columnNum }) 
           alt="img"
           className="w-full object-cover"
         />
+        <ArtCardTitle title="Title" width={width} isExpanded={expandedBox === 2} />
       </motion.div>
       <motion.div layout onHoverStart={() => onHoverStart(3)} className={clsx(gridBoxCSSClasses)}>
         <motion.img
@@ -66,6 +74,7 @@ const AnimatedGridColumn: React.FC<Props> = ({ initialExpandedBox, columnNum }) 
           alt="img"
           className="w-full object-cover"
         />
+        <ArtCardTitle title="Title" width={width} isExpanded={expandedBox === 3} />
       </motion.div>
     </div>
   );
