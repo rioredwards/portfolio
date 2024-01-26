@@ -27,33 +27,21 @@ const AnimatedGridColumn: React.FC<Props> = ({ initialExpandedBox, columnNum }) 
         onHoverStart={() => onHoverStart(1)}
         className={clsx({ 'flex-grow': expandedBox === 1 }, gridBoxCSSClasses)}
       >
-        <motion.img
-          src={`/Temp/${columnNum * 1}.png`}
-          alt="img"
-          className="w-full h-full object-cover"
-        />
+        <motion.img src="/Temp/1.png" alt="img" className="w-full h-full" />
       </motion.div>
       <motion.div
         layout
         onHoverStart={() => onHoverStart(2)}
         className={clsx({ 'flex-grow': expandedBox === 2 }, gridBoxCSSClasses)}
       >
-        <motion.img
-          src={`/Temp/${columnNum * 2}.png`}
-          alt="img"
-          className="w-full h-full object-cover"
-        />
+        <motion.img src="/Temp/1.png" alt="img" className="w-full h-full" />
       </motion.div>
       <motion.div
         layout
         onHoverStart={() => onHoverStart(3)}
         className={clsx({ 'flex-grow': expandedBox === 3 }, gridBoxCSSClasses)}
       >
-        <motion.img
-          src={`/Temp/${columnNum * 3}.png`}
-          alt="img"
-          className="w-full h-full object-cover"
-        />
+        <motion.img src="/Temp/1.png" alt="img" className="w-full h-full" />
       </motion.div>
     </div>
   );
