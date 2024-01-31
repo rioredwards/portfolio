@@ -60,7 +60,7 @@ const ArtCardTitle: React.FC<Props> = ({ isExpanded, title, width }) => {
         variants={subTextVariants}
         initial={false}
         layout
-        className="mx-4 text-md font-black text-white"
+        className="mx-4 text-md font-semibold text-white"
       >
         Decipherment shores of the cosmic ocean take root
       </motion.span>
