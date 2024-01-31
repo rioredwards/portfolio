@@ -2,6 +2,8 @@ import MotionGradientText from '../GradientText';
 import clsx from 'clsx';
 import AnimatedGridColumn from './AnimatedGridColumn';
 
+// Hello, I'm a comment
+
 const Art: React.FC = () => {
   return (
     <>
