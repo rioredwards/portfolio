@@ -1,12 +1,12 @@
-import { CodeCard } from '@/lib/api';
+import { CodeCard as CodeCardType } from '@/lib/dataTypes';
 import { MotionSVGFromUrl } from '@/ui/code/SVGFromUrl';
 import { ForwardRefRenderFunction, forwardRef } from 'react';
 import { motion } from 'framer-motion';
 
-export const CodeCardIcon: ForwardRefRenderFunction<HTMLDivElement, CodeCard['codeCardIcon']> = (
-  props,
-  ref
-) => {
+export const CodeCardIcon: ForwardRefRenderFunction<
+  HTMLDivElement,
+  CodeCardType['codeCardIcon']
+> = (props, ref) => {
   const { animation, image } = props;
 
   return (
@@ -24,6 +24,6 @@ export const CodeCardIcon: ForwardRefRenderFunction<HTMLDivElement, CodeCard['co
   );
 };
 
-const RefCodeCardIcon = forwardRef<HTMLDivElement, CodeCard['codeCardIcon']>(CodeCardIcon);
+const RefCodeCardIcon = forwardRef<HTMLDivElement, CodeCardType['codeCardIcon']>(CodeCardIcon);
 
 export const MotionCodeCardIcon = motion(RefCodeCardIcon);

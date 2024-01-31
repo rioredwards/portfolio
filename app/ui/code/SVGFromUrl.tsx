@@ -1,5 +1,5 @@
 'use client';
-import { CodeCard } from '@/lib/api';
+import { CodeCard as CodeCardType } from '@/lib/dataTypes';
 import { motion } from 'framer-motion';
 import { ForwardRefRenderFunction, forwardRef, useEffect, useState } from 'react';
 
@@ -7,7 +7,7 @@ interface Props {
   url: string;
   title: string;
   containerClasses?: string;
-  animation?: CodeCard['codeCardIcon']['animation'];
+  animation?: CodeCardType['codeCardIcon']['animation'];
 }
 
 export const SVGFromUrl: ForwardRefRenderFunction<HTMLDivElement, Props> = (props, ref) => {

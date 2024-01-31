@@ -1,5 +1,5 @@
 import cssStyles from '@/ui/code/code.module.css';
-import { CodeCard } from '@/lib/api';
+import { CodeCard as CodeCardType } from '@/lib/dataTypes';
 import { useRef, useState } from 'react';
 import { adjustColor } from '@/utils/colorUtils';
 import CodeModal from '@/ui/code/CodeModal';
@@ -84,7 +84,7 @@ const previewVariants: Variants = {
   },
 };
 
-const CodeProjectCard: React.FC<CodeCard & { idx: number }> = ({
+const CodeProjectCard: React.FC<CodeCardType & { idx: number }> = ({
   title,
   slug,
   type,

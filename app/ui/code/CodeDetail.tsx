@@ -1,13 +1,12 @@
-import { CodeDetail as CodeDetailType } from '@/lib/api';
+import { CodeDetail as CodeDetailType } from '@/lib/dataTypes';
 import MotionContentfulImage from '@/ui/ContentfulImage';
 import Shield from '@/ui/code/Shield';
 import clsx from 'clsx';
 import { Markdown } from '@/ui/code/Markdown';
 import CodeDetailSection from '@/ui/code/CodeDetailSection';
 import CodeModalHeader from '../../@modal/(.)code/[slug]/CodeModalHeader';
-import Link from 'next/link';
-import ExternalLinkIcon from '../icons/ExternalLinkIcon';
 import CodeDetailPageHeader from '@/code/[slug]/CodeDetailPageHeader';
+import Chip from '../Chip';
 
 interface Props {
   content: CodeDetailType;
@@ -17,6 +16,8 @@ interface Props {
 const CodeDetail: React.FC<Props> = ({
   content: {
     title,
+    tags,
+    logo,
     links,
     headerImage,
     slogan,
@@ -36,25 +37,27 @@ const CodeDetail: React.FC<Props> = ({
 }) => {
   return (
     <div>
-      <div className="flex justify-start items-center mb-4 mt-6 ml-8">
-        {renderContext === 'modal' ? (
-          <CodeModalHeader title={title} />
-        ) : (
-          <CodeDetailPageHeader title={title} />
-        )}
+      <div className="grid grid-cols-[auto_1fr] grid-rows-[auto_auto] items-center justify-items-start mb-4 mt-6 ml-8">
+        <div className="mr-6 ml-2">
+          {renderContext === 'modal' ? (
+            <CodeModalHeader title={title} logo={logo} />
+          ) : (
+            <CodeDetailPageHeader title={title} logo={logo} />
+          )}
+        </div>
         {!!links?.length && (
-          <ul className="w-full flex items-center justify-start gap-4 h-6 mt-0.5 align-baseline">
+          <ul className="col-span-1 flex items-center justify-start gap-4 h-6 mt-0.5 align-baseline">
             {links.map((link, idx) => (
               <li key={idx}>
-                <Link
-                  href={link.url}
-                  target="_blank"
-                  className="hover:text-white hover:bg-sky-400 text-sky-600 border border-sky-300 rounded-full min-w-[3rem] whitespace-nowrap py-1 px-2 flex items-center justify-center gap-1 cursor-pointer"
-                >
-                  {link.displayText}
-                  <ExternalLinkIcon className="h-4 w-4" />
-                </Link>
+                <Chip style="link" text={link.displayText} href={link.url} size="medium" />
               </li>
+            ))}
+          </ul>
+        )}
+        {!!tags?.length && (
+          <ul className="col-span-2 row-start-2 w-full flex items-center justify-start gap-1 h-6 mt-2 ml-2 align-baseline">
+            {tags.map((tag, idx) => (
+              <li key={idx}>{<Chip style="tag" text={`#${tag}`} size="small" />}</li>
             ))}
           </ul>
         )}
@@ -103,7 +106,13 @@ const CodeDetail: React.FC<Props> = ({
         )}
         {preview && (
           <CodeDetailSection name={'Preview'}>
-            <MotionContentfulImage src={preview.url} height={220} width={730} alt={preview.title} />
+            <MotionContentfulImage
+              src={preview.url}
+              height={220}
+              width={730}
+              alt={preview.title}
+              className="rounded-md"
+            />
           </CodeDetailSection>
         )}
         {usage && (

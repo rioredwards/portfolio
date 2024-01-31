@@ -11,6 +11,28 @@
 
   body:has(dialog[open]) {
     overflow: hidden;
-    padding-right: 1rem;
+    padding-right: 0.75rem;
+  }
+
+  *::-webkit-scrollbar {
+    width: 0.75rem;
+  }
+
+  *::-webkit-scrollbar-track {
+    background: rgb(231, 231, 231);
+    border-radius: 0.75rem;
+  }
+
+  *::-webkit-scrollbar:hover *::-webkit-scrollbar-thumb {
+    background: rgb(160, 160, 160);
+  }
+
+  *::-webkit-scrollbar-thumb {
+    background: rgb(181, 181, 181);
+    border-radius: 0.75rem;
+  }
+
+  *::-webkit-scrollbar-thumb:hover {
+    background: rgb(160, 160, 160);
   }
 }

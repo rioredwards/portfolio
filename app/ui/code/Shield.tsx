@@ -1,4 +1,4 @@
-import { Shield as ShieldType } from '@/lib/api';
+import { Shield as ShieldType } from '@/lib/dataTypes';
 import { MotionSVGFromUrl } from './SVGFromUrl';
 
 interface Props {
