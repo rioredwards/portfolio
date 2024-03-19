@@ -105,7 +105,7 @@ const CodeProjectCard: React.FC<CodeCardType & { idx: number }> = ({
   slug,
 }) => {
   // const hoverDisabled = useRef(false);
-  const bgGradient = generateBgGradientColors(codeCardIcon?.bgColor);
+  // const bgGradient = generateBgGradientColors(codeCardIcon?.bgColor);
   const titleTruncated = truncateTitle(title);
   const [isHover, setIsHover] = useState(false);
 
