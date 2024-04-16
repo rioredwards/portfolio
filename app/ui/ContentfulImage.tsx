@@ -25,4 +25,4 @@ export const MotionContentfulImage = motion(RefContentfulImage);
 
 export default MotionContentfulImage;
 
-// Test 2
+// Test 3
