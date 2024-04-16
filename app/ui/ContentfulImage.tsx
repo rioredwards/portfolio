@@ -24,3 +24,5 @@ const RefContentfulImage = forwardRef<HTMLDivElement, Props>(ContentfulImage);
 export const MotionContentfulImage = motion(RefContentfulImage);
 
 export default MotionContentfulImage;
+
+// Test
