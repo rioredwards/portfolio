@@ -24,16 +24,6 @@ const nextConfig = {
       },
     ],
   },
-  async redirects() {
-    return [
-      // Page redirect DELETE ME LATER
-      {
-        source: '/:slug',
-        destination: 'https://bento.me/rio-edwards',
-        permanent: true,
-      },
-    ];
-  },
 };
 
 module.exports = nextConfig;

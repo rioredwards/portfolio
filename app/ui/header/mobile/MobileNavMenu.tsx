@@ -1,9 +1,8 @@
 'use client';
-import { useRef } from 'react';
 import { Dialog } from '@headlessui/react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
+import { useRef } from 'react';
 import { MobileNavLink } from './MobileNavLink';
-import { MotionContentfulImage } from '@/ui/ContentfulImage';
 
 interface Props {
   isOpen: boolean;
@@ -119,7 +118,7 @@ const MobileNavModal: React.FC<Props> = ({ avatar, isOpen, setIsOpen }) => {
             className="w-full px-8 pb-8"
           >
             {/* Avatar */}
-            <motion.div className="w-full flex items-center justify-center">
+            {/* <motion.div className="w-full flex items-center justify-center">
               <MotionContentfulImage
                 variants={avatarVariants}
                 alt="Rio Edwards"
@@ -128,7 +127,7 @@ const MobileNavModal: React.FC<Props> = ({ avatar, isOpen, setIsOpen }) => {
                 width={160}
                 src={avatar.url}
               />
-            </motion.div>
+            </motion.div> */}
             {/* Title */}
             <Dialog.Title as="h3" className="mt-2 text-2xl font-bold text-gray-700">
               <motion.span
