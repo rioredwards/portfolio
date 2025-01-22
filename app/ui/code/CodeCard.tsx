@@ -85,7 +85,18 @@ const previewVariants: Variants = {
   },
 };
 
+const cardBorderColors = [
+  '#50DD90',
+  '#56CAA7',
+  '#5DBBB7',
+  '#5DB8BA',
+  '#5EB3BE',
+  '#60AAC8',
+  '#6896DE',
+];
+
 const CodeProjectCard: React.FC<CodeCardType & { idx: number }> = ({
+  idx,
   title,
   type,
   codeCardIcon,
@@ -94,7 +105,7 @@ const CodeProjectCard: React.FC<CodeCardType & { idx: number }> = ({
   slug,
 }) => {
   // const hoverDisabled = useRef(false);
-  const bgGradient = generateBgGradientColors(codeCardIcon?.bgColor);
+  // const bgGradient = generateBgGradientColors(codeCardIcon?.bgColor);
   const titleTruncated = truncateTitle(title);
   const [isHover, setIsHover] = useState(false);
 
@@ -131,23 +142,20 @@ const CodeProjectCard: React.FC<CodeCardType & { idx: number }> = ({
     <Link key={slug} href={`/code/${slug}`} passHref className={`${cssStyles.codeCardContainer}`}>
       <div className={`${cssStyles.codeCardContent}`}>
         <motion.article
-          style={{ background: generateBgGradient(bgGradient) }}
+          style={{ border: `2px solid ${cardBorderColors[idx % cardBorderColors.length]}` }}
           onClick={onClick}
           animate={isHover ? 'isHover' : 'isNotHover'}
           variants={codeCardVariants}
           onHoverStart={onHoverStart}
           onHoverEnd={onHoverEnd}
-          className="group w-full h-full rounded-[8vw] sm:rounded-[4vw] lg:rounded-[3vw] overflow-hidden relative"
+          className="bg-gray-100 group w-full h-full rounded-[8vw] sm:rounded-[4vw] lg:rounded-[3vw] overflow-hidden relative"
         >
           <div className="absolute inset-0 rounded-[8vw] sm:rounded-[4vw] lg:rounded-[3vw] overflow-hidden">
             <div className="h-full w-full overflow-hidden">
-              {/* Top Panel */}
-              <div className="z-10 w-full h-[18%] pt-[1%] bg-gray-100 flex items-center pr-[8%] pl-[8%] border-b-2">
-                {/* Panel Icon */}
+              <div className="z-10 w-full h-[18%] pt-[1%] flex items-center pr-[8%] pl-[8%]">
                 <div className="flex-shrink-0 h-full w-[18%] flex items-center justify-between">
                   {codeCardTypeIcon()}
                 </div>
-                {/* Title */}
                 <div className="flex items-center grow h-[70%] px-2 ml-[3%]">
                   <h3 className="text-xl text-gray-600 font-extrabold whitespace-nowrap">
                     {titleTruncated}
