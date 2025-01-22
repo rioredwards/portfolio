@@ -1,9 +1,9 @@
+import Footer from '@/ui/Footer';
 import '@/ui/globals.css';
 import Header from '@/ui/header/Header';
-import Footer from '@/ui/Footer';
+import UnderConstruction from '@/ui/UnderConstruction';
 import { Metadata } from 'next';
 import { Inter as interFont } from 'next/font/google';
-import UnderConstruction from '@/ui/UnderConstruction';
 
 export const metadata: Metadata = {
   title: `Rio Edwards | Web Developer`,
@@ -24,7 +24,7 @@ export default function RootLayout(props: { children: React.ReactNode; modal: Re
       <body className="min-h-screen">
         <Header />
         {props.modal}
-        <main>{props.children}</main>
+        {/* <main>{props.children}</main> */}
         <UnderConstruction />
         <Footer />
       </body>
