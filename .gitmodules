@@ -1,3 +1,0 @@
-[submodule "scripts/downloadProjectThumbnails"]
-	path = scripts/downloadProjectThumbnails
-	url = https://github.com/rioredwards/downloadProjectThumbnails.git
