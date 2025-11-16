@@ -25,7 +25,9 @@ export function Hero({
   return (
     <section className={cn("py-16", className)}>
       {/* Main heading - centered */}
-      <h1 className="mb-12 text-center font-playfair text-5xl font-bold tracking-tight text-[#2d5016] sm:text-6xl md:text-7xl">
+      <h1
+        className="mb-12 text-center text-5xl font-bold tracking-tight text-[#2d5016] sm:text-6xl md:text-7xl"
+        style={{ fontFamily: "var(--font-mazaeni-demo), serif" }}>
         {title}
       </h1>
 
