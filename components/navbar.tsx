@@ -47,7 +47,6 @@ export function Navbar() {
           </NavigationMenuList>
         </div>
       </NavigationMenu>
-      <div className="mt-2 h-px border-t-2 border-dotted border-blue-500" />
     </nav>
   );
 }

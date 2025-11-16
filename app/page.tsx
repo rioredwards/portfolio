@@ -3,13 +3,20 @@ import { Navbar } from "@/components/navbar";
 
 export default function Home() {
   return (
-    <div className="flex min-h-screen flex-col items-center bg-zinc-50 font-sans dark:bg-black">
-      <div className="w-full max-w-4xl px-4 pt-8">
-        <Navbar />
+    <div className="min-h-screen bg-[#f5f1e8] font-sans">
+      <div className="mx-auto w-full max-w-6xl px-4 pt-8">
+        <div className="mb-12 flex justify-center">
+          <Navbar />
+        </div>
         <Hero
-          title="Welcome"
-          subtitle="Portfolio"
-          description="A simple, elegant hero section ready for customization."
+          title="Hello, I'm Rio."
+          subheading="Lorem ipsum Maxime"
+          paragraphs={[
+            "Veritatis obcaecati tenetur iure eius earum ut molestias architecto...",
+            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia...",
+          ]}
+          imageSrc="/profile.jpg"
+          imageAlt="Rio"
         />
       </div>
     </div>
