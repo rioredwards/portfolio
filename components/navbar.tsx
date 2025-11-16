@@ -7,19 +7,45 @@ import {
   NavigationMenuList,
 } from "@/components/ui/navigation-menu";
 import { cn } from "@/lib/utils";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
 
 const navItems = [
-  { label: "Home", href: "/" },
-  { label: "Projects", href: "/projects" },
-  { label: "Skills", href: "/skills" },
-  { label: "Blog", href: "/blog" },
-  { label: "Contact", href: "/contact" },
+  { label: "Home", href: "#home" },
+  { label: "Projects", href: "#projects" },
+  { label: "Skills", href: "#skills" },
+  { label: "Blog", href: "#blog" },
+  { label: "Contact", href: "#contact" },
 ];
 
 export function Navbar() {
-  const pathname = usePathname();
+  const [activeSection, setActiveSection] = useState<string>("");
+
+  useEffect(() => {
+    const handleHashChange = () => {
+      setActiveSection(window.location.hash);
+    };
+
+    // Set initial active section
+    handleHashChange();
+
+    // Listen for hash changes
+    window.addEventListener("hashchange", handleHashChange);
+
+    return () => {
+      window.removeEventListener("hashchange", handleHashChange);
+    };
+  }, []);
+
+  const handleClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    e.preventDefault();
+    const targetId = href.replace("#", "");
+    const element = document.getElementById(targetId);
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth", block: "start" });
+      window.history.pushState(null, "", href);
+      setActiveSection(href);
+    }
+  };
 
   return (
     <nav className="relative">
@@ -27,19 +53,21 @@ export function Navbar() {
         <div className="flex items-center gap-2 rounded-lg bg-[#f5f1e8] px-4 py-2">
           <NavigationMenuList>
             {navItems.map((item) => {
-              const isActive = pathname === item.href;
+              const isActive =
+                activeSection === item.href || (item.href === "#home" && activeSection === "");
               return (
                 <NavigationMenuItem key={item.href}>
                   <NavigationMenuLink asChild>
-                    <Link
+                    <a
                       href={item.href}
+                      onClick={(e) => handleClick(e, item.href)}
                       className={cn(
-                        "px-4 py-1.5 text-sm font-medium text-gray-700 transition-colors",
+                        "px-4 py-1.5 text-sm font-medium text-gray-700 transition-colors cursor-pointer",
                         isActive && "rounded-full bg-white text-gray-800 shadow-sm"
                       )}
                       data-active={isActive}>
                       {item.label}
-                    </Link>
+                    </a>
                   </NavigationMenuLink>
                 </NavigationMenuItem>
               );
