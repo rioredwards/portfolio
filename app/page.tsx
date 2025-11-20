@@ -1,9 +1,11 @@
 import { Hero } from "@/components/hero";
 import { Navbar } from "@/components/navbar";
+import { Sidebar } from "@/components/sidebar";
 
 export default function Home() {
   return (
     <div className="min-h-screen bg-background font-sans">
+      <Sidebar />
       <div className="mx-auto w-full max-w-6xl px-4 pt-8">
         <div className="mb-12 flex justify-center">
           <Navbar />
