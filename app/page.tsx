@@ -22,7 +22,9 @@ export default function Home() {
           imageAlt="Rio"
         />
       </div>
-      <SectionBreak orientation="left" text="Section Break" height="tall" />
+      <SectionBreak orientation="left" height="tall">
+        Projects
+      </SectionBreak>
     </div>
   );
 }

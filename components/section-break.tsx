@@ -7,11 +7,15 @@ type Height = "short" | "tall";
 
 interface SectionBreakProps {
   orientation?: Orientation;
-  text: string;
   height?: Height;
+  children?: React.ReactNode;
 }
 
-export function SectionBreak({ orientation = "left", text, height = "tall" }: SectionBreakProps) {
+export function SectionBreak({
+  orientation = "left",
+  height = "tall",
+  children,
+}: SectionBreakProps) {
   const isLeft = orientation === "left";
   const isTall = height === "tall";
 
@@ -48,7 +52,7 @@ export function SectionBreak({ orientation = "left", text, height = "tall" }: Se
         <h2
           className={cn("p-0 m-0 font-black text-center text-[#099037]", textSize)}
           style={{ fontFamily: "var(--font-mazaeni-demo), serif" }}>
-          {text}
+          {children}
         </h2>
       </div>
 
