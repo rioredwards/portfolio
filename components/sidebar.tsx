@@ -28,7 +28,7 @@ export function Sidebar() {
             href={link.href}
             target={link.href.startsWith("http") ? "_blank" : undefined}
             rel={link.href.startsWith("http") ? "noopener noreferrer" : undefined}
-            className="group/item flex items-center gap-3 rounded-[1.5rem] px-3 py-2 text-foreground transition-all duration-300 hover:bg-accent"
+            className="group/item flex items-center gap-0 group-hover:gap-3 rounded-[1.5rem] px-2 py-2 group-hover:px-3 text-foreground transition-all duration-300 hover:bg-accent"
             aria-label={link.label}>
             <span className="flex-shrink-0 flex items-center justify-center">{link.icon}</span>
             <span
