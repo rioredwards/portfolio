@@ -1,7 +1,8 @@
 "use client";
 
-import { FileText, Github, Linkedin, Mail, Play } from "lucide-react";
+import { FileText, Mail } from "lucide-react";
 import Link from "next/link";
+import { SiGithub, SiLinkedin, SiYoutube } from "react-icons/si";
 
 interface SocialLink {
   icon: React.ReactNode;
@@ -11,9 +12,9 @@ interface SocialLink {
 
 const socialLinks: SocialLink[] = [
   { icon: <Mail className="size-5" />, href: "mailto:your@email.com", label: "Email" },
-  { icon: <Github className="size-5" />, href: "https://github.com", label: "GitHub" },
-  { icon: <Linkedin className="size-5" />, href: "https://linkedin.com", label: "LinkedIn" },
-  { icon: <Play className="size-5" />, href: "https://youtube.com", label: "Video" },
+  { icon: <SiGithub className="size-5" />, href: "https://github.com", label: "GitHub" },
+  { icon: <SiLinkedin className="size-5" />, href: "https://linkedin.com", label: "LinkedIn" },
+  { icon: <SiYoutube className="size-5" />, href: "https://youtube.com", label: "YouTube" },
   { icon: <FileText className="size-5" />, href: "#", label: "Resume" },
 ];
 
@@ -27,7 +28,7 @@ export function Sidebar() {
             href={link.href}
             target={link.href.startsWith("http") ? "_blank" : undefined}
             rel={link.href.startsWith("http") ? "noopener noreferrer" : undefined}
-            className="flex items-center justify-center text-foreground transition-colors hover:text-foreground/80"
+            className="flex items-center justify-center rounded-full p-2 text-foreground transition-colors hover:bg-accent"
             aria-label={link.label}>
             {link.icon}
           </Link>
