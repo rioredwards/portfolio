@@ -1,6 +1,7 @@
 import { Hero } from "@/components/hero";
 import { Navbar } from "@/components/navbar";
 import { Sidebar } from "@/components/sidebar";
+import { SectionBreak } from "../components/section-break";
 
 export default function Home() {
   return (
@@ -21,6 +22,7 @@ export default function Home() {
           imageAlt="Rio"
         />
       </div>
+      <SectionBreak orientation="left" text="Section Break" height="tall" />
     </div>
   );
 }
