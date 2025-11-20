@@ -50,7 +50,7 @@ export function Navbar() {
   return (
     <nav className="relative">
       <NavigationMenu viewport={false}>
-        <div className="flex items-center gap-2 rounded-full bg-background px-4 py-2">
+        <div className="flex items-center gap-2 rounded-full bg-secondary px-4 py-2">
           <NavigationMenuList>
             {navItems.map((item) => {
               const isActive =
@@ -62,9 +62,7 @@ export function Navbar() {
                       href={item.href}
                       onClick={(e) => handleClick(e, item.href)}
                       className={cn(
-                        "px-4 py-1.5 text-sm font-medium text-foreground transition-colors cursor-pointer rounded-full",
-                        isActive && "bg-white text-foreground shadow-sm",
-                        !isActive && "hover:bg-white/50"
+                        "px-4 py-1.5 text-sm font-medium text-foreground transition-colors cursor-pointer !rounded-full hover:bg-tertiary"
                       )}
                       data-active={isActive}>
                       {item.label}
