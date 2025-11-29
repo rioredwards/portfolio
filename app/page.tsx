@@ -40,6 +40,37 @@ export default function Home() {
         ]}
         image="/temp-proj-photo.webp"
       />
+      <SectionBreak orientation="right" height="short"></SectionBreak>
+      <Project
+        category="Planning"
+        title="Class TopBase"
+        description="ClassTopBase is a school management software for after-schools. For this project, I designed a feature to help school owners plan their students' academic plans efficiently."
+        skills={[
+          "JavaScript",
+          "JavaScript",
+          "JavaScript",
+          "JavaScript",
+          "JavaScript",
+          "JavaScript",
+        ]}
+        image="/temp-proj-photo.webp"
+      />
+      <SectionBreak orientation="left" height="short"></SectionBreak>
+      <Project
+        category="Planning"
+        title="Class TopBase"
+        description="ClassTopBase is a school management software for after-schools. For this project, I designed a feature to help school owners plan their students' academic plans efficiently."
+        skills={[
+          "JavaScript",
+          "JavaScript",
+          "JavaScript",
+          "JavaScript",
+          "JavaScript",
+          "JavaScript",
+        ]}
+        image="/temp-proj-photo.webp"
+      />
+      <SectionBreak orientation="right" height="short"></SectionBreak>
     </div>
   );
 }
