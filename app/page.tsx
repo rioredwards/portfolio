@@ -1,4 +1,5 @@
 import { Blog } from "@/components/blog";
+import { Contact } from "@/components/contact";
 import { Hero } from "@/components/hero";
 import { Navbar } from "@/components/navbar";
 import { Project } from "@/components/project";
@@ -99,6 +100,10 @@ export default function Home() {
         description="Blog Description"
         icon={<MessagesSquare className="h-8 w-8" aria-hidden="true" />}
       />
+      <SectionBreak orientation="left" height="tall">
+        Contact
+      </SectionBreak>
+      <Contact />
     </div>
   );
 }
