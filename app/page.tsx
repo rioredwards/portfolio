@@ -1,5 +1,6 @@
 import { Hero } from "@/components/hero";
 import { Navbar } from "@/components/navbar";
+import { Project } from "@/components/project";
 import { Sidebar } from "@/components/sidebar";
 import { SectionBreak } from "../components/section-break";
 
@@ -25,6 +26,7 @@ export default function Home() {
       <SectionBreak orientation="left" height="tall">
         Projects
       </SectionBreak>
+      <Project />
     </div>
   );
 }
