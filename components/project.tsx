@@ -11,7 +11,7 @@ interface ProjectProps {
 export function Project({ category, title, description, skills, image }: ProjectProps) {
   return (
     <section className="px-4 py-16">
-      <div className="mx-auto flex max-w-6xl flex-col gap-12 rounded-[3rem] bg-(--color-bg-secondary) px-8 py-12 shadow-md lg:flex-row lg:items-center lg:gap-16 lg:px-14 lg:py-16">
+      <div className="mx-auto flex max-w-6xl flex-col gap-12 px-8 py-12 lg:flex-row lg:items-center lg:gap-16 lg:px-14 lg:py-16">
         {/* Left column – text content */}
         <div className="flex-1">
           <p className="mb-4 text-sm font-medium uppercase tracking-[0.2em] text-(--color-text-tertiary)">
