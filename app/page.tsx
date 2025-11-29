@@ -26,7 +26,20 @@ export default function Home() {
       <SectionBreak orientation="left" height="tall">
         Projects
       </SectionBreak>
-      <Project />
+      <Project
+        category="Planning"
+        title="Class TopBase"
+        description="ClassTopBase is a school management software for after-schools. For this project, I designed a feature to help school owners plan their students' academic plans efficiently."
+        skills={[
+          "JavaScript",
+          "JavaScript",
+          "JavaScript",
+          "JavaScript",
+          "JavaScript",
+          "JavaScript",
+        ]}
+        image="/temp-proj-photo.webp"
+      />
     </div>
   );
 }
