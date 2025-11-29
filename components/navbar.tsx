@@ -48,9 +48,9 @@ export function Navbar() {
   };
 
   return (
-    <nav className="relative">
+    <div className="sticky top-4 w-full z-50 mx-auto flex items-center justify-center pointer-events-none">
       <NavigationMenu viewport={false}>
-        <div className="flex items-center gap-2 rounded-full bg-secondary px-4 py-2">
+        <div className="flex items-center gap-2 rounded-full bg-secondary px-4 py-2 pointer-events-auto">
           <NavigationMenuList>
             {navItems.map((item) => {
               const isActive =
@@ -62,7 +62,7 @@ export function Navbar() {
                       href={item.href}
                       onClick={(e) => handleClick(e, item.href)}
                       className={cn(
-                        "px-4 py-1.5 text-sm font-medium text-foreground transition-colors cursor-pointer !rounded-full hover:bg-tertiary"
+                        "px-4 py-1.5 text-sm font-medium text-foreground transition-colors cursor-pointer rounded-full! hover:bg-tertiary"
                       )}
                       data-active={isActive}>
                       {item.label}
@@ -74,6 +74,6 @@ export function Navbar() {
           </NavigationMenuList>
         </div>
       </NavigationMenu>
-    </nav>
+    </div>
   );
 }

@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Playfair_Display } from "next/font/google";
 import localFont from "next/font/local";
+import { Navbar } from "../components/navbar";
+import { Sidebar } from "../components/sidebar";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -66,7 +68,11 @@ export default function RootLayout({
     <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${playfairDisplay.variable} ${mazaeniDemo.variable} antialiased`}>
-        {children}
+        <>
+          <Navbar />
+          <Sidebar />
+          {children}
+        </>
       </body>
     </html>
   );
