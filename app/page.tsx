@@ -2,6 +2,8 @@ import { Hero } from "@/components/hero";
 import { Navbar } from "@/components/navbar";
 import { Project } from "@/components/project";
 import { Sidebar } from "@/components/sidebar";
+import { SkillSection } from "@/components/skill-section";
+import { Code2, Database, LibraryBig } from "lucide-react";
 import { SectionBreak } from "../components/section-break";
 
 export default function Home() {
@@ -70,7 +72,24 @@ export default function Home() {
         ]}
         image="/temp-proj-photo.webp"
       />
-      <SectionBreak orientation="right" height="short"></SectionBreak>
+      <SectionBreak orientation="left" height="tall">
+        Skills
+      </SectionBreak>
+      <SkillSection
+        category="Languages"
+        icon={<Code2 className="h-8 w-8" aria-hidden="true" />}
+        skills={["TypeScript", "JavaScript", "HTML", "CSS", "SQL", "Python"]}
+      />
+      <SkillSection
+        category="Libraries & Frameworks"
+        icon={<LibraryBig className="h-8 w-8" aria-hidden="true" />}
+        skills={["React", "Next.js", "Node.js", "Express", "Tailwind CSS", "shadcn/ui"]}
+      />
+      <SkillSection
+        category="Databases & Storage"
+        icon={<Database className="h-8 w-8" aria-hidden="true" />}
+        skills={["PostgreSQL", "MySQL", "MongoDB", "SQLite", "Redis", "Supabase"]}
+      />
     </div>
   );
 }
