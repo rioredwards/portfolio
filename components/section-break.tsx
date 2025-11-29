@@ -24,8 +24,8 @@ export function SectionBreak({
 
   // Size variations based on height prop
   const triangleHeight = isTall ? "h-8" : "h-6";
-  const textSize = isTall ? "text-4xl" : "text-3xl";
-  const padding = isTall ? "p-4" : "p-3";
+  const textSize = isTall ? "text-6xl" : "text-4xl";
+  const padding = isTall ? "p-6" : "p-3";
 
   return (
     <div className="relative w-full">
