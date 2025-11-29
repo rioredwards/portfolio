@@ -1,9 +1,10 @@
+import { Blog } from "@/components/blog";
 import { Hero } from "@/components/hero";
 import { Navbar } from "@/components/navbar";
 import { Project } from "@/components/project";
 import { Sidebar } from "@/components/sidebar";
 import { SkillSection } from "@/components/skill-section";
-import { Code2, Database, LibraryBig } from "lucide-react";
+import { Code2, Database, LibraryBig, MessagesSquare } from "lucide-react";
 import { SectionBreak } from "../components/section-break";
 
 export default function Home() {
@@ -89,6 +90,14 @@ export default function Home() {
         category="Databases & Storage"
         icon={<Database className="h-8 w-8" aria-hidden="true" />}
         skills={["PostgreSQL", "MySQL", "MongoDB", "SQLite", "Redis", "Supabase"]}
+      />
+      <SectionBreak orientation="right" height="tall">
+        Blog
+      </SectionBreak>
+      <Blog
+        title="Blog Title"
+        description="Blog Description"
+        icon={<MessagesSquare className="h-8 w-8" aria-hidden="true" />}
       />
     </div>
   );
