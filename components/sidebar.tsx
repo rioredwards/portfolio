@@ -21,14 +21,14 @@ const socialLinks: SocialLink[] = [
 export function Sidebar() {
   return (
     <aside className="group fixed left-4 top-1/2 -translate-y-1/2 z-50">
-      <nav className="flex flex-col gap-2 rounded-4xl bg-secondary p-3 transition-all duration-300">
+      <nav className="flex flex-col gap-1 rounded-3xl bg-secondary/80 backdrop-blur-sm p-2 transition-all duration-300">
         {socialLinks.map((link, index) => (
           <Link
             key={index}
             href={link.href}
             target={link.href.startsWith("http") ? "_blank" : undefined}
             rel={link.href.startsWith("http") ? "noopener noreferrer" : undefined}
-            className="group/item flex items-center gap-0 group-hover:gap-3 rounded-3xl px-2 py-2 group-hover:px-3 text-foreground transition-all duration-300 hover:bg-accent"
+            className="group/item flex items-center gap-0 group-hover:gap-3 rounded-3xl px-2 py-2 group-hover:px-3 text-foreground transition-all duration-300 hover:bg-background/50"
             aria-label={link.label}>
             <span className="shrink-0 flex items-center justify-center">{link.icon}</span>
             <span
