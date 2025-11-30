@@ -32,7 +32,7 @@ export function SectionBreak({
       {/* Upper triangle */}
       <svg
         className={cn(
-          "block fill-[#e3cfaa] w-auto",
+          "block fill-secondary w-auto",
           triangleHeight,
           isLeft ? "ml-auto" : "mr-auto rotate-90"
         )}
@@ -45,12 +45,12 @@ export function SectionBreak({
       {/* Main rectangle with text */}
       <div
         className={cn(
-          "bg-[#e3cfaa]",
+          "bg-secondary",
           isLeft ? "rounded-[32px_0_32px_0]" : "rounded-[0_32px_0_32px]",
           padding
         )}>
         <h2
-          className={cn("p-0 m-0 font-black text-center text-[#099037]", textSize)}
+          className={cn("p-0 m-0 font-black text-center text-foreground", textSize)}
           style={{ fontFamily: "var(--font-mazaeni-demo), serif" }}>
           {children}
         </h2>
@@ -59,7 +59,7 @@ export function SectionBreak({
       {/* Lower triangle */}
       <svg
         className={cn(
-          "block fill-[#e3cfaa] w-auto",
+          "block fill-secondary w-auto",
           triangleHeight,
           isLeft ? "mr-auto rotate-180" : "ml-auto rotate-270"
         )}

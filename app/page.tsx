@@ -100,7 +100,7 @@ export default function Home() {
         <Blog
           title="Blog Title"
           description="Blog Description"
-          icon={<MessagesSquare className="h-8 w-8" aria-hidden="true" />}
+          icon={<MessagesSquare className="h-10 w-10" aria-hidden="true" />}
         />
       </section>
       <section id="contact">

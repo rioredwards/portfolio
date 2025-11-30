@@ -53,9 +53,9 @@
   --radius: 0.625rem;
   
   /* Color Palette - Single Source of Truth */
-  --color-text-primary: #099037;
-  --color-text-secondary: #0C6746;
-  --color-text-tertiary: #5F8276;
+  --color-text-primary: #0C6746;
+  --color-text-secondary: #5F8276;
+  --color-text-tertiary: #606461;
   --color-bg-primary: #F4EBDA;
   --color-bg-secondary: #EBDBBC;
   --color-bg-tertiary: #DAB773;
@@ -74,7 +74,7 @@
   --muted: var(--color-bg-secondary);
   --muted-foreground: var(--color-text-tertiary);
   --accent: var(--color-bg-tertiary);
-  --accent-foreground: var(--color-text-primary);
+  --accent-foreground: var(--color-text-tertiary);
   --destructive: oklch(0.577 0.245 27.325);
   --border: var(--color-bg-tertiary);
   --input: var(--color-bg-secondary);
