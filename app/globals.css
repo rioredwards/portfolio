@@ -43,14 +43,17 @@
   --color-popover: var(--popover);
   --color-card-foreground: var(--card-foreground);
   --color-card: var(--card);
-  --radius-sm: calc(var(--radius) - 4px);
-  --radius-md: calc(var(--radius) - 2px);
-  --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) + 4px);
+  --radius-xs: calc(var(--radius) - 12px);
+  --radius-sm: calc(var(--radius) - 8px);
+  --radius-md: calc(var(--radius));
+  --radius-lg: calc(var(--radius) + 8px);
+  --radius-xl: calc(var(--radius) + 16px);
+  --radius-2xl: calc(var(--radius) + 24px);
+  --radius-3xl: calc(var(--radius) + 32px);
 }
 
 :root {
-  --radius: 0.625rem;
+  --radius: 1rem;
   
   /* Color Palette - Single Source of Truth */
   --color-text-primary: #0C6746;
@@ -134,5 +137,40 @@
   }
   body {
     @apply bg-background text-foreground;
+  }
+}
+
+@layer utilities {
+  .border-angled-xs {
+    border-top-left-radius: var(--radius-xs);
+    border-bottom-right-radius: var(--radius-xs);
+  }
+  .border-angled-sm {
+    border-top-left-radius: var(--radius-sm);
+    border-bottom-right-radius: var(--radius-sm);
+  }
+  .border-angled-md {
+    border-top-left-radius: var(--radius-md);
+    border-bottom-right-radius: var(--radius-md);
+  }
+  .border-angled-lg {
+    border-top-left-radius: var(--radius-lg); 
+    border-bottom-right-radius: var(--radius-lg); 
+  }
+  .border-angled-xl {
+    border-top-left-radius: var(--radius-xl);
+    border-bottom-right-radius: var(--radius-xl);
+  }
+  .border-angled-2xl {
+    border-top-left-radius: var(--radius-2xl);
+    border-bottom-right-radius: var(--radius-2xl);
+  }
+  .border-angled-3xl  {
+    border-top-left-radius: var(--radius-3xl);
+    border-bottom-right-radius: var(--radius-3xl);
+  }
+  .border-angled-full {
+    border-top-left-radius: 100%;
+    border-bottom-right-radius: 100%;
   }
 }

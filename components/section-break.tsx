@@ -44,7 +44,7 @@ export function SectionBreak({
       <div
         className={cn(
           "bg-secondary",
-          isLeft ? "rounded-[32px_0_32px_0]" : "rounded-[0_32px_0_32px]",
+          isLeft ? "rounded-tl-4xl rounded-br-4xl" : "rounded-tr-4xl rounded-bl-4xl",
           padding
         )}>
         <h2

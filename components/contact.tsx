@@ -72,7 +72,7 @@ export function Contact() {
             <Button
               type="submit"
               size="lg"
-              className="rounded-full bg-primary px-10 text-lg font-bold text-primary-foreground">
+              className="bg-primary min-w-32 text-lg font-bold text-primary-foreground">
               Send
             </Button>
           </div>
