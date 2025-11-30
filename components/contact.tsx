@@ -1,3 +1,5 @@
+import { Button } from "@/components/ui/button";
+
 export function Contact() {
   return (
     <section id="contact" className="px-4 py-16">
@@ -67,11 +69,12 @@ export function Contact() {
 
           {/* Submit button */}
           <div className="mt-4 flex justify-end">
-            <button
+            <Button
               type="submit"
-              className="rounded-full bg-(--color-text-secondary) px-10 py-3 text-lg font-bold text-(--color-bg-primary) shadow-md transition-shadow hover:shadow-lg">
+              size="lg"
+              className="rounded-full bg-primary px-10 text-lg font-bold text-primary-foreground">
               Send
-            </button>
+            </Button>
           </div>
         </form>
       </div>

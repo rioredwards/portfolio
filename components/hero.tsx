@@ -1,5 +1,7 @@
+import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
+import Link from "next/link";
 
 interface HeroProps {
   title: string;
@@ -56,11 +58,9 @@ export function Hero({
           )}
           {/* Contact button - right aligned */}
           <div className="flex justify-end">
-            <a
-              href={buttonHref}
-              className="rounded-lg bg-primary px-8 py-3 text-sm font-medium uppercase tracking-wider text-primary-foreground">
-              {buttonText}
-            </a>
+            <Button asChild size="lg" className="uppercase tracking-wider">
+              <Link href={buttonHref}>{buttonText}</Link>
+            </Button>
           </div>
         </div>
       </div>
