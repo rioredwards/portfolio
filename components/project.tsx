@@ -1,3 +1,4 @@
+import { Skill } from "@/components/ui/skill";
 import Image from "next/image";
 
 interface ProjectProps {
@@ -29,11 +30,7 @@ export function Project({ category, title, description, skills, image }: Project
 
           <div className="flex flex-wrap gap-4">
             {skills.map((skill, index) => (
-              <span
-                key={`${skill}-${index}`}
-                className="rounded-full border border-secondary/40 bg-primary px-6 py-2 text-sm font-medium tracking-wide text-secondary">
-                {skill}
-              </span>
+              <Skill key={`${skill}-${index}`} text={skill} variant="outline" size="sm" />
             ))}
           </div>
         </div>

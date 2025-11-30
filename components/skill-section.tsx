@@ -1,3 +1,4 @@
+import { Skill } from "@/components/ui/skill";
 import type { ReactNode } from "react";
 
 interface SkillSectionProps {
@@ -22,11 +23,13 @@ export function SkillSection({ category, skills, icon }: SkillSectionProps) {
         {/* Skill pills */}
         <div className="flex flex-wrap gap-x-10 gap-y-6">
           {skills.map((skill, index) => (
-            <div
+            <Skill
               key={`${skill}-${index}`}
-              className="inline-flex min-w-36 items-center justify-center bg-primary px-6 py-3 text-base font-medium tracking-[0.16em] text-secondary rounded-full">
-              {skill}
-            </div>
+              text={skill}
+              variant="filled"
+              size="md"
+              className="min-w-36 tracking-[0.16em]"
+            />
           ))}
         </div>
       </div>

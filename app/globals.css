@@ -141,35 +141,35 @@
 }
 
 @layer utilities {
-  .border-angled-xs {
+  .angled-border-xs {
     border-top-left-radius: var(--radius-xs);
     border-bottom-right-radius: var(--radius-xs);
   }
-  .border-angled-sm {
+  .angled-border-sm {
     border-top-left-radius: var(--radius-sm);
     border-bottom-right-radius: var(--radius-sm);
   }
-  .border-angled-md {
+  .angled-border-md {
     border-top-left-radius: var(--radius-md);
     border-bottom-right-radius: var(--radius-md);
   }
-  .border-angled-lg {
+  .angled-border-lg {
     border-top-left-radius: var(--radius-lg); 
     border-bottom-right-radius: var(--radius-lg); 
   }
-  .border-angled-xl {
+  .angled-border-xl {
     border-top-left-radius: var(--radius-xl);
     border-bottom-right-radius: var(--radius-xl);
   }
-  .border-angled-2xl {
+  .angled-border-2xl {
     border-top-left-radius: var(--radius-2xl);
     border-bottom-right-radius: var(--radius-2xl);
   }
-  .border-angled-3xl  {
+  .angled-border-3xl  {
     border-top-left-radius: var(--radius-3xl);
     border-bottom-right-radius: var(--radius-3xl);
   }
-  .border-angled-full {
+  .angled-border-full {
     border-top-left-radius: 100%;
     border-bottom-right-radius: 100%;
   }

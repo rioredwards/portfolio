@@ -1,3 +1,5 @@
+import { Skill } from "@/components/ui/skill";
+
 const BUILT_WITH = ["Figma", "Next.js", "Tailwind", "Contentful", "GraphQL"];
 
 export function Footer() {
@@ -16,11 +18,7 @@ export function Footer() {
           <p className="text-sm font-semibold">Built With</p>
           <div className="flex flex-wrap gap-4">
             {BUILT_WITH.map((tool) => (
-              <span
-                key={tool}
-                className="inline-flex min-w-28 items-center justify-center border border-(--color-text-secondary) bg-(--color-bg-primary) px-5 py-2 text-xs font-medium tracking-[0.16em] uppercase text-(--color-text-secondary) rounded-full">
-                {tool}
-              </span>
+              <Skill key={tool} text={tool} variant="outline" size="sm" />
             ))}
           </div>
         </div>
