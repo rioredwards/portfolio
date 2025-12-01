@@ -5,7 +5,6 @@ import { Project } from "@/components/project";
 import { SkillSection } from "@/components/skill-section";
 import { Code2, Database, LibraryBig, MessagesSquare } from "lucide-react";
 import { SectionBreak } from "../components/section-break";
-import { SectionContent } from "../components/section-content";
 
 export default function Home() {
   return (
@@ -28,7 +27,7 @@ export default function Home() {
         <SectionBreak orientation="left" height="tall">
           Projects
         </SectionBreak>
-        <SectionContent>
+        <div className="section-content">
           <Project
             category="Planning"
             title="Class TopBase"
@@ -43,9 +42,9 @@ export default function Home() {
             ]}
             image="/temp-proj-photo.webp"
           />
-        </SectionContent>
+        </div>
         <SectionBreak orientation="right" height="short"></SectionBreak>
-        <SectionContent>
+        <div className="section-content">
           <Project
             category="Planning"
             title="Class TopBase"
@@ -60,9 +59,9 @@ export default function Home() {
             ]}
             image="/temp-proj-photo.webp"
           />
-        </SectionContent>
+        </div>
         <SectionBreak orientation="left" height="short"></SectionBreak>
-        <SectionContent>
+        <div className="section-content">
           <Project
             category="Planning"
             title="Class TopBase"
@@ -77,7 +76,7 @@ export default function Home() {
             ]}
             image="/temp-proj-photo.webp"
           />
-        </SectionContent>
+        </div>
       </section>
       <section id="skills">
         <SectionBreak orientation="left" height="tall">
