@@ -47,11 +47,13 @@ export function SectionBreak({
           isLeft ? "rounded-tl-4xl rounded-br-4xl" : "rounded-tr-4xl rounded-bl-4xl",
           padding
         )}>
-        <h2
-          className={cn("p-0 m-0 font-black text-center text-foreground", textSize)}
-          style={{ fontFamily: "var(--font-mazaeni-demo), serif" }}>
-          {children}
-        </h2>
+        {children && (
+          <h2
+            className={cn("p-4 m-0 font-black text-center text-foreground", textSize)}
+            style={{ fontFamily: "var(--font-mazaeni-demo), serif" }}>
+            {children}
+          </h2>
+        )}
       </div>
 
       {/* Lower triangle */}
