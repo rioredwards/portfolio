@@ -48,7 +48,7 @@ export function Navbar() {
   };
 
   return (
-    <div className="sticky top-4 w-full z-50 mx-auto flex items-center justify-center pointer-events-none">
+    <header className="sticky top-4 w-full z-50 mx-auto flex items-center justify-center pointer-events-none">
       <NavigationMenu viewport={false}>
         <div className="flex items-center gap-2 rounded-full bg-secondary/80 backdrop-blur-sm px-4 py-2 pointer-events-auto">
           <NavigationMenuList>
@@ -74,6 +74,6 @@ export function Navbar() {
           </NavigationMenuList>
         </div>
       </NavigationMenu>
-    </div>
+    </header>
   );
 }

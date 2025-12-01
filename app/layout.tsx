@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Playfair_Display } from "next/font/google";
 import localFont from "next/font/local";
+import { Footer } from "../components/footer";
 import { Navbar } from "../components/navbar";
+import { SectionBreak } from "../components/section-break";
 import { Sidebar } from "../components/sidebar";
 import "./globals.css";
 
@@ -72,6 +74,8 @@ export default function RootLayout({
           <Navbar />
           <Sidebar />
           {children}
+          <SectionBreak orientation="right" height="short"></SectionBreak>
+          <Footer />
         </>
       </body>
     </html>

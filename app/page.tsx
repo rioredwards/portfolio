@@ -1,15 +1,15 @@
 import { Blog } from "@/components/blog";
 import { Contact } from "@/components/contact";
-import { Footer } from "@/components/footer";
 import { Hero } from "@/components/hero";
 import { Project } from "@/components/project";
 import { SkillSection } from "@/components/skill-section";
 import { Code2, Database, LibraryBig, MessagesSquare } from "lucide-react";
 import { SectionBreak } from "../components/section-break";
+import { SectionContent } from "../components/section-content";
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-background font-sans">
+    <main className="min-h-screen bg-background font-sans">
       <section id="home">
         <div className="mx-auto w-full max-w-6xl px-4 pt-8">
           <Hero
@@ -28,50 +28,56 @@ export default function Home() {
         <SectionBreak orientation="left" height="tall">
           Projects
         </SectionBreak>
-        <Project
-          category="Planning"
-          title="Class TopBase"
-          description="ClassTopBase is a school management software for after-schools. For this project, I designed a feature to help school owners plan their students' academic plans efficiently."
-          skills={[
-            "JavaScript",
-            "JavaScript",
-            "JavaScript",
-            "JavaScript",
-            "JavaScript",
-            "JavaScript",
-          ]}
-          image="/temp-proj-photo.webp"
-        />
+        <SectionContent>
+          <Project
+            category="Planning"
+            title="Class TopBase"
+            description="ClassTopBase is a school management software for after-schools. For this project, I designed a feature to help school owners plan their students' academic plans efficiently."
+            skills={[
+              "JavaScript",
+              "JavaScript",
+              "JavaScript",
+              "JavaScript",
+              "JavaScript",
+              "JavaScript",
+            ]}
+            image="/temp-proj-photo.webp"
+          />
+        </SectionContent>
         <SectionBreak orientation="right" height="short"></SectionBreak>
-        <Project
-          category="Planning"
-          title="Class TopBase"
-          description="ClassTopBase is a school management software for after-schools. For this project, I designed a feature to help school owners plan their students' academic plans efficiently."
-          skills={[
-            "JavaScript",
-            "JavaScript",
-            "JavaScript",
-            "JavaScript",
-            "JavaScript",
-            "JavaScript",
-          ]}
-          image="/temp-proj-photo.webp"
-        />
+        <SectionContent>
+          <Project
+            category="Planning"
+            title="Class TopBase"
+            description="ClassTopBase is a school management software for after-schools. For this project, I designed a feature to help school owners plan their students' academic plans efficiently."
+            skills={[
+              "JavaScript",
+              "JavaScript",
+              "JavaScript",
+              "JavaScript",
+              "JavaScript",
+              "JavaScript",
+            ]}
+            image="/temp-proj-photo.webp"
+          />
+        </SectionContent>
         <SectionBreak orientation="left" height="short"></SectionBreak>
-        <Project
-          category="Planning"
-          title="Class TopBase"
-          description="ClassTopBase is a school management software for after-schools. For this project, I designed a feature to help school owners plan their students' academic plans efficiently."
-          skills={[
-            "JavaScript",
-            "JavaScript",
-            "JavaScript",
-            "JavaScript",
-            "JavaScript",
-            "JavaScript",
-          ]}
-          image="/temp-proj-photo.webp"
-        />
+        <SectionContent>
+          <Project
+            category="Planning"
+            title="Class TopBase"
+            description="ClassTopBase is a school management software for after-schools. For this project, I designed a feature to help school owners plan their students' academic plans efficiently."
+            skills={[
+              "JavaScript",
+              "JavaScript",
+              "JavaScript",
+              "JavaScript",
+              "JavaScript",
+              "JavaScript",
+            ]}
+            image="/temp-proj-photo.webp"
+          />
+        </SectionContent>
       </section>
       <section id="skills">
         <SectionBreak orientation="left" height="tall">
@@ -109,8 +115,6 @@ export default function Home() {
         </SectionBreak>
         <Contact />
       </section>
-      <SectionBreak orientation="right" height="short"></SectionBreak>
-      <Footer />
-    </div>
+    </main>
   );
 }
