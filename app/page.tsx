@@ -10,7 +10,7 @@ export default function Home() {
   return (
     <main className="min-h-screen bg-background font-sans">
       <section id="home">
-        <div className="mx-auto w-full max-w-6xl px-4 pt-8">
+        <div className="section-content mt-16 mb-12">
           <Hero
             title="Hello, I'm Rio."
             subheading="Lorem ipsum Maxime"

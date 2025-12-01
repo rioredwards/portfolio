@@ -25,7 +25,7 @@ export function Hero({
   className,
 }: HeroProps) {
   return (
-    <section className={cn("py-16", className)}>
+    <div className={cn("", className)}>
       {/* Main heading - centered */}
       <h1
         className="mb-12 text-center text-5xl font-bold tracking-tight text-foreground sm:text-6xl md:text-7xl"
@@ -34,11 +34,11 @@ export function Hero({
       </h1>
 
       {/* Content area - profile picture left, text right */}
-      <div className="flex flex-col gap-8 md:flex-row md:items-start md:gap-12">
+      <div className="flex flex-col gap-12 items-center md:flex-row md:items-start md:gap-12">
         {/* Profile picture */}
         {imageSrc && (
           <div className="shrink-0">
-            <div className="relative h-48 w-48 overflow-hidden rounded-full border-4 sm:h-64 sm:w-64">
+            <div className="relative h-64 overflow-hidden rounded-full border-4 sm:h-64 aspect-square">
               <Image src={imageSrc} alt={imageAlt} fill className="object-cover" priority />
             </div>
           </div>
@@ -56,14 +56,14 @@ export function Hero({
               ))}
             </div>
           )}
-          {/* Contact button - right aligned */}
-          <div className="flex justify-end">
+          {/* Contact button */}
+          <div className="flex justify-center md:justify-end">
             <Button asChild size="lg" className="uppercase tracking-wider">
               <Link href={buttonHref}>{buttonText}</Link>
             </Button>
           </div>
         </div>
       </div>
-    </section>
+    </div>
   );
 }
