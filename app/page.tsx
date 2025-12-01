@@ -82,37 +82,53 @@ export default function Home() {
         <SectionBreak orientation="left" height="tall">
           Skills
         </SectionBreak>
-        <SkillSection
-          category="Languages"
-          icon={<Code2 className="h-8 w-8" aria-hidden="true" />}
-          skills={["TypeScript", "JavaScript", "HTML", "CSS", "SQL", "Python"]}
-        />
-        <SkillSection
-          category="Libraries & Frameworks"
-          icon={<LibraryBig className="h-8 w-8" aria-hidden="true" />}
-          skills={["React", "Next.js", "Node.js", "Express", "Tailwind CSS", "shadcn/ui"]}
-        />
-        <SkillSection
-          category="Databases & Storage"
-          icon={<Database className="h-8 w-8" aria-hidden="true" />}
-          skills={["PostgreSQL", "MySQL", "MongoDB", "SQLite", "Redis", "Supabase"]}
-        />
+        <div className="section-content flex flex-col gap-12 py-12">
+          <SkillSection
+            category="Languages"
+            icon={<Code2 className="h-8 w-8" aria-hidden="true" />}
+            skills={["TypeScript", "JavaScript", "HTML", "CSS", "SQL", "Python"]}
+          />
+          <SkillSection
+            category="Libraries & Frameworks"
+            icon={<LibraryBig className="h-8 w-8" aria-hidden="true" />}
+            skills={["React", "Next.js", "Node.js", "Express", "Tailwind CSS", "shadcn/ui"]}
+          />
+          <SkillSection
+            category="Databases & Storage"
+            icon={<Database className="h-8 w-8" aria-hidden="true" />}
+            skills={["PostgreSQL", "MySQL", "MongoDB", "SQLite", "Redis", "Supabase"]}
+          />
+        </div>
       </section>
       <section id="blog">
         <SectionBreak orientation="right" height="tall">
           Blog
         </SectionBreak>
-        <Blog
-          title="Blog Title"
-          description="Blog Description"
-          icon={<MessagesSquare className="h-10 w-10" aria-hidden="true" />}
-        />
+        <div className="section-content flex flex-col gap-12 py-12">
+          <Blog
+            title="Blog Title"
+            description="Blog Description"
+            icon={<MessagesSquare className="h-10 w-10" aria-hidden="true" />}
+          />
+          <Blog
+            title="Blog Title"
+            description="Blog Description"
+            icon={<MessagesSquare className="h-10 w-10" aria-hidden="true" />}
+          />
+          <Blog
+            title="Blog Title"
+            description="Blog Description"
+            icon={<MessagesSquare className="h-10 w-10" aria-hidden="true" />}
+          />
+        </div>
       </section>
       <section id="contact">
         <SectionBreak orientation="left" height="tall">
           Contact
         </SectionBreak>
-        <Contact />
+        <div className="section-content">
+          <Contact />
+        </div>
       </section>
     </main>
   );
