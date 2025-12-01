@@ -1,26 +1,13 @@
 "use client";
 
-import { FileText, Mail } from "lucide-react";
+import { getSocialLinks } from "@/lib/social-links";
 import Link from "next/link";
-import { SiGithub, SiLinkedin, SiYoutube } from "react-icons/si";
 
-interface SocialLink {
-  icon: React.ReactNode;
-  href: string;
-  label: string;
-}
-
-const socialLinks: SocialLink[] = [
-  { icon: <Mail className="size-5" />, href: "mailto:your@email.com", label: "Email" },
-  { icon: <SiGithub className="size-5" />, href: "https://github.com", label: "GitHub" },
-  { icon: <SiLinkedin className="size-5" />, href: "https://linkedin.com", label: "LinkedIn" },
-  { icon: <SiYoutube className="size-5" />, href: "https://youtube.com", label: "YouTube" },
-  { icon: <FileText className="size-5" />, href: "#", label: "Resume" },
-];
+const socialLinks = getSocialLinks();
 
 export function Sidebar() {
   return (
-    <aside className="group fixed left-4 top-1/2 -translate-y-1/2 z-50">
+    <aside className="group fixed left-4 top-1/2 -translate-y-1/2 z-50 hidden md:block">
       <nav className="flex flex-col gap-1 rounded-lg bg-secondary/80 backdrop-blur-sm p-2 transition-all duration-300">
         {socialLinks.map((link, index) => (
           <Link
