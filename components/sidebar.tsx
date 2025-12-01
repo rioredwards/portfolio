@@ -1,5 +1,3 @@
-"use client";
-
 import { getSocialLinks } from "@/lib/social-links";
 import Link from "next/link";
 

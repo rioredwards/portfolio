@@ -35,7 +35,7 @@ export function MobileMenu() {
 
       {/* Fullscreen menu overlay */}
       {isOpen && (
-        <div className="fixed inset-0 z-[100] bg-background md:hidden">
+        <div className="fixed inset-0 z-100 bg-background md:hidden">
           {/* Close button - top right */}
           <button
             onClick={() => setIsOpen(false)}
