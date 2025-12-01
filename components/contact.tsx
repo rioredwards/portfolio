@@ -14,7 +14,7 @@ export function Contact() {
       </div>
 
       {/* Right form */}
-      <form className="flex flex-1 flex-col gap-6">
+      <form suppressHydrationWarning={true} className="flex flex-1 flex-col gap-6">
         {/* Name & Email row */}
         <div className="grid gap-4 md:grid-cols-2">
           <div className="flex flex-col gap-2">
@@ -25,6 +25,7 @@ export function Contact() {
               Full Name
             </label>
             <input
+              suppressHydrationWarning={true}
               id="fullName"
               name="fullName"
               type="text"
@@ -40,6 +41,7 @@ export function Contact() {
               Email
             </label>
             <input
+              suppressHydrationWarning={true}
               id="email"
               name="email"
               type="email"
@@ -58,6 +60,7 @@ export function Contact() {
             Message
           </label>
           <textarea
+            suppressHydrationWarning={true}
             id="message"
             name="message"
             rows={6}
