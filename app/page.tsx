@@ -8,7 +8,7 @@ import { SectionBreak } from "../components/section-break";
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-background font-sans">
+    <main className="min-h-screen bg-background">
       <section id="home">
         <div className="section-content pt-24 pb-16 md:py-42 lg:py-48">
           <Hero

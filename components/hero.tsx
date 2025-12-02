@@ -58,7 +58,7 @@ export function Hero({
             ))}
           </div>
         )}
-        <div className="flex justify-center md:justify-start">
+        <div className="flex justify-center md:justify-start mt-12 md:mt-4">
           <Button asChild size="lg" className="uppercase tracking-wider">
             <Link href={buttonHref}>{buttonText}</Link>
           </Button>
