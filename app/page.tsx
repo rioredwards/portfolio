@@ -10,7 +10,7 @@ export default function Home() {
   return (
     <main className="min-h-screen bg-background">
       <section id="home">
-        <div className="section-content pt-24 pb-16">
+        <div className="section-content pt-24 pb-16 md:pt-48 md:pb-40">
           <Hero
             title="Hello, I'm Rio."
             paragraphs={[
@@ -26,7 +26,7 @@ export default function Home() {
         <SectionBreak orientation="left" height="tall">
           Projects
         </SectionBreak>
-        <div className="section-content">
+        <div className="section-content md:py-24">
           <Project
             category="Planning"
             title="Class TopBase"
@@ -43,7 +43,7 @@ export default function Home() {
           />
         </div>
         <SectionBreak orientation="right" height="short"></SectionBreak>
-        <div className="section-content">
+        <div className="section-content md:py-24">
           <Project
             category="Planning"
             title="Class TopBase"
@@ -60,7 +60,7 @@ export default function Home() {
           />
         </div>
         <SectionBreak orientation="left" height="short"></SectionBreak>
-        <div className="section-content">
+        <div className="section-content md:py-24">
           <Project
             category="Planning"
             title="Class TopBase"
@@ -125,7 +125,7 @@ export default function Home() {
         <SectionBreak orientation="left" height="tall">
           Contact
         </SectionBreak>
-        <div className="section-content">
+        <div className="section-content md:py-24">
           <Contact />
         </div>
       </section>
