@@ -10,12 +10,11 @@ export default function Home() {
   return (
     <main className="min-h-screen bg-background font-sans">
       <section id="home">
-        <div className="section-content mt-16 mb-12 md:mt-28 md:mb-16 lg:mt-32 lg:mb-28">
+        <div className="section-content pt-24 pb-16 md:py-42 lg:py-48">
           <Hero
             title="Hello, I'm Rio."
-            subheading="Lorem ipsum Maxime"
             paragraphs={[
-              "Veritatis obcaecati tenetur iure eius earum ut molestias architecto...",
+              "Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia, molestiae quas vel sint commod repudiandae consequuntur voluptatum laborum.",
               "Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia...",
             ]}
             imageSrc="/profile.jpg"

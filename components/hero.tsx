@@ -5,7 +5,6 @@ import Link from "next/link";
 
 interface HeroProps {
   title: string;
-  subheading?: string;
   paragraphs?: string[];
   buttonText?: string;
   buttonHref?: string;
@@ -16,7 +15,6 @@ interface HeroProps {
 
 export function Hero({
   title,
-  subheading,
   paragraphs,
   buttonText = "CONTACT",
   buttonHref = "#contact",
@@ -25,43 +23,45 @@ export function Hero({
   className,
 }: HeroProps) {
   return (
-    <div className={cn("", className)}>
-      {/* Main heading - centered */}
-      <h1
-        className="mb-12 text-center text-5xl font-bold tracking-tight text-foreground sm:text-6xl md:text-7xl"
-        style={{ fontFamily: "var(--font-mazaeni-demo), serif" }}>
-        {title}
-      </h1>
+    <div
+      className={cn(
+        "grid grid-cols-1 md:place-items-stretch place-items-center md:grid-cols-[auto_1fr] md:grid-rows-[auto_auto]",
+        className
+      )}>
+      {/* Main heading - top-cell on mobile, top-right-cell on desktop */}
+      <div className="md:col-start-2 md:row-start-1 mb-4 md:mb-2">
+        <h1
+          className="text-[clamp(3rem,14vw,5rem)] md:text-6xl lg:text-7xl md:text-left whitespace-nowrap text-center font-bold tracking-tight text-foreground"
+          style={{ fontFamily: "var(--font-mazaeni-demo), serif" }}>
+          {title}
+        </h1>
+      </div>
 
-      {/* Content area - profile picture left, text right */}
-      <div className="flex flex-col gap-12 items-center md:flex-row md:items-start md:gap-12">
+      {/* Profile Picture - middle-cell on mobile, left-cell on desktop */}
+      <div className="md:row-span-2 md:flex md:place-items-center mb-8 md:mb-0 md:ml-12 md:mr-8 lg:mr-16">
         {/* Profile picture */}
         {imageSrc && (
-          <div className="shrink-0">
-            <div className="relative h-64 overflow-hidden rounded-full border-4 sm:h-64 aspect-square">
-              <Image src={imageSrc} alt={imageAlt} fill className="object-cover" priority />
-            </div>
+          <div className="relative h-64 overflow-hidden rounded-full border-4 sm:h-64 aspect-square">
+            <Image src={imageSrc} alt={imageAlt} fill className="object-cover" priority />
           </div>
         )}
+      </div>
 
-        {/* Text content */}
-        <div className="flex-1">
-          {subheading && <h2 className="mb-4 text-xl font-bold sm:text-2xl">{subheading}</h2>}
-          {paragraphs && (
-            <div className="mb-6 space-y-4 text-secondary-foreground">
-              {paragraphs.map((paragraph, index) => (
-                <p key={index} className="leading-relaxed">
-                  {paragraph}
-                </p>
-              ))}
-            </div>
-          )}
-          {/* Contact button */}
-          <div className="flex justify-center md:justify-end">
-            <Button asChild size="lg" className="uppercase tracking-wider">
-              <Link href={buttonHref}>{buttonText}</Link>
-            </Button>
+      {/* Subheading and paragraphs - bottom-cell on mobile, bottom-right-cell on desktop */}
+      <div className="md:col-start-2 md:row-start-2 flex-1 max-w-lg">
+        {paragraphs && (
+          <div className="mb-6 space-y-4 text-secondary-foreground">
+            {paragraphs.map((paragraph, index) => (
+              <p key={index} className="leading-relaxed">
+                {paragraph}
+              </p>
+            ))}
           </div>
+        )}
+        <div className="flex justify-center md:justify-start">
+          <Button asChild size="lg" className="uppercase tracking-wider">
+            <Link href={buttonHref}>{buttonText}</Link>
+          </Button>
         </div>
       </div>
     </div>
