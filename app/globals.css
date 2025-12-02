@@ -103,6 +103,9 @@
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+  --radius-4xl: calc(var(--radius) + 16px);
 }
 
 @layer base {
@@ -121,33 +124,17 @@
 }
 
 @layer utilities {
-  .angled-border-xs {
-    border-top-left-radius: var(--radius-xs);
-    border-bottom-right-radius: var(--radius-xs);
-  }
   .angled-border-sm {
-    border-top-left-radius: var(--radius-sm);
-    border-bottom-right-radius: var(--radius-sm);
-  }
-  .angled-border-md {
-    border-top-left-radius: var(--radius-md);
-    border-bottom-right-radius: var(--radius-md);
-  }
-  .angled-border-lg {
-    border-top-left-radius: var(--radius-lg); 
-    border-bottom-right-radius: var(--radius-lg); 
-  }
-  .angled-border-xl {
-    border-top-left-radius: var(--radius-xl);
-    border-bottom-right-radius: var(--radius-xl);
-  }
-  .angled-border-2xl {
     border-top-left-radius: var(--radius-2xl);
     border-bottom-right-radius: var(--radius-2xl);
   }
-  .angled-border-3xl  {
-    border-top-left-radius: var(--radius-3xl);
+  .angled-border-md {
+    border-top-left-radius: var(--radius-3xl); 
     border-bottom-right-radius: var(--radius-3xl);
+  }
+  .angled-border-lg {
+    border-top-left-radius: var(--radius-4xl); 
+    border-bottom-right-radius: var(--radius-4xl); 
   }
   .angled-border-full {
     border-top-left-radius: 100%;

@@ -9,7 +9,7 @@ interface SkillSectionProps {
 
 export function SkillSection({ category, skills, icon }: SkillSectionProps) {
   return (
-    <div className="rounded-[3rem] bg-secondary px-8 py-10 lg:px-14 lg:py-12">
+    <div className="rounded-[3rem] px-8 py-10 lg:px-14 lg:py-12">
       <div className="mb-8 flex items-center gap-4 text-foreground">
         {icon}
         <h2
@@ -25,9 +25,9 @@ export function SkillSection({ category, skills, icon }: SkillSectionProps) {
           <Skill
             key={`${skill}-${index}`}
             text={skill}
-            variant="filled"
+            variant="outline"
             size="md"
-            className="min-w-36 tracking-[0.16em]"
+            className="tracking-[0.16em]"
           />
         ))}
       </div>

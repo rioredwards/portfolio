@@ -8,9 +8,8 @@ const skillVariants = cva("inline-flex items-center justify-center font-medium t
       outline: "border border-primary text-primary",
     },
     size: {
-      sm: "min-w-16 h-8 angled-border-lg px-3",
-      md: "min-w-24 h-9 angled-border-xl px-4",
-      lg: "min-w-28 h-10 angled-border-2xl px-6",
+      sm: "min-w-16 h-9 angled-border-md px-4",
+      md: "min-w-24 h-10 angled-border-lg px-6",
     },
   },
   defaultVariants: {
