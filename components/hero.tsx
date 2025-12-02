@@ -38,7 +38,7 @@ export function Hero({
       </div>
 
       {/* Profile Picture - middle-cell on mobile, left-cell on desktop */}
-      <div className="md:row-span-2 md:flex md:place-items-center mb-8 md:mb-0 md:ml-12 md:mr-8 lg:mr-16">
+      <div className="md:row-span-2 md:flex md:place-items-center mb-8 md:mb-0 md:mr-8 lg:mr-16">
         {/* Profile picture */}
         {imageSrc && (
           <div className="relative h-64 overflow-hidden rounded-full border-4 sm:h-64 aspect-square">

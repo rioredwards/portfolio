@@ -10,7 +10,7 @@ export default function Home() {
   return (
     <main className="min-h-screen bg-background">
       <section id="home">
-        <div className="section-content pt-24 pb-16 md:py-42 lg:py-48">
+        <div className="section-content pt-24 pb-16">
           <Hero
             title="Hello, I'm Rio."
             paragraphs={[
