@@ -1,6 +1,7 @@
 "use server";
 
 import { CodeBlock, CodeCard, CodeDetail, HeroContent } from "@/lib/dataTypes";
+import env from "@/lib/env";
 import {
   CODE_BLOCK_GRAPHQL_FIELDS,
   CODE_CARDS_GRAPHQL_FIELDS,
@@ -8,31 +9,24 @@ import {
   HERO_GRAPHQL_FIELDS,
 } from "@/lib/graphqlQueries";
 
-async function fetchGraphQL(query: string, preview = false): Promise<any> {
-  console.log("CONTENTFUL_ACCESS_TOKEN", process.env.CONTENTFUL_ACCESS_TOKEN);
-  console.log(
-    "CONTENTFUL_PREVIEW_ACCESS_TOKEN",
-    process.env.CONTENTFUL_PREVIEW_ACCESS_TOKEN,
-  );
-  console.log("CONTENTFUL_SPACE_ID", process.env.CONTENTFUL_SPACE_ID);
+const CONTENTFUL_GRAPHQL_URL =
+  "https://graphql.contentful.com/content/v1/spaces/";
 
-  return fetch(
-    `https://graphql.contentful.com/content/v1/spaces/${process.env.CONTENTFUL_SPACE_ID}`,
-    {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${
-          preview
-            ? process.env.CONTENTFUL_PREVIEW_ACCESS_TOKEN
-            : process.env.CONTENTFUL_ACCESS_TOKEN
-        }`,
-      },
-      body: JSON.stringify({ query }),
-      // TODO: Decide on caching strategy / change revalidate time for deployment
-      next: { tags: ["codeProjects"], revalidate: 30 },
+async function fetchGraphQL(query: string, preview = false): Promise<any> {
+  return fetch(`${CONTENTFUL_GRAPHQL_URL}${env.CONTENTFUL_SPACE_ID}`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${
+        preview
+          ? env.CONTENTFUL_PREVIEW_ACCESS_TOKEN
+          : env.CONTENTFUL_ACCESS_TOKEN
+      }`,
     },
-  ).then((response) => response.json());
+    body: JSON.stringify({ query }),
+    // TODO: Decide on caching strategy / change revalidate time for deployment
+    next: { tags: ["codeProjects"], revalidate: 30 },
+  }).then((response) => response.json());
 }
 
 function extractHeroContent(content: any): any {
