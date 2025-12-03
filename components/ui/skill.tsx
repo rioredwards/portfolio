@@ -2,12 +2,12 @@ import { cn } from "@/lib/utils";
 import { cva, type VariantProps } from "class-variance-authority";
 
 const skillVariants = cva(
-  "inline-flex items-center justify-center font-medium tracking-wide",
+  "inline-flex items-center justify-center font-medium font-serif tracking-wide",
   {
     variants: {
       variant: {
-        filled: "bg-primary text-secondary",
-        outline: "border border-primary text-primary",
+        filled: "bg-foreground text-secondary",
+        outline: "border border-foreground text-foreground",
       },
       size: {
         sm: "min-w-16 h-9 angled-border-md px-4",

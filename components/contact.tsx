@@ -14,7 +14,7 @@ export function Contact() {
           height={300}
         />
         <p
-          className="text-secondary-foreground text-3xl leading-tight font-bold sm:text-4xl"
+          className="text-foreground text-3xl leading-tight font-bold sm:text-4xl"
           style={{ fontFamily: "var(--font-mazaeni-demo), serif" }}
         >
           Nice to meet you!
