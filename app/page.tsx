@@ -2,7 +2,9 @@ import { Blog } from "@/components/blog";
 import { Contact } from "@/components/contact";
 import { Hero } from "@/components/hero";
 import { Project } from "@/components/project";
+import profileImage from "@/public/profile.webp";
 import { MessagesSquare } from "lucide-react";
+import Image from "next/image";
 import { SectionBreak } from "../components/section-break";
 
 export default function Home() {
@@ -16,8 +18,15 @@ export default function Home() {
               "Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia, molestiae quas vel sint commod repudiandae consequuntur voluptatum laborum.",
               "Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia...",
             ]}
-            imageSrc="/profile.jpg"
-            imageAlt="Rio"
+            image={
+              <Image
+                src={profileImage}
+                alt="Rio Edwards"
+                fill
+                className="object-cover"
+                priority
+              />
+            }
           />
         </div>
       </section>

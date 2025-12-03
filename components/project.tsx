@@ -61,7 +61,7 @@ export function Project({
             <Skill
               key={`${skill}-${index}`}
               text={skill}
-              variant="outline"
+              variant="filled"
               size="sm"
             />
           ))}

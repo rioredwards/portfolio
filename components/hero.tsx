@@ -1,6 +1,5 @@
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import Image from "next/image";
 import Link from "next/link";
 
 interface HeroProps {
@@ -8,8 +7,7 @@ interface HeroProps {
   paragraphs?: string[];
   buttonText?: string;
   buttonHref?: string;
-  imageSrc?: string;
-  imageAlt?: string;
+  image: React.ReactNode;
   className?: string;
 }
 
@@ -18,8 +16,7 @@ export function Hero({
   paragraphs,
   buttonText = "CONTACT",
   buttonHref = "#contact",
-  imageSrc,
-  imageAlt = "Profile picture",
+  image,
   className,
 }: HeroProps) {
   return (
@@ -42,17 +39,9 @@ export function Hero({
       {/* Profile Picture - middle-cell on mobile, left-cell on desktop */}
       <div className="mb-8 md:row-span-2 md:mr-8 md:mb-0 md:flex md:place-items-center lg:mr-16">
         {/* Profile picture */}
-        {imageSrc && (
-          <div className="relative aspect-square h-64 overflow-hidden rounded-full border-4 sm:h-64">
-            <Image
-              src={imageSrc}
-              alt={imageAlt}
-              fill
-              className="object-cover"
-              priority
-            />
-          </div>
-        )}
+        <div className="relative aspect-square h-64 overflow-hidden rounded-full border-4 sm:h-64">
+          {image}
+        </div>
       </div>
 
       {/* Subheading and paragraphs - bottom-cell on mobile, bottom-right-cell on desktop */}

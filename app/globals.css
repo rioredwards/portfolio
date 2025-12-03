@@ -6,8 +6,8 @@
 :root {
   /* Theme colors (source of truth) */
   --theme-background: #f4ebda;
-  --theme-foreground: #4c6763;
-  --theme-background-primary: #0d6746;
+  --theme-foreground: #2d645d;
+  --theme-background-primary: #3b823d;
   --theme-foreground-primary: #fdfbf6;
   --theme-background-secondary: #ebdbbc;
   --theme-foreground-secondary: #5c4b3e;
