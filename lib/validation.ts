@@ -45,7 +45,7 @@ export const ShieldSchema = z.object({
 export const HeroContentSchema = z.object({
   title: z.string(),
   secondaryText: z.string(),
-  tertiaryText: z.string(),
+  tertiaryText: z.string().nullable(),
   avatar: ContentfulImageSchema,
 });
 

@@ -127,6 +127,7 @@ async function fetchGraphQL(query: string, preview = false): Promise<unknown> {
 }
 
 function extractHeroContent(content: unknown): HeroContent {
+  console.log(content);
   const heroContentResponseSchema = z.object({
     heroContentCollection: z.object({
       items: z.array(HeroContentSchema).min(1),

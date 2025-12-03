@@ -2,7 +2,6 @@ import { Blog } from "@/components/blog";
 import { Contact } from "@/components/contact";
 import { Hero } from "@/components/hero";
 import { Project } from "@/components/project";
-import profileImage from "@/public/profile.webp";
 import { MessagesSquare } from "lucide-react";
 import { draftMode } from "next/headers";
 import Image from "next/image";
@@ -11,25 +10,24 @@ import { getHeroContent } from "../lib/api";
 
 export default async function Home() {
   const { isEnabled: draftModeIsEnabled } = await draftMode();
-  console.log(draftModeIsEnabled);
   const heroContent = await getHeroContent(draftModeIsEnabled);
 
-  console.log(heroContent);
+  // console.log(heroContent);
 
   return (
     <main className="bg-background min-h-screen">
       <section id="home">
         <div className="section-content pt-24 pb-16 md:pt-48 md:pb-40">
           <Hero
-            title="Hello, I'm Rio."
+            title={heroContent.title}
             paragraphs={[
-              "Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia, molestiae quas vel sint commod repudiandae consequuntur voluptatum laborum.",
-              "Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia...",
+              heroContent.secondaryText,
+              heroContent.tertiaryText ?? "",
             ]}
             image={
               <Image
-                src={profileImage}
-                alt="Rio Edwards"
+                src={heroContent.avatar.url}
+                alt={heroContent.avatar.title}
                 fill
                 className="object-cover"
                 priority

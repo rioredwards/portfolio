@@ -20,7 +20,7 @@ interface RichTextContent {
 interface HeroContent {
   title: string;
   secondaryText: string;
-  tertiaryText: string;
+  tertiaryText: string | null;
   avatar: ContentfulImage;
 }
 
