@@ -4,10 +4,18 @@ import { Hero } from "@/components/hero";
 import { Project } from "@/components/project";
 import profileImage from "@/public/profile.webp";
 import { MessagesSquare } from "lucide-react";
+import { draftMode } from "next/headers";
 import Image from "next/image";
 import { SectionBreak } from "../components/section-break";
+import { getHeroContent } from "../lib/api";
 
-export default function Home() {
+export default async function Home() {
+  const { isEnabled: draftModeIsEnabled } = await draftMode();
+  console.log(draftModeIsEnabled);
+  const heroContent = await getHeroContent(draftModeIsEnabled);
+
+  console.log(heroContent);
+
   return (
     <main className="bg-background min-h-screen">
       <section id="home">
