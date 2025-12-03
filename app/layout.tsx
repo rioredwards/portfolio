@@ -70,7 +70,8 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${playfairDisplay.variable} ${mazaeniDemo.variable} antialiased font-serif`}>
+        className={`${geistSans.variable} ${geistMono.variable} ${playfairDisplay.variable} ${mazaeniDemo.variable} font-serif antialiased`}
+      >
         <>
           <Navbar />
           <Sidebar />

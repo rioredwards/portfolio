@@ -30,13 +30,14 @@ export function SectionBreak({
       {/* Upper triangle */}
       <svg
         className={cn(
-          "block fill-secondary w-auto",
+          "fill-secondary block w-auto",
           triangleHeight,
-          isLeft ? "ml-auto" : "mr-auto rotate-90"
+          isLeft ? "ml-auto" : "mr-auto rotate-90",
         )}
         viewBox="0 0 280 280"
         fill="none"
-        xmlns="http://www.w3.org/2000/svg">
+        xmlns="http://www.w3.org/2000/svg"
+      >
         <path d={trianglePath} />
       </svg>
 
@@ -44,13 +45,20 @@ export function SectionBreak({
       <div
         className={cn(
           "bg-secondary",
-          isLeft ? "rounded-tl-4xl rounded-br-4xl" : "rounded-tr-4xl rounded-bl-4xl",
-          padding
-        )}>
+          isLeft
+            ? "rounded-tl-4xl rounded-br-4xl"
+            : "rounded-tr-4xl rounded-bl-4xl",
+          padding,
+        )}
+      >
         {children && (
           <h2
-            className={cn("p-4 m-0 font-black text-center text-foreground", textSize)}
-            style={{ fontFamily: "var(--font-mazaeni-demo), serif" }}>
+            className={cn(
+              "text-foreground m-0 p-4 text-center font-black",
+              textSize,
+            )}
+            style={{ fontFamily: "var(--font-mazaeni-demo), serif" }}
+          >
             {children}
           </h2>
         )}
@@ -59,13 +67,14 @@ export function SectionBreak({
       {/* Lower triangle */}
       <svg
         className={cn(
-          "block fill-secondary w-auto",
+          "fill-secondary block w-auto",
           triangleHeight,
-          isLeft ? "mr-auto rotate-180" : "ml-auto rotate-270"
+          isLeft ? "mr-auto rotate-180" : "ml-auto rotate-270",
         )}
         viewBox="0 0 280 280"
         fill="none"
-        xmlns="http://www.w3.org/2000/svg">
+        xmlns="http://www.w3.org/2000/svg"
+      >
         <path d={trianglePath} />
       </svg>
     </div>

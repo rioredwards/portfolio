@@ -25,32 +25,40 @@ export function Hero({
   return (
     <div
       className={cn(
-        "grid grid-cols-1 md:place-items-stretch place-items-center md:grid-cols-[auto_1fr] md:grid-rows-[auto_auto]",
-        className
-      )}>
+        "grid grid-cols-1 place-items-center md:grid-cols-[auto_1fr] md:grid-rows-[auto_auto] md:place-items-stretch",
+        className,
+      )}
+    >
       {/* Main heading - top-cell on mobile, top-right-cell on desktop */}
-      <div className="md:col-start-2 md:row-start-1 mb-4 md:mb-2">
+      <div className="mb-4 md:col-start-2 md:row-start-1 md:mb-2">
         <h1
-          className="text-[clamp(3rem,14vw,5rem)] md:text-6xl lg:text-7xl md:text-left whitespace-nowrap text-center font-bold tracking-tight text-foreground"
-          style={{ fontFamily: "var(--font-mazaeni-demo), serif" }}>
+          className="text-foreground text-center text-[clamp(3rem,14vw,5rem)] font-bold tracking-tight whitespace-nowrap md:text-left md:text-6xl lg:text-7xl"
+          style={{ fontFamily: "var(--font-mazaeni-demo), serif" }}
+        >
           {title}
         </h1>
       </div>
 
       {/* Profile Picture - middle-cell on mobile, left-cell on desktop */}
-      <div className="md:row-span-2 md:flex md:place-items-center mb-8 md:mb-0 md:mr-8 lg:mr-16">
+      <div className="mb-8 md:row-span-2 md:mr-8 md:mb-0 md:flex md:place-items-center lg:mr-16">
         {/* Profile picture */}
         {imageSrc && (
-          <div className="relative h-64 overflow-hidden rounded-full border-4 sm:h-64 aspect-square">
-            <Image src={imageSrc} alt={imageAlt} fill className="object-cover" priority />
+          <div className="relative aspect-square h-64 overflow-hidden rounded-full border-4 sm:h-64">
+            <Image
+              src={imageSrc}
+              alt={imageAlt}
+              fill
+              className="object-cover"
+              priority
+            />
           </div>
         )}
       </div>
 
       {/* Subheading and paragraphs - bottom-cell on mobile, bottom-right-cell on desktop */}
-      <div className="md:col-start-2 md:row-start-2 flex-1 max-w-lg">
+      <div className="max-w-lg flex-1 md:col-start-2 md:row-start-2">
         {paragraphs && (
-          <div className="mb-6 space-y-4 text-secondary-foreground">
+          <div className="text-secondary-foreground mb-6 space-y-4">
             {paragraphs.map((paragraph, index) => (
               <p key={index} className="leading-relaxed">
                 {paragraph}
@@ -58,8 +66,8 @@ export function Hero({
             ))}
           </div>
         )}
-        <div className="flex justify-center md:justify-start mt-12 md:mt-4">
-          <Button asChild size="lg" className="uppercase tracking-wider">
+        <div className="mt-12 flex justify-center md:mt-4 md:justify-start">
+          <Button asChild size="lg" className="tracking-wider uppercase">
             <Link href={buttonHref}>{buttonText}</Link>
           </Button>
         </div>

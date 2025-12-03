@@ -1,22 +1,25 @@
 import { cn } from "@/lib/utils";
 import { cva, type VariantProps } from "class-variance-authority";
 
-const skillVariants = cva("inline-flex items-center justify-center font-medium tracking-wide", {
-  variants: {
-    variant: {
-      filled: "bg-primary text-secondary",
-      outline: "border border-primary text-primary",
+const skillVariants = cva(
+  "inline-flex items-center justify-center font-medium tracking-wide",
+  {
+    variants: {
+      variant: {
+        filled: "bg-primary text-secondary",
+        outline: "border border-primary text-primary",
+      },
+      size: {
+        sm: "min-w-16 h-9 angled-border-md px-4",
+        md: "min-w-24 h-10 angled-border-lg px-6",
+      },
     },
-    size: {
-      sm: "min-w-16 h-9 angled-border-md px-4",
-      md: "min-w-24 h-10 angled-border-lg px-6",
+    defaultVariants: {
+      variant: "filled",
+      size: "md",
     },
   },
-  defaultVariants: {
-    variant: "filled",
-    size: "md",
-  },
-});
+);
 
 interface SkillProps extends VariantProps<typeof skillVariants> {
   text: string;
@@ -24,5 +27,9 @@ interface SkillProps extends VariantProps<typeof skillVariants> {
 }
 
 export function Skill({ text, variant, size, className }: SkillProps) {
-  return <span className={cn(skillVariants({ variant, size }), className)}>{text}</span>;
+  return (
+    <span className={cn(skillVariants({ variant, size }), className)}>
+      {text}
+    </span>
+  );
 }

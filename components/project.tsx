@@ -23,36 +23,47 @@ export function Project({
     <article
       className={cn(
         "flex flex-col gap-12 lg:flex-row lg:items-center lg:gap-16",
-        orientation === "left" ? "lg:flex-row" : "lg:flex-row-reverse"
-      )}>
+        orientation === "left" ? "lg:flex-row" : "lg:flex-row-reverse",
+      )}
+    >
       {/* Left column – text content */}
       <div
         className={cn(
-          "flex-1 flex flex-col lg:block",
+          "flex flex-1 flex-col lg:block",
           orientation === "left"
-            ? "text-left items-start lg:text-right"
-            : "text-right items-end lg:text-left"
-        )}>
-        <p className="mb-4 text-sm font-medium uppercase tracking-[0.2em] text-muted-foreground">
+            ? "items-start text-left lg:text-right"
+            : "items-end text-right lg:text-left",
+        )}
+      >
+        <p className="text-muted-foreground mb-4 text-sm font-medium tracking-[0.2em] uppercase">
           {category}
         </p>
         <h2
-          className="mb-6 text-4xl font-bold leading-tight text-foreground sm:text-5xl"
-          style={{ fontFamily: "var(--font-mazaeni-demo), serif" }}>
+          className="text-foreground mb-6 text-4xl leading-tight font-bold sm:text-5xl"
+          style={{ fontFamily: "var(--font-mazaeni-demo), serif" }}
+        >
           {title}
         </h2>
 
-        <p className="mb-8 max-w-xl text-base leading-relaxed text-muted-foreground">
+        <p className="text-muted-foreground mb-8 max-w-xl text-base leading-relaxed">
           {description}
         </p>
 
         <div
           className={cn(
             "flex flex-wrap gap-4",
-            orientation === "left" ? "justify-start lg:justify-end" : "justify-end lg:justify-start"
-          )}>
+            orientation === "left"
+              ? "justify-start lg:justify-end"
+              : "justify-end lg:justify-start",
+          )}
+        >
           {skills.map((skill, index) => (
-            <Skill key={`${skill}-${index}`} text={skill} variant="outline" size="sm" />
+            <Skill
+              key={`${skill}-${index}`}
+              text={skill}
+              variant="outline"
+              size="sm"
+            />
           ))}
         </div>
       </div>
@@ -61,20 +72,22 @@ export function Project({
       <div className="flex-1 max-lg:order-first">
         <div
           className={cn(
-            "mx-auto w-screen -ml-4 md:w-full lg:max-h-80 overflow-hidden aspect-3/2",
+            "mx-auto -ml-4 aspect-3/2 w-screen overflow-hidden md:w-full lg:max-h-80",
             orientation === "left"
               ? "rounded-tl-4xl rounded-br-4xl"
-              : "rounded-tr-4xl rounded-bl-4xl"
-          )}>
+              : "rounded-tr-4xl rounded-bl-4xl",
+          )}
+        >
           <div
             className={cn(
-              "relative bg-secondary h-full w-full",
+              "bg-secondary relative h-full w-full",
               orientation === "left"
                 ? "rounded-tl-4xl rounded-br-4xl"
-                : "rounded-tr-4xl rounded-bl-4xl"
-            )}>
+                : "rounded-tr-4xl rounded-bl-4xl",
+            )}
+          >
             {/* Gradient overlay */}
-            <div className="z-10 absolute inset-0 bg-linear-to-b from-transparent from-80% to-black/30 to-100%" />
+            <div className="absolute inset-0 z-10 bg-linear-to-b from-transparent from-80% to-black/30 to-100%" />
             {/* Window frame (image should overflow the bottom right corner) */}
             <div className="absolute inset-10 h-full w-full">
               <Image

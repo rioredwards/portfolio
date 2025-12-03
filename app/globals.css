@@ -19,7 +19,7 @@
   --theme-input: #dbbe76;
   --theme-ring: #76c18f;
   --shadow-color: #504a3f;
-  
+
   /* Shadcn color variables */
   --background: var(--theme-background);
   --foreground: var(--theme-foreground);
@@ -40,11 +40,11 @@
   --border: var(--theme-border);
   --input: var(--theme-input);
   --ring: var(--theme-ring);
-  --chart-1: oklch(0.7350 0.0564 130.8494);
+  --chart-1: oklch(0.735 0.0564 130.8494);
   --chart-2: oklch(0.6762 0.0567 132.4479);
   --chart-3: oklch(0.8185 0.0332 136.6539);
   --chart-4: oklch(0.5929 0.0464 137.6224);
-  --chart-5: oklch(0.5183 0.0390 137.1892);
+  --chart-5: oklch(0.5183 0.039 137.1892);
   --sidebar: var(--theme-background-secondary);
   --sidebar-foreground: var(--theme-foreground-secondary);
   --sidebar-primary: var(--theme-background-primary);
@@ -53,7 +53,7 @@
   --sidebar-accent-foreground: var(--theme-foreground-accent);
   --sidebar-border: var(--theme-border);
   --sidebar-ring: var(--theme-ring);
-  
+
   /* Additional variables */
   --radius: 1rem;
   --tracking-normal: 0em;
@@ -129,12 +129,12 @@
     border-bottom-right-radius: var(--radius-2xl);
   }
   .angled-border-md {
-    border-top-left-radius: var(--radius-3xl); 
+    border-top-left-radius: var(--radius-3xl);
     border-bottom-right-radius: var(--radius-3xl);
   }
   .angled-border-lg {
-    border-top-left-radius: var(--radius-4xl); 
-    border-bottom-right-radius: var(--radius-4xl); 
+    border-top-left-radius: var(--radius-4xl);
+    border-bottom-right-radius: var(--radius-4xl);
   }
   .angled-border-full {
     border-top-left-radius: 100%;

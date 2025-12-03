@@ -36,7 +36,10 @@ export function Navbar() {
     };
   }, []);
 
-  const handleClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+  const handleClick = (
+    e: React.MouseEvent<HTMLAnchorElement>,
+    href: string,
+  ) => {
     e.preventDefault();
     const targetId = href.replace("#", "");
     const element = document.getElementById(targetId);
@@ -48,13 +51,14 @@ export function Navbar() {
   };
 
   return (
-    <header className="fixed top-2 w-full z-40 mx-auto flex items-center justify-center pointer-events-none">
+    <header className="pointer-events-none fixed top-2 z-40 mx-auto flex w-full items-center justify-center">
       <NavigationMenu viewport={false}>
-        <div className="flex items-center gap-2 rounded-full bg-sidebar/80 backdrop-blur-sm px-4 py-2 pointer-events-auto text-sidebar-foreground">
+        <div className="bg-sidebar/80 text-sidebar-foreground pointer-events-auto flex items-center gap-2 rounded-full px-4 py-2 backdrop-blur-sm">
           <NavigationMenuList>
             {navItems.map((item) => {
               const isActive =
-                activeSection === item.href || (item.href === "#home" && activeSection === "");
+                activeSection === item.href ||
+                (item.href === "#home" && activeSection === "");
               return (
                 <NavigationMenuItem key={item.href}>
                   <NavigationMenuLink asChild>
@@ -62,9 +66,10 @@ export function Navbar() {
                       href={item.href}
                       onClick={(e) => handleClick(e, item.href)}
                       className={cn(
-                        "px-4 py-1.5 text-sm font-medium transition-colors cursor-pointer rounded-full!"
+                        "cursor-pointer rounded-full! px-4 py-1.5 text-sm font-medium transition-colors",
                       )}
-                      data-active={isActive}>
+                      data-active={isActive}
+                    >
                       {item.label}
                     </a>
                   </NavigationMenuLink>

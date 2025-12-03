@@ -5,23 +5,28 @@ export function Contact() {
     <div className="flex flex-col gap-12 md:flex-row md:items-start md:gap-16">
       {/* Left illustration placeholder and heading */}
       <div className="flex flex-1 flex-col items-center md:items-start">
-        <div className="mb-6 h-64 w-64 rounded-3xl bg-secondary shadow-md" />
+        <div className="bg-secondary mb-6 h-64 w-64 rounded-3xl shadow-md" />
         <p
-          className="text-3xl font-bold leading-tight text-secondary-foreground sm:text-4xl"
-          style={{ fontFamily: "var(--font-mazaeni-demo), serif" }}>
+          className="text-secondary-foreground text-3xl leading-tight font-bold sm:text-4xl"
+          style={{ fontFamily: "var(--font-mazaeni-demo), serif" }}
+        >
           Nice to meet you!
         </p>
       </div>
 
       {/* Right form */}
-      <form suppressHydrationWarning={true} className="flex flex-1 flex-col gap-6">
+      <form
+        suppressHydrationWarning={true}
+        className="flex flex-1 flex-col gap-6"
+      >
         {/* Name & Email row */}
         <div className="grid gap-4 md:grid-cols-2">
           <div className="flex flex-col gap-2">
             <label
               htmlFor="fullName"
-              className="text-lg font-semibold text-secondary-foreground"
-              style={{ fontFamily: "var(--font-mazaeni-demo), serif" }}>
+              className="text-secondary-foreground text-lg font-semibold"
+              style={{ fontFamily: "var(--font-mazaeni-demo), serif" }}
+            >
               Full Name
             </label>
             <input
@@ -30,14 +35,15 @@ export function Contact() {
               name="fullName"
               type="text"
               placeholder="John Smith"
-              className="w-full rounded-2xl border border-border bg-background px-4 py-3 text-base text-secondary-foreground shadow-inner focus:outline-none focus:ring-2 focus:ring-ring"
+              className="border-border bg-background text-secondary-foreground focus:ring-ring w-full rounded-2xl border px-4 py-3 text-base shadow-inner focus:ring-2 focus:outline-none"
             />
           </div>
           <div className="flex flex-col gap-2">
             <label
               htmlFor="email"
-              className="text-lg font-semibold text-secondary-foreground"
-              style={{ fontFamily: "var(--font-mazaeni-demo), serif" }}>
+              className="text-secondary-foreground text-lg font-semibold"
+              style={{ fontFamily: "var(--font-mazaeni-demo), serif" }}
+            >
               Email
             </label>
             <input
@@ -46,7 +52,7 @@ export function Contact() {
               name="email"
               type="email"
               placeholder="john@email.com"
-              className="w-full rounded-2xl border border-border bg-background px-4 py-3 text-base text-secondary-foreground shadow-inner focus:outline-none focus:ring-2 focus:ring-ring"
+              className="border-border bg-background text-secondary-foreground focus:ring-ring w-full rounded-2xl border px-4 py-3 text-base shadow-inner focus:ring-2 focus:outline-none"
             />
           </div>
         </div>
@@ -55,8 +61,9 @@ export function Contact() {
         <div className="flex flex-col gap-2">
           <label
             htmlFor="message"
-            className="text-lg font-semibold text-secondary-foreground"
-            style={{ fontFamily: "var(--font-mazaeni-demo), serif" }}>
+            className="text-secondary-foreground text-lg font-semibold"
+            style={{ fontFamily: "var(--font-mazaeni-demo), serif" }}
+          >
             Message
           </label>
           <textarea
@@ -65,7 +72,7 @@ export function Contact() {
             name="message"
             rows={6}
             placeholder="Let's chat!"
-            className="w-full rounded-lg border border-border bg-background px-4 py-3 text-base text-secondary-foreground shadow-inner focus:outline-none focus:ring-2 focus:ring-ring"
+            className="border-border bg-background text-secondary-foreground focus:ring-ring w-full rounded-lg border px-4 py-3 text-base shadow-inner focus:ring-2 focus:outline-none"
           />
         </div>
 
@@ -74,7 +81,8 @@ export function Contact() {
           <Button
             type="submit"
             size="lg"
-            className="bg-primary text-lg font-bold text-primary-foreground">
+            className="bg-primary text-primary-foreground text-lg font-bold"
+          >
             Send
           </Button>
         </div>

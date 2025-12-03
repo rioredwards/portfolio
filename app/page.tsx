@@ -8,7 +8,7 @@ import { SectionBreak } from "../components/section-break";
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-background">
+    <main className="bg-background min-h-screen">
       <section id="home">
         <div className="section-content pt-24 pb-16 md:pt-48 md:pb-40">
           <Hero
@@ -88,17 +88,38 @@ export default function Home() {
           <SkillSection
             category="Languages"
             icon={<Code2 className="h-8 w-8" aria-hidden="true" />}
-            skills={["TypeScript", "JavaScript", "HTML", "CSS", "SQL", "Python"]}
+            skills={[
+              "TypeScript",
+              "JavaScript",
+              "HTML",
+              "CSS",
+              "SQL",
+              "Python",
+            ]}
           />
           <SkillSection
             category="Libraries & Frameworks"
             icon={<LibraryBig className="h-8 w-8" aria-hidden="true" />}
-            skills={["React", "Next.js", "Node.js", "Express", "Tailwind CSS", "shadcn/ui"]}
+            skills={[
+              "React",
+              "Next.js",
+              "Node.js",
+              "Express",
+              "Tailwind CSS",
+              "shadcn/ui",
+            ]}
           />
           <SkillSection
             category="Databases & Storage"
             icon={<Database className="h-8 w-8" aria-hidden="true" />}
-            skills={["PostgreSQL", "MySQL", "MongoDB", "SQLite", "Redis", "Supabase"]}
+            skills={[
+              "PostgreSQL",
+              "MySQL",
+              "MongoDB",
+              "SQLite",
+              "Redis",
+              "Supabase",
+            ]}
           />
         </div>
       </section>
