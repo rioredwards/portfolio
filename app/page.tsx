@@ -26,8 +26,9 @@ export default function Home() {
         <SectionBreak orientation="left" height="tall">
           Projects
         </SectionBreak>
-        <div className="section-content md:py-24">
+        <div className="section-content py-12 md:py-16 lg:py-32">
           <Project
+            orientation="left"
             category="Planning"
             title="Class TopBase"
             description="ClassTopBase is a school management software for after-schools. For this project, I designed a feature to help school owners plan their students' academic plans efficiently."
@@ -43,8 +44,9 @@ export default function Home() {
           />
         </div>
         <SectionBreak orientation="right" height="short"></SectionBreak>
-        <div className="section-content md:py-24">
+        <div className="section-content py-12 md:py-16 lg:py-32">
           <Project
+            orientation="right"
             category="Planning"
             title="Class TopBase"
             description="ClassTopBase is a school management software for after-schools. For this project, I designed a feature to help school owners plan their students' academic plans efficiently."
@@ -60,8 +62,9 @@ export default function Home() {
           />
         </div>
         <SectionBreak orientation="left" height="short"></SectionBreak>
-        <div className="section-content md:py-24">
+        <div className="section-content py-12 md:py-16 lg:py-32">
           <Project
+            orientation="left"
             category="Planning"
             title="Class TopBase"
             description="ClassTopBase is a school management software for after-schools. For this project, I designed a feature to help school owners plan their students' academic plans efficiently."
@@ -125,7 +128,7 @@ export default function Home() {
         <SectionBreak orientation="left" height="tall">
           Contact
         </SectionBreak>
-        <div className="section-content md:py-24">
+        <div className="section-content lg:py-32">
           <Contact />
         </div>
       </section>

@@ -1,5 +1,6 @@
 import { Skill } from "@/components/ui/skill";
 import Image from "next/image";
+import { cn } from "../lib/utils";
 
 interface ProjectProps {
   category: string;
@@ -7,13 +8,31 @@ interface ProjectProps {
   description: string;
   skills: string[];
   image: string;
+  orientation: "left" | "right";
 }
 
-export function Project({ category, title, description, skills, image }: ProjectProps) {
+export function Project({
+  category,
+  title,
+  description,
+  skills,
+  image,
+  orientation,
+}: ProjectProps) {
   return (
-    <article className="flex flex-col gap-12 py-12 lg:flex-row lg:items-center lg:gap-16 lg:py-16">
+    <article
+      className={cn(
+        "flex flex-col gap-12 lg:flex-row lg:items-center lg:gap-16",
+        orientation === "left" ? "lg:flex-row" : "lg:flex-row-reverse"
+      )}>
       {/* Left column – text content */}
-      <div className="flex-1">
+      <div
+        className={cn(
+          "flex-1 flex flex-col lg:block",
+          orientation === "left"
+            ? "text-left items-start lg:text-right"
+            : "text-right items-end lg:text-left"
+        )}>
         <p className="mb-4 text-sm font-medium uppercase tracking-[0.2em] text-muted-foreground">
           {category}
         </p>
@@ -27,7 +46,11 @@ export function Project({ category, title, description, skills, image }: Project
           {description}
         </p>
 
-        <div className="flex flex-wrap gap-4">
+        <div
+          className={cn(
+            "flex flex-wrap gap-4",
+            orientation === "left" ? "justify-start lg:justify-end" : "justify-end lg:justify-start"
+          )}>
           {skills.map((skill, index) => (
             <Skill key={`${skill}-${index}`} text={skill} variant="outline" size="sm" />
           ))}
@@ -35,9 +58,21 @@ export function Project({ category, title, description, skills, image }: Project
       </div>
 
       {/* Right column – Project image */}
-      <div className="flex-1">
-        <div className="mx-auto max-h-80 overflow-hidden rounded-tl-4xl rounded-br-4xl aspect-3/2">
-          <div className="relative bg-secondary h-full w-full">
+      <div className="flex-1 max-lg:order-first">
+        <div
+          className={cn(
+            "mx-auto w-screen -ml-4 md:w-full lg:max-h-80 overflow-hidden aspect-3/2",
+            orientation === "left"
+              ? "rounded-tl-4xl rounded-br-4xl"
+              : "rounded-tr-4xl rounded-bl-4xl"
+          )}>
+          <div
+            className={cn(
+              "relative bg-secondary h-full w-full",
+              orientation === "left"
+                ? "rounded-tl-4xl rounded-br-4xl"
+                : "rounded-tr-4xl rounded-bl-4xl"
+            )}>
             {/* Gradient overlay */}
             <div className="z-10 absolute inset-0 bg-linear-to-b from-transparent from-80% to-black/30 to-100%" />
             {/* Window frame (image should overflow the bottom right corner) */}
