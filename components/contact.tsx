@@ -5,9 +5,9 @@ export function Contact() {
     <div className="flex flex-col gap-12 md:flex-row md:items-start md:gap-16">
       {/* Left illustration placeholder and heading */}
       <div className="flex flex-1 flex-col items-center md:items-start">
-        <div className="mb-6 h-64 w-64 rounded-3xl bg-(--color-bg-secondary) shadow-md" />
+        <div className="mb-6 h-64 w-64 rounded-3xl bg-secondary shadow-md" />
         <p
-          className="text-3xl font-bold leading-tight text-(--color-text-secondary) sm:text-4xl"
+          className="text-3xl font-bold leading-tight text-secondary-foreground sm:text-4xl"
           style={{ fontFamily: "var(--font-mazaeni-demo), serif" }}>
           Nice to meet you!
         </p>
@@ -20,7 +20,7 @@ export function Contact() {
           <div className="flex flex-col gap-2">
             <label
               htmlFor="fullName"
-              className="text-lg font-semibold text-(--color-text-secondary)"
+              className="text-lg font-semibold text-secondary-foreground"
               style={{ fontFamily: "var(--font-mazaeni-demo), serif" }}>
               Full Name
             </label>
@@ -30,13 +30,13 @@ export function Contact() {
               name="fullName"
               type="text"
               placeholder="John Smith"
-              className="w-full rounded-2xl border border-(--color-bg-tertiary) bg-(--color-bg-primary) px-4 py-3 text-base text-(--color-text-secondary) shadow-inner focus:outline-none focus:ring-2 focus:ring-(--color-text-secondary)"
+              className="w-full rounded-2xl border border-border bg-background px-4 py-3 text-base text-secondary-foreground shadow-inner focus:outline-none focus:ring-2 focus:ring-ring"
             />
           </div>
           <div className="flex flex-col gap-2">
             <label
               htmlFor="email"
-              className="text-lg font-semibold text-(--color-text-secondary)"
+              className="text-lg font-semibold text-secondary-foreground"
               style={{ fontFamily: "var(--font-mazaeni-demo), serif" }}>
               Email
             </label>
@@ -46,7 +46,7 @@ export function Contact() {
               name="email"
               type="email"
               placeholder="john@email.com"
-              className="w-full rounded-2xl border border-(--color-bg-tertiary) bg-(--color-bg-primary) px-4 py-3 text-base text-(--color-text-secondary) shadow-inner focus:outline-none focus:ring-2 focus:ring-(--color-text-secondary)"
+              className="w-full rounded-2xl border border-border bg-background px-4 py-3 text-base text-secondary-foreground shadow-inner focus:outline-none focus:ring-2 focus:ring-ring"
             />
           </div>
         </div>
@@ -55,7 +55,7 @@ export function Contact() {
         <div className="flex flex-col gap-2">
           <label
             htmlFor="message"
-            className="text-lg font-semibold text-(--color-text-secondary)"
+            className="text-lg font-semibold text-secondary-foreground"
             style={{ fontFamily: "var(--font-mazaeni-demo), serif" }}>
             Message
           </label>
@@ -65,7 +65,7 @@ export function Contact() {
             name="message"
             rows={6}
             placeholder="Let's chat!"
-            className="w-full rounded-lg border bg-(--color-bg-primary) px-4 py-3 text-base text-(--color-text-secondary) shadow-inner focus:outline-none focus:ring-2 focus:ring-(--color-text-secondary)"
+            className="w-full rounded-lg border border-border bg-background px-4 py-3 text-base text-secondary-foreground shadow-inner focus:outline-none focus:ring-2 focus:ring-ring"
           />
         </div>
 
