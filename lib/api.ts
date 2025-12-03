@@ -42,6 +42,14 @@ class ContentfulValidationError extends Error {
   }
 }
 
+// Helper function to handle validation errors consistently
+function handleValidationError(error: unknown, context: string): never {
+  if (error instanceof z.ZodError) {
+    throw new ContentfulValidationError(`Failed to validate ${context}`, error);
+  }
+  throw error;
+}
+
 async function fetchGraphQL(query: string, preview = false): Promise<unknown> {
   // Validate environment variables
   if (!env.CONTENTFUL_SPACE_ID) {
@@ -129,32 +137,31 @@ function extractHeroContent(content: unknown): HeroContent {
     const validated = heroContentResponseSchema.parse(content);
     return validated.heroContentCollection.items[0];
   } catch (error) {
-    if (error instanceof z.ZodError) {
-      throw new ContentfulValidationError(
-        "Failed to validate hero content",
-        error,
-      );
-    }
-    throw error;
+    handleValidationError(error, "hero content");
   }
 }
 
+// Transform Contentful entry to extract sys.id and flatten structure
+function transformCodeCardEntry(
+  entry: { sys: { id: string } } & Record<string, unknown>,
+) {
+  const { sys, ...rest } = entry;
+  return { id: sys.id, ...rest };
+}
+
 function extractCodeCardsContent(fetchResponse: unknown): CodeCard[] {
+  const codeCardEntrySchema = z
+    .object({
+      sys: z.object({
+        id: z.string(),
+      }),
+    })
+    .passthrough()
+    .transform(transformCodeCardEntry);
+
   const codeCardsResponseSchema = z.object({
     featuredCodeProjectCollection: z.object({
-      items: z.array(
-        z
-          .object({
-            sys: z.object({
-              id: z.string(),
-            }),
-          })
-          .passthrough()
-          .transform((entry) => {
-            const { sys, ...rest } = entry;
-            return { id: sys.id, ...rest };
-          }),
-      ),
+      items: z.array(codeCardEntrySchema),
     }),
   });
 
@@ -165,67 +172,72 @@ function extractCodeCardsContent(fetchResponse: unknown): CodeCard[] {
     // Validate each entry with CodeCardSchema
     return entries.map((entry) => CodeCardSchema.parse(entry));
   } catch (error) {
-    if (error instanceof z.ZodError) {
-      throw new ContentfulValidationError(
-        "Failed to validate code cards content",
-        error,
-      );
-    }
-    throw error;
+    handleValidationError(error, "code cards content");
   }
 }
 
+// Transform Contentful code detail response to match CodeDetail type
+function transformCodeDetailContent(
+  content: {
+    tagsCollection?: { items?: Array<{ text: string }> };
+    linksCollection?: { items?: Array<{ url: string; displayText: string }> };
+    madeWithCollection?: { items?: Array<unknown> };
+  } & Record<string, unknown>,
+) {
+  const tags = content.tagsCollection?.items?.map((tag) => tag.text) ?? [];
+  const links = content.linksCollection?.items ?? [];
+  const madeWith = content.madeWithCollection?.items ?? [];
+
+  // Remove collection properties and add transformed arrays
+  const rest = { ...content };
+  delete rest.tagsCollection;
+  delete rest.linksCollection;
+  delete rest.madeWithCollection;
+
+  return { ...rest, tags, links, madeWith };
+}
+
 function extractCodeDetailContent(fetchResponse: unknown): CodeDetail {
+  // Define nested collection schemas for better readability
+  const tagItemSchema = z.object({ text: z.string() });
+  const tagsCollectionSchema = z.object({
+    items: z.array(tagItemSchema),
+  });
+
+  const linkItemSchema = z.object({
+    url: z.string(),
+    displayText: z.string(),
+  });
+  const linksCollectionSchema = z.object({
+    items: z.array(linkItemSchema),
+  });
+
+  const madeWithItemSchema = z.object({
+    name: z.string(),
+    text: z.string(),
+    backgroundColor: z.string(),
+    logoName: z.string(),
+    logoColor: z.string(),
+    style: z.string(),
+  });
+  const madeWithCollectionSchema = z.object({
+    items: z.array(madeWithItemSchema),
+  });
+
+  // Define the code detail entry schema with transformation
+  const codeDetailEntrySchema = z
+    .object({
+      title: z.string(),
+      tagsCollection: tagsCollectionSchema.optional(),
+      linksCollection: linksCollectionSchema.optional(),
+      madeWithCollection: madeWithCollectionSchema.optional(),
+    })
+    .passthrough()
+    .transform(transformCodeDetailContent);
+
   const codeDetailResponseSchema = z.object({
     featuredCodeProjectCollection: z.object({
-      items: z
-        .array(
-          z
-            .object({
-              title: z.string(),
-              tagsCollection: z.object({
-                items: z.array(z.object({ text: z.string() })),
-              }),
-              linksCollection: z.object({
-                items: z.array(
-                  z.object({
-                    url: z.string(),
-                    displayText: z.string(),
-                  }),
-                ),
-              }),
-              madeWithCollection: z.object({
-                items: z.array(
-                  z.object({
-                    name: z.string(),
-                    text: z.string(),
-                    backgroundColor: z.string(),
-                    logoName: z.string(),
-                    logoColor: z.string(),
-                    style: z.string(),
-                  }),
-                ),
-              }),
-            })
-            .passthrough()
-            .transform((codeDetailContent) => {
-              const tags =
-                codeDetailContent.tagsCollection?.items?.map(
-                  (tag: { text: string }) => tag.text,
-                ) || [];
-              const links = codeDetailContent.linksCollection?.items || [];
-              const madeWith =
-                codeDetailContent.madeWithCollection?.items || [];
-              const {
-                tagsCollection,
-                linksCollection,
-                madeWithCollection,
-                ...rest
-              } = codeDetailContent;
-              return { ...rest, tags, links, madeWith };
-            }),
-        )
-        .min(1),
+      items: z.array(codeDetailEntrySchema).min(1),
     }),
   });
 
@@ -236,13 +248,7 @@ function extractCodeDetailContent(fetchResponse: unknown): CodeDetail {
     // Validate the transformed content with CodeDetailSchema
     return CodeDetailSchema.parse(formattedContent);
   } catch (error) {
-    if (error instanceof z.ZodError) {
-      throw new ContentfulValidationError(
-        "Failed to validate code detail content",
-        error,
-      );
-    }
-    throw error;
+    handleValidationError(error, "code detail content");
   }
 }
 
@@ -257,14 +263,21 @@ function extractCodeBlockContent(fetchResponse: unknown): CodeBlock {
     const validated = codeBlockResponseSchema.parse(fetchResponse);
     return validated.codeBlockCollection.items[0];
   } catch (error) {
-    if (error instanceof z.ZodError) {
-      throw new ContentfulValidationError(
-        "Failed to validate code block content",
-        error,
-      );
-    }
+    handleValidationError(error, "code block content");
+  }
+}
+
+// Helper to handle errors in exported functions
+function handleAPIError(error: unknown, context: string): never {
+  if (
+    error instanceof ContentfulAPIError ||
+    error instanceof ContentfulValidationError
+  ) {
     throw error;
   }
+  throw new ContentfulAPIError(
+    `Failed to get ${context}: ${error instanceof Error ? error.message : "Unknown error"}`,
+  );
 }
 
 export async function getHeroContent(
@@ -284,15 +297,7 @@ export async function getHeroContent(
 
     return extractHeroContent(content);
   } catch (error) {
-    if (
-      error instanceof ContentfulAPIError ||
-      error instanceof ContentfulValidationError
-    ) {
-      throw error;
-    }
-    throw new ContentfulAPIError(
-      `Failed to get hero content: ${error instanceof Error ? error.message : "Unknown error"}`,
-    );
+    handleAPIError(error, "hero content");
   }
 }
 
@@ -316,15 +321,7 @@ export async function getCodeCardsContent(
 
     return extractCodeCardsContent(entries);
   } catch (error) {
-    if (
-      error instanceof ContentfulAPIError ||
-      error instanceof ContentfulValidationError
-    ) {
-      throw error;
-    }
-    throw new ContentfulAPIError(
-      `Failed to get code cards content: ${error instanceof Error ? error.message : "Unknown error"}`,
-    );
+    handleAPIError(error, "code cards content");
   }
 }
 
@@ -350,15 +347,7 @@ export async function getCodeDetailContent(
 
     return extractCodeDetailContent(entry);
   } catch (error) {
-    if (
-      error instanceof ContentfulAPIError ||
-      error instanceof ContentfulValidationError
-    ) {
-      throw error;
-    }
-    throw new ContentfulAPIError(
-      `Failed to get code detail content: ${error instanceof Error ? error.message : "Unknown error"}`,
-    );
+    handleAPIError(error, "code detail content");
   }
 }
 
@@ -384,14 +373,6 @@ export async function getCodeBlockContent(
 
     return extractCodeBlockContent(entry);
   } catch (error) {
-    if (
-      error instanceof ContentfulAPIError ||
-      error instanceof ContentfulValidationError
-    ) {
-      throw error;
-    }
-    throw new ContentfulAPIError(
-      `Failed to get code block content: ${error instanceof Error ? error.message : "Unknown error"}`,
-    );
+    handleAPIError(error, "code block content");
   }
 }
