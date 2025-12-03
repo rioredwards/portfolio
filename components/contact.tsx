@@ -1,11 +1,18 @@
 import { Button } from "@/components/ui/button";
+import funComputerGraphic from "@/public/fun-computer-graphic.webp";
+import Image from "next/image";
 
 export function Contact() {
   return (
     <div className="flex flex-col gap-12 md:flex-row md:items-start md:gap-16">
       {/* Left illustration placeholder and heading */}
-      <div className="flex flex-1 flex-col items-center md:items-start">
-        <div className="bg-secondary mb-6 h-64 w-64 rounded-3xl shadow-md" />
+      <div className="flex flex-1 flex-col items-center gap-4 md:items-start">
+        <Image
+          src={funComputerGraphic}
+          alt="Fun Computer Graphic"
+          width={300}
+          height={300}
+        />
         <p
           className="text-secondary-foreground text-3xl leading-tight font-bold sm:text-4xl"
           style={{ fontFamily: "var(--font-mazaeni-demo), serif" }}
