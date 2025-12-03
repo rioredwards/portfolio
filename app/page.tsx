@@ -2,17 +2,17 @@ import { Blog } from "@/components/blog";
 import { Contact } from "@/components/contact";
 import { Hero } from "@/components/hero";
 import { Project } from "@/components/project";
+import { SectionBreak } from "@/components/section-break";
+import { getCodeCardsContent, getHeroContent } from "@/lib/api";
 import { MessagesSquare } from "lucide-react";
 import { draftMode } from "next/headers";
 import Image from "next/image";
-import { SectionBreak } from "../components/section-break";
-import { getHeroContent } from "../lib/api";
 
 export default async function Home() {
   const { isEnabled: draftModeIsEnabled } = await draftMode();
   const heroContent = await getHeroContent(draftModeIsEnabled);
-
-  // console.log(heroContent);
+  const codeCardsContent = await getCodeCardsContent(draftModeIsEnabled);
+  console.log("codeCardsContent", codeCardsContent);
 
   return (
     <main className="bg-background min-h-screen">
@@ -40,59 +40,26 @@ export default async function Home() {
         <SectionBreak orientation="left" height="tall">
           Projects
         </SectionBreak>
-        <div className="section-content py-12 md:py-16 lg:py-32">
-          <Project
-            orientation="left"
-            category="Planning"
-            title="Class TopBase"
-            description="ClassTopBase is a school management software for after-schools. For this project, I designed a feature to help school owners plan their students' academic plans efficiently."
-            skills={[
-              "JavaScript",
-              "JavaScript",
-              "JavaScript",
-              "JavaScript",
-              "JavaScript",
-              "JavaScript",
-            ]}
-            image="/temp-proj-photo.webp"
-          />
-        </div>
-        <SectionBreak orientation="right" height="short"></SectionBreak>
-        <div className="section-content py-12 md:py-16 lg:py-32">
-          <Project
-            orientation="right"
-            category="Planning"
-            title="Class TopBase"
-            description="ClassTopBase is a school management software for after-schools. For this project, I designed a feature to help school owners plan their students' academic plans efficiently."
-            skills={[
-              "JavaScript",
-              "JavaScript",
-              "JavaScript",
-              "JavaScript",
-              "JavaScript",
-              "JavaScript",
-            ]}
-            image="/temp-proj-photo.webp"
-          />
-        </div>
-        <SectionBreak orientation="left" height="short"></SectionBreak>
-        <div className="section-content py-12 md:py-16 lg:py-32">
-          <Project
-            orientation="left"
-            category="Planning"
-            title="Class TopBase"
-            description="ClassTopBase is a school management software for after-schools. For this project, I designed a feature to help school owners plan their students' academic plans efficiently."
-            skills={[
-              "JavaScript",
-              "JavaScript",
-              "JavaScript",
-              "JavaScript",
-              "JavaScript",
-              "JavaScript",
-            ]}
-            image="/temp-proj-photo.webp"
-          />
-        </div>
+        {codeCardsContent.map((codeCard, index) => (
+          <div key={codeCard.id}>
+            <div className="section-content py-12 md:py-16 lg:py-32">
+              <Project
+                title={codeCard.title}
+                category={codeCard.type}
+                skills={codeCard.madeWith ?? []}
+                orientation={index % 2 === 0 ? "left" : "right"}
+                image={codeCard.preview.url}
+                description={codeCard.description ?? null}
+              />
+            </div>
+            {index < codeCardsContent.length - 1 && (
+              <SectionBreak
+                orientation={index % 2 === 0 ? "right" : "left"}
+                height="short"
+              />
+            )}
+          </div>
+        ))}
       </section>
       <section id="blog">
         <SectionBreak orientation="right" height="tall">

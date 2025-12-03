@@ -1,12 +1,15 @@
-import { Skill } from "@/components/ui/skill";
+import { Shield as ShieldType } from "@/lib/dataTypes";
 import Image from "next/image";
+import { RichTextContent } from "../lib/dataTypes";
 import { cn } from "../lib/utils";
+import { Markdown } from "./markdown";
+import Shield from "./shield";
 
 interface ProjectProps {
   category: string;
   title: string;
-  description: string;
-  skills: string[];
+  description: RichTextContent | null;
+  skills: ShieldType[];
   image: string;
   orientation: "left" | "right";
 }
@@ -45,11 +48,9 @@ export function Project({
           {title}
         </h2>
 
-        <p className="text-muted-foreground mb-8 max-w-xl text-base leading-relaxed">
-          {description}
-        </p>
+        {description ? <Markdown content={description} /> : null}
 
-        <div
+        <ul
           className={cn(
             "flex flex-wrap gap-4",
             orientation === "left"
@@ -57,15 +58,12 @@ export function Project({
               : "justify-end lg:justify-start",
           )}
         >
-          {skills.map((skill, index) => (
-            <Skill
-              key={`${skill}-${index}`}
-              text={skill}
-              variant="filled"
-              size="sm"
-            />
+          {skills.map((skill, idx) => (
+            <li key={idx}>
+              <Shield shield={skill} />
+            </li>
           ))}
-        </div>
+        </ul>
       </div>
 
       {/* Right column – Project image */}

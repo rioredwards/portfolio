@@ -24,7 +24,7 @@ export const AssetLinkSchema = z.object({
 });
 
 export const RichTextContentSchema = z.object({
-  json: z.string(),
+  json: z.any(),
   links: z
     .object({
       assets: AssetLinkSchema,
@@ -57,11 +57,13 @@ export const CodeCardSchema = z.object({
   codeCardIcon: z.object({
     title: z.string(),
     image: ContentfulImageSchema,
-    animation: z.enum(["none", "spin", "pulse", "wiggle"]),
+    animation: z.enum(["none", "spin", "pulsate", "wiggle"]),
     bgColor: z.string(),
   }),
+  description: RichTextContentSchema,
+  madeWith: z.array(ShieldSchema).optional(),
   preview: ContentfulImageSchema,
-  pluginIcon: ContentfulImageSchema,
+  pluginIcon: ContentfulImageSchema.nullable(),
 });
 
 export const CodeDetailSchema = z.object({

@@ -1,0 +1,81 @@
+import cssStyles from "@/components/Markdown.module.css";
+import { getCodeBlockContent } from "@/lib/api";
+import { Asset, RichTextContent } from "@/lib/dataTypes";
+import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
+import { BLOCKS } from "@contentful/rich-text-types";
+import { draftMode } from "next/headers";
+import Image from "next/image";
+import SyntaxHighlighter from "react-syntax-highlighter";
+import { vs } from "react-syntax-highlighter/dist/esm/styles/hljs";
+
+const EmbeddedImage = ({
+  id,
+  assets,
+}: {
+  id: string;
+  assets: Asset[] | undefined;
+}) => {
+  if (!assets)
+    throw new Error("embedded-asset-block in markdown has no assets");
+
+  const image = assets?.find((asset) => asset.sys.id === id);
+
+  if (image?.url) {
+    return (
+      <Image
+        src={image.url}
+        alt={image.title}
+        width={800}
+        height={800}
+        className="rounded-md"
+      />
+    );
+  }
+
+  return null;
+};
+
+const EmbeddedCodeBlock = async ({ id }: { id: string }) => {
+  const { isEnabled: draftModeIsEnabled } = await draftMode();
+  const codeCardsContent = await getCodeBlockContent(draftModeIsEnabled, id);
+
+  // has newLines
+  const hasNewLines = codeCardsContent?.content?.includes("\n");
+
+  if (codeCardsContent?.content) {
+    return (
+      <div className={cssStyles.embeddedCodeBlock}>
+        <SyntaxHighlighter
+          language={codeCardsContent.language}
+          style={vs}
+          showLineNumbers={hasNewLines}
+          lineNumberStyle={{ color: "#9CA3AF" }}
+        >
+          {codeCardsContent.content}
+        </SyntaxHighlighter>
+      </div>
+    );
+  }
+
+  return null;
+};
+
+export function Markdown({ content }: { content: RichTextContent }) {
+  return (
+    <div className={cssStyles.markdown}>
+      {documentToReactComponents(content.json, {
+        renderNode: {
+          [BLOCKS.EMBEDDED_ASSET]: (node) => (
+            <EmbeddedImage
+              id={node.data.target.sys.id}
+              assets={content.links?.assets?.block}
+            />
+          ),
+          [BLOCKS.EMBEDDED_ENTRY]: (node) => (
+            <EmbeddedCodeBlock id={node.data.target.sys.id} />
+          ),
+        },
+      })}
+    </div>
+  );
+}

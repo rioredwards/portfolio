@@ -1,3 +1,5 @@
+import { Document } from "@contentful/rich-text-types";
+
 interface Asset {
   sys: {
     id: string;
@@ -11,7 +13,7 @@ interface AssetLink {
 }
 
 interface RichTextContent {
-  json: string;
+  json: Document;
   links?: {
     assets: AssetLink;
   };
@@ -35,7 +37,7 @@ interface Shield {
 
 type CodeCardType = "website" | "cli" | "plugin";
 
-type CodeCardIconAnimation = "none" | "spin" | "pulse" | "wiggle";
+type CodeCardIconAnimation = "none" | "spin" | "pulsate" | "wiggle";
 
 interface ContentfulLink {
   url: string;
@@ -58,8 +60,10 @@ interface CodeCard {
     animation: CodeCardIconAnimation;
     bgColor: string;
   };
+  description: RichTextContent;
+  madeWith?: Shield[];
   preview: ContentfulImage;
-  pluginIcon: ContentfulImage;
+  pluginIcon: ContentfulImage | null;
 }
 
 interface CodeDetail {
@@ -70,7 +74,7 @@ interface CodeDetail {
   logo?: ContentfulImage;
   links?: ContentfulLink[];
   description?: RichTextContent;
-  madeWith: Shield[];
+  madeWith?: Shield[];
   features?: RichTextContent;
   preview?: ContentfulImage;
   usage?: RichTextContent;

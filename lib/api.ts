@@ -14,13 +14,16 @@ import {
   CodeDetailSchema,
   GraphQLResponseSchema,
   HeroContentSchema,
+  ShieldSchema,
 } from "@/lib/validation";
 import { z } from "zod";
 
 const CONTENTFUL_GRAPHQL_URL =
   "https://graphql.contentful.com/content/v1/spaces/";
 
-// Custom error classes for better error handling
+const isDevelopment = process.env.NODE_ENV === "development";
+
+// Custom error class for API errors
 class ContentfulAPIError extends Error {
   constructor(
     message: string,
@@ -32,22 +35,22 @@ class ContentfulAPIError extends Error {
   }
 }
 
-class ContentfulValidationError extends Error {
-  constructor(
-    message: string,
-    public zodErrors: z.ZodError,
-  ) {
-    super(message);
-    this.name = "ContentfulValidationError";
+// In development, let errors bubble up naturally for easier debugging
+// In production, wrap them in generic messages
+function handleError(error: unknown, context: string): never {
+  if (isDevelopment) {
+    // In dev, let Zod errors and other errors surface naturally
+    throw error;
   }
-}
 
-// Helper function to handle validation errors consistently
-function handleValidationError(error: unknown, context: string): never {
+  // In production, wrap in generic error
   if (error instanceof z.ZodError) {
-    throw new ContentfulValidationError(`Failed to validate ${context}`, error);
+    throw new Error(`Failed to validate ${context}`);
   }
-  throw error;
+  if (error instanceof Error) {
+    throw new Error(`Failed to get ${context}: ${error.message}`);
+  }
+  throw new Error(`Failed to get ${context}: Unknown error`);
 }
 
 async function fetchGraphQL(query: string, preview = false): Promise<unknown> {
@@ -111,11 +114,13 @@ async function fetchGraphQL(query: string, preview = false): Promise<unknown> {
     if (error instanceof ContentfulAPIError) {
       throw error;
     }
+    if (isDevelopment) {
+      // In dev, let Zod errors and other errors surface naturally
+      throw error;
+    }
+    // In production, wrap in generic error
     if (error instanceof z.ZodError) {
-      throw new ContentfulValidationError(
-        "Invalid GraphQL response structure",
-        error,
-      );
+      throw new Error("Invalid GraphQL response structure");
     }
     if (error instanceof Error) {
       throw new ContentfulAPIError(
@@ -127,27 +132,31 @@ async function fetchGraphQL(query: string, preview = false): Promise<unknown> {
 }
 
 function extractHeroContent(content: unknown): HeroContent {
-  console.log(content);
   const heroContentResponseSchema = z.object({
     heroContentCollection: z.object({
       items: z.array(HeroContentSchema).min(1),
     }),
   });
 
-  try {
-    const validated = heroContentResponseSchema.parse(content);
-    return validated.heroContentCollection.items[0];
-  } catch (error) {
-    handleValidationError(error, "hero content");
-  }
+  // In dev, Zod errors will bubble up naturally
+  // In prod, they'll be caught and wrapped by the calling function
+  const validated = heroContentResponseSchema.parse(content);
+  return validated.heroContentCollection.items[0];
 }
 
-// Transform Contentful entry to extract sys.id and flatten structure
+// Transform Contentful entry to extract values and flatten structure
 function transformCodeCardEntry(
-  entry: { sys: { id: string } } & Record<string, unknown>,
+  entry: {
+    sys: { id: string };
+    madeWithCollection?: { items?: Array<unknown> };
+  } & Record<string, unknown>,
 ) {
-  const { sys, ...rest } = entry;
-  return { id: sys.id, ...rest };
+  const { sys, madeWithCollection, ...rest } = entry;
+  return {
+    id: sys.id,
+    madeWith: madeWithCollection?.items ?? [],
+    ...rest,
+  };
 }
 
 function extractCodeCardsContent(fetchResponse: unknown): CodeCard[] {
@@ -156,6 +165,11 @@ function extractCodeCardsContent(fetchResponse: unknown): CodeCard[] {
       sys: z.object({
         id: z.string(),
       }),
+      madeWithCollection: z
+        .object({
+          items: z.array(ShieldSchema).optional(),
+        })
+        .optional(),
     })
     .passthrough()
     .transform(transformCodeCardEntry);
@@ -166,15 +180,15 @@ function extractCodeCardsContent(fetchResponse: unknown): CodeCard[] {
     }),
   });
 
-  try {
-    const validated = codeCardsResponseSchema.parse(fetchResponse);
-    const entries = validated.featuredCodeProjectCollection.items;
+  // In dev, Zod errors will bubble up naturally
+  // In prod, they'll be caught and wrapped by the calling function
+  const validated = codeCardsResponseSchema.parse(fetchResponse);
+  const entries = validated.featuredCodeProjectCollection.items;
 
-    // Validate each entry with CodeCardSchema
-    return entries.map((entry) => CodeCardSchema.parse(entry));
-  } catch (error) {
-    handleValidationError(error, "code cards content");
-  }
+  console.log("entries", entries);
+
+  // Validate each entry with CodeCardSchema
+  return entries.map((entry) => CodeCardSchema.parse(entry));
 }
 
 // Transform Contentful code detail response to match CodeDetail type
@@ -242,15 +256,13 @@ function extractCodeDetailContent(fetchResponse: unknown): CodeDetail {
     }),
   });
 
-  try {
-    const validated = codeDetailResponseSchema.parse(fetchResponse);
-    const formattedContent = validated.featuredCodeProjectCollection.items[0];
+  // In dev, Zod errors will bubble up naturally
+  // In prod, they'll be caught and wrapped by the calling function
+  const validated = codeDetailResponseSchema.parse(fetchResponse);
+  const formattedContent = validated.featuredCodeProjectCollection.items[0];
 
-    // Validate the transformed content with CodeDetailSchema
-    return CodeDetailSchema.parse(formattedContent);
-  } catch (error) {
-    handleValidationError(error, "code detail content");
-  }
+  // Validate the transformed content with CodeDetailSchema
+  return CodeDetailSchema.parse(formattedContent);
 }
 
 function extractCodeBlockContent(fetchResponse: unknown): CodeBlock {
@@ -260,25 +272,10 @@ function extractCodeBlockContent(fetchResponse: unknown): CodeBlock {
     }),
   });
 
-  try {
-    const validated = codeBlockResponseSchema.parse(fetchResponse);
-    return validated.codeBlockCollection.items[0];
-  } catch (error) {
-    handleValidationError(error, "code block content");
-  }
-}
-
-// Helper to handle errors in exported functions
-function handleAPIError(error: unknown, context: string): never {
-  if (
-    error instanceof ContentfulAPIError ||
-    error instanceof ContentfulValidationError
-  ) {
-    throw error;
-  }
-  throw new ContentfulAPIError(
-    `Failed to get ${context}: ${error instanceof Error ? error.message : "Unknown error"}`,
-  );
+  // In dev, Zod errors will bubble up naturally
+  // In prod, they'll be caught and wrapped by the calling function
+  const validated = codeBlockResponseSchema.parse(fetchResponse);
+  return validated.codeBlockCollection.items[0];
 }
 
 export async function getHeroContent(
@@ -298,7 +295,7 @@ export async function getHeroContent(
 
     return extractHeroContent(content);
   } catch (error) {
-    handleAPIError(error, "hero content");
+    handleError(error, "hero content");
   }
 }
 
@@ -306,7 +303,7 @@ export async function getCodeCardsContent(
   isDraftMode: boolean,
 ): Promise<CodeCard[]> {
   try {
-    const entries = await fetchGraphQL(
+    const content = await fetchGraphQL(
       `query {
       featuredCodeProjectCollection(
         order: sys_publishedAt_DESC,
@@ -320,9 +317,9 @@ export async function getCodeCardsContent(
       isDraftMode,
     );
 
-    return extractCodeCardsContent(entries);
+    return extractCodeCardsContent(content);
   } catch (error) {
-    handleAPIError(error, "code cards content");
+    handleError(error, "code cards content");
   }
 }
 
@@ -331,7 +328,7 @@ export async function getCodeDetailContent(
   slug: string,
 ): Promise<CodeDetail> {
   if (!slug || typeof slug !== "string" || slug.trim().length === 0) {
-    throw new ContentfulAPIError("Invalid slug provided");
+    throw new Error("Invalid slug provided");
   }
 
   try {
@@ -348,7 +345,7 @@ export async function getCodeDetailContent(
 
     return extractCodeDetailContent(entry);
   } catch (error) {
-    handleAPIError(error, "code detail content");
+    handleError(error, "code detail content");
   }
 }
 
@@ -357,7 +354,7 @@ export async function getCodeBlockContent(
   blockId: string,
 ): Promise<CodeBlock> {
   if (!blockId || typeof blockId !== "string" || blockId.trim().length === 0) {
-    throw new ContentfulAPIError("Invalid blockId provided");
+    throw new Error("Invalid blockId provided");
   }
 
   try {
@@ -374,6 +371,6 @@ export async function getCodeBlockContent(
 
     return extractCodeBlockContent(entry);
   } catch (error) {
-    handleAPIError(error, "code block content");
+    handleError(error, "code block content");
   }
 }

@@ -39,6 +39,19 @@ const CODE_CARDS_GRAPHQL_FIELDS = `
     animation
     bgColor
   }
+  description {
+    ${RICH_TEXT_GRAPHQL_FIELDS}
+  }
+  madeWithCollection {
+    items {
+      name
+      text
+      backgroundColor
+      logoName
+      logoColor
+      style
+    }
+  }
   preview {
     title
     url
