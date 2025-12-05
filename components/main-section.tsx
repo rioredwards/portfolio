@@ -46,12 +46,13 @@ export function MainSection({
       {/* Main content */}
       <div
         className={cn(
-          "min-h-small mx-auto max-w-6xl px-4 md:px-20",
           fill === "secondary" ? "bg-secondary" : "bg-background",
           isLeft ? "rounded-tl-4xl" : "rounded-tr-4xl",
         )}
       >
-        {children}
+        <div className="min-h-small mx-auto max-w-6xl px-4 md:px-20">
+          {children}
+        </div>
       </div>
     </section>
   );
