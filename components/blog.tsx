@@ -8,7 +8,7 @@ interface BlogProps {
 
 export function Blog({ title, description, icon }: BlogProps) {
   return (
-    <div className="bg-secondary flex items-center justify-between gap-8 rounded-[3rem] px-8 py-10 lg:px-14 lg:py-12">
+    <div className="bg-secondary fade-in flex items-center justify-between gap-8 rounded-[3rem] px-8 py-10 lg:px-14 lg:py-12">
       {/* Text content */}
       <div>
         <h2

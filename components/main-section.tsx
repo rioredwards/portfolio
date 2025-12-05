@@ -8,6 +8,8 @@ interface MainSectionProps {
   orientation?: Orientation;
   height?: Height;
   fill?: "background" | "secondary";
+  bottomPadding?: string;
+  topMargin?: string;
   children?: React.ReactNode;
   className?: string;
 }
@@ -17,6 +19,8 @@ export function MainSection({
   orientation = "left",
   height = "tall",
   fill = "background",
+  bottomPadding,
+  topMargin,
   children,
   className,
 }: MainSectionProps) {
@@ -27,7 +31,7 @@ export function MainSection({
   const triangleHeight = isTall ? "h-8" : "h-6";
 
   return (
-    <section id={id} className={cn(className, "w-full")}>
+    <section id={id} className={cn("fade-in", topMargin)}>
       {/* Upper triangle */}
       <svg
         className={cn(
@@ -50,7 +54,9 @@ export function MainSection({
           isLeft ? "rounded-tl-4xl" : "rounded-tr-4xl",
         )}
       >
-        <div className="min-h-small mx-auto max-w-6xl px-4 md:px-20">
+        <div
+          className={cn("mx-auto max-w-6xl md:px-20", bottomPadding, className)}
+        >
           {children}
         </div>
       </div>

@@ -112,13 +112,23 @@
   * {
     @apply border-border outline-ring/50;
   }
+  html {
+    scroll-behavior: smooth;
+  }
   body {
     @apply bg-background text-foreground;
+  }
+  @media screen and (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+  .fade-in {
+    animation: fadeInAnimation 0.5s ease-in-out;
   }
 }
 
 @layer components {
-  
 }
 
 @layer utilities {
@@ -137,5 +147,21 @@
   .angled-border-full {
     border-top-left-radius: 100%;
     border-bottom-right-radius: 100%;
+  }
+  .fade-in {
+    animation: fadeInAnimation both;
+    animation-timeline: view();
+    animation-range: entry 100px entry 300px;
+  }
+}
+
+@keyframes fadeInAnimation {
+  from {
+    opacity: 0;
+    transform: translateY(100px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
