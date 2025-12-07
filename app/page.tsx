@@ -150,7 +150,7 @@ export default function Home() {
         topMargin="-mt-[240px]"
         bottomPadding="pb-[200px]"
       >
-        <div className="flex flex-col gap-12 py-12">
+        <div className="flex flex-col gap-12 px-4 py-12">
           <Blog
             title="Blog Title"
             description="Blog Description"
@@ -183,9 +183,9 @@ export default function Home() {
         height="tall"
         fill="background"
         topMargin="-mt-[240px]"
-        bottomPadding="pb-[200px]"
+        bottomPadding="pb-[100px]"
       >
-        <div className="py-16 lg:py-32">
+        <div className="pt-24 pb-36 lg:py-32">
           <Contact />
         </div>
       </MainSection>

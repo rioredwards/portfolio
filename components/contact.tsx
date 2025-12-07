@@ -4,7 +4,7 @@ import Image from "next/image";
 
 export function Contact() {
   return (
-    <div className="flex flex-col gap-12 md:flex-row md:items-start md:gap-16">
+    <div className="flex flex-col gap-12 px-4 md:flex-row md:items-start md:gap-16">
       {/* Left illustration placeholder and heading */}
       <div className="flex flex-1 flex-col items-center gap-4 md:items-start">
         <Image
