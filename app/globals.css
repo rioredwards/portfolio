@@ -118,6 +118,11 @@
   body {
     @apply bg-background text-foreground;
   }
+  /* Lock background scroll when a mobile menu overlay is present */
+  body:has(.mobile-menu-open) {
+    overflow: hidden;
+    overscroll-behavior: contain;
+  }
   @media screen and (prefers-reduced-motion: reduce) {
     html {
       scroll-behavior: auto;

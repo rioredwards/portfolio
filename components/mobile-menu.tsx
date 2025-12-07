@@ -1,6 +1,7 @@
 "use client";
 
 import { getSocialLinks } from "@/lib/social-links";
+import profileImage from "@/public/profile.webp";
 import { Link as LinkIcon, X } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -24,7 +25,7 @@ export function MobileMenu() {
 
       {/* Fullscreen menu overlay */}
       {isOpen && (
-        <div className="bg-background fixed inset-0 z-50 md:hidden">
+        <div className="bg-background mobile-menu-open fixed inset-0 z-50 md:hidden">
           {/* Close button - top right */}
           <button
             onClick={() => setIsOpen(false)}
@@ -38,9 +39,9 @@ export function MobileMenu() {
           <div className="flex h-full flex-col items-center justify-center px-6 py-20">
             {/* Profile picture */}
             <div className="mb-6 shrink-0">
-              <div className="border-accent/60 relative h-32 w-32 overflow-hidden rounded-full border-2 sm:h-40 sm:w-40">
+              <div className="border-accent/60 relative h-42 w-42 overflow-hidden rounded-full border-2 sm:h-40 sm:w-40">
                 <Image
-                  src="/profile.jpg"
+                  src={profileImage}
                   alt="Rio Edwards"
                   fill
                   className="object-cover"
