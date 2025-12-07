@@ -22,7 +22,7 @@ export function Hero({
   return (
     <div
       className={cn(
-        "grid grid-cols-1 place-items-center md:grid-cols-[auto_1fr] md:grid-rows-[auto_auto] md:place-items-stretch",
+        "grid grid-cols-1 place-items-center md:grid-cols-[auto_1fr] md:grid-rows-[auto_auto] md:place-items-stretch lg:grid-cols-[1fr_max-content]",
         className,
       )}
     >
@@ -37,7 +37,7 @@ export function Hero({
       </div>
 
       {/* Profile Picture - middle-cell on mobile, left-cell on desktop */}
-      <div className="mb-8 md:row-span-2 md:mr-8 md:mb-0 md:flex md:place-items-center lg:mr-16">
+      <div className="mb-8 md:row-span-2 md:mr-8 md:mb-0 md:flex md:place-items-center lg:mr-16 lg:ml-auto">
         {/* Profile picture */}
         <div className="relative aspect-square h-64 overflow-hidden rounded-full border-4 sm:h-64">
           {image}

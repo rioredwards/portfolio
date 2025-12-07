@@ -12,7 +12,7 @@ export default function Home() {
   return (
     <main className="bg-background min-h-screen">
       <section id="home">
-        <div className="mx-auto max-w-6xl pt-24 pb-56 md:px-20 md:pt-48 md:pb-64">
+        <div className="mx-auto max-w-6xl px-4 pt-24 pb-56 md:px-20 md:pt-48 md:pb-64">
           <Hero
             title="Hello, I'm Rio."
             paragraphs={[
@@ -49,21 +49,23 @@ export default function Home() {
         bottomPadding="pb-[260px]"
         className="pt-16"
       >
-        <Project
-          orientation="left"
-          category="Planning"
-          title="Class TopBase"
-          description="ClassTopBase is a school management software for after-schools. For this project, I designed a feature to help school owners plan their students' academic plans efficiently."
-          skills={[
-            "JavaScript",
-            "JavaScript",
-            "JavaScript",
-            "JavaScript",
-            "JavaScript",
-            "JavaScript",
-          ]}
-          image="/temp-proj-photo.webp"
-        />
+        <div className="md:py-2 lg:py-4">
+          <Project
+            orientation="left"
+            category="Planning"
+            title="Class TopBase"
+            description="ClassTopBase is a school management software for after-schools. For this project, I designed a feature to help school owners plan their students' academic plans efficiently."
+            skills={[
+              "JavaScript",
+              "JavaScript",
+              "JavaScript",
+              "JavaScript",
+              "JavaScript",
+              "JavaScript",
+            ]}
+            image="/temp-proj-photo.webp"
+          />
+        </div>
       </MainSection>
       <MainSection
         orientation="right"
@@ -80,21 +82,23 @@ export default function Home() {
         bottomPadding="pb-[260px]"
         className="pt-16"
       >
-        <Project
-          orientation="right"
-          category="Planning"
-          title="Class TopBase"
-          description="ClassTopBase is a school management software for after-schools. For this project, I designed a feature to help school owners plan their students' academic plans efficiently."
-          skills={[
-            "JavaScript",
-            "JavaScript",
-            "JavaScript",
-            "JavaScript",
-            "JavaScript",
-            "JavaScript",
-          ]}
-          image="/temp-proj-photo.webp"
-        />
+        <div className="md:py-2 lg:py-4">
+          <Project
+            orientation="right"
+            category="Planning"
+            title="Class TopBase"
+            description="ClassTopBase is a school management software for after-schools. For this project, I designed a feature to help school owners plan their students' academic plans efficiently."
+            skills={[
+              "JavaScript",
+              "JavaScript",
+              "JavaScript",
+              "JavaScript",
+              "JavaScript",
+              "JavaScript",
+            ]}
+            image="/temp-proj-photo.webp"
+          />
+        </div>
       </MainSection>
       <MainSection
         orientation="right"
@@ -111,21 +115,23 @@ export default function Home() {
         bottomPadding="pb-[260px]"
         className="pt-16"
       >
-        <Project
-          orientation="left"
-          category="Planning"
-          title="Class TopBase"
-          description="ClassTopBase is a school management software for after-schools. For this project, I designed a feature to help school owners plan their students' academic plans efficiently."
-          skills={[
-            "JavaScript",
-            "JavaScript",
-            "JavaScript",
-            "JavaScript",
-            "JavaScript",
-            "JavaScript",
-          ]}
-          image="/temp-proj-photo.webp"
-        />
+        <div className="md:py-2 lg:py-4">
+          <Project
+            orientation="left"
+            category="Planning"
+            title="Class TopBase"
+            description="ClassTopBase is a school management software for after-schools. For this project, I designed a feature to help school owners plan their students' academic plans efficiently."
+            skills={[
+              "JavaScript",
+              "JavaScript",
+              "JavaScript",
+              "JavaScript",
+              "JavaScript",
+              "JavaScript",
+            ]}
+            image="/temp-proj-photo.webp"
+          />
+        </div>
       </MainSection>
       <MainSection
         orientation="left"
