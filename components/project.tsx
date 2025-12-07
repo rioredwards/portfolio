@@ -22,7 +22,7 @@ export function Project({
   return (
     <article
       className={cn(
-        "fade-in flex flex-col gap-12 lg:flex-row lg:items-center lg:gap-16",
+        "fade-in flex flex-col gap-12 py-12 md:py-16 lg:flex-row lg:items-center lg:gap-16 lg:py-20",
         orientation === "left" ? "lg:flex-row" : "lg:flex-row-reverse",
       )}
     >

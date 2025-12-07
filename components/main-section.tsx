@@ -8,7 +8,6 @@ interface MainSectionProps {
   orientation?: Orientation;
   height?: Height;
   fill?: "background" | "secondary";
-  bottomPadding?: string;
   topMargin?: string;
   children?: React.ReactNode;
   className?: string;
@@ -19,7 +18,6 @@ export function MainSection({
   orientation = "left",
   height = "tall",
   fill = "background",
-  bottomPadding,
   topMargin,
   children,
   className,
@@ -52,11 +50,10 @@ export function MainSection({
         className={cn(
           fill === "secondary" ? "bg-secondary" : "bg-background",
           isLeft ? "rounded-tl-4xl" : "rounded-tr-4xl",
+          "extended-padding",
         )}
       >
-        <div
-          className={cn("mx-auto max-w-6xl md:px-20", bottomPadding, className)}
-        >
+        <div className={cn("mx-auto max-w-6xl md:px-20", className)}>
           {children}
         </div>
       </div>
