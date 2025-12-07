@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono, Playfair_Display } from "next/font/google";
 import localFont from "next/font/local";
 import { Footer } from "../components/footer";
+import { MainSection } from "../components/main-section";
 import { MobileMenu } from "../components/mobile-menu";
 import { Navbar } from "../components/navbar";
-import { SectionBreak } from "../components/section-break";
 import { Sidebar } from "../components/sidebar";
 import "./globals.css";
 
@@ -77,8 +77,22 @@ export default function RootLayout({
           <Sidebar />
           <MobileMenu />
           {children}
-          <SectionBreak orientation="right" height="short"></SectionBreak>
-          <Footer />
+          <MainSection
+            orientation="left"
+            height="short"
+            fill="secondary"
+            topMargin="-mt-[200px]"
+            bottomPadding="pb-[200px]"
+          ></MainSection>
+          <MainSection
+            orientation="left"
+            height="tall"
+            fill="background"
+            topMargin="-mt-[200px]"
+            // bottomPadding="pb-[200px]"
+          >
+            <Footer />
+          </MainSection>
         </>
       </body>
     </html>
