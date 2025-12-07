@@ -137,6 +137,32 @@
 }
 
 @layer utilities {
+  /* Mobile menu responsive helpers (scale with viewport height) */
+  .mm-btn {
+    width: clamp(48px, 9svh, 56px);
+    height: clamp(48px, 9svh, 56px);
+  }
+  .mm-img {
+    width: clamp(96px, 24svh, 160px);
+    height: clamp(96px, 24svh, 160px);
+  }
+  .mm-py {
+    padding-top: clamp(12px, 5svh, 64px);
+    padding-bottom: clamp(12px, 5svh, 64px);
+  }
+  .mm-mb-small {
+    margin-bottom: clamp(8px, 2svh, 16px);
+  }
+  .mm-mb-medium {
+    margin-bottom: clamp(8px, 3svh, 24px);
+  }
+  .mm-gap {
+    gap: clamp(8px, 2.4svh, 18px);
+  }
+  .mm-link {
+    padding-top: clamp(6px, 1.6svh, 12px);
+    padding-bottom: clamp(6px, 1.6svh, 12px);
+  }
   .angled-border-sm {
     border-top-left-radius: var(--radius-2xl);
     border-bottom-right-radius: var(--radius-2xl);

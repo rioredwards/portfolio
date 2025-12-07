@@ -17,7 +17,7 @@ export function MobileMenu() {
       {/* Floating button - bottom right */}
       <button
         onClick={() => setIsOpen(true)}
-        className="bg-foreground text-background fixed right-6 bottom-6 z-50 flex h-14 w-14 items-center justify-center rounded-full shadow-lg transition-all hover:scale-110 md:hidden"
+        className="bg-foreground text-background mm-btn fixed right-6 bottom-6 z-50 flex items-center justify-center rounded-full shadow-lg transition-all hover:scale-110 md:hidden"
         aria-label="Open menu"
       >
         <LinkIcon className="size-6" />
@@ -36,10 +36,10 @@ export function MobileMenu() {
           </button>
 
           {/* Content - centered */}
-          <div className="flex h-full flex-col items-center justify-center px-6 py-20">
+          <div className="mm-py flex h-full flex-col items-center justify-center px-6">
             {/* Profile picture */}
-            <div className="mb-6 shrink-0">
-              <div className="border-accent/60 relative h-42 w-42 overflow-hidden rounded-full border-2 sm:h-40 sm:w-40">
+            <div className="mm-mb-small shrink-0">
+              <div className="border-accent/60 mm-img relative overflow-hidden rounded-full border-2">
                 <Image
                   src={profileImage}
                   alt="Rio Edwards"
@@ -52,19 +52,19 @@ export function MobileMenu() {
 
             {/* Name */}
             <h2
-              className="text-foreground mb-2 text-2xl font-bold sm:text-3xl"
+              className="text-foreground mm-mb-small text-2xl font-bold sm:text-3xl"
               style={{ fontFamily: "var(--font-mazaeni-demo), serif" }}
             >
               Rio Edwards
             </h2>
 
             {/* Title */}
-            <p className="text-secondary-foreground mb-8 text-lg sm:text-xl">
+            <p className="text-secondary-foreground mm-mb-medium text-lg sm:text-xl">
               Developer / Designer / Creator
             </p>
 
             {/* Social links */}
-            <nav className="flex w-full max-w-sm flex-col gap-3">
+            <nav className="mm-gap flex w-full max-w-sm flex-col">
               {socialLinks.map((link, index) => (
                 <Link
                   key={index}
@@ -76,7 +76,7 @@ export function MobileMenu() {
                       : undefined
                   }
                   onClick={() => setIsOpen(false)}
-                  className="border-border/50 bg-background text-foreground hover:bg-secondary/30 flex items-center gap-3 rounded-2xl border px-4 py-3 shadow-sm transition-all hover:shadow-md"
+                  className="border-border/50 bg-background text-foreground hover:bg-secondary/30 mm-link flex items-center gap-3 rounded-2xl border px-4 shadow-sm transition-all hover:shadow-md"
                   aria-label={link.label}
                 >
                   <span className="flex shrink-0 items-center justify-center">
