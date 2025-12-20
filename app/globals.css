@@ -4,6 +4,10 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
+  --font-h1: clamp(3.4rem,calc(7vw + .45rem), 5.75rem);
+  --font-h2: clamp(2.8rem,calc(5.9vw + 0.42rem), 4rem);
+  --font-h3: clamp(2rem,calc(4vw + 0.28rem), 2.4rem);
+  
   /* Theme colors (source of truth) */
   --theme-background: #f4ebda;
   --theme-foreground: #2d645d;
@@ -131,6 +135,19 @@
   }
   .fade-in {
     animation: fadeInAnimation 0.5s ease-in-out;
+  }
+  
+  h1 {
+    @apply text-foreground text-center font-bold tracking-tight whitespace-nowrap md:text-left;
+    font-size: var(--font-h1);
+  }
+  h2 {
+    @apply text-foreground text-center font-bold whitespace-nowrap;
+    font-size: var(--font-h2);
+  }
+  h3 {
+    @apply text-foreground leading-tight font-bold;
+    font-size: var(--font-h3);
   }
 }
 

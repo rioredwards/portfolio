@@ -38,12 +38,9 @@ export function Project({
         <p className="text-muted-foreground mb-4 text-sm font-medium tracking-[0.2em] uppercase">
           {category}
         </p>
-        <h2
-          className="text-foreground mb-6 text-4xl leading-tight font-bold sm:text-5xl"
-          style={{ fontFamily: "var(--font-mazaeni-demo), serif" }}
-        >
+        <h3 style={{ fontFamily: "var(--font-mazaeni-demo), serif" }}>
           {title}
-        </h2>
+        </h3>
 
         <p className="text-muted-foreground mb-8 max-w-xl text-base leading-relaxed">
           {description}

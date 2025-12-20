@@ -29,7 +29,7 @@ export function Hero({
       {/* Main heading - top-cell on mobile, top-right-cell on desktop */}
       <div className="mb-4 md:col-start-2 md:row-start-1 md:mb-2">
         <h1
-          className="text-foreground text-center text-[clamp(3rem,14vw,5rem)] font-bold tracking-tight whitespace-nowrap md:text-left md:text-6xl lg:text-7xl"
+          className=""
           style={{ fontFamily: "var(--font-mazaeni-demo), serif" }}
         >
           {title}
@@ -39,7 +39,7 @@ export function Hero({
       {/* Profile Picture - middle-cell on mobile, left-cell on desktop */}
       <div className="mb-8 md:row-span-2 md:mr-8 md:mb-0 md:flex md:place-items-center lg:mr-16 lg:ml-auto">
         {/* Profile picture */}
-        <div className="relative aspect-square h-64 overflow-hidden rounded-full border-4 sm:h-64">
+        <div className="relative aspect-square h-64 overflow-hidden rounded-full border-4 sm:h-64 md:h-72 lg:h-90">
           {image}
         </div>
       </div>
