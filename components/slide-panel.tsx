@@ -84,7 +84,7 @@ export function SlidePanel({
           fill === "secondary" ? "bg-secondary" : "bg-background",
           isLeft ? "rounded-tl-4xl" : "rounded-tr-4xl",
           bottomPadding,
-          "extended-padding",
+          "extended-padding min-h-24",
         )}
       >
         {children}

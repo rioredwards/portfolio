@@ -34,12 +34,7 @@ export default function Home() {
       <SlidePanel orientation="left" decorationHeight="tall" fill="secondary">
         <SectionHeader title="Projects" />
       </SlidePanel>
-      <SlidePanel
-        orientation="left"
-        decorationHeight="tall"
-        fill="background"
-        className="pt-16"
-      >
+      <SlidePanel orientation="left" decorationHeight="tall" fill="background">
         <div className="md:py-2 lg:py-4">
           <Project
             orientation="left"
@@ -63,12 +58,7 @@ export default function Home() {
         decorationHeight="short"
         fill="secondary"
       ></SlidePanel>
-      <SlidePanel
-        orientation="right"
-        decorationHeight="tall"
-        fill="background"
-        className="pt-16"
-      >
+      <SlidePanel orientation="right" decorationHeight="tall" fill="background">
         <div className="md:py-2 lg:py-4">
           <Project
             orientation="right"
@@ -92,12 +82,7 @@ export default function Home() {
         decorationHeight="short"
         fill="secondary"
       ></SlidePanel>
-      <SlidePanel
-        orientation="right"
-        decorationHeight="tall"
-        fill="background"
-        className="pt-16"
-      >
+      <SlidePanel orientation="right" decorationHeight="tall" fill="background">
         <div className="md:py-2 lg:py-4">
           <Project
             orientation="left"
@@ -116,11 +101,6 @@ export default function Home() {
           />
         </div>
       </SlidePanel>
-      <SlidePanel
-        orientation="left"
-        decorationHeight="short"
-        fill="secondary"
-      ></SlidePanel>
       <SlidePanel orientation="left" decorationHeight="tall" fill="secondary">
         <SectionHeader title="Blog" />
       </SlidePanel>
