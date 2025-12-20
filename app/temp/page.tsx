@@ -1,13 +1,13 @@
 import { MessagesSquare } from "lucide-react";
 import { Blog } from "../../components/blog";
-import { SlidePanel } from "../../components/slide-panel";
 import { Project } from "../../components/project";
 import { SectionHeader } from "../../components/section-header";
+import { SlidePanel } from "../../components/slide-panel";
 
 export default function Home() {
   return (
     <main className="bg-background min-h-screen">
-      <div className="mt-48">
+      <div className="mt-98">
         <SlidePanel orientation="left" decorationHeight="tall" fill="secondary">
           <SectionHeader title="Temp Page" />
         </SlidePanel>
@@ -43,6 +43,7 @@ export default function Home() {
           orientation="right"
           decorationHeight="tall"
           fill="background"
+          className="[--extended-padding-height:0]"
         >
           <div className="flex flex-col gap-12 py-12">
             <Blog

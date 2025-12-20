@@ -69,7 +69,7 @@ export function SlidePanel({
   const bottomPadding = isTall ? "pb-8" : "pb-6";
 
   return (
-    <div className={cn("relative", topMargin, className)}>
+    <div className={cn("fade-in relative", topMargin, className)}>
       {/* Decoration */}
       <TriangleDecoration
         decorationHeight={decorationHeight}
@@ -84,6 +84,7 @@ export function SlidePanel({
           fill === "secondary" ? "bg-secondary" : "bg-background",
           isLeft ? "rounded-tl-4xl" : "rounded-tr-4xl",
           bottomPadding,
+          "extended-padding",
         )}
       >
         {children}

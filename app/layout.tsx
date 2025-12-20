@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono, Playfair_Display } from "next/font/google";
 import localFont from "next/font/local";
 import { Footer } from "../components/footer";
-import { MainSection } from "../components/main-section";
 import { MobileMenu } from "../components/mobile-menu";
 import { Navbar } from "../components/navbar";
 import { Sidebar } from "../components/sidebar";
@@ -77,22 +76,7 @@ export default function RootLayout({
           <Sidebar />
           <MobileMenu />
           {children}
-          <div className="max-h-80 overflow-hidden">
-            <MainSection
-              orientation="right"
-              height="short"
-              fill="secondary"
-              className="min-h-4"
-            ></MainSection>
-            <MainSection
-              orientation="right"
-              height="short"
-              fill="background"
-              className="px-4 pt-12 pb-12"
-            >
-              <Footer />
-            </MainSection>
-          </div>
+          <Footer />
         </>
       </body>
     </html>

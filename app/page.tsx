@@ -2,10 +2,10 @@ import { Blog } from "@/components/blog";
 import { Contact } from "@/components/contact";
 import { Hero } from "@/components/hero";
 import { Project } from "@/components/project";
+import { SlidePanel } from "@/components/slide-panel";
 import profileImage from "@/public/profile.webp";
 import { MessagesSquare } from "lucide-react";
 import Image from "next/image";
-import { MainSection } from "../components/main-section";
 import { SectionHeader } from "../components/section-header";
 
 export default function Home() {
@@ -31,22 +31,13 @@ export default function Home() {
           />
         </div>
       </section>
-      <MainSection
-        id="projects"
-        orientation="left"
-        height="tall"
-        fill="secondary"
-        topMargin="-mt-[200px]"
-        bottomPadding="pb-[240px]"
-      >
+      <SlidePanel orientation="left" decorationHeight="tall" fill="secondary">
         <SectionHeader title="Projects" />
-      </MainSection>
-      <MainSection
+      </SlidePanel>
+      <SlidePanel
         orientation="left"
-        height="tall"
+        decorationHeight="tall"
         fill="background"
-        topMargin="-mt-[240px]"
-        bottomPadding="pb-[260px]"
         className="pt-16"
       >
         <div className="md:py-2 lg:py-4">
@@ -66,20 +57,16 @@ export default function Home() {
             image="/temp-proj-photo.webp"
           />
         </div>
-      </MainSection>
-      <MainSection
+      </SlidePanel>
+      <SlidePanel
         orientation="right"
-        height="short"
+        decorationHeight="short"
         fill="secondary"
-        topMargin="-mt-[200px]"
-        bottomPadding="pb-[200px]"
-      ></MainSection>
-      <MainSection
+      ></SlidePanel>
+      <SlidePanel
         orientation="right"
-        height="tall"
+        decorationHeight="tall"
         fill="background"
-        topMargin="-mt-[200px]"
-        bottomPadding="pb-[260px]"
         className="pt-16"
       >
         <div className="md:py-2 lg:py-4">
@@ -99,20 +86,16 @@ export default function Home() {
             image="/temp-proj-photo.webp"
           />
         </div>
-      </MainSection>
-      <MainSection
+      </SlidePanel>
+      <SlidePanel
         orientation="right"
-        height="short"
+        decorationHeight="short"
         fill="secondary"
-        topMargin="-mt-[200px]"
-        bottomPadding="pb-[200px]"
-      ></MainSection>
-      <MainSection
+      ></SlidePanel>
+      <SlidePanel
         orientation="right"
-        height="tall"
+        decorationHeight="tall"
         fill="background"
-        topMargin="-mt-[200px]"
-        bottomPadding="pb-[260px]"
         className="pt-16"
       >
         <div className="md:py-2 lg:py-4">
@@ -132,30 +115,16 @@ export default function Home() {
             image="/temp-proj-photo.webp"
           />
         </div>
-      </MainSection>
-      <MainSection
+      </SlidePanel>
+      <SlidePanel
         orientation="left"
-        height="short"
+        decorationHeight="short"
         fill="secondary"
-        topMargin="-mt-[200px]"
-        bottomPadding="pb-[200px]"
-      ></MainSection>
-      <MainSection
-        orientation="left"
-        height="tall"
-        fill="secondary"
-        topMargin="-mt-[240px]"
-        bottomPadding="pb-[240px]"
-      >
+      ></SlidePanel>
+      <SlidePanel orientation="left" decorationHeight="tall" fill="secondary">
         <SectionHeader title="Blog" />
-      </MainSection>
-      <MainSection
-        orientation="left"
-        height="tall"
-        fill="background"
-        topMargin="-mt-[240px]"
-        bottomPadding="pb-[200px]"
-      >
+      </SlidePanel>
+      <SlidePanel orientation="left" decorationHeight="tall" fill="background">
         <div className="flex flex-col gap-12 px-4 py-12">
           <Blog
             title="Blog Title"
@@ -173,28 +142,15 @@ export default function Home() {
             icon={<MessagesSquare className="h-10 w-10" aria-hidden="true" />}
           />
         </div>
-      </MainSection>
-      <MainSection
-        id="contact"
-        orientation="right"
-        height="tall"
-        fill="secondary"
-        topMargin="-mt-[200px]"
-        bottomPadding="pb-[240px]"
-      >
+      </SlidePanel>
+      <SlidePanel orientation="right" decorationHeight="tall" fill="secondary">
         <SectionHeader title="Contact" />
-      </MainSection>
-      <MainSection
-        orientation="right"
-        height="tall"
-        fill="background"
-        topMargin="-mt-[240px]"
-        bottomPadding="pb-[0px]"
-      >
+      </SlidePanel>
+      <SlidePanel orientation="right" decorationHeight="tall" fill="background">
         <div className="pt-24 pb-12 lg:pb-16">
           <Contact />
         </div>
-      </MainSection>
+      </SlidePanel>
     </main>
   );
 }

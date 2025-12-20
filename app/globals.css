@@ -58,7 +58,7 @@
   --radius: 1rem;
   --tracking-normal: 0em;
   --spacing: 0.25rem;
-  --extended-padding-height: 400px;
+  --extended-padding-height: 16rem;
 }
 
 @theme inline {
@@ -209,5 +209,5 @@
 }
 
 * {
-  border: 1px solid red;
+  /* border: 1px solid red; */
 }
