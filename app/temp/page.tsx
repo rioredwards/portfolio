@@ -1,29 +1,20 @@
 import { MessagesSquare } from "lucide-react";
 import { Blog } from "../../components/blog";
-import { MainSection } from "../../components/main-section";
+import { SlidePanel } from "../../components/slide-panel";
 import { Project } from "../../components/project";
 import { SectionHeader } from "../../components/section-header";
 
 export default function Home() {
   return (
     <main className="bg-background min-h-screen">
-      <div className="mt-[160vh]">
-        <MainSection
-          orientation="left"
-          height="tall"
-          fill="secondary"
-          topMargin="-mt-[200px]"
-          bottomPadding="pb-[200px]"
-        >
+      <div className="mt-48">
+        <SlidePanel orientation="left" decorationHeight="tall" fill="secondary">
           <SectionHeader title="Temp Page" />
-        </MainSection>
-        <MainSection
+        </SlidePanel>
+        <SlidePanel
           orientation="left"
-          height="tall"
+          decorationHeight="tall"
           fill="background"
-          topMargin="-mt-[240px]"
-          bottomPadding="pb-[200px]"
-          className="pt-16"
         >
           <Project
             orientation="left"
@@ -40,22 +31,18 @@ export default function Home() {
             ]}
             image="/temp-proj-photo.webp"
           />
-        </MainSection>
-        <MainSection
+        </SlidePanel>
+        <SlidePanel
           orientation="right"
-          height="tall"
+          decorationHeight="tall"
           fill="secondary"
-          topMargin="-mt-[200px]"
-          bottomPadding="pb-[200px]"
         >
           <SectionHeader title="Blog" />
-        </MainSection>
-        <MainSection
+        </SlidePanel>
+        <SlidePanel
           orientation="right"
-          height="tall"
+          decorationHeight="tall"
           fill="background"
-          topMargin="-mt-[240px]"
-          bottomPadding="pb-[200px]"
         >
           <div className="flex flex-col gap-12 py-12">
             <Blog
@@ -74,7 +61,7 @@ export default function Home() {
               icon={<MessagesSquare className="h-10 w-10" aria-hidden="true" />}
             />
           </div>
-        </MainSection>
+        </SlidePanel>
       </div>
     </main>
   );
