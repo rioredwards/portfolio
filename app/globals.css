@@ -58,6 +58,7 @@
   --radius: 1rem;
   --tracking-normal: 0em;
   --spacing: 0.25rem;
+  --extended-padding-height: 400px;
 }
 
 @theme inline {
@@ -134,6 +135,16 @@
 }
 
 @layer components {
+  .extended-padding::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%; 
+    height: var(--extended-padding-height);
+    background-color: inherit;
+    z-index: -1;
+  }
 }
 
 @layer utilities {

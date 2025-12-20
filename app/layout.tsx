@@ -77,22 +77,22 @@ export default function RootLayout({
           <Sidebar />
           <MobileMenu />
           {children}
-          <MainSection
-            orientation="left"
-            height="short"
-            fill="secondary"
-            topMargin="-mt-[200px]"
-            bottomPadding="pb-[200px]"
-          ></MainSection>
-          <MainSection
-            orientation="left"
-            height="tall"
-            fill="background"
-            topMargin="-mt-[200px]"
-            // bottomPadding="pb-[200px]"
-          >
-            <Footer />
-          </MainSection>
+          <div className="max-h-80 overflow-hidden">
+            <MainSection
+              orientation="right"
+              height="short"
+              fill="secondary"
+              className="min-h-4"
+            ></MainSection>
+            <MainSection
+              orientation="right"
+              height="short"
+              fill="background"
+              className="px-4 pt-12 pb-12"
+            >
+              <Footer />
+            </MainSection>
+          </div>
         </>
       </body>
     </html>

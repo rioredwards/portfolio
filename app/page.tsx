@@ -37,7 +37,7 @@ export default function Home() {
         height="tall"
         fill="secondary"
         topMargin="-mt-[200px]"
-        bottomPadding="pb-[200px]"
+        bottomPadding="pb-[240px]"
       >
         <SectionHeader title="Projects" />
       </MainSection>
@@ -145,7 +145,7 @@ export default function Home() {
         height="tall"
         fill="secondary"
         topMargin="-mt-[240px]"
-        bottomPadding="pb-[200px]"
+        bottomPadding="pb-[240px]"
       >
         <SectionHeader title="Blog" />
       </MainSection>
@@ -180,7 +180,7 @@ export default function Home() {
         height="tall"
         fill="secondary"
         topMargin="-mt-[200px]"
-        bottomPadding="pb-[200px]"
+        bottomPadding="pb-[240px]"
       >
         <SectionHeader title="Contact" />
       </MainSection>
@@ -189,9 +189,9 @@ export default function Home() {
         height="tall"
         fill="background"
         topMargin="-mt-[240px]"
-        bottomPadding="pb-[100px]"
+        bottomPadding="pb-[0px]"
       >
-        <div className="pt-24 pb-36 lg:py-32">
+        <div className="pt-24 pb-12 lg:pb-16">
           <Contact />
         </div>
       </MainSection>

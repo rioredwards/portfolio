@@ -52,6 +52,7 @@ export function MainSection({
         className={cn(
           fill === "secondary" ? "bg-secondary" : "bg-background",
           isLeft ? "rounded-tl-4xl" : "rounded-tr-4xl",
+          "extended-padding",
         )}
       >
         <div
