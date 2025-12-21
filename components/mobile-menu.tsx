@@ -51,15 +51,10 @@ export function MobileMenu() {
             </div>
 
             {/* Name */}
-            <h2
-              className="text-foreground mm-mb-small text-2xl font-bold sm:text-3xl"
-              style={{ fontFamily: "var(--font-mazaeni-demo), serif" }}
-            >
-              Rio Edwards
-            </h2>
+            <h2 className="text-mobile-heading mm-mb-small">Rio Edwards</h2>
 
             {/* Title */}
-            <p className="text-secondary-foreground mm-mb-medium text-lg sm:text-xl">
+            <p className="text-mobile-body mm-mb-medium">
               Developer / Designer / Creator
             </p>
 
@@ -82,12 +77,7 @@ export function MobileMenu() {
                   <span className="flex shrink-0 items-center justify-center">
                     {link.icon}
                   </span>
-                  <span
-                    className="text-base font-bold"
-                    style={{ fontFamily: "var(--font-mazaeni-demo), serif" }}
-                  >
-                    {link.label}
-                  </span>
+                  <span className="text-button-sm">{link.label}</span>
                 </Link>
               ))}
             </nav>

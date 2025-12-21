@@ -4,9 +4,25 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
+  /* Font sizes */
   --font-h1: clamp(3.4rem,calc(7vw + .45rem), 5.75rem);
   --font-h2: clamp(2.8rem,calc(5.9vw + 0.42rem), 4rem);
   --font-h3: clamp(2rem,calc(4vw + 0.28rem), 2.4rem);
+  
+  /* Text size scale (matching Tailwind defaults) */
+  --font-size-xs: 0.75rem;    /* 12px */
+  --font-size-sm: 0.875rem;   /* 14px */
+  --font-size-base: 1rem;     /* 16px */
+  --font-size-lg: 1.125rem;   /* 18px */
+  --font-size-xl: 1.25rem;    /* 20px */
+  --font-size-2xl: 1.5rem;    /* 24px */
+  --font-size-3xl: 1.875rem;  /* 30px */
+  --font-size-4xl: 2.25rem;   /* 36px */
+  --font-size-5xl: 3rem;      /* 48px */
+  --font-size-6xl: 3.75rem;  /* 60px */
+  --font-size-7xl: 4.5rem;   /* 72px */
+  --font-size-8xl: 6rem;     /* 96px */
+  --font-size-9xl: 8rem;     /* 128px */
   
   /* Theme colors (source of truth) */
   --theme-background: #f4ebda;
@@ -104,6 +120,24 @@
   --font-playfair: var(--font-playfair);
   --font-mazaeni: var(--font-mazaeni-demo), serif;
 
+  --font-size-xs: var(--font-size-xs);
+  --font-size-sm: var(--font-size-sm);
+  --font-size-base: var(--font-size-base);
+  --font-size-lg: var(--font-size-lg);
+  --font-size-xl: var(--font-size-xl);
+  --font-size-2xl: var(--font-size-2xl);
+  --font-size-3xl: var(--font-size-3xl);
+  --font-size-4xl: var(--font-size-4xl);
+  --font-size-5xl: var(--font-size-5xl);
+  --font-size-6xl: var(--font-size-6xl);
+  --font-size-7xl: var(--font-size-7xl);
+  --font-size-8xl: var(--font-size-8xl);
+  --font-size-9xl: var(--font-size-9xl);
+  
+  --font-size-h1: var(--font-h1);
+  --font-size-h2: var(--font-h2);
+  --font-size-h3: var(--font-h3);
+
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
@@ -140,14 +174,42 @@
   h1 {
     @apply text-foreground text-center font-bold tracking-tight whitespace-nowrap md:text-left;
     font-size: var(--font-h1);
+    font-family: var(--font-mazaeni-demo), serif;
   }
   h2 {
     @apply text-foreground text-center font-bold whitespace-nowrap;
     font-size: var(--font-h2);
+    font-family: var(--font-mazaeni-demo), serif;
   }
   h3 {
     @apply text-foreground leading-tight font-bold;
     font-size: var(--font-h3);
+    font-family: var(--font-mazaeni-demo), serif;
+  }
+  
+  p {
+    @apply text-secondary-foreground;
+    font-size: var(--font-size-base);
+    line-height: 1.5;
+  }
+  
+  span {
+    font-size: inherit;
+  }
+  
+  label {
+    @apply text-secondary-foreground font-semibold;
+    font-size: var(--font-size-lg);
+  }
+  
+  input,
+  textarea {
+    @apply text-secondary-foreground;
+    font-size: var(--font-size-base);
+  }
+  
+  button {
+    font-size: inherit;
   }
 }
 
@@ -161,6 +223,70 @@
     height: var(--extended-padding-height);
     background-color: inherit;
     z-index: -1;
+  }
+  
+  /* Text style components */
+  .text-category {
+    @apply text-muted-foreground font-medium tracking-[0.2em] uppercase;
+    font-size: var(--font-size-sm);
+  }
+  
+  .text-body {
+    @apply text-secondary-foreground leading-relaxed;
+    font-size: var(--font-size-base);
+  }
+  
+  .text-body-large {
+    @apply text-secondary-foreground leading-relaxed;
+    font-size: var(--font-size-lg);
+  }
+  
+  .text-section-heading {
+    @apply text-foreground leading-tight font-bold;
+    font-size: clamp(var(--font-size-3xl), 4vw, var(--font-size-4xl));
+  }
+  
+  .text-nav {
+    @apply text-foreground font-medium;
+    font-size: var(--font-size-sm);
+  }
+  
+  .text-button {
+    @apply font-bold;
+    font-size: var(--font-size-lg);
+  }
+  
+  .text-button-sm {
+    @apply font-medium;
+    font-size: var(--font-size-sm);
+  }
+  
+  .text-label {
+    @apply text-secondary-foreground font-semibold;
+    font-size: var(--font-size-lg);
+  }
+  
+  .text-mobile-heading {
+    @apply text-foreground font-bold;
+    font-size: clamp(var(--font-size-2xl), 3vw, var(--font-size-3xl));
+  }
+  
+  .text-mobile-body {
+    @apply text-secondary-foreground;
+    font-size: clamp(var(--font-size-lg), 2vw, var(--font-size-xl));
+  }
+  
+  .text-section-break {
+    @apply text-foreground font-black text-center;
+    font-family: var(--font-mazaeni-demo), serif;
+  }
+  
+  .text-section-break-tall {
+    font-size: var(--font-size-6xl);
+  }
+  
+  .text-section-break-short {
+    font-size: var(--font-size-4xl);
   }
 }
 

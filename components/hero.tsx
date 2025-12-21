@@ -28,12 +28,7 @@ export function Hero({
     >
       {/* Main heading - top-cell on mobile, top-right-cell on desktop */}
       <div className="mb-4 md:col-start-2 md:row-start-1 md:mb-2">
-        <h1
-          className=""
-          style={{ fontFamily: "var(--font-mazaeni-demo), serif" }}
-        >
-          {title}
-        </h1>
+        <h1>{title}</h1>
       </div>
 
       {/* Profile Picture - middle-cell on mobile, left-cell on desktop */}
@@ -47,9 +42,9 @@ export function Hero({
       {/* Subheading and paragraphs - bottom-cell on mobile, bottom-right-cell on desktop */}
       <div className="max-w-lg flex-1 md:col-start-2 md:row-start-2">
         {paragraphs && (
-          <div className="text-secondary-foreground mb-6 space-y-4">
+          <div className="mb-6 space-y-4">
             {paragraphs.map((paragraph, index) => (
-              <p key={index} className="leading-relaxed">
+              <p key={index} className="text-body">
                 {paragraph}
               </p>
             ))}

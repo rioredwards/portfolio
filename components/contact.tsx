@@ -13,12 +13,7 @@ export function Contact() {
           width={300}
           height={300}
         />
-        <p
-          className="text-foreground text-3xl leading-tight font-bold sm:text-4xl"
-          style={{ fontFamily: "var(--font-mazaeni-demo), serif" }}
-        >
-          Nice to meet you!
-        </p>
+        <h2 className="text-section-heading">Nice to meet you!</h2>
       </div>
 
       {/* Right form */}
@@ -29,11 +24,7 @@ export function Contact() {
         {/* Name & Email row */}
         <div className="grid gap-4 md:grid-cols-2">
           <div className="flex flex-col gap-2">
-            <label
-              htmlFor="fullName"
-              className="text-secondary-foreground text-lg font-semibold"
-              style={{ fontFamily: "var(--font-mazaeni-demo), serif" }}
-            >
+            <label htmlFor="fullName" className="text-label">
               Full Name
             </label>
             <input
@@ -42,15 +33,11 @@ export function Contact() {
               name="fullName"
               type="text"
               placeholder="John Smith"
-              className="border-border bg-background text-secondary-foreground focus:ring-ring w-full rounded-2xl border px-4 py-3 text-base shadow-inner focus:ring-2 focus:outline-none"
+              className="border-border bg-background focus:ring-ring w-full rounded-2xl border px-4 py-3 shadow-inner focus:ring-2 focus:outline-none"
             />
           </div>
           <div className="flex flex-col gap-2">
-            <label
-              htmlFor="email"
-              className="text-secondary-foreground text-lg font-semibold"
-              style={{ fontFamily: "var(--font-mazaeni-demo), serif" }}
-            >
+            <label htmlFor="email" className="text-label">
               Email
             </label>
             <input
@@ -59,18 +46,14 @@ export function Contact() {
               name="email"
               type="email"
               placeholder="john@email.com"
-              className="border-border bg-background text-secondary-foreground focus:ring-ring w-full rounded-2xl border px-4 py-3 text-base shadow-inner focus:ring-2 focus:outline-none"
+              className="border-border bg-background focus:ring-ring w-full rounded-2xl border px-4 py-3 shadow-inner focus:ring-2 focus:outline-none"
             />
           </div>
         </div>
 
         {/* Message */}
         <div className="flex flex-col gap-2">
-          <label
-            htmlFor="message"
-            className="text-secondary-foreground text-lg font-semibold"
-            style={{ fontFamily: "var(--font-mazaeni-demo), serif" }}
-          >
+          <label htmlFor="message" className="text-label">
             Message
           </label>
           <textarea
@@ -79,7 +62,7 @@ export function Contact() {
             name="message"
             rows={6}
             placeholder="Let's chat!"
-            className="border-border bg-background text-secondary-foreground focus:ring-ring w-full rounded-lg border px-4 py-3 text-base shadow-inner focus:ring-2 focus:outline-none"
+            className="border-border bg-background focus:ring-ring w-full rounded-lg border px-4 py-3 shadow-inner focus:ring-2 focus:outline-none"
           />
         </div>
 
@@ -88,7 +71,7 @@ export function Contact() {
           <Button
             type="submit"
             size="lg"
-            className="bg-primary text-primary-foreground text-lg font-bold"
+            className="bg-primary text-primary-foreground text-button"
           >
             Send
           </Button>

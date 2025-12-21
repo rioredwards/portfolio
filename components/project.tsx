@@ -35,16 +35,10 @@ export function Project({
             : "items-end text-right lg:text-left",
         )}
       >
-        <p className="text-muted-foreground mb-4 text-sm font-medium tracking-[0.2em] uppercase">
-          {category}
-        </p>
-        <h3 style={{ fontFamily: "var(--font-mazaeni-demo), serif" }}>
-          {title}
-        </h3>
+        <p className="text-category mb-4">{category}</p>
+        <h3>{title}</h3>
 
-        <p className="text-muted-foreground mb-8 max-w-xl text-base leading-relaxed">
-          {description}
-        </p>
+        <p className="text-body mb-8 max-w-xl">{description}</p>
 
         <div
           className={cn(

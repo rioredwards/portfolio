@@ -21,10 +21,7 @@ export function Sidebar() {
             <span className="flex shrink-0 items-center justify-center">
               {link.icon}
             </span>
-            <span
-              className="inline-block max-w-0 overflow-hidden text-sm font-bold whitespace-nowrap opacity-0 transition-all duration-300 group-hover:max-w-none group-hover:opacity-100"
-              style={{ fontFamily: "var(--font-mazaeni-demo), serif" }}
-            >
+            <span className="text-nav inline-block max-w-0 overflow-hidden font-bold whitespace-nowrap opacity-0 transition-all duration-300 group-hover:max-w-none group-hover:opacity-100">
               {link.label}
             </span>
           </Link>

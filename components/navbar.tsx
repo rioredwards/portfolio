@@ -65,7 +65,7 @@ export function Navbar() {
                       href={item.href}
                       onClick={(e) => handleClick(e, item.href)}
                       className={cn(
-                        "cursor-pointer rounded-full! px-4 py-1.5 text-sm font-medium transition-colors",
+                        "text-nav cursor-pointer rounded-full! px-4 py-1.5 transition-colors",
                       )}
                       data-active={isActive}
                     >

@@ -20,7 +20,7 @@ Priority key
 ### Design System Checklist
 
 - [ ] Create a design system for the portfolio while keeping the current design with: ❤️
-      - [ ] A set of variables for the font sizes ❤️
+      - [x] A set of variables for the font sizes ❤️
       - [ ] A set of variables for the colors ❤️
       - [ ] A set of variables for the spacing ❤️
       - [ ] A set of variables for the border radius ❤️

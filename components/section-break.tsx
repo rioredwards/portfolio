@@ -22,7 +22,9 @@ export function SectionBreak({
 
   // Size variations based on height prop
   const triangleHeight = isTall ? "h-8" : "h-6";
-  const textSize = isTall ? "text-6xl" : "text-4xl";
+  const textSizeClass = isTall
+    ? "text-section-break-tall"
+    : "text-section-break-short";
   const padding = isTall ? "p-6" : "p-3";
 
   return (
@@ -52,13 +54,7 @@ export function SectionBreak({
         )}
       >
         {children && (
-          <h2
-            className={cn(
-              "text-foreground m-0 p-4 text-center font-black",
-              textSize,
-            )}
-            style={{ fontFamily: "var(--font-mazaeni-demo), serif" }}
-          >
+          <h2 className={cn("text-section-break m-0 p-4", textSizeClass)}>
             {children}
           </h2>
         )}
