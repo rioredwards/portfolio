@@ -50,33 +50,31 @@ export function Navbar() {
   };
 
   return (
-    <header className="pointer-events-none fixed top-2 z-40 mx-auto flex w-full items-center justify-center">
-      <NavigationMenu viewport={false}>
-        <div className="bg-sidebar/80 text-sidebar-foreground pointer-events-auto flex items-center gap-2 rounded-full px-4 py-2 backdrop-blur-sm">
-          <NavigationMenuList>
-            {navItems.map((item) => {
-              const isActive =
-                activeSection === item.href ||
-                (item.href === "#home" && activeSection === "");
-              return (
-                <NavigationMenuItem key={item.href}>
-                  <NavigationMenuLink asChild>
-                    <a
-                      href={item.href}
-                      onClick={(e) => handleClick(e, item.href)}
-                      className={cn(
-                        "text-nav cursor-pointer rounded-full! px-4 py-1.5 transition-colors",
-                      )}
-                      data-active={isActive}
-                    >
-                      {item.label}
-                    </a>
-                  </NavigationMenuLink>
-                </NavigationMenuItem>
-              );
-            })}
-          </NavigationMenuList>
-        </div>
+    <header className="pointer-events-none fixed top-2 z-40 mx-auto flex w-svw items-center justify-center">
+      <NavigationMenu viewport={false} className="w-full max-w-md flex-1 px-4">
+        <NavigationMenuList className="bg-sidebar/80 text-sidebar-foreground pointer-events-auto w-full rounded-full px-4 py-2 backdrop-blur-sm">
+          {navItems.map((item) => {
+            const isActive =
+              activeSection === item.href ||
+              (item.href === "#home" && activeSection === "");
+            return (
+              <NavigationMenuItem key={item.href}>
+                <NavigationMenuLink asChild>
+                  <a
+                    href={item.href}
+                    onClick={(e) => handleClick(e, item.href)}
+                    className={cn(
+                      "nav-text cursor-pointer rounded-full! px-4 py-2 text-center transition-colors",
+                    )}
+                    data-active={isActive}
+                  >
+                    {item.label}
+                  </a>
+                </NavigationMenuLink>
+              </NavigationMenuItem>
+            );
+          })}
+        </NavigationMenuList>
       </NavigationMenu>
     </header>
   );

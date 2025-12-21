@@ -6,14 +6,14 @@ export function Contact() {
   return (
     <div className="flex flex-col gap-12 md:flex-row md:items-start md:gap-16">
       {/* Left illustration placeholder and heading */}
-      <div className="flex flex-1 flex-col items-center gap-4 md:items-start">
+      <div className="flex flex-1 flex-col items-center gap-4">
         <Image
           src={funComputerGraphic}
           alt="Fun Computer Graphic"
           width={300}
           height={300}
         />
-        <h2 className="text-section-heading">Nice to meet you!</h2>
+        <h2 className="title-2-text">Nice to meet you!</h2>
       </div>
 
       {/* Right form */}
@@ -24,7 +24,7 @@ export function Contact() {
         {/* Name & Email row */}
         <div className="grid gap-4 md:grid-cols-2">
           <div className="flex flex-col gap-2">
-            <label htmlFor="fullName" className="text-label">
+            <label htmlFor="fullName" className="label-text">
               Full Name
             </label>
             <input
@@ -37,7 +37,7 @@ export function Contact() {
             />
           </div>
           <div className="flex flex-col gap-2">
-            <label htmlFor="email" className="text-label">
+            <label htmlFor="email" className="label-text">
               Email
             </label>
             <input
@@ -53,7 +53,7 @@ export function Contact() {
 
         {/* Message */}
         <div className="flex flex-col gap-2">
-          <label htmlFor="message" className="text-label">
+          <label htmlFor="message" className="label-text">
             Message
           </label>
           <textarea
@@ -68,11 +68,7 @@ export function Contact() {
 
         {/* Submit button */}
         <div className="mt-4 flex justify-end">
-          <Button
-            type="submit"
-            size="lg"
-            className="bg-primary text-primary-foreground text-button"
-          >
+          <Button type="submit" size="default">
             Send
           </Button>
         </div>

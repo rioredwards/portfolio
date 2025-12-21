@@ -35,8 +35,8 @@ export function Project({
             : "items-end text-right lg:text-left",
         )}
       >
-        <p className="text-category mb-4">{category}</p>
-        <h3>{title}</h3>
+        <p className="callout-text mb-2">{category}</p>
+        <h3 className="title-2-text">{title}</h3>
 
         <p className="mb-8 max-w-xl">{description}</p>
 
@@ -63,7 +63,7 @@ export function Project({
       <div className="flex-1 max-lg:order-first">
         <div
           className={cn(
-            "mx-auto aspect-3/2 overflow-hidden md:w-full lg:max-h-80",
+            "relative mx-auto aspect-3/2 w-[calc(100%+var(--content-padding-x-mobile)*2)] -translate-x-(--content-padding-x-mobile) overflow-hidden md:w-full lg:max-h-80",
             orientation === "left"
               ? "rounded-tl-(--radius-section) rounded-br-(--radius-section)"
               : "rounded-tr-(--radius-section) rounded-bl-(--radius-section)",

@@ -12,40 +12,43 @@
   - lower bound happens when vw is about 412px
   - upper bound happens when vw is about 1235px
   */
-  --responsive-spacing: clamp(1rem,calc(2vw + .48rem), 2rem);
+  --responsive-spacing: clamp(1rem, calc(2vw + 0.48rem), 2rem);
 
   /* Font sizes */
 
-  --font-h1: max(var(--responsive-spacing) * 2.7, 3.4rem);
-  --font-h2: calc(var(--font-h1) * 0.8);
-  --font-h3: calc(var(--font-h2) * 0.5);
-  
-  /* Semantic font sizes */ 
-  --font-size-body: max(var(--responsive-spacing) * 0.62, 1.1rem);
-  --font-size-section-heading: calc(var(--font-h3) * 0.8);
-  
+  font-size: max(var(--responsive-spacing) * 0.62, 1.1rem);
+
+  --font-size-hero: min(4rem + 3.5vw - 1.8rem, 5rem);
+  --font-size-title-1: 3rem;
+  --font-size-title-2: 2rem;
+  --font-size-title-3: 1.5rem;
+  --font-size-callout: 0.9rem;
+  --font-size-body-large: 1.2rem;
+  --font-size-body: 1rem;
+  --font-size-body-small: 0.8rem;
+
   /* Color system (source of truth) */
-  
+
   /* Base colors */
   --color-background: #f4ebda;
   --color-foreground: #2d645d;
-  
+
   /* Primary colors */
   --color-primary-bg: #3b823d;
   --color-primary-fg: #fdfbf6;
-  
+
   /* Secondary colors */
   --color-secondary-bg: #ebdbbc;
   --color-secondary-fg: #5c4b3e;
-  
+
   /* Accent colors */
   --color-accent-bg: #439d61;
   --color-accent-fg: var(--color-primary-fg);
-  
+
   /* Destructive colors */
   --color-destructive-bg: #d98b7e;
   --color-destructive-fg: var(--color-primary-fg);
-  
+
   /* UI element colors */
   --color-border: #dab773;
   --color-input: #dbbe76;
@@ -60,7 +63,7 @@
   --spacing-article-padding-x: 2rem;
   --spacing-article-padding-y: 2.5rem;
   --spacing: 0.25rem;
-  
+
   /* Semantic border radius tokens */
   --radius-button: 9999px;
   --radius-card: 3rem;
@@ -68,15 +71,13 @@
   --radius-section: 4rem;
   --radius-panel-tall: 4rem;
   --radius-panel-short: 2rem;
-  
+
   /* Legacy radius variable (for backward compatibility) */
   --radius: 1rem;
-  
+
   /* Additional variables */
   --tracking-normal: 0em;
   --extended-padding-height: 16rem;
-  
-
 
   /* Chart colors (oklch format) */
   --color-chart-1: oklch(0.735 0.0564 130.8494);
@@ -84,7 +85,7 @@
   --color-chart-3: oklch(0.8185 0.0332 136.6539);
   --color-chart-4: oklch(0.5929 0.0464 137.6224);
   --color-chart-5: oklch(0.5183 0.039 137.1892);
-  
+
   /* Legacy theme color variables (for backward compatibility) */
   --theme-background: var(--color-background);
   --theme-foreground: var(--color-foreground);
@@ -140,7 +141,7 @@
   --container-content-max-width: var(--content-max-width);
   --spacing-content-padding-x: var(--content-padding-x);
   --spacing-content-padding-y: var(--content-padding-y);
-  
+
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -179,9 +180,14 @@
   --font-playfair: var(--font-playfair);
   --font-mazaeni: var(--font-mazaeni-demo), serif;
 
-  --font-size-h1: var(--font-h1);
-  --font-size-h2: var(--font-h2);
-  --font-size-h3: var(--font-h3);
+  --text-hero: var(--font-size-hero);
+  --text-title-1: var(--font-size-title-1);
+  --text-title-2: var(--font-size-title-2);
+  --text-title-3: var(--font-size-title-3);
+  --text-body: var(--font-size-body);
+  --text-body-small: var(--font-size-body-small);
+  --text-callout: var(--font-size-callout);
+  --text-body-large: var(--font-size-body-large);
 }
 
 @layer base {
@@ -192,7 +198,7 @@
     scroll-behavior: smooth;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground text-body;
   }
   /* Lock background scroll when a mobile menu overlay is present */
   body:has(.mobile-menu-open) {
@@ -207,46 +213,32 @@
   .fade-in {
     animation: fadeInAnimation 0.5s ease-in-out;
   }
-  
+
   h1 {
-    @apply text-foreground text-center font-bold tracking-tight whitespace-nowrap md:text-left;
-    font-size: var(--font-h1);
-    font-family: var(--font-mazaeni-demo), serif;
+    @apply text-foreground text-hero font-mazaeni font-bold tracking-tight;
   }
   h2 {
-    @apply text-foreground text-center font-bold whitespace-nowrap;
-    font-size: var(--font-h2);
-    font-family: var(--font-mazaeni-demo), serif;
+    @apply text-foreground text-title-1 font-mazaeni font-bold;
   }
   h3 {
-    @apply text-foreground leading-tight font-bold;
-    font-size: var(--font-h3);
-    font-family: var(--font-mazaeni-demo), serif;
+    @apply text-foreground text-title-2 font-mazaeni font-bold;
   }
-  
+
   p {
-    @apply text-secondary-foreground;
-    font-size: var(--font-size-body);
-    line-height: 1.5;
+    @apply text-foreground text-body;
   }
-  
+
   span {
     font-size: inherit;
   }
-  
+
   label {
-    @apply text-secondary-foreground font-semibold;
-    font-size: var(--font-size-body-large);
+    @apply text-secondary-foreground text-body-small font-semibold;
   }
-  
+
   input,
   textarea {
-    @apply text-secondary-foreground;
-    font-size: var(--font-size-body);
-  }
-  
-  button {
-    font-size: inherit;
+    @apply text-secondary-foreground text-body;
   }
 }
 
@@ -256,74 +248,44 @@
     position: absolute;
     top: 100%;
     left: 0;
-    width: 100%; 
+    width: 100%;
     height: var(--extended-padding-height);
     background-color: inherit;
     z-index: -1;
   }
-  
-  /* Text style components */
-  .text-category {
-    @apply text-muted-foreground font-medium tracking-[0.2em] uppercase;
-    font-size: 0.875rem;
+
+  /* NOTE: naming these with "text" as a suffix bc otherwise they clash with default text-* classes */
+
+  .hero-text {
+    @apply text-foreground text-hero font-mazaeni text-left font-bold tracking-tight whitespace-nowrap;
   }
-  
-  .text-body {
-    @apply text-secondary-foreground leading-relaxed;
-    font-size: var(--font-size-body);
+  .title-1-text {
+    @apply text-foreground text-title-1 font-mazaeni text-center font-bold whitespace-nowrap;
   }
-  
-  .text-body-large {
-    @apply text-secondary-foreground leading-relaxed;
-    font-size: var(--font-size-body-large);
+  .title-2-text {
+    @apply text-foreground text-title-2 font-mazaeni font-bold;
   }
-  
-  .text-section-heading {
-    @apply text-foreground leading-tight font-bold;
-    font-size: var(--font-size-section-heading);
+
+  .callout-text {
+    @apply text-foreground text-callout leading-relaxed font-thin;
   }
-  
-  .text-nav {
-    @apply text-foreground font-medium;
-    font-size: 0.875rem;
+
+  .body-large-text {
+    @apply text-foreground text-body-large leading-relaxed;
   }
-  
-  .text-button {
-    @apply font-bold;
-    font-size: var(--font-size-body-large);
+  .body-text {
+    @apply text-foreground text-body leading-relaxed;
   }
-  
-  .text-button-sm {
-    @apply font-medium;
-    font-size: 0.875rem;
+  .body-small-text {
+    @apply text-secondary-foreground text-body-small;
   }
-  
-  .text-label {
-    @apply text-secondary-foreground font-semibold;
-    font-size: var(--font-size-body-large);
+
+  .nav-text {
+    @apply text-foreground text-body-small font-medium;
   }
-  
-  .text-mobile-heading {
-    @apply text-foreground font-bold;
-    font-size: clamp(1.5rem, 3vw, 1.875rem);
-  }
-  
-  .text-mobile-body {
-    @apply text-secondary-foreground;
-    font-size: clamp(var(--font-size-body-large), 2vw, 1.25rem);
-  }
-  
-  .text-section-break {
-    @apply text-foreground font-black text-center;
-    font-family: var(--font-mazaeni-demo), serif;
-  }
-  
-  .text-section-break-tall {
-    font-size: var(--font-size-section-break-tall);
-  }
-  
-  .text-section-break-short {
-    font-size: var(--font-size-section-break-short);
+
+  .label-text {
+    @apply text-secondary-foreground text-body-large font-semibold;
   }
 }
 
@@ -373,14 +335,14 @@
   .fade-in {
     animation: fadeInAnimation both;
     animation-timeline: view();
-    animation-range: entry 50px entry 100px;
+    animation-range: entry 100px entry 500px;
   }
 }
 
 @keyframes fadeInAnimation {
   from {
     opacity: 0;
-    transform: translateY(50px);
+    transform: translateY(20px);
   }
   to {
     opacity: 1;
