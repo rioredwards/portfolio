@@ -22,7 +22,7 @@ export function Project({
   return (
     <article
       className={cn(
-        "fade-in flex flex-col gap-12 lg:flex-row lg:items-center lg:gap-16",
+        "fade-in flex flex-col gap-8 lg:flex-row lg:items-center lg:gap-12",
         orientation === "left" ? "lg:flex-row" : "lg:flex-row-reverse",
       )}
     >
@@ -63,7 +63,7 @@ export function Project({
       <div className="flex-1 max-lg:order-first">
         <div
           className={cn(
-            "relative mx-auto aspect-3/2 w-[calc(100%+var(--content-padding-x-mobile)*2)] -translate-x-(--content-padding-x-mobile) overflow-hidden md:w-full lg:max-h-80",
+            "relative mx-auto aspect-3/2 w-[calc(100%+var(--content-padding-x-mobile)*2)] -translate-x-(--content-padding-x-mobile) overflow-hidden md:static md:w-full md:translate-x-0 lg:h-full lg:max-h-80",
             orientation === "left"
               ? "rounded-tl-(--radius-section) rounded-br-(--radius-section)"
               : "rounded-tr-(--radius-section) rounded-bl-(--radius-section)",
