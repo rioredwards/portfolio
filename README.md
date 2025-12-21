@@ -23,7 +23,7 @@ Priority key
       - [ ] A set of variables for the font sizes ❤️
       - [ ] A set of variables for the colors ❤️
       - [ ] A set of variables for the spacing ❤️
-      - [ ] A set of variables for the border radius 🧡
+      - [ ] A set of variables for the border radius ❤️
       - [ ] A set of variables for the box shadow 🧡
       - [ ] A set of variables for the animations 🧡
       - [ ] A set of variables for the borders 🧡
