@@ -21,7 +21,7 @@ Priority key
 
 - [ ] Create a design system for the portfolio while keeping the current design with: ❤️
       - [x] A set of variables for the font sizes ❤️
-      - [ ] A set of variables for the colors ❤️
+      - [x] A set of variables for the colors ❤️
       - [ ] A set of variables for the spacing ❤️
       - [ ] A set of variables for the border radius ❤️
       - [ ] A set of variables for the box shadow 🧡
