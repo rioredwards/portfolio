@@ -9,7 +9,7 @@ interface SkillSectionProps {
 
 export function SkillSection({ category, skills, icon }: SkillSectionProps) {
   return (
-    <div className="rounded-[3rem] px-8 py-10 lg:px-14 lg:py-12">
+    <div className="rounded-(--radius-card) px-(--spacing-article-padding-x) py-(--spacing-article-padding-y)">
       <div className="text-foreground mb-8 flex items-center gap-4">
         {icon}
         <h2 className="text-section-heading">{category}</h2>

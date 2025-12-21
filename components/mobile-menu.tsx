@@ -71,7 +71,7 @@ export function MobileMenu() {
                       : undefined
                   }
                   onClick={() => setIsOpen(false)}
-                  className="border-border/50 bg-background text-foreground hover:bg-secondary/30 mm-link flex items-center gap-3 rounded-2xl border px-4 shadow-sm transition-all hover:shadow-md"
+                  className="border-border/50 bg-background text-foreground hover:bg-secondary/30 mm-link flex items-center gap-3 rounded-(--radius-card) border px-4 shadow-sm transition-all hover:shadow-md"
                   aria-label={link.label}
                 >
                   <span className="flex shrink-0 items-center justify-center">

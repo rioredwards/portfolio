@@ -27,16 +27,16 @@ Priority key
       - [ ] A set of variables for the box shadow 🧡
       - [ ] A set of variables for the animations 🧡
       - [ ] A set of variables for the borders 🧡
-- [ ] Apply the design system to the portfolio while keeping the current design ❤️
-      - [ ] Apply to the desktop navbar ❤️
-      - [ ] Apply to the mobile navbar ❤️
-      - [ ] Apply to the sidebar ❤️
-      - [ ] Apply to the slide panel ❤️
-      - [ ] Apply to the hero section ❤️
-      - [ ] Apply to the projects section ❤️
-      - [ ] Apply to the blog section ❤️
-      - [ ] Apply to the contact section ❤️
-      - [ ] Apply to the footer ❤️
+- [x] Apply the design system to the portfolio while keeping the current design ❤️
+      - [x] Apply to the desktop navbar ❤️
+      - [x] Apply to the mobile navbar ❤️
+      - [x] Apply to the sidebar ❤️
+      - [x] Apply to the slide panel ❤️
+      - [x] Apply to the hero section ❤️
+      - [x] Apply to the projects section ❤️
+      - [x] Apply to the blog section ❤️
+      - [x] Apply to the contact section ❤️
+      - [x] Apply to the footer ❤️
 - [ ] Tweak the design system as needed to ensure every component looks good/consistent ❤️
 - [ ] Ensure the layout is responsive and spacing is consistent ❤️
       - [ ] Navbar ❤️

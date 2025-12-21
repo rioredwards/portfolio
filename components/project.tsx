@@ -22,14 +22,14 @@ export function Project({
   return (
     <article
       className={cn(
-        "fade-in flex flex-col gap-12 py-12 md:py-16 lg:flex-row lg:items-center lg:gap-16 lg:py-20",
+        "fade-in flex flex-col gap-12 lg:flex-row lg:items-center lg:gap-16",
         orientation === "left" ? "lg:flex-row" : "lg:flex-row-reverse",
       )}
     >
       {/* Left column – text content */}
       <div
         className={cn(
-          "flex flex-1 flex-col px-4 lg:block",
+          "flex flex-1 flex-col lg:block",
           orientation === "left"
             ? "items-start text-left lg:text-right"
             : "items-end text-right lg:text-left",
@@ -38,7 +38,7 @@ export function Project({
         <p className="text-category mb-4">{category}</p>
         <h3>{title}</h3>
 
-        <p className="text-body mb-8 max-w-xl">{description}</p>
+        <p className="mb-8 max-w-xl">{description}</p>
 
         <div
           className={cn(
@@ -65,16 +65,16 @@ export function Project({
           className={cn(
             "mx-auto aspect-3/2 overflow-hidden md:w-full lg:max-h-80",
             orientation === "left"
-              ? "rounded-tl-4xl rounded-br-4xl"
-              : "rounded-tr-4xl rounded-bl-4xl",
+              ? "rounded-tl-(--radius-section) rounded-br-(--radius-section)"
+              : "rounded-tr-(--radius-section) rounded-bl-(--radius-section)",
           )}
         >
           <div
             className={cn(
               "bg-secondary relative h-full w-full",
               orientation === "left"
-                ? "rounded-tl-4xl rounded-br-4xl"
-                : "rounded-tr-4xl rounded-bl-4xl",
+                ? "rounded-tl-(--radius-section) rounded-br-(--radius-section)"
+                : "rounded-tr-(--radius-section) rounded-bl-(--radius-section)",
             )}
           >
             {/* Gradient overlay */}

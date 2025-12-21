@@ -8,11 +8,11 @@ interface BlogProps {
 
 export function Blog({ title, description, icon }: BlogProps) {
   return (
-    <div className="bg-secondary fade-in flex items-center justify-between gap-8 rounded-[3rem] px-8 py-10 lg:px-14 lg:py-12">
+    <div className="bg-secondary fade-in flex items-center justify-between gap-8 rounded-(--radius-card) px-(--spacing-article-padding-x) py-(--spacing-article-padding-y)">
       {/* Text content */}
       <div>
-        <h2 className="text-section-heading mb-3">{title}</h2>
-        <p className="text-body-large font-medium">{description}</p>
+        <h3 className="mb-3">{title}</h3>
+        <p>{description}</p>
       </div>
 
       {/* Icon bubble */}

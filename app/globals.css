@@ -4,17 +4,25 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
+  /* 
+  variables derived from this smoothly transition between 1rem and 2rem as the viewport width increases:
+  - grow and shrink with the viewport width 
+  - have a minimum and maximum value
+  - still respond to changes in font-size which is important for accessibility (font-size needs to respond to zoom level)
+  - lower bound happens when vw is about 412px
+  - upper bound happens when vw is about 1235px
+  */
+  --responsive-spacing: clamp(1rem,calc(2vw + .48rem), 2rem);
+
   /* Font sizes */
-  --font-h1: clamp(3.4rem,calc(7vw + .45rem), 5.75rem);
-  --font-h2: clamp(2.8rem,calc(5.9vw + 0.42rem), 4rem);
-  --font-h3: clamp(2rem,calc(4vw + 0.28rem), 2.4rem);
+
+  --font-h1: max(var(--responsive-spacing) * 2.7, 3.4rem);
+  --font-h2: calc(var(--font-h1) * 0.8);
+  --font-h3: calc(var(--font-h2) * 0.5);
   
-  /* Semantic font sizes */
-  --font-size-body: 1rem;
-  --font-size-body-large: 1.125rem;
-  --font-size-section-heading: clamp(1.875rem, 4vw, 2.25rem);
-  --font-size-section-break-tall: 3.75rem;
-  --font-size-section-break-short: 2.25rem;
+  /* Semantic font sizes */ 
+  --font-size-body: max(var(--responsive-spacing) * 0.62, 1.1rem);
+  --font-size-section-heading: calc(var(--font-h3) * 0.8);
   
   /* Color system (source of truth) */
   
@@ -43,7 +51,33 @@
   --color-input: #dbbe76;
   --color-ring: #76c18f;
   --color-shadow: #504a3f;
+
+  /* Semantic spacing tokens */
+  --content-max-width: 72rem;
+  --content-padding-x-mobile: var(--responsive-spacing);
+  --content-padding-x-desktop: 4rem;
+  --content-padding-y: calc(var(--responsive-spacing) * 6);
+  --spacing-article-padding-x: 2rem;
+  --spacing-article-padding-y: 2.5rem;
+  --spacing: 0.25rem;
   
+  /* Semantic border radius tokens */
+  --radius-button: 9999px;
+  --radius-card: 3rem;
+  --radius-input: 1rem;
+  --radius-section: 4rem;
+  --radius-panel-tall: 4rem;
+  --radius-panel-short: 2rem;
+  
+  /* Legacy radius variable (for backward compatibility) */
+  --radius: 1rem;
+  
+  /* Additional variables */
+  --tracking-normal: 0em;
+  --extended-padding-height: 16rem;
+  
+
+
   /* Chart colors (oklch format) */
   --color-chart-1: oklch(0.735 0.0564 130.8494);
   --color-chart-2: oklch(0.6762 0.0567 132.4479);
@@ -100,33 +134,13 @@
   --sidebar-accent-foreground: var(--theme-foreground-accent);
   --sidebar-border: var(--theme-border);
   --sidebar-ring: var(--theme-ring);
-
-  /* Semantic spacing tokens */
-  --spacing-container-max-width: 72rem;
-  --spacing-section-padding: 2rem;
-  --spacing-section-padding-x: 5rem;
-  --spacing-article-padding-x: 2rem;
-  --spacing-article-padding-x-lg: 3.5rem;
-  --spacing-article-padding-y: 2.5rem;
-  --spacing-article-padding-y-lg: 3rem;
-  --spacing-content-padding: 1rem;
-  --spacing: 0.25rem;
-  
-  /* Semantic border radius tokens */
-  --radius-button: 9999px;
-  --radius-card: 3rem;
-  --radius-input: 1rem;
-  --radius-section: 2rem;
-  
-  /* Legacy radius variable (for backward compatibility) */
-  --radius: 1rem;
-  
-  /* Additional variables */
-  --tracking-normal: 0em;
-  --extended-padding-height: 16rem;
 }
 
 @theme inline {
+  --container-content-max-width: var(--content-max-width);
+  --spacing-content-padding-x: var(--content-padding-x);
+  --spacing-content-padding-y: var(--content-padding-y);
+  
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
