@@ -112,10 +112,18 @@
   --spacing-content-padding: 1rem;
   --spacing: 0.25rem;
   
-  /* Additional variables */
+  /* Semantic border radius tokens */
+  --radius-button: 9999px;
+  --radius-card: 3rem;
+  --radius-input: 1rem;
+  --radius-section: 2rem;
+  
+  /* Legacy radius variable (for backward compatibility) */
   --radius: 1rem;
+  
+  /* Additional variables */
   --tracking-normal: 0em;
-  --extended-padding-height: 16rem;       /* 256px - Extended padding height */
+  --extended-padding-height: 16rem;
 }
 
 @theme inline {
@@ -160,14 +168,6 @@
   --font-size-h1: var(--font-h1);
   --font-size-h2: var(--font-h2);
   --font-size-h3: var(--font-h3);
-
-  --radius-sm: calc(var(--radius) - 4px);
-  --radius-md: calc(var(--radius) - 2px);
-  --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) + 4px);
-  --radius-2xl: calc(var(--radius) + 8px);
-  --radius-3xl: calc(var(--radius) + 12px);
-  --radius-4xl: calc(var(--radius) + 16px);
 }
 
 @layer base {
@@ -341,16 +341,16 @@
     padding-bottom: clamp(6px, 1.6svh, 12px);
   }
   .angled-border-sm {
-    border-top-left-radius: var(--radius-2xl);
-    border-bottom-right-radius: var(--radius-2xl);
+    border-top-left-radius: 1.5rem;
+    border-bottom-right-radius: 1.5rem;
   }
   .angled-border-md {
-    border-top-left-radius: var(--radius-3xl);
-    border-bottom-right-radius: var(--radius-3xl);
+    border-top-left-radius: 1.75rem;
+    border-bottom-right-radius: 1.75rem;
   }
   .angled-border-lg {
-    border-top-left-radius: var(--radius-4xl);
-    border-bottom-right-radius: var(--radius-4xl);
+    border-top-left-radius: var(--radius-section);
+    border-bottom-right-radius: var(--radius-section);
   }
   .angled-border-full {
     border-top-left-radius: 100%;

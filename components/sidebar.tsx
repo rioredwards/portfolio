@@ -6,7 +6,7 @@ const socialLinks = getSocialLinks();
 export function Sidebar() {
   return (
     <aside className="group text-sidebar fixed top-1/2 left-2 z-50 hidden -translate-y-1/2 md:block">
-      <nav className="bg-sidebar/80 flex flex-col gap-1 rounded-(--border-radius) p-(--padding) backdrop-blur-sm transition-all duration-300 [--border-radius:var(--radius-3xl)] [--padding:calc(var(--spacing)*2)]">
+      <nav className="bg-sidebar/80 flex flex-col gap-1 rounded-(--border-radius) p-(--padding) backdrop-blur-sm transition-all duration-300 [--border-radius:1.75rem] [--padding:calc(var(--spacing)*2)]">
         {socialLinks.map((link, index) => (
           <Link
             key={index}
