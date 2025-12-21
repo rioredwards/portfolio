@@ -9,20 +9,12 @@
   --font-h2: clamp(2.8rem,calc(5.9vw + 0.42rem), 4rem);
   --font-h3: clamp(2rem,calc(4vw + 0.28rem), 2.4rem);
   
-  /* Text size scale (matching Tailwind defaults) */
-  --font-size-xs: 0.75rem;    /* 12px */
-  --font-size-sm: 0.875rem;   /* 14px */
-  --font-size-base: 1rem;     /* 16px */
-  --font-size-lg: 1.125rem;   /* 18px */
-  --font-size-xl: 1.25rem;    /* 20px */
-  --font-size-2xl: 1.5rem;    /* 24px */
-  --font-size-3xl: 1.875rem;  /* 30px */
-  --font-size-4xl: 2.25rem;   /* 36px */
-  --font-size-5xl: 3rem;      /* 48px */
-  --font-size-6xl: 3.75rem;  /* 60px */
-  --font-size-7xl: 4.5rem;   /* 72px */
-  --font-size-8xl: 6rem;     /* 96px */
-  --font-size-9xl: 8rem;     /* 128px */
+  /* Semantic font sizes */
+  --font-size-body: 1rem;
+  --font-size-body-large: 1.125rem;
+  --font-size-section-heading: clamp(1.875rem, 4vw, 2.25rem);
+  --font-size-section-break-tall: 3.75rem;
+  --font-size-section-break-short: 2.25rem;
   
   /* Color system (source of truth) */
   
@@ -109,11 +101,21 @@
   --sidebar-border: var(--theme-border);
   --sidebar-ring: var(--theme-ring);
 
+  /* Semantic spacing tokens */
+  --spacing-container-max-width: 72rem;
+  --spacing-section-padding: 2rem;
+  --spacing-section-padding-x: 5rem;
+  --spacing-article-padding-x: 2rem;
+  --spacing-article-padding-x-lg: 3.5rem;
+  --spacing-article-padding-y: 2.5rem;
+  --spacing-article-padding-y-lg: 3rem;
+  --spacing-content-padding: 1rem;
+  --spacing: 0.25rem;
+  
   /* Additional variables */
   --radius: 1rem;
   --tracking-normal: 0em;
-  --spacing: 0.25rem;
-  --extended-padding-height: 16rem;
+  --extended-padding-height: 16rem;       /* 256px - Extended padding height */
 }
 
 @theme inline {
@@ -155,20 +157,6 @@
   --font-playfair: var(--font-playfair);
   --font-mazaeni: var(--font-mazaeni-demo), serif;
 
-  --font-size-xs: var(--font-size-xs);
-  --font-size-sm: var(--font-size-sm);
-  --font-size-base: var(--font-size-base);
-  --font-size-lg: var(--font-size-lg);
-  --font-size-xl: var(--font-size-xl);
-  --font-size-2xl: var(--font-size-2xl);
-  --font-size-3xl: var(--font-size-3xl);
-  --font-size-4xl: var(--font-size-4xl);
-  --font-size-5xl: var(--font-size-5xl);
-  --font-size-6xl: var(--font-size-6xl);
-  --font-size-7xl: var(--font-size-7xl);
-  --font-size-8xl: var(--font-size-8xl);
-  --font-size-9xl: var(--font-size-9xl);
-  
   --font-size-h1: var(--font-h1);
   --font-size-h2: var(--font-h2);
   --font-size-h3: var(--font-h3);
@@ -224,7 +212,7 @@
   
   p {
     @apply text-secondary-foreground;
-    font-size: var(--font-size-base);
+    font-size: var(--font-size-body);
     line-height: 1.5;
   }
   
@@ -234,13 +222,13 @@
   
   label {
     @apply text-secondary-foreground font-semibold;
-    font-size: var(--font-size-lg);
+    font-size: var(--font-size-body-large);
   }
   
   input,
   textarea {
     @apply text-secondary-foreground;
-    font-size: var(--font-size-base);
+    font-size: var(--font-size-body);
   }
   
   button {
@@ -263,52 +251,52 @@
   /* Text style components */
   .text-category {
     @apply text-muted-foreground font-medium tracking-[0.2em] uppercase;
-    font-size: var(--font-size-sm);
+    font-size: 0.875rem;
   }
   
   .text-body {
     @apply text-secondary-foreground leading-relaxed;
-    font-size: var(--font-size-base);
+    font-size: var(--font-size-body);
   }
   
   .text-body-large {
     @apply text-secondary-foreground leading-relaxed;
-    font-size: var(--font-size-lg);
+    font-size: var(--font-size-body-large);
   }
   
   .text-section-heading {
     @apply text-foreground leading-tight font-bold;
-    font-size: clamp(var(--font-size-3xl), 4vw, var(--font-size-4xl));
+    font-size: var(--font-size-section-heading);
   }
   
   .text-nav {
     @apply text-foreground font-medium;
-    font-size: var(--font-size-sm);
+    font-size: 0.875rem;
   }
   
   .text-button {
     @apply font-bold;
-    font-size: var(--font-size-lg);
+    font-size: var(--font-size-body-large);
   }
   
   .text-button-sm {
     @apply font-medium;
-    font-size: var(--font-size-sm);
+    font-size: 0.875rem;
   }
   
   .text-label {
     @apply text-secondary-foreground font-semibold;
-    font-size: var(--font-size-lg);
+    font-size: var(--font-size-body-large);
   }
   
   .text-mobile-heading {
     @apply text-foreground font-bold;
-    font-size: clamp(var(--font-size-2xl), 3vw, var(--font-size-3xl));
+    font-size: clamp(1.5rem, 3vw, 1.875rem);
   }
   
   .text-mobile-body {
     @apply text-secondary-foreground;
-    font-size: clamp(var(--font-size-lg), 2vw, var(--font-size-xl));
+    font-size: clamp(var(--font-size-body-large), 2vw, 1.25rem);
   }
   
   .text-section-break {
@@ -317,11 +305,11 @@
   }
   
   .text-section-break-tall {
-    font-size: var(--font-size-6xl);
+    font-size: var(--font-size-section-break-tall);
   }
   
   .text-section-break-short {
-    font-size: var(--font-size-4xl);
+    font-size: var(--font-size-section-break-short);
   }
 }
 
