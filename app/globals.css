@@ -1,204 +1,131 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
-@custom-variant dark (&:is(.dark *));
+/* NOTE: SEE THE BOTTOM OF THIS FILE FOR IMPORTANT INFO ON THE DESIGN SYSTEM */
 
 :root {
-  /* 
-  variables derived from this smoothly transition between 1rem and 2rem as the viewport width increases:
-  - grow and shrink with the viewport width 
-  - have a minimum and maximum value
-  - still respond to changes in font-size which is important for accessibility (font-size needs to respond to zoom level)
-  - lower bound happens when vw is about 412px
-  - upper bound happens when vw is about 1235px
-  */
+  /* Colors: primitives ❌ DON'T REFERENCE THESE DIRECTLY IN YOUR CODE */
+  --color-light-1: #fdfbf6;
+  --color-light-2: #f4ebda;
+  --color-light-3: #ebdbbc;
+
+  --color-dark-1: #5c4b3e;
+  --color-dark-2: #504a3f;
+  --color-dark-3: #3a352c;
+
+  --color-teal-1: #2d645d;
+  --color-teal-2: #25544c;
+
+  --color-moss-green-1: #a29e5e;
+  --color-moss-green-2: #778842;
+
+  --color-forest-green-1: #3b823d;
+  --color-forest-green-2: #2d712f;
+
+  --color-jade-green-1: #039f69;
+  --color-jade-green-2: #008959;
+
+  --color-artichoke-green-1: oklch(0.8185 0.0332 136.6539);
+  --color-artichoke-green-2: oklch(0.735 0.0564 130.8494);
+  --color-artichoke-green-3: oklch(0.5929 0.0464 137.6224);
+  --color-artichoke-green-4: oklch(0.5183 0.039 137.1892);
+
+  --color-wheat-yellow-1: #dbbe76;
+  --color-wheat-yellow-2: #d4b26c;
+
+  --color-tomato-red-1: #ad4848;
+  --color-grass-green-1: #4e8750;
+  --color-gold-1: #8f7127;
+
+  /* RESPONSIVE SIZING: The root font-size is based on this variable, meaning ANYTHING USING REM UNITS WILL SCALE WITH THE VIEWPORT WIDTH. */
   --responsive-spacing: clamp(1rem, calc(2vw + 0.48rem), 2rem);
-
-  /* Font sizes */
-
   font-size: max(var(--responsive-spacing) * 0.62, 1.1rem);
 
-  --font-size-hero: min(4rem + 3.5vw - 1.8rem, 5rem);
-  --font-size-title-1: 3rem;
-  --font-size-title-2: 2rem;
-  --font-size-title-3: 1.5rem;
-  --font-size-callout: 0.9rem;
-  --font-size-body-large: 1.2rem;
-  --font-size-body: 1rem;
-  --font-size-body-small: 0.8rem;
-
-  /* Color system (source of truth) */
-
-  /* Base colors */
-  --color-background: #f4ebda;
-  --color-foreground: #2d645d;
-
-  /* Primary colors */
-  --color-primary-bg: #3b823d;
-  --color-primary-fg: #fdfbf6;
-
-  /* Secondary colors */
-  --color-secondary-bg: #ebdbbc;
-  --color-secondary-fg: #5c4b3e;
-
-  /* Accent colors */
-  --color-accent-bg: #439d61;
-  --color-accent-fg: var(--color-primary-fg);
-
-  /* Destructive colors */
-  --color-destructive-bg: #d98b7e;
-  --color-destructive-fg: var(--color-primary-fg);
-
-  /* UI element colors */
-  --color-border: #dab773;
-  --color-input: #dbbe76;
-  --color-ring: #76c18f;
-  --color-shadow: #504a3f;
-
-  /* Semantic spacing tokens */
-  --content-max-width: 72rem;
-  --content-padding-x-mobile: var(--responsive-spacing);
-  --content-padding-x-desktop: 4rem;
-  --content-padding-y: calc(var(--responsive-spacing) * 6);
-  --spacing-article-padding-x: 2rem;
-  --spacing-article-padding-y: 2.5rem;
-  --spacing: 0.25rem;
-
-  /* Semantic border radius tokens */
-  --radius-button: 9999px;
-  --radius-card: 3rem;
-  --radius-input: 1rem;
-  --radius-section: 4rem;
-  --radius-panel-tall: 4rem;
-  --radius-panel-short: 2rem;
-
-  /* Legacy radius variable (for backward compatibility) */
-  --radius: 1rem;
-
   /* Additional variables */
-  --tracking-normal: 0em;
   --extended-padding-height: 16rem;
-
-  /* Chart colors (oklch format) */
-  --color-chart-1: oklch(0.735 0.0564 130.8494);
-  --color-chart-2: oklch(0.6762 0.0567 132.4479);
-  --color-chart-3: oklch(0.8185 0.0332 136.6539);
-  --color-chart-4: oklch(0.5929 0.0464 137.6224);
-  --color-chart-5: oklch(0.5183 0.039 137.1892);
-
-  /* Legacy theme color variables (for backward compatibility) */
-  --theme-background: var(--color-background);
-  --theme-foreground: var(--color-foreground);
-  --theme-background-primary: var(--color-primary-bg);
-  --theme-foreground-primary: var(--color-primary-fg);
-  --theme-background-secondary: var(--color-secondary-bg);
-  --theme-foreground-secondary: var(--color-secondary-fg);
-  --theme-background-accent: var(--color-accent-bg);
-  --theme-foreground-accent: var(--color-accent-fg);
-  --theme-background-destructive: var(--color-destructive-bg);
-  --theme-foreground-destructive: var(--color-destructive-fg);
-  --theme-border: var(--color-border);
-  --theme-input: var(--color-input);
-  --theme-ring: var(--color-ring);
-  --shadow-color: var(--color-shadow);
-
-  /* Shadcn color variables */
-  --background: var(--theme-background);
-  --foreground: var(--theme-foreground);
-  --card: var(--theme-background-secondary);
-  --card-foreground: var(--theme-foreground-secondary);
-  --popover: var(--theme-background);
-  --popover-foreground: var(--theme-foreground);
-  --primary: var(--theme-background-primary);
-  --primary-foreground: var(--theme-foreground-primary);
-  --secondary: var(--theme-background-secondary);
-  --secondary-foreground: var(--theme-foreground-secondary);
-  --muted: var(--theme-background-secondary);
-  --muted-foreground: var(--theme-foreground-secondary);
-  --accent: var(--theme-background-accent);
-  --accent-foreground: var(--theme-foreground-accent);
-  --destructive: var(--theme-background-destructive);
-  --destructive-foreground: var(--theme-foreground-destructive);
-  --border: var(--theme-border);
-  --input: var(--theme-input);
-  --ring: var(--theme-ring);
-  --chart-1: var(--color-chart-1);
-  --chart-2: var(--color-chart-2);
-  --chart-3: var(--color-chart-3);
-  --chart-4: var(--color-chart-4);
-  --chart-5: var(--color-chart-5);
-  --sidebar: var(--theme-background-secondary);
-  --sidebar-foreground: var(--theme-foreground-secondary);
-  --sidebar-primary: var(--theme-background-primary);
-  --sidebar-primary-foreground: var(--theme-foreground-primary);
-  --sidebar-accent: var(--theme-background-accent);
-  --sidebar-accent-foreground: var(--theme-foreground-accent);
-  --sidebar-border: var(--theme-border);
-  --sidebar-ring: var(--theme-ring);
 }
 
+/* @THEME: Use @theme to define new theme variables which get converted into tailwind utility classes */
+@theme {
+  /* --text-*	Font size utilities like text-xl */
+  --text-size-hero: min(4rem + 3.5vw - 1.8rem, 5rem);
+  --text-size-heading: 3rem;
+  --text-size-subheading: 2rem;
+  --text-size-body: 1rem;
+  --text-size-body-large: 1.2rem;
+  --text-size-category: 0.9rem;
+  --text-size-body-small: 0.8rem;
+
+  /* --container-*	Container query variants like @sm:* and size utilities like max-w-md */
+  --container-size-content-max-width: 72rem;
+  --container-size-content-padding-x-mobile: 2rem;
+  --container-size-content-padding-x-desktop: 4rem;
+  --container-size-content-padding-y: calc(2rem * 100vw / 360px);
+
+  /* --spacing-*	Spacing and sizing utilities like px-4, max-h-16, and many more */
+  --article-size-padding-x: 2rem;
+  --article-size-padding-y: 2.5rem;
+
+  /* --radius-*	Border radius utilities like rounded-sm */
+  --radius-size-button: 9999px;
+  --radius-size-card: 3rem;
+  --radius-size-input: 1rem;
+  --radius-size-section: 4rem;
+  --radius-size-panel-tall: 4rem;
+  --radius-size-panel-short: 2rem;
+}
+
+/* @THEME INLINE: When defining theme variables that reference other variables, use the inline option */
 @theme inline {
-  --container-content-max-width: var(--content-max-width);
-  --spacing-content-padding-x: var(--content-padding-x);
-  --spacing-content-padding-y: var(--content-padding-y);
+  /* 
+  Colors: Semantic tokens (✅ USE THESE)
+  --color-*	Color utilities like bg-red-500, text-sky-300, and many more
+  */
+  --color-color-surface-1: var(--color-light-1);
+  --color-color-surface-2: var(--color-light-2);
+  --color-color-surface-3: var(--color-light-3);
 
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --color-card: var(--card);
-  --color-card-foreground: var(--card-foreground);
-  --color-popover: var(--popover);
-  --color-popover-foreground: var(--popover-foreground);
-  --color-primary: var(--primary);
-  --color-primary-foreground: var(--primary-foreground);
-  --color-secondary: var(--secondary);
-  --color-secondary-foreground: var(--secondary-foreground);
-  --color-muted: var(--muted);
-  --color-muted-foreground: var(--muted-foreground);
-  --color-accent: var(--accent);
-  --color-accent-foreground: var(--accent-foreground);
-  --color-destructive: var(--destructive);
-  --color-destructive-foreground: var(--destructive-foreground);
-  --color-border: var(--border);
-  --color-input: var(--input);
-  --color-ring: var(--ring);
-  --color-chart-1: var(--chart-1);
-  --color-chart-2: var(--chart-2);
-  --color-chart-3: var(--chart-3);
-  --color-chart-4: var(--chart-4);
-  --color-chart-5: var(--chart-5);
-  --color-sidebar: var(--sidebar);
-  --color-sidebar-foreground: var(--sidebar-foreground);
-  --color-sidebar-primary: var(--sidebar-primary);
-  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
-  --color-sidebar-accent: var(--sidebar-accent);
-  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
-  --color-sidebar-border: var(--sidebar-border);
-  --color-sidebar-ring: var(--sidebar-ring);
+  --color-color-body: var(--color-dark-3);
+  --color-color-muted: var(--color-dark-2);
+  --color-color-heading: var(--color-dark-1);
 
+  --color-color-link: var(--color-wheat-yellow-2);
+  --color-color-link-hover: var(--color-teal-1);
+
+  --color-color-fill-primary-bg: var(--color-teal-1);
+  --color-color-fill-primary-fg: var(--color-light-1);
+
+  --color-color-fill-secondary-bg: var(--color-wheat-yellow-2);
+  --color-color-fill-secondary-fg: var(--color-light-1);
+
+  --color-color-border-light: var(--color-light-3);
+  --color-color-border-dark: var(--color-wheat-yellow-1);
+  --color-color-border-active: var(--color-jade-green-1);
+  --color-color-ring-light: var(--color-jade-green-1);
+
+  --color-color-success-bg: var(--color-grass-green-1);
+  --color-color-success-fg: var(--color-light-1);
+  --color-color-warning-bg: var(--color-gold-1);
+  --color-color-warning-fg: var(--color-light-1);
+  --color-color-error-bg: var(--color-tomato-red-1);
+  --color-color-error-fg: var(--color-light-1);
+
+  /* --font-*	Font family utilities like font-sans */
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
   --font-playfair: var(--font-playfair);
   --font-mazaeni: var(--font-mazaeni-demo), serif;
-
-  --text-hero: var(--font-size-hero);
-  --text-title-1: var(--font-size-title-1);
-  --text-title-2: var(--font-size-title-2);
-  --text-title-3: var(--font-size-title-3);
-  --text-body: var(--font-size-body);
-  --text-body-small: var(--font-size-body-small);
-  --text-callout: var(--font-size-callout);
-  --text-body-large: var(--font-size-body-large);
 }
 
 @layer base {
   * {
-    @apply border-border outline-ring/50;
+    @apply border-color-border-light outline-color-ring-light;
   }
   html {
     scroll-behavior: smooth;
   }
   body {
-    @apply bg-background text-foreground text-body;
+    @apply bg-color-surface-1 text-size-body text-color-body;
   }
   /* Lock background scroll when a mobile menu overlay is present */
   body:has(.mobile-menu-open) {
@@ -210,35 +137,45 @@
       scroll-behavior: auto;
     }
   }
+
   .fade-in {
     animation: fadeInAnimation 0.5s ease-in-out;
   }
 
   h1 {
-    @apply text-foreground text-hero font-mazaeni font-bold tracking-tight;
+    @apply text-size-hero text-color-fill-primary-bg font-mazaeni font-bold tracking-tight;
   }
   h2 {
-    @apply text-foreground text-title-1 font-mazaeni font-bold;
+    @apply text-color-heading text-size-heading font-mazaeni font-semibold;
   }
   h3 {
-    @apply text-foreground text-title-2 font-mazaeni font-bold;
+    @apply text-color-heading text-size-subheading font-mazaeni font-semibold;
   }
-
   p {
-    @apply text-foreground text-body;
+    @apply text-size-body text-color-body leading-relaxed;
   }
-
   span {
     font-size: inherit;
   }
-
   label {
-    @apply text-secondary-foreground text-body-small font-semibold;
+    @apply text-size-body-small text-color-muted font-semibold;
   }
-
+  nav a {
+    @apply text-size-body-small text-color-link hover:text-color-link-hover font-medium;
+  }
   input,
   textarea {
-    @apply text-secondary-foreground text-body;
+    @apply text-size-body text-color-body;
+  }
+  /* Text classes that don't necessarily map 1:1 to a specific html element */
+  .category-text {
+    @apply text-size-category text-color-muted leading-relaxed font-thin;
+  }
+  .body-large-text {
+    @apply text-size-body-large text-color-body leading-relaxed;
+  }
+  .body-small-text {
+    @apply text-size-body-small text-color-muted;
   }
 }
 
@@ -246,46 +183,12 @@
   .extended-padding::after {
     content: "";
     position: absolute;
-    top: 100%;
+    top: 1%;
     left: 0;
     width: 100%;
     height: var(--extended-padding-height);
     background-color: inherit;
     z-index: -1;
-  }
-
-  /* NOTE: naming these with "text" as a suffix bc otherwise they clash with default text-* classes */
-
-  .hero-text {
-    @apply text-foreground text-hero font-mazaeni text-left font-bold tracking-tight whitespace-nowrap;
-  }
-  .title-1-text {
-    @apply text-foreground text-title-1 font-mazaeni text-center font-bold whitespace-nowrap;
-  }
-  .title-2-text {
-    @apply text-foreground text-title-2 font-mazaeni font-bold;
-  }
-
-  .callout-text {
-    @apply text-foreground text-callout leading-relaxed font-thin;
-  }
-
-  .body-large-text {
-    @apply text-foreground text-body-large leading-relaxed;
-  }
-  .body-text {
-    @apply text-foreground text-body leading-relaxed;
-  }
-  .body-small-text {
-    @apply text-secondary-foreground text-body-small;
-  }
-
-  .nav-text {
-    @apply text-foreground text-body-small font-medium;
-  }
-
-  .label-text {
-    @apply text-secondary-foreground text-body-large font-semibold;
   }
 }
 
@@ -350,6 +253,59 @@
   }
 }
 
-* {
-  /* border: 1px solid red; */
+/* 
+DETAILED INFO ON THE DESIGN SYSTEM: 
+
+[1] PREFER DECLARING AND USING VARIABLES IN THE @THEME BLOCK WHENEVER POSSIBLE:
+- Variables in the @theme block are automatically converted into utility classes within their respective namespaces
+- Define them like this:
+
+@theme {
+  --color-color-surface-1: var(--color-light-1);
 }
+- Use them like this:
+
+<div class="bg-color-surface-1"></div>
+
+- Note that I'm using the "color-color-" prefix. This is to disambiguate between the color utilities and the size utilities when writing classes in jsx.
+- Checkout the docs for more info: [Theme variable namespaces in Tailwind CSS](https://tailwindcss.com/docs/theme#theme-variable-namespaces) 
+- The @theme inline block is almost identical to the @theme block, but it allows you to reference other variables within the block
+
+[2] RESPONSIVE SIZING:
+I setup a variable called --responsive-spacing.
+It smoothly transition between 1rem and 2rem as the viewport width increases.
+The root font-size is based on this variable, 
+meaning ANYTHING USING REM UNITS WILL SCALE WITH THE VIEWPORT WIDTH.
+Anything which is derived from this variable (or rem units) will:
+  - grow and shrink with the viewport width 
+  - have a minimum and maximum value
+  - lower bound happens when vw is about 412px
+  - upper bound happens when vw is about 1235px
+  - still respond to changes in font-size which is important for accessibility (font-size needs to respond to zoom level)
+
+[3] USING COLORS:
+- PRIMITIVES ❌ DON'T REFERENCE THESE DIRECTLY IN YOUR CODE
+- SEMANTIC TOKENS ✅ USE THESE INSTEAD
+
+REFERENCES:
+[Theme variable namespaces](https://tailwindcss.com/docs/theme#theme-variable-namespaces)
+Namespace	Utility classes:
+--color-*	Color utilities like bg-red-500, text-sky-300, and many more
+--font-*	Font family utilities like font-sans
+--text-*	Font size utilities like text-xl
+--font-weight-*	Font weight utilities like font-bold
+--tracking-*	Letter spacing utilities like tracking-wide
+--leading-*	Line height utilities like leading-tight
+--breakpoint-*	Responsive breakpoint variants like sm:*
+--container-*	Container query variants like @sm:* and size utilities like max-w-md
+--spacing-*	Spacing and sizing utilities like px-4, max-h-16, and many more
+--radius-*	Border radius utilities like rounded-sm
+--shadow-*	Box shadow utilities like shadow-md
+--inset-shadow-*	Inset box shadow utilities like inset-shadow-xs
+--drop-shadow-*	Drop shadow filter utilities like drop-shadow-md
+--blur-*	Blur filter utilities like blur-md
+--perspective-*	Perspective utilities like perspective-near
+--aspect-*	Aspect ratio utilities like aspect-video
+--ease-*	Transition timing function utilities like ease-out
+--animate-*	Animation utilities like animate-spin 
+*/
