@@ -96,7 +96,7 @@ export function SlidePanel({
       {/* Main content */}
       <div
         className={cn(
-          fill === "secondary" ? "bg-secondary" : "bg-background",
+          fill === "secondary" ? "bg-secondary" : "bg-color-surface-1",
           isLeft
             ? isTall
               ? "rounded-tl-(--radius-panel-tall)" // left tall panel

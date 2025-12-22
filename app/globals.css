@@ -37,6 +37,8 @@
   --color-forest-green-1: #3b823d;
   --color-forest-green-2: #2d712f;
 
+  --color-lime-green-1: #76c18f;
+
   --color-jade-green-1: #039f69;
   --color-jade-green-2: #008959;
 
@@ -66,10 +68,10 @@
   --text-size-hero: min(4rem + 3.5vw - 1.8rem, 5rem);
   --text-size-heading: 3rem;
   --text-size-subheading: 2rem;
-  --text-size-body: 1rem;
   --text-size-body-large: 1.2rem;
-  --text-size-category: 0.8rem;
-  --text-size-body-small: 0.5rem;
+  --text-size-body: 1rem;
+  --text-size-category: 0.9rem;
+  --text-size-body-small: 0.8rem;
 
   /* --container-*	Container query variants like @sm:* and size utilities like max-w-md */
   --container-size-content-max-width: 72rem;
@@ -78,7 +80,7 @@
   --container-size-content-padding-y: calc(2rem * 100vw / 360px);
 
   /* --spacing-*	Spacing and sizing utilities like px-4, max-h-16, and many more */
-  --spacing: 0.2rem;
+  --spacing: 0.21rem;
   --article-size-padding-x: 2rem;
   --article-size-padding-y: 2.7rem;
 
@@ -122,7 +124,7 @@
   --color-color-border-light: var(--color-light-3);
   --color-color-border-dark: var(--color-wheat-yellow-1);
   --color-color-border-active: var(--color-jade-green-1);
-  --color-color-ring-light: var(--color-forest-green-1);
+  --color-color-ring-light: var(--color-lime-green-1);
 
   --color-color-success-bg: var(--color-grass-green-1);
   --color-color-success-fg: var(--color-light-1);
@@ -182,7 +184,7 @@
     @apply text-size-body-small text-color-muted font-semibold;
   }
   nav a {
-    @apply text-size-body-small text-color-link hover:text-color-link-hover font-medium;
+    @apply text-color-link hover:text-color-link-hover text-sm font-medium;
   }
   input,
   textarea {

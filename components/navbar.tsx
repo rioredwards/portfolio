@@ -67,8 +67,8 @@ export function Navbar() {
                     href={item.href}
                     onClick={(e) => handleClick(e, item.href)}
                     className={cn(
-                      "hover:bg-color-fill-secondary-bg hover:text-color-fill-secondary-fg cursor-pointer rounded-full! px-4 py-1.5 text-center transition-colors",
-                      isActive && "bg-color-surface-1 text-color-link-hover",
+                      "hover:text-color-link-hover cursor-pointer rounded-full! px-2 py-2 text-center transition-colors",
+                      isActive && "bg-color-surface-1",
                     )}
                     data-active={isActive}
                   >
