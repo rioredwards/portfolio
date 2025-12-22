@@ -33,7 +33,7 @@ export function Contact() {
               name="fullName"
               type="text"
               placeholder="John Smith"
-              className="border-border bg-background focus:ring-ring w-full rounded-(--radius-input) border px-4 py-3 shadow-inner focus:ring-2 focus:outline-none"
+              className="border-border bg-color-surface-1 focus:ring-color-ring-light w-full rounded-(--radius-input) border px-4 py-3 shadow-inner focus:ring-2 focus:outline-none"
             />
           </div>
           <div className="flex flex-col gap-2">
@@ -46,7 +46,7 @@ export function Contact() {
               name="email"
               type="email"
               placeholder="john@email.com"
-              className="border-border bg-background focus:ring-ring w-full rounded-(--radius-input) border px-4 py-3 shadow-inner focus:ring-2 focus:outline-none"
+              className="border-border bg-color-surface-1 focus:ring-color-ring-light w-full rounded-(--radius-input) border px-4 py-3 shadow-inner focus:ring-2 focus:outline-none"
             />
           </div>
         </div>
@@ -62,7 +62,7 @@ export function Contact() {
             name="message"
             rows={6}
             placeholder="Let's chat!"
-            className="border-border bg-background focus:ring-ring w-full rounded-(--radius-input) border px-4 py-3 shadow-inner focus:ring-2 focus:outline-none"
+            className="border-border bg-color-surface-1 focus:ring-color-ring-light w-full rounded-(--radius-input) border px-4 py-3 shadow-inner focus:ring-2 focus:outline-none"
           />
         </div>
 

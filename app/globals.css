@@ -3,10 +3,25 @@
 
 /* NOTE: SEE THE BOTTOM OF THIS FILE FOR IMPORTANT INFO ON THE DESIGN SYSTEM */
 
+/* --theme-background: #f4ebda;
+--theme-foreground: #2d645d;
+--theme-background-primary: #3b823d;
+--theme-foreground-primary: #fdfbf6;
+--theme-background-secondary: #ebdbbc;
+--theme-foreground-secondary: #5c4b3e;
+--theme-background-accent: #439d61;
+--theme-foreground-accent: var(--theme-foreground-primary);
+--theme-background-destructive: #d98b7e;
+--theme-foreground-destructive: var(--theme-foreground-primary);
+--theme-border: #dab773;
+--theme-input: #dbbe76;
+--theme-ring: #76c18f;
+--shadow-color: #504a3f; */
+
 :root {
   /* Colors: primitives ❌ DON'T REFERENCE THESE DIRECTLY IN YOUR CODE */
-  --color-light-1: #fdfbf6;
-  --color-light-2: #f4ebda;
+  --color-light-1: #f4ebda;
+  --color-light-2: #efe4cd;
   --color-light-3: #ebdbbc;
 
   --color-dark-1: #5c4b3e;
@@ -38,8 +53,8 @@
   --color-gold-1: #8f7127;
 
   /* RESPONSIVE SIZING: The root font-size is based on this variable, meaning ANYTHING USING REM UNITS WILL SCALE WITH THE VIEWPORT WIDTH. */
-  --responsive-spacing: clamp(1rem, calc(2vw + 0.48rem), 2rem);
-  font-size: max(var(--responsive-spacing) * 0.62, 1.1rem);
+  --responsive-spacing: clamp(16px, calc(0.32vw + 14.88px), 20px);
+  font-size: var(--responsive-spacing);
 
   /* Additional variables */
   --extended-padding-height: 16rem;
@@ -53,8 +68,8 @@
   --text-size-subheading: 2rem;
   --text-size-body: 1rem;
   --text-size-body-large: 1.2rem;
-  --text-size-category: 0.9rem;
-  --text-size-body-small: 0.8rem;
+  --text-size-category: 0.8rem;
+  --text-size-body-small: 0.5rem;
 
   /* --container-*	Container query variants like @sm:* and size utilities like max-w-md */
   --container-size-content-max-width: 72rem;
@@ -63,8 +78,9 @@
   --container-size-content-padding-y: calc(2rem * 100vw / 360px);
 
   /* --spacing-*	Spacing and sizing utilities like px-4, max-h-16, and many more */
+  --spacing: 0.2rem;
   --article-size-padding-x: 2rem;
-  --article-size-padding-y: 2.5rem;
+  --article-size-padding-y: 2.7rem;
 
   /* --radius-*	Border radius utilities like rounded-sm */
   --radius-size-button: 9999px;
@@ -82,26 +98,31 @@
   --color-*	Color utilities like bg-red-500, text-sky-300, and many more
   */
   --color-color-surface-1: var(--color-light-1);
-  --color-color-surface-2: var(--color-light-2);
-  --color-color-surface-3: var(--color-light-3);
+  --color-color-surface-2: var(--color-light-3);
 
   --color-color-body: var(--color-dark-3);
   --color-color-muted: var(--color-dark-2);
-  --color-color-heading: var(--color-dark-1);
+  --color-color-heading: var(--color-teal-1);
 
-  --color-color-link: var(--color-wheat-yellow-2);
-  --color-color-link-hover: var(--color-teal-1);
+  --color-color-link: var(--color-dark-1);
+  --color-color-link-hover: var(--color-forest-green-1);
 
-  --color-color-fill-primary-bg: var(--color-teal-1);
+  --color-color-fill-primary-bg: var(--color-forest-green-1);
   --color-color-fill-primary-fg: var(--color-light-1);
 
   --color-color-fill-secondary-bg: var(--color-wheat-yellow-2);
   --color-color-fill-secondary-fg: var(--color-light-1);
 
+  --color-color-navbar-bg: color-mix(
+    in oklab,
+    var(--color-light-3) 80%,
+    transparent
+  );
+
   --color-color-border-light: var(--color-light-3);
   --color-color-border-dark: var(--color-wheat-yellow-1);
   --color-color-border-active: var(--color-jade-green-1);
-  --color-color-ring-light: var(--color-jade-green-1);
+  --color-color-ring-light: var(--color-forest-green-1);
 
   --color-color-success-bg: var(--color-grass-green-1);
   --color-color-success-fg: var(--color-light-1);
@@ -143,7 +164,7 @@
   }
 
   h1 {
-    @apply text-size-hero text-color-fill-primary-bg font-mazaeni font-bold tracking-tight;
+    @apply text-size-hero text-color-heading font-mazaeni font-bold tracking-tight;
   }
   h2 {
     @apply text-color-heading text-size-heading font-mazaeni font-semibold;
@@ -265,7 +286,7 @@ DETAILED INFO ON THE DESIGN SYSTEM:
 }
 - Use them like this:
 
-<div class="bg-color-surface-1"></div>
+<div class="bg-color-surface-1 "></div>
 
 - Note that I'm using the "color-color-" prefix. This is to disambiguate between the color utilities and the size utilities when writing classes in jsx.
 - Checkout the docs for more info: [Theme variable namespaces in Tailwind CSS](https://tailwindcss.com/docs/theme#theme-variable-namespaces) 

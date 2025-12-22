@@ -13,7 +13,7 @@ import { SectionHeader } from "../components/section-header";
 
 export default function Home() {
   return (
-    <main className="bg-background min-h-screen">
+    <main className="bg-color-surface-1 min-h-screen">
       <section id="home">
         <div
           className={cn(

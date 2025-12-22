@@ -16,7 +16,7 @@ export function Blog({ title, description, icon }: BlogProps) {
       </div>
 
       {/* Icon bubble */}
-      <div className="bg-background flex h-24 w-24 shrink-0 items-center justify-center rounded-full">
+      <div className="bg-color-surface-1 flex h-24 w-24 shrink-0 items-center justify-center rounded-full">
         <div className="text-foreground">{icon}</div>
       </div>
     </div>

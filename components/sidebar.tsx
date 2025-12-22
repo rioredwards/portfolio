@@ -15,7 +15,7 @@ export function Sidebar() {
             rel={
               link.href.startsWith("http") ? "noopener noreferrer" : undefined
             }
-            className="group/item text-primary ring-ring/50 hover:bg-background/50 hover:text-sidebar-primary flex items-center gap-0 rounded-[calc(var(--border-radius)-var(--padding))] px-2 py-2 transition-all duration-300 group-hover:gap-3 group-hover:px-3"
+            className="group/item text-primary ring-color-ring-light/50 hover:bg-background/50 hover:text-sidebar-primary flex items-center gap-0 rounded-[calc(var(--border-radius)-var(--padding))] px-2 py-2 transition-all duration-300 group-hover:gap-3 group-hover:px-3"
             aria-label={link.label}
           >
             <span className="flex shrink-0 items-center justify-center">
