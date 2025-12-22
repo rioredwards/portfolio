@@ -65,13 +65,15 @@
 /* @THEME: Use @theme to define new theme variables which get converted into tailwind utility classes */
 @theme {
   /* --text-*	Font size utilities like text-xl */
+  /* 
   --text-size-hero: min(4rem + 3.5vw - 1.8rem, 5rem);
   --text-size-heading: 3rem;
   --text-size-subheading: 2rem;
   --text-size-body-large: 1.2rem;
   --text-size-body: 1rem;
   --text-size-category: 0.9rem;
-  --text-size-body-small: 0.8rem;
+  --text-size-body-small: 0.8rem; 
+  */
 
   /* --container-*	Container query variants like @sm:* and size utilities like max-w-md */
   --container-size-content-max-width: 72rem;
@@ -148,7 +150,7 @@
     scroll-behavior: smooth;
   }
   body {
-    @apply bg-color-surface-1 text-size-body text-color-body;
+    @apply bg-color-surface-1 text-color-body text-base;
   }
   /* Lock background scroll when a mobile menu overlay is present */
   body:has(.mobile-menu-open) {
@@ -166,39 +168,39 @@
   }
 
   h1 {
-    @apply text-size-hero text-color-heading font-mazaeni font-bold tracking-tight;
+    @apply text-color-heading font-mazaeni text-6xl font-bold tracking-tight;
   }
   h2 {
-    @apply text-color-heading text-size-heading font-mazaeni font-semibold;
+    @apply text-color-heading font-mazaeni text-4xl font-semibold;
   }
   h3 {
-    @apply text-color-heading text-size-subheading font-mazaeni font-semibold;
+    @apply text-color-heading font-mazaeni text-3xl font-semibold;
   }
   p {
-    @apply text-size-body text-color-body leading-relaxed;
+    @apply text-color-body text-base leading-relaxed;
   }
   span {
     font-size: inherit;
   }
   label {
-    @apply text-size-body-small text-color-muted font-semibold;
+    @apply text-color-muted text-sm font-semibold;
   }
   nav a {
-    @apply text-color-link hover:text-color-link-hover text-sm font-medium;
+    @apply text-color-link hover:text-color-link-hover text-base font-medium;
   }
   input,
   textarea {
-    @apply text-size-body text-color-body;
+    @apply text-color-body text-base;
   }
   /* Text classes that don't necessarily map 1:1 to a specific html element */
   .category-text {
-    @apply text-size-category text-color-muted leading-relaxed font-thin;
+    @apply text-color-muted text-sm leading-relaxed font-thin;
   }
   .body-large-text {
-    @apply text-size-body-large text-color-body leading-relaxed;
+    @apply text-color-body text-lg leading-relaxed;
   }
   .body-small-text {
-    @apply text-size-body-small text-color-muted;
+    @apply text-color-muted text-sm font-medium;
   }
 }
 

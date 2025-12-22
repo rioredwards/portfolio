@@ -51,11 +51,8 @@ export function Navbar() {
 
   return (
     <header className="pointer-events-none fixed top-2 z-40 mx-auto flex w-full items-center justify-center">
-      <NavigationMenu
-        viewport={false}
-        className="w-full max-w-[22rem] flex-1 px-4"
-      >
-        <NavigationMenuList className="bg-color-navbar-bg pointer-events-auto w-full rounded-full px-4 py-2 backdrop-blur-sm">
+      <NavigationMenu viewport={false} className="w-full max-w-xs flex-1 px-1">
+        <NavigationMenuList className="bg-color-navbar-bg pointer-events-auto w-full rounded-full px-4 py-2.5 backdrop-blur-sm">
           {navItems.map((item) => {
             const isActive =
               activeSection === item.href ||
@@ -67,7 +64,7 @@ export function Navbar() {
                     href={item.href}
                     onClick={(e) => handleClick(e, item.href)}
                     className={cn(
-                      "hover:text-color-link-hover cursor-pointer rounded-full! px-2 py-2 text-center transition-colors",
+                      "hover:text-color-link-hover cursor-pointer rounded-full! px-4 py-1.5 text-center text-sm transition-colors",
                       isActive && "bg-color-surface-1",
                     )}
                     data-active={isActive}
