@@ -1,8 +1,6 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
-@custom-variant dark (&:is(.dark *));
-
 :root {
   /* Theme colors (source of truth) */
   --theme-background: #f4ebda;
@@ -20,39 +18,9 @@
   --theme-ring: #76c18f;
   --shadow-color: #504a3f;
 
-  /* Shadcn color variables */
-  --background: var(--theme-background);
-  --foreground: var(--theme-foreground);
-  --card: var(--theme-background-secondary);
-  --card-foreground: var(--theme-foreground-secondary);
-  --popover: var(--theme-background);
-  --popover-foreground: var(--theme-foreground);
-  --primary: var(--theme-background-primary);
-  --primary-foreground: var(--theme-foreground-primary);
-  --secondary: var(--theme-background-secondary);
-  --secondary-foreground: var(--theme-foreground-secondary);
-  --muted: var(--theme-background-secondary);
-  --muted-foreground: var(--theme-foreground-secondary);
-  --accent: var(--theme-background-accent);
-  --accent-foreground: var(--theme-foreground-accent);
-  --destructive: var(--theme-background-destructive);
-  --destructive-foreground: var(--theme-foreground-destructive);
-  --border: var(--theme-border);
-  --input: var(--theme-input);
-  --ring: var(--theme-ring);
-  --chart-1: oklch(0.735 0.0564 130.8494);
-  --chart-2: oklch(0.6762 0.0567 132.4479);
-  --chart-3: oklch(0.8185 0.0332 136.6539);
-  --chart-4: oklch(0.5929 0.0464 137.6224);
-  --chart-5: oklch(0.5183 0.039 137.1892);
-  --sidebar: var(--theme-background-secondary);
-  --sidebar-foreground: var(--theme-foreground-secondary);
-  --sidebar-primary: var(--theme-background-primary);
-  --sidebar-primary-foreground: var(--theme-foreground-primary);
-  --sidebar-accent: var(--theme-background-accent);
-  --sidebar-accent-foreground: var(--theme-foreground-accent);
-  --sidebar-border: var(--theme-border);
-  --sidebar-ring: var(--theme-ring);
+  /* RESPONSIVE SIZING: The root font-size is based on this variable, meaning ANYTHING USING REM UNITS WILL SCALE WITH THE VIEWPORT WIDTH. */
+  --responsive-spacing: clamp(1rem, calc(2vw + 0.48rem), 2rem);
+  font-size: max(var(--responsive-spacing) * 0.62, 1.1rem);
 
   /* Additional variables */
   --radius: 1rem;
@@ -61,40 +29,47 @@
   --extended-padding-height: 16rem;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --color-card: var(--card);
-  --color-card-foreground: var(--card-foreground);
-  --color-popover: var(--popover);
-  --color-popover-foreground: var(--popover-foreground);
-  --color-primary: var(--primary);
-  --color-primary-foreground: var(--primary-foreground);
-  --color-secondary: var(--secondary);
-  --color-secondary-foreground: var(--secondary-foreground);
-  --color-muted: var(--muted);
-  --color-muted-foreground: var(--muted-foreground);
-  --color-accent: var(--accent);
-  --color-accent-foreground: var(--accent-foreground);
-  --color-destructive: var(--destructive);
-  --color-destructive-foreground: var(--destructive-foreground);
-  --color-border: var(--border);
-  --color-input: var(--input);
-  --color-ring: var(--ring);
-  --color-chart-1: var(--chart-1);
-  --color-chart-2: var(--chart-2);
-  --color-chart-3: var(--chart-3);
-  --color-chart-4: var(--chart-4);
-  --color-chart-5: var(--chart-5);
-  --color-sidebar: var(--sidebar);
-  --color-sidebar-foreground: var(--sidebar-foreground);
-  --color-sidebar-primary: var(--sidebar-primary);
-  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
-  --color-sidebar-accent: var(--sidebar-accent);
-  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
-  --color-sidebar-border: var(--sidebar-border);
-  --color-sidebar-ring: var(--sidebar-ring);
+@theme {
+  /* --container-*	Container query variants like @sm:* and size utilities like max-w-md */
+  --container-size-content-max-width: 72rem;
+  --container-size-content-padding-x-mobile: 2rem;
+  --container-size-content-padding-x-desktop: 4rem;
+  --container-size-content-padding-y: calc(2rem * 100vw / 360px);
 
+  /* --spacing-*	Spacing and sizing utilities like px-4, max-h-16, and many more */
+ --article-size-padding-x: 2rem;
+ --article-size-padding-y: 2.5rem;
+}
+
+@theme inline {
+  --color-background: var(--theme-background);
+  --color-foreground: var(--theme-foreground);
+  --color-card: var(--theme-background-secondary);
+  --color-card-foreground: var(--theme-foreground-secondary);
+  --color-popover: var(--theme-background);
+  --color-popover-foreground: var(--theme-foreground);
+  --color-primary: var(--theme-background-primary);
+  --color-primary-foreground: var(--theme-foreground-primary);
+  --color-secondary: var(--theme-background-secondary);
+  --color-secondary-foreground: var(--theme-foreground-secondary);
+  --color-muted: var(--theme-background-secondary);
+  --color-muted-foreground: var(--theme-foreground-secondary);
+  --color-accent: var(--theme-background-accent);
+  --color-accent-foreground: var(--theme-foreground-accent);
+  --color-destructive: var(--theme-background-destructive);
+  --color-destructive-foreground: var(--theme-foreground-destructive);
+  --color-border: var(--theme-border);
+  --color-input: var(--theme-input);
+  --color-ring: var(--theme-ring);
+  --color-sidebar: var(--theme-background-secondary);
+  --color-sidebar-foreground: var(--theme-foreground-secondary);
+  --color-sidebar-primary: var(--theme-background-primary);
+  --color-sidebar-primary-foreground: var(--theme-foreground-primary);
+  --color-sidebar-accent: var(--theme-background-accent);
+  --color-sidebar-accent-foreground: var(--theme-foreground-accent);
+  --color-sidebar-border: var(--theme-border);
+  --color-sidebar-ring: var(--theme-ring);
+  
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
   --font-playfair: var(--font-playfair);
@@ -193,14 +168,14 @@
   .fade-in {
     animation: fadeInAnimation both;
     animation-timeline: view();
-    animation-range: entry 50px entry 100px;
+    animation-range: entry 100px entry 500px;
   }
 }
 
 @keyframes fadeInAnimation {
   from {
     opacity: 0;
-    transform: translateY(50px);
+    transform: translateY(20px);
   }
   to {
     opacity: 1;
