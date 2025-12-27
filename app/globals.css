@@ -55,7 +55,7 @@
   --color-gold-1: #8f7127;
 
   /* RESPONSIVE SIZING: The root font-size is based on this variable, meaning ANYTHING USING REM UNITS WILL SCALE WITH THE VIEWPORT WIDTH. */
-  --responsive-spacing: clamp(16px, calc(0.32vw + 14.88px), 20px);
+  --responsive-spacing: clamp(15px, calc(0.32vw + 13.88px), 19px);
   font-size: var(--responsive-spacing);
 
   /* Additional variables */
@@ -75,6 +75,8 @@
   --text-size-body-small: 0.8rem; 
   */
 
+  /* --text-sm: 0.8rem; */
+
   /* --container-*	Container query variants like @sm:* and size utilities like max-w-md */
   --container-size-content-max-width: 72rem;
   --container-size-content-padding-x-mobile: 2rem;
@@ -82,7 +84,7 @@
   --container-size-content-padding-y: calc(2rem * 100vw / 360px);
 
   /* --spacing-*	Spacing and sizing utilities like px-4, max-h-16, and many more */
-  --spacing: 0.21rem;
+  --spacing: 0.25rem;
   --article-size-padding-x: 2rem;
   --article-size-padding-y: 2.7rem;
 
@@ -264,6 +266,12 @@
     animation: fadeInAnimation both;
     animation-timeline: view();
     animation-range: entry 100px entry 500px;
+  }
+  .test {
+    @apply bg-color-fill-primary-bg text-color-fill-primary-fg hover:bg-color-fill-primary-bg/90;
+    @apply bg-color-error-bg hover:bg-color-error-bg/90 focus-visible:ring-color-error-bg/20 dark:focus-visible:ring-color-error-bg/40 dark:bg-color-error-bg/60;
+    @apply bg-color-surface-1 hover:bg-color-fill-secondary-bg hover:text-color-fill-secondary-fg dark:bg-color-surface-1/30 dark:border-color-border-dark dark:hover:bg-color-surface-1/50 border shadow-xs;
+    @apply bg-secondary text-secondary-foreground hover:bg-secondary/80;
   }
 }
 

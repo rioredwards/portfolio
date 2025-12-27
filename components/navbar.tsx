@@ -51,8 +51,8 @@ export function Navbar() {
 
   return (
     <header className="pointer-events-none fixed top-2 z-40 mx-auto flex w-full items-center justify-center">
-      <NavigationMenu viewport={false} className="w-full max-w-xs flex-1 px-1">
-        <NavigationMenuList className="bg-color-navbar-bg pointer-events-auto w-full rounded-full px-4 py-2.5 backdrop-blur-sm">
+      <NavigationMenu viewport={false}>
+        <NavigationMenuList className="bg-color-navbar-bg pointer-events-auto flex items-center gap-2 rounded-full px-4 py-2 backdrop-blur-sm">
           {navItems.map((item) => {
             const isActive =
               activeSection === item.href ||
