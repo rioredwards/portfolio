@@ -2,15 +2,16 @@ Automatically stage changes and create a commit (or multiple commits) with an au
 
 **Steps to execute (do all automatically without asking):**
 
-1. Check git status to see what files have changed
-2. Determine if the changes should be grouped into one commit or split into multiple commits.
+1. Use git diff and git status to see what files have changed
+2. Check the TODO list in the README.md file to see if any tasks have been completed. If the changes are clearly related to a specific task, use that task name to inform what files should be committed and what the commit message should be.
+3. Determine if the changes should be grouped into one commit or split into multiple commits.
 
 - For a single commit, the changes should be generally related... either to a single component/feature or a single type of change (e.g. formatting, refactoring, etc.). Small miscellaneous changes should be grouped into a single commit.
 - For multiple commits, the changes should be unrelated... either to different components/features or different types of changes (e.g. formatting, refactoring, etc.).
 - Proceed with the following steps for each commit.
 
-3. Stage all changes related to the commit: `git add .`
-4. Generate a concise commit message based on the changes:
+4. Stage all changes related to the commit: `git add .`
+5. Generate a concise commit message based on the changes:
 
 - Review the changed files and their diffs if needed
 - Use conventional commit format:

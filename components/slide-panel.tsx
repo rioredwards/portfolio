@@ -4,7 +4,7 @@ import { cva } from "class-variance-authority";
 
 type Orientation = "left" | "right";
 type DecorationHeight = "short" | "tall";
-interface SlidePanelProps {
+export interface SlidePanelProps {
   orientation?: Orientation;
   decorationHeight?: DecorationHeight;
   fill?: "background" | "secondary";
