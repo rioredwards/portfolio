@@ -31,14 +31,15 @@
 
 @theme {
   /* --container-*	Container query variants like @sm:* and size utilities like max-w-md */
-  --container-size-content-max-width: 72rem;
-  --container-size-content-padding-x-mobile: 2rem;
-  --container-size-content-padding-x-desktop: 4rem;
-  --container-size-content-padding-y: calc(2rem * 100vw / 360px);
+  --container-content-max-w: 72rem;
 
   /* --spacing-*	Spacing and sizing utilities like px-4, max-h-16, and many more */
- --article-size-padding-x: 2rem;
- --article-size-padding-y: 2.5rem;
+  --spacing-content-px-md: 4rem;
+  --spacing-content-px: 2rem;
+  --spacing-content-py: 4rem;
+
+  --spacing-article-px: 2rem;
+  --spacing-article-py: 2.5rem;
 }
 
 @theme inline {
@@ -69,7 +70,7 @@
   --color-sidebar-accent-foreground: var(--theme-foreground-accent);
   --color-sidebar-border: var(--theme-border);
   --color-sidebar-ring: var(--theme-ring);
-  
+
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
   --font-playfair: var(--font-playfair);
@@ -115,7 +116,7 @@
     position: absolute;
     top: 100%;
     left: 0;
-    width: 100%; 
+    width: 100%;
     height: var(--extended-padding-height);
     background-color: inherit;
     z-index: -1;
