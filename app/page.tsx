@@ -2,7 +2,7 @@ import { Blog } from "@/components/blog";
 import { Contact } from "@/components/contact";
 import { Hero } from "@/components/hero";
 import { Project } from "@/components/project";
-import { SectionContentWrapper } from "@/components/sectionContentWrapper";
+import { SectionContentWrapper } from "@/components/section-content-wrapper";
 import { SlidePanel } from "@/components/slide-panel";
 import profileImage from "@/public/profile.webp";
 import { MessagesSquare } from "lucide-react";

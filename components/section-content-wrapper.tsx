@@ -10,7 +10,7 @@ export function SectionContentWrapper({
   return (
     <div
       className={cn(
-        "max-w-content-max-width mx-auto px-(--content-padding-x-mobile) py-(--content-padding-y) md:px-(--content-padding-x-desktop)",
+        "max-w-content-max-w px-content-px py-content-py md:px-content-px-md mx-auto",
         className,
       )}
     >
