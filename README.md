@@ -45,9 +45,9 @@ Priority key
       - [x] Sidebar ❤️
         - [x] Desktop ❤️
         - [x] Mobile ❤️
-      - [ ] Slide panel ❤️
-        - [ ] Desktop ❤️
-        - [ ] Mobile ❤️
+      - [x] Slide panel ❤️
+        - [x] Desktop ❤️
+        - [x] Mobile ❤️
       - [ ] Hero section ❤️
         - [ ] Desktop ❤️
         - [ ] Mobile ❤️

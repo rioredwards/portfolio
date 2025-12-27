@@ -26,7 +26,6 @@
   --radius: 1rem;
   --tracking-normal: 0em;
   --spacing: 0.25rem;
-  --extended-padding-height: 16rem;
 }
 
 @theme {
@@ -38,8 +37,19 @@
   --spacing-content-px: 2rem;
   --spacing-content-py: 4rem;
 
+  --spacing-panel-tall-extended-padding-height: 16rem;
+  --spacing-panel-short-extended-padding-height: 12rem;
+
   --spacing-article-px: 2rem;
   --spacing-article-py: 2.5rem;
+
+  /* --radius-*	Border radius utilities like rounded-sm */
+  --radius-button: 9999px;
+  --radius-card: 3rem;
+  --radius-input: 1rem;
+  --radius-section: 4rem;
+  --radius-panel-tall: 4rem;
+  --radius-panel-short: 3rem;
 }
 
 @theme inline {
@@ -188,8 +198,7 @@
   }
 }
 
-/* 
-* {
+/* * {
   border: 1px solid red;
-} 
-*/
+  background-color: rgba(255, 0, 0, 0.043);
+} */

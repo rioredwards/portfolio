@@ -10,6 +10,7 @@ export interface SlidePanelProps {
   fill?: "background" | "secondary";
   children?: React.ReactNode;
   className?: string;
+  previousDecorationHeight?: DecorationHeight | null;
 }
 
 type TriangleDecorationProps = Flatten<Omit<SlidePanelProps, "children">>;
@@ -17,8 +18,8 @@ type TriangleDecorationProps = Flatten<Omit<SlidePanelProps, "children">>;
 const triangleHeightVariants = cva("block w-auto", {
   variants: {
     decorationHeight: {
-      tall: "h-8 -top-8",
-      short: "h-6 -top-6",
+      tall: "h-(--radius-panel-tall) -top-(--radius-panel-tall)",
+      short: "h-(--radius-panel-short) -top-(--radius-panel-short)",
     },
     orientation: {
       left: "right-0",
@@ -60,13 +61,25 @@ export function SlidePanel({
   fill = "background",
   children,
   className = "",
+  previousDecorationHeight = null,
 }: SlidePanelProps) {
   const isLeft = orientation === "left";
   const isTall = decorationHeight === "tall";
+  const previousIsTall = previousDecorationHeight === "tall";
 
   // NOTE: The panels are positioned so that they overlap the previous section's decoration.
-  const topMargin = isTall ? "-mt-8" : "-mt-6";
-  const bottomPadding = isTall ? "pb-8" : "pb-6";
+  // The top margin should match the previous panel's bottom padding (inversed).
+  // If no previous panel is specified, use 0
+  const topMargin =
+    previousDecorationHeight !== null
+      ? previousIsTall
+        ? "-mt-panel-tall-extended-padding-height"
+        : "-mt-panel-short-extended-padding-height"
+      : "mt-0";
+
+  const bottomPadding = isTall
+    ? "pb-panel-tall-extended-padding-height"
+    : "pb-panel-short-extended-padding-height";
 
   return (
     <div className={cn("fade-in relative", topMargin, className)}>
@@ -82,12 +95,17 @@ export function SlidePanel({
       <div
         className={cn(
           fill === "secondary" ? "bg-secondary" : "bg-background",
-          isLeft ? "rounded-tl-4xl" : "rounded-tr-4xl",
+          isLeft
+            ? isTall
+              ? "rounded-tl-panel-tall" // left tall panel
+              : "rounded-tl-panel-short" // left short panel
+            : isTall
+              ? "rounded-tr-panel-tall" // right tall panel
+              : "rounded-tr-panel-short", // right short panel
           bottomPadding,
-          "extended-padding min-h-24",
         )}
       >
-        {children}
+        {children ? children : <div className="min-h-14" />}
       </div>
     </div>
   );
