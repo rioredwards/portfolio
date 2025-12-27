@@ -48,15 +48,15 @@ Priority key
       - [x] Slide panel ❤️
         - [x] Desktop ❤️
         - [x] Mobile ❤️
-      - [ ] Hero section ❤️
-        - [ ] Desktop ❤️
-        - [ ] Mobile ❤️
-      - [ ] Projects section ❤️
-        - [ ] Desktop ❤️
-        - [ ] Mobile ❤️
-      - [ ] Blog section ❤️
-        - [ ] Desktop ❤️
-        - [ ] Mobile ❤️
+      - [x] Hero section ❤️
+        - [x] Desktop ❤️
+        - [x] Mobile ❤️
+      - [x] Projects section ❤️
+        - [x] Desktop ❤️
+        - [x] Mobile ❤️
+      - [x] Blog section ❤️
+        - [x] Desktop ❤️
+        - [x] Mobile ❤️
       - [ ] Contact section ❤️
         - [ ] Desktop ❤️
         - [ ] Mobile ❤️
