@@ -25,7 +25,7 @@ export function MobileMenu() {
 
       {/* Fullscreen menu overlay */}
       {isOpen && (
-        <div className="bg-color-surface-1 mobile-menu-open fixed inset-0 z-50 md:hidden">
+        <div className="bg-background mobile-menu-open fixed inset-0 z-50 md:hidden">
           {/* Close button - top right */}
           <button
             onClick={() => setIsOpen(false)}
@@ -51,10 +51,15 @@ export function MobileMenu() {
             </div>
 
             {/* Name */}
-            <h2 className="text-mobile-heading mm-mb-small">Rio Edwards</h2>
+            <h2
+              className="text-foreground mm-mb-small text-2xl font-bold sm:text-3xl"
+              style={{ fontFamily: "var(--font-mazaeni-demo), serif" }}
+            >
+              Rio Edwards
+            </h2>
 
             {/* Title */}
-            <p className="text-mobile-body mm-mb-medium">
+            <p className="text-secondary-foreground mm-mb-medium text-lg sm:text-xl">
               Developer / Designer / Creator
             </p>
 
@@ -71,13 +76,18 @@ export function MobileMenu() {
                       : undefined
                   }
                   onClick={() => setIsOpen(false)}
-                  className="border-border/50 bg-color-surface-1 text-foreground hover:bg-secondary/30 mm-link flex items-center gap-3 rounded-(--radius-card) border px-4 shadow-sm transition-all hover:shadow-md"
+                  className="border-border/50 bg-background text-foreground hover:bg-secondary/30 mm-link flex items-center gap-3 rounded-2xl border px-4 shadow-sm transition-all hover:shadow-md"
                   aria-label={link.label}
                 >
                   <span className="flex shrink-0 items-center justify-center">
                     {link.icon}
                   </span>
-                  <span className="text-button-sm">{link.label}</span>
+                  <span
+                    className="text-base font-bold"
+                    style={{ fontFamily: "var(--font-mazaeni-demo), serif" }}
+                  >
+                    {link.label}
+                  </span>
                 </Link>
               ))}
             </nav>

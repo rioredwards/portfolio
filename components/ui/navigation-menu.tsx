@@ -17,7 +17,10 @@ function NavigationMenu({
     <NavigationMenuPrimitive.Root
       data-slot="navigation-menu"
       data-viewport={viewport}
-      className={cn("group/navigation-menu relative", className)}
+      className={cn(
+        "group/navigation-menu relative flex max-w-max flex-1 items-center justify-center",
+        className,
+      )}
       {...props}
     >
       {children}
@@ -34,7 +37,7 @@ function NavigationMenuList({
     <NavigationMenuPrimitive.List
       data-slot="navigation-menu-list"
       className={cn(
-        "group flex flex-1 list-none items-stretch justify-stretch gap-1",
+        "group flex flex-1 list-none items-center justify-center gap-1",
         className,
       )}
       {...props}
@@ -49,14 +52,14 @@ function NavigationMenuItem({
   return (
     <NavigationMenuPrimitive.Item
       data-slot="navigation-menu-item"
-      className={cn("relative flex-1", className)}
+      className={cn("relative", className)}
       {...props}
     />
   );
 }
 
 const navigationMenuTriggerStyle = cva(
-  "group inline-flex h-9 w-max items-center justify-center rounded-md bg-color-surface-1 px-4 py-2 font-medium hover:bg-color-surface-1 hover:text-color-link-hover focus:bg-color-surface-1 focus:text-color-link-hover disabled:pointer-events-none disabled:opacity-50 data-[state=open]:hover:bg-color-secondary-bg data-[state=open]:text-color-link-hover data-[state=open]:focus:bg-color-secondary-bg data-[state=open]:bg-color-secondary-bg/50 focus-visible:ring-color-ring-light/50 outline-none transition-[color,box-shadow] focus-visible:ring-[3px] focus-visible:outline-1",
+  "group inline-flex h-9 w-max items-center justify-center rounded-md bg-background px-4 py-2 text-sm font-medium hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground disabled:pointer-events-none disabled:opacity-50 data-[state=open]:hover:bg-accent data-[state=open]:text-accent-foreground data-[state=open]:focus:bg-accent data-[state=open]:bg-accent/50 focus-visible:ring-ring/50 outline-none transition-[color,box-shadow] focus-visible:ring-[3px] focus-visible:outline-1",
 );
 
 function NavigationMenuTrigger({
@@ -126,7 +129,7 @@ function NavigationMenuLink({
     <NavigationMenuPrimitive.Link
       data-slot="navigation-menu-link"
       className={cn(
-        "data-[active=true]:bg-color-surface-1 ring-color-ring-light/50 hover:text-color-link-hover hover:bg-color-surface-1/50 focus:bg-color-surface-1/50 focus-visible:ring-color-ring-light/50 flex flex-col gap-1 rounded-sm p-2 transition-all outline-none focus-visible:ring-[3px] focus-visible:outline-1 data-[active=true]:ring-1 [&_svg:not([class*='size-'])]:size-4",
+        "data-[active=true]:bg-background ring-ring/50 hover:text-primary hover:bg-background/50 focus:bg-background/50 focus-visible:ring-ring/50 flex flex-col gap-1 rounded-sm p-2 text-sm transition-all outline-none focus-visible:ring-[3px] focus-visible:outline-1 data-[active=true]:ring-1 [&_svg:not([class*='size-'])]:size-4",
         className,
       )}
       {...props}

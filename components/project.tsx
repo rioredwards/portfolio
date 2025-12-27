@@ -22,23 +22,32 @@ export function Project({
   return (
     <article
       className={cn(
-        "fade-in flex flex-col gap-8 lg:flex-row lg:items-center lg:gap-12",
+        "fade-in flex flex-col gap-12 py-12 md:py-16 lg:flex-row lg:items-center lg:gap-16 lg:py-20",
         orientation === "left" ? "lg:flex-row" : "lg:flex-row-reverse",
       )}
     >
       {/* Left column – text content */}
       <div
         className={cn(
-          "flex flex-1 flex-col lg:block",
+          "flex flex-1 flex-col px-4 lg:block",
           orientation === "left"
             ? "items-start text-left lg:text-right"
             : "items-end text-right lg:text-left",
         )}
       >
-        <p className="callout-text mb-2">{category}</p>
-        <h3 className="title-2-text">{title}</h3>
+        <p className="text-muted-foreground mb-4 text-sm font-medium tracking-[0.2em] uppercase">
+          {category}
+        </p>
+        <h2
+          className="text-foreground mb-6 text-4xl leading-tight font-bold sm:text-5xl"
+          style={{ fontFamily: "var(--font-mazaeni-demo), serif" }}
+        >
+          {title}
+        </h2>
 
-        <p className="mb-8 max-w-xl">{description}</p>
+        <p className="text-muted-foreground mb-8 max-w-xl text-base leading-relaxed">
+          {description}
+        </p>
 
         <div
           className={cn(
@@ -63,18 +72,18 @@ export function Project({
       <div className="flex-1 max-lg:order-first">
         <div
           className={cn(
-            "relative mx-auto aspect-3/2 w-[calc(100%+var(--content-padding-x-mobile)*2)] -translate-x-(--content-padding-x-mobile) overflow-hidden md:static md:w-full md:translate-x-0 lg:h-full lg:max-h-80",
+            "mx-auto aspect-3/2 overflow-hidden md:w-full lg:max-h-80",
             orientation === "left"
-              ? "rounded-tl-(--radius-section) rounded-br-(--radius-section)"
-              : "rounded-tr-(--radius-section) rounded-bl-(--radius-section)",
+              ? "rounded-tl-4xl rounded-br-4xl"
+              : "rounded-tr-4xl rounded-bl-4xl",
           )}
         >
           <div
             className={cn(
               "bg-secondary relative h-full w-full",
               orientation === "left"
-                ? "rounded-tl-(--radius-section) rounded-br-(--radius-section)"
-                : "rounded-tr-(--radius-section) rounded-bl-(--radius-section)",
+                ? "rounded-tl-4xl rounded-br-4xl"
+                : "rounded-tr-4xl rounded-bl-4xl",
             )}
           >
             {/* Gradient overlay */}

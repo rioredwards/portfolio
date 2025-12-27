@@ -4,13 +4,12 @@ import { cva } from "class-variance-authority";
 
 type Orientation = "left" | "right";
 type DecorationHeight = "short" | "tall";
-export interface SlidePanelProps {
+interface SlidePanelProps {
   orientation?: Orientation;
   decorationHeight?: DecorationHeight;
   fill?: "background" | "secondary";
   children?: React.ReactNode;
   className?: string;
-  previousDecorationHeight?: DecorationHeight | null;
 }
 
 type TriangleDecorationProps = Flatten<Omit<SlidePanelProps, "children">>;
@@ -18,8 +17,8 @@ type TriangleDecorationProps = Flatten<Omit<SlidePanelProps, "children">>;
 const triangleHeightVariants = cva("block w-auto", {
   variants: {
     decorationHeight: {
-      tall: "h-[var(--radius-panel-tall)] -top-[var(--radius-panel-tall)]",
-      short: "h-[var(--radius-panel-short)] -top-[var(--radius-panel-short)]",
+      tall: "h-8 -top-8",
+      short: "h-6 -top-6",
     },
     orientation: {
       left: "right-0",
@@ -61,27 +60,13 @@ export function SlidePanel({
   fill = "background",
   children,
   className = "",
-  previousDecorationHeight = null,
 }: SlidePanelProps) {
   const isLeft = orientation === "left";
   const isTall = decorationHeight === "tall";
-  const previousIsTall = previousDecorationHeight === "tall";
 
   // NOTE: The panels are positioned so that they overlap the previous section's decoration.
-  // The top margin should match the previous panel's bottom padding (inversed).
-  // If no previous panel is specified, use the current panel's decoration height.
-  const topMargin =
-    previousDecorationHeight !== null
-      ? previousIsTall
-        ? "-mt-[var(--panel-decoration-tall)]"
-        : "-mt-[var(--panel-decoration-short)]"
-      : isTall
-        ? "-mt-[var(--panel-decoration-tall)]"
-        : "-mt-[var(--panel-decoration-short)]";
-
-  const bottomPadding = isTall
-    ? "pb-[var(--panel-decoration-tall)]"
-    : "pb-[var(--panel-decoration-short)]";
+  const topMargin = isTall ? "-mt-8" : "-mt-6";
+  const bottomPadding = isTall ? "pb-8" : "pb-6";
 
   return (
     <div className={cn("fade-in relative", topMargin, className)}>
@@ -96,16 +81,10 @@ export function SlidePanel({
       {/* Main content */}
       <div
         className={cn(
-          fill === "secondary" ? "bg-secondary" : "bg-color-surface-1",
-          isLeft
-            ? isTall
-              ? "rounded-tl-(--radius-panel-tall)" // left tall panel
-              : "rounded-tl-(--radius-panel-short)" // left short panel
-            : isTall
-              ? "rounded-tr-(--radius-panel-tall)" // right tall panel
-              : "rounded-tr-(--radius-panel-short)", // right short panel
+          fill === "secondary" ? "bg-secondary" : "bg-background",
+          isLeft ? "rounded-tl-4xl" : "rounded-tr-4xl",
           bottomPadding,
-          "extended-padding min-h-14",
+          "extended-padding min-h-24",
         )}
       >
         {children}

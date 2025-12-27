@@ -4,7 +4,6 @@ import { Hero } from "@/components/hero";
 import { Project } from "@/components/project";
 import { SectionContentWrapper } from "@/components/sectionContentWrapper";
 import { SlidePanel } from "@/components/slide-panel";
-import { cn } from "@/lib/utils";
 import profileImage from "@/public/profile.webp";
 import { MessagesSquare } from "lucide-react";
 import Image from "next/image";
@@ -13,13 +12,9 @@ import { SectionHeader } from "../components/section-header";
 
 export default function Home() {
   return (
-    <main className="bg-color-surface-1 min-h-screen">
+    <main className="bg-background min-h-screen">
       <section id="home">
-        <div
-          className={cn(
-            "mx-auto flex min-h-svh flex-col items-center justify-center px-4 pt-24 pb-24 md:px-20",
-          )}
-        >
+        <div className="max-w-content-max-w px-content-px md:px-content-px-md py-content-py mx-auto grid min-h-screen place-items-center">
           <Hero
             title="Hello, I'm Rio."
             paragraphs={[

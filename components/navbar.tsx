@@ -52,30 +52,31 @@ export function Navbar() {
   return (
     <header className="pointer-events-none fixed top-2 z-40 mx-auto flex w-full items-center justify-center">
       <NavigationMenu viewport={false}>
-        <NavigationMenuList className="bg-color-navbar-bg pointer-events-auto flex items-center gap-2 rounded-full px-4 py-2 backdrop-blur-sm">
-          {navItems.map((item) => {
-            const isActive =
-              activeSection === item.href ||
-              (item.href === "#home" && activeSection === "");
-            return (
-              <NavigationMenuItem key={item.href}>
-                <NavigationMenuLink asChild>
-                  <a
-                    href={item.href}
-                    onClick={(e) => handleClick(e, item.href)}
-                    className={cn(
-                      "hover:text-color-link-hover cursor-pointer rounded-full! px-4 py-1.5 text-center text-sm transition-colors",
-                      isActive && "bg-color-surface-1",
-                    )}
-                    data-active={isActive}
-                  >
-                    {item.label}
-                  </a>
-                </NavigationMenuLink>
-              </NavigationMenuItem>
-            );
-          })}
-        </NavigationMenuList>
+        <div className="bg-sidebar/80 text-sidebar-foreground pointer-events-auto flex items-center gap-2 rounded-full px-4 py-2 backdrop-blur-sm">
+          <NavigationMenuList>
+            {navItems.map((item) => {
+              const isActive =
+                activeSection === item.href ||
+                (item.href === "#home" && activeSection === "");
+              return (
+                <NavigationMenuItem key={item.href}>
+                  <NavigationMenuLink asChild>
+                    <a
+                      href={item.href}
+                      onClick={(e) => handleClick(e, item.href)}
+                      className={cn(
+                        "cursor-pointer rounded-full! px-4 py-1.5 text-sm font-medium transition-colors",
+                      )}
+                      data-active={isActive}
+                    >
+                      {item.label}
+                    </a>
+                  </NavigationMenuLink>
+                </NavigationMenuItem>
+              );
+            })}
+          </NavigationMenuList>
+        </div>
       </NavigationMenu>
     </header>
   );

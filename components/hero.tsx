@@ -22,35 +22,40 @@ export function Hero({
   return (
     <div
       className={cn(
-        "grid w-full min-w-0 grid-cols-1 place-items-center lg:grid-cols-[auto_auto] lg:grid-rows-[auto_auto] lg:place-items-stretch",
+        "grid grid-cols-1 place-items-center md:grid-cols-[auto_1fr] md:grid-rows-[auto_auto] md:place-items-stretch lg:grid-cols-[1fr_max-content]",
         className,
       )}
     >
       {/* Main heading - top-cell on mobile, top-right-cell on desktop */}
-      <div className="mb-4 lg:col-start-2 lg:row-start-1 lg:mb-2">
-        <h1 className="hero-text">{title}</h1>
+      <div className="mb-4 md:col-start-2 md:row-start-1 md:mb-2">
+        <h1
+          className="text-foreground text-center text-[clamp(3rem,14vw,5rem)] font-bold tracking-tight whitespace-nowrap md:text-left md:text-6xl lg:text-7xl"
+          style={{ fontFamily: "var(--font-mazaeni-demo), serif" }}
+        >
+          {title}
+        </h1>
       </div>
 
       {/* Profile Picture - middle-cell on mobile, left-cell on desktop */}
-      <div className="mb-8 lg:row-span-2 lg:mr-16 lg:mb-0 lg:ml-auto lg:flex lg:place-items-center">
+      <div className="mb-8 md:row-span-2 md:mr-8 md:mb-0 md:flex md:place-items-center lg:mr-16 lg:ml-auto">
         {/* Profile picture */}
-        <div className="relative aspect-square h-64 overflow-hidden rounded-full border-4 lg:h-full lg:w-full">
+        <div className="relative aspect-square h-64 overflow-hidden rounded-full border-4 sm:h-64">
           {image}
         </div>
       </div>
 
       {/* Subheading and paragraphs - bottom-cell on mobile, bottom-right-cell on desktop */}
-      <div className="max-w-lg flex-1 lg:col-start-2 lg:row-start-2">
+      <div className="max-w-lg flex-1 md:col-start-2 md:row-start-2">
         {paragraphs && (
-          <div className="mb-6 space-y-4">
+          <div className="text-secondary-foreground mb-6 space-y-4">
             {paragraphs.map((paragraph, index) => (
-              <p key={index} className="body-text">
+              <p key={index} className="leading-relaxed">
                 {paragraph}
               </p>
             ))}
           </div>
         )}
-        <div className="mt-12 flex justify-center lg:mt-4 lg:justify-start">
+        <div className="mt-12 flex justify-center md:mt-4 md:justify-start">
           <Button asChild size="lg" className="tracking-wider uppercase">
             <Link href={buttonHref}>{buttonText}</Link>
           </Button>
