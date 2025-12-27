@@ -95,6 +95,10 @@
   body {
     @apply bg-background text-foreground;
   }
+  /* Offset scroll position for sections to appear closer to middle of viewport */
+  section {
+    scroll-margin-top: clamp(20vh, 10vh, 30vh);
+  }
   /* Lock background scroll when a mobile menu overlay is present */
   body:has(.mobile-menu-open) {
     overflow: hidden;

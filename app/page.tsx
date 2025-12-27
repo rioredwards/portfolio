@@ -7,7 +7,6 @@ import { SlidePanel } from "@/components/slide-panel";
 import profileImage from "@/public/profile.webp";
 import { MessagesSquare } from "lucide-react";
 import Image from "next/image";
-import { PanelStack } from "../components/panel-stack";
 import { SectionHeader } from "../components/section-header";
 
 export default function Home() {
@@ -33,7 +32,7 @@ export default function Home() {
           />
         </div>
       </section>
-      <PanelStack>
+      <section id="projects">
         <SlidePanel orientation="left" decorationHeight="tall" fill="secondary">
           <SectionHeader title="Projects" />
         </SlidePanel>
@@ -116,6 +115,8 @@ export default function Home() {
             />
           </SectionContentWrapper>
         </SlidePanel>
+      </section>
+      <section id="blog">
         <SlidePanel
           orientation="right"
           decorationHeight="tall"
@@ -154,6 +155,8 @@ export default function Home() {
             </div>
           </SectionContentWrapper>
         </SlidePanel>
+      </section>
+      <section id="contact">
         <SlidePanel orientation="left" decorationHeight="tall" fill="secondary">
           <SectionHeader title="Contact" />
         </SlidePanel>
@@ -166,7 +169,7 @@ export default function Home() {
             <Contact />
           </SectionContentWrapper>
         </SlidePanel>
-      </PanelStack>
+      </section>
     </main>
   );
 }

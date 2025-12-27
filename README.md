@@ -39,9 +39,9 @@ Priority key
       - [x] Apply to the footer ❤️
 - [x] Tweak the design system as needed to ensure every component looks good/consistent ❤️
 - [ ] Ensure the layout is responsive and spacing is consistent ❤️
-      - [ ] Navbar ❤️
-        - [ ] Desktop ❤️
-        - [ ] Mobile ❤️
+      - [] Navbar ❤️
+        - [x] Desktop ❤️
+        - [x] Mobile ❤️
       - [ ] Sidebar ❤️
         - [ ] Desktop ❤️
         - [ ] Mobile ❤️
