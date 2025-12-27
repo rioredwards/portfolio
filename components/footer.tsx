@@ -1,7 +1,7 @@
 import { Skill } from "@/components/ui/skill";
 import { SlidePanel } from "./slide-panel";
 
-const BUILT_WITH = ["Figma", "Next.js", "Tailwind", "Contentful", "GraphQL"];
+const BUILT_WITH = ["Next.js", "Tailwind", "Shadcn/UI", "TypeScript"];
 
 export function Footer() {
   return (
@@ -11,7 +11,7 @@ export function Footer() {
         <div className="space-y-1 text-sm">
           <p className="font-semibold">Designed and Developed by</p>
           <p>Rio Edwards</p>
-          <p>©2024</p>
+          <p>©2025</p>
         </div>
 
         {/* Right built-with pills */}

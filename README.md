@@ -37,7 +37,7 @@ Priority key
       - [x] Apply to the blog section ❤️
       - [x] Apply to the contact section ❤️
       - [x] Apply to the footer ❤️
-- [ ] Tweak the design system as needed to ensure every component looks good/consistent ❤️
+- [x] Tweak the design system as needed to ensure every component looks good/consistent ❤️
 - [ ] Ensure the layout is responsive and spacing is consistent ❤️
       - [ ] Navbar ❤️
         - [ ] Desktop ❤️
