@@ -27,7 +27,7 @@ const formSchema = z.object({
     .max(500, "Email must be at most 500 characters."),
   message: z
     .string()
-    .min(10, "Message must be at least 10 characters.")
+    .min(1, "Message is required.")
     .max(1000, "Message must be at most 1000 characters."),
 });
 
