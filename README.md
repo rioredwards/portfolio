@@ -38,7 +38,7 @@ Priority key
       - [x] Apply to the contact section ❤️
       - [x] Apply to the footer ❤️
 - [x] Tweak the design system as needed to ensure every component looks good/consistent ❤️
-- [ ] Ensure the layout is responsive and spacing is consistent ❤️
+- [x] Ensure the layout is responsive and spacing is consistent ❤️
       - [x] Navbar ❤️
         - [x] Desktop ❤️
         - [x] Mobile ❤️
@@ -60,9 +60,9 @@ Priority key
       - [x] Contact section ❤️
         - [x] Desktop ❤️
         - [x] Mobile ❤️
-      - [ ] Footer ❤️
-        - [ ] Desktop ❤️
-        - [ ] Mobile ❤️
+      - [x] Footer ❤️
+        - [x] Desktop ❤️
+        - [x] Mobile ❤️
 
 ### Replace Placeholder Content Checklist
 
