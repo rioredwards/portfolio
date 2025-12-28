@@ -1,4 +1,5 @@
 Help me add a new feature to the portfolio. Ask me what feature I want to add, then:
+
 1. Break it down into tasks
 2. Check existing code patterns
 3. Implement it following the project's conventions
