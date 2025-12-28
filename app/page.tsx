@@ -33,13 +33,19 @@ export default function Home() {
         </div>
       </section>
       <section id="projects">
-        <SlidePanel orientation="left" decorationHeight="tall" fill="secondary">
+        <SlidePanel
+          orientation="left"
+          decorationHeight="tall"
+          previousDecorationHeight={null}
+          fill="secondary"
+        >
           <SectionHeader title="Projects" />
         </SlidePanel>
         <SlidePanel
           orientation="left"
           decorationHeight="tall"
           fill="background"
+          previousDecorationHeight="tall"
         >
           <SectionContentWrapper>
             <Project
@@ -63,11 +69,13 @@ export default function Home() {
           orientation="right"
           decorationHeight="short"
           fill="secondary"
+          previousDecorationHeight="tall"
         ></SlidePanel>
         <SlidePanel
           orientation="right"
           decorationHeight="short"
           fill="background"
+          previousDecorationHeight="short"
         >
           <SectionContentWrapper>
             <Project
@@ -90,12 +98,14 @@ export default function Home() {
         <SlidePanel
           orientation="left"
           decorationHeight="short"
+          previousDecorationHeight="short"
           fill="secondary"
         ></SlidePanel>
         <SlidePanel
           orientation="left"
           decorationHeight="short"
           fill="background"
+          previousDecorationHeight="short"
         >
           <SectionContentWrapper>
             <Project
@@ -120,6 +130,7 @@ export default function Home() {
         <SlidePanel
           orientation="right"
           decorationHeight="tall"
+          previousDecorationHeight="short"
           fill="secondary"
         >
           <SectionHeader title="Blog" />
@@ -127,6 +138,7 @@ export default function Home() {
         <SlidePanel
           orientation="right"
           decorationHeight="tall"
+          previousDecorationHeight="tall"
           fill="background"
         >
           <SectionContentWrapper>
@@ -157,13 +169,19 @@ export default function Home() {
         </SlidePanel>
       </section>
       <section id="contact">
-        <SlidePanel orientation="left" decorationHeight="tall" fill="secondary">
+        <SlidePanel
+          orientation="left"
+          decorationHeight="tall"
+          fill="secondary"
+          previousDecorationHeight="short"
+        >
           <SectionHeader title="Contact" />
         </SlidePanel>
         <SlidePanel
           orientation="left"
           decorationHeight="tall"
           fill="background"
+          previousDecorationHeight="tall"
         >
           <SectionContentWrapper>
             <Contact />

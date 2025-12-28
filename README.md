@@ -38,31 +38,31 @@ Priority key
       - [x] Apply to the contact section ❤️
       - [x] Apply to the footer ❤️
 - [x] Tweak the design system as needed to ensure every component looks good/consistent ❤️
-- [ ] Ensure the layout is responsive and spacing is consistent ❤️
+- [x] Ensure the layout is responsive and spacing is consistent ❤️
       - [x] Navbar ❤️
         - [x] Desktop ❤️
         - [x] Mobile ❤️
       - [x] Sidebar ❤️
         - [x] Desktop ❤️
         - [x] Mobile ❤️
-      - [ ] Slide panel ❤️
-        - [ ] Desktop ❤️
-        - [ ] Mobile ❤️
-      - [ ] Hero section ❤️
-        - [ ] Desktop ❤️
-        - [ ] Mobile ❤️
-      - [ ] Projects section ❤️
-        - [ ] Desktop ❤️
-        - [ ] Mobile ❤️
-      - [ ] Blog section ❤️
-        - [ ] Desktop ❤️
-        - [ ] Mobile ❤️
-      - [ ] Contact section ❤️
-        - [ ] Desktop ❤️
-        - [ ] Mobile ❤️
-      - [ ] Footer ❤️
-        - [ ] Desktop ❤️
-        - [ ] Mobile ❤️
+      - [x] Slide panel ❤️
+        - [x] Desktop ❤️
+        - [x] Mobile ❤️
+      - [x] Hero section ❤️
+        - [x] Desktop ❤️
+        - [x] Mobile ❤️
+      - [x] Projects section ❤️
+        - [x] Desktop ❤️
+        - [x] Mobile ❤️
+      - [x] Blog section ❤️
+        - [x] Desktop ❤️
+        - [x] Mobile ❤️
+      - [x] Contact section ❤️
+        - [x] Desktop ❤️
+        - [x] Mobile ❤️
+      - [x] Footer ❤️
+        - [x] Desktop ❤️
+        - [x] Mobile ❤️
 
 ### Replace Placeholder Content Checklist
 

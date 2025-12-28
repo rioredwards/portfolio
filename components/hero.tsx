@@ -56,7 +56,11 @@ export function Hero({
           </div>
         )}
         <div className="mt-12 flex justify-center md:mt-4 md:justify-start">
-          <Button asChild size="lg" className="tracking-wider uppercase">
+          <Button
+            asChild
+            size="lg"
+            className="text-lg font-bold tracking-wider uppercase"
+          >
             <Link href={buttonHref}>{buttonText}</Link>
           </Button>
         </div>
