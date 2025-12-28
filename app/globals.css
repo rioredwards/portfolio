@@ -9,14 +9,17 @@
   --theme-foreground-primary: #fdfbf6;
   --theme-background-secondary: #ebdbbc;
   --theme-foreground-secondary: #5c4b3e;
+  --theme-foreground-muted: rgb(
+    from var(--theme-foreground-secondary) r g b / calc(alpha / 2)
+  );
   --theme-background-accent: #439d61;
   --theme-foreground-accent: var(--theme-foreground-primary);
-  --theme-background-destructive: #d98b7e;
+  --theme-background-destructive: #c53920;
   --theme-foreground-destructive: var(--theme-foreground-primary);
   --theme-border: #dab773;
-  --theme-input: #dbbe76;
+  --theme-input: #e8d4ae;
   --theme-ring: #76c18f;
-  --shadow-color: #504a3f;
+  --theme-shadow-color: #504a3f;
 
   /* RESPONSIVE SIZING: The root font-size is based on this variable, meaning ANYTHING USING REM UNITS WILL SCALE WITH THE VIEWPORT WIDTH. */
   --responsive-spacing: clamp(15px, calc(0.32vw + 13.88px), 19px);
@@ -64,13 +67,13 @@
   --color-secondary: var(--theme-background-secondary);
   --color-secondary-foreground: var(--theme-foreground-secondary);
   --color-muted: var(--theme-background-secondary);
-  --color-muted-foreground: var(--theme-foreground-secondary);
+  --color-muted-foreground: var(--theme-foreground-muted);
   --color-accent: var(--theme-background-accent);
   --color-accent-foreground: var(--theme-foreground-accent);
   --color-destructive: var(--theme-background-destructive);
   --color-destructive-foreground: var(--theme-foreground-destructive);
   --color-border: var(--theme-border);
-  --color-input: var(--theme-input);
+  --color-input: var(--theme-border);
   --color-ring: var(--theme-ring);
   --color-sidebar: var(--theme-background-secondary);
   --color-sidebar-foreground: var(--theme-foreground-secondary);
@@ -80,6 +83,7 @@
   --color-sidebar-accent-foreground: var(--theme-foreground-accent);
   --color-sidebar-border: var(--theme-border);
   --color-sidebar-ring: var(--theme-ring);
+  --color-shadow: var(--theme-shadow-color);
 
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);

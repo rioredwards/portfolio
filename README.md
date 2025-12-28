@@ -57,9 +57,9 @@ Priority key
       - [x] Blog section ❤️
         - [x] Desktop ❤️
         - [x] Mobile ❤️
-      - [ ] Contact section ❤️
-        - [ ] Desktop ❤️
-        - [ ] Mobile ❤️
+      - [x] Contact section ❤️
+        - [x] Desktop ❤️
+        - [x] Mobile ❤️
       - [ ] Footer ❤️
         - [ ] Desktop ❤️
         - [ ] Mobile ❤️

@@ -69,12 +69,13 @@ export function Contact() {
       <form
         id="contact-form"
         suppressHydrationWarning={true}
+        className="flex-1 space-y-8"
         onSubmit={(e) => {
           e.preventDefault();
           form.handleSubmit();
         }}
       >
-        <FieldGroup>
+        <FieldGroup className="grid gap-x-4 gap-y-8 md:grid-cols-2">
           <form.Field
             name="name"
             children={(field) => {
@@ -82,7 +83,13 @@ export function Contact() {
                 field.state.meta.isTouched && !field.state.meta.isValid;
               return (
                 <Field data-invalid={isInvalid}>
-                  <FieldLabel htmlFor={field.name}>Full Name</FieldLabel>
+                  <FieldLabel
+                    className="text-secondary-foreground text-lg font-semibold"
+                    style={{ fontFamily: "var(--font-mazaeni-demo), serif" }}
+                    htmlFor={field.name}
+                  >
+                    Full Name
+                  </FieldLabel>
                   <Input
                     id={field.name}
                     name={field.name}
@@ -92,6 +99,7 @@ export function Contact() {
                     aria-invalid={isInvalid}
                     placeholder="John Smith"
                     autoComplete="name"
+                    required
                   />
                   {isInvalid && <FieldError errors={field.state.meta.errors} />}
                 </Field>
@@ -113,9 +121,10 @@ export function Contact() {
                     onBlur={field.handleBlur}
                     onChange={(e) => field.handleChange(e.target.value)}
                     aria-invalid={isInvalid}
-                    placeholder="John Smith"
+                    placeholder="email@example.com"
                     autoComplete="email"
                     type="email"
+                    required
                   />
                   {isInvalid && <FieldError errors={field.state.meta.errors} />}
                 </Field>
@@ -129,9 +138,9 @@ export function Contact() {
                 field.state.meta.isTouched && !field.state.meta.isValid;
 
               return (
-                <Field>
+                <Field className="md:col-span-2">
                   <FieldLabel htmlFor={field.name}>Message</FieldLabel>
-                  <InputGroup>
+                  <InputGroup className="border-border max-h-64">
                     <InputGroupTextarea
                       id={field.name}
                       name={field.name}
@@ -140,8 +149,8 @@ export function Contact() {
                       onChange={(e) => field.handleChange(e.target.value)}
                       placeholder="Let's chat!"
                       rows={6}
-                      className="min-h-24 resize-none"
                       aria-invalid={isInvalid}
+                      required
                     />
                     <InputGroupAddon align="block-end">
                       <InputGroupText className="tabular-nums">
@@ -155,8 +164,12 @@ export function Contact() {
             }}
           />
         </FieldGroup>
-        <Field orientation="horizontal">
-          <Button type="button" variant="outline" onClick={() => form.reset()}>
+        <Field orientation="horizontal" className="flex justify-end gap-4">
+          <Button
+            type="button"
+            variant="destructive"
+            onClick={() => form.reset()}
+          >
             Reset
           </Button>
           <Button type="submit" form="contact-form">
