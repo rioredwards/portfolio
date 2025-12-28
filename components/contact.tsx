@@ -1,11 +1,55 @@
+"use client";
+
+import { useForm } from "@tanstack/react-form";
+import { toast } from "sonner";
+import * as z from "zod";
+
 import { Button } from "@/components/ui/button";
 import funComputerGraphic from "@/public/fun-computer-graphic.webp";
 import Image from "next/image";
+import { Field, FieldError, FieldGroup, FieldLabel } from "./ui/field";
+import { Input } from "./ui/input";
+import {
+  InputGroup,
+  InputGroupAddon,
+  InputGroupText,
+  InputGroupTextarea,
+} from "./ui/input-group";
+
+const formSchema = z.object({
+  name: z
+    .string()
+    .min(1, "Name is required.")
+    .max(200, "Name must be at most 200 characters."),
+  email: z
+    .email()
+    .min(1, "Email is required.")
+    .max(500, "Email must be at most 500 characters."),
+  message: z
+    .string()
+    .min(10, "Message must be at least 10 characters.")
+    .max(1000, "Message must be at most 1000 characters."),
+});
 
 export function Contact() {
+  const form = useForm({
+    defaultValues: {
+      name: "",
+      email: "",
+      message: "",
+    },
+    validators: {
+      onSubmit: formSchema,
+    },
+    onSubmit: async ({ value }) => {
+      console.log(value);
+      toast.success("Form submitted successfully");
+    },
+  });
+
   return (
     <div className="flex flex-col gap-12 md:flex-row md:items-center md:gap-16">
-      {/* Left illustration placeholder and heading */}
+      {/* illustration placeholder and heading */}
       <div className="flex flex-1 flex-col items-center gap-4 md:items-start">
         <Image
           src={funComputerGraphic}
@@ -23,76 +67,115 @@ export function Contact() {
 
       {/* Right form */}
       <form
+        id="contact-form"
         suppressHydrationWarning={true}
-        className="flex flex-1 flex-col gap-6"
+        className="flex-1 space-y-8"
+        onSubmit={(e) => {
+          e.preventDefault();
+          form.handleSubmit();
+        }}
       >
-        {/* Name & Email row */}
-        <div className="grid gap-4 md:grid-cols-2">
-          <div className="flex flex-col gap-2">
-            <label
-              htmlFor="fullName"
-              className="text-secondary-foreground text-lg font-semibold"
-              style={{ fontFamily: "var(--font-mazaeni-demo), serif" }}
-            >
-              Full Name
-            </label>
-            <input
-              suppressHydrationWarning={true}
-              id="fullName"
-              name="fullName"
-              type="text"
-              placeholder="John Smith"
-              className="border-border bg-background text-secondary-foreground focus:ring-ring w-full rounded-2xl border px-4 py-3 text-base shadow-inner focus:ring-2 focus:outline-none"
-            />
-          </div>
-          <div className="flex flex-col gap-2">
-            <label
-              htmlFor="email"
-              className="text-secondary-foreground text-lg font-semibold"
-              style={{ fontFamily: "var(--font-mazaeni-demo), serif" }}
-            >
-              Email
-            </label>
-            <input
-              suppressHydrationWarning={true}
-              id="email"
-              name="email"
-              type="email"
-              placeholder="john@email.com"
-              className="border-border bg-background text-secondary-foreground focus:ring-ring w-full rounded-2xl border px-4 py-3 text-base shadow-inner focus:ring-2 focus:outline-none"
-            />
-          </div>
-        </div>
-
-        {/* Message */}
-        <div className="flex flex-col gap-2">
-          <label
-            htmlFor="message"
-            className="text-secondary-foreground text-lg font-semibold"
-            style={{ fontFamily: "var(--font-mazaeni-demo), serif" }}
-          >
-            Message
-          </label>
-          <textarea
-            suppressHydrationWarning={true}
-            id="message"
-            name="message"
-            rows={6}
-            placeholder="Let's chat!"
-            className="border-border bg-background text-secondary-foreground focus:ring-ring w-full rounded-lg border px-4 py-3 text-base shadow-inner focus:ring-2 focus:outline-none"
+        <FieldGroup className="grid gap-x-4 gap-y-8 md:grid-cols-2">
+          <form.Field
+            name="name"
+            children={(field) => {
+              const isInvalid =
+                field.state.meta.isTouched && !field.state.meta.isValid;
+              return (
+                <Field data-invalid={isInvalid}>
+                  <FieldLabel
+                    className="text-secondary-foreground text-lg font-semibold"
+                    style={{ fontFamily: "var(--font-mazaeni-demo), serif" }}
+                    htmlFor={field.name}
+                  >
+                    Full Name
+                  </FieldLabel>
+                  <Input
+                    id={field.name}
+                    name={field.name}
+                    value={field.state.value}
+                    onBlur={field.handleBlur}
+                    onChange={(e) => field.handleChange(e.target.value)}
+                    aria-invalid={isInvalid}
+                    placeholder="John Smith"
+                    autoComplete="name"
+                    required
+                  />
+                  {isInvalid && <FieldError errors={field.state.meta.errors} />}
+                </Field>
+              );
+            }}
           />
-        </div>
+          <form.Field
+            name="email"
+            children={(field) => {
+              const isInvalid =
+                field.state.meta.isTouched && !field.state.meta.isValid;
+              return (
+                <Field data-invalid={isInvalid}>
+                  <FieldLabel htmlFor={field.name}>Email</FieldLabel>
+                  <Input
+                    id={field.name}
+                    name={field.name}
+                    value={field.state.value}
+                    onBlur={field.handleBlur}
+                    onChange={(e) => field.handleChange(e.target.value)}
+                    aria-invalid={isInvalid}
+                    placeholder="email@example.com"
+                    autoComplete="email"
+                    type="email"
+                    required
+                  />
+                  {isInvalid && <FieldError errors={field.state.meta.errors} />}
+                </Field>
+              );
+            }}
+          />
+          <form.Field
+            name="message"
+            children={(field) => {
+              const isInvalid =
+                field.state.meta.isTouched && !field.state.meta.isValid;
 
-        {/* Submit button */}
-        <div className="mt-4 flex justify-end">
+              return (
+                <Field className="md:col-span-2">
+                  <FieldLabel htmlFor={field.name}>Message</FieldLabel>
+                  <InputGroup className="border-border max-h-64">
+                    <InputGroupTextarea
+                      id={field.name}
+                      name={field.name}
+                      value={field.state.value}
+                      onBlur={field.handleBlur}
+                      onChange={(e) => field.handleChange(e.target.value)}
+                      placeholder="Let's chat!"
+                      rows={6}
+                      aria-invalid={isInvalid}
+                      required
+                    />
+                    <InputGroupAddon align="block-end">
+                      <InputGroupText className="tabular-nums">
+                        {field.state.value.length}/100 characters
+                      </InputGroupText>
+                    </InputGroupAddon>
+                  </InputGroup>
+                  {isInvalid && <FieldError errors={field.state.meta.errors} />}
+                </Field>
+              );
+            }}
+          />
+        </FieldGroup>
+        <Field orientation="horizontal" className="flex justify-end gap-4">
           <Button
-            type="submit"
-            size="lg"
-            className="bg-primary text-primary-foreground text-lg font-bold"
+            type="button"
+            variant="destructive"
+            onClick={() => form.reset()}
           >
-            Send
+            Reset
           </Button>
-        </div>
+          <Button type="submit" form="contact-form">
+            Submit
+          </Button>
+        </Field>
       </form>
     </div>
   );
