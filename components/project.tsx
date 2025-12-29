@@ -25,7 +25,7 @@ export function Project({
   return (
     <article
       className={cn(
-        "fade-in py-article-py flex flex-col gap-12 lg:flex-row lg:items-center lg:gap-4 xl:gap-16",
+        "fade-in flex flex-col gap-12 lg:flex-row lg:items-center lg:gap-4 xl:gap-16",
         orientation === "left" ? "lg:flex-row" : "lg:flex-row-reverse",
       )}
     >
@@ -77,16 +77,16 @@ export function Project({
           className={cn(
             "relative mx-auto aspect-3/2 w-[calc(100%+var(--spacing-content-px)*2)] -translate-x-(--spacing-content-px) overflow-hidden md:w-full md:translate-x-0 lg:max-h-80",
             orientation === "left"
-              ? "rounded-tl-4xl rounded-br-4xl"
-              : "rounded-tr-4xl rounded-bl-4xl",
+              ? "rounded-tl-card rounded-br-card"
+              : "rounded-tr-card rounded-bl-card",
           )}
         >
           <div
             className={cn(
               "bg-secondary relative h-full w-full",
               orientation === "left"
-                ? "rounded-tl-4xl rounded-br-4xl"
-                : "rounded-tr-4xl rounded-bl-4xl",
+                ? "rounded-tl-card rounded-br-card"
+                : "rounded-tr-card rounded-bl-card",
             )}
           >
             {/* Gradient overlay */}
