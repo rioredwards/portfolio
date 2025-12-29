@@ -26,7 +26,7 @@ export function Sidebar() {
       aria-label="Social links"
     >
       <nav
-        className="bg-sidebar/80 flex flex-col gap-1 rounded-3xl p-2 backdrop-blur-sm transition-all duration-300"
+        className="bg-sidebar/80 flex flex-col gap-1 rounded-md p-2 backdrop-blur-sm transition-all duration-300"
         aria-label="Social media and contact links"
       >
         {socialLinks.map((link, index) => {

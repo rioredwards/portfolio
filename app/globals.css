@@ -26,7 +26,7 @@
   font-size: var(--responsive-spacing);
 
   /* Additional variables */
-  --radius: 4rem;
+  --radius: 2rem;
   --tracking-normal: 0em;
   --spacing: 0.25rem;
 }
@@ -194,16 +194,16 @@
     padding-bottom: clamp(6px, 1.6svh, 12px);
   }
   .angled-border-sm {
-    border-top-left-radius: var(--radius-2xl);
-    border-bottom-right-radius: var(--radius-2xl);
+    border-top-left-radius: var(--radius-sm);
+    border-bottom-right-radius: var(--radius-sm);
   }
   .angled-border-md {
-    border-top-left-radius: var(--radius-3xl);
-    border-bottom-right-radius: var(--radius-3xl);
+    border-top-left-radius: var(--radius-md);
+    border-bottom-right-radius: var(--radius-md);
   }
   .angled-border-lg {
-    border-top-left-radius: var(--radius-4xl);
-    border-bottom-right-radius: var(--radius-4xl);
+    border-top-left-radius: var(--radius-lg);
+    border-bottom-right-radius: var(--radius-lg);
   }
   .angled-border-full {
     border-top-left-radius: 100%;
