@@ -33,7 +33,7 @@ Priority key
   - [x] Apply to the sidebar ❤️
   - [x] Apply to the slide panel ❤️
   - [x] Apply to the hero section ❤️
-  - [x] Apply to the projects section ❤️
+  - [x] Apply to the work section ❤️
   - [x] Apply to the blog section ❤️
   - [x] Apply to the contact section ❤️
   - [x] Apply to the footer ❤️
@@ -51,7 +51,7 @@ Priority key
   - [x] Hero section ❤️
     - [x] Desktop ❤️
     - [x] Mobile ❤️
-  - [x] Projects section ❤️
+  - [x] Work section ❤️
     - [x] Desktop ❤️
     - [x] Mobile ❤️
   - [x] Blog section ❤️
@@ -77,7 +77,7 @@ Priority key
   - [x] Title ❤️
   - [x] Paragraphs ❤️
   - [x] Image ❤️
-- [ ] Works section ❤️
+- [ ] Work section ❤️
   - [ ] First project ❤️
     - [ ] Category ❤️
     - [ ] Title ❤️
@@ -303,7 +303,7 @@ Priority key
 
 ### Additional Features Checklist
 
-- [ ] Social sharing buttons (blog posts, projects) 🧡
+- [ ] Social sharing buttons (blog posts, work) 🧡
 - [ ] Print styles (especially for resume page) 🧡
 - [ ] Email templates (for contact form auto-replies) 🧡
 - [ ] Search functionality (if blog/works grow large) 💛

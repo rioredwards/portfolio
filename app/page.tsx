@@ -31,14 +31,14 @@ export default function Home() {
           />
         </SectionContentWrapper>
       </section>
-      <section id="projects">
+      <section id="work">
         <SlidePanel
           orientation="left"
           decorationHeight="tall"
           previousDecorationHeight={null}
           fill="secondary"
         >
-          <SectionHeader title="Projects" />
+          <SectionHeader title="Work" />
         </SlidePanel>
         <SlidePanel
           orientation="left"
