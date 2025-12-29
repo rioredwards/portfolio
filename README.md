@@ -73,10 +73,10 @@ Priority key
   - [x] YouTube ❤️
   - [x] BlueSky ❤️
   - [x] Resume ❤️
-- [ ] Hero section ❤️
-  - [ ] Title ❤️
-  - [ ] Paragraphs ❤️
-  - [ ] Image ❤️
+- [x] Hero section ❤️
+  - [x] Title ❤️
+  - [x] Paragraphs ❤️
+  - [x] Image ❤️
 - [ ] Works section ❤️
   - [ ] First project ❤️
     - [ ] Category ❤️

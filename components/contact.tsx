@@ -169,11 +169,20 @@ export function Contact() {
             type="button"
             variant="destructive"
             onClick={() => form.reset()}
+            size="sm"
           >
-            Reset
+            button
           </Button>
-          <Button type="submit" form="contact-form">
-            Submit
+          <Button
+            type="button"
+            variant="destructive"
+            onClick={() => form.reset()}
+            size="default"
+          >
+            button
+          </Button>
+          <Button type="submit" form="contact-form" size="lg">
+            button
           </Button>
         </Field>
       </form>

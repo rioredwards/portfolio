@@ -34,6 +34,7 @@
 @theme {
   /* --container-*	Container query variants like @sm:* and size utilities like max-w-md */
   --container-content-max-w: 72rem;
+  --container-prose-max: 58ch;
 
   /* --spacing-*	Spacing and sizing utilities like px-4, max-h-16, and many more */
   --spacing-content-px-md: 4rem;
@@ -107,7 +108,7 @@
     scroll-behavior: smooth;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground overflow-x-hidden;
   }
   /* Offset scroll position for sections to appear closer to middle of viewport */
   section {
@@ -123,6 +124,33 @@
       scroll-behavior: auto;
     }
   }
+
+  /* Default prose */
+  p,
+  li,
+  dd,
+  blockquote {
+    @apply max-w-prose-max text-pretty;
+  }
+
+  /* Headlines */
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply text-balance;
+  }
+
+  /* UI */
+  button,
+  label,
+  nav,
+  pre,
+  code,
+  .ui {
+    @apply text-nowrap;
+  }
+
   .fade-in {
     animation: fadeInAnimation 0.5s ease-in-out;
   }

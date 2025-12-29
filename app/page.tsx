@@ -13,12 +13,11 @@ export default function Home() {
   return (
     <main className="bg-background min-h-screen">
       <section id="home">
-        <div className="max-w-content-max-w px-content-px md:px-content-px-md py-content-py mx-auto grid min-h-screen place-items-center">
+        <SectionContentWrapper className="py-0!">
           <Hero
             title="Hello, I'm Rio."
             paragraphs={[
-              "Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia, molestiae quas vel sint commod repudiandae consequuntur voluptatum laborum.",
-              "Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia...",
+              "I'm a detail-oriented software engineer dedicated to building products users value and enjoy.",
             ]}
             image={
               <Image
@@ -30,7 +29,7 @@ export default function Home() {
               />
             }
           />
-        </div>
+        </SectionContentWrapper>
       </section>
       <section id="projects">
         <SlidePanel
