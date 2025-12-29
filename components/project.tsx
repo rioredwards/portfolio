@@ -1,13 +1,16 @@
 import { Skill } from "@/components/ui/skill";
-import Image from "next/image";
+import Image, { StaticImageData } from "next/image";
 import { cn } from "../lib/utils";
 
-interface ProjectProps {
+export interface Project {
   category: string;
   title: string;
   description: string;
   skills: string[];
-  image: string;
+  image: StaticImageData;
+}
+
+interface ProjectProps extends Project {
   orientation: "left" | "right";
 }
 

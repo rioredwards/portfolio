@@ -4,9 +4,11 @@ import { Hero } from "@/components/hero";
 import { Project } from "@/components/project";
 import { SectionContentWrapper } from "@/components/section-content-wrapper";
 import { SlidePanel } from "@/components/slide-panel";
+import { PROJECTS } from "@/lib/projects-data";
 import profileImage from "@/public/profile.webp";
 import { MessagesSquare } from "lucide-react";
 import Image from "next/image";
+import { Fragment } from "react/jsx-runtime";
 import { SectionHeader } from "../components/section-header";
 
 export default function Home() {
@@ -40,90 +42,35 @@ export default function Home() {
         >
           <SectionHeader title="Work" />
         </SlidePanel>
-        <SlidePanel
-          orientation="left"
-          decorationHeight="tall"
-          fill="background"
-          previousDecorationHeight="tall"
-        >
-          <SectionContentWrapper>
-            <Project
-              orientation="left"
-              category="Planning"
-              title="Class TopBase"
-              description="ClassTopBase is a school management software for after-schools. For this project, I designed a feature to help school owners plan their students' academic plans efficiently."
-              skills={[
-                "JavaScript",
-                "JavaScript",
-                "JavaScript",
-                "JavaScript",
-                "JavaScript",
-                "JavaScript",
-              ]}
-              image="/temp-proj-photo.webp"
-            />
-          </SectionContentWrapper>
-        </SlidePanel>
-        <SlidePanel
-          orientation="right"
-          decorationHeight="short"
-          fill="secondary"
-          previousDecorationHeight="tall"
-        ></SlidePanel>
-        <SlidePanel
-          orientation="right"
-          decorationHeight="short"
-          fill="background"
-          previousDecorationHeight="short"
-        >
-          <SectionContentWrapper>
-            <Project
-              orientation="right"
-              category="Planning"
-              title="Class TopBase"
-              description="ClassTopBase is a school management software for after-schools. For this project, I designed a feature to help school owners plan their students' academic plans efficiently."
-              skills={[
-                "JavaScript",
-                "JavaScript",
-                "JavaScript",
-                "JavaScript",
-                "JavaScript",
-                "JavaScript",
-              ]}
-              image="/temp-proj-photo.webp"
-            />
-          </SectionContentWrapper>
-        </SlidePanel>
-        <SlidePanel
-          orientation="left"
-          decorationHeight="short"
-          previousDecorationHeight="short"
-          fill="secondary"
-        ></SlidePanel>
-        <SlidePanel
-          orientation="left"
-          decorationHeight="short"
-          fill="background"
-          previousDecorationHeight="short"
-        >
-          <SectionContentWrapper>
-            <Project
-              orientation="left"
-              category="Planning"
-              title="Class TopBase"
-              description="ClassTopBase is a school management software for after-schools. For this project, I designed a feature to help school owners plan their students' academic plans efficiently."
-              skills={[
-                "JavaScript",
-                "JavaScript",
-                "JavaScript",
-                "JavaScript",
-                "JavaScript",
-                "JavaScript",
-              ]}
-              image="/temp-proj-photo.webp"
-            />
-          </SectionContentWrapper>
-        </SlidePanel>
+        {PROJECTS.map((project, index) => (
+          <Fragment key={`${project.title}-${index}`}>
+            <SlidePanel
+              orientation={index % 2 === 0 ? "left" : "right"}
+              decorationHeight={index === 0 ? "tall" : "short"}
+              fill="background"
+              previousDecorationHeight={index === 0 ? "tall" : "short"}
+            >
+              <SectionContentWrapper>
+                <Project
+                  orientation={index % 2 === 0 ? "left" : "right"}
+                  category={project.category}
+                  title={project.title}
+                  description={project.description}
+                  skills={project.skills}
+                  image={project.image}
+                />
+              </SectionContentWrapper>
+            </SlidePanel>
+            {index < PROJECTS.length - 1 && (
+              <SlidePanel
+                orientation={index % 2 === 0 ? "right" : "left"}
+                decorationHeight="short"
+                fill="secondary"
+                previousDecorationHeight={index === 0 ? "tall" : "short"}
+              />
+            )}
+          </Fragment>
+        ))}
       </section>
       <section id="blog">
         <SlidePanel

@@ -77,25 +77,25 @@ Priority key
   - [x] Title ❤️
   - [x] Paragraphs ❤️
   - [x] Image ❤️
-- [ ] Work section ❤️
-  - [ ] First project ❤️
-    - [ ] Category ❤️
-    - [ ] Title ❤️
-    - [ ] Description ❤️
-    - [ ] Skills ❤️
-    - [ ] Image ❤️
-  - [ ] Second project ❤️
-    - [ ] Category ❤️
-    - [ ] Title ❤️
-    - [ ] Description ❤️
-    - [ ] Skills ❤️
-    - [ ] Image ❤️
-  - [ ] Third project ❤️
-    - [ ] Category ❤️
-    - [ ] Title ❤️
-    - [ ] Description ❤️
-    - [ ] Skills ❤️
-    - [ ] Image ❤️
+- [x] Work section ❤️
+  - [x] First project ❤️
+    - [x] Category ❤️
+    - [x] Title ❤️
+    - [x] Description ❤️
+    - [x] Skills ❤️
+    - [x] Image ❤️
+  - [x] Second project ❤️
+    - [x] Category ❤️
+    - [x] Title ❤️
+    - [x] Description ❤️
+    - [x] Skills ❤️
+    - [x] Image ❤️
+  - [x] Third project ❤️
+    - [x] Category ❤️
+    - [x] Title ❤️
+    - [x] Description ❤️
+    - [x] Skills ❤️
+    - [x] Image ❤️
 - [ ] Blog section ❤️
   - [ ] First blog ❤️
     - [ ] Title ❤️
