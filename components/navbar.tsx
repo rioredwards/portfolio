@@ -160,12 +160,12 @@ export function Navbar() {
                         "flex! flex-row! gap-0! rounded-full!",
                         // Custom styling with proper padding
                         "cursor-pointer px-4! py-1.5! text-sm font-medium transition-colors",
-                        // Hover/active states - only background, keep text color
-                        "hover:bg-background/50 hover:text-sidebar-foreground",
-                        "focus:text-sidebar-foreground focus:bg-transparent",
-                        "data-[active=true]:bg-background/50 data-[active=true]:text-sidebar-foreground",
+                        // Hover/active states
+                        "hover:bg-background/50 hover:text-primary-hover",
+                        "focus:text-primary-hover focus:bg-transparent",
+                        "data-[active=true]:bg-background/50 data-[active=true]:text-primary-hover",
                         // Focus visible for accessibility
-                        "focus-visible:ring-ring focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none",
+                        "focus-visible:ring-ring focus-visible:text-primary-hover focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none",
                       )}
                       data-active={isActive ? "true" : undefined}
                     >

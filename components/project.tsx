@@ -24,48 +24,102 @@ export function Project({
   return (
     <article
       className={cn(
-        "group fade-in bg-card rounded-card relative aspect-3/2 w-full cursor-pointer overflow-clip border shadow-md transition-all duration-200 hover:shadow-xl",
+        "relative", // Positioning
+        "aspect-3/2 w-full overflow-clip", // Layout & Sizing
+        "bg-card rounded-card shadow-md", // Background & Effects
+        "group fade-in cursor-pointer transition-all duration-200 hover:shadow-xl", // Animation & Transitions
+        "[--foreground:var(--color-popover)]", // Adjust this to change all foreground colors within card
       )}
     >
       {/* Project image container */}
-      <div className="bg-secondary relative h-full w-full overflow-clip">
+      <div
+        className={cn(
+          "relative", // Positioning
+          "h-full w-full overflow-clip", // Layout & Sizing
+          "bg-secondary", // Background & Effects
+        )}
+      >
         {/* Image container with parallax */}
-        <div className="absolute inset-0 h-[122%] w-full -translate-y-[10%]">
+        <div
+          className={cn(
+            "absolute inset-0 -translate-y-[10%]", // Positioning
+            "h-[122%] w-full", // Layout & Sizing
+          )}
+        >
           <Image
             src={image}
             alt={`${title} preview`}
             fill
-            className="paralax object-cover transition-all duration-200"
+            className={cn(
+              "object-cover", // Layout & Sizing
+              "paralax transition-all duration-200", // Animation & Transitions
+            )}
             priority
           />
         </div>
 
-        {/* Gradient overlay - animated on hover */}
-        <div className="bg-blur-md pointer-events-none absolute inset-0 z-10 bg-black/10 opacity-0 backdrop-blur-xs transition-opacity duration-200 group-hover:opacity-100" />
+        {/* Blur overlay - animated on hover */}
+        <div
+          className={cn(
+            "absolute inset-0 z-10", // Positioning
+            "pointer-events-none", // Layout & Sizing
+            "opacity-0 backdrop-blur-xs", // Background & Effects
+            "transition-opacity duration-200 group-hover:opacity-100", // Animation & Transitions
+          )}
+        />
 
         {/* Details panel - slides up from bottom on hover */}
-        <div className="absolute right-0 bottom-0 left-0 z-20 translate-y-full bg-linear-to-b from-black/60 from-80% to-black/80 to-100% p-6 backdrop-blur-sm transition-transform duration-200 group-hover:translate-y-0 lg:p-8">
-          <div className="flex flex-col">
-            <p className="text-primary-foreground mb-3 text-xs font-medium tracking-[0.2em] uppercase">
+        <div
+          className={cn(
+            "absolute right-0 bottom-0 left-0 z-20", // Positioning
+            "p-6 lg:p-8", // Layout & Sizing
+            // "via-background/80 to-background/90 bg-linear-to-b from-transparent from-0% via-10% to-100%", // Background & Effects
+            "bg-foreground/90",
+            "translate-y-full transition-transform duration-200 group-hover:translate-y-0", // Animation & Transitions
+          )}
+        >
+          <div
+            className={cn(
+              "flex flex-col", // Layout & Sizing
+            )}
+          >
+            <p
+              className={cn(
+                "mb-3 text-xs", // Layout & Sizing
+                "font-medium tracking-[0.2em] text-(--foreground) uppercase", // Typography
+              )}
+            >
               {category}
             </p>
             <h2
-              className="text-primary-foreground mb-4 text-3xl leading-tight font-bold sm:text-4xl lg:text-5xl"
+              className={cn(
+                "mb-4 text-3xl leading-tight sm:text-4xl lg:text-5xl", // Layout & Sizing
+                "font-bold text-(--foreground)", // Typography
+              )}
               style={{ fontFamily: "var(--font-mazaeni-demo), serif" }}
             >
               {title}
             </h2>
-            <p className="text-primary-foreground mb-6 text-base leading-relaxed">
+            <p
+              className={cn(
+                "mb-6 text-base leading-relaxed", // Layout & Sizing
+                "text-(--foreground)", // Typography
+              )}
+            >
               {description}
             </p>
-            <div className="flex flex-wrap gap-3">
+            <div
+              className={cn(
+                "flex flex-wrap gap-3", // Layout & Sizing
+              )}
+            >
               {skills.map((skill, index) => (
                 <Skill
                   key={`${skill}-${index}`}
                   text={skill}
                   variant="filled"
                   size="sm"
-                  className="text-primary-foreground border-primary-foreground bg-primary-foreground/18"
+                  className="border-(--foreground)/50 bg-(--foreground)/8 text-(--foreground)"
                 />
               ))}
             </div>

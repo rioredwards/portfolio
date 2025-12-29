@@ -26,7 +26,7 @@ export function Sidebar() {
       aria-label="Social links"
     >
       <nav
-        className="bg-sidebar/80 flex flex-col gap-1 rounded-md p-2 backdrop-blur-sm transition-all duration-300"
+        className="bg-sidebar/80 flex flex-col rounded-md p-2 backdrop-blur-sm transition-all duration-300"
         aria-label="Social media and contact links"
       >
         {socialLinks.map((link, index) => {
@@ -56,7 +56,7 @@ export function Sidebar() {
               target={isExternal ? "_blank" : undefined}
               rel={isExternal ? "noopener noreferrer" : undefined}
               onClick={handleClick}
-              className="group/item text-primary ring-ring/50 hover:bg-background/50 hover:text-sidebar-primary focus-visible:ring-ring flex items-center gap-0 rounded-3xl px-2 py-3 transition-all duration-300 group-hover:gap-3 group-hover:px-4 focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none"
+              className="group/item text-sidebar-foreground ring-ring/50 hover:bg-background/50 hover:text-primary-hover focus-visible:ring-ring flex items-center gap-0 rounded-3xl px-2 py-2.5 transition-all duration-300 group-hover:gap-3 group-hover:px-4 hover:ring focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none"
               aria-label={ariaLabel}
             >
               <span className="flex shrink-0 items-center justify-center">
