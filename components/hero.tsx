@@ -91,7 +91,7 @@ export function Hero({
   className,
 }: HeroProps) {
   return (
-    <div className="grid min-h-dvh place-items-center">
+    <div className="grid min-h-[calc(100vh-6rem)] place-items-center md:min-h-screen">
       {/* Desktop layout */}
       <div
         className={cn(
@@ -113,7 +113,7 @@ export function Hero({
       {/* Mobile layout */}
       <div
         className={cn(
-          "mt-10 flex flex-col items-center justify-start md:hidden",
+          "flex flex-col items-center justify-start md:hidden",
           className,
         )}
       >

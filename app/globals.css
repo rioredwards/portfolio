@@ -2,6 +2,7 @@
 @import "tw-animate-css";
 
 :root {
+  view-transition-name: root;
   /* Theme colors (source of truth) */
   --theme-background: #f4ebda;
   --theme-foreground: #2d645d;
@@ -214,6 +215,15 @@
     animation-timeline: view();
     animation-range: entry 100px entry 500px;
   }
+  .paralax {
+    animation: adjust-image linear both;
+    animation-timeline: view();
+    /* animation-range: entry 0% exit 0%; */
+    /* will-change: transform; */
+    /* animation: fly-in linear both; */
+    /* animation-timeline: view(block); */
+    /* animation-range: entry -100% exit 200%; */
+  }
 }
 
 @keyframes fadeInAnimation {
@@ -224,6 +234,15 @@
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+@keyframes adjust-image {
+  0% {
+    object-position: 0 60px;
+  }
+  100% {
+    object-position: 0 -60px;
   }
 }
 

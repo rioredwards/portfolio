@@ -25,7 +25,7 @@ export function Project({
   return (
     <article
       className={cn(
-        "fade-in flex flex-col gap-12 lg:flex-row lg:items-center lg:gap-4 xl:gap-16",
+        "group fade-in flex flex-col gap-12 lg:flex-row lg:items-center lg:gap-4 xl:gap-16",
         orientation === "left" ? "lg:flex-row" : "lg:flex-row-reverse",
       )}
     >
@@ -75,7 +75,7 @@ export function Project({
       <div className="flex-1 max-lg:order-first">
         <div
           className={cn(
-            "relative mx-auto aspect-3/2 w-[calc(100%+var(--spacing-content-px)*2)] -translate-x-(--spacing-content-px) overflow-hidden md:w-full md:translate-x-0 lg:max-h-80",
+            "relative mx-auto aspect-3/2 w-[calc(100%+var(--spacing-content-px)*2)] -translate-x-(--spacing-content-px) overflow-clip md:w-full md:translate-x-0 lg:max-h-80",
             orientation === "left"
               ? "rounded-tl-card rounded-br-card"
               : "rounded-tr-card rounded-bl-card",
@@ -90,14 +90,14 @@ export function Project({
             )}
           >
             {/* Gradient overlay */}
-            <div className="absolute inset-0 z-10 bg-linear-to-b from-transparent from-80% to-black/30 to-100%" />
+            <div className="pointer-none: absolute inset-0 z-10 bg-linear-to-b from-transparent from-80% to-black/30 to-100%" />
             {/* Window frame (image should overflow the bottom right corner) */}
-            <div className="absolute inset-10 h-full w-full">
+            <div className="absolute inset-0 h-[122%] w-full -translate-y-[10%]">
               <Image
                 src={image}
                 alt={`${title} preview`}
                 fill
-                className="object-cover object-top-left"
+                className="paralax overflow-clip object-cover transition-all duration-300 group-hover:scale-110!"
                 priority
               />
             </div>
@@ -106,4 +106,17 @@ export function Project({
       </div>
     </article>
   );
+}
+
+{
+  /* <div className="inset-0 overflow-clip">
+        <Image
+          src={image}
+          alt={`${title} preview`}
+          width={2060}
+          height={2060}
+          className="paralax overflow-clip object-cover"
+          priority
+        />
+      </div> */
 }
