@@ -4,9 +4,9 @@ import { Hero } from "@/components/hero";
 import { Project } from "@/components/project";
 import { SectionContentWrapper } from "@/components/section-content-wrapper";
 import { SlidePanel } from "@/components/slide-panel";
+import { BLOGS } from "@/lib/blogs-data";
 import { PROJECTS } from "@/lib/projects-data";
 import profileImage from "@/public/profile.webp";
-import { MessagesSquare } from "lucide-react";
 import Image from "next/image";
 import { Fragment } from "react/jsx-runtime";
 import { SectionHeader } from "../components/section-header";
@@ -89,27 +89,14 @@ export default function Home() {
         >
           <SectionContentWrapper>
             <div className="flex flex-col gap-12">
-              <Blog
-                title="Blog Title"
-                description="Blog Description"
-                icon={
-                  <MessagesSquare className="h-10 w-10" aria-hidden="true" />
-                }
-              />
-              <Blog
-                title="Blog Title"
-                description="Blog Description"
-                icon={
-                  <MessagesSquare className="h-10 w-10" aria-hidden="true" />
-                }
-              />
-              <Blog
-                title="Blog Title"
-                description="Blog Description"
-                icon={
-                  <MessagesSquare className="h-10 w-10" aria-hidden="true" />
-                }
-              />
+              {BLOGS.map((blog, index) => (
+                <Blog
+                  key={`${blog.title}-${index}`}
+                  title={blog.title}
+                  description={blog.description}
+                  icon={blog.icon}
+                />
+              ))}
             </div>
           </SectionContentWrapper>
         </SlidePanel>
@@ -119,7 +106,7 @@ export default function Home() {
           orientation="left"
           decorationHeight="tall"
           fill="secondary"
-          previousDecorationHeight="short"
+          previousDecorationHeight="tall"
         >
           <SectionHeader title="Contact" />
         </SlidePanel>
