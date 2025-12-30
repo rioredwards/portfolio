@@ -2,15 +2,22 @@
 
 import { getSocialLinks } from "@/lib/social-links";
 import profileImage from "@/public/profile.webp";
-import { Link as LinkIcon, X } from "lucide-react";
+import {
+  Cancel01Icon,
+  Link04Icon,
+  Tick01Icon,
+} from "@hugeicons/core-free-icons";
+import { HugeiconsIcon } from "@hugeicons/react";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
+import { toast } from "sonner";
 
 const socialLinks = getSocialLinks();
 
 export function MobileMenu() {
   const [isOpen, setIsOpen] = useState(false);
+  const [copiedEmail, setCopiedEmail] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
 
@@ -64,6 +71,16 @@ export function MobileMenu() {
     return () => menu.removeEventListener("keydown", handleTabKey);
   }, [isOpen]);
 
+  // Reset copied state after timeout
+  useEffect(() => {
+    if (copiedEmail) {
+      const timer = setTimeout(() => {
+        setCopiedEmail(false);
+      }, 1500);
+      return () => clearTimeout(timer);
+    }
+  }, [copiedEmail]);
+
   return (
     <>
       {/* Floating button - bottom right */}
@@ -74,7 +91,13 @@ export function MobileMenu() {
         aria-expanded={isOpen}
         aria-controls="mobile-menu"
       >
-        <LinkIcon className="size-6" aria-hidden="true" />
+        <HugeiconsIcon
+          icon={Link04Icon}
+          size={24}
+          color="currentColor"
+          strokeWidth={2}
+          aria-hidden="true"
+        />
       </button>
 
       {/* Fullscreen menu overlay */}
@@ -94,7 +117,13 @@ export function MobileMenu() {
             className="text-foreground focus-visible:ring-ring absolute top-6 right-6 z-10 flex h-10 w-10 items-center justify-center rounded-full transition-colors hover:opacity-70 focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none"
             aria-label="Close menu"
           >
-            <X className="size-6" aria-hidden="true" />
+            <HugeiconsIcon
+              icon={Cancel01Icon}
+              size={24}
+              color="currentColor"
+              strokeWidth={2}
+              aria-hidden="true"
+            />
           </button>
 
           {/* Content - centered */}
@@ -132,9 +161,29 @@ export function MobileMenu() {
             >
               {socialLinks.map((link, index) => {
                 const isExternal = link.href.startsWith("http");
+                const isEmail = link.copyToClipboard && link.copyValue;
                 const ariaLabel = isExternal
                   ? `${link.label}, opens in a new tab`
                   : link.label;
+
+                const handleClick = async (e: React.MouseEvent) => {
+                  if (isEmail) {
+                    e.preventDefault();
+                    try {
+                      await navigator.clipboard.writeText(link.copyValue!);
+                      setCopiedEmail(true);
+                      toast.success(`${link.label} copied to clipboard!`);
+                      // Don't close menu immediately, let user see the "copied" state
+                      setTimeout(() => {
+                        setIsOpen(false);
+                      }, 1500);
+                    } catch {
+                      toast.error("Failed to copy to clipboard");
+                    }
+                  } else {
+                    setIsOpen(false);
+                  }
+                };
 
                 return (
                   <Link
@@ -142,7 +191,7 @@ export function MobileMenu() {
                     href={link.href}
                     target={isExternal ? "_blank" : undefined}
                     rel={isExternal ? "noopener noreferrer" : undefined}
-                    onClick={() => setIsOpen(false)}
+                    onClick={handleClick}
                     className="border-border/50 bg-background text-foreground hover:bg-secondary/30 mm-link focus-visible:ring-ring flex items-center gap-3 rounded-2xl border px-4 shadow-sm transition-all hover:shadow-md focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none"
                     aria-label={ariaLabel}
                   >
@@ -150,13 +199,22 @@ export function MobileMenu() {
                       className="flex shrink-0 items-center justify-center"
                       aria-hidden="true"
                     >
-                      {link.icon}
+                      {isEmail && copiedEmail ? (
+                        <HugeiconsIcon
+                          icon={Tick01Icon}
+                          size={20}
+                          color="currentColor"
+                          strokeWidth={2}
+                        />
+                      ) : (
+                        link.icon
+                      )}
                     </span>
                     <span
                       className="text-base font-bold"
                       style={{ fontFamily: "var(--font-mazaeni-demo), serif" }}
                     >
-                      {link.label}
+                      {isEmail && copiedEmail ? "Copied" : link.label}
                     </span>
                   </Link>
                 );
