@@ -4,8 +4,10 @@ import { parseFormErrors } from "@/lib/contact-validation";
 import { useContactForm } from "@/lib/hooks/use-contact-form";
 import { useContactFormValidation } from "@/lib/hooks/use-contact-form-validation";
 import funComputerGraphic from "@/public/fun-computer-graphic.webp";
+import { AlertCircleIcon, CheckCircle2Icon } from "lucide-react";
 import Image from "next/image";
 import { ContactSubmitButton } from "./contact-submit-button";
+import { Alert, AlertDescription, AlertTitle } from "./ui/alert";
 import { Field, FieldError, FieldGroup, FieldLabel } from "./ui/field";
 import { Input } from "./ui/input";
 import {
@@ -16,7 +18,7 @@ import {
 } from "./ui/input-group";
 
 export function Contact() {
-  const { form, state, action } = useContactForm();
+  const { form, state, action, isSuccess } = useContactForm();
   const { nameValidator, emailValidator, messageValidator } =
     useContactFormValidation(form);
 
@@ -49,19 +51,38 @@ export function Contact() {
           await form.handleSubmit();
         }}
       >
+        {/* Display success message */}
+        {isSuccess && (
+          <Alert>
+            <CheckCircle2Icon />
+            <AlertTitle>Success!</AlertTitle>
+            <AlertDescription>
+              Your message has been sent successfully. I&apos;ll get back to you
+              soon!
+            </AlertDescription>
+          </Alert>
+        )}
         {/* Display server-side form errors */}
         {state &&
           typeof state === "object" &&
           parseFormErrors(state.errors).length > 0 && (
-            <FieldError
-              errors={parseFormErrors(state.errors).map((errorMessage) => ({
-                message: errorMessage,
-              }))}
-            />
+            <Alert variant="destructive">
+              <AlertCircleIcon />
+              <AlertTitle>Validation Error</AlertTitle>
+              <AlertDescription>
+                {parseFormErrors(state.errors).map((errorMessage, index) => (
+                  <p key={index}>{errorMessage}</p>
+                ))}
+              </AlertDescription>
+            </Alert>
           )}
         {/* Display string errors (non-validation errors) */}
         {typeof state === "string" && (
-          <FieldError errors={[{ message: state }]} />
+          <Alert variant="destructive">
+            <AlertCircleIcon />
+            <AlertTitle>Error</AlertTitle>
+            <AlertDescription>{state}</AlertDescription>
+          </Alert>
         )}
         <FieldGroup className="grid gap-x-4 gap-y-8 md:grid-cols-2">
           <form.Field

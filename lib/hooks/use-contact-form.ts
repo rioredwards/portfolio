@@ -35,9 +35,13 @@ export function useContactForm() {
     }
   }, [state, form]);
 
+  // Derive success state directly from state and form submission
+  const isSuccess = state === undefined && form.state.isSubmitted;
+
   return {
     form,
     state,
     action,
+    isSuccess,
   };
 }

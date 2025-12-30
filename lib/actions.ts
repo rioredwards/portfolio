@@ -44,7 +44,7 @@ export default async function emailAction(
   try {
     const validatedData = await serverValidate(formData);
 
-    throw Error("Test error");
+    // throw Error("Test error");
 
     // Send email
     await sendEmail(validatedData);
