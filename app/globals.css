@@ -56,6 +56,12 @@
 
 @theme inline {
   --color-background: var(--theme-background);
+  --color-background-hover: hsl(
+    from var(--theme-background) h calc(s * 1.2) calc(l * 0.94)
+  );
+  --color-background-hover-border: hsl(
+    from var(--theme-border) h calc(s * 1.3) calc(l * 1.2)
+  );
   --color-foreground: var(--theme-foreground);
   --color-card: var(--theme-background-secondary);
   --color-card-foreground: var(--theme-foreground-secondary);
@@ -71,10 +77,10 @@
   --color-primary-foreground: var(--theme-foreground-primary);
   --color-secondary: var(--theme-background-secondary);
   --color-secondary-hover: hsl(
-    from var(--theme-background-secondary) h calc(s * 1.2) calc(l * 1.2)
+    from var(--theme-background-secondary) h calc(s * 1.2) calc(l * 1.09)
   );
   --color-secondary-hover-border: hsl(
-    from var(--theme-background-secondary) h calc(s * 1.3) calc(l * 1.6)
+    from var(--theme-background-secondary) h calc(s * 1.2) calc(l * 0.92)
   );
   --color-secondary-foreground: var(--theme-foreground-secondary);
   --color-muted: var(--theme-background-secondary);
@@ -101,8 +107,8 @@
   --color-sidebar: var(--theme-background-secondary);
   --color-sidebar-foreground: color-mix(
     in oklab,
-    var(--theme-foreground-secondary),
-    transparent 20%
+    var(--theme-foreground),
+    transparent 9%
   );
   --color-sidebar-accent: var(--theme-background-accent);
   --color-sidebar-accent-foreground: var(--theme-foreground-accent);
@@ -237,7 +243,7 @@
     border-top-right-radius: 100%;
     border-bottom-left-radius: 100%;
   }
-  .fade-in {
+  .fade-in-scroll {
     animation: fadeInAnimation both;
     animation-timeline: view();
     animation-range: entry 100px entry 500px;
@@ -245,6 +251,49 @@
   .paralax {
     animation: adjust-image linear both;
     animation-timeline: view();
+  }
+  .custom-bg-ping-wrapper {
+    position: relative;
+  }
+
+  .custom-bg-ping-wrapper:hover::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: inherit; /* or a specific color */
+    border-radius: inherit;
+    z-index: 0; /* behind inner card */
+    animation: customPingAnimation 1.6s ease-in-out infinite;
+  }
+
+  .custom-bg-ping {
+    position: relative;
+    z-index: 1; /* above the ping */
+  }
+}
+
+@media (hover: none) and (pointer: coarse) {
+  .custom-bg-ping-wrapper::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: inherit; /* or a specific color */
+    border-radius: inherit;
+    z-index: 0; /* behind inner card */
+    animation: customPingAnimation 1.6s ease-in-out infinite;
+  }
+}
+
+/* like the ping animation, but goes on a :before element */
+@keyframes customPingAnimation {
+  0% {
+    opacity: 0.8;
+    transform: scaleX(1) scaleY(1);
+  }
+  75%,
+  100% {
+    opacity: 0;
+    transform: scaleX(1.06) scaleY(1.2);
   }
 }
 

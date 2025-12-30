@@ -6,6 +6,8 @@ import { useMemo } from "react";
 import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
 import { cn } from "@/lib/utils";
+import { AlertCircleIcon } from "@hugeicons/core-free-icons";
+import { HugeiconsIcon } from "@hugeicons/react";
 
 function FieldSet({ className, ...props }: React.ComponentProps<"fieldset">) {
   return (
@@ -232,6 +234,12 @@ function FieldError({
       className={cn("text-destructive text-sm font-normal", className)}
       {...props}
     >
+      <HugeiconsIcon
+        icon={AlertCircleIcon}
+        size={16}
+        color="currentColor"
+        strokeWidth={2}
+      />
       {content}
     </div>
   );
