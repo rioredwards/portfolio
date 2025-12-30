@@ -1,4 +1,5 @@
-import { FileText, Mail } from "lucide-react";
+import { File01Icon, Mail01Icon } from "@hugeicons/core-free-icons";
+import { HugeiconsIcon } from "@hugeicons/react";
 import { SiBluesky, SiGithub, SiLinkedin, SiYoutube } from "react-icons/si";
 
 export interface SocialLink {
@@ -12,7 +13,14 @@ export interface SocialLink {
 export function getSocialLinks(iconSize: string = "size-5"): SocialLink[] {
   return [
     {
-      icon: <Mail className={iconSize} />,
+      icon: (
+        <HugeiconsIcon
+          icon={Mail01Icon}
+          size={20}
+          color="currentColor"
+          strokeWidth={1.8}
+        />
+      ),
       href: "#",
       label: "Email",
       copyToClipboard: true,
@@ -38,6 +46,17 @@ export function getSocialLinks(iconSize: string = "size-5"): SocialLink[] {
       href: "https://bsky.app/profile/rioredwards.bsky.social",
       label: "BlueSky",
     },
-    { icon: <FileText className={iconSize} />, href: "#", label: "Resume" },
+    {
+      icon: (
+        <HugeiconsIcon
+          icon={File01Icon}
+          size={20}
+          color="currentColor"
+          strokeWidth={1.8}
+        />
+      ),
+      href: "#",
+      label: "Resume",
+    },
   ];
 }

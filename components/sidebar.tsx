@@ -1,7 +1,8 @@
 "use client";
 
 import { getSocialLinks } from "@/lib/social-links";
-import { Check } from "lucide-react";
+import { Tick01Icon } from "@hugeicons/core-free-icons";
+import { HugeiconsIcon } from "@hugeicons/react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
@@ -61,7 +62,12 @@ export function Sidebar() {
             >
               <span className="flex shrink-0 items-center justify-center">
                 {isEmail && copiedEmail ? (
-                  <Check className="size-5" />
+                  <HugeiconsIcon
+                    icon={Tick01Icon}
+                    size={20}
+                    color="currentColor"
+                    strokeWidth={1.8}
+                  />
                 ) : (
                   link.icon
                 )}

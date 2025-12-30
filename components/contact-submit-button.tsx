@@ -1,6 +1,11 @@
 "use client";
 
-import { CheckCircle2Icon, Loader2Icon, SendIcon } from "lucide-react";
+import {
+  CheckmarkCircle02Icon,
+  Rotate01Icon,
+  SentIcon,
+} from "@hugeicons/core-free-icons";
+import { HugeiconsIcon } from "@hugeicons/react";
 import { useFormStatus } from "react-dom";
 import { Button } from "./ui/button";
 
@@ -20,7 +25,12 @@ export function ContactSubmitButton({
   if (success) {
     return (
       <Button type="submit" disabled={true} size="default" variant="default">
-        <CheckCircle2Icon />
+        <HugeiconsIcon
+          icon={CheckmarkCircle02Icon}
+          size={16}
+          color="currentColor"
+          strokeWidth={1.8}
+        />
         Success!
       </Button>
     );
@@ -35,17 +45,34 @@ export function ContactSubmitButton({
     >
       {success ? (
         <>
-          <CheckCircle2Icon className="size-4 animate-pulse" />
+          <HugeiconsIcon
+            icon={CheckmarkCircle02Icon}
+            size={16}
+            color="currentColor"
+            strokeWidth={2}
+            className="animate-pulse"
+          />
           Success!
         </>
       ) : pending ? (
         <>
-          <Loader2Icon className="size-4 animate-spin" />
+          <HugeiconsIcon
+            icon={Rotate01Icon}
+            size={16}
+            color="currentColor"
+            strokeWidth={2}
+            className="animate-spin"
+          />
           Sending...
         </>
       ) : (
         <>
-          <SendIcon className="size-4" />
+          <HugeiconsIcon
+            icon={SentIcon}
+            size={16}
+            color="currentColor"
+            strokeWidth={2}
+          />
           Send
         </>
       )}

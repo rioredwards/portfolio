@@ -2,7 +2,12 @@
 
 import { getSocialLinks } from "@/lib/social-links";
 import profileImage from "@/public/profile.webp";
-import { Check, Link as LinkIcon, X } from "lucide-react";
+import {
+  Cancel01Icon,
+  Link01Icon,
+  Tick01Icon,
+} from "@hugeicons/core-free-icons";
+import { HugeiconsIcon } from "@hugeicons/react";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
@@ -86,7 +91,13 @@ export function MobileMenu() {
         aria-expanded={isOpen}
         aria-controls="mobile-menu"
       >
-        <LinkIcon className="size-6" aria-hidden="true" />
+        <HugeiconsIcon
+          icon={Link01Icon}
+          size={24}
+          color="currentColor"
+          strokeWidth={1.8}
+          aria-hidden="true"
+        />
       </button>
 
       {/* Fullscreen menu overlay */}
@@ -106,7 +117,13 @@ export function MobileMenu() {
             className="text-foreground focus-visible:ring-ring absolute top-6 right-6 z-10 flex h-10 w-10 items-center justify-center rounded-full transition-colors hover:opacity-70 focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none"
             aria-label="Close menu"
           >
-            <X className="size-6" aria-hidden="true" />
+            <HugeiconsIcon
+              icon={Cancel01Icon}
+              size={24}
+              color="currentColor"
+              strokeWidth={1.8}
+              aria-hidden="true"
+            />
           </button>
 
           {/* Content - centered */}
@@ -183,7 +200,12 @@ export function MobileMenu() {
                       aria-hidden="true"
                     >
                       {isEmail && copiedEmail ? (
-                        <Check className="size-5" />
+                        <HugeiconsIcon
+                          icon={Tick01Icon}
+                          size={20}
+                          color="currentColor"
+                          strokeWidth={1.8}
+                        />
                       ) : (
                         link.icon
                       )}

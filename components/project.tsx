@@ -27,7 +27,7 @@ export function Project({
         "relative", // Positioning
         "aspect-3/2 w-full overflow-clip", // Layout & Sizing
         "bg-card rounded-card shadow-md", // Background & Effects
-        "group fade-in cursor-pointer transition-all duration-200 hover:shadow-xl", // Animation & Transitions
+        "group fade-in-scroll cursor-pointer transition-all duration-200 hover:shadow-xl", // Animation & Transitions
         "[--foreground:var(--color-popover)]", // Adjust this to change all foreground colors within card
       )}
     >

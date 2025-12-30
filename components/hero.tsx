@@ -91,7 +91,7 @@ export function Hero({
   className,
 }: HeroProps) {
   return (
-    <div className="grid min-h-[calc(100vh-6rem)] place-items-center md:min-h-screen">
+    <div className="fade-in grid min-h-[calc(100vh-6rem)] place-items-center md:min-h-screen">
       {/* Desktop layout */}
       <div
         className={cn(

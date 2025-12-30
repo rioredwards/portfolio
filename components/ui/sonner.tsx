@@ -1,12 +1,13 @@
 "use client";
 
 import {
-  CircleCheckIcon,
-  InfoIcon,
-  Loader2Icon,
-  OctagonXIcon,
-  TriangleAlertIcon,
-} from "lucide-react";
+  CheckmarkCircle02Icon,
+  InformationCircleIcon,
+  OctagonIcon,
+  Rotate01Icon,
+  TriangleIcon,
+} from "@hugeicons/core-free-icons";
+import { HugeiconsIcon } from "@hugeicons/react";
 import { Toaster as Sonner, type ToasterProps } from "sonner";
 
 const Toaster = ({ ...props }: ToasterProps) => {
@@ -15,11 +16,47 @@ const Toaster = ({ ...props }: ToasterProps) => {
       theme="light"
       className="toaster group"
       icons={{
-        success: <CircleCheckIcon className="size-4" />,
-        info: <InfoIcon className="size-4" />,
-        warning: <TriangleAlertIcon className="size-4" />,
-        error: <OctagonXIcon className="size-4" />,
-        loading: <Loader2Icon className="size-4 animate-spin" />,
+        success: (
+          <HugeiconsIcon
+            icon={CheckmarkCircle02Icon}
+            size={16}
+            color="currentColor"
+            strokeWidth={1.8}
+          />
+        ),
+        info: (
+          <HugeiconsIcon
+            icon={InformationCircleIcon}
+            size={16}
+            color="currentColor"
+            strokeWidth={1.8}
+          />
+        ),
+        warning: (
+          <HugeiconsIcon
+            icon={TriangleIcon}
+            size={16}
+            color="currentColor"
+            strokeWidth={1.8}
+          />
+        ),
+        error: (
+          <HugeiconsIcon
+            icon={OctagonIcon}
+            size={16}
+            color="currentColor"
+            strokeWidth={1.8}
+          />
+        ),
+        loading: (
+          <HugeiconsIcon
+            icon={Rotate01Icon}
+            size={16}
+            color="currentColor"
+            strokeWidth={1.8}
+            className="animate-spin"
+          />
+        ),
       }}
       style={
         {
