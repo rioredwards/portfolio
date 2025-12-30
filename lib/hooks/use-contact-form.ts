@@ -18,7 +18,8 @@ export function useContactForm() {
   const form = useForm({
     ...emailFormOpts,
     transform: useTransform(
-      (baseForm) => mergeForm(baseForm, state ?? {}),
+      (baseForm) =>
+        mergeForm(baseForm, state && typeof state === "object" ? state : {}),
       [state],
     ),
   });
@@ -28,6 +29,9 @@ export function useContactForm() {
     if (state === undefined && form.state.isSubmitted) {
       toast.success("Email sent successfully!");
       form.reset();
+    } else if (typeof state === "string") {
+      // Show error toast for non-validation errors (string errors)
+      toast.error(state);
     }
   }, [state, form]);
 

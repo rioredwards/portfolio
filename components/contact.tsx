@@ -49,6 +49,20 @@ export function Contact() {
           await form.handleSubmit();
         }}
       >
+        {/* Display server-side form errors */}
+        {state &&
+          typeof state === "object" &&
+          parseFormErrors(state.errors).length > 0 && (
+            <FieldError
+              errors={parseFormErrors(state.errors).map((errorMessage) => ({
+                message: errorMessage,
+              }))}
+            />
+          )}
+        {/* Display string errors (non-validation errors) */}
+        {typeof state === "string" && (
+          <FieldError errors={[{ message: state }]} />
+        )}
         <FieldGroup className="grid gap-x-4 gap-y-8 md:grid-cols-2">
           <form.Field
             name="name"
@@ -175,9 +189,6 @@ export function Contact() {
             }}
           />
         </FieldGroup>
-        {parseFormErrors(state?.errors).map((errorMessage) => (
-          <FieldError key={errorMessage} errors={[{ message: errorMessage }]} />
-        ))}
         <Field orientation="horizontal" className="flex justify-end gap-4">
           <form.Subscribe selector={(formState) => formState.canSubmit}>
             {(canSubmit) => <ContactSubmitButton canSubmit={canSubmit} />}

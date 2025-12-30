@@ -2,6 +2,7 @@
 
 import { emailFormOpts } from "@/lib/email-form-shared-code";
 import {
+  ServerFormState,
   ServerValidateError,
   createServerValidate,
 } from "@tanstack/react-form-nextjs";
@@ -15,15 +16,35 @@ const serverValidate = createServerValidate({
     // Validate using Zod schema
     const result = emailSchema.safeParse(value);
     if (!result.success) {
-      // Return validation error - the form will handle displaying field errors
-      return "Please check all fields and try again.";
+      // Map Zod field errors to form field errors
+      const fieldErrors: Record<string, string[]> = {};
+
+      result.error.issues.forEach((issue) => {
+        const field = issue.path[0] as string;
+        if (field) {
+          if (!fieldErrors[field]) {
+            fieldErrors[field] = [];
+          }
+          fieldErrors[field].push(issue.message);
+        }
+      });
+
+      // Return field-specific errors
+      return fieldErrors;
     }
   },
 });
 
-export default async function emailAction(_: unknown, formData: FormData) {
+export default async function emailAction(
+  _: unknown,
+  formData: FormData,
+): Promise<
+  ServerFormState<typeof emailFormOpts, undefined> | undefined | string
+> {
   try {
     const validatedData = await serverValidate(formData);
+
+    throw Error("Test error");
 
     // Send email
     await sendEmail(validatedData);
@@ -38,9 +59,10 @@ export default async function emailAction(_: unknown, formData: FormData) {
     }
 
     // Handle email sending errors
-    // console.error("Email submission error:", e);
+    // Convert error to a user-friendly message
+    const errorMessage = "An unknown error occurred.";
 
-    // Re-throw the error - it will be caught by Next.js and shown to the user
-    throw e;
+    // Return error as string - will be handled by the frontend
+    return errorMessage;
   }
 }
