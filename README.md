@@ -101,8 +101,8 @@ Priority key
     - [x] Title ❤️
     - [x] Description ❤️
     - [x] Icon ❤️
-- [ ] Contact section ❤️
-  - [ ] Wire up with real email service (refer to previous version of this project... there's a working version of this somewhere in the git history. Use the worktree that is dedicated to referencing older versions of this project in ../portfolio-old/) ❤️
+- [x] Contact section ❤️
+  - [x] Wire up with real email service (refer to previous version of this project... there's a working version of this somewhere in the git history. Use the worktree that is dedicated to referencing older versions of this project in ../portfolio-old/) ❤️
 - [ ] Footer ❤️
   - [ ] Built With Pills ❤️
 
