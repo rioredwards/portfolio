@@ -1,34 +1,68 @@
 "use client";
 
 import {
-  CircleCheckIcon,
-  InfoIcon,
-  Loader2Icon,
-  OctagonXIcon,
-  TriangleAlertIcon,
-} from "lucide-react";
-import { useTheme } from "next-themes";
+  CheckmarkCircle02Icon,
+  InformationCircleIcon,
+  OctagonIcon,
+  Rotate01Icon,
+  TriangleIcon,
+} from "@hugeicons/core-free-icons";
+import { HugeiconsIcon } from "@hugeicons/react";
 import { Toaster as Sonner, type ToasterProps } from "sonner";
 
 const Toaster = ({ ...props }: ToasterProps) => {
-  const { theme = "system" } = useTheme();
-
   return (
     <Sonner
-      theme={theme as ToasterProps["theme"]}
+      theme="light"
       className="toaster group"
       icons={{
-        success: <CircleCheckIcon className="size-4" />,
-        info: <InfoIcon className="size-4" />,
-        warning: <TriangleAlertIcon className="size-4" />,
-        error: <OctagonXIcon className="size-4" />,
-        loading: <Loader2Icon className="size-4 animate-spin" />,
+        success: (
+          <HugeiconsIcon
+            icon={CheckmarkCircle02Icon}
+            size={16}
+            color="currentColor"
+            strokeWidth={2}
+          />
+        ),
+        info: (
+          <HugeiconsIcon
+            icon={InformationCircleIcon}
+            size={16}
+            color="currentColor"
+            strokeWidth={2}
+          />
+        ),
+        warning: (
+          <HugeiconsIcon
+            icon={TriangleIcon}
+            size={16}
+            color="currentColor"
+            strokeWidth={2}
+          />
+        ),
+        error: (
+          <HugeiconsIcon
+            icon={OctagonIcon}
+            size={16}
+            color="currentColor"
+            strokeWidth={2}
+          />
+        ),
+        loading: (
+          <HugeiconsIcon
+            icon={Rotate01Icon}
+            size={16}
+            color="currentColor"
+            strokeWidth={2}
+            className="animate-spin"
+          />
+        ),
       }}
       style={
         {
-          "--normal-bg": "var(--popover)",
-          "--normal-text": "var(--popover-foreground)",
-          "--normal-border": "var(--border)",
+          "--normal-bg": "var(--color-popover)",
+          "--normal-text": "var(--color-popover-foreground)",
+          "--normal-border": "var(--color-border)",
           "--border-radius": "var(--radius)",
         } as React.CSSProperties
       }

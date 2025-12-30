@@ -1,13 +1,16 @@
 import { Skill } from "@/components/ui/skill";
-import Image from "next/image";
+import Image, { StaticImageData } from "next/image";
 import { cn } from "../lib/utils";
 
-interface ProjectProps {
+export interface Project {
   category: string;
   title: string;
   description: string;
   skills: string[];
-  image: string;
+  image: StaticImageData;
+}
+
+interface ProjectProps extends Project {
   orientation: "left" | "right";
 }
 
@@ -17,86 +20,108 @@ export function Project({
   description,
   skills,
   image,
-  orientation,
 }: ProjectProps) {
   return (
     <article
       className={cn(
-        "fade-in py-article-py flex flex-col gap-12 lg:flex-row lg:items-center lg:gap-4 xl:gap-16",
-        orientation === "left" ? "lg:flex-row" : "lg:flex-row-reverse",
+        "relative", // Positioning
+        "aspect-3/2 w-full overflow-clip", // Layout & Sizing
+        "bg-card rounded-card shadow-md", // Background & Effects
+        "group fade-in-scroll cursor-pointer transition-all duration-200 hover:shadow-xl", // Animation & Transitions
+        "[--foreground:var(--color-popover)]", // Adjust this to change all foreground colors within card
       )}
     >
-      {/* text content */}
+      {/* Project image container */}
       <div
         className={cn(
-          "flex flex-1 flex-col px-4 lg:block",
-          orientation === "left"
-            ? "items-start text-left lg:text-right"
-            : "items-end text-right lg:text-left",
+          "relative", // Positioning
+          "h-full w-full overflow-clip", // Layout & Sizing
+          "bg-secondary", // Background & Effects
         )}
       >
-        <p className="text-muted-foreground mb-4 text-sm font-medium tracking-[0.2em] uppercase">
-          {category}
-        </p>
-        <h2
-          className="text-foreground mb-6 text-4xl leading-tight font-bold sm:text-5xl"
-          style={{ fontFamily: "var(--font-mazaeni-demo), serif" }}
-        >
-          {title}
-        </h2>
-
-        <p className="text-muted-foreground mb-8 max-w-xl text-base leading-relaxed">
-          {description}
-        </p>
-
+        {/* Image container with parallax */}
         <div
           className={cn(
-            "flex flex-wrap gap-4",
-            orientation === "left"
-              ? "justify-start lg:justify-end"
-              : "justify-end lg:justify-start",
+            "absolute inset-0 -translate-y-[10%]", // Positioning
+            "h-[122%] w-full", // Layout & Sizing
           )}
         >
-          {skills.map((skill, index) => (
-            <Skill
-              key={`${skill}-${index}`}
-              text={skill}
-              variant="filled"
-              size="sm"
-            />
-          ))}
+          <Image
+            src={image}
+            alt={`${title} preview`}
+            fill
+            className={cn(
+              "object-cover", // Layout & Sizing
+              "paralax transition-all duration-200", // Animation & Transitions
+            )}
+            priority
+          />
         </div>
-      </div>
 
-      {/* Project image */}
-      <div className="flex-1 max-lg:order-first">
+        {/* Blur overlay - animated on hover */}
         <div
           className={cn(
-            "relative mx-auto aspect-3/2 w-[calc(100%+var(--spacing-content-px)*2)] -translate-x-(--spacing-content-px) overflow-hidden md:w-full md:translate-x-0 lg:max-h-80",
-            orientation === "left"
-              ? "rounded-tl-4xl rounded-br-4xl"
-              : "rounded-tr-4xl rounded-bl-4xl",
+            "absolute inset-0 z-10", // Positioning
+            "pointer-events-none", // Layout & Sizing
+            "opacity-0 backdrop-blur-xs", // Background & Effects
+            "transition-opacity duration-200 group-hover:opacity-100", // Animation & Transitions
+          )}
+        />
+
+        {/* Details panel - slides up from bottom on hover */}
+        <div
+          className={cn(
+            "absolute right-0 bottom-0 left-0 z-20", // Positioning
+            "p-6 lg:p-8", // Layout & Sizing
+            // "via-background/80 to-background/90 bg-linear-to-b from-transparent from-0% via-10% to-100%", // Background & Effects
+            "bg-foreground/90",
+            "translate-y-full transition-transform duration-200 group-hover:translate-y-0", // Animation & Transitions
           )}
         >
           <div
             className={cn(
-              "bg-secondary relative h-full w-full",
-              orientation === "left"
-                ? "rounded-tl-4xl rounded-br-4xl"
-                : "rounded-tr-4xl rounded-bl-4xl",
+              "flex flex-col", // Layout & Sizing
             )}
           >
-            {/* Gradient overlay */}
-            <div className="absolute inset-0 z-10 bg-linear-to-b from-transparent from-80% to-black/30 to-100%" />
-            {/* Window frame (image should overflow the bottom right corner) */}
-            <div className="absolute inset-10 h-full w-full">
-              <Image
-                src={image}
-                alt={`${title} preview`}
-                fill
-                className="object-cover object-top-left"
-                priority
-              />
+            <p
+              className={cn(
+                "mb-3 text-xs", // Layout & Sizing
+                "font-medium tracking-[0.2em] text-(--foreground) uppercase", // Typography
+              )}
+            >
+              {category}
+            </p>
+            <h2
+              className={cn(
+                "mb-4 text-3xl leading-tight sm:text-4xl lg:text-5xl", // Layout & Sizing
+                "font-bold text-(--foreground)", // Typography
+              )}
+              style={{ fontFamily: "var(--font-mazaeni-demo), serif" }}
+            >
+              {title}
+            </h2>
+            <p
+              className={cn(
+                "mb-6 text-base leading-relaxed", // Layout & Sizing
+                "text-(--foreground)", // Typography
+              )}
+            >
+              {description}
+            </p>
+            <div
+              className={cn(
+                "flex flex-wrap gap-3", // Layout & Sizing
+              )}
+            >
+              {skills.map((skill, index) => (
+                <Skill
+                  key={`${skill}-${index}`}
+                  text={skill}
+                  variant="filled"
+                  size="sm"
+                  className="border-(--foreground)/50 bg-(--foreground)/8 text-(--foreground)"
+                />
+              ))}
             </div>
           </div>
         </div>
