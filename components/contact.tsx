@@ -60,6 +60,30 @@ function errorParser(errors: unknown): string[] {
   return ["An unknown error occurred. Please try again."];
 }
 
+const validateEmail = (val: string) => {
+  if (!val || val.trim().length === 0) {
+    return "Email is required.";
+  }
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailRegex.test(val)) {
+    return "Please enter a valid email address.";
+  }
+};
+
+const validateName = (val: string) => {
+  if (!val || val.trim().length === 0) {
+    return "Name is required.";
+  }
+  return undefined;
+};
+
+const validateMessage = (val: string) => {
+  if (!val || val.trim().length === 0) {
+    return "Message is required.";
+  }
+  return undefined;
+};
+
 export function Contact() {
   const [state, action] = useActionState(emailAction, initialFormState);
 
@@ -80,28 +104,83 @@ export function Contact() {
     }
   }, [state, form]);
 
-  const nameFieldValidator = ({ value }: { value: string }) => {
-    if (!value || value.trim().length === 0) {
-      return "Name is required.";
+  const runValidationStrategy = ({
+    val,
+    fieldName,
+    caller,
+    validateFn,
+  }: {
+    val: string;
+    fieldName: Parameters<typeof form.getFieldMeta>[0];
+    caller: "onChange" | "onBlur";
+    validateFn: (val: string) => string | undefined;
+  }) => {
+    // debugger;
+    const fieldMeta = form.getFieldMeta(fieldName);
+    const hasBeenBlurred = fieldMeta?.isBlurred;
+    const hasErrorsFromOnBlur = fieldMeta?.errorMap?.onBlur?.length > 0;
+    if (caller === "onChange" && !hasBeenBlurred) {
+      // Prevent onChange event from running validators before initial blur event
+      // Otherwise, user will see an error message immidiately when they start typing
+      return;
     }
-    return undefined;
+    if (caller === "onChange" && hasErrorsFromOnBlur) {
+      // After initial blur event, clear the error message and run validations on each keystroke
+      // Otherwise, the field will show an error until the next blur event, even if they fix the error
+      form.setFieldMeta(fieldName, (fieldMeta) => {
+        return {
+          ...fieldMeta,
+          errorMap: { ...fieldMeta.errorMap, onBlur: undefined },
+          errorSourceMap: { ...fieldMeta.errorSourceMap, onBlur: undefined },
+        };
+      });
+    }
+    return validateFn(val);
   };
 
-  const emailFieldValidator = ({ value }: { value: string }) => {
-    if (!value || value.trim().length === 0) {
-      return "Email is required.";
-    }
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(value)) {
-      return "Please enter a valid email address.";
-    }
+  const emailFieldValidator = ({
+    val,
+    caller,
+  }: {
+    val: string;
+    caller: "onBlur" | "onChange";
+  }) => {
+    return runValidationStrategy({
+      val,
+      fieldName: "email",
+      caller,
+      validateFn: validateEmail,
+    });
   };
 
-  const messageFieldValidator = ({ value }: { value: string }) => {
-    if (!value || value.trim().length === 0) {
-      return "Message is required.";
-    }
-    return undefined;
+  const nameFieldValidator = ({
+    val,
+    caller,
+  }: {
+    val: string;
+    caller: "onBlur" | "onChange";
+  }) => {
+    return runValidationStrategy({
+      val,
+      fieldName: "name",
+      caller,
+      validateFn: validateName,
+    });
+  };
+
+  const messageFieldValidator = ({
+    val,
+    caller,
+  }: {
+    val: string;
+    caller: "onBlur" | "onChange";
+  }) => {
+    return runValidationStrategy({
+      val,
+      fieldName: "message",
+      caller,
+      validateFn: validateMessage,
+    });
   };
 
   // Submit button component that uses useFormStatus to track server action pending state
@@ -121,11 +200,10 @@ export function Contact() {
     );
   }
 
-  console.log("form.getAllErrors()", form.getAllErrors());
-
   return (
     <div className="flex flex-col gap-12 md:flex-row md:items-center md:gap-16">
       {/* illustration placeholder and heading */}
+
       <div className="flex flex-1 flex-col items-center gap-4 md:items-start">
         <Image
           src={funComputerGraphic}
@@ -154,7 +232,12 @@ export function Contact() {
         <FieldGroup className="grid gap-x-4 gap-y-8 md:grid-cols-2">
           <form.Field
             name="name"
-            validators={{ onChange: nameFieldValidator }}
+            validators={{
+              onBlur: ({ value: val }) =>
+                nameFieldValidator({ val, caller: "onBlur" }),
+              onChange: ({ value: val }) =>
+                nameFieldValidator({ val, caller: "onChange" }),
+            }}
             children={(field) => {
               const isInvalid =
                 field.state.meta.isTouched && !field.state.meta.isValid;
@@ -191,10 +274,16 @@ export function Contact() {
           />
           <form.Field
             name="email"
-            validators={{ onChange: emailFieldValidator }}
+            validators={{
+              onBlur: ({ value: val }) =>
+                emailFieldValidator({ val, caller: "onBlur" }),
+              onChange: ({ value: val }) =>
+                emailFieldValidator({ val, caller: "onChange" }),
+            }}
             children={(field) => {
               const isInvalid =
                 field.state.meta.isTouched && !field.state.meta.isValid;
+
               return (
                 <Field data-invalid={isInvalid}>
                   <FieldLabel htmlFor={field.name}>Email</FieldLabel>
@@ -223,7 +312,12 @@ export function Contact() {
           />
           <form.Field
             name="message"
-            validators={{ onChange: messageFieldValidator }}
+            validators={{
+              onBlur: ({ value: val }) =>
+                messageFieldValidator({ val, caller: "onBlur" }),
+              onChange: ({ value: val }) =>
+                messageFieldValidator({ val, caller: "onChange" }),
+            }}
             children={(field) => {
               const isInvalid =
                 field.state.meta.isTouched && !field.state.meta.isValid;
