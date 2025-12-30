@@ -11,7 +11,7 @@ export const BLOGS: Blog[] = [
         icon={ServerStack03Icon}
         size={44}
         color="currentColor"
-        strokeWidth={1.8}
+        strokeWidth={2}
       />
     ),
   },

@@ -18,7 +18,7 @@ export function getSocialLinks(iconSize: string = "size-5"): SocialLink[] {
           icon={Mail01Icon}
           size={20}
           color="currentColor"
-          strokeWidth={1.8}
+          strokeWidth={2}
         />
       ),
       href: "#",
@@ -52,7 +52,7 @@ export function getSocialLinks(iconSize: string = "size-5"): SocialLink[] {
           icon={File01Icon}
           size={20}
           color="currentColor"
-          strokeWidth={1.8}
+          strokeWidth={2}
         />
       ),
       href: "#",

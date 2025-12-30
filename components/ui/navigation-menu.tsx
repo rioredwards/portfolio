@@ -79,7 +79,7 @@ function NavigationMenuTrigger({
         icon={ArrowDown01Icon}
         size={12}
         color="currentColor"
-        strokeWidth={1.8}
+        strokeWidth={2}
         className="relative top-px ml-1 transition duration-300 group-data-[state=open]:rotate-180"
         aria-hidden="true"
       />

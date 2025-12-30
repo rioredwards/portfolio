@@ -4,7 +4,7 @@ import { getSocialLinks } from "@/lib/social-links";
 import profileImage from "@/public/profile.webp";
 import {
   Cancel01Icon,
-  Link01Icon,
+  Link04Icon,
   Tick01Icon,
 } from "@hugeicons/core-free-icons";
 import { HugeiconsIcon } from "@hugeicons/react";
@@ -92,10 +92,10 @@ export function MobileMenu() {
         aria-controls="mobile-menu"
       >
         <HugeiconsIcon
-          icon={Link01Icon}
+          icon={Link04Icon}
           size={24}
           color="currentColor"
-          strokeWidth={1.8}
+          strokeWidth={2}
           aria-hidden="true"
         />
       </button>
@@ -121,7 +121,7 @@ export function MobileMenu() {
               icon={Cancel01Icon}
               size={24}
               color="currentColor"
-              strokeWidth={1.8}
+              strokeWidth={2}
               aria-hidden="true"
             />
           </button>
@@ -204,7 +204,7 @@ export function MobileMenu() {
                           icon={Tick01Icon}
                           size={20}
                           color="currentColor"
-                          strokeWidth={1.8}
+                          strokeWidth={2}
                         />
                       ) : (
                         link.icon

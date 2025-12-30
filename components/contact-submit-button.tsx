@@ -29,7 +29,7 @@ export function ContactSubmitButton({
           icon={CheckmarkCircle02Icon}
           size={16}
           color="currentColor"
-          strokeWidth={1.8}
+          strokeWidth={2}
         />
         Success!
       </Button>

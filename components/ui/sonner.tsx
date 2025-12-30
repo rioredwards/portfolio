@@ -21,7 +21,7 @@ const Toaster = ({ ...props }: ToasterProps) => {
             icon={CheckmarkCircle02Icon}
             size={16}
             color="currentColor"
-            strokeWidth={1.8}
+            strokeWidth={2}
           />
         ),
         info: (
@@ -29,7 +29,7 @@ const Toaster = ({ ...props }: ToasterProps) => {
             icon={InformationCircleIcon}
             size={16}
             color="currentColor"
-            strokeWidth={1.8}
+            strokeWidth={2}
           />
         ),
         warning: (
@@ -37,7 +37,7 @@ const Toaster = ({ ...props }: ToasterProps) => {
             icon={TriangleIcon}
             size={16}
             color="currentColor"
-            strokeWidth={1.8}
+            strokeWidth={2}
           />
         ),
         error: (
@@ -45,7 +45,7 @@ const Toaster = ({ ...props }: ToasterProps) => {
             icon={OctagonIcon}
             size={16}
             color="currentColor"
-            strokeWidth={1.8}
+            strokeWidth={2}
           />
         ),
         loading: (
@@ -53,7 +53,7 @@ const Toaster = ({ ...props }: ToasterProps) => {
             icon={Rotate01Icon}
             size={16}
             color="currentColor"
-            strokeWidth={1.8}
+            strokeWidth={2}
             className="animate-spin"
           />
         ),
