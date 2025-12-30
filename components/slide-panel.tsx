@@ -82,7 +82,7 @@ export function SlidePanel({
     : "pb-panel-short-extended-padding-height";
 
   return (
-    <div className={cn("fade-in relative", topMargin, className)}>
+    <div className={cn("fade-in-scroll relative", topMargin, className)}>
       {/* Decoration */}
       <TriangleDecoration
         decorationHeight={decorationHeight}
