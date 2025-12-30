@@ -1,38 +1,126 @@
-import { draftMode } from 'next/headers';
-import { getHeroContent } from '@/lib/api';
-import Hero from '@/ui/hero/Hero';
-import CodeCardsSection from './ui/code/CodeCardsSection';
-import ContactForm from './ui/contact/ContactForm';
-import About from './ui/about/About';
-import Art from './ui/art/Art';
+import { Blog } from "@/components/blog";
+import { Contact } from "@/components/contact";
+import { Hero } from "@/components/hero";
+import { Project } from "@/components/project";
+import { SectionContentWrapper } from "@/components/section-content-wrapper";
+import { SlidePanel } from "@/components/slide-panel";
+import { BLOGS } from "@/lib/blogs-data";
+import { PROJECTS } from "@/lib/projects-data";
+import profileImage from "@/public/profile.webp";
+import Image from "next/image";
+import { Fragment } from "react/jsx-runtime";
+import { SectionHeader } from "../components/section-header";
 
-export default async function Page() {
-  const { isEnabled: draftModeIsEnabled } = draftMode();
-  const heroContent = await getHeroContent(draftModeIsEnabled);
-
+export default function Home() {
   return (
-    <div className="w-full flex flex-col items-center justify-start">
-      <section className="mt-44 2xl:mt-72 container px-5 flex justify-around items-center flex-col">
-        <Hero {...heroContent} />
+    <main className="bg-background min-h-screen">
+      <section id="home">
+        <SectionContentWrapper className="py-0!">
+          <Hero
+            title="Hello, I'm Rio."
+            paragraphs={[
+              "I'm a detail-oriented software engineer dedicated to building products users value and enjoy.",
+            ]}
+            image={
+              <Image
+                src={profileImage}
+                alt="Rio Edwards"
+                fill
+                className="object-cover"
+                priority
+              />
+            }
+          />
+        </SectionContentWrapper>
       </section>
-      <hr />
-      <div className="mt-24 2xl:mt-36 mb-24 w-full flex items-center justify-center">
-        <section className="w-full py-6 px-0" id="code">
-          <CodeCardsSection />
-        </section>
-      </div>
-      <section className="w-full py-6 px-0 mb-28 flex flex-col items-center justify-start" id="art">
-        <Art />
+      <section id="work">
+        <SlidePanel
+          orientation="left"
+          decorationHeight="tall"
+          previousDecorationHeight={null}
+          fill="secondary"
+        >
+          <SectionHeader title="Work" />
+        </SlidePanel>
+        {PROJECTS.map((project, index) => (
+          <Fragment key={`${project.title}-${index}`}>
+            <SlidePanel
+              orientation={index % 2 === 0 ? "left" : "right"}
+              decorationHeight={index === 0 ? "tall" : "short"}
+              fill="background"
+              previousDecorationHeight={index === 0 ? "tall" : "short"}
+            >
+              <SectionContentWrapper>
+                <Project
+                  orientation={index % 2 === 0 ? "left" : "right"}
+                  category={project.category}
+                  title={project.title}
+                  description={project.description}
+                  skills={project.skills}
+                  image={project.image}
+                />
+              </SectionContentWrapper>
+            </SlidePanel>
+            {index < PROJECTS.length - 1 && (
+              <SlidePanel
+                orientation={index % 2 === 0 ? "right" : "left"}
+                decorationHeight="short"
+                fill="secondary"
+                previousDecorationHeight={index === 0 ? "tall" : "short"}
+              />
+            )}
+          </Fragment>
+        ))}
       </section>
-      <section
-        className="w-full py-6 px-0 mb-28 flex flex-col items-center justify-start"
-        id="about"
-      >
-        <About />
+      <section id="blog">
+        <SlidePanel
+          orientation="right"
+          decorationHeight="tall"
+          previousDecorationHeight="short"
+          fill="secondary"
+        >
+          <SectionHeader title="Blog" />
+        </SlidePanel>
+        <SlidePanel
+          orientation="right"
+          decorationHeight="tall"
+          previousDecorationHeight="tall"
+          fill="background"
+        >
+          <SectionContentWrapper>
+            <div className="flex flex-col gap-12">
+              {BLOGS.map((blog, index) => (
+                <Blog
+                  key={`${blog.title}-${index}`}
+                  title={blog.title}
+                  description={blog.description}
+                  icon={blog.icon}
+                />
+              ))}
+            </div>
+          </SectionContentWrapper>
+        </SlidePanel>
       </section>
-      <section className="w-full py-6 px-0" id="contact">
-        <ContactForm />
+      <section id="contact">
+        <SlidePanel
+          orientation="left"
+          decorationHeight="tall"
+          fill="secondary"
+          previousDecorationHeight="tall"
+        >
+          <SectionHeader title="Contact" />
+        </SlidePanel>
+        <SlidePanel
+          orientation="left"
+          decorationHeight="tall"
+          fill="background"
+          previousDecorationHeight="tall"
+        >
+          <SectionContentWrapper>
+            <Contact />
+          </SectionContentWrapper>
+        </SlidePanel>
       </section>
-    </div>
+    </main>
   );
 }
