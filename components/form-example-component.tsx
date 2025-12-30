@@ -8,7 +8,7 @@ import {
   useForm,
   useTransform,
 } from "@tanstack/react-form-nextjs";
-import { useActionState, useState } from "react";
+import { useActionState } from "react";
 
 export const ClientComp = () => {
   const [state, action] = useActionState(someAction, initialFormState);
@@ -21,14 +21,8 @@ export const ClientComp = () => {
     ),
   });
 
-  const [formErrors, setFormErrors] = useState<string[]>([]);
-
   return (
     <form action={action as never} onSubmit={() => form.handleSubmit()}>
-      {formErrors.map((error) => (
-        <p key={error}>{error}</p>
-      ))}
-
       <form.Field
         name="age"
         validators={{

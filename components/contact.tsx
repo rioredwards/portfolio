@@ -1,19 +1,11 @@
 "use client";
 
-import emailAction from "@/lib/actions";
-import { emailFormOpts } from "@/lib/email-form-shared-code";
+import { parseFormErrors } from "@/lib/contact-validation";
+import { useContactForm } from "@/lib/hooks/use-contact-form";
+import { useContactFormValidation } from "@/lib/hooks/use-contact-form-validation";
 import funComputerGraphic from "@/public/fun-computer-graphic.webp";
-import {
-  initialFormState,
-  mergeForm,
-  useForm,
-  useTransform,
-} from "@tanstack/react-form-nextjs";
 import Image from "next/image";
-import { useActionState, useEffect } from "react";
-import { useFormStatus } from "react-dom";
-import { toast } from "sonner";
-import { Button } from "./ui/button";
+import { ContactSubmitButton } from "./contact-submit-button";
 import { Field, FieldError, FieldGroup, FieldLabel } from "./ui/field";
 import { Input } from "./ui/input";
 import {
@@ -23,182 +15,10 @@ import {
   InputGroupTextarea,
 } from "./ui/input-group";
 
-function errorParser(errors: unknown): string[] {
-  if (!errors) {
-    return [];
-  }
-  if (typeof errors === "string") {
-    return [errors];
-  }
-
-  if (
-    typeof errors === "object" &&
-    "message" in errors &&
-    typeof errors.message === "string"
-  ) {
-    return [errors.message];
-  }
-
-  if (Array.isArray(errors)) {
-    return errors
-      .filter((e) => e != null)
-      .map((e) => {
-        let errorMessage = null;
-        if (typeof e === "string") {
-          errorMessage = e;
-        } else if (
-          typeof e === "object" &&
-          "message" in e &&
-          typeof e.message === "string"
-        ) {
-          errorMessage = e.message;
-        }
-        return errorMessage ? errorMessage : null;
-      })
-      .filter((e): e is string => e !== null);
-  }
-  return ["An unknown error occurred. Please try again."];
-}
-
-const validateEmail = (val: string) => {
-  if (!val || val.trim().length === 0) {
-    return "Email is required.";
-  }
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  if (!emailRegex.test(val)) {
-    return "Please enter a valid email address.";
-  }
-};
-
-const validateName = (val: string) => {
-  if (!val || val.trim().length === 0) {
-    return "Name is required.";
-  }
-  return undefined;
-};
-
-const validateMessage = (val: string) => {
-  if (!val || val.trim().length === 0) {
-    return "Message is required.";
-  }
-  return undefined;
-};
-
 export function Contact() {
-  const [state, action] = useActionState(emailAction, initialFormState);
-
-  const form = useForm({
-    ...emailFormOpts,
-    transform: useTransform(
-      (baseForm) => mergeForm(baseForm, state ?? {}),
-      [state],
-    ),
-  });
-
-  // Show toast notifications based on form state
-  useEffect(() => {
-    // When state is undefined, it means the form submitted successfully
-    if (state === undefined && form.state.isSubmitted) {
-      toast.success("Email sent successfully!");
-      form.reset();
-    }
-  }, [state, form]);
-
-  const runValidationStrategy = ({
-    val,
-    fieldName,
-    caller,
-    validateFn,
-  }: {
-    val: string;
-    fieldName: Parameters<typeof form.getFieldMeta>[0];
-    caller: "onChange" | "onBlur";
-    validateFn: (val: string) => string | undefined;
-  }) => {
-    // debugger;
-    const fieldMeta = form.getFieldMeta(fieldName);
-    const hasBeenBlurred = fieldMeta?.isBlurred;
-    const hasErrorsFromOnBlur = fieldMeta?.errorMap?.onBlur?.length > 0;
-    if (caller === "onChange" && !hasBeenBlurred) {
-      // Prevent onChange event from running validators before initial blur event
-      // Otherwise, user will see an error message immidiately when they start typing
-      return;
-    }
-    if (caller === "onChange" && hasErrorsFromOnBlur) {
-      // After initial blur event, clear the error message and run validations on each keystroke
-      // Otherwise, the field will show an error until the next blur event, even if they fix the error
-      form.setFieldMeta(fieldName, (fieldMeta) => {
-        return {
-          ...fieldMeta,
-          errorMap: { ...fieldMeta.errorMap, onBlur: undefined },
-          errorSourceMap: { ...fieldMeta.errorSourceMap, onBlur: undefined },
-        };
-      });
-    }
-    return validateFn(val);
-  };
-
-  const emailFieldValidator = ({
-    val,
-    caller,
-  }: {
-    val: string;
-    caller: "onBlur" | "onChange";
-  }) => {
-    return runValidationStrategy({
-      val,
-      fieldName: "email",
-      caller,
-      validateFn: validateEmail,
-    });
-  };
-
-  const nameFieldValidator = ({
-    val,
-    caller,
-  }: {
-    val: string;
-    caller: "onBlur" | "onChange";
-  }) => {
-    return runValidationStrategy({
-      val,
-      fieldName: "name",
-      caller,
-      validateFn: validateName,
-    });
-  };
-
-  const messageFieldValidator = ({
-    val,
-    caller,
-  }: {
-    val: string;
-    caller: "onBlur" | "onChange";
-  }) => {
-    return runValidationStrategy({
-      val,
-      fieldName: "message",
-      caller,
-      validateFn: validateMessage,
-    });
-  };
-
-  // Submit button component that uses useFormStatus to track server action pending state
-  // Must be inside the form element to work
-  function SubmitButton({ canSubmit }: { canSubmit: boolean }) {
-    const { pending } = useFormStatus();
-
-    return (
-      <Button
-        type="submit"
-        disabled={!canSubmit || pending}
-        size="default"
-        variant="default"
-      >
-        {pending ? "Sending..." : "Submit"}
-      </Button>
-    );
-  }
+  const { form, state, action } = useContactForm();
+  const { nameValidator, emailValidator, messageValidator } =
+    useContactFormValidation(form);
 
   return (
     <div className="flex flex-col gap-12 md:flex-row md:items-center md:gap-16">
@@ -234,9 +54,9 @@ export function Contact() {
             name="name"
             validators={{
               onBlur: ({ value: val }) =>
-                nameFieldValidator({ val, caller: "onBlur" }),
+                nameValidator({ val, caller: "onBlur" }),
               onChange: ({ value: val }) =>
-                nameFieldValidator({ val, caller: "onChange" }),
+                nameValidator({ val, caller: "onChange" }),
             }}
             children={(field) => {
               const isInvalid =
@@ -263,7 +83,7 @@ export function Contact() {
                   />
                   {isInvalid && (
                     <FieldError
-                      errors={errorParser(field.state.meta.errors).map(
+                      errors={parseFormErrors(field.state.meta.errors).map(
                         (error) => ({ message: error }),
                       )}
                     />
@@ -276,9 +96,9 @@ export function Contact() {
             name="email"
             validators={{
               onBlur: ({ value: val }) =>
-                emailFieldValidator({ val, caller: "onBlur" }),
+                emailValidator({ val, caller: "onBlur" }),
               onChange: ({ value: val }) =>
-                emailFieldValidator({ val, caller: "onChange" }),
+                emailValidator({ val, caller: "onChange" }),
             }}
             children={(field) => {
               const isInvalid =
@@ -301,7 +121,7 @@ export function Contact() {
                   />
                   {isInvalid && (
                     <FieldError
-                      errors={errorParser(field.state.meta.errors).map(
+                      errors={parseFormErrors(field.state.meta.errors).map(
                         (error) => ({ message: error }),
                       )}
                     />
@@ -314,9 +134,9 @@ export function Contact() {
             name="message"
             validators={{
               onBlur: ({ value: val }) =>
-                messageFieldValidator({ val, caller: "onBlur" }),
+                messageValidator({ val, caller: "onBlur" }),
               onChange: ({ value: val }) =>
-                messageFieldValidator({ val, caller: "onChange" }),
+                messageValidator({ val, caller: "onChange" }),
             }}
             children={(field) => {
               const isInvalid =
@@ -345,7 +165,7 @@ export function Contact() {
                   </InputGroup>
                   {isInvalid && (
                     <FieldError
-                      errors={errorParser(field.state.meta.errors).map(
+                      errors={parseFormErrors(field.state.meta.errors).map(
                         (error) => ({ message: error }),
                       )}
                     />
@@ -355,12 +175,12 @@ export function Contact() {
             }}
           />
         </FieldGroup>
-        {errorParser(state?.errors).map((errorMessage) => (
+        {parseFormErrors(state?.errors).map((errorMessage) => (
           <FieldError key={errorMessage} errors={[{ message: errorMessage }]} />
         ))}
         <Field orientation="horizontal" className="flex justify-end gap-4">
           <form.Subscribe selector={(formState) => formState.canSubmit}>
-            {(canSubmit) => <SubmitButton canSubmit={canSubmit} />}
+            {(canSubmit) => <ContactSubmitButton canSubmit={canSubmit} />}
           </form.Subscribe>
         </Field>
       </form>

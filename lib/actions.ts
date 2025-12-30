@@ -8,10 +8,6 @@ import {
 import { emailSchema } from "./dataTypes";
 import { sendEmail } from "./email";
 
-function sleep(ms: number) {
-  return new Promise((resolve) => setTimeout(resolve, ms));
-}
-
 // Create the server action that will infer the types of the form from `emailFormOpts`
 const serverValidate = createServerValidate({
   ...emailFormOpts,
