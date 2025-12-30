@@ -18,8 +18,8 @@ Note: You may use the following tools as needed:
 - generate a concise conventional commit message for the single commit that will be the result of the cleanup.
 - generate a useful PR summary.
 
-7. Rebase the current branch onto the branch I want to merge into accepting all changes from the current branch: e.g. `git rebase -X theirs dev`
-8. Now squash the commits into a single commit by using `git reset --soft dev`
+7. Rebase the current branch onto the branch I want to merge into accepting all changes from the current branch: e.g. `git rebase -X theirs origin/dev`
+8. Now squash the commits into a single commit by using `git reset --soft origin/dev`
 9. Now make a single commit with the changes in the working tree. Use the commit message from step 6 for the commit message.
 10. Push the cleanup branch to the remote repository
 11. Create a pull request from the cleanup branch to the branch I want to merge into. Create a useful PR summary based on the changes and commit messages from step 6.
