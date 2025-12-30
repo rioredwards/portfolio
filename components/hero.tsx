@@ -11,6 +11,77 @@ interface HeroProps {
   className?: string;
 }
 
+function HeroImage({
+  image,
+  className,
+}: {
+  image: React.ReactNode;
+  className?: string;
+}) {
+  return (
+    <div
+      className={cn(
+        "relative aspect-square min-h-64 min-w-64 shrink-0 overflow-hidden rounded-full border-4",
+        className,
+      )}
+    >
+      {image}
+    </div>
+  );
+}
+
+function HeroButton({
+  buttonText,
+  buttonHref,
+}: {
+  buttonText: string;
+  buttonHref: string;
+}) {
+  return (
+    <Button asChild size="lg" className="font-bold tracking-wider uppercase">
+      <Link href={buttonHref}>{buttonText}</Link>
+    </Button>
+  );
+}
+
+function HeroParagraph({
+  paragraphs,
+  className,
+}: {
+  paragraphs: string[];
+  className?: string;
+}) {
+  return (
+    <div className={cn("text-secondary-foreground", className)}>
+      {paragraphs.map((paragraph, index) => (
+        <p key={index} className="text-lg leading-relaxed">
+          {paragraph}
+        </p>
+      ))}
+    </div>
+  );
+}
+
+function HeroHeading({
+  title,
+  className,
+}: {
+  title: string;
+  className?: string;
+}) {
+  return (
+    <h1
+      className={cn(
+        "text-foreground text-center text-[clamp(3rem,14vw,5rem)] font-bold tracking-tight md:text-left md:text-6xl lg:text-7xl",
+        className,
+      )}
+      style={{ fontFamily: "var(--font-mazaeni-demo), serif" }}
+    >
+      {title}
+    </h1>
+  );
+}
+
 export function Hero({
   title,
   paragraphs,
@@ -20,50 +91,39 @@ export function Hero({
   className,
 }: HeroProps) {
   return (
-    <div
-      className={cn(
-        "grid grid-cols-1 place-items-center md:grid-cols-[auto_1fr] md:grid-rows-[auto_auto] md:place-items-stretch lg:grid-cols-[1fr_max-content]",
-        className,
-      )}
-    >
-      {/* Main heading - top-cell on mobile, top-right-cell on desktop */}
-      <div className="mb-4 md:col-start-2 md:row-start-1 md:mb-2">
-        <h1
-          className="text-foreground text-center text-[clamp(3rem,14vw,5rem)] font-bold tracking-tight whitespace-nowrap md:text-left md:text-6xl lg:text-7xl"
-          style={{ fontFamily: "var(--font-mazaeni-demo), serif" }}
-        >
-          {title}
-        </h1>
-      </div>
-
-      {/* Profile Picture - middle-cell on mobile, left-cell on desktop */}
-      <div className="mb-8 md:row-span-2 md:mr-8 md:mb-0 md:flex md:place-items-center lg:mr-16 lg:ml-auto">
-        {/* Profile picture */}
-        <div className="relative aspect-square h-64 overflow-hidden rounded-full border-4 sm:h-64">
-          {image}
-        </div>
-      </div>
-
-      {/* Subheading and paragraphs - bottom-cell on mobile, bottom-right-cell on desktop */}
-      <div className="max-w-lg flex-1 md:col-start-2 md:row-start-2">
-        {paragraphs && (
-          <div className="text-secondary-foreground mb-6 space-y-4">
-            {paragraphs.map((paragraph, index) => (
-              <p key={index} className="leading-relaxed">
-                {paragraph}
-              </p>
-            ))}
-          </div>
+    <div className="fade-in grid min-h-[calc(100vh-6rem)] place-items-center md:min-h-screen">
+      {/* Desktop layout */}
+      <div
+        className={cn(
+          // "grid grid-cols-1 place-items-center md:grid-cols-[auto_1fr] md:grid-rows-[auto_auto] md:place-items-stretch lg:grid-cols-[1fr_max-content]",
+          "hidden items-center pt-32 pb-24 md:flex md:gap-12",
+          className,
         )}
-        <div className="mt-12 flex justify-center md:mt-4 md:justify-start">
-          <Button
-            asChild
-            size="lg"
-            className="text-lg font-bold tracking-wider uppercase"
-          >
-            <Link href={buttonHref}>{buttonText}</Link>
-          </Button>
+      >
+        <HeroImage image={image} className="h-full" />
+        <div className="max-w-prose-max flex flex-col items-start justify-end">
+          <HeroHeading title={title} className="mb-4" />
+          <HeroParagraph
+            paragraphs={paragraphs || []}
+            className="mb-8 space-y-4"
+          />
+          <HeroButton buttonText={buttonText} buttonHref={buttonHref} />
         </div>
+      </div>
+      {/* Mobile layout */}
+      <div
+        className={cn(
+          "flex flex-col items-center justify-start md:hidden",
+          className,
+        )}
+      >
+        <HeroHeading title={title} className="mb-4" />
+        <HeroImage image={image} className="mb-4" />
+        <HeroParagraph
+          paragraphs={paragraphs || []}
+          className="max-w-prose-max mb-10 space-y-4 text-center"
+        />
+        <HeroButton buttonText={buttonText} buttonHref={buttonHref} />
       </div>
     </div>
   );

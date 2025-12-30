@@ -2,10 +2,11 @@
 @import "tw-animate-css";
 
 :root {
+  view-transition-name: root;
   /* Theme colors (source of truth) */
   --theme-background: #f4ebda;
   --theme-foreground: #2d645d;
-  --theme-background-primary: #3b823d;
+  --theme-background-primary: #2f6f31;
   --theme-foreground-primary: #fdfbf6;
   --theme-background-secondary: #ebdbbc;
   --theme-foreground-secondary: #5c4b3e;
@@ -26,7 +27,7 @@
   font-size: var(--responsive-spacing);
 
   /* Additional variables */
-  --radius: 1rem;
+  --radius: 2rem;
   --tracking-normal: 0em;
   --spacing: 0.25rem;
 }
@@ -34,51 +35,81 @@
 @theme {
   /* --container-*	Container query variants like @sm:* and size utilities like max-w-md */
   --container-content-max-w: 72rem;
+  --container-prose-max: 58ch;
 
   /* --spacing-*	Spacing and sizing utilities like px-4, max-h-16, and many more */
   --spacing-content-px-md: 4rem;
   --spacing-content-px: 2rem;
-  --spacing-content-py: 4rem;
+  --spacing-content-py: 6rem;
 
   --spacing-panel-tall-extended-padding-height: 16rem;
   --spacing-panel-short-extended-padding-height: 12rem;
 
-  --spacing-article-px: 2rem;
-  --spacing-article-py: 2.5rem;
-
   /* --radius-*	Border radius utilities like rounded-sm */
   --radius-button: 9999px;
   --radius-card: 3rem;
-  --radius-input: 1rem;
-  --radius-section: 4rem;
+  --radius-input: 2rem;
+  --radius-section: 2rem;
   --radius-panel-tall: 4rem;
   --radius-panel-short: 3rem;
 }
 
 @theme inline {
   --color-background: var(--theme-background);
+  --color-background-hover: hsl(
+    from var(--theme-background) h calc(s * 1.2) calc(l * 0.94)
+  );
+  --color-background-hover-border: hsl(
+    from var(--theme-border) h calc(s * 1.3) calc(l * 1.2)
+  );
   --color-foreground: var(--theme-foreground);
   --color-card: var(--theme-background-secondary);
   --color-card-foreground: var(--theme-foreground-secondary);
   --color-popover: var(--theme-background);
   --color-popover-foreground: var(--theme-foreground);
   --color-primary: var(--theme-background-primary);
+  --color-primary-hover: hsl(
+    from var(--theme-background-primary) h calc(s * 1.2) calc(l * 1.2)
+  );
+  --color-primary-hover-border: hsl(
+    from var(--theme-background-primary) h calc(s * 1.3) calc(l * 1.6)
+  );
   --color-primary-foreground: var(--theme-foreground-primary);
   --color-secondary: var(--theme-background-secondary);
+  --color-secondary-hover: hsl(
+    from var(--theme-background-secondary) h calc(s * 1.2) calc(l * 1.09)
+  );
+  --color-secondary-hover-border: hsl(
+    from var(--theme-background-secondary) h calc(s * 1.2) calc(l * 0.92)
+  );
   --color-secondary-foreground: var(--theme-foreground-secondary);
   --color-muted: var(--theme-background-secondary);
   --color-muted-foreground: var(--theme-foreground-muted);
   --color-accent: var(--theme-background-accent);
+  --color-accent-hover: hsl(
+    from var(--theme-background-accent) h calc(s * 1.2) calc(l * 1.2)
+  );
+  --color-accent-hover-border: hsl(
+    from var(--theme-background-accent) h calc(s * 1.3) calc(l * 1.6)
+  );
   --color-accent-foreground: var(--theme-foreground-accent);
   --color-destructive: var(--theme-background-destructive);
+  --color-destructive-hover: hsl(
+    from var(--theme-background-destructive) h calc(s * 1.2) calc(l * 1.2)
+  );
+  --color-destructive-hover-border: hsl(
+    from var(--theme-background-destructive) h calc(s * 1.3) calc(l * 1.6)
+  );
   --color-destructive-foreground: var(--theme-foreground-destructive);
   --color-border: var(--theme-border);
   --color-input: var(--theme-border);
   --color-ring: var(--theme-ring);
   --color-sidebar: var(--theme-background-secondary);
-  --color-sidebar-foreground: var(--theme-foreground-secondary);
-  --color-sidebar-primary: var(--theme-background-primary);
-  --color-sidebar-primary-foreground: var(--theme-foreground-primary);
+  --color-sidebar-foreground: color-mix(
+    in oklab,
+    var(--theme-foreground),
+    transparent 9%
+  );
   --color-sidebar-accent: var(--theme-background-accent);
   --color-sidebar-accent-foreground: var(--theme-foreground-accent);
   --color-sidebar-border: var(--theme-border);
@@ -90,8 +121,9 @@
   --font-playfair: var(--font-playfair);
   --font-mazaeni: var(--font-mazaeni-demo), serif;
 
-  --radius-sm: calc(var(--radius) - 4px);
-  --radius-md: calc(var(--radius) - 2px);
+  --radius-xs: calc(var(--radius) - 12px);
+  --radius-sm: calc(var(--radius) - 8px);
+  --radius-md: calc(var(--radius) - 4px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
   --radius-2xl: calc(var(--radius) + 8px);
@@ -107,7 +139,7 @@
     scroll-behavior: smooth;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground overflow-x-hidden;
   }
   /* Offset scroll position for sections to appear closer to middle of viewport */
   section {
@@ -123,6 +155,33 @@
       scroll-behavior: auto;
     }
   }
+
+  /* Default prose */
+  p,
+  li,
+  dd,
+  blockquote {
+    @apply max-w-prose-max text-pretty;
+  }
+
+  /* Headlines */
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply text-balance;
+  }
+
+  /* UI */
+  button,
+  label,
+  nav,
+  pre,
+  code,
+  .ui {
+    @apply text-nowrap;
+  }
+
   .fade-in {
     animation: fadeInAnimation 0.5s ease-in-out;
   }
@@ -169,25 +228,72 @@
     padding-bottom: clamp(6px, 1.6svh, 12px);
   }
   .angled-border-sm {
-    border-top-left-radius: var(--radius-2xl);
-    border-bottom-right-radius: var(--radius-2xl);
+    border-top-right-radius: var(--radius-xs);
+    border-bottom-left-radius: var(--radius-xs);
   }
   .angled-border-md {
-    border-top-left-radius: var(--radius-3xl);
-    border-bottom-right-radius: var(--radius-3xl);
+    border-top-right-radius: var(--radius-sm);
+    border-bottom-left-radius: var(--radius-sm);
   }
   .angled-border-lg {
-    border-top-left-radius: var(--radius-4xl);
-    border-bottom-right-radius: var(--radius-4xl);
+    border-top-right-radius: var(--radius-md);
+    border-bottom-left-radius: var(--radius-md);
   }
   .angled-border-full {
-    border-top-left-radius: 100%;
-    border-bottom-right-radius: 100%;
+    border-top-right-radius: 100%;
+    border-bottom-left-radius: 100%;
   }
-  .fade-in {
+  .fade-in-scroll {
     animation: fadeInAnimation both;
     animation-timeline: view();
     animation-range: entry 100px entry 500px;
+  }
+  .paralax {
+    animation: adjust-image linear both;
+    animation-timeline: view();
+  }
+  .custom-bg-ping-wrapper {
+    position: relative;
+  }
+
+  .custom-bg-ping-wrapper:hover::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: inherit; /* or a specific color */
+    border-radius: inherit;
+    z-index: 0; /* behind inner card */
+    animation: customPingAnimation 1.6s ease-in-out infinite;
+  }
+
+  .custom-bg-ping {
+    position: relative;
+    z-index: 1; /* above the ping */
+  }
+}
+
+@media (hover: none) and (pointer: coarse) {
+  .custom-bg-ping-wrapper::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: inherit; /* or a specific color */
+    border-radius: inherit;
+    z-index: 0; /* behind inner card */
+    animation: customPingAnimation 1.6s ease-in-out infinite;
+  }
+}
+
+/* like the ping animation, but goes on a :before element */
+@keyframes customPingAnimation {
+  0% {
+    opacity: 0.8;
+    transform: scaleX(1) scaleY(1);
+  }
+  75%,
+  100% {
+    opacity: 0;
+    transform: scaleX(1.06) scaleY(1.2);
   }
 }
 
@@ -200,6 +306,23 @@
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+@keyframes adjust-image {
+  0% {
+    object-position: 0 60px;
+  }
+  100% {
+    object-position: 0 -60px;
+  }
+}
+
+/* Sonner toast styling */
+[data-sonner-toast] {
+  background-color: var(--color-popover) !important;
+  color: var(--color-popover-foreground) !important;
+  border: 1px solid var(--color-border) !important;
+  border-radius: var(--radius) !important;
 }
 
 /* * {

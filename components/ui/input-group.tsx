@@ -14,8 +14,9 @@ function InputGroup({ className, ...props }: React.ComponentProps<"div">) {
       data-slot="input-group"
       role="group"
       className={cn(
-        "group/input-group border-input dark:bg-input/30 relative flex w-full items-center rounded-md border shadow-xs transition-[color,box-shadow] outline-none",
+        "group/input-group border-input dark:bg-input/30 relative flex w-full items-center border shadow-xs transition-[color,box-shadow] outline-none",
         // custom
+        "rounded-input",
         "inset-shadow-shadow/10 inset-shadow-sm",
         "border-border bg-transparent dark:bg-transparent",
         "h-9 min-w-0 has-[>textarea]:h-auto",
@@ -49,9 +50,9 @@ const inputGroupAddonVariants = cva(
         "inline-end":
           "order-last pr-3 has-[>button]:mr-[-0.45rem] has-[>kbd]:mr-[-0.35rem]",
         "block-start":
-          "order-first w-full justify-start px-3 pt-3 [.border-b]:pb-3 group-has-[>input]/input-group:pt-2.5",
+          "order-first w-full justify-start px-5 pt-3 [.border-b]:pb-3 group-has-[>input]/input-group:pt-2.5",
         "block-end":
-          "order-last w-full justify-start px-3 pb-3 [.border-t]:pt-3 group-has-[>input]/input-group:pb-2.5",
+          "order-last w-full justify-start px-5 pb-3 [.border-t]:pt-3 group-has-[>input]/input-group:pb-2.5",
       },
     },
     defaultVariants: {

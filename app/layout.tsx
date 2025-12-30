@@ -5,6 +5,7 @@ import { Footer } from "../components/footer";
 import { MobileMenu } from "../components/mobile-menu";
 import { Navbar } from "../components/navbar";
 import { Sidebar } from "../components/sidebar";
+import { Toaster } from "../components/ui/sonner";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -77,6 +78,7 @@ export default function RootLayout({
           <MobileMenu />
           {children}
           <Footer />
+          <Toaster />
         </>
       </body>
     </html>
