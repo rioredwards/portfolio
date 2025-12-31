@@ -108,18 +108,18 @@ Priority key
 
 ### New Content Checklist
 
-- [ ] Design a "Testimonials" section ❤️
-  - [ ] Desktop ❤️
-  - [ ] Mobile ❤️
-- [ ] Add Testimonials section ❤️
-  - [ ] First testimonial ❤️
-    - [ ] Name ❤️
-    - [ ] Description ❤️
-    - [ ] Image ❤️
-  - [ ] Second testimonial ❤️
-    - [ ] Name ❤️
-    - [ ] Description ❤️
-    - [ ] Image ❤️
+- [x] Design a "Testimonials" section ❤️
+  - [x] Desktop ❤️
+  - [x] Mobile ❤️
+- [x] Add Testimonials section ❤️
+  - [x] First testimonial ❤️
+    - [x] Name ❤️
+    - [x] Description ❤️
+    - [x] Image ❤️
+  - [x] Second testimonial ❤️
+    - [x] Name ❤️
+    - [x] Description ❤️
+    - [x] Image ❤️
 - [ ] Add project detail page/modal ❤️
       This should be a modal that appears when the user clicks on a project card in the works section. It should render mdx content, which should be stored in the project's directory. It can also be viewed in a standalone page. This is made possible by a next.js feature (see previous versions of this project for reference)
   - [ ] Desktop ❤️

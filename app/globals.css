@@ -13,7 +13,7 @@
   --theme-foreground-muted: rgb(
     from var(--theme-foreground-secondary) r g b / calc(alpha / 2)
   );
-  --theme-background-accent: #439d61;
+  --theme-background-accent: #75439d;
   --theme-foreground-accent: var(--theme-foreground-primary);
   --theme-background-destructive: #c53920;
   --theme-foreground-destructive: var(--theme-foreground-primary);
@@ -324,3 +324,64 @@
   border: 1px solid var(--color-border) !important;
   border-radius: var(--radius) !important;
 }
+
+/* Carousel styling */
+.embla {
+  overflow: hidden;
+}
+
+.embla__viewport {
+  overflow: hidden;
+}
+
+.embla__container {
+  display: flex;
+}
+
+.embla__slide {
+  flex: 0 0 100%;
+  min-width: 0;
+}
+
+/* Hide scrollbar for carousel */
+.embla__viewport::-webkit-scrollbar {
+  display: none;
+}
+
+.embla__viewport {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Carousel fade effect on edges */
+.carousel-fade {
+  position: relative;
+}
+
+.carousel-fade::before,
+.carousel-fade::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 2rem;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.carousel-fade::before {
+  left: 0;
+  background: linear-gradient(to right, var(--color-secondary), transparent);
+}
+
+.carousel-fade::after {
+  right: 0;
+  background: linear-gradient(to left, var(--color-secondary), transparent);
+}
+
+/* 
+* {
+  border: 1px solid red;
+  background-color: rgba(255, 0, 0, 0.02);
+} 
+*/
