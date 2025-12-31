@@ -23,11 +23,13 @@
   --theme-shadow-color: #504a3f;
 
   /* RESPONSIVE SIZING: The root font-size is based on this variable, meaning ANYTHING USING REM UNITS WILL SCALE WITH THE VIEWPORT WIDTH. */
-  --responsive-spacing: clamp(15px, calc(0.32vw + 13.88px), 19px);
-  font-size: var(--responsive-spacing);
+  --responsive-spacing-min: clamp(15px, calc(0.32vw + 13.88px), 19px);
+  --responsive-spacing-base: clamp(14px, calc(0.64vw + 12px), 22px);
+  --responsive-spacing-max: clamp(14px, calc(1.28vw + 10px), 30px);
+  font-size: var(--responsive-spacing-min);
 
   /* Additional variables */
-  --radius: 2rem;
+  --radius: calc(var(--responsive-spacing-max) * 1);
   --tracking-normal: 0em;
   --spacing: 0.25rem;
 }
@@ -44,14 +46,6 @@
 
   --spacing-panel-tall-extended-padding-height: 16rem;
   --spacing-panel-short-extended-padding-height: 12rem;
-
-  /* --radius-*	Border radius utilities like rounded-sm */
-  --radius-button: 9999px;
-  --radius-card: 3rem;
-  --radius-input: 2rem;
-  --radius-section: 2rem;
-  --radius-panel-tall: 4rem;
-  --radius-panel-short: 3rem;
 }
 
 @theme inline {
@@ -121,14 +115,15 @@
   --font-playfair: var(--font-playfair);
   --font-mazaeni: var(--font-mazaeni-demo), serif;
 
-  --radius-xs: calc(var(--radius) - 12px);
-  --radius-sm: calc(var(--radius) - 8px);
-  --radius-md: calc(var(--radius) - 4px);
+  --radius-xs: calc(var(--radius) * 0.3);
+  --radius-sm: calc(var(--radius) * 0.5);
+  --radius-md: calc(var(--radius) * 0.8);
   --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) + 4px);
-  --radius-2xl: calc(var(--radius) + 8px);
-  --radius-3xl: calc(var(--radius) + 12px);
-  --radius-4xl: calc(var(--radius) + 16px);
+  --radius-xl: calc(var(--radius) * 1.2);
+  --radius-2xl: calc(var(--radius) * 1.5);
+  --radius-3xl: calc(var(--radius) * 1.9);
+  --radius-4xl: calc(var(--radius) * 2.4);
+  --radius-5xl: calc(var(--radius) * 3);
 }
 
 @layer base {
@@ -228,16 +223,16 @@
     padding-bottom: clamp(6px, 1.6svh, 12px);
   }
   .angled-border-sm {
-    border-top-right-radius: var(--radius-xs);
-    border-bottom-left-radius: var(--radius-xs);
-  }
-  .angled-border-md {
-    border-top-right-radius: var(--radius-sm);
-    border-bottom-left-radius: var(--radius-sm);
-  }
-  .angled-border-lg {
     border-top-right-radius: var(--radius-md);
     border-bottom-left-radius: var(--radius-md);
+  }
+  .angled-border-md {
+    border-top-right-radius: var(--radius-lg);
+    border-bottom-left-radius: var(--radius-lg);
+  }
+  .angled-border-lg {
+    border-top-right-radius: var(--radius-xl);
+    border-bottom-left-radius: var(--radius-xl);
   }
   .angled-border-full {
     border-top-right-radius: 100%;

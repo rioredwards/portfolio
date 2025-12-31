@@ -23,9 +23,9 @@ export function Contact() {
     useContactFormValidation(form);
 
   return (
-    <div className="flex flex-col gap-12">
+    <div className="fade-in-scroll flex flex-col gap-12">
       {/* Contact form and illustration */}
-      <div className="flex flex-col gap-12 md:flex-row md:items-center md:gap-16">
+      <div className="fade-in-scroll flex flex-col gap-12 md:flex-row md:items-center md:gap-16">
         {/* illustration placeholder and heading */}
 
         <div className="flex flex-1 flex-col items-center gap-4 md:items-start">
@@ -53,12 +53,11 @@ export function Contact() {
           />
         )}
 
-        {/* Display success message */}
         {!isSuccess && (
           <form
             id="contact-form"
             suppressHydrationWarning={true}
-            className="flex-1 space-y-8"
+            className="fade-in-scroll flex-1 space-y-8"
             action={action as never}
             onSubmit={async () => {
               await form.handleSubmit();
@@ -228,7 +227,7 @@ export function Contact() {
         )}
       </div>
       {/* Testimonials Carousel */}
-      <div className="rounded-card bg-secondary flex px-4 py-12">
+      <div className="bg-secondary fade-in-scroll flex rounded-4xl px-4 py-12">
         <TestimonialsCarousel />
       </div>
     </div>

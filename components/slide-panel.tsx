@@ -18,8 +18,8 @@ type TriangleDecorationProps = Flatten<Omit<SlidePanelProps, "children">>;
 const triangleHeightVariants = cva("block w-auto", {
   variants: {
     decorationHeight: {
-      tall: "h-(--radius-panel-tall) -top-(--radius-panel-tall)",
-      short: "h-(--radius-panel-short) -top-(--radius-panel-short)",
+      tall: "h-(--radius-5xl) -top-(--radius-5xl)",
+      short: "h-(--radius-4xl) -top-(--radius-4xl)",
     },
     orientation: {
       left: "right-0",
@@ -97,11 +97,11 @@ export function SlidePanel({
           fill === "secondary" ? "bg-secondary" : "bg-background",
           isLeft
             ? isTall
-              ? "rounded-tl-panel-tall" // left tall panel
-              : "rounded-tl-panel-short" // left short panel
+              ? "rounded-tl-5xl" // left tall panel
+              : "rounded-tl-4xl" // left short panel
             : isTall
-              ? "rounded-tr-panel-tall" // right tall panel
-              : "rounded-tr-panel-short", // right short panel
+              ? "rounded-tr-5xl" // right tall panel
+              : "rounded-tr-4xl", // right short panel
           bottomPadding,
         )}
       >

@@ -16,7 +16,7 @@ function InputGroup({ className, ...props }: React.ComponentProps<"div">) {
       className={cn(
         "group/input-group border-input dark:bg-input/30 relative flex w-full items-center border shadow-xs transition-[color,box-shadow] outline-none",
         // custom
-        "rounded-input",
+        "rounded-lg",
         "inset-shadow-shadow/10 inset-shadow-sm",
         "border-border bg-transparent dark:bg-transparent",
         "h-9 min-w-0 has-[>textarea]:h-auto",

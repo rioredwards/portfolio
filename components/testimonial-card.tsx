@@ -10,7 +10,7 @@ export function TestimonialCard({
   company,
 }: Testimonial) {
   return (
-    <div className="rounded-card max-w-prose-max relative flex flex-col px-6 py-4 select-none">
+    <div className="max-w-prose-max relative flex flex-col rounded-4xl px-6 py-4 select-none">
       {/* Spacer */}
       <div className="inline-block h-6 w-full"></div>
 

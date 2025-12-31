@@ -9,6 +9,13 @@ This is my portfolio website. It is built with Next.js, TypeScript, shadcn/ui, a
 3. Run `npm run dev` to start the development server
 4. Open [http://localhost:3000](http://localhost:3000) to see the result
 
+## New TODOS
+
+- The links in the navbar don't work for navigating between pagees, only within sections on the home page. I think that there should be two variants of the navbar. One is for navigating the home page (as is currently) and one is for navigating between pages. The between pages one should.
+- Cursor should be a pointer on the navbuttons on the carousel.
+- Refine project modal and page ui. Possibly switch to an MDX renderer.
+- Fix Nex.js error in modal
+
 ## TODO
 
 Priority key
@@ -120,14 +127,14 @@ Priority key
     - [x] Name ❤️
     - [x] Description ❤️
     - [x] Image ❤️
-- [ ] Add project detail page/modal ❤️
+- [x] Add project detail page/modal ❤️
       This should be a modal that appears when the user clicks on a project card in the works section. It should render mdx content, which should be stored in the project's directory. It can also be viewed in a standalone page. This is made possible by a next.js feature (see previous versions of this project for reference)
-  - [ ] Desktop ❤️
-  - [ ] Mobile ❤️
-- [ ] Add blog detail page/modal ❤️
+  - [x] Desktop ❤️
+  - [x] Mobile ❤️
+- [x] Add blog detail page/modal ❤️
       This should be a modal that appears when the user clicks on a blog card in the blog section. It should render mdx content, which should be stored in the blog's directory. It can also be viewed in a standalone page. This is made possible by a next.js feature (see previous versions of this project for reference)
-  - [ ] Desktop ❤️
-  - [ ] Mobile ❤️
+  - [x] Desktop ❤️
+  - [x] Mobile ❤️
 - [ ] Ancillary Pages ❤️
   - [ ] Resume page ❤️
     - [ ] Desktop ❤️

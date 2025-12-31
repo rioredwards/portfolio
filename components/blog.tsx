@@ -8,7 +8,7 @@ export interface Blog {
 
 export function Blog({ title, description, icon }: Blog) {
   return (
-    <div className="bg-secondary fade-in-scroll rounded-card flex items-center justify-between gap-8 px-8 py-10 lg:px-14 lg:py-12">
+    <div className="bg-secondary fade-in-scroll flex items-center justify-between gap-8 rounded-4xl px-8 py-10 lg:px-14 lg:py-12">
       {/* Text content */}
       <div>
         <h2

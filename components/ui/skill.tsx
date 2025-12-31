@@ -11,7 +11,7 @@ const skillVariants = cva(
       },
       size: {
         sm: [
-          "angled-border-sm",
+          "angled-border-md",
           "border border-primary",
           "bg-primary/18 text-primary",
           "px-3 py-2",

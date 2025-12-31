@@ -16,7 +16,7 @@ export function Testimonial({
   company,
 }: Testimonial) {
   return (
-    <div className="bg-secondary rounded-card flex flex-col items-center gap-4 px-6 py-6 text-center sm:px-8 sm:py-8">
+    <div className="bg-secondary flex flex-col items-center gap-4 rounded-4xl px-6 py-6 text-center sm:px-8 sm:py-8">
       {/* Image */}
       <div className="relative h-16 w-16 shrink-0 overflow-clip rounded-full">
         <Image src={image} alt={name} fill className="object-cover" />

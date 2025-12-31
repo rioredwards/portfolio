@@ -1,3 +1,5 @@
+"use client";
+
 import { Skill } from "@/components/ui/skill";
 import Image, { StaticImageData } from "next/image";
 import { cn } from "../lib/utils";
@@ -12,6 +14,7 @@ export interface Project {
 
 interface ProjectProps extends Project {
   orientation: "left" | "right";
+  onClick?: () => void;
 }
 
 export function Project({
@@ -20,13 +23,15 @@ export function Project({
   description,
   skills,
   image,
+  onClick,
 }: ProjectProps) {
   return (
     <article
+      onClick={onClick}
       className={cn(
         "relative", // Positioning
         "aspect-3/2 w-full overflow-clip", // Layout & Sizing
-        "bg-card rounded-card shadow-md", // Background & Effects
+        "bg-card rounded-4xl shadow-md", // Background & Effects
         "group fade-in-scroll cursor-pointer transition-all duration-200 hover:shadow-xl", // Animation & Transitions
         "[--foreground:var(--color-popover)]", // Adjust this to change all foreground colors within card
       )}
