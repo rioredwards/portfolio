@@ -9,11 +9,11 @@ Personal portfolio website built with Next.js 16, React 19, TypeScript, Tailwind
 ## Commands
 
 ```bash
-npm run dev      # Start development server (localhost:3000)
-npm run build    # Production build
-npm run lint     # ESLint
-npm run lint:fix # ESLint with auto-fix
-npm run format   # Prettier formatting
+bun run dev      # Start development server (localhost:3000)
+bun run build    # Production build
+bun run lint     # ESLint
+bun run lint:fix # ESLint with auto-fix
+bun run format   # Prettier formatting
 ```
 
 ## Architecture
