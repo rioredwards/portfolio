@@ -1,4 +1,8 @@
-import { Blog } from "@/components/blog";
+import { BlogCard } from "@/components/blog-card";
+import {
+  BlogModalHandler,
+  SerializedBlog,
+} from "@/components/blog-modal-handler";
 import { Contact } from "@/components/contact";
 import { Hero } from "@/components/hero";
 import { ProjectCard } from "@/components/project-card";
@@ -9,7 +13,8 @@ import {
 import { SectionContentWrapper } from "@/components/section-content-wrapper";
 import { SectionHeader } from "@/components/section-header";
 import { SlidePanel } from "@/components/slide-panel";
-import { BLOGS } from "@/lib/blogs-data";
+import { getBlogIcon } from "@/lib/blog-icons";
+import { getAllBlogCards, getAllBlogsWithContent } from "@/lib/blogs";
 import { getAllProjectCards, getAllProjectsWithContent } from "@/lib/projects";
 import profileImage from "@/public/profile.webp";
 import Image from "next/image";
@@ -20,12 +25,24 @@ export default async function Home() {
   const projectCards = getAllProjectCards();
   const projectsWithContent = getAllProjectsWithContent();
 
+  const blogCards = getAllBlogCards();
+  const blogsWithContent = getAllBlogsWithContent();
+
   // Serialize MDX content for client-side rendering in the modal
   const serializedProjects = new Map<string, SerializedProject>();
   for (const [slug, project] of projectsWithContent) {
     const serializedContent = await serialize(project.content);
     serializedProjects.set(slug, {
       frontmatter: project.frontmatter,
+      serializedContent,
+    });
+  }
+
+  const serializedBlogs = new Map<string, SerializedBlog>();
+  for (const [slug, blog] of blogsWithContent) {
+    const serializedContent = await serialize(blog.content);
+    serializedBlogs.set(slug, {
+      frontmatter: blog.frontmatter,
       serializedContent,
     });
   }
@@ -110,12 +127,13 @@ export default async function Home() {
         >
           <SectionContentWrapper>
             <div className="flex flex-col gap-12">
-              {BLOGS.map((blog, index) => (
-                <Blog
+              {blogCards.map((blog, index) => (
+                <BlogCard
                   key={`${blog.title}-${index}`}
                   title={blog.title}
+                  slug={blog.slug}
                   description={blog.description}
-                  icon={blog.icon}
+                  icon={getBlogIcon(blog.icon)}
                 />
               ))}
             </div>
@@ -146,6 +164,7 @@ export default async function Home() {
 
       <Suspense fallback={null}>
         <ProjectModalHandler projectsMap={serializedProjects} />
+        <BlogModalHandler blogsMap={serializedBlogs} />
       </Suspense>
     </main>
   );

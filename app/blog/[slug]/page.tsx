@@ -1,0 +1,33 @@
+import { BlogDetailContent } from "@/components/blog-detail-content";
+import { getBlogSlugs, getBlogWithContent } from "@/lib/blogs";
+import { cn } from "@/lib/utils";
+import { notFound } from "next/navigation";
+
+interface PageProps {
+  params: Promise<{ slug: string }>;
+}
+
+export async function generateStaticParams() {
+  const slugs = getBlogSlugs();
+  return slugs.map((slug) => ({ slug }));
+}
+
+export default async function BlogDetailPage({ params }: PageProps) {
+  const { slug } = await params;
+  const blog = getBlogWithContent(slug);
+
+  if (!blog) {
+    notFound();
+  }
+
+  return (
+    <main className={cn("bg-background min-h-screen")}>
+      <div className={cn("px-content-px py-content-py mx-auto max-w-3xl")}>
+        <BlogDetailContent
+          frontmatter={blog.frontmatter}
+          content={blog.content}
+        />
+      </div>
+    </main>
+  );
+}

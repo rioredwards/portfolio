@@ -1,0 +1,104 @@
+---
+title: "What is the backend?"
+slug: "what-is-the-backend"
+description: "An easy intro to the Backend, Servers, APIs, etc.."
+icon: "ServerStack03Icon"
+date: "2024-01-15"
+tags:
+  - "Backend"
+  - "Servers"
+  - "APIs"
+  - "Beginner"
+order: 1
+---
+
+If you've ever wondered what happens behind the scenes when you use an app or website, you're in the right place. Let's demystify the backend!
+
+## The Restaurant Analogy
+
+Think of a web application like a restaurant:
+
+- **The Frontend** is like the dining area - it's what customers (users) see and interact with. The menus, the decor, the tables.
+- **The Backend** is like the kitchen - it's where all the real work happens, hidden from view.
+
+When you place an order (click a button, submit a form), that request goes to the kitchen (backend), where it's processed, and then the result comes back to your table (the screen).
+
+## What Actually is the Backend?
+
+The backend consists of three main components:
+
+### 1. The Server
+
+A server is just a computer that's always on and connected to the internet, waiting to receive and respond to requests. When you type a URL in your browser, you're sending a request to a server somewhere in the world.
+
+```
+Your Browser → Internet → Server → Database
+                ↑                      ↓
+                ←←←←← Response ←←←←←←←←
+```
+
+### 2. The Application
+
+This is the code that runs on the server. It contains the **business logic** - the rules that determine how data should be processed. For example:
+
+- "If a user tries to log in, check if their password matches"
+- "When someone places an order, decrease the inventory count"
+- "Calculate the total price including tax and shipping"
+
+### 3. The Database
+
+This is where all the data lives - user accounts, products, orders, messages, everything. The backend application talks to the database to:
+
+- **Create** new records (signing up a new user)
+- **Read** existing data (loading your profile)
+- **Update** information (changing your password)
+- **Delete** records (removing an item from your cart)
+
+## What's an API?
+
+API stands for **Application Programming Interface**. It's essentially a menu of operations that the backend offers to the frontend.
+
+Instead of the frontend needing to know *how* to get user data from the database, it just says: "Hey API, give me user #123's profile" and the API handles all the details.
+
+```javascript
+// Frontend makes a request
+fetch('/api/users/123')
+
+// Backend responds with data
+{
+  "id": 123,
+  "name": "Rio Edwards",
+  "email": "rio@example.com"
+}
+```
+
+## Common Backend Technologies
+
+Here are some popular tools used in backend development:
+
+| Category | Examples |
+|----------|----------|
+| Languages | JavaScript (Node.js), Python, Ruby, Go, Java |
+| Frameworks | Express.js, Django, Rails, Spring |
+| Databases | PostgreSQL, MongoDB, MySQL, Redis |
+| APIs | REST, GraphQL |
+
+## Why Does This Matter?
+
+Understanding the backend helps you:
+
+1. **Debug issues** - Is the problem in the frontend or backend?
+2. **Design better apps** - Knowing the constraints helps you make smarter decisions
+3. **Communicate with your team** - Speak the same language as backend developers
+4. **Build full-stack applications** - Become a more versatile developer
+
+## Next Steps
+
+Ready to dive deeper? Here are some topics to explore:
+
+- **REST APIs** - The most common way frontends and backends communicate
+- **Authentication** - How users log in securely
+- **Databases** - SQL vs NoSQL and when to use each
+- **Deployment** - Getting your backend code running on the internet
+
+The backend might be invisible to users, but it's the engine that powers every great application. Now you know what's happening behind the curtain!
