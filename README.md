@@ -131,10 +131,10 @@ Priority key
       This should be a modal that appears when the user clicks on a project card in the works section. It should render mdx content, which should be stored in the project's directory. It can also be viewed in a standalone page. This is made possible by a next.js feature (see previous versions of this project for reference)
   - [x] Desktop ❤️
   - [x] Mobile ❤️
-- [x] Add blog detail page/modal ❤️
-      This should be a modal that appears when the user clicks on a blog card in the blog section. It should render mdx content, which should be stored in the blog's directory. It can also be viewed in a standalone page. This is made possible by a next.js feature (see previous versions of this project for reference)
-  - [x] Desktop ❤️
-  - [x] Mobile ❤️
+- [] Add blog detail page/modal ❤️
+  This should be a modal that appears when the user clicks on a blog card in the blog section. It should render mdx content, which should be stored in the blog's directory. It can also be viewed in a standalone page. This is made possible by a next.js feature (see previous versions of this project for reference)
+  - [] Desktop ❤️
+  - [] Mobile ❤️
 - [ ] Ancillary Pages ❤️
   - [ ] Resume page ❤️
     - [ ] Desktop ❤️
