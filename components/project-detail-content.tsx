@@ -1,9 +1,10 @@
 import { ProjectFrontmatter } from "@/lib/projects";
 import { cn } from "@/lib/utils";
+import { useMDXComponents } from "@/mdx-components";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import Link from "next/link";
-import { useMDXComponents } from "@/mdx-components";
 import { Button } from "./ui/button";
+import { DialogTitle } from "./ui/dialog";
 
 interface ProjectDetailContentProps {
   frontmatter: ProjectFrontmatter;
@@ -33,12 +34,11 @@ export function ProjectDetailHeader({
         >
           {frontmatter.title.charAt(0)}
         </div>
-        <h1
-          className={cn("text-4xl font-bold", "text-foreground")}
-          style={{ fontFamily: "var(--font-mazaeni-demo), serif" }}
-        >
+        <DialogTitle
+          className={cn("text-3xl font-bold", "text-foreground")}
+          style={{ fontFamily: "var(--font-mazaeni-demo), serif" }}>
           {frontmatter.title}
-        </h1>
+        </DialogTitle>
       </div>
 
       {/* Tags */}

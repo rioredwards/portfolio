@@ -1,6 +1,6 @@
 "use client";
 
-import { Dialog, DialogContent } from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { BlogFrontmatter } from "@/lib/blogs";
 import { cn } from "@/lib/utils";
 import { MDXRemote, MDXRemoteSerializeResult } from "next-mdx-remote";
@@ -20,12 +20,11 @@ export function BlogDetailHeader({
 }) {
   return (
     <div className={cn("flex flex-col gap-3")}>
-      <h1
+      <DialogTitle
         className={cn("text-3xl font-bold", "text-foreground")}
-        style={{ fontFamily: "var(--font-mazaeni-demo), serif" }}
-      >
+        style={{ fontFamily: "var(--font-mazaeni-demo), serif" }}>
         {frontmatter.title}
-      </h1>
+      </DialogTitle>
 
       {/* Tags and Date */}
       <div className={cn("flex flex-wrap items-center gap-2")}>
@@ -84,14 +83,14 @@ export function BlogDetailModal({
           )}
         >
           {/* Sticky Header */}
-          <div
+          <DialogHeader
             className={cn(
               "bg-background sticky top-0 z-10",
               "px-6 py-6 pb-4 shadow-lg",
             )}
           >
             <BlogDetailHeader frontmatter={frontmatter} />
-          </div>
+          </DialogHeader>
 
           {/* Scrollable Content */}
           <div className={cn("flex-1 overflow-y-auto px-6 pb-8 lg:px-8")}>
