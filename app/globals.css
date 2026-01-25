@@ -3,6 +3,18 @@
 
 :root {
   view-transition-name: root;
+
+  /* Syntax highlighting colors (sugar-high) */
+  --sh-class: #2d5e9d;
+  --sh-identifier: var(--theme-foreground-secondary);
+  --sh-sign: #8996a3;
+  --sh-string: #007f7a;
+  --sh-keyword: #c53920;
+  --sh-comment: #a19595;
+  --sh-jsxliterals: #6f42c1;
+  --sh-property: #2d645d;
+  --sh-entity: #22863a;
+
   /* Theme colors (source of truth) */
   --theme-background: #f4ebda;
   --theme-foreground: #2d645d;
@@ -380,3 +392,173 @@
   background-color: rgba(255, 0, 0, 0.02);
 } 
 */
+
+/* ===== MDX Prose Styling ===== */
+
+/* Syntax highlighting colors (sugar-high) */
+:root {
+  --sh-class: #2d5e9d;
+  --sh-identifier: #354150;
+  --sh-sign: #8996a3;
+  --sh-string: #007f7a;
+  --sh-keyword: #e02518;
+  --sh-comment: #a19595;
+  --sh-jsxliterals: #6266d1;
+  --sh-property: #e25a1c;
+  --sh-entity: #e25a1c;
+}
+
+.dark {
+  --sh-class: #4c97f8;
+  --sh-identifier: #e0e0e0;
+  --sh-keyword: #f47067;
+  --sh-string: #0fa295;
+}
+
+/* Selection color */
+::selection {
+  background-color: oklch(0.67 0.16 58 / 40%);
+  color: inherit;
+}
+
+/* Prose anchor links */
+.prose .anchor {
+  @apply invisible absolute no-underline;
+  margin-left: -1em;
+  padding-right: 0.5em;
+  width: 80%;
+  max-width: 700px;
+  cursor: pointer;
+}
+
+.prose .anchor:hover {
+  @apply visible;
+}
+
+.prose .anchor:after {
+  @apply text-primary/50;
+  content: "#";
+}
+
+.prose *:hover > .anchor {
+  @apply visible;
+}
+
+/* Prose headings */
+.prose h1 {
+  @apply text-foreground mt-8 mb-4 text-4xl font-semibold tracking-tight;
+}
+
+.prose h2 {
+  @apply text-foreground mt-8 mb-3 text-2xl font-semibold tracking-tight;
+}
+
+.prose h3 {
+  @apply text-foreground mt-6 mb-2 text-xl font-semibold tracking-tight;
+}
+
+.prose h4 {
+  @apply text-foreground mt-6 mb-2 text-lg font-medium tracking-tight;
+}
+
+/* Prose paragraphs and text */
+.prose p {
+  @apply text-foreground/90 my-4 leading-relaxed;
+}
+
+.prose strong {
+  @apply text-foreground font-semibold;
+}
+
+.prose em {
+  @apply italic;
+}
+
+/* Prose links */
+.prose a:not(.anchor) {
+  @apply decoration-primary/50 hover:decoration-primary underline underline-offset-2 transition-colors;
+}
+
+/* Prose lists */
+.prose ul {
+  @apply my-4 list-disc space-y-2 pl-6;
+}
+
+.prose ol {
+  @apply my-4 list-decimal space-y-2 pl-6;
+}
+
+.prose li {
+  @apply text-foreground/90;
+}
+
+/* Prose code blocks */
+.prose pre {
+  @apply bg-muted border-border my-6 overflow-x-auto rounded-lg border px-4 py-3 text-sm;
+}
+
+.prose code {
+  @apply bg-muted rounded-md px-1.5 py-0.5 font-mono text-sm;
+}
+
+.prose pre code {
+  @apply bg-transparent p-0;
+  line-height: 1.6;
+}
+
+.prose code span {
+  @apply font-medium;
+}
+
+/* Hide scrollbar on pre */
+.prose pre::-webkit-scrollbar {
+  display: none;
+}
+
+.prose pre {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Prose images */
+.prose img {
+  @apply my-6 rounded-lg;
+}
+
+/* Prose tables */
+.prose table {
+  @apply my-6 w-full text-sm;
+  display: block;
+  overflow-x: auto;
+}
+
+.prose thead {
+  @apply border-border border-b;
+}
+
+.prose th {
+  @apply text-foreground px-3 py-2 text-left font-semibold;
+}
+
+.prose td {
+  @apply border-border/50 text-foreground/90 border-b px-3 py-2;
+}
+
+.prose tr:last-child td {
+  @apply border-b-0;
+}
+
+/* Prose blockquotes */
+.prose blockquote {
+  @apply border-primary/30 text-foreground/80 my-6 border-l-4 pl-4 italic;
+}
+
+/* Prose horizontal rules */
+.prose hr {
+  @apply border-border my-8;
+}
+
+/* First child spacing fix */
+.prose > :first-child {
+  margin-top: 0 !important;
+}
