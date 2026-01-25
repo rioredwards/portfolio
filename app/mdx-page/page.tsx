@@ -11,7 +11,9 @@ export default function Page() {
       previousDecorationHeight="tall"
     >
       <SectionContentWrapper className="">
-        <Welcome />
+        <article className="prose">
+          <Welcome />
+        </article>
       </SectionContentWrapper>
     </SlidePanel>
   </div>)

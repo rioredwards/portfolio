@@ -447,18 +447,32 @@
 /* Prose headings */
 .prose h1 {
   @apply text-foreground mt-8 mb-4 text-4xl font-semibold tracking-tight;
+  font-family: var(--font-mazaeni-demo), serif;
 }
 
 .prose h2 {
   @apply text-foreground mt-8 mb-3 text-2xl font-semibold tracking-tight;
+  font-family: var(--font-mazaeni-demo), serif;
 }
 
 .prose h3 {
   @apply text-foreground mt-6 mb-2 text-xl font-semibold tracking-tight;
+  font-family: var(--font-mazaeni-demo), serif;
 }
 
 .prose h4 {
   @apply text-foreground mt-6 mb-2 text-lg font-medium tracking-tight;
+  font-family: var(--font-mazaeni-demo), serif;
+}
+
+.prose h5 {
+  @apply text-foreground mt-4 mb-2 text-base font-medium tracking-tight;
+  font-family: var(--font-mazaeni-demo), serif;
+}
+
+.prose h6 {
+  @apply text-foreground mt-4 mb-2 text-sm font-medium tracking-tight;
+  font-family: var(--font-mazaeni-demo), serif;
 }
 
 /* Prose paragraphs and text */
