@@ -1,30 +1,27 @@
 "use client";
 
 import { Dialog, DialogContent } from "@/components/ui/dialog";
-import { ParsedProjectContent } from "@/lib/parse-project-markdown";
+import { ProjectFrontmatter } from "@/lib/projects";
 import { cn } from "@/lib/utils";
+import { MDXRemote, MDXRemoteSerializeResult } from "next-mdx-remote";
 import Link from "next/link";
-import { Project } from "./project";
-import {
-  ProjectDetailContent,
-  ProjectDetailHeader,
-} from "./project-detail-content";
+import { ProjectDetailHeader } from "./project-detail-content";
 import { Button } from "./ui/button";
 
 interface ProjectDetailModalProps {
-  project: Project | null;
-  content: ParsedProjectContent | null;
+  frontmatter: ProjectFrontmatter | null;
+  serializedContent: MDXRemoteSerializeResult | null;
   open: boolean;
   onOpenChange: (open: boolean) => void;
 }
 
 export function ProjectDetailModal({
-  project,
-  content,
+  frontmatter,
+  serializedContent,
   open,
   onOpenChange,
 }: ProjectDetailModalProps) {
-  if (!project) return null;
+  if (!frontmatter) return null;
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
@@ -38,34 +35,41 @@ export function ProjectDetailModal({
         showCloseButton={true}
       >
         {/* Sticky Header */}
-        {content && (
-          <div
-            className={cn(
-              "bg-background sticky top-0 z-10",
-              "px-6 py-6 pb-4 shadow-lg",
-            )}
-          >
-            <ProjectDetailHeader project={project} content={content} />
-          </div>
-        )}
+        <div
+          className={cn(
+            "bg-background sticky top-0 z-10",
+            "px-6 py-6 pb-4 shadow-lg",
+          )}
+        >
+          <ProjectDetailHeader frontmatter={frontmatter} />
+        </div>
 
         {/* Scrollable Content */}
         <div
           className={cn(
             "flex-1 overflow-y-auto px-6 lg:px-8",
-            content && content.links.length > 0 && "pb-24",
+            frontmatter.links && frontmatter.links.length > 0 && "pb-24",
           )}
         >
-          {content ? (
+          {serializedContent ? (
             <>
-              <ProjectDetailContent
-                project={project}
-                content={content}
-                renderContext="modal"
-              />
+              <div
+                className={cn(
+                  "prose prose-neutral dark:prose-invert max-w-none",
+                  "prose-headings:font-[var(--font-mazaeni-demo),serif]",
+                  "prose-p:text-foreground prose-strong:text-foreground",
+                  "prose-ul:text-foreground prose-ol:text-foreground prose-li:text-foreground",
+                  "prose-a:text-primary prose-a:no-underline hover:prose-a:underline",
+                  "prose-img:rounded-xl prose-img:my-6",
+                  "prose-pre:bg-secondary prose-pre:text-foreground",
+                  "prose-code:bg-secondary prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded",
+                )}
+              >
+                <MDXRemote {...serializedContent} />
+              </div>
               <div className={cn("border-border mt-6 border-t pt-6")}>
                 <Link
-                  href={`/work/${project.title.toLowerCase().replace(/\s+/g, "-")}`}
+                  href={`/work/${frontmatter.slug}`}
                   className={cn("text-primary text-sm hover:underline")}
                   onClick={(e) => {
                     e.stopPropagation();
@@ -84,7 +88,7 @@ export function ProjectDetailModal({
         </div>
 
         {/* Floating Links at Bottom */}
-        {content && content.links.length > 0 && (
+        {frontmatter.links && frontmatter.links.length > 0 && (
           <div
             className={cn(
               "bg-background sticky right-0 bottom-0 left-0 z-50",
@@ -92,7 +96,7 @@ export function ProjectDetailModal({
               "px-6 py-2",
             )}
           >
-            {content.links.map((link, idx) => (
+            {frontmatter.links.map((link, idx) => (
               <Button key={idx} asChild variant="outline" size="sm">
                 <Link href={link.url} target="_blank" rel="noopener noreferrer">
                   {link.text}

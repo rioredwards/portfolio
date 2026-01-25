@@ -21,15 +21,18 @@ bun run format   # Prettier formatting
 ### Directory Structure
 - `app/` - Next.js App Router pages and layouts
 - `components/` - React components (UI primitives in `components/ui/`)
+- `content/projects/` - Project MDX files with frontmatter metadata
 - `lib/` - Utilities, data, server actions, and hooks
-- `public/work/` - Project assets (images in `images/`, markdown content in `markdown/`)
+- `public/work/images/` - Project images
 - `fonts/` - Custom local fonts (Mazaeni Demo)
 
 ### Key Patterns
 
-**Data-driven content**: Projects, blogs, and testimonials are defined in `lib/*-data.ts` files and rendered by corresponding components.
+**Data-driven content**: Blogs and testimonials are defined in `lib/*-data.ts` files. Projects are defined as MDX files in `content/projects/` with frontmatter for metadata.
 
-**Project detail pages**: Use parallel routes pattern - projects can be viewed as modal overlays or standalone pages at `/work/[slug]`. Markdown content lives in `public/work/markdown/` and is parsed via `lib/get-project-markdown.ts` and `lib/parse-project-markdown.ts`.
+**Project MDX system**: Projects are stored as single-source MDX files in `content/projects/`. Each file contains frontmatter (title, slug, description, category, skills, image, links, order) and MDX body content. Utility functions in `lib/projects.ts` provide `getProjectSlugs()`, `getAllProjectCards()`, `getProjectWithContent()`, and `getAllProjectsWithContent()`.
+
+**Project detail pages**: Projects can be viewed as modal overlays (on home page) or standalone pages at `/work/[slug]`. MDX content is rendered using `next-mdx-remote`.
 
 **Design system**: CSS variables defined in `app/globals.css` with responsive sizing using `clamp()`. Uses Tailwind's `@theme` directive for custom tokens. Key concepts:
 - `--responsive-spacing-*` variables scale with viewport width

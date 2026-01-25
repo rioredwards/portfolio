@@ -11,8 +11,7 @@ export function ProjectCard({ orientation, ...project }: ProjectCardProps) {
   const router = useRouter();
 
   const handleClick = () => {
-    const slug = project.title.toLowerCase().replace(/\s+/g, "-");
-    router.push(`?project=${slug}`, { scroll: false });
+    router.push(`?project=${project.slug}`, { scroll: false });
   };
 
   return (

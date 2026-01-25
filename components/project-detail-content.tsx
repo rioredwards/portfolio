@@ -1,48 +1,20 @@
-import { ParsedProjectContent } from "@/lib/parse-project-markdown";
+import { ProjectFrontmatter } from "@/lib/projects";
 import { cn } from "@/lib/utils";
+import { MDXRemote } from "next-mdx-remote/rsc";
 import Link from "next/link";
-import ReactMarkdown from "react-markdown";
-import { Project } from "./project";
+import { useMDXComponents } from "@/mdx-components";
 import { Button } from "./ui/button";
-import { Skill } from "./ui/skill";
 
 interface ProjectDetailContentProps {
-  project: Project;
-  content: ParsedProjectContent;
+  frontmatter: ProjectFrontmatter;
+  content: string;
   renderContext?: "modal" | "page";
 }
 
-function ProjectDetailSection({
-  name,
-  children,
-}: {
-  name?: string;
-  children: React.ReactNode;
-}) {
-  return (
-    <div className={cn("mb-6")}>
-      {name && (
-        <div className={cn("mt-6 mb-4 flex flex-col justify-center")}>
-          <h2
-            className={cn("mb-2 text-2xl font-bold", "text-foreground")}
-            style={{ fontFamily: "var(--font-mazaeni-demo), serif" }}
-          >
-            {name}
-          </h2>
-          <div className={cn("bg-border h-px w-full")} />
-        </div>
-      )}
-      <div>{children}</div>
-    </div>
-  );
-}
-
 export function ProjectDetailHeader({
-  project,
-  content,
+  frontmatter,
 }: {
-  project: Project;
-  content: ParsedProjectContent;
+  frontmatter: ProjectFrontmatter;
 }) {
   return (
     <div
@@ -59,13 +31,13 @@ export function ProjectDetailHeader({
             "text-foreground-secondary text-2xl font-bold",
           )}
         >
-          {project.title.charAt(0)}
+          {frontmatter.title.charAt(0)}
         </div>
         <h1
           className={cn("text-4xl font-bold", "text-foreground")}
           style={{ fontFamily: "var(--font-mazaeni-demo), serif" }}
         >
-          {content.title}
+          {frontmatter.title}
         </h1>
       </div>
 
@@ -77,9 +49,9 @@ export function ProjectDetailHeader({
             "bg-secondary text-foreground-secondary",
           )}
         >
-          #{project.category}
+          #{frontmatter.category}
         </span>
-        {project.skills.slice(0, 2).map((skill, idx) => (
+        {frontmatter.skills.slice(0, 2).map((skill, idx) => (
           <span
             key={idx}
             className={cn(
@@ -96,10 +68,12 @@ export function ProjectDetailHeader({
 }
 
 export function ProjectDetailContent({
-  project,
+  frontmatter,
   content,
   renderContext = "page",
 }: ProjectDetailContentProps) {
+  const components = useMDXComponents({});
+
   return (
     <div>
       {/* Header Section: Logo, Title, Links, Tags */}
@@ -118,7 +92,7 @@ export function ProjectDetailContent({
                 "text-foreground-secondary text-2xl font-bold",
               )}
             >
-              {project.title.charAt(0)}
+              {frontmatter.title.charAt(0)}
             </div>
             <h1
               className={cn(
@@ -127,14 +101,14 @@ export function ProjectDetailContent({
               )}
               style={{ fontFamily: "var(--font-mazaeni-demo), serif" }}
             >
-              {content.title}
+              {frontmatter.title}
             </h1>
           </div>
 
           {/* Links (Try, GitHub) */}
-          {content.links.length > 0 && (
+          {frontmatter.links && frontmatter.links.length > 0 && (
             <ul className={cn("flex items-center gap-4")}>
-              {content.links.map((link, idx) => (
+              {frontmatter.links.map((link, idx) => (
                 <li key={idx}>
                   <Button
                     asChild
@@ -165,9 +139,9 @@ export function ProjectDetailContent({
                 "bg-secondary text-foreground-secondary",
               )}
             >
-              #{project.category}
+              #{frontmatter.category}
             </span>
-            {project.skills.slice(0, 2).map((skill, idx) => (
+            {frontmatter.skills.slice(0, 2).map((skill, idx) => (
               <span
                 key={idx}
                 className={cn(
@@ -182,180 +156,22 @@ export function ProjectDetailContent({
         </div>
       )}
 
-      {/* Content Section */}
+      {/* MDX Content Section */}
       <section>
-        {/* Header Image */}
-        {content.headerImage && (
-          <div className={cn("bg-secondary my-6 overflow-hidden rounded-xl")}>
-            <div
-              className={cn(
-                "flex aspect-video w-full items-center justify-center",
-              )}
-            >
-              <span className={cn("text-muted-foreground")}>
-                Header Image Placeholder
-              </span>
-            </div>
-          </div>
-        )}
-
-        {/* Slogan */}
-        {content.slogan && (
-          <ProjectDetailSection>
-            <div
-              className={cn(
-                "prose prose-neutral dark:prose-invert max-w-none",
-                "prose-p:text-foreground prose-strong:text-foreground",
-              )}
-            >
-              <ReactMarkdown>{content.slogan}</ReactMarkdown>
-            </div>
-          </ProjectDetailSection>
-        )}
-
-        {/* Description */}
-        {content.description && (
-          <ProjectDetailSection>
-            <div
-              className={cn(
-                "prose prose-neutral dark:prose-invert max-w-none",
-                "prose-p:text-foreground",
-              )}
-            >
-              <ReactMarkdown>{content.description}</ReactMarkdown>
-            </div>
-          </ProjectDetailSection>
-        )}
-
-        {/* Made With */}
-        {content.madeWith.length > 0 && (
-          <ProjectDetailSection name="Made With">
-            <div className={cn("flex flex-wrap gap-2")}>
-              {content.madeWith.map((tech, idx) => (
-                <Skill key={idx} text={tech} />
-              ))}
-            </div>
-          </ProjectDetailSection>
-        )}
-
-        {/* Features */}
-        {content.features && (
-          <ProjectDetailSection name="Features">
-            <div
-              className={cn(
-                "prose prose-neutral dark:prose-invert max-w-none",
-                "prose-ul:text-foreground prose-li:text-foreground",
-                "prose-strong:text-foreground",
-              )}
-            >
-              <ReactMarkdown>{content.features}</ReactMarkdown>
-            </div>
-          </ProjectDetailSection>
-        )}
-
-        {/* Preview */}
-        {content.preview && (
-          <ProjectDetailSection name="Preview">
-            <div className={cn("bg-secondary overflow-hidden rounded-xl")}>
-              <div
-                className={cn(
-                  "flex aspect-video w-full items-center justify-center",
-                )}
-              >
-                <span className={cn("text-muted-foreground")}>
-                  Preview Image Placeholder
-                </span>
-              </div>
-            </div>
-          </ProjectDetailSection>
-        )}
-
-        {/* Usage */}
-        {content.usage && (
-          <ProjectDetailSection name="Usage">
-            <div
-              className={cn(
-                "prose prose-neutral dark:prose-invert max-w-none",
-                "prose-ol:text-foreground prose-li:text-foreground",
-              )}
-            >
-              <ReactMarkdown>{content.usage}</ReactMarkdown>
-            </div>
-          </ProjectDetailSection>
-        )}
-
-        {/* Configure */}
-        {content.configure && (
-          <ProjectDetailSection name="Configure">
-            <div
-              className={cn(
-                "prose prose-neutral dark:prose-invert max-w-none",
-                "prose-ol:text-foreground prose-li:text-foreground",
-              )}
-            >
-              <ReactMarkdown>{content.configure}</ReactMarkdown>
-            </div>
-          </ProjectDetailSection>
-        )}
-
-        {/* Lessons Learned */}
-        {content.lessonsLearned && (
-          <ProjectDetailSection name="Lessons Learned">
-            <div
-              className={cn(
-                "prose prose-neutral dark:prose-invert max-w-none",
-                "prose-ul:text-foreground prose-li:text-foreground",
-                "prose-strong:text-foreground",
-              )}
-            >
-              <ReactMarkdown>{content.lessonsLearned}</ReactMarkdown>
-            </div>
-          </ProjectDetailSection>
-        )}
-
-        {/* Reflection */}
-        {content.reflection && (
-          <ProjectDetailSection name="Reflection">
-            <div
-              className={cn(
-                "prose prose-neutral dark:prose-invert max-w-none",
-                "prose-p:text-foreground prose-a:text-primary prose-a:no-underline hover:prose-a:underline",
-              )}
-            >
-              <ReactMarkdown>{content.reflection}</ReactMarkdown>
-            </div>
-          </ProjectDetailSection>
-        )}
-
-        {/* Authors */}
-        {content.authors && (
-          <ProjectDetailSection name="Authors">
-            <div
-              className={cn(
-                "prose prose-neutral dark:prose-invert max-w-none",
-                "prose-ul:text-foreground prose-li:text-foreground",
-                "prose-a:text-primary prose-a:no-underline hover:prose-a:underline",
-              )}
-            >
-              <ReactMarkdown>{content.authors}</ReactMarkdown>
-            </div>
-          </ProjectDetailSection>
-        )}
-
-        {/* Acknowledgements */}
-        {content.acknowledgements && (
-          <ProjectDetailSection name="Acknowledgements">
-            <div
-              className={cn(
-                "prose prose-neutral dark:prose-invert max-w-none",
-                "prose-ul:text-foreground prose-li:text-foreground",
-                "prose-a:text-primary prose-a:no-underline hover:prose-a:underline",
-              )}
-            >
-              <ReactMarkdown>{content.acknowledgements}</ReactMarkdown>
-            </div>
-          </ProjectDetailSection>
-        )}
+        <div
+          className={cn(
+            "prose prose-neutral dark:prose-invert max-w-none",
+            "prose-headings:font-[var(--font-mazaeni-demo),serif]",
+            "prose-p:text-foreground prose-strong:text-foreground",
+            "prose-ul:text-foreground prose-ol:text-foreground prose-li:text-foreground",
+            "prose-a:text-primary prose-a:no-underline hover:prose-a:underline",
+            "prose-img:rounded-xl prose-img:my-6",
+            "prose-pre:bg-secondary prose-pre:text-foreground",
+            "prose-code:bg-secondary prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded",
+          )}
+        >
+          <MDXRemote source={content} components={components} />
+        </div>
       </section>
     </div>
   );

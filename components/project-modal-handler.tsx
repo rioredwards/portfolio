@@ -1,30 +1,27 @@
 "use client";
 
-import { ParsedProjectContent } from "@/lib/parse-project-markdown";
-import { PROJECTS } from "@/lib/projects-data";
+import { ProjectFrontmatter } from "@/lib/projects";
+import { MDXRemoteSerializeResult } from "next-mdx-remote";
 import { useRouter, useSearchParams } from "next/navigation";
 import { ProjectDetailModal } from "./project-detail-modal";
 
+export interface SerializedProject {
+  frontmatter: ProjectFrontmatter;
+  serializedContent: MDXRemoteSerializeResult;
+}
+
 interface ProjectModalHandlerProps {
-  projectContentMap: Map<string, ParsedProjectContent>;
+  projectsMap: Map<string, SerializedProject>;
 }
 
 export function ProjectModalHandler({
-  projectContentMap,
+  projectsMap,
 }: ProjectModalHandlerProps) {
   const searchParams = useSearchParams();
   const router = useRouter();
 
   const projectSlug = searchParams.get("project");
-  const selectedProject = projectSlug
-    ? PROJECTS.find(
-        (p) => p.title.toLowerCase().replace(/\s+/g, "-") === projectSlug
-      ) ?? null
-    : null;
-
-  const content = selectedProject
-    ? projectContentMap.get(selectedProject.title) ?? null
-    : null;
+  const selectedProject = projectSlug ? projectsMap.get(projectSlug) : null;
 
   const handleOpenChange = (open: boolean) => {
     if (!open) {
@@ -34,8 +31,8 @@ export function ProjectModalHandler({
 
   return (
     <ProjectDetailModal
-      project={selectedProject}
-      content={content}
+      frontmatter={selectedProject?.frontmatter ?? null}
+      serializedContent={selectedProject?.serializedContent ?? null}
       open={!!selectedProject}
       onOpenChange={handleOpenChange}
     />

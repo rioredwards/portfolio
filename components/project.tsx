@@ -1,15 +1,16 @@
 "use client";
 
 import { Skill } from "@/components/ui/skill";
-import Image, { StaticImageData } from "next/image";
+import Image from "next/image";
 import { cn } from "../lib/utils";
 
 export interface Project {
   category: string;
   title: string;
+  slug: string;
   description: string;
   skills: string[];
-  image: StaticImageData;
+  image: string;
 }
 
 interface ProjectProps extends Project {
@@ -55,6 +56,7 @@ export function Project({
             src={image}
             alt={`${title} preview`}
             fill
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 800px"
             className={cn(
               "object-cover", // Layout & Sizing
               "paralax transition-all duration-200", // Animation & Transitions
