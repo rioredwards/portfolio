@@ -1,5 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { Message02Icon } from "@hugeicons/core-free-icons";
+import { HugeiconsIcon } from "@hugeicons/react";
 import Link from "next/link";
 
 interface HeroProps {
@@ -38,9 +40,39 @@ function HeroButton({
   buttonHref: string;
 }) {
   return (
-    <Button asChild size="xl" className="tracking-wider uppercase text-lg bg-accent hover:bg-accent-hover">
-      <Link href={buttonHref}>{buttonText}</Link>
-    </Button>
+    <div className="p-4 group -translate-x-4 pointer-coarse:translate-x-0">
+      <Button
+        asChild
+        size="icon-xl"
+        className={cn(
+          "bg-secondary group-hover:bg-accent-hover! pointer-coarse:bg-accent-hover! custom-bg-ping-wrapper",
+          "overflow-hidden group-hover:overflow-visible pointer-coarse:overflow-visible",
+          "transition-all duration-400",
+          "w-16 group-hover:w-52 pointer-coarse:w-52 group-hover:px-6 pointer-coarse:px-6 h-14",
+        )}
+      >
+        <Link className="" href={buttonHref}>
+          <div className="custom-bg-ping flex items-center gap-2 mr-2">
+            <span
+              className={cn(
+                "grid grid-cols-[0fr] transition-all duration-400",
+                "group-hover:grid-cols-[1fr] pointer-coarse:grid-cols-[1fr]",
+              )}
+            >
+              <span className="overflow-hidden opacity-0 group-hover:opacity-100 pointer-coarse:opacity-100 whitespace-nowrap text-xl uppercase tracking-wider transition-all duration-400 ease-in">
+                {buttonText}
+              </span>
+            </span>
+            <HugeiconsIcon
+              icon={Message02Icon}
+              className="size-8 group-hover:scale-75 pointer-coarse:scale-75 transition-all duration-400 text-accent group-hover:text-primary-foreground pointer-coarse:text-primary-foreground"
+              color="currentColor"
+              strokeWidth={2}
+            />
+          </div>
+        </Link>
+      </Button>
+    </div>
   );
 }
 
@@ -105,7 +137,7 @@ export function Hero({
           <HeroHeading title={title} className="mb-4" />
           <HeroParagraph
             paragraphs={paragraphs || []}
-            className="mb-8 space-y-4"
+            className="mb-2 space-y-4"
           />
           <HeroButton buttonText={buttonText} buttonHref={buttonHref} />
         </div>
