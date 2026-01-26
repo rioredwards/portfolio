@@ -1,3 +1,4 @@
+import { ContentProse } from "@/components/content-detail/content-prose";
 import { ProjectFrontmatter } from "@/lib/projects";
 import { cn } from "@/lib/utils";
 import { useMDXComponents } from "@/mdx-components";
@@ -132,20 +133,9 @@ export function ProjectDetailContent({
 
       {/* MDX Content Section */}
       <section>
-        <div
-          className={cn(
-            "prose prose-neutral dark:prose-invert max-w-none",
-            "prose-headings:font-[var(--font-mazaeni-demo),serif]",
-            "prose-p:text-foreground prose-strong:text-foreground",
-            "prose-ul:text-foreground prose-ol:text-foreground prose-li:text-foreground",
-            "prose-a:text-primary prose-a:no-underline hover:prose-a:underline",
-            "prose-img:rounded-xl prose-img:my-6",
-            "prose-pre:bg-secondary prose-pre:text-foreground",
-            "prose-code:bg-secondary prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded",
-          )}
-        >
+        <ContentProse>
           <MDXRemote source={content} components={components} />
-        </div>
+        </ContentProse>
       </section>
     </div>
   );

@@ -1,7 +1,8 @@
+import { ContentProse } from "@/components/content-detail/content-prose";
 import { BlogFrontmatter } from "@/lib/blogs";
 import { cn } from "@/lib/utils";
-import { MDXRemote } from "next-mdx-remote/rsc";
 import { useMDXComponents } from "@/mdx-components";
+import { MDXRemote } from "next-mdx-remote/rsc";
 
 interface BlogDetailContentProps {
   frontmatter: BlogFrontmatter;
@@ -69,23 +70,9 @@ export function BlogDetailContent({
       </header>
 
       {/* MDX Content */}
-      <div
-        className={cn(
-          "prose prose-neutral dark:prose-invert max-w-none",
-          "prose-headings:font-[var(--font-mazaeni-demo),serif]",
-          "prose-p:text-foreground prose-strong:text-foreground",
-          "prose-ul:text-foreground prose-ol:text-foreground prose-li:text-foreground",
-          "prose-a:text-primary prose-a:no-underline hover:prose-a:underline",
-          "prose-img:rounded-xl prose-img:my-6",
-          "prose-pre:bg-secondary prose-pre:text-foreground",
-          "prose-code:bg-secondary prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded",
-          "prose-table:text-foreground",
-          "prose-th:bg-secondary prose-th:px-4 prose-th:py-2",
-          "prose-td:px-4 prose-td:py-2",
-        )}
-      >
+      <ContentProse includeTableStyles>
         <MDXRemote source={content} components={components} />
-      </div>
+      </ContentProse>
     </article>
   );
 }

@@ -1,14 +1,13 @@
 "use client";
 
+import {
+  ContentModalHandler,
+  SerializedContent,
+} from "@/components/content-detail/content-modal-handler";
 import { ProjectFrontmatter } from "@/lib/projects";
-import { MDXRemoteSerializeResult } from "next-mdx-remote";
-import { useRouter, useSearchParams } from "next/navigation";
 import { ProjectDetailModal } from "./project-detail-modal";
 
-export interface SerializedProject {
-  frontmatter: ProjectFrontmatter;
-  serializedContent: MDXRemoteSerializeResult;
-}
+export type SerializedProject = SerializedContent<ProjectFrontmatter>;
 
 interface ProjectModalHandlerProps {
   projectsMap: Map<string, SerializedProject>;
@@ -17,24 +16,11 @@ interface ProjectModalHandlerProps {
 export function ProjectModalHandler({
   projectsMap,
 }: ProjectModalHandlerProps) {
-  const searchParams = useSearchParams();
-  const router = useRouter();
-
-  const projectSlug = searchParams.get("project");
-  const selectedProject = projectSlug ? projectsMap.get(projectSlug) : null;
-
-  const handleOpenChange = (open: boolean) => {
-    if (!open) {
-      router.push("/", { scroll: false });
-    }
-  };
-
   return (
-    <ProjectDetailModal
-      frontmatter={selectedProject?.frontmatter ?? null}
-      serializedContent={selectedProject?.serializedContent ?? null}
-      open={!!selectedProject}
-      onOpenChange={handleOpenChange}
+    <ContentModalHandler
+      contentMap={projectsMap}
+      queryParam="project"
+      renderModal={(props) => <ProjectDetailModal {...props} />}
     />
   );
 }
