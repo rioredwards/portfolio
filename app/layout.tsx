@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Playfair_Display } from "next/font/google";
+import { DM_Mono, DM_Sans } from "next/font/google";
 import localFont from "next/font/local";
 import { Footer } from "../components/footer";
 import { MobileMenu } from "../components/mobile-menu";
@@ -8,20 +8,15 @@ import { Sidebar } from "../components/sidebar";
 import { Toaster } from "../components/ui/sonner";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const dmSans = DM_Sans({
+  variable: "--font-dm-sans",
   subsets: ["latin"],
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const dmMono = DM_Mono({
+  variable: "--font-dm-mono",
   subsets: ["latin"],
-});
-
-const playfairDisplay = Playfair_Display({
-  variable: "--font-playfair",
-  subsets: ["latin"],
-  weight: ["400", "700"],
+  weight: ["300", "400", "500"],
 });
 
 const mazaeniDemo = localFont({
@@ -70,7 +65,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${playfairDisplay.variable} ${mazaeniDemo.variable} font-serif antialiased`}
+        className={`${dmSans.variable} ${dmMono.variable} ${mazaeniDemo.variable} font-sans antialiased`}
       >
         <>
           <Navbar />

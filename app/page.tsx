@@ -5,10 +5,9 @@ import {
 } from "@/components/blog-modal-handler";
 import { Contact } from "@/components/contact";
 import { Hero } from "@/components/hero";
-import { ProjectCard } from "@/components/project-card";
 import {
   ProjectModalHandler,
-  SerializedProject,
+  SerializedProject
 } from "@/components/project-modal-handler";
 import { SectionContentWrapper } from "@/components/section-content-wrapper";
 import { SectionHeader } from "@/components/section-header";
@@ -17,9 +16,10 @@ import { getBlogIcon } from "@/lib/blog-icons";
 import { getAllBlogCards, getAllBlogsWithContent } from "@/lib/blogs";
 import { getAllProjectCards, getAllProjectsWithContent } from "@/lib/projects";
 import profileImage from "@/public/profile.webp";
-import Image from "next/image";
 import { serialize } from "next-mdx-remote/serialize";
+import Image from "next/image";
 import { Fragment, Suspense } from "react";
+import { ProjectCard } from "../components/project-card";
 
 export default async function Home() {
   const projectCards = getAllProjectCards();

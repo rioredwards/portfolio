@@ -13,59 +13,27 @@ interface ProjectDetailContentProps {
 }
 
 export function ProjectDetailHeader({
-  frontmatter,
-}: {
-  frontmatter: ProjectFrontmatter;
-}) {
+  category,
+  title,
+}:
+  ProjectFrontmatter
+) {
   return (
-    <div
-      className={cn(
-        "grid grid-cols-[auto_1fr] grid-rows-[auto_auto] items-center justify-items-start",
-        "gap-x-4 gap-y-4",
-      )}
-    >
-      {/* Logo placeholder and Title */}
-      <div className={cn("flex items-center gap-4")}>
-        <div
-          className={cn(
-            "bg-secondary flex h-12 w-12 items-center justify-center rounded-full",
-            "text-foreground-secondary text-2xl font-bold",
-          )}
-        >
-          {frontmatter.title.charAt(0)}
-        </div>
+    <article className="flex flex-col gap-4 px-2 md:px-4 ">
+      <header className="flex flex-col gap-2">
+        <span className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">
+          {category}
+        </span>
         <DialogTitle
           className={cn("text-3xl font-bold", "text-foreground")}
           style={{ fontFamily: "var(--font-mazaeni-demo), serif" }}>
-          {frontmatter.title}
+          {title}
         </DialogTitle>
-      </div>
-
-      {/* Tags */}
-      <div className={cn("col-span-2 flex flex-wrap items-center gap-2")}>
-        <span
-          className={cn(
-            "rounded-full px-3 py-1 text-xs font-medium",
-            "bg-secondary text-foreground-secondary",
-          )}
-        >
-          #{frontmatter.category}
-        </span>
-        {frontmatter.skills.slice(0, 2).map((skill, idx) => (
-          <span
-            key={idx}
-            className={cn(
-              "rounded-full px-3 py-1 text-xs font-medium",
-              "bg-secondary text-foreground-secondary",
-            )}
-          >
-            #{skill}
-          </span>
-        ))}
-      </div>
-    </div>
+      </header>
+    </article>
   );
 }
+
 
 export function ProjectDetailContent({
   frontmatter,
@@ -105,18 +73,15 @@ export function ProjectDetailContent({
             </h1>
           </div>
 
-          {/* Links (Try, GitHub) */}
+          {/* Links  */}
           {frontmatter.links && frontmatter.links.length > 0 && (
             <ul className={cn("flex items-center gap-4")}>
               {frontmatter.links.map((link, idx) => (
                 <li key={idx}>
                   <Button
                     asChild
-                    variant="outline"
+                    variant={idx === 0 ? "default" : "outline"}
                     size="sm"
-                    className={cn(
-                      "border-foreground text-foreground hover:bg-secondary",
-                    )}
                   >
                     <Link
                       href={link.url}

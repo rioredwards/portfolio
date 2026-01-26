@@ -8,6 +8,7 @@ import Link from "next/link";
 import { ProjectDetailHeader } from "./project-detail-content";
 import { Button } from "./ui/button";
 
+
 interface ProjectDetailModalProps {
   frontmatter: ProjectFrontmatter | null;
   serializedContent: MDXRemoteSerializeResult | null;
@@ -37,54 +38,55 @@ export function ProjectDetailModal({
         {/* Sticky Header */}
         <div
           className={cn(
-            "bg-background sticky top-0 z-10",
-            "px-6 py-6 pb-4 shadow-lg",
+            "bg-background/50 backdrop-blur-sm sticky top-0 z-10",
+            "px-6 py-6 pb-4 ",
           )}
         >
-          <ProjectDetailHeader frontmatter={frontmatter} />
+          <ProjectDetailHeader {...frontmatter} />
         </div>
 
         {/* Scrollable Content */}
         <div
           className={cn(
-            "flex-1 overflow-y-auto px-6 lg:px-8",
-            frontmatter.links && frontmatter.links.length > 0 && "pb-24",
+            "flex-1 overflow-y-auto px-6 lg:px-8 w-full py-12 bg-card",
           )}
         >
-          {serializedContent ? (
-            <>
-              <div
-                className={cn(
-                  "prose prose-neutral dark:prose-invert max-w-none",
-                  "prose-headings:font-[var(--font-mazaeni-demo),serif]",
-                  "prose-p:text-foreground prose-strong:text-foreground",
-                  "prose-ul:text-foreground prose-ol:text-foreground prose-li:text-foreground",
-                  "prose-a:text-primary prose-a:no-underline hover:prose-a:underline",
-                  "prose-img:rounded-xl prose-img:my-6",
-                  "prose-pre:bg-secondary prose-pre:text-foreground",
-                  "prose-code:bg-secondary prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded",
-                )}
-              >
-                <MDXRemote {...serializedContent} />
-              </div>
-              <div className={cn("border-border mt-6 border-t pt-6")}>
-                <Link
-                  href={`/work/${frontmatter.slug}`}
-                  className={cn("text-primary text-sm hover:underline")}
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    onOpenChange(false);
-                  }}
+          <div className="mx-auto w-fit">
+            {serializedContent ? (
+              <>
+                <div
+                  className={cn(
+                    "prose prose-neutral dark:prose-invert max-w-none",
+                    "prose-headings:font-[var(--font-mazaeni-demo),serif]",
+                    "prose-p:text-foreground prose-strong:text-foreground",
+                    "prose-ul:text-foreground prose-ol:text-foreground prose-li:text-foreground",
+                    "prose-a:text-primary prose-a:no-underline hover:prose-a:underline",
+                    "prose-img:rounded-xl prose-img:my-6",
+                    "prose-pre:bg-secondary prose-pre:text-foreground",
+                    "prose-code:bg-secondary prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded",
+                  )}
                 >
-                  View full page →
-                </Link>
-              </div>
-            </>
-          ) : (
-            <p className={cn("text-muted-foreground")}>
-              Content not available.
-            </p>
-          )}
+                  <MDXRemote {...serializedContent} />
+                </div>
+                <div className={cn("border-border mt-6 border-t pt-6")}>
+                  <Link
+                    href={`/work/${frontmatter.slug}`}
+                    className={cn("text-primary text-sm hover:underline")}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      onOpenChange(false);
+                    }}
+                  >
+                    View full page →
+                  </Link>
+                </div>
+              </>
+            ) : (
+              <p className={cn("text-muted-foreground")}>
+                Content not available.
+              </p>
+            )}
+          </div>
         </div>
 
         {/* Floating Links at Bottom */}
@@ -93,11 +95,11 @@ export function ProjectDetailModal({
             className={cn(
               "bg-background sticky right-0 bottom-0 left-0 z-50",
               "flex items-center justify-center gap-4",
-              "px-6 py-2",
+              "px-6 py-6",
             )}
           >
             {frontmatter.links.map((link, idx) => (
-              <Button key={idx} asChild variant="outline" size="sm">
+              <Button key={idx} asChild variant={idx === 0 ? "default" : "outline"} size="default">
                 <Link href={link.url} target="_blank" rel="noopener noreferrer">
                   {link.text}
                 </Link>

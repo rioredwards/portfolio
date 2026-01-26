@@ -16,11 +16,11 @@
   --sh-entity: #22863a;
 
   /* Theme colors (source of truth) */
-  --theme-background: #f4ebda;
+  --theme-background: #ebdbbc;
   --theme-foreground: #2d645d;
   --theme-background-primary: #2f6f31;
   --theme-foreground-primary: #fdfbf6;
-  --theme-background-secondary: #ebdbbc;
+  --theme-background-secondary: #f4ebda;
   --theme-foreground-secondary: #5c4b3e;
   --theme-background-tertiary: #e8d4ae;
   --theme-foreground-muted: rgb(
@@ -131,9 +131,9 @@
   --color-sidebar-ring: var(--theme-ring);
   --color-shadow: var(--theme-shadow-color);
 
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-  --font-playfair: var(--font-playfair);
+  --font-sans: var(--font-dm-sans);
+  --font-serif: var(--font-mazaeni-demo), serif;
+  --font-mono: var(--font-dm-mono);
   --font-mazaeni: var(--font-mazaeni-demo), serif;
 
   --radius-xs: calc(var(--radius) * 0.3);
