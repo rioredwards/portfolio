@@ -21,9 +21,6 @@ export function ProjectDetailHeader({
   return (
     <article className="flex flex-col gap-4 px-2 md:px-4 ">
       <header className="flex flex-col gap-2">
-        <span className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">
-          {category}
-        </span>
         <DialogTitle
           className={cn("text-3xl font-bold", "text-foreground")}
           style={{ fontFamily: "var(--font-mazaeni-demo), serif" }}>

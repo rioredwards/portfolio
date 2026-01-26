@@ -39,7 +39,7 @@ export function ProjectDetailModal({
         <div
           className={cn(
             "bg-background/50 backdrop-blur-sm sticky top-0 z-10",
-            "px-6 py-6 pb-4 ",
+            "px-6 pt-6 pb-3 ",
           )}
         >
           <ProjectDetailHeader {...frontmatter} />
@@ -95,7 +95,7 @@ export function ProjectDetailModal({
             className={cn(
               "bg-background sticky right-0 bottom-0 left-0 z-50",
               "flex items-center justify-center gap-4",
-              "px-6 py-6",
+              "px-6 py-3",
             )}
           >
             {frontmatter.links.map((link, idx) => (

@@ -49,7 +49,7 @@ export default async function Home() {
 
   return (
     <main className="bg-background min-h-screen">
-      <section id="home" className="bg-secondary pb-24">
+      <section id="home" className="bg-secondary pb-40">
         <SectionContentWrapper className="py-0!">
           <Hero
             title="Hello, I'm Rio."

@@ -38,7 +38,7 @@ function HeroButton({
   buttonHref: string;
 }) {
   return (
-    <Button asChild size="lg" className="font-bold tracking-wider uppercase">
+    <Button asChild size="xl" className="tracking-wider uppercase text-lg bg-accent">
       <Link href={buttonHref}>{buttonText}</Link>
     </Button>
   );

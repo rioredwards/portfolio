@@ -18,7 +18,7 @@
   /* Theme colors (source of truth) */
   --theme-background: #ebddc3;
   --theme-foreground: #2d645d;
-  --theme-background-primary: #2f6f31;
+  --theme-background-primary: #2d645d;
   --theme-foreground-primary: #fdfbf6;
   --theme-background-secondary: #f4ebda;
   --theme-foreground-secondary: #5c4b3e;
@@ -26,7 +26,7 @@
   --theme-foreground-muted: rgb(
     from var(--theme-foreground-secondary) r g b / calc(alpha / 2)
   );
-  --theme-background-accent: #75439d;
+  --theme-background-accent: #2f6f31;
   --theme-foreground-accent: var(--theme-foreground-primary);
   --theme-background-destructive: #c53920;
   --theme-foreground-destructive: var(--theme-foreground-primary);
@@ -70,6 +70,12 @@
     from var(--theme-border) h calc(s * 1.3) calc(l * 1.2)
   );
   --color-foreground: var(--theme-foreground);
+  --color-foreground-hover: hsl(
+    from var(--theme-foreground) h calc(s * 1.2) calc(l * 1.2)
+  );
+  --color-foreground-hover-border: hsl(
+    from var(--theme-foreground) h calc(s * 1.3) calc(l * 1.3)
+  );
   --color-card: var(--theme-background-secondary);
   --color-card-foreground: var(--theme-foreground-secondary);
   --color-popover: var(--theme-background);
@@ -107,7 +113,7 @@
   --color-accent-hover-border: hsl(
     from var(--theme-background-accent) h calc(s * 1.3) calc(l * 1.6)
   );
-  --color-accent-foreground: var(--theme-foreground-accent);
+  --color-accent-foreground: var(--theme-foreground-primary);
   --color-destructive: var(--theme-background-destructive);
   --color-destructive-hover: hsl(
     from var(--theme-background-destructive) h calc(s * 1.2) calc(l * 1.2)
@@ -143,7 +149,7 @@
   --radius-xl: calc(var(--radius) * 1.2);
   --radius-2xl: calc(var(--radius) * 1.5);
   --radius-3xl: calc(var(--radius) * 1.9);
-  --radius-4xl: calc(var(--radius) * 2.4);
+  --radius-4xl: calc(var(--radius) * 2.1);
   --radius-5xl: calc(var(--radius) * 3);
 
   /* Shadows */
