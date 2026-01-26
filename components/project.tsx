@@ -1,6 +1,5 @@
 "use client";
 
-import { Skill } from "@/components/ui/skill";
 import Image from "next/image";
 import { cn } from "../lib/utils";
 
@@ -18,6 +17,7 @@ interface ProjectProps extends Project {
   onClick?: () => void;
 }
 
+
 export function Project({
   category,
   title,
@@ -30,109 +30,51 @@ export function Project({
     <article
       onClick={onClick}
       className={cn(
-        "relative", // Positioning
-        "aspect-3/2 w-full overflow-clip", // Layout & Sizing
-        "bg-card rounded-4xl shadow-md", // Background & Effects
-        "group fade-in-scroll cursor-pointer transition-all duration-200 hover:shadow-xl", // Animation & Transitions
-        "[--foreground:var(--color-popover)]", // Adjust this to change all foreground colors within card
+        "w-full max-w-4xl mx-auto bg-card rounded-4xl outline-none group shadow-card hover:shadow-card-hover duration-300 ease-out hover:-translate-y-0.5 active:scale-[0.985] cursor-pointer text-left focus-visible:ring-4 focus-visible:ring-ring/50 focus-visible:ring-offset-2 focus-visible:ring-offset-background fade-in-scroll transition-all ",
       )}
     >
-      {/* Project image container */}
-      <div
-        className={cn(
-          "relative", // Positioning
-          "h-full w-full overflow-clip", // Layout & Sizing
-          "bg-secondary", // Background & Effects
-        )}
-      >
-        {/* Image container with parallax */}
-        <div
-          className={cn(
-            "absolute inset-0 -translate-y-[10%]", // Positioning
-            "h-[122%] w-full", // Layout & Sizing
-          )}
-        >
-          <Image
-            src={image}
-            alt={`${title} preview`}
-            fill
-            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 800px"
-            className={cn(
-              "object-cover", // Layout & Sizing
-              "paralax transition-all duration-200", // Animation & Transitions
-            )}
-            priority
-          />
-        </div>
-
-        {/* Blur overlay - animated on hover */}
-        <div
-          className={cn(
-            "absolute inset-0 z-10", // Positioning
-            "pointer-events-none", // Layout & Sizing
-            "opacity-0 backdrop-blur-xs", // Background & Effects
-            "transition-opacity duration-200 group-hover:opacity-100", // Animation & Transitions
-          )}
+      {/* Image container with parallax */}
+      <div className="w-full aspect-5/4 sm:aspect-2/1 relative overflow-clip rounded-t-4xl">
+        <Image
+          src={image}
+          alt={`${title} preview`}
+          width={1000}
+          height={1000}
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 800px"
+          className="size-full group-hover:scale-105 transition-transform duration-300 object-cover rounded-t-4xl absolute"
+          // scrool-driven-parallax animation
+          style={{
+            viewTimelineName: "--parallax-image",
+            viewTimelineAxis: "block",
+            animation: "linear parallaxMove both",
+            animationTimeline: "--parallax-image",
+            animationRange: "entry 0% exit 100%",
+            height: "125%",
+          }}
+          priority
         />
-
-        {/* Details panel - slides up from bottom on hover */}
-        <div
-          className={cn(
-            "absolute right-0 bottom-0 left-0 z-20", // Positioning
-            "p-6 lg:p-8", // Layout & Sizing
-            // "via-background/80 to-background/90 bg-linear-to-b from-transparent from-0% via-10% to-100%", // Background & Effects
-            "bg-foreground/90",
-            "translate-y-full transition-transform duration-200 group-hover:translate-y-0", // Animation & Transitions
-          )}
-        >
-          <div
-            className={cn(
-              "flex flex-col", // Layout & Sizing
-            )}
-          >
-            <p
-              className={cn(
-                "mb-3 text-xs", // Layout & Sizing
-                "font-medium tracking-[0.2em] text-(--foreground) uppercase", // Typography
-              )}
-            >
-              {category}
-            </p>
-            <h2
-              className={cn(
-                "mb-4 text-3xl leading-tight sm:text-4xl lg:text-5xl", // Layout & Sizing
-                "font-bold text-(--foreground)", // Typography
-              )}
-              style={{ fontFamily: "var(--font-mazaeni-demo), serif" }}
-            >
-              {title}
-            </h2>
-            <p
-              className={cn(
-                "mb-6 text-base leading-relaxed", // Layout & Sizing
-                "text-(--foreground)", // Typography
-              )}
-            >
-              {description}
-            </p>
-            <div
-              className={cn(
-                "flex flex-wrap gap-3", // Layout & Sizing
-              )}
-            >
-              {skills.map((skill, index) => (
-                <Skill
-                  key={`${skill}-${index}`}
-                  text={skill}
-                  variant="filled"
-                  size="sm"
-                  className="border-(--foreground)/50 bg-(--foreground)/8 text-(--foreground)"
-                />
-              ))}
-            </div>
-          </div>
-        </div>
       </div>
+      <article className="flex flex-col gap-4 p-6 sm:p-8 ">
+        <header className="flex flex-col gap-2">
+          <span className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">
+            {category}
+          </span>
+          <h3 className="font-mazaeni text-3xl font-semibold leading-tight text-foreground group-hover:brightness-125 group-active:brightness-150 transition-brightness duration-300 ease-out">
+            {title}
+          </h3>
+        </header>
+        <p className="max-w-prose leading-relaxed text-secondary-foreground">
+          {description}
+        </p>
+        <div className="flex flex-wrap gap-2 pt-1">
+          {skills.map((skill) => (
+            <span key={skill} className="rounded-full bg-tertiary px-4 py-1.5 text-sm font-medium text-tertiary-foreground transition-colors">
+              {skill}
+            </span>
+          ))}
+        </div>
+      </article>
+
     </article>
   );
 }

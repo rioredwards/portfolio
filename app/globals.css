@@ -22,6 +22,7 @@
   --theme-foreground-primary: #fdfbf6;
   --theme-background-secondary: #ebdbbc;
   --theme-foreground-secondary: #5c4b3e;
+  --theme-background-tertiary: #e8d4ae;
   --theme-foreground-muted: rgb(
     from var(--theme-foreground-secondary) r g b / calc(alpha / 2)
   );
@@ -32,7 +33,7 @@
   --theme-border: #dab773;
   --theme-input: #e8d4ae;
   --theme-ring: #76c18f;
-  --theme-shadow-color: #504a3f;
+  --theme-shadow-color: #32302c;
 
   /* RESPONSIVE SIZING: The root font-size is based on this variable, meaning ANYTHING USING REM UNITS WILL SCALE WITH THE VIEWPORT WIDTH. */
   --responsive-spacing-min: clamp(15px, calc(0.32vw + 13.88px), 19px);
@@ -89,6 +90,14 @@
     from var(--theme-background-secondary) h calc(s * 1.2) calc(l * 0.92)
   );
   --color-secondary-foreground: var(--theme-foreground-secondary);
+  --color-tertiary: var(--theme-background-tertiary);
+  --color-tertiary-foreground: var(--theme-foreground-secondary);
+  --color-tertiary-hover: hsl(
+    from var(--theme-background-tertiary) h calc(s * 1) calc(l * 0.92)
+  );
+  --color-tertiary-hover-border: hsl(
+    from var(--theme-background-tertiary) h calc(s * 1.2) calc(l * 0.92)
+  );
   --color-muted: var(--theme-background-secondary);
   --color-muted-foreground: var(--theme-foreground-muted);
   --color-accent: var(--theme-background-accent);
@@ -136,6 +145,12 @@
   --radius-3xl: calc(var(--radius) * 1.9);
   --radius-4xl: calc(var(--radius) * 2.4);
   --radius-5xl: calc(var(--radius) * 3);
+
+  /* Shadows */
+  --shadow-card: 0 0.25rem 1rem
+    color-mix(in oklab, var(--theme-shadow-color), transparent 94%);
+  --shadow-card-hover: 0 0.75rem 4rem
+    color-mix(in oklab, var(--theme-shadow-color), transparent 70%);
 }
 
 @layer base {
@@ -255,10 +270,7 @@
     animation-timeline: view();
     animation-range: entry 100px entry 500px;
   }
-  .paralax {
-    animation: adjust-image linear both;
-    animation-timeline: view();
-  }
+
   .custom-bg-ping-wrapper {
     position: relative;
   }
@@ -291,6 +303,14 @@
   }
 }
 
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition: none !important;
+  }
+}
+
 /* like the ping animation, but goes on a :before element */
 @keyframes customPingAnimation {
   0% {
@@ -315,12 +335,12 @@
   }
 }
 
-@keyframes adjust-image {
+@keyframes parallaxMove {
   0% {
-    object-position: 0 60px;
+    object-position: center 0;
   }
   100% {
-    object-position: 0 -60px;
+    object-position: center -3rem;
   }
 }
 
@@ -576,3 +596,9 @@
 .prose > :first-child {
   margin-top: 0 !important;
 }
+
+/* 
+* {
+  border: 1px solid red;
+  background-color: rgba(255, 0, 0, 0.02);
+} */
