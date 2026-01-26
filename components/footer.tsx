@@ -8,7 +8,7 @@ export function Footer() {
     <SlidePanel
       orientation="right"
       decorationHeight="tall"
-      fill="secondary"
+      fill="background"
       previousDecorationHeight="tall"
     >
       <footer className="text-secondary-foreground max-w-content-max-w px-content-px md:px-content-px-md py-content-py mx-auto flex flex-col items-start justify-between gap-8 md:flex-row md:items-center">

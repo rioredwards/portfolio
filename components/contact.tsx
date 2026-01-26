@@ -227,7 +227,7 @@ export function Contact() {
         )}
       </div>
       {/* Testimonials Carousel */}
-      <div className="bg-secondary fade-in-scroll flex rounded-4xl px-4 py-12">
+      <div className="bg-background fade-in-scroll flex rounded-4xl px-4 py-12">
         <TestimonialsCarousel />
       </div>
     </div>

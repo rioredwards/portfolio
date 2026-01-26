@@ -49,7 +49,7 @@ export default async function Home() {
 
   return (
     <main className="bg-background min-h-screen">
-      <section id="home">
+      <section id="home" className="bg-secondary pb-24">
         <SectionContentWrapper className="py-0!">
           <Hero
             title="Hello, I'm Rio."
@@ -73,7 +73,7 @@ export default async function Home() {
         <SlidePanel
           orientation="left"
           decorationHeight="tall"
-          previousDecorationHeight={null}
+          previousDecorationHeight={"short"}
           fill="secondary"
         >
           <SectionHeader title="Work" />
@@ -141,7 +141,7 @@ export default async function Home() {
         </SlidePanel>
       </section>
 
-      <section id="contact">
+      <section id="contact" className="bg-secondary pb-24">
         <SlidePanel
           orientation="left"
           decorationHeight="tall"
@@ -153,7 +153,7 @@ export default async function Home() {
         <SlidePanel
           orientation="left"
           decorationHeight="tall"
-          fill="background"
+          fill="secondary"
           previousDecorationHeight="tall"
         >
           <SectionContentWrapper>
