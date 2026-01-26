@@ -13,18 +13,30 @@ interface ProjectDetailContentProps {
 }
 
 export function ProjectDetailHeader({
-  category,
   title,
-}:
-  ProjectFrontmatter
-) {
+  links,
+}: ProjectFrontmatter) {
+  const firstLink = links?.[0];
+
   return (
-    <article className="flex flex-col gap-4 px-2 md:px-4 ">
+    <article className="flex flex-col gap-4 px-2 md:px-4">
       <header className="flex flex-col gap-2">
         <DialogTitle
           className={cn("text-3xl font-bold", "text-foreground")}
-          style={{ fontFamily: "var(--font-mazaeni-demo), serif" }}>
-          {title}
+          style={{ fontFamily: "var(--font-mazaeni-demo), serif" }}
+        >
+          {firstLink ? (
+            <Link
+              href={firstLink.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:brightness-125"
+            >
+              {title}
+            </Link>
+          ) : (
+            title
+          )}
         </DialogTitle>
       </header>
     </article>

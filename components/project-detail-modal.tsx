@@ -38,7 +38,7 @@ export function ProjectDetailModal({
         {/* Sticky Header */}
         <div
           className={cn(
-            "bg-background sticky top-0 z-10",
+            "bg-background/70 backdrop-blur-sm absolute top-0 left-0 right-0 z-10",
             "px-6 pt-6 pb-3 ",
           )}
         >
@@ -48,7 +48,7 @@ export function ProjectDetailModal({
         {/* Scrollable Content */}
         <div
           className={cn(
-            "flex-1 overflow-y-auto px-6 lg:px-8 w-full py-12 bg-card",
+            "flex-1 overflow-y-auto px-6 lg:px-8 w-full py-12 pt-28 bg-card",
           )}
         >
           <div className="mx-auto w-fit">
@@ -68,7 +68,7 @@ export function ProjectDetailModal({
                 >
                   <MDXRemote {...serializedContent} />
                 </div>
-                <div className={cn("border-border mt-6 border-t pt-6")}>
+                {/* <div className={cn("border-border mt-6 border-t pt-6")}>
                   <Link
                     href={`/work/${frontmatter.slug}`}
                     className={cn("text-primary text-sm hover:underline")}
@@ -79,7 +79,7 @@ export function ProjectDetailModal({
                   >
                     View full page →
                   </Link>
-                </div>
+                </div> */}
               </>
             ) : (
               <p className={cn("text-muted-foreground")}>
@@ -93,7 +93,7 @@ export function ProjectDetailModal({
         {frontmatter.links && frontmatter.links.length > 0 && (
           <div
             className={cn(
-              "bg-background sticky right-0 bottom-0 left-0 z-50",
+              "bg-background/70 backdrop-blur-sm absolute right-0 bottom-0 left-0 z-50",
               "flex items-center justify-center gap-4",
               "px-6 py-3",
             )}
