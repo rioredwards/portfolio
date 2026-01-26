@@ -16,13 +16,13 @@
   --sh-entity: #22863a;
 
   /* Theme colors (source of truth) */
-  --theme-background: #ebdbbc;
+  --theme-background: #ebddc3;
   --theme-foreground: #2d645d;
   --theme-background-primary: #2f6f31;
   --theme-foreground-primary: #fdfbf6;
   --theme-background-secondary: #f4ebda;
   --theme-foreground-secondary: #5c4b3e;
-  --theme-background-tertiary: #e8d4ae;
+  --theme-background-tertiary: #ebdbbc;
   --theme-foreground-muted: rgb(
     from var(--theme-foreground-secondary) r g b / calc(alpha / 2)
   );
@@ -31,7 +31,7 @@
   --theme-background-destructive: #c53920;
   --theme-foreground-destructive: var(--theme-foreground-primary);
   --theme-border: #dab773;
-  --theme-input: #e8d4ae;
+  --theme-input: #f4ebda;
   --theme-ring: #76c18f;
   --theme-shadow-color: #32302c;
 
@@ -117,7 +117,7 @@
   );
   --color-destructive-foreground: var(--theme-foreground-destructive);
   --color-border: var(--theme-border);
-  --color-input: var(--theme-border);
+  --color-input: var(--theme-input);
   --color-ring: var(--theme-ring);
   --color-sidebar: var(--theme-background-secondary);
   --color-sidebar-foreground: color-mix(
