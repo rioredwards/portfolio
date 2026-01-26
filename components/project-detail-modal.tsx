@@ -38,7 +38,7 @@ export function ProjectDetailModal({
         {/* Sticky Header */}
         <div
           className={cn(
-            "bg-background/50 backdrop-blur-sm sticky top-0 z-10",
+            "bg-background sticky top-0 z-10",
             "px-6 pt-6 pb-3 ",
           )}
         >

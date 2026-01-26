@@ -30,7 +30,7 @@ export function Project({
     <article
       onClick={onClick}
       className={cn(
-        "w-full max-w-4xl mx-auto bg-card rounded-4xl outline-none group shadow-card hover:shadow-card-hover duration-300 ease-out hover:-translate-y-0.5 active:scale-[0.985] cursor-pointer text-left focus-visible:ring-4 focus-visible:ring-ring/50 focus-visible:ring-offset-2 focus-visible:ring-offset-background fade-in-scroll transition-all ",
+        "w-full max-w-4xl mx-auto bg-card rounded-4xl outline-none group hover:shadow-card-hover duration-300 ease-out hover:-translate-y-0.5 active:scale-[0.985] cursor-pointer text-left focus-visible:ring-4 focus-visible:ring-ring/50 focus-visible:ring-offset-2 focus-visible:ring-offset-background fade-in-scroll transition-all ",
       )}
     >
       {/* Image container with parallax */}
