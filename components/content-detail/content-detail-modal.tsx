@@ -16,8 +16,6 @@ interface ContentDetailModalProps {
   renderFloatingFooter?: () => ReactNode;
   /** Include table styles in prose (for blog content) */
   includeTableStyles?: boolean;
-  /** Max width class override (default: lg:max-w-4xl) */
-  maxWidthClass?: string;
 }
 
 /**
@@ -31,7 +29,6 @@ export function ContentDetailModal({
   renderHeader,
   renderFloatingFooter,
   includeTableStyles = false,
-  maxWidthClass = "lg:max-w-4xl",
 }: ContentDetailModalProps) {
   const hasFloatingFooter = !!renderFloatingFooter;
 
@@ -40,7 +37,6 @@ export function ContentDetailModal({
       <DialogContent
         className={cn(
           "max-h-[94dvh] w-full max-w-[calc(100vw-var(--spacing-content-px))] md:max-w-[calc(100vw-var(--spacing-content-px-md)*2)]",
-          maxWidthClass,
           "overflow-hidden",
           "flex flex-col",
           "gap-0 p-0",

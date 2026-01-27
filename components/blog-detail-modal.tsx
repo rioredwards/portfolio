@@ -51,7 +51,6 @@ export function BlogDetailModal({
       serializedContent={serializedContent}
       renderHeader={() => <BlogDetailHeader frontmatter={frontmatter} />}
       includeTableStyles={true}
-      maxWidthClass="lg:max-w-3xl"
     />
   );
 }
