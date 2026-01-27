@@ -27,16 +27,6 @@ When you place an order (click a button, submit a form), that request goes to th
 
 The backend consists of three main components:
 
-### 1. The Server
-
-A server is just a computer that's always on and connected to the internet, waiting to receive and respond to requests. When you type a URL in your browser, you're sending a request to a server somewhere in the world.
-
-```
-Your Browser → Internet → Server → Database
-                ↑                      ↓
-                ←←←←← Response ←←←←←←←←
-```
-
 ### 2. The Application
 
 This is the code that runs on the server. It contains the **business logic** - the rules that determine how data should be processed. For example:
@@ -58,7 +48,7 @@ This is where all the data lives - user accounts, products, orders, messages, ev
 
 API stands for **Application Programming Interface**. It's essentially a menu of operations that the backend offers to the frontend.
 
-Instead of the frontend needing to know *how* to get user data from the database, it just says: "Hey API, give me user #123's profile" and the API handles all the details.
+Instead of the frontend needing to know _how_ to get user data from the database, it just says: "Hey API, give me user #123's profile" and the API handles all the details.
 
 ```javascript
 // Frontend makes a request
@@ -76,12 +66,12 @@ fetch('/api/users/123')
 
 Here are some popular tools used in backend development:
 
-| Category | Examples |
-|----------|----------|
-| Languages | JavaScript (Node.js), Python, Ruby, Go, Java |
-| Frameworks | Express.js, Django, Rails, Spring |
-| Databases | PostgreSQL, MongoDB, MySQL, Redis |
-| APIs | REST, GraphQL |
+| Category   | Examples                                     |
+| ---------- | -------------------------------------------- |
+| Languages  | JavaScript (Node.js), Python, Ruby, Go, Java |
+| Frameworks | Express.js, Django, Rails, Spring            |
+| Databases  | PostgreSQL, MongoDB, MySQL, Redis            |
+| APIs       | REST, GraphQL                                |
 
 ## Why Does This Matter?
 
