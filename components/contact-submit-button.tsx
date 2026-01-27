@@ -41,6 +41,7 @@ export function ContactSubmitButton({
       type="submit"
       disabled={!canSubmit || pending || success}
       size="default"
+      className="bg-accent hover:bg-accent-hover pointer-coarse:bg-accent-hover"
       variant="default"
     >
       {success ? (
