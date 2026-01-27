@@ -1,3 +1,4 @@
+import { HeadingLink } from "@/components/mdx-heading-link";
 import type { MDXComponents } from "mdx/types";
 import Image, { ImageProps } from "next/image";
 import Link from "next/link";
@@ -21,15 +22,8 @@ function createHeading(level: number) {
     const slug = slugify(text);
     return React.createElement(
       `h${level}`,
-      { id: slug },
-      [
-        React.createElement("a", {
-          href: `#${slug}`,
-          key: `link-${slug}`,
-          className: "anchor",
-        }),
-      ],
-      children
+      { id: slug, className: "group relative scroll-mt-24" },
+      <HeadingLink slug={slug}>{children}</HeadingLink>
     );
   };
   Heading.displayName = `Heading${level}`;

@@ -75,10 +75,19 @@ export function Navbar() {
 
       setActiveSection((prev) => {
         if (prev !== activeSection) {
-          // Update URL without triggering scroll - defer to avoid React render warning
-          requestAnimationFrame(() => {
-            window.history.replaceState(null, "", activeSection);
-          });
+          // Only update URL if current hash is a known section hash or empty
+          // This prevents overwriting hashes from modal content (e.g., #features)
+          const currentHash = window.location.hash;
+          const knownHashes = navItems.map((item) => item.href);
+          const shouldUpdateUrl =
+            currentHash === "" || knownHashes.includes(currentHash);
+
+          if (shouldUpdateUrl) {
+            // Update URL without triggering scroll - defer to avoid React render warning
+            requestAnimationFrame(() => {
+              window.history.replaceState(null, "", activeSection);
+            });
+          }
           return activeSection;
         }
         return prev;

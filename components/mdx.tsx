@@ -5,6 +5,7 @@ import { highlight } from "sugar-high";
 import remarkGfm from "remark-gfm";
 import React, { ComponentPropsWithoutRef } from "react";
 import { cn } from "@/lib/utils";
+import { HeadingLink } from "./mdx-heading-link";
 
 function slugify(str: string) {
   return str
@@ -27,15 +28,8 @@ function createHeading(level: number) {
     const Tag = `h${level}` as keyof React.JSX.IntrinsicElements;
 
     return (
-      <Tag id={slug} className="group scroll-mt-24">
-        <a
-          href={`#${slug}`}
-          className="anchor absolute -ml-6 opacity-0 transition-opacity group-hover:opacity-100"
-          aria-hidden="true"
-        >
-          #
-        </a>
-        {children}
+      <Tag id={slug} className="group relative scroll-mt-24">
+        <HeadingLink slug={slug}>{children}</HeadingLink>
       </Tag>
     );
   };
