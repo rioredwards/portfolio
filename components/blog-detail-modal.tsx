@@ -22,15 +22,48 @@ function BlogDetailHeader({ frontmatter }: { frontmatter: BlogFrontmatter }) {
       >
         {frontmatter.title}
       </DialogTitle>
+    </div>
+  );
+}
 
-      {frontmatter.date && (
+function BlogFrontmatterSection({
+  frontmatter,
+}: {
+  frontmatter: BlogFrontmatter;
+}) {
+  const hasTags = frontmatter.tags && frontmatter.tags.length > 0;
+  const hasDate = !!frontmatter.date;
+
+  if (!hasTags && !hasDate) {
+    return null;
+  }
+
+  return (
+    <div className="flex flex-col gap-3">
+      {hasDate && (
         <span className={cn("text-muted-foreground text-sm")}>
-          {new Date(frontmatter.date).toLocaleDateString("en-US", {
+          {new Date(frontmatter.date!).toLocaleDateString("en-US", {
             year: "numeric",
             month: "long",
             day: "numeric",
           })}
         </span>
+      )}
+      {hasTags && (
+        <div className="flex flex-wrap gap-2">
+          {frontmatter.tags!.map((tag, idx) => (
+            <span
+              key={tag}
+              className={cn(
+                "bg-secondary text-secondary-foreground",
+                "rounded-full py-1 text-sm"
+              )}
+            >
+              {/* seprated by a circle */}
+              {tag} {idx < frontmatter.tags!.length - 1 && <span className="text-muted-foreground">•</span>}
+            </span>
+          ))}
+        </div>
       )}
     </div>
   );
@@ -50,6 +83,9 @@ export function BlogDetailModal({
       onOpenChange={onOpenChange}
       serializedContent={serializedContent}
       renderHeader={() => <BlogDetailHeader frontmatter={frontmatter} />}
+      renderFrontmatter={() => (
+        <BlogFrontmatterSection frontmatter={frontmatter} />
+      )}
       includeTableStyles={true}
     />
   );

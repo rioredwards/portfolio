@@ -13,6 +13,8 @@ interface ContentDetailModalProps {
   serializedContent: MDXRemoteSerializeResult | null;
   /** Render the header content (title, metadata, etc.) */
   renderHeader: () => ReactNode;
+  /** Optional render for frontmatter section (tags, skills, etc.) - displayed before MDX content */
+  renderFrontmatter?: () => ReactNode;
   /** Optional render for floating footer (buttons, links, etc.) */
   renderFloatingFooter?: () => ReactNode;
   /** Include table styles in prose (for blog content) */
@@ -28,6 +30,7 @@ export function ContentDetailModal({
   onOpenChange,
   serializedContent,
   renderHeader,
+  renderFrontmatter,
   renderFloatingFooter,
   includeTableStyles = false,
 }: ContentDetailModalProps) {
@@ -79,6 +82,12 @@ export function ContentDetailModal({
           )}
         >
           <div className="mx-auto w-fit">
+            {renderFrontmatter && (
+              <>
+                {renderFrontmatter()}
+                <hr className="border-border my-8" />
+              </>
+            )}
             {serializedContent ? (
               <ContentProse includeTableStyles={includeTableStyles}>
                 <MDXRemote {...serializedContent} components={mdxComponents} />
