@@ -1,6 +1,7 @@
 "use client";
 
 import { Dialog, DialogContent } from "@/components/ui/dialog";
+import { mdxComponents } from "@/components/mdx";
 import { cn } from "@/lib/utils";
 import { MDXRemote, MDXRemoteSerializeResult } from "next-mdx-remote";
 import { ReactNode } from "react";
@@ -63,7 +64,7 @@ export function ContentDetailModal({
           <div className="mx-auto w-fit">
             {serializedContent ? (
               <ContentProse includeTableStyles={includeTableStyles}>
-                <MDXRemote {...serializedContent} />
+                <MDXRemote {...serializedContent} components={mdxComponents} />
               </ContentProse>
             ) : (
               <p className={cn("text-muted-foreground")}>

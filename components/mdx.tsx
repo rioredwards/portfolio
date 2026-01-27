@@ -135,7 +135,48 @@ function Hr() {
   return <hr className="border-border my-8" />;
 }
 
-const components = {
+interface FigureProps {
+  src: string;
+  alt: string;
+  caption?: string;
+  credit?: string;
+  creditUrl?: string;
+}
+
+function Figure({ src, alt, caption, credit, creditUrl }: FigureProps) {
+  return (
+    <figure className="my-6">
+      <Image
+        src={src}
+        alt={alt}
+        width={800}
+        height={600}
+        className="rounded-lg"
+      />
+      {(caption || credit) && (
+        <figcaption className="mt-2 text-center text-sm text-muted-foreground">
+          {caption}
+          {caption && credit && " — "}
+          {credit &&
+            (creditUrl ? (
+              <a
+                href={creditUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="underline underline-offset-2 hover:text-foreground"
+              >
+                {credit}
+              </a>
+            ) : (
+              credit
+            ))}
+        </figcaption>
+      )}
+    </figure>
+  );
+}
+
+export const mdxComponents = {
   h1: createHeading(1),
   h2: createHeading(2),
   h3: createHeading(3),
@@ -149,13 +190,14 @@ const components = {
   Table,
   blockquote: Blockquote,
   hr: Hr,
+  Figure,
 };
 
 export function CustomMDX(props: MDXRemoteProps) {
   return (
     <MDXRemote
       {...props}
-      components={{ ...components, ...(props.components || {}) }}
+      components={{ ...mdxComponents, ...(props.components || {}) }}
       options={{
         mdxOptions: {
           remarkPlugins: [remarkGfm],
