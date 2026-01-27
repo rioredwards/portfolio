@@ -20,10 +20,10 @@ export function ProjectDetailHeader({
   const firstLink = links?.[0];
 
   return (
-    <article className="flex flex-col gap-4 px-2 md:px-4">
+    <div className="flex flex-col gap-4 px-2 md:px-4">
       <header className="flex flex-col gap-2">
         <DialogTitle
-          className={cn("text-3xl font-bold", "text-foreground")}
+          className={cn("text-2xl font-bold", "text-foreground")}
           style={{ fontFamily: "var(--font-mazaeni-demo), serif" }}
         >
           {firstLink ? (
@@ -40,7 +40,7 @@ export function ProjectDetailHeader({
           )}
         </DialogTitle>
       </header>
-    </article>
+    </div>
   );
 }
 
