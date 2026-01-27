@@ -33,21 +33,30 @@ function BlogFrontmatterSection({
 }) {
   const hasTags = frontmatter.tags && frontmatter.tags.length > 0;
   const hasDate = !!frontmatter.date;
+  const hasReadingTime = !!frontmatter.readingTime;
 
-  if (!hasTags && !hasDate) {
+  if (!hasTags && !hasDate && !hasReadingTime) {
     return null;
   }
 
   return (
     <div className="flex flex-col gap-3">
-      {hasDate && (
-        <span className={cn("text-muted-foreground text-sm")}>
-          {new Date(frontmatter.date!).toLocaleDateString("en-US", {
-            year: "numeric",
-            month: "long",
-            day: "numeric",
-          })}
-        </span>
+      {(hasDate || hasReadingTime) && (
+        <div className="text-muted-foreground flex items-center gap-2 text-sm">
+          {hasDate && (
+            <span>
+              {new Date(frontmatter.date!).toLocaleDateString("en-US", {
+                year: "numeric",
+                month: "long",
+                day: "numeric",
+              })}
+            </span>
+          )}
+          {hasDate && hasReadingTime && <span>•</span>}
+          {hasReadingTime && (
+            <span>{frontmatter.readingTime} min read</span>
+          )}
+        </div>
       )}
       {hasTags && (
         <div className="flex flex-wrap gap-2">

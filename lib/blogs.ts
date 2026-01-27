@@ -11,6 +11,26 @@ export interface BlogFrontmatter {
   date?: string;
   tags?: string[];
   order?: number;
+  readingTime?: number; // Calculated reading time in minutes
+}
+
+/**
+ * Calculate estimated reading time based on word count
+ * Uses ~200 words per minute as average reading speed
+ */
+function calculateReadingTime(content: string): number {
+  // Remove MDX/JSX components and markdown syntax for more accurate count
+  const plainText = content
+    .replace(/<[^>]*>/g, "") // Remove HTML/JSX tags
+    .replace(/\[([^\]]*)\]\([^)]*\)/g, "$1") // Convert links to just text
+    .replace(/[#*_`~]/g, "") // Remove markdown syntax
+    .trim();
+
+  const words = plainText.split(/\s+/).filter((word) => word.length > 0).length;
+  const wordsPerMinute = 200;
+  const minutes = Math.ceil(words / wordsPerMinute);
+
+  return Math.max(1, minutes); // Minimum 1 minute
 }
 
 export interface BlogCard {
@@ -122,6 +142,7 @@ export function getBlogWithContent(slug: string): BlogWithContent | null {
       date: data.date,
       tags: data.tags || [],
       order: data.order,
+      readingTime: calculateReadingTime(content),
     };
 
     return {

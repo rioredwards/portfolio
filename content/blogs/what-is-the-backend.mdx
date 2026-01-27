@@ -163,9 +163,13 @@ Generally speaking, a server is an application that uses the internet to communi
 Let's walk through how a _server_ helps someone login to an application:
 
 _Frontend_: “Hey, server 👋 ! This person wants to log in. Here's the Username and Password they entered. 💌”
+
 _Server_: “Thanks, frontend! Let me check my database… 🫡”
+
 _Server_: **checks database** 👨‍💻
+
 _Server_: “Yep! That user exists in my database! 👍”
+
 _Frontend_: “Okay cool, I'll grant them entry. 🔓”
 
 This single server may interact with thousands of frontends and even other servers throughout the day! It ensures that the frontends receive the data they need when they need it. It also provides a level of security for the database. If the frontend interacted directly with the database, then a hacker could alter the frontend app to request everyone's passwords!
