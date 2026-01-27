@@ -4,6 +4,7 @@ import { ContentDetailModal } from "@/components/content-detail/content-detail-m
 import { BlogFrontmatter } from "@/lib/blogs";
 import { cn } from "@/lib/utils";
 import { MDXRemoteSerializeResult } from "next-mdx-remote";
+import { Fragment } from "react/jsx-runtime";
 import { DialogTitle } from "./ui/dialog";
 
 interface BlogDetailModalProps {
@@ -59,18 +60,20 @@ function BlogFrontmatterSection({
         </div>
       )}
       {hasTags && (
-        <div className="flex flex-wrap gap-2">
+        <div className="flex flex-wrap gap-2 items-center">
           {frontmatter.tags!.map((tag, idx) => (
-            <span
-              key={tag}
-              className={cn(
-                "bg-secondary text-secondary-foreground",
-                "rounded-full py-1 text-sm"
-              )}
-            >
-              {/* seprated by a circle */}
-              {tag} {idx < frontmatter.tags!.length - 1 && <span className="text-muted-foreground">•</span>}
-            </span>
+            <Fragment key={idx}>
+              <span
+                className={cn(
+                  "bg-secondary text-secondary-foreground",
+                  "rounded-full py-1 text-sm"
+                )}
+              >
+                {/* seprated by a circle */}
+                {tag}
+              </span>
+              {idx < frontmatter.tags!.length - 1 && <span className="text-muted-foreground">•</span>}
+            </Fragment>
           ))}
         </div>
       )}

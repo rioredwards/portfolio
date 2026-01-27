@@ -77,7 +77,7 @@ export function ContentDetailModal({
         {/* Scrollable Content */}
         <div
           className={cn(
-            "flex-1 overflow-y-auto px-6 lg:px-8 w-full py-12 bg-card",
+            "flex-1 overflow-y-auto px-6 lg:px-8 w-full py-8 bg-card",
             hasFloatingFooter && "pb-20",
           )}
         >

@@ -63,6 +63,7 @@ export default async function Home() {
                 fill
                 className="object-cover"
                 priority
+                placeholder="blur"
               />
             }
           />

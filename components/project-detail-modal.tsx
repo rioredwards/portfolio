@@ -5,6 +5,7 @@ import { ProjectFrontmatter } from "@/lib/projects";
 import { cn } from "@/lib/utils";
 import { MDXRemoteSerializeResult } from "next-mdx-remote";
 import Link from "next/link";
+import { Fragment } from "react/jsx-runtime";
 import { ProjectDetailHeader } from "./project-detail-content";
 import { Button } from "./ui/button";
 
@@ -34,18 +35,21 @@ function ProjectFrontmatterSection({
           <span className="text-muted-foreground text-sm font-medium">
             Skills
           </span>
-          <div className="flex flex-wrap gap-2">
+          <div className="flex flex-wrap gap-2 items-center">
             {frontmatter.skills.map((skill, idx) => (
-              <span
-                key={skill}
-                className={cn(
-                  "bg-secondary text-secondary-foreground",
-                  "rounded-full py-1 text-sm"
-                )}
-              >
-                {/* seprated by a circle */}
-                {skill} {idx < frontmatter.skills.length - 1 && <span className="text-muted-foreground">•</span>}
-              </span>
+              <Fragment key={idx}>
+                <span
+                  key={idx}
+                  className={cn(
+                    "bg-secondary text-secondary-foreground",
+                    "rounded-full py-1 text-sm"
+                  )}
+                >
+                  {/* seprated by a circle */}
+                  {skill}
+                </span>
+                {idx < frontmatter.skills.length - 1 && <span className="text-muted-foreground">•</span>}
+              </Fragment>
             ))}
           </div>
         </div>
