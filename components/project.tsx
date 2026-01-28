@@ -37,7 +37,7 @@ export function Project({
     >
       {/* Image container with parallax */}
       <div
-        className="w-full aspect-5/4 sm:aspect-2/1 relative overflow-clip rounded-t-4xl"
+        className="w-full aspect-2/1 relative overflow-clip rounded-t-4xl"
         style={{ backgroundColor: brandColor }}
       >
         <Image
@@ -47,10 +47,10 @@ export function Project({
           height={1000}
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 800px"
           className={cn(
-            "object-cover rounded-tl-xl absolute transition-transform ease-out duration-600",
+            "object-contain rounded-tl-xl absolute transition-transform ease-out duration-600",
             "group-hover:scale-105 group-hover:-translate-y-4",
             brandColor
-              ? "w-[92%] h-[115%] top-[16%] left-[8%]"
+              ? "top-[16%] left-[8%]"
               : "size-full rounded-t-4xl"
           )}
           style={
