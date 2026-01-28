@@ -7,7 +7,7 @@ export interface BlogFrontmatter {
   title: string;
   slug: string;
   description: string;
-  icon: string;
+  icon?: string; // Optional blog icon/image
   date?: string;
   tags?: string[];
   order?: number;
