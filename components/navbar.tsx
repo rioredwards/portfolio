@@ -7,20 +7,35 @@ import {
   NavigationMenuList,
 } from "@/components/ui/navigation-menu";
 import { cn } from "@/lib/utils";
+import { ArrowRight02Icon } from "@hugeicons/core-free-icons";
+import { HugeiconsIcon } from '@hugeicons/react';
 import Link from "next/link";
+import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
-const navItems = [
+
+
+const homeNavItems = [
   { label: "Home", href: "#home" },
   { label: "Work", href: "#work" },
   { label: "Blog", href: "#blog" },
   { label: "Contact", href: "#contact" },
 ];
 
+const notHomeNavItems = [
+  { label: "Back Home", href: "/" },
+];
+
 export function Navbar() {
   const [activeSection, setActiveSection] = useState<string>("");
+  const router = useRouter()
+  const pathname = usePathname();
+  const isHomePage = pathname === "/";
+  const navItems = isHomePage ? homeNavItems : notHomeNavItems;
 
   useEffect(() => {
+    if (!isHomePage) return;
+
     const handleHashChange = () => {
       setActiveSection(window.location.hash);
     };
@@ -34,10 +49,11 @@ export function Navbar() {
     return () => {
       window.removeEventListener("hashchange", handleHashChange);
     };
-  }, []);
+  }, [isHomePage]);
 
   // Intersection Observer to detect when sections cross the middle of viewport
   useEffect(() => {
+    if (!isHomePage) return;
     const sections = navItems
       .map((item) => {
         const id = item.href.replace("#", "");
@@ -133,12 +149,16 @@ export function Navbar() {
       });
       window.removeEventListener("scroll", handleScroll);
     };
-  }, []);
+  }, [isHomePage, navItems]);
 
   const handleClick = (
     e: React.MouseEvent<HTMLAnchorElement | HTMLButtonElement>,
     href: string,
   ) => {
+    if (!isHomePage) {
+      router.push(href, { scroll: false });
+      return;
+    }
     e.preventDefault();
     const targetId = href.replace("#", "");
     const element = document.getElementById(targetId);
@@ -166,7 +186,7 @@ export function Navbar() {
                       onClick={(e) => handleClick(e, item.href)}
                       className={cn(
                         // Override NavigationMenuLink defaults
-                        "flex! flex-row! gap-0! rounded-full!",
+                        "flex! flex-row! gap-0! rounded-full! items-center",
                         // Custom styling with proper padding
                         "cursor-pointer px-4! py-1.5! text-sm font-medium transition-colors",
                         // Hover/active states
@@ -178,6 +198,7 @@ export function Navbar() {
                       )}
                       data-active={isActive ? "true" : undefined}
                     >
+                      {!isHomePage && <HugeiconsIcon icon={ArrowRight02Icon} size={16} color="currentColor" strokeWidth={2} className="mr-2 rotate-180" />}
                       {item.label}
                     </Link>
                   </NavigationMenuLink>

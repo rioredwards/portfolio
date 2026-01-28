@@ -19,7 +19,7 @@ import profileImage from "@/public/profile.webp";
 import { serialize } from "next-mdx-remote/serialize";
 import Image from "next/image";
 import { Fragment, Suspense } from "react";
-import { ProjectCard } from "../components/project-card";
+import { ProjectCard } from "../../components/project-card";
 
 export default async function Home() {
   const projectCards = getAllProjectCards();

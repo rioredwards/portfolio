@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { DM_Mono, DM_Sans } from "next/font/google";
 import localFont from "next/font/local";
-import { Footer } from "../components/footer";
 import { MobileMenu } from "../components/mobile-menu";
 import { Navbar } from "../components/navbar";
 import { Sidebar } from "../components/sidebar";
@@ -72,7 +71,6 @@ export default function RootLayout({
           <Sidebar />
           <MobileMenu />
           {children}
-          <Footer />
           <Toaster />
         </>
       </body>
