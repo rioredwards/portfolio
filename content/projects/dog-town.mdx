@@ -1,0 +1,278 @@
+---
+title: "DogTown"
+slug: "dog-town"
+icon: "/work/images/dog-town/logo-256.png"
+description: "A self-hosted website powered by a Raspberry Pi."
+category: "Web App"
+skills:
+  - "Next.js"
+  - "React"
+  - "TypeScript"
+  - "Tailwind CSS"
+  - "Docker"
+  - "Linux"
+  - "PostgreSQL"
+  - "Cloudflare Tunnels"
+  - "Node.js"
+  - "Python"
+image: "/work/images/dog-town/dog-town-screenshot.png"
+links:
+  - text: "LinkedIn"
+    url: "https://www.linkedin.com/in/rio-edwards/"
+  - text: "Bluesky"
+    url: "https://bsky.app/profile/rioedwards.bsky.social"
+  - text: "YouTube"
+    url: "https://www.youtube.com/channel/UCZdVYjS_Os_4e7DZAZSRxBQ"
+  - text: "GitHub"
+    url: "https://github.com/rioedwards/"
+order: 0
+---
+
+Come on down to DogTown!
+
+<Figure src="/work/images/dog-town/me-with-pups.jpeg" alt="Rio with dogs" />
+
+Software developer and dog enthusiast based in Portland, OR.
+
+---
+
+## What is this?
+
+<Figure src="/work/images/dog-town/my-pi.jpeg" alt="A Raspberry Pi" />
+
+Over the holidays, my sister gifted me a **Raspberry Pi**. Thanks, sis! 🫶
+
+If you're unfamiliar, a Raspberry Pi is a credit-card-sized computer. Unlike traditional machines, it doesn't include a screen, keyboard, or even a case—just the bare essentials. The main selling point of my model? **It has a power button** 🤯🤯🤯
+
+So, why would you want one? Raspberry Pis are perfect for DIY projects. You can build robots, smart home devices, or even host your own website—like I did.
+
+After some late-night coding and falling down a few Linux rabbit holes, I launched my first **self-hosted website**.
+
+Naturally, the theme is **dog photos**. Because dogs are awesome. 🐶
+
+---
+
+## Inspiration
+
+I've always leaned on services like Vercel and Netlify to host my projects. They're fast, reliable, and super easy to use.
+
+But I've had this nagging curiosity to understand how the internet actually works. What's really happening behind the scenes? What does it take to manage a server?
+
+So I challenged myself to dive into the world of self-hosting. It felt like the perfect opportunity to fill in some knowledge gaps—and get hands-on with my new Raspberry Pi.
+
+Along the way, I learned a ton about networking, Linux, process management, Docker, DevOps, security, and more.
+
+---
+
+## Some background (for noobs)
+
+<Figure
+  src="/work/images/dog-town/tech-for-dummies.jpeg"
+  alt="Diagram showing how this website gets from my Raspberry Pi to your computer/phone"
+/>
+
+### Networking 101
+
+The internet is basically just computers talking to each other over cables and Wi-Fi.
+
+They exchange data using IP addresses, URLs, and something called DNS—often referred to as the internet's “phone book.”
+
+For this project, I took my existing domain, `rioedwards.com`, and created a subdomain: `pi.rioedwards.com`, which I pointed to my Raspberry Pi. Now anyone can visit that subdomain and land on this site!
+
+This is all facilitated by DNS providers (like Cloudflare), who have servers all over the world for directing traffic. Your computer asks your router for `pi.rioedwards.com`, which eventually reaches Cloudflare, and they route the request to my Raspberry Pi.
+
+### What is a server?
+
+In simple terms, the internet has two types of computers: **clients** and **servers**. Your computer (the client) sends requests to mine (the server).
+
+Your browser is your interface to the internet. It sends requests to servers and displays the responses.
+
+My Pi runs a **web server**, which allows it to respond to those requests. It responds with code (and images of dogs) which your browser uses to create the page you're seeing here.
+
+### Tying it all together
+
+To make this site work, I had to:
+
+- Build the **frontend** (code that runs in your browser)
+- Build the **backend** (code that runs on my Pi)
+- Set up the domain and networking
+- Figure out why my Pi kept disconnecting 🫠
+
+There's more going on behind the scenes—like a database, an AI-powered DogBot, and a system profiler—but we'll get into that next.
+
+### Bonus: What makes a computer a server?
+
+Any computer can be a server—even yours! All it takes is downloading some (free) server software like nginx or Apache and turning it on.
+
+To expose it to the internet, you'd need to configure your router or use a service like Cloudflare Tunnels, like I did. But be careful—if you make a mistake, you might expose your machine in unsafe ways.
+
+Want a deeper dive? Check out my article: **What is the Backend?**  
+https://medium.com/@rioedwards/what-is-the-backend-ffd808ff950e
+
+---
+
+## How it's made (for the nerds)
+
+<Figure
+  src="/work/images/dog-town/tech-stack.jpeg"
+  alt="Diagram showing the tech stack powering this site"
+/>
+
+### Tech Stack
+
+| Layer           | Technology                                                                     |
+| --------------- | ------------------------------------------------------------------------------ |
+| OS              | Raspberry Pi OS (Debian GNU/Linux "trixie")                                    |
+| Tunnel          | Cloudflare Tunnels                                                             |
+| Web             | Next.js, React, TypeScript, Tailwind, ShadCN, Three.js, MDX, Drizzle, NextAuth |
+| Database        | PostgreSQL                                                                     |
+| AI Validation   | Python, FastAPI, OpenNSFW, PyTorch                                             |
+| System Profiler | Hono, TypeScript, Node.js                                                      |
+
+Was this overengineered? Probably. But my goal was to **learn**, not just ship.
+
+---
+
+## Timeline
+
+### Phase 1
+
+I started with this tutorial:  
+https://www.youtube.com/watch?v=Vp4glSVPT8o
+
+That got me a basic fullstack Next.js app running on the Pi, with traffic routed through a Cloudflare Tunnel. Easy win.
+
+At first, there was no database, authentication, or any of that fancy stuff. I was just winging it and adding features as I went.
+
+I stored photos and metadata as raw files using Node.js. I also set up a simple UUID tagging system for identifying users and images.
+
+I started building it over the holidays and had it connected to the TV, so my family could upload dog photos and see them on screen.
+
+<Figure
+  src="/work/images/dog-town/the-setup-og.jpeg"
+  alt="Laptop, Raspberry Pi, TV, and Suki on the setup"
+/>
+
+Eventually, work got busy, and the project went on the back burner for about a year.
+
+Highlights from Phase 1:
+
+- I built a “glowing gradient border” UI component (might release it as an npm package someday).
+- I wrote a Bash script for auto-updating the app and restarting the server (my first step into DevOps for this project).
+- I built a browser-based image compression/conversion tool to handle large images and HEIC (which basically has no browser support).
+
+### Phase 2
+
+After a long break, I came back with a fresh perspective and lots of ideas. First step: upgrade the stack.
+
+Improvements:
+
+- Switched to SQLite and Prisma
+- Added NextAuth for authentication
+- Identified key issues:
+  1. Server instability
+  2. Clunky deployments
+  3. No image moderation
+
+To fix the issues, I:
+
+1. Replaced `nohup` with **PM2** for process management
+2. Set up a **GitHub Actions** workflow for CI/CD
+3. Created **DogBot**, an AI image validator
+4. Dockerized everything
+5. Rebuilt the `/stats` page as a dedicated microservice
+
+#### DogBot - AI Image Validation
+
+DogBot runs as a middleware service, verifying that all uploaded images are “SFW” and contain dogs.
+
+Built using:
+
+- OpenNSFW (inappropriate content detection)
+- PyTorch/TorchVision (verify images contain dogs)
+
+It runs on a FastAPI server, processing images and returning `isDog` and `isNSFW` as scores/booleans.
+
+**Demo video:**  
+/ videos /DogBot-Demo.mp4
+
+### Docker Woes & Wins
+
+Docker makes things easier, but only if you know what you're doing 😅.
+
+I spent more time learning Docker/Docker Compose than anything else in this project. Worth it though—it also inspired a side project: a CLI utility for quickly casting commands from your history.
+
+<Figure src="/work/images/dog-town/fzf-cmd.jpg" alt="fz-cmd project image" />
+
+- Repo: https://github.com/rioedwards/fz-cmd
+
+### Phase 3
+
+I found this tutorial from Lee Rob on self-hosting Next.js apps:  
+https://www.youtube.com/watch?v=sIVL4JMqRfc
+
+Once I had it working, I rebuilt my app using his setup, reintegrating my features one by one.
+
+Upgrades:
+
+- Prisma ➡️ Drizzle
+- SQLite ➡️ PostgreSQL
+- Added **Nginx** for image caching
+
+#### System Profiler Service
+
+This started as a simple `/stats` page, but evolved into a full system profiler:
+
+- Built with Hono, TypeScript, Node.js
+- Gathers metrics from `/proc`, `/sys`, and the Docker socket
+- Streamed to the frontend via Server-Sent Events (SSE)
+- Authenticated requests via token
+- Dashboard built with Recharts
+
+#### 3D Model using a Depth Map
+
+Inspired by this Wes Bos & SyntaxFM video:  
+https://www.youtube.com/watch?v=HzL65tTeANs&t=70s
+
+I created a 3D depth map using MiDaS + a generated texture + Figma, then fed it into Three.js for the 3D effect.
+
+<Figure
+  src="/work/images/dog-town/pi-3d.png"
+  alt="2D image of a Raspberry Pi used for the 3D effect"
+/>
+
+<Figure
+  src="/work/images/dog-town/pi-depth.png"
+  alt="Depth map of the Raspberry Pi image"
+/>
+
+### Phase 4
+
+It was “feature-complete.” So naturally, I added more features. 🤷‍♂️
+
+- **MDX Support**: write markdown + embed components
+- **Lightbox UX**: fullscreen image/video previews
+- **Logo / Branding**: designed in Figma
+
+<Figure src="/work/images/dog-town/logo-prog.jpg" alt="Logo progression" />
+
+---
+
+## Final Thoughts
+
+I learned a lot from this project—Docker, DevOps, Linux, bash scripting, networking, and more. These are skills I'll benefit from for the rest of my career.
+
+And since I mentioned AI…
+
+> I can't imagine a world where knowledge, skills, and experience aren't valuable.
+
+Thanks for reading! ❤️
+
+---
+
+## Get in Touch
+
+- LinkedIn: https://www.linkedin.com/in/rio-edwards/
+- Bluesky: https://bsky.app/profile/rioedwards.bsky.social
+- YouTube: https://www.youtube.com/channel/UCZdVYjS_Os_4e7DZAZSRxBQ
+- GitHub: https://github.com/rioedwards/
