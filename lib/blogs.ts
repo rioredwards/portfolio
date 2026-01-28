@@ -1,13 +1,13 @@
 import fs from "fs";
-import path from "path";
 import matter from "gray-matter";
+import path from "path";
 
 // Types
 export interface BlogFrontmatter {
   title: string;
   slug: string;
   description: string;
-  icon?: string; // Optional blog icon/image
+  icon: string;
   date?: string;
   tags?: string[];
   order?: number;

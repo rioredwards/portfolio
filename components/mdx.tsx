@@ -83,7 +83,8 @@ function CustomLink({
 }
 
 function RoundedImage(props: ImageProps) {
-  return <Image className={cn("rounded-lg", props.className)} {...props} />;
+  const { alt, ...rest } = props;
+  return <Image className={cn("rounded-lg", props.className)} alt={alt} {...rest} />;
 }
 
 interface TableProps {
