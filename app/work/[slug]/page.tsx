@@ -25,11 +25,10 @@ export default async function ProjectDetailPage({ params }: PageProps) {
 
   return (
     <main className={cn("bg-secondary min-h-screen")}>
-      <div className={cn("px-content-px py-content-py mx-auto max-w-5xl")}>
+      <div className={cn("px-content-px py-content-py mx-auto max-w-prose-max")}>
         <ProjectDetailContent
           frontmatter={project.frontmatter}
           content={project.content}
-          renderContext="page"
         />
       </div>
     </main>

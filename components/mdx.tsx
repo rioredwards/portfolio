@@ -1,10 +1,10 @@
+import { cn } from "@/lib/utils";
 import { MDXRemote, MDXRemoteProps } from "next-mdx-remote/rsc";
 import Image, { ImageProps } from "next/image";
 import Link from "next/link";
-import { highlight } from "sugar-high";
-import remarkGfm from "remark-gfm";
 import React, { ComponentPropsWithoutRef } from "react";
-import { cn } from "@/lib/utils";
+import remarkGfm from "remark-gfm";
+import { highlight } from "sugar-high";
 import { HeadingLink } from "./mdx-heading-link";
 
 function slugify(str: string) {
@@ -139,16 +139,16 @@ interface FigureProps {
 
 export function Figure({ src, alt, caption, credit, creditUrl }: FigureProps) {
   return (
-    <figure className="my-6">
+    <figure className="my-6 w-full">
       <Image
         src={src}
         alt={alt}
         width={800}
         height={600}
-        className="rounded-lg"
+        className="rounded-lg w-full"
       />
       {(caption || credit) && (
-        <figcaption className="mt-2 text-center text-sm text-muted-foreground">
+        <figcaption className="mt-2 text-center text-sm text-muted-foreground w-full">
           {caption}
           {caption && credit && " — "}
           {credit &&

@@ -1,11 +1,12 @@
 import fs from "fs";
-import path from "path";
 import matter from "gray-matter";
+import path from "path";
 
 // Types
 export interface ProjectFrontmatter {
   title: string;
   slug: string;
+  icon?: string;
   description: string;
   category: string;
   skills: string[];
@@ -110,9 +111,7 @@ export function getAllProjectCards(): ProjectCard[] {
 /**
  * Get a project with its full MDX content
  */
-export function getProjectWithContent(
-  slug: string,
-): ProjectWithContent | null {
+export function getProjectWithContent(slug: string): ProjectWithContent | null {
   try {
     const filePath = path.join(PROJECTS_DIR, `${slug}.mdx`);
     if (!fs.existsSync(filePath)) {
@@ -125,6 +124,7 @@ export function getProjectWithContent(
     const frontmatter: ProjectFrontmatter = {
       title: data.title,
       slug: data.slug,
+      icon: data.icon,
       description: data.description,
       category: data.category,
       skills: data.skills || [],

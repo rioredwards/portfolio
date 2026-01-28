@@ -83,10 +83,7 @@ export function ContentDetailModal({
         >
           <div className="mx-auto w-fit">
             {renderFrontmatter && (
-              <>
-                {renderFrontmatter()}
-                <hr className="border-border my-8" />
-              </>
+              renderFrontmatter()
             )}
             {serializedContent ? (
               <ContentProse includeTableStyles={includeTableStyles}>
