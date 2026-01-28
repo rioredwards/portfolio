@@ -11,6 +11,7 @@ export interface ProjectFrontmatter {
   category: string;
   skills: string[];
   image: string;
+  brandColor?: string;
   links?: Array<{ text: string; url: string }>;
   order?: number;
 }
@@ -22,6 +23,7 @@ export interface ProjectCard {
   category: string;
   skills: string[];
   image: string;
+  brandColor?: string;
 }
 
 export interface ProjectWithContent {
@@ -66,6 +68,7 @@ export function getProjectFrontmatter(slug: string): ProjectFrontmatter | null {
       category: data.category,
       skills: data.skills || [],
       image: data.image,
+      brandColor: data.brandColor,
       links: data.links || [],
       order: data.order,
     };
@@ -92,6 +95,7 @@ export function getAllProjectCards(): ProjectCard[] {
         category: frontmatter.category,
         skills: frontmatter.skills,
         image: frontmatter.image,
+        brandColor: frontmatter.brandColor,
         order: frontmatter.order,
       });
     }
@@ -129,6 +133,7 @@ export function getProjectWithContent(slug: string): ProjectWithContent | null {
       category: data.category,
       skills: data.skills || [],
       image: data.image,
+      brandColor: data.brandColor,
       links: data.links || [],
       order: data.order,
     };

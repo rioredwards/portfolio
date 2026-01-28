@@ -96,6 +96,7 @@ export default async function Home() {
                   description={project.description}
                   skills={project.skills}
                   image={project.image}
+                  brandColor={project.brandColor}
                 />
               </SectionContentWrapper>
             </SlidePanel>
