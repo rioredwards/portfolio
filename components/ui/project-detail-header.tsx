@@ -5,15 +5,14 @@ import { Button } from "./button";
 
 interface ProjectDetailHeaderProps {
   title: string;
+  slug: string;
   links?: { text: string; url: string }[];
   icon?: string;
   category: string;
   skills: string[];
 }
 
-export function ProjectDetailHeader({ title, links, icon, category, skills }: ProjectDetailHeaderProps) {
-  const firstLink = links?.[0];
-
+export function ProjectDetailHeader({ title, slug, links, icon }: ProjectDetailHeaderProps) {
   const Content = (
     <header className="flex items-center gap-4">
       {icon && (
@@ -38,20 +37,12 @@ export function ProjectDetailHeader({ title, links, icon, category, skills }: Pr
     )}
     >
       <h1 style={{ fontFamily: "var(--font-mazaeni-demo), serif" }}>
-        {
-          firstLink ? (
-            <Link
-              href={firstLink.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-4 group"
-            >
-              {Content}
-            </Link>
-          ) : (
-            <span className="flex items-center gap-4">{Content}</span>
-          )
-        }
+        <Link
+          href={`/work/${slug}`}
+          className="flex items-center gap-4 group"
+        >
+          {Content}
+        </Link>
       </h1>
       {links && links.length > 0 && (
         <ul className={cn("flex items-center gap-4")}>

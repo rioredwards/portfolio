@@ -3,9 +3,7 @@ import { cn } from "@/lib/utils";
 import Image from "next/image";
 import Link from "next/link";
 
-export function ProjectModalHeader({ title, links, icon }: ProjectFrontmatter) {
-  const firstLink = links?.[0];
-
+export function ProjectModalHeader({ title, slug, icon }: ProjectFrontmatter) {
   const Content = (
     <>
       {icon && (
@@ -26,20 +24,12 @@ export function ProjectModalHeader({ title, links, icon }: ProjectFrontmatter) {
   return (
     <div className={cn("px-2 md:px-4 text-foreground")}>
       <h1 style={{ fontFamily: "var(--font-mazaeni-demo), serif" }}>
-        {
-          firstLink ? (
-            <Link
-              href={firstLink.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-4 group"
-            >
-              {Content}
-            </Link>
-          ) : (
-            <span className="flex items-center gap-4">{Content}</span>
-          )
-        }
+        <Link
+          href={`/work/${slug}`}
+          className="flex items-center gap-4 group"
+        >
+          {Content}
+        </Link>
       </h1>
     </div>
   );
