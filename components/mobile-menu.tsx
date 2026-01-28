@@ -105,7 +105,7 @@ export function MobileMenu() {
         <div
           ref={menuRef}
           id="mobile-menu"
-          className="bg-background mobile-menu-open fixed inset-0 z-50 md:hidden"
+          className="bg-secondary mobile-menu-open fixed inset-0 z-50 md:hidden"
           role="dialog"
           aria-modal="true"
           aria-label="Mobile navigation menu"
@@ -130,7 +130,7 @@ export function MobileMenu() {
           <div className="mm-py flex h-full flex-col items-center justify-center px-6">
             {/* Profile picture */}
             <div className="mm-mb-small shrink-0">
-              <div className="border-accent/60 mm-img relative overflow-hidden rounded-full border-2">
+              <div className="border-border/50 mm-img relative overflow-hidden rounded-full border-2">
                 <Image
                   src={profileImage}
                   alt="Rio Edwards"

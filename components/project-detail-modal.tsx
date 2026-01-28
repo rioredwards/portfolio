@@ -43,7 +43,7 @@ export function ProjectDetailModal({
                   key={idx}
                   asChild
                   variant={idx === 0 ? "default" : "outline"}
-                  size="default"
+                  size="sm"
                 >
                   <Link href={link.url} target="_blank" rel="noopener noreferrer">
                     {link.text}

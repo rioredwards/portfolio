@@ -50,7 +50,7 @@ const alertVariants = cva("", {
       default:
         "bg-secondary text-foreground hover:bg-secondary-hover hover:border-secondary-hover-border",
       success:
-        "bg-primary hover:bg-primary-hover text-primary-foreground hover:border-primary-hover-border border border-transparent",
+        "bg-accent hover:bg-accent-hover text-accent-foreground hover:border-accent-hover-border border border-transparent",
       destructive:
         "bg-destructive hover:bg-destructive-hover text-destructive-foreground hover:border-destructive-hover-border border border-transparent",
     },
@@ -62,8 +62,8 @@ const alertVariants = cva("", {
 
 interface AlertProps
   extends
-    Omit<React.HTMLAttributes<HTMLDivElement>, "title">,
-    VariantProps<typeof alertVariants> {
+  Omit<React.HTMLAttributes<HTMLDivElement>, "title">,
+  VariantProps<typeof alertVariants> {
   variant: "default" | "success" | "destructive";
   icon?: React.ReactNode;
   title?: string;

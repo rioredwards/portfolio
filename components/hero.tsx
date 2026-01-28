@@ -23,7 +23,7 @@ function HeroImage({
   return (
     <div
       className={cn(
-        "relative aspect-square min-h-64 min-w-64 shrink-0 overflow-hidden rounded-full border-4",
+        "relative aspect-square min-h-64 min-w-64 shrink-0 overflow-hidden rounded-full border-4 border-border/50",
         className,
       )}
     >

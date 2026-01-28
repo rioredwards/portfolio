@@ -102,7 +102,7 @@ export function ContentDetailModal({
         <div className={cn(
           "bg-background/70 backdrop-blur-sm right-0 bottom-0 left-0 z-50",
           "flex items-center justify-center gap-4",
-          "px-6 py-3",
+          "px-6 py-2",
         )}>{hasFloatingFooter && renderFloatingFooter()}</div>
       </DialogContent>
     </Dialog>

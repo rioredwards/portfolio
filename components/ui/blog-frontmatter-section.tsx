@@ -38,20 +38,20 @@ export function BlogFrontmatterSection({
             <Fragment key={idx}>
               <span
                 className={cn(
-                  "bg-secondary text-foreground",
+                  "text-foreground",
                   "rounded-full py-1 text-sm"
                 )}
               >
                 {tag}
               </span>
               {idx < frontmatter.tags!.length - 1 && (
-                <span className="text-muted-foreground">•</span>
+                <span className="text-muted-foreground/40">/</span>
               )}
             </Fragment>
           ))}
         </div>
       )}
-      <hr className="border-border mt-4 mb-8" />
+      <hr className="border-border/40 mt-4 mb-8" />
     </div>
   );
 }

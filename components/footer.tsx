@@ -1,4 +1,5 @@
-import { Skill } from "@/components/ui/skill";
+import { Fragment } from "react/jsx-runtime";
+import { cn } from "../lib/utils";
 
 const BUILT_WITH = ["Next.js", "Tailwind", "Shadcn/UI", "TypeScript"];
 
@@ -17,8 +18,19 @@ export function Footer() {
       <div className="flex flex-col items-start gap-3 md:items-end">
         <p className="text-sm font-semibold">Built With</p>
         <div className="flex flex-wrap gap-4">
-          {BUILT_WITH.map((tool) => (
-            <Skill key={tool} text={tool} variant="outline" size="sm" />
+          {BUILT_WITH.map((tool, idx) => (
+            <Fragment key={idx}>
+              <span
+                className={cn(
+                  "text-foreground",
+                  "rounded-full py-1 text-sm"
+                )}
+              >
+                {/* seprated by a circle */}
+                {tool}
+              </span>
+              {idx < BUILT_WITH.length - 1 && <span className="text-muted-foreground/40">/</span>}
+            </Fragment>
           ))}
         </div>
       </div>

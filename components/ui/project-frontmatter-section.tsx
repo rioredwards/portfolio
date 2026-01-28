@@ -27,20 +27,20 @@ export function ProjectFrontmatterSection({
                 <span
                   key={idx}
                   className={cn(
-                    "bg-secondary text-foreground",
+                    "text-foreground",
                     "rounded-full py-1 text-sm"
                   )}
                 >
                   {/* seprated by a circle */}
                   {skill}
                 </span>
-                {idx < frontmatter.skills.length - 1 && <span className="text-muted-foreground">•</span>}
+                {idx < frontmatter.skills.length - 1 && <span className="text-muted-foreground/40">/</span>}
               </Fragment>
             ))}
           </div>
         </div>
       )}
-      <hr className="border-border mt-4 mb-8" />
+      <hr className="border-border/40 mt-4 mb-8" />
     </div>
   );
 }
