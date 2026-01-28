@@ -137,7 +137,7 @@ interface FigureProps {
   creditUrl?: string;
 }
 
-function Figure({ src, alt, caption, credit, creditUrl }: FigureProps) {
+export function Figure({ src, alt, caption, credit, creditUrl }: FigureProps) {
   return (
     <figure className="my-6">
       <Image

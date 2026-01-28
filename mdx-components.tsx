@@ -1,4 +1,5 @@
 import { HeadingLink } from "@/components/mdx-heading-link";
+import { Figure } from "@/components/mdx";
 import type { MDXComponents } from "mdx/types";
 import Image, { ImageProps } from "next/image";
 import Link from "next/link";
@@ -137,6 +138,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     Table,
     blockquote: Blockquote,
     hr: Hr,
+    Figure,
     ...components,
   };
 }
