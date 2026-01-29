@@ -29,24 +29,12 @@ order: 0
 # Test
 
 <LightboxImage
-  src="/work/images/dog-town/dog-town-screenshot-3.jpg"
+  src={ImgDogTownScreenshot3}
   alt="Dog Town Screenshot 1"
   priority={true}
 />
 
-### some more text
-
-  <LightboxImage
-    src="/work/images/dog-town/dog-town-screenshot-2.jpg"
-    alt="A Raspberry Pi"
-  />
-  <LightboxImage
-    src="/work/images/dog-town/dog-town-screenshot-3.jpg"
-    alt="A Raspberry Pi"
-  />
-</LightboxGallery>
-
-This is a hobby project of mine, a self-hosted photo-sharing web app running on my Raspberry Pi. Naturally, the theme is **dog photos** because dogs are awesome. 🐶
+DogTown is a self-hosted photo-sharing app running on my Raspberry Pi. Naturally, the theme is **dog photos** because dogs are awesome. 🐶
 
 I learned a ton about networking, DevOps, security, and more.
 
@@ -54,8 +42,8 @@ I learned a ton about networking, DevOps, security, and more.
 
 ## What I built
 
-<Figure
-  src="/work/images/dog-town/tech-stack.jpeg"
+<LightboxImage
+  src={ImgDogTownTechStack}
   alt="Diagram showing the tech stack powering this site"
 />
 
@@ -143,8 +131,8 @@ I stored photos and metadata as raw files using Node.js. I also set up a simple 
 
 I started building it over the holidays and had it connected to the TV, so my family could upload dog photos and see them on screen.
 
-<Figure
-  src="/work/images/dog-town/the-setup-og.jpeg"
+<LightboxImage
+  src={ImgDogTownTheSetupOg}
   alt="Laptop, Raspberry Pi, TV, and Suki on the setup"
 />
 
@@ -197,7 +185,7 @@ Docker makes things easier, but only if you know what you're doing 😅.
 
 I spent more time learning Docker/Docker Compose than anything else in this project. Worth it though—it also inspired a side project: a CLI utility for quickly casting commands from your history.
 
-<Figure src="/work/images/dog-town/fzf-cmd.jpg" alt="fz-cmd project image" />
+<LightboxImage src={ImgDogTownFzfCmd} alt="fz-cmd project image" />
 
 - Repo: https://github.com/rioedwards/fz-cmd
 
@@ -231,12 +219,12 @@ https://www.youtube.com/watch?v=HzL65tTeANs&t=70s
 
 I created a 3D depth map using MiDaS + a generated texture + Figma, then fed it into Three.js for the 3D effect.
 
-<Figure
+<LightboxImage
   src="/work/images/dog-town/pi-3d.png"
   alt="2D image of a Raspberry Pi used for the 3D effect"
 />
 
-<Figure
+<LightboxImage
   src="/work/images/dog-town/pi-depth.png"
   alt="Depth map of the Raspberry Pi image"
 />
@@ -249,7 +237,7 @@ It was “feature-complete.” So naturally, I added more features. 🤷‍♂�
 - **Lightbox UX**: fullscreen image/video previews
 - **Logo / Branding**: designed in Figma
 
-<Figure src="/work/images/dog-town/logo-prog.jpg" alt="Logo progression" />
+<LightboxImage src={ImgDogTownLogoProg} alt="Logo progression" />
 
 ---
 
@@ -272,4 +260,6 @@ Thanks for reading! ❤️
 - YouTube: https://www.youtube.com/channel/UCZdVYjS_Os_4e7DZAZSRxBQ
 - GitHub: https://github.com/rioedwards/
 
-<Figure src="/work/images/dog-town/my-pi.jpeg" alt="A Raspberry Pi" />
+<LightboxImage src={ImgDogTownMyPi} alt="A Raspberry Pi" />
+
+</LightboxGallery>

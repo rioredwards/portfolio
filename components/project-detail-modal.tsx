@@ -3,15 +3,15 @@
 import { ContentDetailModal } from "@/components/content-detail/content-detail-modal";
 import { ProjectModalHeader } from "@/components/ui/project-modal-header";
 import { ProjectFrontmatter } from "@/lib/projects";
-import { MDXRemoteSerializeResult } from "next-mdx-remote";
 import Link from "next/link";
+import { ReactNode } from "react";
 import { Button } from "./ui/button";
 import { DialogTitle } from "./ui/dialog";
 import { ProjectFrontmatterSection } from "./ui/project-frontmatter-section";
 
 interface ProjectDetailModalProps {
   frontmatter: ProjectFrontmatter | null;
-  serializedContent: MDXRemoteSerializeResult | null;
+  renderedContent: ReactNode;
   open: boolean;
   onOpenChange: (open: boolean) => void;
 }
@@ -19,7 +19,7 @@ interface ProjectDetailModalProps {
 
 export function ProjectDetailModal({
   frontmatter,
-  serializedContent,
+  renderedContent,
   open,
   onOpenChange,
 }: ProjectDetailModalProps) {
@@ -29,7 +29,7 @@ export function ProjectDetailModal({
     <ContentDetailModal
       open={open}
       onOpenChange={onOpenChange}
-      serializedContent={serializedContent}
+      renderedContent={renderedContent}
       renderHeader={() => <DialogTitle><ProjectModalHeader {...frontmatter} /></DialogTitle>}
       renderFrontmatter={() => (
         <ProjectFrontmatterSection frontmatter={frontmatter} />

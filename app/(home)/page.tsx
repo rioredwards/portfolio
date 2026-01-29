@@ -1,22 +1,24 @@
 import { BlogCard } from "@/components/blog-card";
 import {
   BlogModalHandler,
-  SerializedBlog,
+  RenderedBlog,
 } from "@/components/blog-modal-handler";
 import { Contact } from "@/components/contact";
 import { Hero } from "@/components/hero";
+import { mdxComponents } from "@/components/mdx";
 import {
   ProjectModalHandler,
-  SerializedProject
+  RenderedProject,
 } from "@/components/project-modal-handler";
 import { SectionContentWrapper } from "@/components/section-content-wrapper";
 import { SectionHeader } from "@/components/section-header";
 import { SlidePanel } from "@/components/slide-panel";
+import { projectImageScope } from "@/content/projects/project-images";
 import { getBlogIcon } from "@/lib/blog-icons";
 import { getAllBlogCards, getAllBlogsWithContent } from "@/lib/blogs";
 import { getAllProjectCards, getAllProjectsWithContent } from "@/lib/projects";
 import profileImage from "@/public/profile.webp";
-import { serialize } from "next-mdx-remote/serialize";
+import { MDXRemote } from "next-mdx-remote/rsc";
 import Image from "next/image";
 import { Fragment, Suspense } from "react";
 import { ProjectCard } from "../../components/project-card";
@@ -28,22 +30,28 @@ export default async function Home() {
   const blogCards = getAllBlogCards();
   const blogsWithContent = getAllBlogsWithContent();
 
-  // Serialize MDX content for client-side rendering in the modal
-  const serializedProjects = new Map<string, SerializedProject>();
+  // Render MDX content on the server and pass as ReactNode to client modals
+  const renderedProjects = new Map<string, RenderedProject>();
   for (const [slug, project] of projectsWithContent) {
-    const serializedContent = await serialize(project.content);
-    serializedProjects.set(slug, {
+    renderedProjects.set(slug, {
       frontmatter: project.frontmatter,
-      serializedContent,
+      renderedContent: (
+        <MDXRemote
+          source={project.content}
+          components={mdxComponents}
+          options={{ scope: projectImageScope }}
+        />
+      ),
     });
   }
 
-  const serializedBlogs = new Map<string, SerializedBlog>();
+  const renderedBlogs = new Map<string, RenderedBlog>();
   for (const [slug, blog] of blogsWithContent) {
-    const serializedContent = await serialize(blog.content);
-    serializedBlogs.set(slug, {
+    renderedBlogs.set(slug, {
       frontmatter: blog.frontmatter,
-      serializedContent,
+      renderedContent: (
+        <MDXRemote source={blog.content} components={mdxComponents} />
+      ),
     });
   }
 
@@ -165,8 +173,8 @@ export default async function Home() {
       </section>
 
       <Suspense fallback={null}>
-        <ProjectModalHandler projectsMap={serializedProjects} />
-        <BlogModalHandler blogsMap={serializedBlogs} />
+        <ProjectModalHandler projectsMap={renderedProjects} />
+        <BlogModalHandler blogsMap={renderedBlogs} />
       </Suspense>
     </main>
   );

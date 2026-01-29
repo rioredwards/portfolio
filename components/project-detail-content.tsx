@@ -1,4 +1,5 @@
 import { ContentProse } from "@/components/content-detail/content-prose";
+import { projectImageScope } from "@/content/projects/project-images";
 import { ProjectFrontmatter } from "@/lib/projects";
 import { useMDXComponents } from "@/mdx-components";
 import { MDXRemote } from "next-mdx-remote/rsc";
@@ -28,7 +29,7 @@ export function ProjectDetailContent({
       {/* MDX Content Section */}
       <section>
         <ContentProse>
-          <MDXRemote source={content} components={components} />
+          <MDXRemote source={content} components={components} options={{ scope: projectImageScope }} />
         </ContentProse>
       </section>
     </div>

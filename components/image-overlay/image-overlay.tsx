@@ -9,6 +9,9 @@ export interface ImageOverlayProps
   extends Omit<React.ComponentProps<"div">, "children"> {
   src: string | StaticImageData;
   alt: string;
+  width?: number;
+  height?: number;
+  fill?: boolean;
   sizes?: string;
   priority?: boolean;
   overlayClassName?: string;
@@ -22,10 +25,13 @@ const ImageOverlay = React.forwardRef<HTMLDivElement, ImageOverlayProps>(
     {
       src,
       alt,
-      sizes,
+      width,
+      height,
+      fill,
+      sizes = "(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 640px",
       priority = false,
       className,
-      overlayClassName,
+      overlayClassName = "rounded-2xl size-full",
       zoomOnHover = true,
       onActiveChange,
       onClick,
@@ -83,7 +89,7 @@ const ImageOverlay = React.forwardRef<HTMLDivElement, ImageOverlayProps>(
         ref={ref}
         role="group"
         className={cn(
-          "group transition-all duration-200 ease-in-out relative aspect-square overflow-hidden rounded-2xl cursor-pointer",
+          "group transition-all duration-200 ease-in-out relative overflow-hidden rounded-2xl cursor-pointer",
           className
         )}
         style={{
@@ -98,13 +104,16 @@ const ImageOverlay = React.forwardRef<HTMLDivElement, ImageOverlayProps>(
         <Image
           src={src}
           alt={alt}
-          fill
+          fill={true}
+          // width={fill ? undefined : width ?? undefined}
+          // height={fill ? undefined : height ?? undefined}
           priority={priority}
           sizes={sizes}
           placeholder={isStaticImage && src.blurDataURL ? "blur" : undefined}
           className={cn(
-            "object-cover transition-transform duration-300 ease-in-out",
-            zoomOnHover && active && "scale-110"
+            "block object-cover my-0! transition-transform duration-300 ease-in-out rounded-2xl",
+            zoomOnHover && active && "scale-105",
+            className
           )}
         />
 

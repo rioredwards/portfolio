@@ -2,15 +2,15 @@
 
 import {
   ContentModalHandler,
-  SerializedContent,
+  RenderedContent,
 } from "@/components/content-detail/content-modal-handler";
 import { BlogFrontmatter } from "@/lib/blogs";
 import { BlogDetailModal } from "./blog-detail-modal";
 
-export type SerializedBlog = SerializedContent<BlogFrontmatter>;
+export type RenderedBlog = RenderedContent<BlogFrontmatter>;
 
 interface BlogModalHandlerProps {
-  blogsMap: Map<string, SerializedBlog>;
+  blogsMap: Map<string, RenderedBlog>;
 }
 
 export function BlogModalHandler({ blogsMap }: BlogModalHandlerProps) {

@@ -5,18 +5,18 @@ import { BlogFrontmatterSection } from "@/components/ui/blog-frontmatter-section
 import { BlogModalHeader } from "@/components/ui/blog-modal-header";
 import { DialogTitle } from "@/components/ui/dialog";
 import { BlogFrontmatter } from "@/lib/blogs";
-import { MDXRemoteSerializeResult } from "next-mdx-remote";
+import { ReactNode } from "react";
 
 interface BlogDetailModalProps {
   frontmatter: BlogFrontmatter | null;
-  serializedContent: MDXRemoteSerializeResult | null;
+  renderedContent: ReactNode;
   open: boolean;
   onOpenChange: (open: boolean) => void;
 }
 
 export function BlogDetailModal({
   frontmatter,
-  serializedContent,
+  renderedContent,
   open,
   onOpenChange,
 }: BlogDetailModalProps) {
@@ -26,7 +26,7 @@ export function BlogDetailModal({
     <ContentDetailModal
       open={open}
       onOpenChange={onOpenChange}
-      serializedContent={serializedContent}
+      renderedContent={renderedContent}
       renderHeader={() => (
         <DialogTitle>
           <BlogModalHeader {...frontmatter} />

@@ -2,15 +2,15 @@
 
 import {
   ContentModalHandler,
-  SerializedContent,
+  RenderedContent,
 } from "@/components/content-detail/content-modal-handler";
 import { ProjectFrontmatter } from "@/lib/projects";
 import { ProjectDetailModal } from "./project-detail-modal";
 
-export type SerializedProject = SerializedContent<ProjectFrontmatter>;
+export type RenderedProject = RenderedContent<ProjectFrontmatter>;
 
 interface ProjectModalHandlerProps {
-  projectsMap: Map<string, SerializedProject>;
+  projectsMap: Map<string, RenderedProject>;
 }
 
 export function ProjectModalHandler({

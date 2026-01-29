@@ -1,24 +1,23 @@
 "use client";
 
-import { MDXRemoteSerializeResult } from "next-mdx-remote";
 import { useRouter, useSearchParams } from "next/navigation";
 import { ReactNode, useState } from "react";
 import { useLightbox } from "../lightbox-image";
 
-export interface SerializedContent<TFrontmatter> {
+export interface RenderedContent<TFrontmatter> {
   frontmatter: TFrontmatter;
-  serializedContent: MDXRemoteSerializeResult;
+  renderedContent: ReactNode;
 }
 
 interface ContentModalHandlerProps<TFrontmatter> {
-  /** Map of slug -> serialized content */
-  contentMap: Map<string, SerializedContent<TFrontmatter>>;
+  /** Map of slug -> rendered content */
+  contentMap: Map<string, RenderedContent<TFrontmatter>>;
   /** Query parameter name to read from URL (e.g., "project" or "blog") */
   queryParam: string;
   /** Render the modal with the selected content */
   renderModal: (props: {
     frontmatter: TFrontmatter;
-    serializedContent: MDXRemoteSerializeResult;
+    renderedContent: ReactNode;
     open: boolean;
     onOpenChange: (open: boolean) => void;
   }) => ReactNode;
@@ -59,7 +58,7 @@ export function ContentModalHandler<TFrontmatter>({
     <>
       {renderModal({
         frontmatter: selectedContent.frontmatter,
-        serializedContent: selectedContent.serializedContent,
+        renderedContent: selectedContent.renderedContent,
         open: open,
         onOpenChange: handleOpenChange,
       })}

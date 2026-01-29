@@ -1,11 +1,11 @@
 "use client";
 
-import { cn } from "@/lib/utils";
-import { usePointerType } from "@/components/image-overlay/use-pointer-type";
 import { ImageOverlay } from "@/components/image-overlay/image-overlay";
+import { usePointerType } from "@/components/image-overlay/use-pointer-type";
 import { useLightbox } from "@/components/lightbox-image/lightbox-provider";
 import { LightboxTrigger } from "@/components/lightbox-image/lightbox-trigger";
 import type { LightboxSlide } from "@/components/lightbox-image/types";
+import { cn } from "@/lib/utils";
 import { StaticImageData } from "next/image";
 
 interface LightboxImageProps {
@@ -25,7 +25,7 @@ export function LightboxImage({
   src,
   alt,
   caption,
-  enableLightbox = false,
+  enableLightbox = true,
   gallery,
   galleryIndex = 0,
   priority = false,
@@ -59,7 +59,7 @@ export function LightboxImage({
         alt={alt}
         sizes={sizes}
         priority={priority}
-        className={cn("size-full", className)}
+        className={cn(className)}
         overlayClassName="rounded-2xl size-full"
         zoomOnHover={enableLightbox}
         onClick={handleImageClick}

@@ -1,9 +1,7 @@
 "use client";
 
-import { mdxComponents } from "@/components/mdx";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { cn } from "@/lib/utils";
-import { MDXRemote, MDXRemoteSerializeResult } from "next-mdx-remote";
 import { ReactNode, useEffect } from "react";
 import { useLightbox } from "../lightbox-image/lightbox-provider";
 import { ContentProse } from "./content-prose";
@@ -11,7 +9,7 @@ import { ContentProse } from "./content-prose";
 interface ContentDetailModalProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
-  serializedContent: MDXRemoteSerializeResult | null;
+  renderedContent: ReactNode;
   /** Render the header content (title, metadata, etc.) */
   renderHeader: () => ReactNode;
   /** Optional render for frontmatter section (tags, skills, etc.) - displayed before MDX content */
@@ -29,7 +27,7 @@ interface ContentDetailModalProps {
 export function ContentDetailModal({
   open,
   onOpenChange,
-  serializedContent,
+  renderedContent,
   renderHeader,
   renderFrontmatter,
   renderFloatingFooter,
@@ -40,7 +38,7 @@ export function ContentDetailModal({
 
   // Scroll to hash element after modal content renders
   useEffect(() => {
-    if (open && serializedContent) {
+    if (open && renderedContent) {
       const hash = window.location.hash.slice(1); // Remove the #
       if (hash) {
         // Small delay to ensure content is rendered
@@ -53,7 +51,7 @@ export function ContentDetailModal({
         return () => clearTimeout(timeoutId);
       }
     }
-  }, [open, serializedContent]);
+  }, [open, renderedContent]);
 
   return (
     <Dialog open={true} onOpenChange={onOpenChange} modal={true} >
@@ -90,15 +88,9 @@ export function ContentDetailModal({
             {renderFrontmatter && (
               renderFrontmatter()
             )}
-            {serializedContent ? (
-              <ContentProse includeTableStyles={includeTableStyles}>
-                <MDXRemote {...serializedContent} components={mdxComponents} />
-              </ContentProse>
-            ) : (
-              <p className={cn("text-muted-foreground")}>
-                Content not available.
-              </p>
-            )}
+            <ContentProse includeTableStyles={includeTableStyles}>
+              {renderedContent}
+            </ContentProse>
           </div>
         </div>
 
