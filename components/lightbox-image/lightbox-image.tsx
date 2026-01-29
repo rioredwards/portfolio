@@ -8,7 +8,7 @@ import type { LightboxSlide } from "@/components/lightbox-image/types";
 import { cn } from "@/lib/utils";
 import { StaticImageData } from "next/image";
 
-interface LightboxImageProps {
+export interface LightboxImageProps {
   src: string | StaticImageData;
   alt: string;
   caption?: React.ReactNode;

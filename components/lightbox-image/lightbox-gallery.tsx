@@ -1,24 +1,22 @@
-"use client";
-
 import React from "react";
 import type { LightboxSlide } from "@/components/lightbox-image/types";
-import { LightboxImage } from "@/components/lightbox-image/lightbox-image";
+import { LightboxImage, LightboxImageProps } from "@/components/lightbox-image/lightbox-image";
 
 interface LightboxGalleryProps {
   children: React.ReactNode;
 }
 
+
 function collectSlides(node: React.ReactNode): LightboxSlide[] {
   const slides: LightboxSlide[] = [];
   React.Children.forEach(node, (child) => {
     if (!React.isValidElement(child)) return;
-    const props = child.props as Record<string, unknown>;
     if (child.type === LightboxImage) {
-      slides.push({
-        src: props.src as string,
-        alt: props.alt as string,
-      });
+      const props = child.props as LightboxImageProps;
+      const slide = typeof props.src === "string" ? props : { ...props.src, alt: props.alt };
+      slides.push(slide as LightboxSlide);
     }
+    const props = child.props as Record<string, unknown>;
     if (props.children) {
       slides.push(...collectSlides(props.children as React.ReactNode));
     }
