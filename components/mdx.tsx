@@ -1,9 +1,10 @@
+import { ImageOverlay } from "@/components/image-overlay/image-overlay";
+import { LightboxGallery } from "@/components/lightbox-image/lightbox-gallery";
+import { LightboxImage } from "@/components/lightbox-image/lightbox-image";
 import { cn } from "@/lib/utils";
-import { MDXRemote, MDXRemoteProps } from "next-mdx-remote/rsc";
 import Image, { ImageProps } from "next/image";
 import Link from "next/link";
 import React, { ComponentPropsWithoutRef } from "react";
-import remarkGfm from "remark-gfm";
 import { highlight } from "sugar-high";
 import { HeadingLink } from "./mdx-heading-link";
 
@@ -186,19 +187,7 @@ export const mdxComponents = {
   blockquote: Blockquote,
   hr: Hr,
   Figure,
+  LightboxImage,
+  LightboxGallery,
+  ImageOverlay,
 };
-
-export function CustomMDX(props: MDXRemoteProps) {
-  return (
-    <MDXRemote
-      {...props}
-      components={{ ...mdxComponents, ...(props.components || {}) }}
-      options={{
-        mdxOptions: {
-          remarkPlugins: [remarkGfm],
-        },
-        ...props.options,
-      }}
-    />
-  );
-}

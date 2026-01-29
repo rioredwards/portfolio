@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { DM_Mono, DM_Sans } from "next/font/google";
 import localFont from "next/font/local";
+import { LightboxProvider } from "../components/lightbox-image";
 import { MobileMenu } from "../components/mobile-menu";
 import { Navbar } from "../components/navbar";
 import { Sidebar } from "../components/sidebar";
@@ -66,13 +67,13 @@ export default function RootLayout({
       <body
         className={`${dmSans.variable} ${dmMono.variable} ${mazaeniDemo.variable} font-sans antialiased`}
       >
-        <>
+        <LightboxProvider>
           <Navbar />
           <Sidebar />
           <MobileMenu />
           {children}
           <Toaster />
-        </>
+        </LightboxProvider>
       </body>
     </html>
   );
