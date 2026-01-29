@@ -1,14 +1,13 @@
 "use client";
 
-import { NextJsImageSlide } from "@/components/lightbox-image/next-image-slide";
-import type { LightboxContextValue } from "@/components/lightbox-image/types";
 import { createContext, useCallback, useContext, useState } from "react";
 import Lightbox, { type Slide } from "yet-another-react-lightbox";
-import Captions from "yet-another-react-lightbox/plugins/captions";
-import "yet-another-react-lightbox/plugins/captions.css";
 import Video from "yet-another-react-lightbox/plugins/video";
+import Captions from "yet-another-react-lightbox/plugins/captions";
 import "yet-another-react-lightbox/styles.css";
-import { usePointerType } from "../image-overlay/use-pointer-type";
+import "yet-another-react-lightbox/plugins/captions.css";
+import type { LightboxContextValue } from "@/components/lightbox-image/types";
+import { NextJsImageSlide } from "@/components/lightbox-image/next-image-slide";
 
 const LightboxContext = createContext<LightboxContextValue | null>(null);
 
@@ -24,7 +23,6 @@ export function LightboxProvider({ children }: { children: React.ReactNode }) {
   const [isOpen, setIsOpen] = useState(false);
   const [slides, setSlides] = useState<Slide[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
-  const pointerType = usePointerType();
 
   const openSingle = useCallback((slide: Slide) => {
     setSlides([slide]);
@@ -62,9 +60,7 @@ export function LightboxProvider({ children }: { children: React.ReactNode }) {
           finite: slides.length === 1,
         }}
         controller={{
-          closeOnBackdropClick: pointerType === "fine" ? true : false,
-          closeOnPullDown: true,
-          closeOnPullUp: true,
+          closeOnBackdropClick: true,
         }}
       />
     </LightboxContext.Provider>

@@ -1,11 +1,8 @@
-"use client";
-
+import { cn } from "@/lib/utils";
 import { ImageOverlay } from "@/components/image-overlay/image-overlay";
-import { usePointerType } from "@/components/image-overlay/use-pointer-type";
-import { useLightbox } from "@/components/lightbox-image/lightbox-provider";
+import { LightboxImageClient } from "@/components/lightbox-image/lightbox-image-client";
 import { LightboxTrigger } from "@/components/lightbox-image/lightbox-trigger";
 import type { LightboxSlide } from "@/components/lightbox-image/types";
-import { cn } from "@/lib/utils";
 import { StaticImageData } from "next/image";
 
 export interface LightboxImageProps {
@@ -33,48 +30,41 @@ export function LightboxImage({
   sizes = "(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 640px",
   maximizeIcon,
 }: LightboxImageProps) {
-  const pointerType = usePointerType();
-  const { openSingle, openGallery } = useLightbox();
-
   const isStaticImage = typeof src === "object";
 
   const slide: LightboxSlide = isStaticImage
     ? { ...src, alt, description: caption }
     : { src, alt, description: caption };
 
-  const handleImageClick = () => {
-    if (pointerType === "fine" && enableLightbox) {
-      if (gallery && gallery.length > 0) {
-        openGallery(gallery, galleryIndex);
-      } else {
-        openSingle(slide);
-      }
-    }
-  };
-
   return (
     <figure className="my-6 size-full">
-      <ImageOverlay
-        src={src}
-        alt={alt}
-        sizes={sizes}
-        priority={priority}
-        className={cn(className)}
-        overlayClassName="rounded-2xl size-full"
-        zoomOnHover={enableLightbox}
-        onClick={handleImageClick}
+      <LightboxImageClient
+        enableLightbox={enableLightbox}
+        slide={slide}
+        gallery={gallery}
+        galleryIndex={galleryIndex}
       >
-        {enableLightbox && (
-          <LightboxTrigger
-            {...(gallery && gallery.length > 0
-              ? { slides: gallery, index: galleryIndex }
-              : { slide })}
-            aria-label="View fullscreen"
-          >
-            {maximizeIcon || <DefaultMaximizeIcon />}
-          </LightboxTrigger>
-        )}
-      </ImageOverlay>
+        <ImageOverlay
+          src={src}
+          alt={alt}
+          sizes={sizes}
+          priority={priority}
+          className={cn("size-full", className)}
+          overlayClassName="rounded-2xl size-full"
+          zoomOnHover={enableLightbox}
+        >
+          {enableLightbox && (
+            <LightboxTrigger
+              {...(gallery && gallery.length > 0
+                ? { slides: gallery, index: galleryIndex }
+                : { slide })}
+              aria-label="View fullscreen"
+            >
+              {maximizeIcon || <DefaultMaximizeIcon />}
+            </LightboxTrigger>
+          )}
+        </ImageOverlay>
+      </LightboxImageClient>
       {caption && (
         <figcaption className="mt-2 text-sm text-muted-foreground text-center italic">
           {caption}

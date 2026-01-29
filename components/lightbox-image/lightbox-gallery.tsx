@@ -1,6 +1,7 @@
 import React from "react";
 import type { LightboxSlide } from "@/components/lightbox-image/types";
-import { LightboxImage, LightboxImageProps } from "@/components/lightbox-image/lightbox-image";
+import { LightboxImage } from "@/components/lightbox-image/lightbox-image";
+import type { LightboxImageProps } from "@/components/lightbox-image/lightbox-image";
 
 interface LightboxGalleryProps {
   children: React.ReactNode;

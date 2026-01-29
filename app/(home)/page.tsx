@@ -45,6 +45,8 @@ export default async function Home() {
     });
   }
 
+  console.log("Page.tsx")
+
   const renderedBlogs = new Map<string, RenderedBlog>();
   for (const [slug, blog] of blogsWithContent) {
     renderedBlogs.set(slug, {
@@ -172,10 +174,8 @@ export default async function Home() {
         </SlidePanel>
       </section>
 
-      <Suspense fallback={null}>
-        <ProjectModalHandler projectsMap={renderedProjects} />
-        <BlogModalHandler blogsMap={renderedBlogs} />
-      </Suspense>
+      <ProjectModalHandler projectsMap={renderedProjects} />
+      <BlogModalHandler blogsMap={renderedBlogs} />
     </main>
   );
 }
