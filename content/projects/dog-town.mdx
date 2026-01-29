@@ -6,14 +6,9 @@ description: "Self-hosted on my Raspberry Pi"
 category: "Web App"
 skills:
   - "Next.js"
-  - "React"
-  - "TypeScript"
-  - "Tailwind CSS"
   - "Docker"
   - "Linux"
-  - "PostgreSQL"
-  - "Cloudflare Tunnels"
-  - "Node.js"
+  - "Hono"
   - "Python"
 image: "/work/images/dog-town/dog-town-screenshot-3.jpg"
 brandColor: "#F5954E"
@@ -29,95 +24,77 @@ links:
 order: 0
 ---
 
-Come on down to DogTown!
-
-<Figure src="/work/images/dog-town/me-with-pups.jpeg" alt="Rio with dogs" />
-
-Software developer and dog enthusiast based in Portland, OR.
-
----
-
-## What is this?
-
-<Figure src="/work/images/dog-town/my-pi.jpeg" alt="A Raspberry Pi" />
-
-Over the holidays, my sister gifted me a **Raspberry Pi**. Thanks, sis! 🫶
-
-If you're unfamiliar, a Raspberry Pi is a credit-card-sized computer. Unlike traditional machines, it doesn't include a screen, keyboard, or even a case—just the bare essentials. The main selling point of my model? **It has a power button** 🤯🤯🤯
-
-So, why would you want one? Raspberry Pis are perfect for DIY projects. You can build robots, smart home devices, or even host your own website—like I did.
-
-After some late-night coding and falling down a few Linux rabbit holes, I launched my first **self-hosted website**.
-
-Naturally, the theme is **dog photos**. Because dogs are awesome. 🐶
-
----
-
-## Inspiration
-
-I've always leaned on services like Vercel and Netlify to host my projects. They're fast, reliable, and super easy to use.
-
-But I've had this nagging curiosity to understand how the internet actually works. What's really happening behind the scenes? What does it take to manage a server?
-
-So I challenged myself to dive into the world of self-hosting. It felt like the perfect opportunity to fill in some knowledge gaps—and get hands-on with my new Raspberry Pi.
-
-Along the way, I learned a ton about networking, Linux, process management, Docker, DevOps, security, and more.
-
----
-
-## Some background (for noobs)
-
 <Figure
-  src="/work/images/dog-town/tech-for-dummies.jpeg"
-  alt="Diagram showing how this website gets from my Raspberry Pi to your computer/phone"
+  src="/work/images/dog-town/dog-town-screenshot-3.jpg"
+  alt="A Raspberry Pi"
 />
 
-### Networking 101
+This is a hobby project of mine, a self-hosted photo-sharing web app running on my Raspberry Pi. Naturally, the theme is **dog photos** because dogs are awesome. 🐶
 
-The internet is basically just computers talking to each other over cables and Wi-Fi.
-
-They exchange data using IP addresses, URLs, and something called DNS—often referred to as the internet's “phone book.”
-
-For this project, I took my existing domain, `rioedwards.com`, and created a subdomain: `pi.rioedwards.com`, which I pointed to my Raspberry Pi. Now anyone can visit that subdomain and land on this site!
-
-This is all facilitated by DNS providers (like Cloudflare), who have servers all over the world for directing traffic. Your computer asks your router for `pi.rioedwards.com`, which eventually reaches Cloudflare, and they route the request to my Raspberry Pi.
-
-### What is a server?
-
-In simple terms, the internet has two types of computers: **clients** and **servers**. Your computer (the client) sends requests to mine (the server).
-
-Your browser is your interface to the internet. It sends requests to servers and displays the responses.
-
-My Pi runs a **web server**, which allows it to respond to those requests. It responds with code (and images of dogs) which your browser uses to create the page you're seeing here.
-
-### Tying it all together
-
-To make this site work, I had to:
-
-- Build the **frontend** (code that runs in your browser)
-- Build the **backend** (code that runs on my Pi)
-- Set up the domain and networking
-- Figure out why my Pi kept disconnecting 🫠
-
-There's more going on behind the scenes—like a database, an AI-powered DogBot, and a system profiler—but we'll get into that next.
-
-### Bonus: What makes a computer a server?
-
-Any computer can be a server—even yours! All it takes is downloading some (free) server software like nginx or Apache and turning it on.
-
-To expose it to the internet, you'd need to configure your router or use a service like Cloudflare Tunnels, like I did. But be careful—if you make a mistake, you might expose your machine in unsafe ways.
-
-Want a deeper dive? Check out my article: **What is the Backend?**  
-https://medium.com/@rioedwards/what-is-the-backend-ffd808ff950e
+I learned a ton about networking, DevOps, security, and more.
 
 ---
 
-## How it's made (for the nerds)
+## What I built
 
 <Figure
   src="/work/images/dog-town/tech-stack.jpeg"
   alt="Diagram showing the tech stack powering this site"
 />
+
+### Core
+
+- **Full-stack Next.js app** - React, TypeScript, Tailwind, Shadcn/UI, MDX, NextAuth, Three.js, and more
+- **Database** PostgreSQL with Drizzle ORM
+
+### Supporting Services
+
+- **AI Image Validation** - Python,FastAPI, OpenNSFW, and PyTorch
+- **System Profiler** - Hono, TypeScript, Node.js
+
+### DevOps/Infra
+
+- **Docker + Compose** for reproducible local/staging/production environments
+- **CI/CD with GitHub Actions** for automated builds and deploys
+- **Bash Scripts** for automated tasks
+- **Umami** for analytics
+
+### Networking & Security
+
+- **Cloudflare Tunnel** to expose the Pi safely to the internet
+- **Nginx caching** for faster image delivery
+
+---
+
+## Core
+
+### Full-stack Next.js app
+
+DogTown is a full-stack **Next.js** app built with **React + TypeScript**, styled with **Tailwind** and **shadcn/ui**, and extended with **MDX** so I can write content while still embedding custom components. It includes authentication via **NextAuth**, a clean upload/viewing flow (lightbox-style browsing), and a dashboard with live system metrics.
+
+Architecturally, I treated it like a real production app: clear separation between UI and server logic, predictable data models, and careful handling of user-generated content. The result is something that feels snappy and “product-like,” even though it's running on a tiny computer in my house.
+
+### Database (PostgreSQL + Drizzle)
+
+DogTown uses **PostgreSQL** and **Drizzle ORM** to keep the schema and queries strongly typed. The data model is fairly simple, but it's easy to extend and modify as the project grows.
+
+## Supporting Services
+
+### AI Image Validation (Python + FastAPI)
+
+To keep uploads safe (and on-theme), I built **DogBot**: a small **FastAPI** service that validates images before they’re accepted. It returns signals like `isDog` and `isNSFW` using **PyTorch/TorchVision** and an **OpenNSFW-style** classifier. The goal wasn’t “perfect AI”—it was a pragmatic safety layer that makes moderation easier and prevents obvious bad uploads from ever landing in the database.
+
+I designed it as a dedicated service so it could evolve independently from the web app. That also forced me to think about real integration concerns: request/response contracts, timeouts, failure behavior (what happens when validation is down), and how to keep the upload experience smooth without sacrificing safety.
+
+### System Profiler (Hono + Node.js)
+
+DogTown also includes a lightweight profiler service built with **Hono + Node.js (TypeScript)**. It collects system and container metrics from **/proc**, **/sys**, and the **Docker socket**, then streams updates to the frontend in real time. This started as “I wonder how hard this Pi is working,” and turned into a surprisingly useful visibility tool.
+
+I stream metrics using **Server-Sent Events (SSE)** to keep the implementation simple and efficient. Requests are authenticated, and the UI presents a dashboard-style view of CPU, memory, disk, and container health—basically a tiny observability layer tailored to this project.
+
+---
+
+## How it's made (for the nerds)
 
 ### Tech Stack
 
@@ -277,3 +254,5 @@ Thanks for reading! ❤️
 - Bluesky: https://bsky.app/profile/rioedwards.bsky.social
 - YouTube: https://www.youtube.com/channel/UCZdVYjS_Os_4e7DZAZSRxBQ
 - GitHub: https://github.com/rioedwards/
+
+<Figure src="/work/images/dog-town/my-pi.jpeg" alt="A Raspberry Pi" />
