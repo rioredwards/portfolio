@@ -5,6 +5,7 @@ import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { cn } from "@/lib/utils";
 import { MDXRemote, MDXRemoteSerializeResult } from "next-mdx-remote";
 import { ReactNode, useEffect } from "react";
+import { useLightbox } from "../lightbox-image/lightbox-provider";
 import { ContentProse } from "./content-prose";
 
 interface ContentDetailModalProps {
@@ -35,6 +36,7 @@ export function ContentDetailModal({
   includeTableStyles = false,
 }: ContentDetailModalProps) {
   const hasFloatingFooter = !!renderFloatingFooter;
+  const { isOpen: isLightboxOpen } = useLightbox();
 
   // Scroll to hash element after modal content renders
   useEffect(() => {
@@ -54,7 +56,7 @@ export function ContentDetailModal({
   }, [open, serializedContent]);
 
   return (
-    <Dialog open={open} onOpenChange={onOpenChange}>
+    <Dialog open={true} onOpenChange={onOpenChange} modal={true} >
       <DialogContent
         className={cn(
           "max-h-[94dvh] w-full max-w-[calc(100vw-var(--spacing-content-px))] md:max-w-[calc(100vw-var(--spacing-content-px-md)*2)] lg:max-w-4xl",
@@ -63,6 +65,24 @@ export function ContentDetailModal({
           "gap-0 p-0",
         )}
         showCloseButton={true}
+        onEscapeKeyDown={(e) => {
+          if (isLightboxOpen) {
+            e.preventDefault();
+            return
+          }
+        }}
+        onInteractOutside={(e) => {
+          if (isLightboxOpen) {
+            e.preventDefault();
+            return
+          }
+        }}
+        onPointerDownOutside={(e) => {
+          if (isLightboxOpen) {
+            e.preventDefault();
+            return
+          }
+        }}
       >
         {/* Sticky Header with backdrop blur */}
         <div

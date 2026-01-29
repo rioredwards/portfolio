@@ -2,7 +2,8 @@
 
 import { MDXRemoteSerializeResult } from "next-mdx-remote";
 import { useRouter, useSearchParams } from "next/navigation";
-import { ReactNode } from "react";
+import { ReactNode, useState } from "react";
+import { useLightbox } from "../lightbox-image";
 
 export interface SerializedContent<TFrontmatter> {
   frontmatter: TFrontmatter;
@@ -32,6 +33,8 @@ export function ContentModalHandler<TFrontmatter>({
   queryParam,
   renderModal,
 }: ContentModalHandlerProps<TFrontmatter>) {
+  const { isOpen: isLightboxOpen } = useLightbox()
+  const [open, setOpen] = useState(true);
   const searchParams = useSearchParams();
   const router = useRouter();
 
@@ -39,6 +42,10 @@ export function ContentModalHandler<TFrontmatter>({
   const selectedContent = slug ? contentMap.get(slug) : null;
 
   const handleOpenChange = (open: boolean) => {
+    if (isLightboxOpen) {
+      return
+    }
+    setOpen(open);
     if (!open) {
       router.push("/", { scroll: false });
     }
@@ -53,7 +60,7 @@ export function ContentModalHandler<TFrontmatter>({
       {renderModal({
         frontmatter: selectedContent.frontmatter,
         serializedContent: selectedContent.serializedContent,
-        open: true,
+        open: open,
         onOpenChange: handleOpenChange,
       })}
     </>

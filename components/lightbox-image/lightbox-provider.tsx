@@ -1,13 +1,14 @@
 "use client";
 
+import { NextJsImageSlide } from "@/components/lightbox-image/next-image-slide";
+import type { LightboxContextValue } from "@/components/lightbox-image/types";
 import { createContext, useCallback, useContext, useState } from "react";
 import Lightbox, { type Slide } from "yet-another-react-lightbox";
-import Video from "yet-another-react-lightbox/plugins/video";
 import Captions from "yet-another-react-lightbox/plugins/captions";
-import "yet-another-react-lightbox/styles.css";
 import "yet-another-react-lightbox/plugins/captions.css";
-import type { LightboxContextValue } from "@/components/lightbox-image/types";
-import { NextJsImageSlide } from "@/components/lightbox-image/next-image-slide";
+import Video from "yet-another-react-lightbox/plugins/video";
+import "yet-another-react-lightbox/styles.css";
+import { usePointerType } from "../image-overlay/use-pointer-type";
 
 const LightboxContext = createContext<LightboxContextValue | null>(null);
 
@@ -23,6 +24,7 @@ export function LightboxProvider({ children }: { children: React.ReactNode }) {
   const [isOpen, setIsOpen] = useState(false);
   const [slides, setSlides] = useState<Slide[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
+  const pointerType = usePointerType();
 
   const openSingle = useCallback((slide: Slide) => {
     setSlides([slide]);
@@ -41,7 +43,7 @@ export function LightboxProvider({ children }: { children: React.ReactNode }) {
   }, []);
 
   return (
-    <LightboxContext.Provider value={{ openSingle, openGallery, close }}>
+    <LightboxContext.Provider value={{ openSingle, openGallery, close, isOpen }}>
       {children}
       <Lightbox
         open={isOpen}
@@ -60,7 +62,9 @@ export function LightboxProvider({ children }: { children: React.ReactNode }) {
           finite: slides.length === 1,
         }}
         controller={{
-          closeOnBackdropClick: true,
+          closeOnBackdropClick: pointerType === "fine" ? true : false,
+          closeOnPullDown: true,
+          closeOnPullUp: true,
         }}
       />
     </LightboxContext.Provider>

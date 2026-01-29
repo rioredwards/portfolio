@@ -4,6 +4,7 @@ export interface LightboxContextValue {
   openSingle: (slide: Slide) => void;
   openGallery: (slides: Slide[], index: number) => void;
   close: () => void;
+  isOpen: boolean;
 }
 
 // Re-export Slide type for convenience
