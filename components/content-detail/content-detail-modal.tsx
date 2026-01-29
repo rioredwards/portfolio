@@ -65,24 +65,9 @@ export function ContentDetailModal({
           "gap-0 p-0",
         )}
         showCloseButton={true}
-        onEscapeKeyDown={(e) => {
-          if (isLightboxOpen) {
-            e.preventDefault();
-            return
-          }
-        }}
-        onInteractOutside={(e) => {
-          if (isLightboxOpen) {
-            e.preventDefault();
-            return
-          }
-        }}
-        onPointerDownOutside={(e) => {
-          if (isLightboxOpen) {
-            e.preventDefault();
-            return
-          }
-        }}
+        onEscapeKeyDown={(e) => isLightboxOpen && e.preventDefault()}
+        onInteractOutside={(e) => isLightboxOpen && e.preventDefault()}
+        onPointerDownOutside={(e) => isLightboxOpen && e.preventDefault()}
       >
         {/* Sticky Header with backdrop blur */}
         <div
@@ -97,11 +82,11 @@ export function ContentDetailModal({
         {/* Scrollable Content */}
         <div
           className={cn(
-            "flex-1 overflow-y-auto px-6 lg:px-8 w-full py-8 bg-card",
+            "flex-1 overflow-y-auto px-6 lg:px-8 w-full py-8 bg-card overflow-x-hidden",
             hasFloatingFooter && "pb-20",
           )}
         >
-          <div className="mx-auto w-fit">
+          <div className="mx-auto w-full">
             {renderFrontmatter && (
               renderFrontmatter()
             )}

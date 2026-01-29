@@ -63,7 +63,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" >
+      <meta name="format-detection" content="telephone=no, date=no, email=no, address=no" />
+      <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, maximum-scale=1.0"></meta>
       <body
         className={`${dmSans.variable} ${dmMono.variable} ${mazaeniDemo.variable} font-sans antialiased`}
       >

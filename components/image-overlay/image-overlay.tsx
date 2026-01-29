@@ -1,7 +1,7 @@
 "use client";
 
-import { cn } from "@/lib/utils";
 import { usePointerType } from "@/components/image-overlay/use-pointer-type";
+import { cn } from "@/lib/utils";
 import Image, { StaticImageData } from "next/image";
 import React, { useCallback, useState } from "react";
 
@@ -83,7 +83,7 @@ const ImageOverlay = React.forwardRef<HTMLDivElement, ImageOverlayProps>(
         ref={ref}
         role="group"
         className={cn(
-          "relative aspect-square overflow-hidden cursor-pointer h-full w-full rounded-2xl",
+          "group transition-all duration-200 ease-in-out relative aspect-square overflow-hidden rounded-2xl cursor-pointer",
           className
         )}
         style={{
