@@ -19,9 +19,9 @@ export function ProjectDetailHeader({ title, slug, links, icon }: ProjectDetailH
         <Image
           src={icon}
           alt={title}
-          width={48}
-          height={48}
-          className="h-16 w-16"
+          width={42}
+          height={42}
+          className="h-10 w-10"
         />
       )}
       <span className="text-3xl font-bold transition-all duration-200 group-hover:brightness-125">

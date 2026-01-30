@@ -84,7 +84,7 @@ export function ContentDetailModal({
             hasFloatingFooter && "pb-20",
           )}
         >
-          <div className="mx-auto w-full">
+          <div className="mx-auto max-w-prose-max">
             {renderFrontmatter && (
               renderFrontmatter()
             )}

@@ -34,7 +34,7 @@ function ImageOverlay({
   return (
     <ImageOverlayClient
       className={cn(
-        "relative aspect-square overflow-hidden cursor-pointer h-full w-full rounded-2xl",
+        "relative aspect-square overflow-hidden cursor-pointer h-full w-full rounded-2xl border border-border",
         className
       )}
       style={{
@@ -52,7 +52,7 @@ function ImageOverlay({
         placeholder={isStaticImage && src.blurDataURL ? "blur" : undefined}
         className={cn(
           "object-cover m-0! transition-transform duration-300 ease-in-out",
-          zoomOnHover && "group-data-[active=true]:scale-110"
+          zoomOnHover && "group-data-[active=true]:scale-105"
         )}
       />
 

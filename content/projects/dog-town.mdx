@@ -13,20 +13,14 @@ skills:
 image: "/work/images/dog-town/dog-town-screenshot-3.jpg"
 brandColor: "#F5954E"
 links:
-  - text: "LinkedIn"
-    url: "https://www.linkedin.com/in/rio-edwards/"
-  - text: "Bluesky"
-    url: "https://bsky.app/profile/rioedwards.bsky.social"
-  - text: "YouTube"
-    url: "https://www.youtube.com/channel/UCZdVYjS_Os_4e7DZAZSRxBQ"
-  - text: "GitHub"
-    url: "https://github.com/rioedwards/"
+  - text: "View Live Site"
+    url: "https://pi.rioedwards.com/"
+  - text: "View Source"
+    url: "https://github.com/rioedwards/dog-town"
 order: 0
 ---
 
 <LightboxGallery>
-
-# Test
 
 <LightboxImage
   src={ImgDogTownScreenshot3}
@@ -34,37 +28,35 @@ order: 0
   priority={true}
 />
 
-DogTown is a self-hosted photo-sharing app running on my Raspberry Pi. Naturally, the theme is **dog photos** because dogs are awesome. 🐶
-
-I learned a ton about networking, DevOps, security, and more.
+DogTown is a self-hosted photo-sharing app running on my Raspberry Pi. Naturally, the theme is **dog photos** because that allowed meto look at cute dog photos all day long. 🐶
 
 ---
 
-## What I built
+## Tech Stack
 
 <LightboxImage
   src={ImgDogTownTechStack}
   alt="Diagram showing the tech stack powering this site"
 />
 
-### Core
+**Core**
 
 - **Full-stack Next.js app** - React, TypeScript, Tailwind, Shadcn/UI, MDX, NextAuth, Three.js, and more
 - **Database** PostgreSQL with Drizzle ORM
 
-### Supporting Services
+**Supporting Services**
 
 - **AI Image Validation** - Python,FastAPI, OpenNSFW, and PyTorch
 - **System Profiler** - Hono, TypeScript, Node.js
 
-### DevOps/Infra
+**DevOps/Infra**
 
 - **Docker + Compose** for reproducible local/staging/production environments
 - **CI/CD with GitHub Actions** for automated builds and deploys
 - **Bash Scripts** for automated tasks
 - **Umami** for analytics
 
-### Networking & Security
+**Networking & Security**
 
 - **Cloudflare Tunnel** to expose the Pi safely to the internet
 - **Nginx caching** for faster image delivery
@@ -75,9 +67,9 @@ I learned a ton about networking, DevOps, security, and more.
 
 ### Full-stack Next.js app
 
-DogTown is a full-stack **Next.js** app built with **React + TypeScript**, styled with **Tailwind** and **shadcn/ui**, and extended with **MDX** so I can write content while still embedding custom components. It includes authentication via **NextAuth**, a clean upload/viewing flow (lightbox-style browsing), and a dashboard with live system metrics.
+DogTown is a full-stack **Next.js** app built with **React + TypeScript**, styled with **Tailwind** and **shadcn/ui**, and extended with **MDX** so I can write content while still embedding custom components. It includes authentication via **NextAuth**, a clean upload flow with client-side image compression, and a dashboard with live system metrics.
 
-Architecturally, I treated it like a real production app: clear separation between UI and server logic, predictable data models, and careful handling of user-generated content. The result is something that feels snappy and “product-like,” even though it's running on a tiny computer in my house.
+I treated it like a real production app: clear separation of concerns, robust design system, and optimized for performance. The result is something that feels snappy and “product-like,” even though it's running on a tiny computer in my house.
 
 ### Database (PostgreSQL + Drizzle)
 
@@ -87,179 +79,60 @@ DogTown uses **PostgreSQL** and **Drizzle ORM** to keep the schema and queries s
 
 ### AI Image Validation (Python + FastAPI)
 
-To keep uploads safe (and on-theme), I built **DogBot**: a small **FastAPI** service that validates images before they’re accepted. It returns signals like `isDog` and `isNSFW` using **PyTorch/TorchVision** and an **OpenNSFW-style** classifier. The goal wasn’t “perfect AI”—it was a pragmatic safety layer that makes moderation easier and prevents obvious bad uploads from ever landing in the database.
-
-I designed it as a dedicated service so it could evolve independently from the web app. That also forced me to think about real integration concerns: request/response contracts, timeouts, failure behavior (what happens when validation is down), and how to keep the upload experience smooth without sacrificing safety.
-
-### System Profiler (Hono + Node.js)
-
-DogTown also includes a lightweight profiler service built with **Hono + Node.js (TypeScript)**. It collects system and container metrics from **/proc**, **/sys**, and the **Docker socket**, then streams updates to the frontend in real time. This started as “I wonder how hard this Pi is working,” and turned into a surprisingly useful visibility tool.
-
-I stream metrics using **Server-Sent Events (SSE)** to keep the implementation simple and efficient. Requests are authenticated, and the UI presents a dashboard-style view of CPU, memory, disk, and container health—basically a tiny observability layer tailored to this project.
-
----
-
-## How it's made (for the nerds)
-
-### Tech Stack
-
-| Layer           | Technology                                                                     |
-| --------------- | ------------------------------------------------------------------------------ |
-| OS              | Raspberry Pi OS (Debian GNU/Linux "trixie")                                    |
-| Tunnel          | Cloudflare Tunnels                                                             |
-| Web             | Next.js, React, TypeScript, Tailwind, ShadCN, Three.js, MDX, Drizzle, NextAuth |
-| Database        | PostgreSQL                                                                     |
-| AI Validation   | Python, FastAPI, OpenNSFW, PyTorch                                             |
-| System Profiler | Hono, TypeScript, Node.js                                                      |
-
-Was this overengineered? Probably. But my goal was to **learn**, not just ship.
-
----
-
-## Timeline
-
-### Phase 1
-
-I started with this tutorial:  
-https://www.youtube.com/watch?v=Vp4glSVPT8o
-
-That got me a basic fullstack Next.js app running on the Pi, with traffic routed through a Cloudflare Tunnel. Easy win.
-
-At first, there was no database, authentication, or any of that fancy stuff. I was just winging it and adding features as I went.
-
-I stored photos and metadata as raw files using Node.js. I also set up a simple UUID tagging system for identifying users and images.
-
-I started building it over the holidays and had it connected to the TV, so my family could upload dog photos and see them on screen.
-
-<LightboxImage
-  src={ImgDogTownTheSetupOg}
-  alt="Laptop, Raspberry Pi, TV, and Suki on the setup"
-/>
-
-Eventually, work got busy, and the project went on the back burner for about a year.
-
-Highlights from Phase 1:
-
-- I built a “glowing gradient border” UI component (might release it as an npm package someday).
-- I wrote a Bash script for auto-updating the app and restarting the server (my first step into DevOps for this project).
-- I built a browser-based image compression/conversion tool to handle large images and HEIC (which basically has no browser support).
-
-### Phase 2
-
-After a long break, I came back with a fresh perspective and lots of ideas. First step: upgrade the stack.
-
-Improvements:
-
-- Switched to SQLite and Prisma
-- Added NextAuth for authentication
-- Identified key issues:
-  1. Server instability
-  2. Clunky deployments
-  3. No image moderation
-
-To fix the issues, I:
-
-1. Replaced `nohup` with **PM2** for process management
-2. Set up a **GitHub Actions** workflow for CI/CD
-3. Created **DogBot**, an AI image validator
-4. Dockerized everything
-5. Rebuilt the `/stats` page as a dedicated microservice
-
-#### DogBot - AI Image Validation
-
-DogBot runs as a middleware service, verifying that all uploaded images are “SFW” and contain dogs.
-
-Built using:
+To keep user-generated content on-brand and safe for all audiences, I created **DogBot**: a an AI image validation service. Built using:
 
 - OpenNSFW (inappropriate content detection)
 - PyTorch/TorchVision (verify images contain dogs)
 
-It runs on a FastAPI server, processing images and returning `isDog` and `isNSFW` as scores/booleans.
+It runs on a FastAPI server, processing images and returning `isDog` and `isNSFW` as scores/booleans. I designed it as a dedicated service so it could evolve independently from the web app.
 
-**Demo video:**  
-/ videos /DogBot-Demo.mp4
+### System Profiler (Hono + Node.js)
 
-### Docker Woes & Wins
+DogTown also includes a custom system-profiler service built with **Hono + Node.js**. It collects metrics from the PI and docker containers, which are fetched from the Next.js app streamed to the frontend in realtime.
 
-Docker makes things easier, but only if you know what you're doing 😅.
-
-I spent more time learning Docker/Docker Compose than anything else in this project. Worth it though—it also inspired a side project: a CLI utility for quickly casting commands from your history.
-
-<LightboxImage src={ImgDogTownFzfCmd} alt="fz-cmd project image" />
-
-- Repo: https://github.com/rioedwards/fz-cmd
-
-### Phase 3
-
-I found this tutorial from Lee Rob on self-hosting Next.js apps:  
-https://www.youtube.com/watch?v=sIVL4JMqRfc
-
-Once I had it working, I rebuilt my app using his setup, reintegrating my features one by one.
-
-Upgrades:
-
-- Prisma ➡️ Drizzle
-- SQLite ➡️ PostgreSQL
-- Added **Nginx** for image caching
-
-#### System Profiler Service
-
-This started as a simple `/stats` page, but evolved into a full system profiler:
-
-- Built with Hono, TypeScript, Node.js
-- Gathers metrics from `/proc`, `/sys`, and the Docker socket
-- Streamed to the frontend via Server-Sent Events (SSE)
-- Authenticated requests via token
-- Dashboard built with Recharts
-
-#### 3D Model using a Depth Map
-
-Inspired by this Wes Bos & SyntaxFM video:  
-https://www.youtube.com/watch?v=HzL65tTeANs&t=70s
-
-I created a 3D depth map using MiDaS + a generated texture + Figma, then fed it into Three.js for the 3D effect.
+This started as a way for me to look under the hood, but evolved into it's own page with a dashboard UI made with Recharts. I also added a 3D raspberry pi model using three.js for some visual flair.
 
 <LightboxImage
-  src="/work/images/dog-town/pi-3d.png"
-  alt="2D image of a Raspberry Pi used for the 3D effect"
+  src={ImgDogTownDashboardScreenshot}
+  alt="DogTown Dashboard Screenshot"
 />
 
-<LightboxImage
-  src="/work/images/dog-town/pi-depth.png"
-  alt="Depth map of the Raspberry Pi image"
-/>
+## DevOps/Infra
 
-### Phase 4
+### Docker + Compose
 
-It was “feature-complete.” So naturally, I added more features. 🤷‍♂️
+Everything runs in isolated **Docker** containers, wired together with **Docker-Compose**. This enables development, staging, and production environments to stay in sync. I also have a variety of utility scripts to help with things like manual deployments, updates, and maintenance.
 
-- **MDX Support**: write markdown + embed components
-- **Lightbox UX**: fullscreen image/video previews
-- **Logo / Branding**: designed in Figma
+This infrastructure speeds up development and deployment significantly and makes the app portable and easy to deploy across multiple environments.
 
-<LightboxImage src={ImgDogTownLogoProg} alt="Logo progression" />
+### CI/CD with GitHub Actions
+
+I set up **GitHub Actions** to automate builds and deployments so updates are consistent and low-stress. The pipeline handles the typical steps—build, validate, and ship—so I'm not SSH'ing into the Pi at midnight to copy files around and hope for the best. It also nudged me toward better habits: keeping changes small, ensuring environments are deterministic, and treating deployments like a repeatable process rather than a one-off event.
+
+In practice, it makes the project easier to maintain over time. If I can't deploy confidently, I stop shipping—so the CI/CD work is what keeps this hobby project alive.
+
+### Umami
+
+For analytics, I use **Umami**. This continues the theme of self-hosting and privacy-first. It's lightweight, privacy-friendly, and fits the self-hosted ethos of the project. It runs in a separate container and is accessible via a separate subdomain via the Cloudflare Tunnel.
+
+---
+
+## Networking & Security
+
+### Cloudflare Tunnel
+
+DogTown is exposed to the internet through **Cloudflare Tunnel**, which means I didn't have to setup port forwarding on my router. It also provides some additional security and performance gains like DDoS protection and TLS/SSL termination.
+
+### Nginx caching
+
+I added **Nginx** to cache images and other static assets. This was an easy way to reduce load on the Pi and improve the overall performance of the app.
 
 ---
 
 ## Final Thoughts
 
-I learned a lot from this project—Docker, DevOps, Linux, bash scripting, networking, and more. These are skills I'll benefit from for the rest of my career.
-
-And since I mentioned AI…
-
-> I can't imagine a world where knowledge, skills, and experience aren't valuable.
+I learned a lot from this project—Docker, DevOps, Linux, bash scripting, networking, and more. If you happen to be looking for ideas for your next side-project, I'd highly recommend picking up a Raspberry Pi.
 
 Thanks for reading! ❤️
 
----
-
-## Get in Touch
-
-- LinkedIn: https://www.linkedin.com/in/rio-edwards/
-- Bluesky: https://bsky.app/profile/rioedwards.bsky.social
-- YouTube: https://www.youtube.com/channel/UCZdVYjS_Os_4e7DZAZSRxBQ
-- GitHub: https://github.com/rioedwards/
-
-<LightboxImage src={ImgDogTownMyPi} alt="A Raspberry Pi" />
-
-</LightboxGallery>
+</ LightboxGallery>
