@@ -48,11 +48,11 @@ const alertVariants = cva("", {
   variants: {
     variant: {
       default:
-        "bg-secondary text-foreground hover:bg-secondary-hover hover:border-secondary-hover-border",
+        "bg-secondary text-foreground hover:border-secondary-hover-border hover:bg-secondary-hover",
       success:
-        "bg-accent hover:bg-accent-hover text-accent-foreground hover:border-accent-hover-border border border-transparent",
+        "border border-transparent bg-accent text-accent-foreground hover:border-accent-hover-border hover:bg-accent-hover",
       destructive:
-        "bg-destructive hover:bg-destructive-hover text-destructive-foreground hover:border-destructive-hover-border border border-transparent",
+        "border border-transparent bg-destructive text-destructive-foreground hover:border-destructive-hover-border hover:bg-destructive-hover",
     },
   },
   defaultVariants: {

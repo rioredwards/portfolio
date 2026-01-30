@@ -18,8 +18,8 @@ type TriangleDecorationProps = Flatten<Omit<SlidePanelProps, "children">>;
 const triangleHeightVariants = cva("block w-auto", {
   variants: {
     decorationHeight: {
-      tall: "h-(--radius-5xl) -top-(--radius-5xl)",
-      short: "h-(--radius-4xl) -top-(--radius-4xl)",
+      tall: "-top-(--radius-5xl) h-(--radius-5xl)",
+      short: "-top-(--radius-4xl) h-(--radius-4xl)",
     },
     orientation: {
       left: "right-0",
