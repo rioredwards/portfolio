@@ -1,9 +1,9 @@
 "use client";
 
+import { useLightbox } from "@/components/lightbox-image/lightbox-provider";
 import { Slot } from "@radix-ui/react-slot";
 import React from "react";
 import type { Slide } from "yet-another-react-lightbox";
-import { useLightbox } from "@/components/lightbox-image/lightbox-provider";
 
 type SingleSlideProps = {
   slide: Slide;
@@ -39,7 +39,14 @@ const LightboxTrigger = React.forwardRef<
 
   const Comp = asChild ? Slot : "button";
 
-  return <Comp ref={ref} onClick={handleClick} {...rest} />;
+  return (
+    <Comp
+      ref={ref}
+      onClick={handleClick}
+      aria-label="View fullscreen"
+      {...rest}
+    />
+  );
 });
 LightboxTrigger.displayName = "LightboxTrigger";
 

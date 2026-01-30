@@ -4,7 +4,6 @@ import {
   type ImageOverlayClientProps,
 } from "@/components/image-overlay/image-overlay-client";
 import Image, { StaticImageData } from "next/image";
-import React from "react";
 
 export interface ImageOverlayProps extends ImageOverlayClientProps {
   src: string | StaticImageData;
@@ -34,7 +33,7 @@ function ImageOverlay({
   return (
     <ImageOverlayClient
       className={cn(
-        "relative aspect-square cursor-pointer overflow-hidden rounded-2xl border border-border",
+        "group/overlay relative aspect-square cursor-pointer overflow-hidden rounded-2xl shadow-lg",
         className,
       )}
       style={{
@@ -51,15 +50,16 @@ function ImageOverlay({
         sizes={sizes}
         placeholder={isStaticImage && src.blurDataURL ? "blur" : undefined}
         className={cn(
-          "object-cover transition-transform duration-300 ease-in-out",
-          zoomOnHover && "group-data-[active=true]:scale-105",
+          "object-cover transition-transform duration-500 ease-out",
+          zoomOnHover &&
+            "group-active/overlay:scale-[100%]! group-data-[active=true]:scale-[102%]",
         )}
       />
 
       {children && (
         <div
           className={cn(
-            "absolute inset-0 bg-transparent transition-colors duration-300 group-data-[active=true]:bg-foreground/40",
+            "absolute inset-0 bg-transparent transition-colors duration-300 group-data-[active=true]:bg-black/30",
             overlayClassName,
           )}
         >

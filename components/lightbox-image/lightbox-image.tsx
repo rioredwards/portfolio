@@ -3,6 +3,7 @@ import { ImageOverlay } from "@/components/image-overlay/image-overlay";
 import { LightboxImageClient } from "@/components/lightbox-image/lightbox-image-client";
 import { LightboxTrigger } from "@/components/lightbox-image/lightbox-trigger";
 import type { LightboxSlide } from "@/components/lightbox-image/types";
+import { Maximize } from "lucide-react";
 import { StaticImageData } from "next/image";
 
 export interface LightboxImageProps {
@@ -76,24 +77,16 @@ export function LightboxImage({
 
 function DefaultMaximizeIcon() {
   return (
-    <div className="absolute top-3 right-3 z-20 flex h-8 w-8 cursor-pointer items-center justify-center rounded-full bg-background/70 text-foreground shadow-md backdrop-blur-sm transition-all duration-200 ease-in-out hover:bg-primary hover:text-primary-foreground">
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width={24}
-        height={24}
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth={2}
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        className="h-4 w-4"
+    <div className="absolute top-4 right-4 z-20">
+      <div
+        className={cn(
+          "flex h-10 w-10 cursor-pointer items-center justify-center rounded-full",
+          "bg-white/10 backdrop-blur-sm hover:bg-white/20",
+          "transition-all duration-200 hover:scale-105 active:scale-95",
+        )}
       >
-        <polyline points="15 3 21 3 21 9" />
-        <polyline points="9 21 3 21 3 15" />
-        <line x1={21} x2={14} y1={3} y2={10} />
-        <line x1={3} x2={10} y1={21} y2={14} />
-      </svg>
+        <Maximize className="h-5 w-5 fill-white text-white" />
+      </div>
     </div>
   );
 }

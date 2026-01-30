@@ -47,7 +47,7 @@ export function Project({
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 800px"
           className={cn(
             "absolute rounded-tl-xl object-contain transition-transform duration-600 ease-out",
-            "group-hover:-translate-y-4 group-hover:scale-105",
+            "group-hover:-translate-y-4 group-hover:scale-105 group-active:translate-y-0 group-active:scale-100",
             brandColor ? "top-[16%] left-[8%]" : "size-full rounded-t-4xl",
           )}
           style={

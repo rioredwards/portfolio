@@ -1,13 +1,13 @@
 "use client";
 
+import { NextJsImageSlide } from "@/components/lightbox-image/next-image-slide";
+import type { LightboxContextValue } from "@/components/lightbox-image/types";
 import { createContext, useCallback, useContext, useState } from "react";
 import Lightbox, { type Slide } from "yet-another-react-lightbox";
-import Video from "yet-another-react-lightbox/plugins/video";
 import Captions from "yet-another-react-lightbox/plugins/captions";
-import "yet-another-react-lightbox/styles.css";
 import "yet-another-react-lightbox/plugins/captions.css";
-import type { LightboxContextValue } from "@/components/lightbox-image/types";
-import { NextJsImageSlide } from "@/components/lightbox-image/next-image-slide";
+import Video from "yet-another-react-lightbox/plugins/video";
+import "yet-another-react-lightbox/styles.css";
 
 const LightboxContext = createContext<LightboxContextValue | null>(null);
 
@@ -41,7 +41,9 @@ export function LightboxProvider({ children }: { children: React.ReactNode }) {
   }, []);
 
   return (
-    <LightboxContext.Provider value={{ openSingle, openGallery, close, isOpen }}>
+    <LightboxContext.Provider
+      value={{ openSingle, openGallery, close, isOpen }}
+    >
       {children}
       <Lightbox
         open={isOpen}
