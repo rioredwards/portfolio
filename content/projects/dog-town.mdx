@@ -31,7 +31,7 @@ order: 0
   priority={true}
 />
 
-DogTown is a self-hosted photo-sharing app running on my Raspberry Pi. Naturally, the theme is **dog photos** because that allowed meto look at cute dog photos all day long. 🐶
+DogTown is a self-hosted photo-sharing app running on my [Raspberry Pi](https://www.raspberrypi.com). Naturally, the theme is **dogs** because dogs play a big part in my life. 🐶
 
 ---
 
@@ -44,27 +44,35 @@ DogTown is a self-hosted photo-sharing app running on my Raspberry Pi. Naturally
   caption="DogTown Diagram"
 />
 
-### Core
+<span className="prose mt-6 mb-2 font-mazaeni text-lg text-foreground">
+  Core
+</span>
 
-- **Full-stack Next.js app** - React, TypeScript, Tailwind, Shadcn/UI, MDX, NextAuth, Three.js, and more
-- **Database** PostgreSQL with Drizzle ORM
+- **Full-stack Next.js app** - [Next.js](https://nextjs.org), [React](https://react.dev), [TypeScript](https://www.typescriptlang.org), [Tailwind CSS](https://tailwindcss.com), [shadcn](https://ui.shadcn.com), [MDX](https://mdxjs.com), [NextAuth.js](https://next-auth.js.org), [Three.js](https://threejs.org), and more...
+- **Database** - [PostgreSQL](https://www.postgresql.org), [Drizzle ORM](https://orm.drizzle.team)
 
-### Supporting Services
+<span className="prose mt-6 mb-2 font-mazaeni text-lg text-foreground">
+  Supporting Services
+</span>
 
-- **AI Image Validation** - Python,FastAPI, OpenNSFW, and PyTorch
-- **System Profiler** - Hono, TypeScript, Node.js
+- **AI Image Validation** - [Python](https://www.python.org), [FastAPI](https://fastapi.tiangolo.com), [OpenNSFW](https://github.com/yahoo/open_nsfw), [PyTorch](https://pytorch.org)
+- **System Profiler** - [Hono](https://hono.dev), [TypeScript](https://www.typescriptlang.org), [Node.js](https://nodejs.org)
 
-### DevOps/Infra
+<span className="prose mt-6 mb-2 font-mazaeni text-lg text-foreground">
+  DevOps/Infra
+</span>
 
-- **Docker + Compose** for reproducible local/staging/production environments
-- **CI/CD with GitHub Actions** for automated builds and deploys
-- **Bash Scripts** for automated tasks
-- **Umami** for analytics
+- **Containerization** - [Docker](https://www.docker.com)
+- **CI/CD** - [GitHub Actions](https://github.com/features/actions)
+- **Helper Scripts** - [Bash](https://www.gnu.org/software/bash/), [JavaScript](https://www.javascript.com)
+- **Reverse Proxy & Caching** - [NGINX](https://nginx.org)
 
-### Networking & Security
+<span className="prose mt-6 mb-2 font-mazaeni text-lg text-foreground">
+  Networking, Security, and Analytics
+</span>
 
-- **Cloudflare Tunnel** to expose the Pi safely to the internet
-- **Nginx caching** for faster image delivery
+- **Secure Tunnel** - [Cloudflare Tunnel](https://developers.cloudflare.com/cloudflare-one/networks/connectors/cloudflare-tunnel/)
+- **Analytics** - [Umami](https://umami.is)
 
 ---
 
@@ -76,7 +84,7 @@ DogTown is a full-stack **Next.js** app built with **React + TypeScript**, style
 
 I treated it like a real production app: clear separation of concerns, robust design system, and optimized for performance. The result is something that feels snappy and “product-like,” even though it's running on a tiny computer in my house.
 
-### Database (PostgreSQL + Drizzle)
+### Database
 
 DogTown uses **PostgreSQL** and **Drizzle ORM** to keep the schema and queries strongly typed. The data model is fairly simple, but it's easy to extend and modify as the project grows.
 
@@ -84,7 +92,7 @@ DogTown uses **PostgreSQL** and **Drizzle ORM** to keep the schema and queries s
 
 ## Supporting Services
 
-### AI Image Validation (Python + FastAPI)
+### AI Image Validation
 
 To keep user-generated content on-brand and safe for all audiences, I created **DogBot**: a an AI image validation service. Built using:
 
@@ -95,7 +103,7 @@ It runs on a FastAPI server, processing images and returning `isDog` and `isNSFW
 
 <VideoPlayer src="/work/images/dog-town/DogBot-Demo.mp4" />
 
-### System Profiler (Hono + Node.js)
+### System Profiler
 
 DogTown also includes a custom system-profiler service built with **Hono + Node.js**. It collects metrics from the PI and docker containers, which are fetched from the Next.js app streamed to the frontend in realtime.
 
@@ -111,33 +119,33 @@ This started as a way for me to look under the hood, but evolved into it's own p
 
 ## DevOps/Infra
 
-### Docker + Compose
+### Containerization
 
 Everything runs in isolated **Docker** containers, wired together with **Docker-Compose**. This enables development, staging, and production environments to stay in sync. I also have a variety of utility scripts to help with things like manual deployments, updates, and maintenance.
 
 This infrastructure speeds up development and deployment significantly and makes the app portable and easy to deploy across multiple environments.
 
-### CI/CD with GitHub Actions
+### CI/CD
 
 I set up **GitHub Actions** to automate builds and deployments so updates are consistent and low-stress. The pipeline handles the typical steps—build, validate, and ship—so I'm not SSH'ing into the Pi at midnight to copy files around and hope for the best. It also nudged me toward better habits: keeping changes small, ensuring environments are deterministic, and treating deployments like a repeatable process rather than a one-off event.
 
 In practice, it makes the project easier to maintain over time. If I can't deploy confidently, I stop shipping—so the CI/CD work is what keeps this hobby project alive.
 
-### Umami
+### Reverse Proxy & Caching
 
-For analytics, I use **Umami**. This continues the theme of self-hosting and privacy-first. It's lightweight, privacy-friendly, and fits the self-hosted ethos of the project. It runs in a docker container and is accessible via a separate subdomain in the Cloudflare Tunnel.
+I added **Nginx** to cache images and other static assets. This was an easy way to reduce load on the Pi and improve the overall performance of the app.
 
 ---
 
-## Networking & Security
+## Networking, Security, and Analytics
 
-### Cloudflare Tunnel
+### Secure Tunnel
 
 DogTown is exposed to the internet through **Cloudflare Tunnel**, which means I didn't have to setup port forwarding on my router. It also provides some additional security and performance gains like DDoS protection and TLS/SSL termination.
 
-### Nginx caching
+### Analytics
 
-I added **Nginx** to cache images and other static assets. This was an easy way to reduce load on the Pi and improve the overall performance of the app.
+For analytics, I use **Umami**. This continues the theme of self-hosting and privacy-first. It's lightweight, privacy-friendly, and fits the self-hosted ethos of the project. It runs in a docker container and is accessible via a separate subdomain in the tunnel.
 
 ---
 
