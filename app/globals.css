@@ -16,7 +16,7 @@
   --sh-entity: #22863a;
 
   /* Theme colors (source of truth) */
-  --theme-background: #ebddc3;
+  --theme-background: #ecdfca;
   --theme-foreground: #2d645d;
   --theme-background-primary: #2d645d;
   --theme-foreground-primary: #fdfbf6;
@@ -28,6 +28,7 @@
   );
   --theme-background-accent: #2f6f31;
   --theme-foreground-accent: var(--theme-foreground-primary);
+  --theme-background-pop: #e3cea3;
   --theme-background-destructive: #c53920;
   --theme-foreground-destructive: var(--theme-foreground-primary);
   --theme-border: #dab773;
@@ -480,6 +481,12 @@
   color: inherit;
 }
 
+.prose {
+  @apply text-foreground;
+  line-height: 1.65;
+  text-shadow: 2px 3px 4px rgba(3, 42, 0, 0.05);
+}
+
 /* Prose anchor links */
 .prose .anchor {
   @apply no-underline;
@@ -487,39 +494,38 @@
 }
 
 /* Prose headings */
-.prose h1 {
-  @apply mt-8 mb-4 text-4xl font-semibold tracking-tight text-foreground;
+.prose :where(h1, h2, h3) {
   font-family: var(--font-mazaeni-demo), serif;
+}
+
+.prose h1 {
+  @apply mt-8 mb-4 text-4xl font-semibold text-foreground;
 }
 
 .prose h2 {
-  @apply mt-8 mb-3 text-2xl font-semibold tracking-tight text-foreground;
-  font-family: var(--font-mazaeni-demo), serif;
+  @apply mt-8 mb-3 text-2xl font-semibold text-foreground;
 }
 
 .prose h3 {
-  @apply mt-6 mb-2 text-xl font-semibold tracking-tight text-foreground;
-  font-family: var(--font-mazaeni-demo), serif;
+  @apply mt-6 mb-2 text-lg font-semibold text-foreground;
 }
 
 .prose h4 {
-  @apply mt-6 mb-2 text-lg font-medium tracking-tight text-foreground;
-  font-family: var(--font-mazaeni-demo), serif;
+  @apply mt-6 mb-2 text-lg font-medium text-foreground;
 }
 
 .prose h5 {
-  @apply mt-4 mb-2 text-base font-medium tracking-tight text-foreground;
-  font-family: var(--font-mazaeni-demo), serif;
+  @apply mt-4 mb-2 text-base font-medium text-foreground;
 }
 
 .prose h6 {
-  @apply mt-4 mb-2 text-sm font-medium tracking-tight text-foreground;
+  @apply mt-4 mb-2 text-sm font-medium text-foreground;
   font-family: var(--font-mazaeni-demo), serif;
 }
 
 /* Prose paragraphs and text */
 .prose p {
-  @apply my-4 leading-relaxed text-foreground/90;
+  @apply mb-4 leading-relaxed text-foreground/90;
 }
 
 .prose strong {
