@@ -7,6 +7,7 @@ import Link from "next/link";
 import { ReactNode } from "react";
 import { Button } from "@/components/ui/button";
 import { DialogTitle } from "@/components/ui/dialog";
+import { LinkIcon } from "@/components/ui/link-icon";
 import { ProjectFrontmatterSection } from "@/components/ui/project-frontmatter-section";
 
 interface ProjectDetailModalProps {
@@ -52,7 +53,9 @@ export function ProjectDetailModal({
                       href={link.url}
                       target="_blank"
                       rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2"
                     >
+                      <LinkIcon name={link.icon} size={14} />
                       {link.text}
                     </Link>
                   </Button>

@@ -12,7 +12,7 @@ export interface ProjectFrontmatter {
   skills: string[];
   image: string;
   brandColor?: string;
-  links?: Array<{ text: string; url: string }>;
+  links?: Array<{ text: string; url: string; icon?: string }>;
   order?: number;
 }
 
@@ -64,6 +64,7 @@ export function getProjectFrontmatter(slug: string): ProjectFrontmatter | null {
     return {
       title: data.title,
       slug: data.slug,
+      icon: data.icon,
       description: data.description,
       category: data.category,
       skills: data.skills || [],

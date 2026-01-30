@@ -1,12 +1,19 @@
 import { cn } from "@/lib/utils";
 import Link from "next/link";
+import { Button } from "./button";
+import { LinkIcon } from "./link-icon";
 
 interface BlogDetailHeaderProps {
   title: string;
   slug: string;
+  links?: { text: string; url: string; icon?: string }[];
 }
 
-export function BlogDetailHeader({ title, slug }: BlogDetailHeaderProps) {
+export function BlogDetailHeader({
+  title,
+  slug,
+  links,
+}: BlogDetailHeaderProps) {
   return (
     <div
       className={cn(
@@ -21,6 +28,30 @@ export function BlogDetailHeader({ title, slug }: BlogDetailHeaderProps) {
           </span>
         </Link>
       </h1>
+      {links && links.length > 0 && (
+        <ul className={cn("flex items-center gap-4")}>
+          {links.map((link, idx) => (
+            <li key={idx}>
+              <Button
+                asChild
+                variant={idx === 0 ? "default" : "outline"}
+                size="sm"
+                className="text-sm"
+              >
+                <Link
+                  href={link.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2"
+                >
+                  <LinkIcon name={link.icon} size={14} />
+                  {link.text}
+                </Link>
+              </Button>
+            </li>
+          ))}
+        </ul>
+      )}
     </div>
   );
 }

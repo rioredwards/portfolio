@@ -2,11 +2,12 @@ import Image from "next/image";
 import Link from "next/link";
 import { cn } from "../../lib/utils";
 import { Button } from "./button";
+import { LinkIcon } from "./link-icon";
 
 interface ProjectDetailHeaderProps {
   title: string;
   slug: string;
-  links?: { text: string; url: string }[];
+  links?: { text: string; url: string; icon?: string }[];
   icon?: string;
   category: string;
   skills: string[];
@@ -57,7 +58,13 @@ export function ProjectDetailHeader({
                 size="sm"
                 className="text-sm"
               >
-                <Link href={link.url} target="_blank" rel="noopener noreferrer">
+                <Link
+                  href={link.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2"
+                >
+                  <LinkIcon name={link.icon} size={14} />
                   {link.text}
                 </Link>
               </Button>

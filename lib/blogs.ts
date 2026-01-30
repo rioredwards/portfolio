@@ -10,6 +10,7 @@ export interface BlogFrontmatter {
   icon: string;
   date?: string;
   tags?: string[];
+  links?: Array<{ text: string; url: string; icon?: string }>;
   order?: number;
   readingTime?: number; // Calculated reading time in minutes
 }
@@ -82,6 +83,7 @@ export function getBlogFrontmatter(slug: string): BlogFrontmatter | null {
       icon: data.icon,
       date: data.date,
       tags: data.tags || [],
+      links: data.links || [],
       order: data.order,
     };
   } catch (error) {
@@ -141,6 +143,7 @@ export function getBlogWithContent(slug: string): BlogWithContent | null {
       icon: data.icon,
       date: data.date,
       tags: data.tags || [],
+      links: data.links || [],
       order: data.order,
       readingTime: calculateReadingTime(content),
     };
