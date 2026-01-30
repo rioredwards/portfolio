@@ -1,11 +1,12 @@
 // Dog Town
+import ImgDogTownDashboardScreenshot from "@/public/work/images/dog-town/dashboard-screenshot.jpg";
 import ImgDogTownScreenshot3 from "@/public/work/images/dog-town/dog-town-screenshot-3.jpg";
-import ImgDogTownTechStack from "@/public/work/images/dog-town/Tech-Stack.jpeg";
-import ImgDogTownTheSetupOg from "@/public/work/images/dog-town/The-Setup-OG.jpeg";
 import ImgDogTownFzfCmd from "@/public/work/images/dog-town/fzf-cmd.jpg";
 import ImgDogTownLogoProg from "@/public/work/images/dog-town/Logo-Prog.jpg";
+import ImgDogTownMeWithPups from "@/public/work/images/dog-town/Me-With-Pups.jpeg";
 import ImgDogTownMyPi from "@/public/work/images/dog-town/My-Pi.jpeg";
-import ImgDogTownDashboardScreenshot from "@/public/work/images/dog-town/dashboard-screenshot.jpg";
+import ImgDogTownTechStack from "@/public/work/images/dog-town/Tech-Stack.jpeg";
+import ImgDogTownTheSetupOg from "@/public/work/images/dog-town/The-Setup-OG.jpeg";
 
 // Code Quest
 import ImgCodeQuestHeader from "@/public/work/images/code-quest/code-quest-header.png";
@@ -25,4 +26,5 @@ export const projectImageScope = {
   ImgCodeQuestPreview,
   ImgJScribePreview,
   ImgDogTownDashboardScreenshot,
+  ImgDogTownMeWithPups,
 };
