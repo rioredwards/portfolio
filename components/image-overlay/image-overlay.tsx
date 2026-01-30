@@ -1,9 +1,10 @@
+import { cn } from "@/lib/utils";
 import {
   ImageOverlayClient,
   type ImageOverlayClientProps,
 } from "@/components/image-overlay/image-overlay-client";
-import { cn } from "@/lib/utils";
 import Image, { StaticImageData } from "next/image";
+import React from "react";
 
 export interface ImageOverlayProps extends ImageOverlayClientProps {
   src: string | StaticImageData;
@@ -50,7 +51,7 @@ function ImageOverlay({
         sizes={sizes}
         placeholder={isStaticImage && src.blurDataURL ? "blur" : undefined}
         className={cn(
-          "m-0! object-cover transition-transform duration-300 ease-in-out",
+          "object-cover transition-transform duration-300 ease-in-out",
           zoomOnHover && "group-data-[active=true]:scale-105",
         )}
       />
