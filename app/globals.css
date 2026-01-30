@@ -375,15 +375,6 @@
   }
 }
 
-@keyframes parallaxMove {
-  0% {
-    object-position: center 0;
-  }
-  100% {
-    object-position: center -3rem;
-  }
-}
-
 /* Sonner toast styling */
 [data-sonner-toast] {
   background-color: var(--color-popover) !important;

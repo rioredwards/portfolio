@@ -1,5 +1,6 @@
-import Image from "next/image";
 import { cn } from "@/lib/utils";
+import Image from "next/image";
+import "./project.css";
 
 export interface Project {
   category: string;
@@ -25,20 +26,34 @@ export function Project({
   brandColor,
   onClick,
 }: ProjectProps) {
+  // const mobileClassesContainer = cn("pointer-coarse:aspect-square");
+  // const desktopClassesContainer = cn(
+  //   "pointer-fine:hover:-translate-y-0.5 pointer-fine:hover:shadow-card-hover",
+  // );
+  // const desktopClassesImageContainer = cn("pointer-fine:rounded-t-4xl");
+  // const mobileClassesImage = cn("pointer-coarse:size-full");
+  // const desktopClassesImage = cn(
+  //   "pointer-fine:top-[16%] pointer-fine:left-[8%] pointer-fine:rounded-t-4xl pointer-fine:group-hover:-translate-y-4 pointer-fine:group-hover:scale-105 pointer-fine:group-active:translate-y-0",
+  // );
+
   return (
     <article
       onClick={onClick}
       className={cn(
         cn(
-          "group fade-in-scroll mx-auto w-full max-w-4xl cursor-pointer rounded-4xl bg-card text-left outline-none focus:ring-2 focus:ring-primary focus:outline-none focus-visible:ring-4 focus-visible:ring-ring/30 focus-visible:ring-offset-2 focus-visible:ring-offset-background",
+          "group mx-auto w-full max-w-4xl cursor-pointer rounded-4xl bg-card text-left outline-none focus:ring-2 focus:ring-primary focus:outline-none focus-visible:ring-4 focus-visible:ring-ring/30 focus-visible:ring-offset-2 focus-visible:ring-offset-background",
           // Animation/interactivity classes
-          "transition-all duration-300 ease-out hover:-translate-y-0.5 hover:shadow-card-hover active:translate-y-0 active:scale-100 active:scale-[0.985]",
+          "transition-all duration-300 ease-out active:translate-y-0 active:scale-100 active:scale-[0.985]",
+          // desktop classes
+          "pointer-fine:hover:-translate-y-0.5 pointer-fine:hover:shadow-card-hover",
         ),
       )}
     >
       {/* Image container with parallax */}
       <div
-        className="relative aspect-2/1 w-full overflow-clip rounded-t-4xl"
+        className={cn(
+          "relative w-full overflow-clip rounded-t-4xl pointer-coarse:aspect-video pointer-fine:aspect-2/1",
+        )}
         style={{ backgroundColor: brandColor }}
       >
         <Image
@@ -48,23 +63,16 @@ export function Project({
           height={1000}
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 800px"
           className={cn(
-            // Split classes into base style and animation logic
-            "absolute rounded-tl-xl object-contain focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:outline-none",
-            "transition-transform duration-600 ease-out group-hover:-translate-y-4 group-hover:scale-105 group-active:translate-y-0 group-active:scale-100",
-            brandColor ? "top-[16%] left-[8%]" : "size-full rounded-t-4xl",
+            "parallax-image",
+            // Base styles
+            "absolute focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:outline-none",
+            // Animation logic
+            "transition-transform duration-600 ease-out group-active:scale-100",
+            // mobile classes
+            "pointer-coarse:object-cover",
+            // desktop classes
+            "pointer-fine:top-[16%] pointer-fine:left-[8%] pointer-fine:rounded-t-4xl pointer-fine:group-hover:-translate-y-4 pointer-fine:group-hover:scale-105 pointer-fine:group-active:translate-y-0",
           )}
-          style={
-            brandColor
-              ? undefined
-              : {
-                  viewTimelineName: "--parallax-image",
-                  viewTimelineAxis: "block",
-                  animation: "linear parallaxMove both",
-                  animationTimeline: "--parallax-image",
-                  animationRange: "entry 0% exit 100%",
-                  height: "125%",
-                }
-          }
           priority
         />
       </div>

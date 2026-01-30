@@ -1,8 +1,4 @@
-import {
-  BlogCard,
-  BlogModalHandler,
-  RenderedBlog,
-} from "@/components/blog";
+import { BlogCard, BlogModalHandler, RenderedBlog } from "@/components/blog";
 import { Contact } from "@/components/contact";
 import {
   Hero,
@@ -14,8 +10,8 @@ import { mdxComponents } from "@/components/mdx";
 import {
   ProjectCard,
   ProjectModalHandler,
-  RenderedProject,
-} from "@/components/project";
+  type RenderedProject,
+} from "@/components/project/index";
 import { projectImageScope } from "@/content/projects/project-images";
 import { getBlogIcon } from "@/lib/blog-icons";
 import { getAllBlogCards, getAllBlogsWithContent } from "@/lib/blogs";
