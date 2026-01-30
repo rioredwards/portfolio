@@ -7,7 +7,7 @@ import {
 } from "@hugeicons/core-free-icons";
 import { HugeiconsIcon } from "@hugeicons/react";
 import { useFormStatus } from "react-dom";
-import { Button } from "./ui/button";
+import { Button } from "@/components/ui/button";
 
 /**
  * Submit button component that uses useFormStatus to track server action pending state

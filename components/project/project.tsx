@@ -1,7 +1,5 @@
-"use client";
-
 import Image from "next/image";
-import { cn } from "../lib/utils";
+import { cn } from "@/lib/utils";
 
 export interface Project {
   category: string;
@@ -31,7 +29,11 @@ export function Project({
     <article
       onClick={onClick}
       className={cn(
-        "group fade-in-scroll mx-auto w-full max-w-4xl cursor-pointer rounded-4xl bg-card text-left transition-all duration-300 ease-out outline-none hover:-translate-y-0.5 hover:shadow-card-hover focus:ring-2 focus:ring-primary focus:outline-none focus-visible:ring-4 focus-visible:ring-ring/30 focus-visible:ring-offset-2 focus-visible:ring-offset-background active:translate-y-0 active:scale-100 active:scale-[0.985]",
+        cn(
+          "group fade-in-scroll mx-auto w-full max-w-4xl cursor-pointer rounded-4xl bg-card text-left outline-none focus:ring-2 focus:ring-primary focus:outline-none focus-visible:ring-4 focus-visible:ring-ring/30 focus-visible:ring-offset-2 focus-visible:ring-offset-background",
+          // Animation/interactivity classes
+          "transition-all duration-300 ease-out hover:-translate-y-0.5 hover:shadow-card-hover active:translate-y-0 active:scale-100 active:scale-[0.985]",
+        ),
       )}
     >
       {/* Image container with parallax */}
@@ -46,9 +48,9 @@ export function Project({
           height={1000}
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 800px"
           className={cn(
-            "absolute rounded-tl-xl object-contain transition-transform duration-600 ease-out",
-            "group-hover:-translate-y-4 group-hover:scale-105 group-active:translate-y-0 group-active:scale-100",
-            "focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:outline-none",
+            // Split classes into base style and animation logic
+            "absolute rounded-tl-xl object-contain focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:outline-none",
+            "transition-transform duration-600 ease-out group-hover:-translate-y-4 group-hover:scale-105 group-active:translate-y-0 group-active:scale-100",
             brandColor ? "top-[16%] left-[8%]" : "size-full rounded-t-4xl",
           )}
           style={

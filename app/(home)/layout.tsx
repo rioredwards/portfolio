@@ -1,7 +1,5 @@
-import { Footer } from "@/components/footer";
-import { Navbar } from "@/components/navbar";
+import { Footer, Navbar, SlidePanel } from "@/components/layout";
 import type { Metadata } from "next";
-import { SlidePanel } from "../../components/slide-panel";
 
 export const metadata: Metadata = {
   title: "Create Next App",

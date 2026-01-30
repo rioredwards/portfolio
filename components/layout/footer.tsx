@@ -1,5 +1,5 @@
 import { Fragment } from "react/jsx-runtime";
-import { cn } from "../lib/utils";
+import { cn } from "@/lib/utils";
 
 const BUILT_WITH = ["Next.js", "Tailwind", "Shadcn/UI", "TypeScript"];
 

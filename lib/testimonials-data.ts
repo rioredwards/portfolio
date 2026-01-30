@@ -1,7 +1,7 @@
 import profileImage from "@/public/profile.webp";
-import { Testimonial } from "../components/testimonial";
+import type { TestimonialType } from "@/components/testimonials";
 
-export const TESTIMONIALS: Testimonial[] = [
+export const TESTIMONIALS: TestimonialType[] = [
   {
     name: "John Doe",
     description:

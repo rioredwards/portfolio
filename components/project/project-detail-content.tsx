@@ -3,8 +3,8 @@ import { projectImageScope } from "@/content/projects/project-images";
 import { ProjectFrontmatter } from "@/lib/projects";
 import { useMDXComponents } from "@/mdx-components";
 import { MDXRemote } from "next-mdx-remote/rsc";
-import { ProjectDetailHeader } from "./ui/project-detail-header";
-import { ProjectFrontmatterSection } from "./ui/project-frontmatter-section";
+import { ProjectDetailHeader } from "@/components/ui/project-detail-header";
+import { ProjectFrontmatterSection } from "@/components/ui/project-frontmatter-section";
 
 interface ProjectDetailContentProps {
   frontmatter: ProjectFrontmatter;

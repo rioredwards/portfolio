@@ -5,9 +5,9 @@ import { ProjectModalHeader } from "@/components/ui/project-modal-header";
 import { ProjectFrontmatter } from "@/lib/projects";
 import Link from "next/link";
 import { ReactNode } from "react";
-import { Button } from "./ui/button";
-import { DialogTitle } from "./ui/dialog";
-import { ProjectFrontmatterSection } from "./ui/project-frontmatter-section";
+import { Button } from "@/components/ui/button";
+import { DialogTitle } from "@/components/ui/dialog";
+import { ProjectFrontmatterSection } from "@/components/ui/project-frontmatter-section";
 
 interface ProjectDetailModalProps {
   frontmatter: ProjectFrontmatter | null;

@@ -6,16 +6,16 @@ import { useContactFormValidation } from "@/lib/hooks/use-contact-form-validatio
 import funComputerGraphic from "@/public/fun-computer-graphic.webp";
 import Image from "next/image";
 import { ContactSubmitButton } from "./contact-submit-button";
-import { TestimonialsCarousel } from "./testimonials-carousel";
-import { Alert } from "./ui/alert";
-import { Field, FieldError, FieldGroup, FieldLabel } from "./ui/field";
-import { Input } from "./ui/input";
+import { TestimonialsCarousel } from "@/components/testimonials";
+import { Alert } from "@/components/ui/alert";
+import { Field, FieldError, FieldGroup, FieldLabel } from "@/components/ui/field";
+import { Input } from "@/components/ui/input";
 import {
   InputGroup,
   InputGroupAddon,
   InputGroupText,
   InputGroupTextarea,
-} from "./ui/input-group";
+} from "@/components/ui/input-group";
 
 export function Contact() {
   const { form, state, action, isSuccess } = useContactForm();

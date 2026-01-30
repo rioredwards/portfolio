@@ -9,7 +9,7 @@ import {
   CarouselContent,
   CarouselIndicators,
   CarouselItem,
-} from "./ui/carousel";
+} from "@/components/ui/carousel";
 
 const AUTOSCROLL_DELAY = 6000;
 

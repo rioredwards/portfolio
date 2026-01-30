@@ -1,6 +1,8 @@
+import {
+  SectionContentWrapper,
+  SlidePanel,
+} from "@/components/layout";
 import Welcome from "@/markdown/welcome.mdx";
-import { SectionContentWrapper } from "../../components/section-content-wrapper";
-import { SlidePanel } from "../../components/slide-panel";
 
 export default function Page() {
   return (

@@ -1,18 +1,21 @@
-import { BlogCard } from "@/components/blog-card";
 import {
+  BlogCard,
   BlogModalHandler,
   RenderedBlog,
-} from "@/components/blog-modal-handler";
+} from "@/components/blog";
 import { Contact } from "@/components/contact";
-import { Hero } from "@/components/hero";
+import {
+  Hero,
+  SectionContentWrapper,
+  SectionHeader,
+  SlidePanel,
+} from "@/components/layout";
 import { mdxComponents } from "@/components/mdx";
 import {
+  ProjectCard,
   ProjectModalHandler,
   RenderedProject,
-} from "@/components/project-modal-handler";
-import { SectionContentWrapper } from "@/components/section-content-wrapper";
-import { SectionHeader } from "@/components/section-header";
-import { SlidePanel } from "@/components/slide-panel";
+} from "@/components/project";
 import { projectImageScope } from "@/content/projects/project-images";
 import { getBlogIcon } from "@/lib/blog-icons";
 import { getAllBlogCards, getAllBlogsWithContent } from "@/lib/blogs";
@@ -21,7 +24,6 @@ import profileImage from "@/public/profile.webp";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import Image from "next/image";
 import { Fragment } from "react";
-import { ProjectCard } from "../../components/project-card";
 
 export default async function Home() {
   const projectCards = getAllProjectCards();

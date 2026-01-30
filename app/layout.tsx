@@ -1,11 +1,13 @@
 import type { Metadata } from "next";
 import { DM_Mono, DM_Sans } from "next/font/google";
 import localFont from "next/font/local";
-import { LightboxProvider } from "../components/lightbox-image";
-import { MobileMenu } from "../components/mobile-menu";
-import { Navbar } from "../components/navbar";
-import { Sidebar } from "../components/sidebar";
-import { Toaster } from "../components/ui/sonner";
+import {
+  MobileMenu,
+  Navbar,
+  Sidebar,
+} from "@/components/layout";
+import { LightboxProvider } from "@/components/lightbox-image";
+import { Toaster } from "@/components/ui/sonner";
 import "./globals.css";
 
 const dmSans = DM_Sans({

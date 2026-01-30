@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { Testimonial } from "./testimonial";
-import { QuoteSvg } from "./ui/quote-svg";
+import { QuoteSvg } from "@/components/ui/quote-svg";
 
 export function TestimonialCard({
   name,

@@ -1,6 +1,7 @@
 import { ImageOverlay } from "@/components/image-overlay/image-overlay";
 import { LightboxGallery } from "@/components/lightbox-image/lightbox-gallery";
 import { LightboxImage } from "@/components/lightbox-image/lightbox-image";
+import { VideoPlayer } from "@/components/video-player/video-player";
 import { cn } from "@/lib/utils";
 import Image, { ImageProps } from "next/image";
 import Link from "next/link";
@@ -14,8 +15,8 @@ function slugify(str: string) {
     .toLowerCase()
     .trim()
     .replace(/\s+/g, "-") // Replace spaces with -
-    .replace(/&/g, "-and-") // Replace & with 'and'
-    .replace(/[^\w\-]+/g, "") // Remove all non-word characters except -
+    .replace(/\&/g, "-and-") // Replace & with 'and'
+    .replace(/[^\w\-]+/g, "") // Remove non-word characters except -
     .replace(/\-\-+/g, "-"); // Replace multiple - with single -
 }
 
@@ -188,4 +189,5 @@ export const mdxComponents = {
   LightboxImage,
   LightboxGallery,
   ImageOverlay,
+  VideoPlayer,
 };

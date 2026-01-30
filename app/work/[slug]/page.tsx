@@ -1,4 +1,4 @@
-import { ProjectDetailContent } from "@/components/project-detail-content";
+import { ProjectDetailContent } from "@/components/project";
 import { getProjectSlugs, getProjectWithContent } from "@/lib/projects";
 import { cn } from "@/lib/utils";
 import { notFound } from "next/navigation";

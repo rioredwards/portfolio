@@ -1,4 +1,4 @@
-import { BlogDetailContent } from "@/components/blog-detail-content";
+import { BlogDetailContent } from "@/components/blog";
 import { getBlogSlugs, getBlogWithContent } from "@/lib/blogs";
 import { cn } from "@/lib/utils";
 import { notFound } from "next/navigation";
