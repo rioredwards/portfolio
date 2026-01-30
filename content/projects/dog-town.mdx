@@ -42,24 +42,24 @@ DogTown is a self-hosted photo-sharing app running on my Raspberry Pi. Naturally
   caption="DogTown Diagram"
 />
 
-**Core**
+### Core
 
 - **Full-stack Next.js app** - React, TypeScript, Tailwind, Shadcn/UI, MDX, NextAuth, Three.js, and more
 - **Database** PostgreSQL with Drizzle ORM
 
-**Supporting Services**
+### Supporting Services
 
 - **AI Image Validation** - Python,FastAPI, OpenNSFW, and PyTorch
 - **System Profiler** - Hono, TypeScript, Node.js
 
-**DevOps/Infra**
+### DevOps/Infra
 
 - **Docker + Compose** for reproducible local/staging/production environments
 - **CI/CD with GitHub Actions** for automated builds and deploys
 - **Bash Scripts** for automated tasks
 - **Umami** for analytics
 
-**Networking & Security**
+### Networking & Security
 
 - **Cloudflare Tunnel** to expose the Pi safely to the internet
 - **Nginx caching** for faster image delivery
@@ -78,6 +78,8 @@ I treated it like a real production app: clear separation of concerns, robust de
 
 DogTown uses **PostgreSQL** and **Drizzle ORM** to keep the schema and queries strongly typed. The data model is fairly simple, but it's easy to extend and modify as the project grows.
 
+---
+
 ## Supporting Services
 
 ### AI Image Validation (Python + FastAPI)
@@ -89,6 +91,8 @@ To keep user-generated content on-brand and safe for all audiences, I created **
 
 It runs on a FastAPI server, processing images and returning `isDog` and `isNSFW` as scores/booleans. I designed it as a dedicated service so it could evolve independently from the web app.
 
+<VideoPlayer src="/work/images/dog-town/DogBot-Demo.mp4" />
+
 ### System Profiler (Hono + Node.js)
 
 DogTown also includes a custom system-profiler service built with **Hono + Node.js**. It collects metrics from the PI and docker containers, which are fetched from the Next.js app streamed to the frontend in realtime.
@@ -99,6 +103,8 @@ This started as a way for me to look under the hood, but evolved into it's own p
   src={ImgDogTownDashboardScreenshot}
   alt="DogTown Dashboard Screenshot"
 />
+
+---
 
 ## DevOps/Infra
 
