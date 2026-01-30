@@ -10,9 +10,9 @@ export function ProjectModalHeader({ title, slug, icon }: ProjectFrontmatter) {
         <Image
           src={icon}
           alt={title}
-          width={48}
-          height={48}
-          className="h-12 w-12"
+          width={42}
+          height={42}
+          className="h-10 w-10"
         />
       )}
       <span className="text-2xl font-bold transition-all duration-200 group-hover:brightness-125">
