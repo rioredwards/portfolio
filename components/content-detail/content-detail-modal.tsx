@@ -54,7 +54,7 @@ export function ContentDetailModal({
   }, [open, renderedContent]);
 
   return (
-    <Dialog open={true} onOpenChange={onOpenChange} modal={true} >
+    <Dialog open={true} onOpenChange={onOpenChange} modal={true}>
       <DialogContent
         className={cn(
           "max-h-[94dvh] w-full max-w-[calc(100vw-var(--spacing-content-px))] md:max-w-[calc(100vw-var(--spacing-content-px-md)*2)] lg:max-w-4xl",
@@ -70,7 +70,7 @@ export function ContentDetailModal({
         {/* Sticky Header with backdrop blur */}
         <div
           className={cn(
-            "bg-background sticky top-0 left-0 right-0 z-10",
+            "sticky top-0 right-0 left-0 z-10 bg-background",
             "px-6 pt-6 pb-3",
           )}
         >
@@ -80,14 +80,12 @@ export function ContentDetailModal({
         {/* Scrollable Content */}
         <div
           className={cn(
-            "flex-1 overflow-y-auto px-6 lg:px-8 w-full py-8 bg-card overflow-x-hidden",
+            "w-full flex-1 overflow-x-hidden overflow-y-auto bg-card px-6 py-8 lg:px-8",
             hasFloatingFooter && "pb-20",
           )}
         >
           <div className="mx-auto max-w-prose-max">
-            {renderFrontmatter && (
-              renderFrontmatter()
-            )}
+            {renderFrontmatter && renderFrontmatter()}
             <ContentProse includeTableStyles={includeTableStyles}>
               {renderedContent}
             </ContentProse>
@@ -96,11 +94,15 @@ export function ContentDetailModal({
 
         {/* Optional Floating Footer */}
 
-        <div className={cn(
-          "bg-background/70 backdrop-blur-sm right-0 bottom-0 left-0 z-50",
-          "flex items-center justify-center gap-4",
-          "px-6 py-2",
-        )}>{hasFloatingFooter && renderFloatingFooter()}</div>
+        <div
+          className={cn(
+            "right-0 bottom-0 left-0 z-50 bg-background/70 backdrop-blur-sm",
+            "flex items-center justify-center gap-4",
+            "px-6 py-2",
+          )}
+        >
+          {hasFloatingFooter && renderFloatingFooter()}
+        </div>
       </DialogContent>
     </Dialog>
   );

@@ -16,7 +16,6 @@ interface ProjectDetailModalProps {
   onOpenChange: (open: boolean) => void;
 }
 
-
 export function ProjectDetailModal({
   frontmatter,
   renderedContent,
@@ -30,28 +29,36 @@ export function ProjectDetailModal({
       open={open}
       onOpenChange={onOpenChange}
       renderedContent={renderedContent}
-      renderHeader={() => <DialogTitle><ProjectModalHeader {...frontmatter} /></DialogTitle>}
+      renderHeader={() => (
+        <DialogTitle>
+          <ProjectModalHeader {...frontmatter} />
+        </DialogTitle>
+      )}
       renderFrontmatter={() => (
         <ProjectFrontmatterSection frontmatter={frontmatter} />
       )}
       renderFloatingFooter={
         frontmatter.links && frontmatter.links.length > 0
           ? () => (
-            <>
-              {frontmatter.links!.map((link, idx) => (
-                <Button
-                  key={idx}
-                  asChild
-                  variant={idx === 0 ? "default" : "outline"}
-                  size="sm"
-                >
-                  <Link href={link.url} target="_blank" rel="noopener noreferrer">
-                    {link.text}
-                  </Link>
-                </Button>
-              ))}
-            </>
-          )
+              <>
+                {frontmatter.links!.map((link, idx) => (
+                  <Button
+                    key={idx}
+                    asChild
+                    variant={idx === 0 ? "default" : "outline"}
+                    size="sm"
+                  >
+                    <Link
+                      href={link.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      {link.text}
+                    </Link>
+                  </Button>
+                ))}
+              </>
+            )
           : undefined
       }
     />

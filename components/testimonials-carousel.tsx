@@ -21,7 +21,7 @@ export function TestimonialsCarousel() {
   return (
     <div className="carousel-fade w-full">
       <Carousel
-        className="max-w-content-max-w mx-auto w-full"
+        className="mx-auto w-full max-w-content-max-w"
         opts={{
           align: "center",
           loop: true,

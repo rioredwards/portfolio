@@ -12,7 +12,12 @@ interface ProjectDetailHeaderProps {
   skills: string[];
 }
 
-export function ProjectDetailHeader({ title, slug, links, icon }: ProjectDetailHeaderProps) {
+export function ProjectDetailHeader({
+  title,
+  slug,
+  links,
+  icon,
+}: ProjectDetailHeaderProps) {
   const Content = (
     <header className="flex items-center gap-4">
       {icon && (
@@ -31,16 +36,14 @@ export function ProjectDetailHeader({ title, slug, links, icon }: ProjectDetailH
   );
 
   return (
-    <div className={cn(
-      "mt-6 mb-6 flex flex-col md:flex-row md:items-center justify-between",
-      "gap-x-12 gap-y-4",
-    )}
+    <div
+      className={cn(
+        "mt-6 mb-6 flex flex-col justify-between md:flex-row md:items-center",
+        "gap-x-12 gap-y-4",
+      )}
     >
       <h1 style={{ fontFamily: "var(--font-mazaeni-demo), serif" }}>
-        <Link
-          href={`/work/${slug}`}
-          className="flex items-center gap-4 group"
-        >
+        <Link href={`/work/${slug}`} className="group flex items-center gap-4">
           {Content}
         </Link>
       </h1>
@@ -54,11 +57,7 @@ export function ProjectDetailHeader({ title, slug, links, icon }: ProjectDetailH
                 size="sm"
                 className="text-sm"
               >
-                <Link
-                  href={link.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
+                <Link href={link.url} target="_blank" rel="noopener noreferrer">
                   {link.text}
                 </Link>
               </Button>

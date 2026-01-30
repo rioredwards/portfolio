@@ -36,7 +36,7 @@ export function Contact() {
             height={300}
           />
           <p
-            className="text-foreground text-3xl leading-tight font-bold sm:text-4xl"
+            className="text-3xl leading-tight font-bold text-foreground sm:text-4xl"
             style={{ fontFamily: "var(--font-mazaeni-demo), serif" }}
           >
             Nice to meet you!
@@ -100,7 +100,7 @@ export function Contact() {
                   return (
                     <Field data-invalid={isInvalid}>
                       <FieldLabel
-                        className="text-secondary-foreground text-lg font-semibold"
+                        className="text-lg font-semibold text-secondary-foreground"
                         style={{
                           fontFamily: "var(--font-mazaeni-demo), serif",
                         }}
@@ -183,7 +183,7 @@ export function Contact() {
                   return (
                     <Field className="md:col-span-2">
                       <FieldLabel htmlFor={field.name}>Message</FieldLabel>
-                      <InputGroup className="border-border max-h-64">
+                      <InputGroup className="max-h-64 border-border">
                         <InputGroupTextarea
                           id={field.name}
                           name={field.name}
@@ -227,7 +227,7 @@ export function Contact() {
         )}
       </div>
       {/* Testimonials Carousel */}
-      <div className="bg-background fade-in-scroll flex rounded-4xl px-4 py-12">
+      <div className="fade-in-scroll flex rounded-4xl bg-background px-4 py-12">
         <TestimonialsCarousel />
       </div>
     </div>

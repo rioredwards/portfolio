@@ -11,7 +11,6 @@ interface ProjectDetailContentProps {
   content: string;
 }
 
-
 export function ProjectDetailContent({
   frontmatter,
   content,
@@ -29,7 +28,11 @@ export function ProjectDetailContent({
       {/* MDX Content Section */}
       <section>
         <ContentProse>
-          <MDXRemote source={content} components={components} options={{ scope: projectImageScope }} />
+          <MDXRemote
+            source={content}
+            components={components}
+            options={{ scope: projectImageScope }}
+          />
         </ContentProse>
       </section>
     </div>

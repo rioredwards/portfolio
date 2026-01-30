@@ -62,8 +62,8 @@ const alertVariants = cva("", {
 
 interface AlertProps
   extends
-  Omit<React.HTMLAttributes<HTMLDivElement>, "title">,
-  VariantProps<typeof alertVariants> {
+    Omit<React.HTMLAttributes<HTMLDivElement>, "title">,
+    VariantProps<typeof alertVariants> {
   variant: "default" | "success" | "destructive";
   icon?: React.ReactNode;
   title?: string;
@@ -80,12 +80,12 @@ const Alert = React.forwardRef<HTMLDivElement, AlertProps>(
         role="alert"
         className={cn(
           alertVariants({ variant }),
-          "fade-in custom-bg-ping-wrapper rounded-lg border",
+          "custom-bg-ping-wrapper rounded-lg border fade-in",
         )}
       >
         <div
           className={cn(
-            "fade-in custom-bg-ping",
+            "custom-bg-ping fade-in",
             "text-md grid w-full grid-cols-[auto_1fr] grid-rows-[auto_auto] gap-x-4 rounded-lg border px-4 py-3",
             alertVariants({ variant }),
             className,

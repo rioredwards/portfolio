@@ -10,13 +10,13 @@ export function TestimonialCard({
   company,
 }: Testimonial) {
   return (
-    <div className="max-w-prose-max relative flex flex-col rounded-4xl px-6 py-4 select-none">
+    <div className="relative flex max-w-prose-max flex-col rounded-4xl px-6 py-4 select-none">
       {/* Spacer */}
       <div className="inline-block h-6 w-full"></div>
 
       {/* Large faded quote mark behind text */}
       <div
-        className="text-muted-foreground pointer-events-none absolute opacity-20 md:top-2 md:-left-8"
+        className="pointer-events-none absolute text-muted-foreground opacity-20 md:top-2 md:-left-8"
         style={{ fontFamily: "var(--font-mazaeni-demo), serif" }}
       >
         <QuoteSvg className="size-16 rotate-190" />
@@ -25,7 +25,7 @@ export function TestimonialCard({
       {/* Content on top */}
       <div className="relative z-10 flex flex-col gap-5">
         {/* Testimonial text */}
-        <p className="text-secondary-foreground text-base leading-relaxed font-medium sm:text-lg">
+        <p className="text-base leading-relaxed font-medium text-secondary-foreground sm:text-lg">
           {description}
         </p>
 
@@ -36,12 +36,12 @@ export function TestimonialCard({
           </div>
           <div className="flex flex-col">
             <h3
-              className="text-foreground text-lg font-bold sm:text-xl"
+              className="text-lg font-bold text-foreground sm:text-xl"
               style={{ fontFamily: "var(--font-mazaeni-demo), serif" }}
             >
               {name}
             </h3>
-            <p className="text-muted-foreground text-sm leading-relaxed font-medium sm:text-base">
+            <p className="text-sm leading-relaxed font-medium text-muted-foreground sm:text-base">
               <span className="font-bold">{jobTitle}</span>
               <span className="text-secondary-foreground/50"> at </span>
               <span className="font-bold">{company}</span>

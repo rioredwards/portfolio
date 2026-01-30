@@ -13,9 +13,7 @@ interface ProjectModalHandlerProps {
   projectsMap: Map<string, RenderedProject>;
 }
 
-export function ProjectModalHandler({
-  projectsMap,
-}: ProjectModalHandlerProps) {
+export function ProjectModalHandler({ projectsMap }: ProjectModalHandlerProps) {
   return (
     <ContentModalHandler
       contentMap={projectsMap}

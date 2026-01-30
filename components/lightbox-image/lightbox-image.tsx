@@ -66,7 +66,7 @@ export function LightboxImage({
         </ImageOverlay>
       </LightboxImageClient>
       {caption && (
-        <figcaption className="mt-2 text-sm text-muted-foreground text-center italic">
+        <figcaption className="mt-2 text-center text-sm text-muted-foreground italic">
           {caption}
         </figcaption>
       )}
@@ -76,7 +76,7 @@ export function LightboxImage({
 
 function DefaultMaximizeIcon() {
   return (
-    <div className="backdrop-blur-sm bg-background/70 absolute right-3 top-3 z-20 flex h-8 w-8 items-center justify-center rounded-full text-foreground shadow-md transition-all duration-200 ease-in-out hover:bg-primary hover:text-primary-foreground cursor-pointer">
+    <div className="absolute top-3 right-3 z-20 flex h-8 w-8 cursor-pointer items-center justify-center rounded-full bg-background/70 text-foreground shadow-md backdrop-blur-sm transition-all duration-200 ease-in-out hover:bg-primary hover:text-primary-foreground">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width={24}
@@ -87,7 +87,7 @@ function DefaultMaximizeIcon() {
         strokeWidth={2}
         strokeLinecap="round"
         strokeLinejoin="round"
-        className="w-4 h-4"
+        className="h-4 w-4"
       >
         <polyline points="15 3 21 3 21 9" />
         <polyline points="9 21 3 21 3 15" />

@@ -19,6 +19,7 @@ bun run format   # Prettier formatting
 ## Architecture
 
 ### Directory Structure
+
 - `app/` - Next.js App Router pages and layouts
 - `components/` - React components (UI primitives in `components/ui/`)
 - `content/projects/` - Project MDX files with frontmatter metadata
@@ -35,6 +36,7 @@ bun run format   # Prettier formatting
 **Project detail pages**: Projects can be viewed as modal overlays (on home page) or standalone pages at `/work/[slug]`. MDX content is rendered using `next-mdx-remote`.
 
 **Design system**: CSS variables defined in `app/globals.css` with responsive sizing using `clamp()`. Uses Tailwind's `@theme` directive for custom tokens. Key concepts:
+
 - `--responsive-spacing-*` variables scale with viewport width
 - Custom radius, color, and spacing tokens
 - `extended-padding` component pattern for sections with decorative overflow
@@ -42,6 +44,7 @@ bun run format   # Prettier formatting
 **Contact form**: Uses TanStack Form with Zod validation (`lib/dataTypes.ts`), nodemailer for email, and server actions (`lib/actions.ts`).
 
 ### Fonts
+
 - Geist Sans/Mono (Google Fonts)
 - Playfair Display (Google Fonts)
 - Mazaeni Demo (local, in `fonts/`)
@@ -49,6 +52,7 @@ bun run format   # Prettier formatting
 ## Important Conventions
 
 **Icons**: Use Hugeicons, not lucide-react:
+
 ```typescript
 import { IconName } from "@hugeicons/core-free-icons";
 import { HugeiconsIcon } from "@hugeicons/react";

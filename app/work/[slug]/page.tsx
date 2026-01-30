@@ -1,8 +1,5 @@
 import { ProjectDetailContent } from "@/components/project-detail-content";
-import {
-  getProjectSlugs,
-  getProjectWithContent,
-} from "@/lib/projects";
+import { getProjectSlugs, getProjectWithContent } from "@/lib/projects";
 import { cn } from "@/lib/utils";
 import { notFound } from "next/navigation";
 
@@ -24,8 +21,10 @@ export default async function ProjectDetailPage({ params }: PageProps) {
   }
 
   return (
-    <main className={cn("bg-secondary min-h-screen")}>
-      <div className={cn("px-content-px py-content-py mx-auto max-w-prose-max")}>
+    <main className={cn("min-h-screen bg-secondary")}>
+      <div
+        className={cn("mx-auto max-w-prose-max px-content-px py-content-py")}
+      >
         <ProjectDetailContent
           frontmatter={project.frontmatter}
           content={project.content}

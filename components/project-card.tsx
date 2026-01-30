@@ -15,10 +15,6 @@ export function ProjectCard({ orientation, ...project }: ProjectCardProps) {
   };
 
   return (
-    <Project
-      orientation={orientation}
-      onClick={handleClick}
-      {...project}
-    />
+    <Project orientation={orientation} onClick={handleClick} {...project} />
   );
 }

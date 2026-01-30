@@ -20,11 +20,7 @@ function slugify(str: string) {
 }
 
 function createHeading(level: number) {
-  const HeadingComponent = ({
-    children,
-  }: {
-    children?: React.ReactNode;
-  }) => {
+  const HeadingComponent = ({ children }: { children?: React.ReactNode }) => {
     const slug = slugify(children?.toString() ?? "");
     const Tag = `h${level}` as keyof React.JSX.IntrinsicElements;
 
@@ -85,7 +81,9 @@ function CustomLink({
 
 function RoundedImage(props: ImageProps) {
   const { alt, ...rest } = props;
-  return <Image className={cn("rounded-lg", props.className)} alt={alt} {...rest} />;
+  return (
+    <Image className={cn("rounded-lg", props.className)} alt={alt} {...rest} />
+  );
 }
 
 interface TableProps {
@@ -121,14 +119,14 @@ function Table({ data }: TableProps) {
 
 function Blockquote({ children }: { children?: React.ReactNode }) {
   return (
-    <blockquote className="border-primary border-l-4 pl-4 italic">
+    <blockquote className="border-l-4 border-primary pl-4 italic">
       {children}
     </blockquote>
   );
 }
 
 function Hr() {
-  return <hr className="border-border my-8" />;
+  return <hr className="my-8 border-border" />;
 }
 
 interface FigureProps {
@@ -147,10 +145,10 @@ export function Figure({ src, alt, caption, credit, creditUrl }: FigureProps) {
         alt={alt}
         width={800}
         height={600}
-        className="rounded-lg w-full"
+        className="w-full rounded-lg"
       />
       {(caption || credit) && (
-        <figcaption className="mt-2 text-center text-sm text-muted-foreground w-full">
+        <figcaption className="mt-2 w-full text-center text-sm text-muted-foreground">
           {caption}
           {caption && credit && " — "}
           {credit &&

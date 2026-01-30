@@ -10,7 +10,7 @@ export function SectionContentWrapper({
   return (
     <div
       className={cn(
-        "max-w-content-max-w px-content-px py-content-py md:px-content-px-md mx-auto",
+        "mx-auto max-w-content-max-w px-content-px py-content-py md:px-content-px-md",
         className,
       )}
     >

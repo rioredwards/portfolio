@@ -8,12 +8,10 @@ import {
 } from "@/components/ui/navigation-menu";
 import { cn } from "@/lib/utils";
 import { ArrowRight02Icon } from "@hugeicons/core-free-icons";
-import { HugeiconsIcon } from '@hugeicons/react';
+import { HugeiconsIcon } from "@hugeicons/react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-
-
 
 const homeNavItems = [
   { label: "Home", href: "#home" },
@@ -22,13 +20,11 @@ const homeNavItems = [
   { label: "Contact", href: "#contact" },
 ];
 
-const notHomeNavItems = [
-  { label: "Back Home", href: "/" },
-];
+const notHomeNavItems = [{ label: "Back Home", href: "/" }];
 
 export function Navbar() {
   const [activeSection, setActiveSection] = useState<string>("");
-  const router = useRouter()
+  const router = useRouter();
   const pathname = usePathname();
   const isHomePage = pathname === "/";
   const navItems = isHomePage ? homeNavItems : notHomeNavItems;
@@ -172,7 +168,7 @@ export function Navbar() {
   return (
     <header className="pointer-events-none fixed top-2 z-40 mx-auto flex w-full items-center justify-center">
       <NavigationMenu viewport={false}>
-        <div className="bg-sidebar/80 text-sidebar-foreground pointer-events-auto flex items-center gap-2 rounded-full px-4 py-2 backdrop-blur-sm">
+        <div className="pointer-events-auto flex items-center gap-2 rounded-full bg-sidebar/80 px-4 py-2 text-sidebar-foreground backdrop-blur-sm">
           <NavigationMenuList className="flex-wrap">
             {navItems.map((item) => {
               const isActive =
@@ -186,19 +182,27 @@ export function Navbar() {
                       onClick={(e) => handleClick(e, item.href)}
                       className={cn(
                         // Override NavigationMenuLink defaults
-                        "flex! flex-row! gap-0! rounded-full! items-center",
+                        "flex! flex-row! items-center gap-0! rounded-full!",
                         // Custom styling with proper padding
                         "cursor-pointer px-4! py-1.5! text-sm font-medium transition-colors",
                         // Hover/active states
                         "hover:bg-background/50 hover:text-primary-hover",
-                        "focus:text-primary-hover focus:bg-transparent",
+                        "focus:bg-transparent focus:text-primary-hover",
                         "data-[active=true]:bg-background/50 data-[active=true]:text-primary-hover",
                         // Focus visible for accessibility
-                        "focus-visible:ring-ring focus-visible:text-primary-hover focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none",
+                        "focus-visible:text-primary-hover focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:outline-none",
                       )}
                       data-active={isActive ? "true" : undefined}
                     >
-                      {!isHomePage && <HugeiconsIcon icon={ArrowRight02Icon} size={16} color="currentColor" strokeWidth={2} className="mr-2 rotate-180" />}
+                      {!isHomePage && (
+                        <HugeiconsIcon
+                          icon={ArrowRight02Icon}
+                          size={16}
+                          color="currentColor"
+                          strokeWidth={2}
+                          className="mr-2 rotate-180"
+                        />
+                      )}
                       {item.label}
                     </Link>
                   </NavigationMenuLink>

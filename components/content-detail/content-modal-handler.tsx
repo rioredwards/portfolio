@@ -32,7 +32,7 @@ export function ContentModalHandler<TFrontmatter>({
   queryParam,
   renderModal,
 }: ContentModalHandlerProps<TFrontmatter>) {
-  const { isOpen: isLightboxOpen } = useLightbox()
+  const { isOpen: isLightboxOpen } = useLightbox();
   const [open, setOpen] = useState(true);
   const searchParams = useSearchParams();
   const router = useRouter();
@@ -42,7 +42,7 @@ export function ContentModalHandler<TFrontmatter>({
 
   const handleOpenChange = (open: boolean) => {
     if (isLightboxOpen) {
-      return
+      return;
     }
     setOpen(open);
     if (!open) {

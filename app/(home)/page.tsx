@@ -20,7 +20,7 @@ import { getAllProjectCards, getAllProjectsWithContent } from "@/lib/projects";
 import profileImage from "@/public/profile.webp";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import Image from "next/image";
-import { Fragment, Suspense } from "react";
+import { Fragment } from "react";
 import { ProjectCard } from "../../components/project-card";
 
 export default async function Home() {
@@ -45,7 +45,7 @@ export default async function Home() {
     });
   }
 
-  console.log("Page.tsx")
+  console.log("Page.tsx");
 
   const renderedBlogs = new Map<string, RenderedBlog>();
   for (const [slug, blog] of blogsWithContent) {
@@ -58,7 +58,7 @@ export default async function Home() {
   }
 
   return (
-    <main className="bg-background min-h-screen">
+    <main className="min-h-screen bg-background">
       <section id="home" className="bg-secondary pb-40">
         <SectionContentWrapper className="py-0!">
           <Hero

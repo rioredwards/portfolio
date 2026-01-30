@@ -41,7 +41,9 @@ export function LightboxProvider({ children }: { children: React.ReactNode }) {
   }, []);
 
   return (
-    <LightboxContext.Provider value={{ openSingle, openGallery, close, isOpen }}>
+    <LightboxContext.Provider
+      value={{ openSingle, openGallery, close, isOpen }}
+    >
       {children}
       <Lightbox
         open={isOpen}

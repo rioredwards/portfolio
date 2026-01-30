@@ -18,7 +18,7 @@ export function BlogFrontmatterSection({
   return (
     <div className="flex flex-col gap-3">
       {(hasDate || hasReadingTime) && (
-        <div className="text-muted-foreground flex items-center gap-2 text-sm">
+        <div className="flex items-center gap-2 text-sm text-muted-foreground">
           {hasDate && (
             <span>
               {new Date(frontmatter.date!).toLocaleDateString("en-US", {
@@ -33,14 +33,11 @@ export function BlogFrontmatterSection({
         </div>
       )}
       {hasTags && (
-        <div className="flex flex-wrap gap-2 items-center">
+        <div className="flex flex-wrap items-center gap-2">
           {frontmatter.tags!.map((tag, idx) => (
             <Fragment key={idx}>
               <span
-                className={cn(
-                  "text-foreground",
-                  "rounded-full py-1 text-sm"
-                )}
+                className={cn("text-foreground", "rounded-full py-1 text-sm")}
               >
                 {tag}
               </span>
@@ -51,7 +48,7 @@ export function BlogFrontmatterSection({
           ))}
         </div>
       )}
-      <hr className="border-border/40 mt-4 mb-8" />
+      <hr className="mt-4 mb-8 border-border/40" />
     </div>
   );
 }

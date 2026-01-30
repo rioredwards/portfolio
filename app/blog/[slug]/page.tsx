@@ -21,8 +21,10 @@ export default async function BlogDetailPage({ params }: PageProps) {
   }
 
   return (
-    <main className={cn("bg-secondary min-h-screen")}>
-      <div className={cn("px-content-px py-content-py mx-auto max-w-prose-max")}>
+    <main className={cn("min-h-screen bg-secondary")}>
+      <div
+        className={cn("mx-auto max-w-prose-max px-content-px py-content-py")}
+      >
         <BlogDetailContent
           frontmatter={blog.frontmatter}
           content={blog.content}

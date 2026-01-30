@@ -86,7 +86,7 @@ export function MobileMenu() {
       {/* Floating button - bottom right */}
       <button
         onClick={() => setIsOpen(true)}
-        className="bg-foreground text-background mm-btn focus-visible:ring-ring fixed right-6 bottom-6 z-50 flex items-center justify-center rounded-full shadow-lg transition-all hover:scale-110 focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none md:hidden"
+        className="mm-btn fixed right-6 bottom-6 z-50 flex items-center justify-center rounded-full bg-foreground text-background shadow-lg transition-all hover:scale-110 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:outline-none md:hidden"
         aria-label="Open menu"
         aria-expanded={isOpen}
         aria-controls="mobile-menu"
@@ -105,7 +105,7 @@ export function MobileMenu() {
         <div
           ref={menuRef}
           id="mobile-menu"
-          className="bg-secondary mobile-menu-open fixed inset-0 z-50 md:hidden"
+          className="mobile-menu-open fixed inset-0 z-50 bg-secondary md:hidden"
           role="dialog"
           aria-modal="true"
           aria-label="Mobile navigation menu"
@@ -114,7 +114,7 @@ export function MobileMenu() {
           <button
             ref={closeButtonRef}
             onClick={() => setIsOpen(false)}
-            className="text-foreground focus-visible:ring-ring absolute top-6 right-6 z-10 flex h-10 w-10 items-center justify-center rounded-full transition-colors hover:opacity-70 focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none"
+            className="absolute top-6 right-6 z-10 flex h-10 w-10 items-center justify-center rounded-full text-foreground transition-colors hover:opacity-70 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:outline-none"
             aria-label="Close menu"
           >
             <HugeiconsIcon
@@ -130,7 +130,7 @@ export function MobileMenu() {
           <div className="mm-py flex h-full flex-col items-center justify-center px-6">
             {/* Profile picture */}
             <div className="mm-mb-small shrink-0">
-              <div className="border-border/50 mm-img relative overflow-hidden rounded-full border-2">
+              <div className="mm-img relative overflow-hidden rounded-full border-2 border-border/50">
                 <Image
                   src={profileImage}
                   alt="Rio Edwards"
@@ -143,14 +143,14 @@ export function MobileMenu() {
 
             {/* Name */}
             <h2
-              className="text-foreground mm-mb-small text-2xl font-bold sm:text-3xl"
+              className="mm-mb-small text-2xl font-bold text-foreground sm:text-3xl"
               style={{ fontFamily: "var(--font-mazaeni-demo), serif" }}
             >
               Rio Edwards
             </h2>
 
             {/* Title */}
-            <p className="text-secondary-foreground mm-mb-medium text-lg sm:text-xl">
+            <p className="mm-mb-medium text-lg text-secondary-foreground sm:text-xl">
               Developer / Designer / Creator
             </p>
 
@@ -192,7 +192,7 @@ export function MobileMenu() {
                     target={isExternal ? "_blank" : undefined}
                     rel={isExternal ? "noopener noreferrer" : undefined}
                     onClick={handleClick}
-                    className="border-border/50 bg-background text-foreground hover:bg-secondary/30 mm-link focus-visible:ring-ring flex items-center gap-3 rounded-2xl border px-4 shadow-sm transition-all hover:shadow-md focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none"
+                    className="mm-link flex items-center gap-3 rounded-2xl border border-border/50 bg-background px-4 text-foreground shadow-sm transition-all hover:bg-secondary/30 hover:shadow-md focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:outline-none"
                     aria-label={ariaLabel}
                   >
                     <span

@@ -167,7 +167,7 @@
     scroll-behavior: smooth;
   }
   body {
-    @apply bg-background text-foreground overflow-x-hidden;
+    @apply overflow-x-hidden bg-background text-foreground;
   }
 
   /* Custom scrollbar styling */
@@ -488,42 +488,42 @@
 
 /* Prose headings */
 .prose h1 {
-  @apply text-foreground mt-8 mb-4 text-4xl font-semibold tracking-tight;
+  @apply mt-8 mb-4 text-4xl font-semibold tracking-tight text-foreground;
   font-family: var(--font-mazaeni-demo), serif;
 }
 
 .prose h2 {
-  @apply text-foreground mt-8 mb-3 text-2xl font-semibold tracking-tight;
+  @apply mt-8 mb-3 text-2xl font-semibold tracking-tight text-foreground;
   font-family: var(--font-mazaeni-demo), serif;
 }
 
 .prose h3 {
-  @apply text-foreground mt-6 mb-2 text-xl font-semibold tracking-tight;
+  @apply mt-6 mb-2 text-xl font-semibold tracking-tight text-foreground;
   font-family: var(--font-mazaeni-demo), serif;
 }
 
 .prose h4 {
-  @apply text-foreground mt-6 mb-2 text-lg font-medium tracking-tight;
+  @apply mt-6 mb-2 text-lg font-medium tracking-tight text-foreground;
   font-family: var(--font-mazaeni-demo), serif;
 }
 
 .prose h5 {
-  @apply text-foreground mt-4 mb-2 text-base font-medium tracking-tight;
+  @apply mt-4 mb-2 text-base font-medium tracking-tight text-foreground;
   font-family: var(--font-mazaeni-demo), serif;
 }
 
 .prose h6 {
-  @apply text-foreground mt-4 mb-2 text-sm font-medium tracking-tight;
+  @apply mt-4 mb-2 text-sm font-medium tracking-tight text-foreground;
   font-family: var(--font-mazaeni-demo), serif;
 }
 
 /* Prose paragraphs and text */
 .prose p {
-  @apply text-foreground/90 my-4 leading-relaxed;
+  @apply my-4 leading-relaxed text-foreground/90;
 }
 
 .prose strong {
-  @apply text-foreground font-semibold;
+  @apply font-semibold text-foreground;
 }
 
 .prose em {
@@ -532,7 +532,7 @@
 
 /* Prose links */
 .prose a:not(.anchor) {
-  @apply decoration-primary/50 hover:decoration-primary underline underline-offset-2 transition-colors;
+  @apply underline decoration-primary/50 underline-offset-2 transition-colors hover:decoration-primary;
 }
 
 /* Prose lists */
@@ -550,11 +550,11 @@
 
 /* Prose code blocks */
 .prose pre {
-  @apply bg-muted border-border my-6 overflow-x-auto rounded-lg border px-4 py-3 text-sm;
+  @apply my-6 overflow-x-auto rounded-lg border border-border bg-muted px-4 py-3 text-sm;
 }
 
 .prose code {
-  @apply bg-muted rounded-md px-1.5 py-0.5 font-mono text-sm;
+  @apply rounded-md bg-muted px-1.5 py-0.5 font-mono text-sm;
 }
 
 .prose pre code {
@@ -589,15 +589,15 @@
 }
 
 .prose thead {
-  @apply border-border border-b;
+  @apply border-b border-border;
 }
 
 .prose th {
-  @apply text-foreground px-3 py-2 text-left font-semibold;
+  @apply px-3 py-2 text-left font-semibold text-foreground;
 }
 
 .prose td {
-  @apply border-border/50 text-foreground/90 border-b px-3 py-2;
+  @apply border-b border-border/50 px-3 py-2 text-foreground/90;
 }
 
 .prose tr:last-child td {
@@ -606,12 +606,12 @@
 
 /* Prose blockquotes */
 .prose blockquote {
-  @apply border-primary/30 text-foreground/80 my-6 border-l-4 pl-4 italic;
+  @apply my-6 border-l-4 border-primary/30 pl-4 text-foreground/80 italic;
 }
 
 /* Prose horizontal rules */
 .prose hr {
-  @apply border-border my-8;
+  @apply my-8 border-border;
 }
 
 /* First child spacing fix */

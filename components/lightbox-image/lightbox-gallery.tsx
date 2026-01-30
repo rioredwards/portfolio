@@ -7,14 +7,16 @@ interface LightboxGalleryProps {
   children: React.ReactNode;
 }
 
-
 function collectSlides(node: React.ReactNode): LightboxSlide[] {
   const slides: LightboxSlide[] = [];
   React.Children.forEach(node, (child) => {
     if (!React.isValidElement(child)) return;
     if (child.type === LightboxImage) {
       const props = child.props as LightboxImageProps;
-      const slide = typeof props.src === "string" ? props : { ...props.src, alt: props.alt };
+      const slide =
+        typeof props.src === "string"
+          ? props
+          : { ...props.src, alt: props.alt };
       slides.push(slide as LightboxSlide);
     }
     const props = child.props as Record<string, unknown>;
@@ -28,7 +30,7 @@ function collectSlides(node: React.ReactNode): LightboxSlide[] {
 function injectGallery(
   node: React.ReactNode,
   slides: LightboxSlide[],
-  counter: { index: number }
+  counter: { index: number },
 ): React.ReactNode {
   return React.Children.map(node, (child) => {
     if (!React.isValidElement(child)) return child;
@@ -42,7 +44,7 @@ function injectGallery(
           enableLightbox: true,
           gallery: slides,
           galleryIndex: idx,
-        }
+        },
       );
     }
 
@@ -50,7 +52,7 @@ function injectGallery(
       return React.cloneElement(
         child as React.ReactElement<Record<string, unknown>>,
         {},
-        injectGallery(props.children as React.ReactNode, slides, counter)
+        injectGallery(props.children as React.ReactNode, slides, counter),
       );
     }
 

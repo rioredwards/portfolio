@@ -285,8 +285,8 @@ function CarouselIndicators({
           className={cn(
             "h-3 rounded-full transition-all",
             selectedIndex === index
-              ? "bg-ring/80 border-ring/20 w-6 border"
-              : "bg-ring/30 border-ring/30 hover:bg-ring/50 w-3 border",
+              ? "w-6 border border-ring/20 bg-ring/80"
+              : "w-3 border border-ring/30 bg-ring/30 hover:bg-ring/50",
           )}
         />
       ))}

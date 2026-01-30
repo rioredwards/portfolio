@@ -22,12 +22,9 @@ export function ProjectModalHeader({ title, slug, icon }: ProjectFrontmatter) {
   );
 
   return (
-    <div className={cn("px-2 md:px-4 text-foreground")}>
+    <div className={cn("px-2 text-foreground md:px-4")}>
       <h1 style={{ fontFamily: "var(--font-mazaeni-demo), serif" }}>
-        <Link
-          href={`/work/${slug}`}
-          className="flex items-center gap-4 group"
-        >
+        <Link href={`/work/${slug}`} className="group flex items-center gap-4">
           {Content}
         </Link>
       </h1>

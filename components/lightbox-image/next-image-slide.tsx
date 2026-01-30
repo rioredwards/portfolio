@@ -18,9 +18,7 @@ type NextJsSlide = SlideImage & {
   blurDataURL?: string;
 };
 
-function isNextJsImage(
-  slide: RenderSlideProps["slide"]
-): slide is NextJsSlide {
+function isNextJsImage(slide: RenderSlideProps["slide"]): slide is NextJsSlide {
   return (
     isImageSlide(slide) &&
     typeof slide.width === "number" &&
@@ -42,13 +40,13 @@ export function NextJsImageSlide({ slide, offset, rect }: RenderSlideProps) {
 
   const width = !cover
     ? Math.round(
-        Math.min(rect.width, (rect.height / slide.height) * slide.width)
+        Math.min(rect.width, (rect.height / slide.height) * slide.width),
       )
     : rect.width;
 
   const height = !cover
     ? Math.round(
-        Math.min(rect.height, (rect.width / slide.width) * slide.height)
+        Math.min(rect.height, (rect.width / slide.width) * slide.height),
       )
     : rect.height;
 

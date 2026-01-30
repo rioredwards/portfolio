@@ -4,67 +4,79 @@ import { cn } from "@/lib/utils";
 import { usePointerType } from "@/components/image-overlay/use-pointer-type";
 import React, { useCallback, useState } from "react";
 
-export interface ImageOverlayClientProps
-  extends React.ComponentProps<"div"> {
+export interface ImageOverlayClientProps extends React.ComponentProps<"div"> {
   onActiveChange?: (active: boolean) => void;
 }
 
 const ImageOverlayClient = React.forwardRef<
   HTMLDivElement,
   ImageOverlayClientProps
->(({ onActiveChange, onClick, onMouseEnter, onMouseLeave, className, children, ...props }, ref) => {
-  const [active, setActive] = useState(false);
-  const pointerType = usePointerType();
-
-  const handleClick = useCallback(
-    (e: React.MouseEvent<HTMLDivElement>) => {
-      if (pointerType === "coarse") {
-        const next = !active;
-        setActive(next);
-        onActiveChange?.(next);
-      }
-      onClick?.(e);
+>(
+  (
+    {
+      onActiveChange,
+      onClick,
+      onMouseEnter,
+      onMouseLeave,
+      className,
+      children,
+      ...props
     },
-    [pointerType, active, onClick, onActiveChange]
-  );
+    ref,
+  ) => {
+    const [active, setActive] = useState(false);
+    const pointerType = usePointerType();
 
-  const handleMouseEnter = useCallback(
-    (e: React.MouseEvent<HTMLDivElement>) => {
-      if (pointerType === "fine") {
-        setActive(true);
-        onActiveChange?.(true);
-      }
-      onMouseEnter?.(e);
-    },
-    [pointerType, onMouseEnter, onActiveChange]
-  );
+    const handleClick = useCallback(
+      (e: React.MouseEvent<HTMLDivElement>) => {
+        if (pointerType === "coarse") {
+          const next = !active;
+          setActive(next);
+          onActiveChange?.(next);
+        }
+        onClick?.(e);
+      },
+      [pointerType, active, onClick, onActiveChange],
+    );
 
-  const handleMouseLeave = useCallback(
-    (e: React.MouseEvent<HTMLDivElement>) => {
-      if (pointerType === "fine") {
-        setActive(false);
-        onActiveChange?.(false);
-      }
-      onMouseLeave?.(e);
-    },
-    [pointerType, onMouseLeave, onActiveChange]
-  );
+    const handleMouseEnter = useCallback(
+      (e: React.MouseEvent<HTMLDivElement>) => {
+        if (pointerType === "fine") {
+          setActive(true);
+          onActiveChange?.(true);
+        }
+        onMouseEnter?.(e);
+      },
+      [pointerType, onMouseEnter, onActiveChange],
+    );
 
-  return (
-    <div
-      ref={ref}
-      role="group"
-      data-active={active}
-      className={cn("group", className)}
-      onClick={handleClick}
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
-      {...props}
-    >
-      {children}
-    </div>
-  );
-});
+    const handleMouseLeave = useCallback(
+      (e: React.MouseEvent<HTMLDivElement>) => {
+        if (pointerType === "fine") {
+          setActive(false);
+          onActiveChange?.(false);
+        }
+        onMouseLeave?.(e);
+      },
+      [pointerType, onMouseLeave, onActiveChange],
+    );
+
+    return (
+      <div
+        ref={ref}
+        role="group"
+        data-active={active}
+        className={cn("group", className)}
+        onClick={handleClick}
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
+        {...props}
+      >
+        {children}
+      </div>
+    );
+  },
+);
 ImageOverlayClient.displayName = "ImageOverlayClient";
 
 export { ImageOverlayClient };

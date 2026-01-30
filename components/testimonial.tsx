@@ -16,7 +16,7 @@ export function Testimonial({
   company,
 }: Testimonial) {
   return (
-    <div className="bg-secondary flex flex-col items-center gap-4 rounded-4xl px-6 py-6 text-center sm:px-8 sm:py-8">
+    <div className="flex flex-col items-center gap-4 rounded-4xl bg-secondary px-6 py-6 text-center sm:px-8 sm:py-8">
       {/* Image */}
       <div className="relative h-16 w-16 shrink-0 overflow-clip rounded-full">
         <Image src={image} alt={name} fill className="object-cover" />
@@ -24,16 +24,16 @@ export function Testimonial({
 
       {/* Text content */}
       <div className="flex flex-col gap-3">
-        <p className="text-secondary-foreground text-sm leading-relaxed font-medium sm:text-base">
+        <p className="text-sm leading-relaxed font-medium text-secondary-foreground sm:text-base">
           {description}
         </p>
         <h3
-          className="text-foreground text-lg font-bold sm:text-xl"
+          className="text-lg font-bold text-foreground sm:text-xl"
           style={{ fontFamily: "var(--font-mazaeni-demo), serif" }}
         >
           {name}
         </h3>
-        <p className="text-secondary-foreground text-sm leading-relaxed font-medium sm:text-base">
+        <p className="text-sm leading-relaxed font-medium text-secondary-foreground sm:text-base">
           <span className="font-bold">{jobTitle}</span>
           <span className="text-secondary-foreground/50"> at </span>
           <span className="font-bold">{company}</span>

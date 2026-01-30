@@ -1,14 +1,14 @@
 {
-	"folders": [
-		{
-			"path": "."
-		},
-		{
-			"path": "../pi-site"
-		},
-		{
-			"path": "../repl/repl-html-css-js"
-		}
-	],
-	"settings": {}
+  "folders": [
+    {
+      "path": ".",
+    },
+    {
+      "path": "../pi-site",
+    },
+    {
+      "path": "../repl/repl-html-css-js",
+    },
+  ],
+  "settings": {},
 }

@@ -40,32 +40,32 @@ function HeroButton({
   buttonHref: string;
 }) {
   return (
-    <div className="p-4 group -translate-x-4 pointer-coarse:translate-x-0">
+    <div className="group -translate-x-4 p-4 pointer-coarse:translate-x-0">
       <Button
         asChild
         size="icon-xl"
         className={cn(
-          "bg-secondary group-hover:bg-accent-hover! pointer-coarse:bg-accent-hover! custom-bg-ping-wrapper",
+          "custom-bg-ping-wrapper bg-secondary group-hover:bg-accent-hover! pointer-coarse:bg-accent-hover!",
           "overflow-hidden group-hover:overflow-visible pointer-coarse:overflow-visible",
           "transition-all duration-400",
-          "w-16 group-hover:w-52 pointer-coarse:w-52 group-hover:px-6 pointer-coarse:px-6 h-14",
+          "h-14 w-16 group-hover:w-52 group-hover:px-6 pointer-coarse:w-52 pointer-coarse:px-6",
         )}
       >
         <Link className="" href={buttonHref}>
-          <div className="custom-bg-ping flex items-center gap-2 mr-2">
+          <div className="custom-bg-ping mr-2 flex items-center gap-2">
             <span
               className={cn(
                 "grid grid-cols-[0fr] transition-all duration-400",
                 "group-hover:grid-cols-[1fr] pointer-coarse:grid-cols-[1fr]",
               )}
             >
-              <span className="overflow-hidden opacity-0 group-hover:opacity-100 pointer-coarse:opacity-100 whitespace-nowrap text-xl uppercase tracking-wider transition-all duration-400 ease-in">
+              <span className="overflow-hidden text-xl tracking-wider whitespace-nowrap uppercase opacity-0 transition-all duration-400 ease-in group-hover:opacity-100 pointer-coarse:opacity-100">
                 {buttonText}
               </span>
             </span>
             <HugeiconsIcon
               icon={Message02Icon}
-              className="size-8 group-hover:scale-75 pointer-coarse:scale-75 transition-all duration-400 text-accent group-hover:text-primary-foreground pointer-coarse:text-primary-foreground"
+              className="size-8 text-accent transition-all duration-400 group-hover:scale-75 group-hover:text-primary-foreground pointer-coarse:scale-75 pointer-coarse:text-primary-foreground"
               color="currentColor"
               strokeWidth={2}
             />
@@ -104,7 +104,7 @@ function HeroHeading({
   return (
     <h1
       className={cn(
-        "text-foreground text-center text-[clamp(3rem,14vw,5rem)] font-bold tracking-tight md:text-left md:text-6xl lg:text-7xl",
+        "text-center text-[clamp(3rem,14vw,5rem)] font-bold tracking-tight text-foreground md:text-left md:text-6xl lg:text-7xl",
         className,
       )}
       style={{ fontFamily: "var(--font-mazaeni-demo), serif" }}
@@ -123,7 +123,7 @@ export function Hero({
   className,
 }: HeroProps) {
   return (
-    <div className="fade-in grid min-h-[calc(100vh-6rem)] place-items-center md:min-h-screen">
+    <div className="grid min-h-[calc(100vh-6rem)] place-items-center fade-in md:min-h-screen">
       {/* Desktop layout */}
       <div
         className={cn(
@@ -133,7 +133,7 @@ export function Hero({
         )}
       >
         <HeroImage image={image} className="h-full" />
-        <div className="max-w-prose-max flex flex-col items-start justify-end">
+        <div className="flex max-w-prose-max flex-col items-start justify-end">
           <HeroHeading title={title} className="mb-4" />
           <HeroParagraph
             paragraphs={paragraphs || []}
@@ -153,7 +153,7 @@ export function Hero({
         <HeroImage image={image} className="mb-4" />
         <HeroParagraph
           paragraphs={paragraphs || []}
-          className="max-w-prose-max mb-10 space-y-4 text-center"
+          className="mb-10 max-w-prose-max space-y-4 text-center"
         />
         <HeroButton buttonText={buttonText} buttonHref={buttonHref} />
       </div>

@@ -14,10 +14,10 @@ function InputGroup({ className, ...props }: React.ComponentProps<"div">) {
       data-slot="input-group"
       role="group"
       className={cn(
-        "group/input-group border-input dark:bg-input/30 relative flex w-full items-center border shadow-xs transition-[color,box-shadow] outline-none",
+        "group/input-group relative flex w-full items-center border border-input shadow-xs transition-[color,box-shadow] outline-none dark:bg-input/30",
         // custom
         "rounded-lg",
-        "inset-shadow-shadow/10 inset-shadow-sm",
+        "inset-shadow-sm inset-shadow-shadow/10",
         "border-border bg-input dark:bg-input",
         "h-9 min-w-0 has-[>textarea]:h-auto",
 
@@ -28,10 +28,10 @@ function InputGroup({ className, ...props }: React.ComponentProps<"div">) {
         "has-[>[data-align=block-end]]:h-auto has-[>[data-align=block-end]]:flex-col has-[>[data-align=block-end]]:[&>input]:pt-3",
 
         // Focus state.
-        "has-[[data-slot=input-group-control]:focus-visible]:border-ring has-[[data-slot=input-group-control]:focus-visible]:ring-ring/50 has-[[data-slot=input-group-control]:focus-visible]:ring-[3px]",
+        "has-[[data-slot=input-group-control]:focus-visible]:border-ring has-[[data-slot=input-group-control]:focus-visible]:ring-[3px] has-[[data-slot=input-group-control]:focus-visible]:ring-ring/50",
 
         // Error state.
-        "has-[[data-slot][aria-invalid=true]]:ring-destructive/20 has-[[data-slot][aria-invalid=true]]:border-destructive dark:has-[[data-slot][aria-invalid=true]]:ring-destructive/40",
+        "has-[[data-slot][aria-invalid=true]]:border-destructive has-[[data-slot][aria-invalid=true]]:ring-destructive/20 dark:has-[[data-slot][aria-invalid=true]]:ring-destructive/40",
 
         className,
       )}
@@ -124,7 +124,7 @@ function InputGroupText({ className, ...props }: React.ComponentProps<"span">) {
   return (
     <span
       className={cn(
-        "text-muted-foreground flex items-center gap-2 text-sm [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4",
+        "flex items-center gap-2 text-sm text-muted-foreground [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4",
         className,
       )}
       {...props}
@@ -158,7 +158,7 @@ function InputGroupTextarea({
       className={cn(
         "flex-1 resize-none rounded-none border-0 bg-input py-3 shadow-none focus-visible:ring-0 dark:bg-input",
         // custom
-        "text-secondary-foreground min-h-24 w-full rounded-2xl px-5 py-5 text-base shadow-inner md:text-base",
+        "min-h-24 w-full rounded-2xl px-5 py-5 text-base text-secondary-foreground shadow-inner md:text-base",
         className,
       )}
       {...props}
@@ -172,6 +172,5 @@ export {
   InputGroupButton,
   InputGroupInput,
   InputGroupText,
-  InputGroupTextarea
+  InputGroupTextarea,
 };
-

@@ -4,12 +4,9 @@ import Link from "next/link";
 
 export function BlogModalHeader({ title, slug }: BlogFrontmatter) {
   return (
-    <div className={cn("px-2 md:px-4 text-foreground")}>
+    <div className={cn("px-2 text-foreground md:px-4")}>
       <h1 style={{ fontFamily: "var(--font-mazaeni-demo), serif" }}>
-        <Link
-          href={`/blog/${slug}`}
-          className="flex items-center gap-4 group"
-        >
+        <Link href={`/blog/${slug}`} className="group flex items-center gap-4">
           <span className="text-2xl font-bold transition-all duration-200 group-hover:brightness-125">
             {title}
           </span>

@@ -32,9 +32,5 @@ export function LightboxImageClient({
     }
   };
 
-  return (
-    <div onClick={handleClick}>
-      {children}
-    </div>
-  );
+  return <div onClick={handleClick}>{children}</div>;
 }
