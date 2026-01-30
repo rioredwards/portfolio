@@ -91,14 +91,30 @@ export function VideoPlayer({
   };
 
   const toggleFullscreen = async () => {
-    if (!containerRef.current) return;
+    const container = containerRef.current;
+    const video = videoRef.current;
+    if (!container) return;
 
-    if (!document.fullscreenElement) {
-      await containerRef.current.requestFullscreen();
-      setIsFullscreen(true);
+    if (!isFullscreen) {
+      if (container.requestFullscreen) {
+        await container.requestFullscreen();
+      } else if (
+        video &&
+        "webkitEnterFullscreen" in video &&
+        typeof (video as any).webkitEnterFullscreen === "function"
+      ) {
+        (video as any).webkitEnterFullscreen();
+      }
     } else {
-      await document.exitFullscreen();
-      setIsFullscreen(false);
+      if (document.exitFullscreen) {
+        await document.exitFullscreen();
+      } else if (
+        video &&
+        "webkitExitFullscreen" in video &&
+        typeof (video as any).webkitExitFullscreen === "function"
+      ) {
+        (video as any).webkitExitFullscreen();
+      }
     }
   };
 
@@ -133,8 +149,24 @@ export function VideoPlayer({
       setIsFullscreen(!!document.fullscreenElement);
     };
     document.addEventListener("fullscreenchange", handleFullscreenChange);
+
+    // iOS Safari: fullscreen only works on the video element itself
+    const video = videoRef.current;
+    const handleWebkitBeginFullscreen = () => setIsFullscreen(true);
+    const handleWebkitEndFullscreen = () => setIsFullscreen(false);
+    video?.addEventListener("webkitbeginfullscreen", handleWebkitBeginFullscreen);
+    video?.addEventListener("webkitendfullscreen", handleWebkitEndFullscreen);
+
     return () => {
       document.removeEventListener("fullscreenchange", handleFullscreenChange);
+      video?.removeEventListener(
+        "webkitbeginfullscreen",
+        handleWebkitBeginFullscreen,
+      );
+      video?.removeEventListener(
+        "webkitendfullscreen",
+        handleWebkitEndFullscreen,
+      );
       if (hideControlsTimeout.current) {
         clearTimeout(hideControlsTimeout.current);
       }
