@@ -1,8 +1,11 @@
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import profileImage from "@/public/profile.webp"; // Adjust path as needed
 import { Message02Icon } from "@hugeicons/core-free-icons";
 import { HugeiconsIcon } from "@hugeicons/react";
+import Image from "next/image";
 import Link from "next/link";
+import React from "react";
 
 interface HeroProps {
   title: string;
@@ -76,24 +79,6 @@ function HeroButton({
   );
 }
 
-function HeroParagraph({
-  paragraphs,
-  className,
-}: {
-  paragraphs: string[];
-  className?: string;
-}) {
-  return (
-    <div className={cn("text-secondary-foreground", className)}>
-      {paragraphs.map((paragraph, index) => (
-        <p key={index} className="text-lg leading-relaxed">
-          {paragraph}
-        </p>
-      ))}
-    </div>
-  );
-}
-
 function HeroHeading({
   title,
   className,
@@ -114,14 +99,27 @@ function HeroHeading({
   );
 }
 
-export function Hero({
-  title,
-  paragraphs,
-  buttonText = "CONTACT",
-  buttonHref = "#contact",
-  image,
-  className,
-}: HeroProps) {
+export function Hero() {
+  const image = (
+    <Image
+      src={profileImage}
+      alt="Rio Edwards"
+      fill
+      className="object-cover"
+      priority
+      placeholder="blur"
+    />
+  );
+  const title = "Hello, I'm Rio.";
+  const paragraph = (
+    <p key="1" className="text-lg leading-relaxed">
+      I&apos;m a detail-oriented software engineer dedicated to building
+      products users value and enjoy.
+    </p>
+  );
+  const buttonText = "CONTACT";
+  const buttonHref = "#contact";
+
   return (
     <div className="grid min-h-[calc(100vh-6rem)] place-items-center fade-in md:min-h-screen">
       {/* Desktop layout */}
@@ -129,32 +127,22 @@ export function Hero({
         className={cn(
           // "grid grid-cols-1 place-items-center md:grid-cols-[auto_1fr] md:grid-rows-[auto_auto] md:place-items-stretch lg:grid-cols-[1fr_max-content]",
           "hidden items-center pt-32 pb-24 md:flex md:gap-12",
-          className,
         )}
       >
         <HeroImage image={image} className="h-full" />
         <div className="flex max-w-prose-max flex-col items-start justify-end">
           <HeroHeading title={title} className="mb-4" />
-          <HeroParagraph
-            paragraphs={paragraphs || []}
-            className="mb-2 space-y-4"
-          />
+          {paragraph}
           <HeroButton buttonText={buttonText} buttonHref={buttonHref} />
         </div>
       </div>
       {/* Mobile layout */}
-      <div
-        className={cn(
-          "flex flex-col items-center justify-start md:hidden",
-          className,
-        )}
-      >
+      <div className={cn("flex flex-col items-center justify-start md:hidden")}>
         <HeroHeading title={title} className="mb-4" />
         <HeroImage image={image} className="mb-4" />
-        <HeroParagraph
-          paragraphs={paragraphs || []}
-          className="mb-10 max-w-prose-max space-y-4 text-center"
-        />
+        <div className="mb-10 max-w-prose-max space-y-4 text-center">
+          {paragraph}
+        </div>
         <HeroButton buttonText={buttonText} buttonHref={buttonHref} />
       </div>
     </div>

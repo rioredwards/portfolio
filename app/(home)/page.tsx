@@ -16,9 +16,7 @@ import { projectImageScope } from "@/content/projects/project-images";
 import { getBlogIcon } from "@/lib/blog-icons";
 import { getAllBlogCards, getAllBlogsWithContent } from "@/lib/blogs";
 import { getAllProjectCards, getAllProjectsWithContent } from "@/lib/projects";
-import profileImage from "@/public/profile.webp";
 import { MDXRemote } from "next-mdx-remote/rsc";
-import Image from "next/image";
 import { Fragment, Suspense } from "react";
 
 export default async function Home() {
@@ -59,22 +57,7 @@ export default async function Home() {
     <main className="min-h-screen bg-background">
       <section id="home" className="bg-secondary pb-40">
         <SectionContentWrapper className="py-0!">
-          <Hero
-            title="Hello, I'm Rio."
-            paragraphs={[
-              "I'm a detail-oriented software engineer dedicated to building products users value and enjoy.",
-            ]}
-            image={
-              <Image
-                src={profileImage}
-                alt="Rio Edwards"
-                fill
-                className="object-cover"
-                priority
-                placeholder="blur"
-              />
-            }
-          />
+          <Hero />
         </SectionContentWrapper>
       </section>
 
