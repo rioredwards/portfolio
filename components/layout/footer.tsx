@@ -1,7 +1,7 @@
 import { cn } from "@/lib/utils";
 import { Fragment } from "react/jsx-runtime";
 
-const BUILT_WITH = ["Next.js", "Tailwind", "Shadcn/UI", "TypeScript"];
+const BUILT_WITH = ["Next.js", "TypeScript", "Tailwind", "Shadcn/UI", "MDX"];
 
 export function Footer() {
   return (
