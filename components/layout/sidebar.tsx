@@ -74,7 +74,7 @@ export function Sidebar() {
               </span>
               <span
                 className="inline-block max-w-0 overflow-hidden text-sm font-bold whitespace-nowrap opacity-0 transition-all duration-300 group-hover:max-w-none group-hover:opacity-100"
-                style={{ fontFamily: "var(--font-mazaeni-demo), serif" }}
+                style={{ fontFamily: "var(--font-mazaeni), serif" }}
                 aria-hidden="true"
               >
                 {isEmail && copiedEmail ? "Copied" : link.label}

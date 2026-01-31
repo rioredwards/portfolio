@@ -19,7 +19,7 @@ import { getAllProjectCards, getAllProjectsWithContent } from "@/lib/projects";
 import profileImage from "@/public/profile.webp";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import Image from "next/image";
-import { Fragment } from "react";
+import { Fragment, Suspense } from "react";
 
 export default async function Home() {
   const projectCards = getAllProjectCards();
@@ -172,8 +172,10 @@ export default async function Home() {
         </SlidePanel>
       </section>
 
-      <ProjectModalHandler projectsMap={renderedProjects} />
-      <BlogModalHandler blogsMap={renderedBlogs} />
+      <Suspense>
+        <ProjectModalHandler projectsMap={renderedProjects} />
+        <BlogModalHandler blogsMap={renderedBlogs} />
+      </Suspense>
     </main>
   );
 }

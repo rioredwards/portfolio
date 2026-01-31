@@ -1,14 +1,13 @@
 "use client";
 
-import { parseFormErrors } from "@/lib/contact-validation";
-import { useContactForm } from "@/lib/hooks/use-contact-form";
-import { useContactFormValidation } from "@/lib/hooks/use-contact-form-validation";
-import funComputerGraphic from "@/public/fun-computer-graphic.webp";
-import Image from "next/image";
-import { ContactSubmitButton } from "./contact-submit-button";
 import { TestimonialsCarousel } from "@/components/testimonials";
 import { Alert } from "@/components/ui/alert";
-import { Field, FieldError, FieldGroup, FieldLabel } from "@/components/ui/field";
+import {
+  Field,
+  FieldError,
+  FieldGroup,
+  FieldLabel,
+} from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
 import {
   InputGroup,
@@ -16,6 +15,12 @@ import {
   InputGroupText,
   InputGroupTextarea,
 } from "@/components/ui/input-group";
+import { parseFormErrors } from "@/lib/contact-validation";
+import { useContactForm } from "@/lib/hooks/use-contact-form";
+import { useContactFormValidation } from "@/lib/hooks/use-contact-form-validation";
+import funComputerGraphic from "@/public/fun-computer-graphic.webp";
+import Image from "next/image";
+import { ContactSubmitButton } from "./contact-submit-button";
 
 export function Contact() {
   const { form, state, action, isSuccess } = useContactForm();
@@ -28,7 +33,7 @@ export function Contact() {
       <div className="fade-in-scroll flex flex-col gap-12 md:flex-row md:items-center md:gap-16">
         {/* illustration placeholder and heading */}
 
-        <div className="flex flex-1 flex-col items-center gap-4 md:items-start">
+        <div className="flex flex-1 flex-col items-center gap-4">
           <Image
             src={funComputerGraphic}
             alt="Fun Computer Graphic"
@@ -37,7 +42,7 @@ export function Contact() {
           />
           <p
             className="text-3xl leading-tight font-bold text-foreground sm:text-4xl"
-            style={{ fontFamily: "var(--font-mazaeni-demo), serif" }}
+            style={{ fontFamily: "var(--font-mazaeni), serif" }}
           >
             Nice to meet you!
           </p>
@@ -102,7 +107,7 @@ export function Contact() {
                       <FieldLabel
                         className="text-lg font-semibold text-secondary-foreground"
                         style={{
-                          fontFamily: "var(--font-mazaeni-demo), serif",
+                          fontFamily: "var(--font-mazaeni), serif",
                         }}
                         htmlFor={field.name}
                       >

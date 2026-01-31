@@ -107,7 +107,7 @@ function HeroHeading({
         "text-center text-[clamp(3rem,14vw,5rem)] font-bold tracking-tight text-foreground md:text-left md:text-6xl lg:text-7xl",
         className,
       )}
-      style={{ fontFamily: "var(--font-mazaeni-demo), serif" }}
+      style={{ fontFamily: "var(--font-mazaeni), serif" }}
     >
       {title}
     </h1>

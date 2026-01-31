@@ -139,9 +139,9 @@
   --color-shadow: var(--theme-shadow-color);
 
   --font-sans: var(--font-dm-sans);
-  --font-serif: var(--font-mazaeni-demo), serif;
+  --font-serif: var(--font-mazaeni), serif;
   --font-mono: var(--font-dm-mono);
-  --font-mazaeni: var(--font-mazaeni-demo), serif;
+  --font-mazaeni: var(--font-mazaeni), serif;
 
   --radius-xs: calc(var(--radius) * 0.3);
   --radius-sm: calc(var(--radius) * 0.5);
@@ -486,7 +486,7 @@
 
 /* Prose headings */
 .prose :where(h1, h2, h3) {
-  font-family: var(--font-mazaeni-demo), serif;
+  font-family: var(--font-mazaeni), serif;
 }
 
 .prose h1 {
@@ -511,7 +511,7 @@
 
 .prose h6 {
   @apply mt-4 mb-2 text-sm font-medium text-foreground;
-  font-family: var(--font-mazaeni-demo), serif;
+  font-family: var(--font-mazaeni), serif;
 }
 
 /* Prose paragraphs and text */

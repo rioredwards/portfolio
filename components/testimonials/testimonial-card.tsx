@@ -1,6 +1,6 @@
+import { QuoteSvg } from "@/components/ui/quote-svg";
 import Image from "next/image";
 import { Testimonial } from "./testimonial";
-import { QuoteSvg } from "@/components/ui/quote-svg";
 
 export function TestimonialCard({
   name,
@@ -17,7 +17,7 @@ export function TestimonialCard({
       {/* Large faded quote mark behind text */}
       <div
         className="pointer-events-none absolute text-muted-foreground opacity-20 md:top-2 md:-left-8"
-        style={{ fontFamily: "var(--font-mazaeni-demo), serif" }}
+        style={{ fontFamily: "var(--font-mazaeni), serif" }}
       >
         <QuoteSvg className="size-16 rotate-190" />
       </div>
@@ -37,7 +37,7 @@ export function TestimonialCard({
           <div className="flex flex-col">
             <h3
               className="text-lg font-bold text-foreground sm:text-xl"
-              style={{ fontFamily: "var(--font-mazaeni-demo), serif" }}
+              style={{ fontFamily: "var(--font-mazaeni), serif" }}
             >
               {name}
             </h3>

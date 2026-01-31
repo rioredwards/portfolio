@@ -29,7 +29,7 @@ export function Testimonial({
         </p>
         <h3
           className="text-lg font-bold text-foreground sm:text-xl"
-          style={{ fontFamily: "var(--font-mazaeni-demo), serif" }}
+          style={{ fontFamily: "var(--font-mazaeni), serif" }}
         >
           {name}
         </h3>

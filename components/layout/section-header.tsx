@@ -10,7 +10,7 @@ export function SectionHeader({ title, className }: SectionHeaderProps) {
     <div className={cn("p-10", className)}>
       <h2
         className="m-0 text-center text-6xl font-black text-foreground"
-        style={{ fontFamily: "var(--font-mazaeni-demo), serif" }}
+        style={{ fontFamily: "var(--font-mazaeni), serif" }}
       >
         {title}
       </h2>

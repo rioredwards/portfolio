@@ -20,7 +20,7 @@ export function ContentProse({
     <div
       className={cn(
         "prose prose-neutral dark:prose-invert max-w-none",
-        "prose-headings:font-[var(--font-mazaeni-demo),serif]",
+        "prose-headings:font-[var(--font-mazaeni),serif]",
         "prose-p:text-foreground prose-strong:text-foreground",
         "prose-ul:text-foreground prose-ol:text-foreground prose-li:text-foreground",
         "prose-a:text-primary prose-a:no-underline hover:prose-a:underline",

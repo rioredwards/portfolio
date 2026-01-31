@@ -43,7 +43,7 @@ export function ProjectDetailHeader({
         "gap-x-12 gap-y-4",
       )}
     >
-      <h1 style={{ fontFamily: "var(--font-mazaeni-demo), serif" }}>
+      <h1 style={{ fontFamily: "var(--font-mazaeni), serif" }}>
         <Link href={`/work/${slug}`} className="group flex items-center gap-4">
           {Content}
         </Link>

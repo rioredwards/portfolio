@@ -1,5 +1,5 @@
-import { Fragment } from "react/jsx-runtime";
 import { cn } from "@/lib/utils";
+import { Fragment } from "react/jsx-runtime";
 
 const BUILT_WITH = ["Next.js", "Tailwind", "Shadcn/UI", "TypeScript"];
 
@@ -10,7 +10,7 @@ export function Footer() {
       <div className="space-y-1 text-sm">
         <p className="font-semibold">Designed and Developed by</p>
         <p>Rio Edwards</p>
-        <p>©2025</p>
+        <p>©{new Date().getFullYear()}</p>
       </div>
 
       {/* Right built-with pills */}

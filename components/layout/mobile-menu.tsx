@@ -144,7 +144,7 @@ export function MobileMenu() {
             {/* Name */}
             <h2
               className="mm-mb-small text-2xl font-bold text-foreground sm:text-3xl"
-              style={{ fontFamily: "var(--font-mazaeni-demo), serif" }}
+              style={{ fontFamily: "var(--font-mazaeni), serif" }}
             >
               Rio Edwards
             </h2>
@@ -212,7 +212,7 @@ export function MobileMenu() {
                     </span>
                     <span
                       className="text-base font-bold"
-                      style={{ fontFamily: "var(--font-mazaeni-demo), serif" }}
+                      style={{ fontFamily: "var(--font-mazaeni), serif" }}
                     >
                       {isEmail && copiedEmail ? "Copied" : link.label}
                     </span>

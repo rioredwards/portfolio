@@ -29,7 +29,7 @@ export function BlogCard({ title, slug, description, icon }: BlogCardProps) {
       <div>
         <h2
           className="mb-3 text-3xl leading-tight font-bold text-foreground sm:text-4xl"
-          style={{ fontFamily: "var(--font-mazaeni-demo), serif" }}
+          style={{ fontFamily: "var(--font-mazaeni), serif" }}
         >
           {title}
         </h2>
