@@ -52,7 +52,7 @@ export function Project({
       {/* Image container with parallax */}
       <div
         className={cn(
-          "relative w-full overflow-clip rounded-t-4xl pointer-coarse:aspect-video pointer-fine:aspect-2/1",
+          "relative w-full overflow-clip rounded-tl-4xl pointer-coarse:aspect-video pointer-fine:aspect-2/1",
         )}
         style={{ backgroundColor: brandColor }}
       >
@@ -71,7 +71,7 @@ export function Project({
             // mobile classes
             "pointer-coarse:object-cover",
             // desktop classes
-            "pointer-fine:top-[16%] pointer-fine:left-[8%] pointer-fine:rounded-t-4xl pointer-fine:group-hover:-translate-y-4 pointer-fine:group-hover:scale-105 pointer-fine:group-active:translate-y-0",
+            "pointer-fine:top-[16%] pointer-fine:left-[8%] pointer-fine:rounded-tl-xl pointer-fine:group-hover:-translate-y-4 pointer-fine:group-hover:scale-105 pointer-fine:group-active:translate-y-0",
           )}
           priority
         />
