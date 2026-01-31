@@ -1,29 +1,24 @@
-import profileImage from "@/public/profile.webp";
 import type { TestimonialType } from "@/components/testimonials";
+import imgAmandaHockmuthProfile from "@/public/testamonial-images/amanda-hockmuth-profile.png";
+import imgArinWilliamsProfile from "@/public/testamonial-images/arin-williams-profile.png";
 
 export const TESTIMONIALS: TestimonialType[] = [
   {
-    name: "John Doe",
+    name: "Arin Williams",
     description:
-      "Rio is an exceptional software engineer who consistently delivers high-quality work. Their attention to detail and dedication to creating user-friendly products is truly impressive.",
-    image: profileImage, // TODO: Replace with actual testimonial image
-    jobTitle: "Software Engineer",
-    company: "Company A",
+      "I have had the pleasure of working with some of the most talented software engineers around the world. Without a doubt, Rio could go to-to-toe with the very best that I've known; despite the fact that he's a selfless team player.",
+    image: imgArinWilliamsProfile, // TODO: Replace with actual testimonial image
+    jobTitle: "Product Manager",
+    company: "Comcast",
   },
   {
-    name: "Jane Smith",
+    name: "Amanda Hockmuth",
     description:
-      "Working with Rio has been a pleasure. Their technical expertise and collaborative approach make them an invaluable team member. I highly recommend their services.",
-    image: profileImage, // TODO: Replace with actual testimonial image
-    jobTitle: "Software Engineer",
-    company: "Company B",
+      "Rio's talent is self evident, but his quiet positivity in particular, is infectious. " +
+      "His VSCode Extension 'Error Affirmations' is the perfect illustration, and my favorite extension (even over 'Prettier').",
+    image: imgAmandaHockmuthProfile, // TODO: Replace with actual testimonial image
+    jobTitle: "Software Developer",
+    company: "Code The Dream",
   },
-  {
-    name: "John O'Connor",
-    description:
-      "Rio is a great developer and a great person. He is always willing to help and is a great team player. I highly recommend him.",
-    image: profileImage, // TODO: Replace with actual testimonial image
-    jobTitle: "Software Engineer",
-    company: "Lumeer",
-  },
+  // TODO: Reach out to people for more testimonials and ask them^ if they're cool with being featured here
 ];
