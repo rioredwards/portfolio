@@ -55,7 +55,7 @@ export function getSocialLinks(iconSize: string = "size-5"): SocialLink[] {
           strokeWidth={2}
         />
       ),
-      href: "#",
+      href: "/resume",
       label: "Resume",
     },
   ];
