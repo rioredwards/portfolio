@@ -104,7 +104,7 @@ function HeroHeading({
   return (
     <h1
       className={cn(
-        "text-center text-[clamp(3rem,14vw,5rem)] font-bold tracking-tight text-foreground md:text-left md:text-6xl lg:text-7xl",
+        "text-center text-[clamp(3rem,14vw,5rem)] font-black tracking-tight text-foreground md:text-left md:text-6xl lg:text-7xl",
         className,
       )}
       style={{ fontFamily: "var(--font-mazaeni), serif" }}
