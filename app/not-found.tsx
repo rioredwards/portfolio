@@ -14,7 +14,7 @@ export default function NotFound() {
         Sorry, the page you&apos;re looking for doesn&apos;t exist.
       </p>
       <Button asChild className="mt-8" size="lg">
-        <Link href="/">Back to Home</Link>
+        <Link href="/">Back Home</Link>
       </Button>
     </main>
   );
