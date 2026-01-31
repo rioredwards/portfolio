@@ -1,0 +1,614 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+:root {
+  view-transition-name: root;
+
+  /* Theme colors (source of truth) */
+  --theme-background: #ecdfca;
+  --theme-foreground: #2d645d;
+  --theme-background-primary: #2d645d;
+  --theme-foreground-primary: #fdfbf6;
+  --theme-background-secondary: #f4ebda;
+  --theme-foreground-secondary: #5c4b3e;
+  --theme-background-tertiary: #ebdbbc;
+  --theme-foreground-muted: rgb(
+    from var(--theme-foreground-secondary) r g b / calc(alpha / 2)
+  );
+  --theme-background-accent: #2f6f31;
+  --theme-foreground-accent: var(--theme-foreground-primary);
+  --theme-background-pop: #e3cea3;
+  --theme-background-destructive: #c53920;
+  --theme-foreground-destructive: var(--theme-foreground-primary);
+  --theme-border: #dab773;
+  --theme-input: #f4ebda;
+  --theme-ring: #76c18f;
+  --theme-shadow-color: #32302c;
+
+  /* RESPONSIVE SIZING: The root font-size is based on this variable, meaning ANYTHING USING REM UNITS WILL SCALE WITH THE VIEWPORT WIDTH. */
+  --responsive-spacing-min: clamp(15px, calc(0.32vw + 13.88px), 19px);
+  --responsive-spacing-base: clamp(14px, calc(0.64vw + 12px), 22px);
+  --responsive-spacing-max: clamp(14px, calc(1.28vw + 10px), 30px);
+  font-size: var(--responsive-spacing-min);
+
+  /* Additional variables */
+  --radius: calc(var(--responsive-spacing-max) * 1);
+  --tracking-normal: 0em;
+  --spacing: 0.25rem;
+}
+
+@theme {
+  /* --container-*	Container query variants like @sm:* and size utilities like max-w-md */
+  --container-content-max-w: 72rem;
+  --container-prose-max: 58ch;
+
+  /* --spacing-*	Spacing and sizing utilities like px-4, max-h-16, and many more */
+  --spacing-content-px-md: 4rem;
+  --spacing-content-px: 2rem;
+  --spacing-content-py: 6rem;
+
+  --spacing-panel-tall-extended-padding-height: 16rem;
+  --spacing-panel-short-extended-padding-height: 12rem;
+}
+
+@theme inline {
+  --color-background: var(--theme-background);
+  --color-background-hover: hsl(
+    from var(--theme-background) h calc(s * 1.2) calc(l * 0.94)
+  );
+  --color-background-hover-border: hsl(
+    from var(--theme-border) h calc(s * 1.3) calc(l * 1.2)
+  );
+  --color-foreground: var(--theme-foreground);
+  --color-foreground-hover: hsl(
+    from var(--theme-foreground) h calc(s * 1.2) calc(l * 1.2)
+  );
+  --color-foreground-hover-border: hsl(
+    from var(--theme-foreground) h calc(s * 1.3) calc(l * 1.3)
+  );
+  --color-card: var(--theme-background-secondary);
+  --color-card-foreground: var(--theme-foreground-secondary);
+  --color-popover: var(--theme-background);
+  --color-popover-foreground: var(--theme-foreground);
+  --color-primary: var(--theme-background-primary);
+  --color-primary-hover: hsl(
+    from var(--theme-background-primary) h calc(s * 1.2) calc(l * 1.2)
+  );
+  --color-primary-hover-border: hsl(
+    from var(--theme-background-primary) h calc(s * 1.3) calc(l * 1.6)
+  );
+  --color-primary-foreground: var(--theme-foreground-primary);
+  --color-secondary: var(--theme-background-secondary);
+  --color-secondary-hover: hsl(
+    from var(--theme-background-secondary) h calc(s * 1.2) calc(l * 1.09)
+  );
+  --color-secondary-hover-border: hsl(
+    from var(--theme-background-secondary) h calc(s * 1.2) calc(l * 0.92)
+  );
+  --color-secondary-foreground: var(--theme-foreground-secondary);
+  --color-tertiary: var(--theme-background-tertiary);
+  --color-tertiary-foreground: var(--theme-foreground-secondary);
+  --color-tertiary-hover: hsl(
+    from var(--theme-background-tertiary) h calc(s * 1) calc(l * 0.92)
+  );
+  --color-tertiary-hover-border: hsl(
+    from var(--theme-background-tertiary) h calc(s * 1.2) calc(l * 0.92)
+  );
+  --color-muted: var(--theme-background-secondary);
+  --color-muted-foreground: var(--theme-foreground-muted);
+  --color-accent: var(--theme-background-accent);
+  --color-accent-hover: hsl(
+    from var(--theme-background-accent) h calc(s * 1.2) calc(l * 1.2)
+  );
+  --color-accent-hover-border: hsl(
+    from var(--theme-background-accent) h calc(s * 1.3) calc(l * 1.6)
+  );
+  --color-accent-foreground: var(--theme-foreground-primary);
+  --color-destructive: var(--theme-background-destructive);
+  --color-destructive-hover: hsl(
+    from var(--theme-background-destructive) h calc(s * 1.2) calc(l * 1.2)
+  );
+  --color-destructive-hover-border: hsl(
+    from var(--theme-background-destructive) h calc(s * 1.3) calc(l * 1.6)
+  );
+  --color-destructive-foreground: var(--theme-foreground-destructive);
+  --color-border: var(--theme-border);
+  --color-input: var(--theme-input);
+  --color-ring: var(--theme-ring);
+  --color-sidebar: var(--theme-background-secondary);
+  --color-sidebar-foreground: color-mix(
+    in oklab,
+    var(--theme-foreground),
+    transparent 9%
+  );
+  --color-sidebar-accent: var(--theme-background-accent);
+  --color-sidebar-accent-foreground: var(--theme-foreground-accent);
+  --color-sidebar-border: var(--theme-border);
+  --color-sidebar-ring: var(--theme-ring);
+  --color-shadow: var(--theme-shadow-color);
+
+  --font-sans: var(--font-dm-sans);
+  --font-serif: var(--font-mazaeni), serif;
+  --font-mono: var(--font-dm-mono);
+  --font-mazaeni: var(--font-mazaeni), serif;
+
+  --radius-xs: calc(var(--radius) * 0.3);
+  --radius-sm: calc(var(--radius) * 0.5);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.2);
+  --radius-2xl: calc(var(--radius) * 1.5);
+  --radius-3xl: calc(var(--radius) * 1.9);
+  --radius-4xl: calc(var(--radius) * 2.1);
+  --radius-5xl: calc(var(--radius) * 3);
+
+  /* Shadows */
+  --shadow-card: 0 0.25rem 1rem
+    color-mix(in oklab, var(--theme-shadow-color), transparent 94%);
+  --shadow-card-hover: 0 0.75rem 4rem
+    color-mix(in oklab, var(--theme-shadow-color), transparent 70%);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  html {
+    @apply bg-secondary;
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply overflow-x-hidden bg-secondary text-foreground;
+  }
+
+  /* Custom scrollbar styling */
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: var(--theme-background-secondary);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--theme-border);
+    border-radius: 999px;
+    border: 2px solid var(--theme-background-secondary);
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--theme-ring);
+  }
+  /* Firefox scrollbar */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: color-mix(in oklab, var(--theme-border), transparent 30%)
+      var(--theme-background-secondary);
+  }
+  /* Offset scroll position for sections to appear closer to middle of viewport */
+  section {
+    scroll-margin-top: clamp(20vh, 10vh, 30vh);
+  }
+  /* Lock background scroll when a mobile menu overlay is present */
+  body:has(.mobile-menu-open) {
+    overflow: hidden;
+    overscroll-behavior: contain;
+  }
+  @media screen and (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+
+  /* Default prose */
+  p,
+  li,
+  dd,
+  blockquote {
+    @apply max-w-prose-max text-pretty;
+  }
+
+  /* Headlines */
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply text-balance;
+  }
+
+  /* UI */
+  button,
+  label,
+  nav,
+  pre,
+  code,
+  .ui {
+    @apply text-nowrap;
+  }
+
+  .fade-in {
+    animation: fadeInAnimation 0.5s ease-in-out;
+  }
+
+  .yarl__root {
+    pointer-events: all !important;
+  }
+
+  /* data-slot="dialog-overlay" selector */
+  [data-slot="dialog-overlay"]:has(~ .yarl__root) {
+    background-color: red;
+    pointer-events: none !important;
+  }
+}
+
+@layer components {
+  .extended-padding::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    height: var(--extended-padding-height);
+    background-color: inherit;
+    z-index: -1;
+  }
+}
+
+@layer utilities {
+  /* Mobile menu responsive helpers (scale with viewport height) */
+  .mm-btn {
+    width: clamp(48px, 9svh, 56px);
+    height: clamp(48px, 9svh, 56px);
+  }
+  .mm-img {
+    width: clamp(96px, 24svh, 160px);
+    height: clamp(96px, 24svh, 160px);
+  }
+  .mm-py {
+    padding-top: clamp(12px, 5svh, 64px);
+    padding-bottom: clamp(12px, 5svh, 64px);
+  }
+  .mm-mb-small {
+    margin-bottom: clamp(8px, 2svh, 16px);
+  }
+  .mm-mb-medium {
+    margin-bottom: clamp(8px, 3svh, 24px);
+  }
+  .mm-gap {
+    gap: clamp(8px, 2.4svh, 18px);
+  }
+  .mm-link {
+    padding-top: clamp(6px, 1.6svh, 12px);
+    padding-bottom: clamp(6px, 1.6svh, 12px);
+  }
+  .angled-border-sm {
+    border-top-right-radius: var(--radius-md);
+    border-bottom-left-radius: var(--radius-md);
+  }
+  .angled-border-md {
+    border-top-right-radius: var(--radius-lg);
+    border-bottom-left-radius: var(--radius-lg);
+  }
+  .angled-border-lg {
+    border-top-right-radius: var(--radius-xl);
+    border-bottom-left-radius: var(--radius-xl);
+  }
+  .angled-border-full {
+    border-top-right-radius: 100%;
+    border-bottom-left-radius: 100%;
+  }
+  .fade-in-scroll {
+    animation: fadeInAnimation both;
+    animation-timeline: view();
+    animation-range: entry 100px entry 500px;
+  }
+
+  .custom-bg-ping-wrapper {
+    position: relative;
+  }
+
+  .custom-bg-ping-wrapper:hover::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: inherit; /* or a specific color */
+    border-radius: inherit;
+    z-index: 0; /* behind inner card */
+    animation: customPingAnimation 1.6s ease-in-out infinite;
+  }
+
+  .custom-bg-ping {
+    position: relative;
+    z-index: 1; /* above the ping */
+  }
+}
+
+@media (hover: none) and (pointer: coarse) {
+  .custom-bg-ping-wrapper::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: inherit; /* or a specific color */
+    border-radius: inherit;
+    z-index: 0; /* behind inner card */
+    animation: customPingAnimation 1.6s ease-in-out infinite;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition: none !important;
+  }
+}
+
+/* like the ping animation, but goes on a :before element */
+@keyframes customPingAnimation {
+  0% {
+    opacity: 0.8;
+    transform: scaleX(1) scaleY(1);
+  }
+  75%,
+  100% {
+    opacity: 0;
+    transform: scaleX(1.06) scaleY(1.2);
+  }
+}
+
+@keyframes fadeInAnimation {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Sonner toast styling */
+[data-sonner-toast] {
+  background-color: var(--color-popover) !important;
+  color: var(--color-popover-foreground) !important;
+  border: 1px solid var(--color-border) !important;
+  border-radius: var(--radius) !important;
+}
+
+/* Carousel styling */
+.embla {
+  overflow: hidden;
+}
+
+.embla__viewport {
+  overflow: hidden;
+}
+
+.embla__container {
+  display: flex;
+}
+
+.embla__slide {
+  flex: 0 0 100%;
+  min-width: 0;
+}
+
+/* Hide scrollbar for carousel */
+.embla__viewport::-webkit-scrollbar {
+  display: none;
+}
+
+.embla__viewport {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Carousel fade effect on edges */
+.carousel-fade {
+  position: relative;
+}
+
+.carousel-fade::before,
+.carousel-fade::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 2rem;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.carousel-fade::before {
+  left: 0;
+  background: linear-gradient(to right, var(--color-background), transparent);
+}
+
+.carousel-fade::after {
+  right: 0;
+  background: linear-gradient(to left, var(--color-background), transparent);
+}
+
+/* 
+* {
+  border: 1px solid red;
+  background-color: rgba(255, 0, 0, 0.02);
+} 
+*/
+
+/* ===== MDX Prose Styling ===== */
+
+/* Syntax highlighting colors (sugar-high) */
+:root {
+  /* Syntax highlighting colors (sugar-high) */
+  --sh-class: #2d5e9d;
+  --sh-identifier: var(--theme-foreground-secondary);
+  --sh-sign: #8996a3;
+  --sh-string: #007f7a;
+  --sh-keyword: #c53920;
+  --sh-comment: #a19595;
+  --sh-jsxliterals: #6f42c1;
+  --sh-property: #2d645d;
+  --sh-entity: #22863a;
+}
+
+.dark {
+  --sh-class: #4c97f8;
+  --sh-identifier: #e0e0e0;
+  --sh-keyword: #f47067;
+  --sh-string: #0fa295;
+}
+
+/* Selection color */
+::selection {
+  background-color: oklch(0.67 0.16 58 / 40%);
+  color: inherit;
+}
+
+.prose {
+  @apply text-foreground;
+  line-height: 1.65;
+  text-shadow: 2px 3px 4px rgba(3, 42, 0, 0.05);
+}
+
+/* Prose anchor links */
+.prose .anchor {
+  @apply no-underline;
+  cursor: pointer;
+}
+
+/* Prose headings */
+.prose :where(h1, h2, h3) {
+  font-family: var(--font-mazaeni), serif;
+}
+
+.prose h1 {
+  @apply mt-8 mb-4 text-4xl font-semibold text-foreground;
+}
+
+.prose h2 {
+  @apply mt-8 mb-3 text-2xl font-semibold text-foreground;
+}
+
+.prose h3 {
+  @apply mt-6 mb-2 text-lg font-semibold text-foreground;
+}
+
+.prose h4 {
+  @apply mt-6 mb-2 text-lg font-medium text-foreground;
+}
+
+.prose h5 {
+  @apply mt-4 mb-2 text-base font-medium text-foreground;
+}
+
+.prose h6 {
+  @apply mt-4 mb-2 text-sm font-medium text-foreground;
+  font-family: var(--font-mazaeni), serif;
+}
+
+/* Prose paragraphs and text */
+.prose p {
+  @apply mb-4 leading-relaxed text-foreground/90;
+}
+
+.prose strong {
+  @apply font-semibold text-foreground;
+}
+
+.prose em {
+  @apply italic;
+}
+
+/* Prose links */
+.prose a:not(.anchor) {
+  @apply underline decoration-primary/50 underline-offset-2 transition-colors hover:decoration-primary;
+}
+
+/* Prose lists */
+.prose ul {
+  @apply my-4 list-disc space-y-2 pl-6;
+}
+
+.prose ol {
+  @apply my-4 list-decimal space-y-2 pl-6;
+}
+
+.prose li {
+  @apply text-foreground/90;
+}
+
+/* Prose code blocks */
+.prose pre {
+  @apply my-6 overflow-x-auto rounded-lg border border-border bg-muted px-4 py-3 text-sm;
+}
+
+.prose code {
+  @apply rounded-md bg-muted px-1.5 py-0.5 font-mono text-sm;
+}
+
+.prose pre code {
+  @apply bg-transparent p-0;
+  line-height: 1.6;
+}
+
+.prose code span {
+  @apply font-medium;
+}
+
+/* Hide scrollbar on pre */
+.prose pre::-webkit-scrollbar {
+  display: none;
+}
+
+.prose pre {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Prose images */
+.prose img {
+  @apply rounded-lg;
+}
+
+/* Prose tables */
+.prose table {
+  @apply my-6 w-full text-sm;
+  display: block;
+  overflow-x: auto;
+}
+
+.prose thead {
+  @apply border-b border-border;
+}
+
+.prose th {
+  @apply px-3 py-2 text-left font-semibold text-foreground;
+}
+
+.prose td {
+  @apply border-b border-border/50 px-3 py-2 text-foreground/90;
+}
+
+.prose tr:last-child td {
+  @apply border-b-0;
+}
+
+/* Prose blockquotes */
+.prose blockquote {
+  @apply my-6 border-l-4 border-primary/30 pl-4 text-foreground/80 italic;
+}
+
+/* Prose horizontal rules */
+.prose hr {
+  @apply my-8 border-border;
+}
+
+/* First child spacing fix */
+.prose > :first-child {
+  margin-top: 0 !important;
+}
+
+/* 
+* {
+  border: 1px solid red;
+  background-color: rgba(255, 0, 0, 0.02);
+} */

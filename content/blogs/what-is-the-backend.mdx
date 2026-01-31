@@ -1,0 +1,402 @@
+---
+title: "What is the backend?"
+slug: "what-is-the-backend"
+description: "An easy intro to the Backend, Servers, APIs, etc.."
+icon: "ServerStack03Icon"
+date: "2024-04-21"
+tags:
+  - "Backend"
+  - "Servers"
+  - "APIs"
+  - "Databases"
+  - "Beginner"
+order: 1
+---
+
+An easy intro to the Backend, Servers, APIs, etc..
+
+<Figure
+  src="/blog/images/what-is-the-backend/abstract-technology.webp"
+  alt="Abstract technology illustration"
+  credit="Tung Nguyen on Pixabay"
+  creditUrl="https://pixabay.com/illustrations/technology-city-glowing-business-6701504/"
+/>
+
+## Introduction
+
+This is the guide I wish I had years ago…
+
+I'll introduce you to the world of backend development by explaining key concepts and terminology. I'll keep it simple, avoiding technical jargon as much as possible, and there won't be any actual code.
+
+## Application
+
+**Some code that runs on a computer and does something.**
+
+This is such a broad term. You can pretty much think of any code you write as an application, or at least a part of one! The world is full of various types of apps, each with its own unique purpose.
+
+For most of these apps, there's a lot going on behind the scenes that the end user isn't aware of. As a user, you typically only interact with the _frontend_, but there's a whole other world, the _backend_, which is essential for making apps function. Let's start with a brief recap of the frontend.
+
+<Figure
+  src="/blog/images/what-is-the-backend/learning.webp"
+  alt="Students watching online webinar"
+  credit="pch.vector on Freepik"
+  creditUrl="https://www.freepik.com/free-vector/group-students-watching-online-webinar_8271020.htm"
+/>
+
+## Frontend
+
+**Apps that run on your computer/device.**
+
+A _frontend_ (a.k.a “client”) is any app designed to run on your device (computer, phone, tablet, console, etc…). Generally, they provide a graphical user interface (GUI) where you can see things and click on stuff! When you think of an application, the frontend is probably what comes to mind. It's the part that you see and interact with.
+
+<Figure
+  src="/blog/images/what-is-the-backend/retro-gui.webp"
+  alt="Retro GUI interface"
+  credit="Freepik"
+  creditUrl="https://www.freepik.com/free-vector/linear-vintage-vaporwave-background_13182199.htm"
+/>
+
+For example, I'm using the [Google Docs](https://docs.google.com) frontend to write these words. The web app is running in my browser on my computer.
+
+## Backend
+
+**Apps that run on Server Computers.**
+
+A _backend_ is an app (or set of apps) designed to run on [server computers](<https://en.wikipedia.org/wiki/Server_(computing)>). Generally, they allow frontend apps to store information in a _database_ and communicate through the internet using _servers_. We will take a closer look at databases and servers in the next sections.
+
+<Figure
+  src="/blog/images/what-is-the-backend/frontend-backend.webp"
+  alt="Frontend and backend diagram"
+  credit="Rio Edwards"
+/>
+
+You might be wondering: “Why do we need backends?” To help answer this, let's imagine trying to create an app like [YouTube](https://www.youtube.com) and explore how the backend addresses some key challenges we would face:
+
+**Challenge 1: Storing content**
+We need a way for people to upload videos. If a user has a video file that they want to share, they should be able to upload it to our site and share a link to it so that their friends can see!
+
+**Solution: Database**
+We need a database! This will allow users to store videos on our site. We will dive deeper into databases later, but for now, it's enough to know that they allow us to store and retrieve data!
+
+**Challenge 2: Distributing Content**
+Once we have videos uploaded, we need a way to deliver them to users on demand. Imagine if every time someone clicked on a video, it had to be sent directly from the uploader's computer to the viewer's device. That would be so clunky and unreliable. You'd better hope Mr. Beast has some good wifi!
+
+**Solution 2: Servers**
+Enter _servers_! Servers are designed to store and deliver information through the internet. As with databases, we will discuss servers in much more depth in the coming sections.
+
+As you can see, backends provide essential services for modern applications. In fact, the entire internet wouldn't be possible without backends! All websites are stored in the backend and delivered to you through web servers. Whenever you go to a website, your computer asks another computer, out there in the world, to send it some frontend code to run (HTML, CSS, JavaScript, images, etc…). This communication happens at incredible speeds through the internet so your webpage loads up within milliseconds! 🤯
+
+<Figure
+  src="/blog/images/what-is-the-backend/the-internet.webp"
+  alt="The internet visualization"
+  credit="Rio Edwards"
+/>
+
+**Side note: The Internet 🌐 is a network of (mostly) fiber optic cables connecting computers! They span the entire globe, even across the Atlantic and Pacific oceans! Check out [this awesome video](https://www.youtube.com/watch?v=x3c1ih2NJEg&ab_channel=Lesics) for an in-depth explanation.**
+
+## Fullstack
+
+**An application that has both a frontend and a backend.**
+
+If you know how to write frontend and backend code, you can call yourself a Fullstack Developer and your friends will think you're cool! 😎
+
+<Figure
+  src="/blog/images/what-is-the-backend/fullstack.webp"
+  alt="Fullstack diagram"
+  credit="Rio Edwards"
+/>
+
+## Server (Computer)
+
+**A type of computer that runs Backend apps.**
+
+Okay, we are moving on to _servers_, but we first need to clear something up…. the word, server, has multiple meanings! 😬 It can refer to a type of _computer_ or a type of _application_. In this section, we are talking about the _computer_. We will talk about the application next.
+
+<Figure
+  src="/blog/images/what-is-the-backend/server-computer.webp"
+  alt="Server computer diagram"
+  credit="Rio Edwards"
+/>
+
+A _server_ is a type of computer, typically found in a [data center](https://en.wikipedia.org/wiki/Data_center). They work similarly to the computers you and I are used to, but they're optimized for different tasks. Put simply, they are designed to run _backend_ applications! This means they usually don't have screens, so you need to use other computers and the internet to interact with them!
+
+When you write backend code, you usually run it on your own computer while developing and testing it, but the end goal is to deploy it on a production server!
+
+<Figure
+  src="/blog/images/what-is-the-backend/data-center.webp"
+  alt="Data center"
+  credit="DC Studio on Freepik"
+  creditUrl="https://www.freepik.com/free-photo/modern-data-center-providing-cloud-services-enabling-businesses-access-computing-resources-storage-demand-internet-server-room-infrastructure-3d-render-animation_56001615.htm"
+/>
+
+Back in the stone ages, when you wanted your own website, you most likely had to buy your own server computer and set it up in your house. If you spilled coffee on it, your website might go down! 😧
+
+<Figure
+  src="/blog/images/what-is-the-backend/google-lego-computer.webp"
+  alt="Google's first server housed in LEGO bricks"
+  caption="Google's first server, which was housed in LEGO bricks"
+  credit="Christian Heilmann on Flickr (Edited)"
+/>
+
+Nowadays, “The Cloud” and “Serverless” computing are convinient alternatives to buying your own server. These services allow you to rent out someone else's servers. They take care of the hardware, the networking and (some of) the software, and you just worry about making a cool application!
+
+Here are the 3 most popular Cloud Platforms:
+
+- [Amazon Web Services (AWS)](https://aws.amazon.com)
+- [Google Cloud Platform (GCP)](https://cloud.google.com)
+- [Microsoft's Azure](https://azure.microsoft.com)
+
+## Server (Application)
+
+**An app that interacts with other apps using Requests and Responses.**
+
+In the last section we covered server computers, now let's talk about server applications!
+
+<Figure
+  src="/blog/images/what-is-the-backend/server-app.webp"
+  alt="Server application diagram"
+  credit="Rio Edwards"
+/>
+
+Generally speaking, a server is an application that uses the internet to communicate with other applications. It's like the “front desk” for your backend. It receives _requests_ and returns meaningful _responses_. It also typically interacts with a _database_ to retrieve or store information. All of this takes place on Server Computers!
+
+Let's walk through how a _server_ helps someone login to an application:
+
+_Frontend_: “Hey, server 👋 ! This person wants to log in. Here's the Username and Password they entered. 💌”
+
+_Server_: “Thanks, frontend! Let me check my database… 🫡”
+
+_Server_: **checks database** 👨‍💻
+
+_Server_: “Yep! That user exists in my database! 👍”
+
+_Frontend_: “Okay cool, I'll grant them entry. 🔓”
+
+This single server may interact with thousands of frontends and even other servers throughout the day! It ensures that the frontends receive the data they need when they need it. It also provides a level of security for the database. If the frontend interacted directly with the database, then a hacker could alter the frontend app to request everyone's passwords!
+
+<Figure
+  src="/blog/images/what-is-the-backend/client-sever-model.webp"
+  alt="Client-server model diagram"
+  credit="Rio Edwards"
+/>
+
+There are many different types of servers: Web Servers, Email Servers, Game Servers, etc… The core, defining feature amongst them is that they all interact with other applications, not directly with humans.
+
+### Here's another real world example
+
+As I type these words in Google Docs,
+
+1. The _frontend_ automatically sends _requests_ to Google's _servers_ saying, “Save this document in a database. ✉️”
+2. The servers save the document in the database, as requested, and then return a response saying “Saved! 💾”
+3. The frontend, then updates the display to let me know my work was saved!
+
+So, I interact with the _frontend_, and the frontend interacts with the _backend_. Thanks, Google Servers! 🙌
+
+<Figure
+  src="/blog/images/what-is-the-backend/google-docs-fullstack-flow.webp"
+  alt="Google Docs fullstack flow diagram"
+  credit="Rio Edwards"
+/>
+
+### Bonus: Server (Waiter)
+
+There's one more type of server that we have to cover:
+
+The kind that work in restaurants, a.k.a “Waiters”!
+
+No, really! They are a surprisingly accurate analogy for servers (application):
+
+1. You browse the menu (_frontend_)
+2. You give the server your request (_backend_)
+3. They get your food from the kitchen (_database_)
+4. They return with food (_response_)
+
+<Figure
+  src="/blog/images/what-is-the-backend/waiter.webp"
+  alt="Waitress holding menu"
+  credit="stefamerpik on Freepik"
+  creditUrl="https://www.freepik.com/free-photo/happy-beautiful-smiling-waitress-wearing-apron-holding-folder-menu-restaurant-looking-camera-standing-cozy-coffeehouse-good-service_27157766.htm"
+/>
+
+## Database
+
+**An organized collection of data.**
+
+A database is just a collection of organized data! This could be strings, numbers, binary, etc… Where things start to get more complicated is when we consider all the different ways that data could be stored and managed.
+
+To illustrate this point, imagine a hospital that stores all their patients' records on sticky notes, scattered throughout the halls. That's a terrible idea, I know! Storing new records would be a breeze, but retrieving them later would be a total nightmare!
+
+This is the problem that **Database Management Systems (DBMS)** solve. As the name suggests, they are applications designed to help you manage your data! They typically enforce a specific structure, for your data, and then give you the option to create, read, update and delete data records using code (these are often referred to as **CRUD** operations).
+
+**Note: A common convention is to refer to DBMS's as “databases”. It's just easier and still gets the point across, so for the rest of the article, I will use the term “database” exclusively.**
+
+<Figure
+  src="/blog/images/what-is-the-backend/database.webp"
+  alt="Database illustration"
+  credit="freepik"
+  creditUrl="https://www.freepik.com/free-vector/gradient-website-hosting-illustration_22650925.htm"
+/>
+
+There are many different types of databases (see [this list](https://db-engines.com/en/ranking) for more). Here, I will introduce you to the three most popular ones:
+
+- **Relational:**
+  This is the most common type of database. It stores data in tables, which are made up of rows and columns (think Excel Spreadsheets). You can interact with these databases using a special programming language called _SQL_ (Structured Query Language). The most popular relational databases are [MySQL](https://www.mysql.com/), [PostgreSQL](https://www.postgresql.org/), [SQLite](https://www.sqlite.org/), and [Oracle](https://www.oracle.com/database/).
+
+- **Document:**
+  This is a type of NoSQL database that stores data in documents, which are similar to JSON objects. The most popular document database is [MongoDB](https://www.mongodb.com/), but there are many others, including [CouchDB](https://couchdb.apache.org/), [Couchbase](https://www.couchbase.com/), and [Amazon DocumentDB](https://aws.amazon.com/documentdb/).
+
+- **Key-Value:**
+  This is another type of NoSQL database that stores data as key-value pairs. Each key is unique and is associated with a single value. The most popular key-value database is [Redis](https://redis.io/), which is typically used as a cache (for very fast lookups).
+
+## Let's Untangle These Terms!
+
+Many of these terms are used interchangeably, so let's do a quick recap to clarify their differences:
+
+- **Frontend & Client:**
+  These terms mean the same thing. The client is the end user, so they see the frontend application.
+
+- **Backend:**
+  This is an umbrella term for all the apps that don't run on the client's computer/device. So _servers_ and _databases_ are both part of the backend.
+
+- **Server:**
+  We use the term "server" for both the _computer_ and the _application_! 🤷‍♂️
+
+- **Database & DBMS:**
+  Just call it all a _database_! It's easier to say and everyone does it 😉.
+
+<Figure
+  src="/blog/images/what-is-the-backend/backend-recap.webp"
+  alt="Backend terminology recap"
+  credit="Rio Edwards"
+/>
+
+For example: when you write backend code (e.g. using [Express](https://expressjs.com/) and [MongoDB](https://www.mongodb.com/)) you are writing a _server_ (application) that interacts with a _database_ (application), designed to run on a _server_ (computer).
+
+## Bonus: Take a break!
+
+Here are some puppies because your brain deserves a break. 😘🧠
+
+<Figure
+  src="/blog/images/what-is-the-backend/puppies.webp"
+  alt="Golden retriever puppies"
+  credit="rawpixel.com on Freepik"
+  creditUrl="https://www.freepik.com/free-photo/portrait-five-adorable-golden-retriever-puppies_3532151.htm"
+/>
+
+## HTTP
+
+**A language that apps use to communicate over the internet.**
+
+When talking about servers, we introduced the terms “request” and “response”, but never elaborated much on what they really are. Well, here's your explanation: they are packets of data, transferred over the internet using protocols such as HTTP.
+
+[HTTP](https://www.cloudflare.com/learning/ddos/glossary/hypertext-transfer-protocol-http/) is simply a language that applications use to communicate over the internet. You will learn the basics when creating a server and setting up a frontend application to interact with a server. I won't go into detail here, but I promise, it's not that bad!
+
+Your web browser actually sends HTTP requests to servers on your behalf all of the time! When you type “http://youtube.com” into the search bar and hit “enter”, your browser sends an HTTP request to YouTube's servers, which return the information needed to load the YouTube homepage. You can see the request in the Network tab in Google Chrome's dev tools.
+
+<Figure
+  src="/blog/images/what-is-the-backend/http-request.webp"
+  alt="HTTP request in dev tools"
+  credit="Rio Edwards"
+/>
+
+Check out [HTTP Cats](https://http.cat/) for some HTTP status codes with cats to match! 🐱
+
+## API
+
+**An application (or part of an application) that interacts with another application.**
+
+This is a big one: API (Application Programming Interface)!
+
+You will see this acronym come up all the time, and like with the term “server” it can mean different things depending on context. In the most general sense, an API allows one application to interact with another application, through code.
+
+So, basically, it's the part of your app or codebase that other people can use in their app or codebase. Whenever you write an application that needs to interact with another application, you will need to ensure that the application has an API.
+
+<Figure
+  src="/blog/images/what-is-the-backend/api.webp"
+  alt="API diagram"
+  credit="Rio Edwards"
+/>
+
+Servers are often called APIs! This is because they allow frontend applications to interact with backend applications… or interaction between backend applications. They are the intersection between one app and another.
+
+REST is a type of API that uses HTTP. It's very common. Any time you make a server you will probably make a REST API (often called RESTful). 😴
+
+Aside from the world of backends, you also see the term API when using code Libraries and Frameworks (like React and Express.js). The creators of these libraries provide guides called “API References”, which explain how to use them. In this context, the API doesn't facilitate interaction between separate applications but rather between the library's internals and your application. It's a layer of abstraction over the complex code that they wrote.
+
+<Figure
+  src="/blog/images/what-is-the-backend/react-api.webp"
+  alt="React website API reference"
+  caption="Screenshot of the React Website"
+  credit="Rio Edwards"
+  creditUrl="https://react.dev/"
+/>
+
+## APIs In The Real World
+
+Many companies provide APIs so that developers can interact with their databases and services:
+
+- [OpenAI](https://openai.com) has one, so you can make your own frontend like ChatGPT:
+
+<Figure
+  src="/blog/images/what-is-the-backend/openai-api.webp"
+  alt="OpenAI website API"
+  caption="Screenshot of the OpenAI Website"
+  credit="Rio Edwards"
+  creditUrl="https://openai.com/"
+/>
+
+- [Google](https://developers.google.com) has a variety of APIs related to their Google Maps product:
+
+<Figure
+  src="/blog/images/what-is-the-backend/google-maps-api.webp"
+  alt="Google Maps API"
+  caption="Screenshot of the Google Developers Website"
+  credit="Rio Edwards"
+  creditUrl="https://developers.google.com/maps"
+/>
+
+- [The Cat API](https://thecatapi.com/) provides cat images on demand:
+
+<Figure
+  src="/blog/images/what-is-the-backend/cat-api.webp"
+  alt="Cat API website"
+  caption="Screenshot of the Cat API Website"
+  credit="Rio Edwards"
+  creditUrl="https://thecatapi.com/"
+/>
+
+## Examples of Frontend, Backend & Fullstack Apps
+
+Now that we have a better understanding of backends and their functions, let's explore some situations where you might find yourself needing a backend, frontend, or both.
+
+### Portfolio Website
+
+**Do you want to make a portfolio website?**
+
+For this, you probably don't need to create a backend. This would be considered a **static website** because the same content is displayed every time someone visits. You will still need to host your website on a web server, but you don't need to create your own. There are sites like [Github](https://github.com/) and [Netlify](https://www.netlify.com/), which have web servers for you to use for free!
+
+### Social Media App
+
+**Do you want to create a social media app, that allows people to create profiles and sign in to your website?**
+
+Sounds like you need a backend as well as a frontend. The frontend will allow users to create posts and interact with eachother, while the backend will take care of storing and serving content. This would be considered a **dynamic website** because the content on the site can be updated and changed by users.
+
+### AI Copyright Detector
+
+**Do you want to make an app that uses AI to analyze whether some text is copyrighted?**
+
+For this, you might just need a backend. You could create a server that receives some text, runs it through a special AI program, and sends back a response of "true" or "false", to indicate whether the excerpt is copyrighted or not. The core of your app would be a backend, but many different frontend apps could use it.
+
+For example, if a school had an app for submitting assignments, they could use your server to verify that students aren't cheating. You might want to make an _API reference_ that explains to other programmers how they can use your server within their app.
+
+## Bonus: Cheat Sheet
+
+Wow, that was a lot! Congrats on getting through all that! 🥳
+
+If you've absorbed even half of the information from this article, you're well-equipped to begin writing your own backend code! Mastering this skill is invaluable for any developer.
+
+As an added bonus, I've linked a _cheat sheet_ below with all the topics from this article. Feel free to bookmark it and refer back to it from time to time:
+
+[Rio's Cool and Awesome Backend Cheat Sheet](https://docs.google.com/document/d/e/2PACX-1vR8FY8lpjNQyvgzHMRpvQmpr-BjHrbvG3zD_X9fjR2Gp27RO8e1mQrfae6DmKeGFFaZVc_y_o-pVCRz/pub)
+
+Made by [Rio Edwards](https://www.rioedwards.com) with ❤️
