@@ -35,7 +35,7 @@ function HeroButton({
   buttonHref: string;
 }) {
   return (
-    <div className="group -translate-x-4 p-4 pointer-coarse:translate-x-0">
+    <div className="group p-4 lg:-translate-x-4 pointer-coarse:translate-x-0">
       <Button
         asChild
         size="icon-xl"
