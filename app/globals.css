@@ -154,10 +154,11 @@
     @apply border-border outline-ring/50;
   }
   html {
+    @apply bg-secondary;
     scroll-behavior: smooth;
   }
   body {
-    @apply overflow-x-hidden bg-background text-foreground;
+    @apply overflow-x-hidden bg-secondary text-foreground;
   }
 
   /* Custom scrollbar styling */

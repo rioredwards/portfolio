@@ -6,6 +6,7 @@ import { HugeiconsIcon } from "@hugeicons/react";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
+import { RotatingWord } from "../ui/RotatingWord";
 
 function HeroImage({
   image,
@@ -42,7 +43,7 @@ function HeroButton({
           "custom-bg-ping-wrapper bg-secondary group-hover:bg-accent-hover! pointer-coarse:bg-accent-hover!",
           "overflow-hidden group-hover:overflow-visible pointer-coarse:overflow-visible",
           "transition-all duration-400",
-          "h-14 w-16 group-hover:w-52 group-hover:px-6 pointer-coarse:w-52 pointer-coarse:px-6",
+          "h-14 w-12 group-hover:w-52 group-hover:px-6 pointer-coarse:w-52 pointer-coarse:px-6",
         )}
       >
         <Link className="" href={buttonHref}>
@@ -80,7 +81,7 @@ function HeroHeading({
   return (
     <h1
       className={cn(
-        "text-center text-[clamp(3rem,14vw,5rem)] font-black tracking-tight text-foreground md:text-left md:text-6xl lg:text-7xl",
+        "text-center text-[clamp(3rem,14vw,5rem)] leading-16 font-black tracking-tight text-foreground md:text-left md:text-6xl lg:text-7xl",
         className,
       )}
       style={{ fontFamily: "var(--font-mazaeni), serif" }}
@@ -102,11 +103,27 @@ export function Hero() {
     />
   );
   const title = "Hello, I'm Rio.";
+
+  const adjectives = [
+    "thoughtful",
+    "accessible",
+    "maintainable",
+    "delightful",
+    "responsive",
+    "scalable",
+    "memorable",
+    "intuitive",
+    "reliable",
+    "secure",
+  ];
+
   const paragraph = (
-    <p key="1" className="text-lg leading-relaxed">
-      I build thoughtful software.
+    <p key="1" className="text-center text-lg leading-relaxed md:text-left">
+      I build <RotatingWord words={adjectives} className="w-32 font-bold" />{" "}
+      software.
     </p>
   );
+
   const buttonText = "CONTACT";
   const buttonHref = "#contact";
 
@@ -120,16 +137,20 @@ export function Hero() {
         )}
       >
         <HeroImage image={image} className="h-full" />
-        <div className="flex max-w-prose-max flex-col items-start justify-end">
+        <div className="mt-10 flex max-w-prose-max flex-col items-start justify-end">
           <HeroHeading title={title} className="mb-4" />
-          {paragraph}
+          <div className="mb-2">{paragraph}</div>
           <HeroButton buttonText={buttonText} buttonHref={buttonHref} />
         </div>
       </div>
       {/* Mobile layout */}
-      <div className={cn("flex flex-col items-center justify-start md:hidden")}>
-        <HeroHeading title={title} className="mb-4" />
-        <HeroImage image={image} className="mb-4" />
+      <div
+        className={cn(
+          "mt-8 flex flex-col items-center justify-start md:hidden",
+        )}
+      >
+        <HeroHeading title={title} className="mb-8" />
+        <HeroImage image={image} className="mb-6" />
         <div className="mb-10 max-w-prose-max space-y-4 text-center">
           {paragraph}
         </div>

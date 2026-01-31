@@ -1,0 +1,208 @@
+.rotating-word-container {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  flex-direction: column;
+  height: 1.5rem;
+  min-width: 1rem;
+  overflow: hidden;
+  /* background-color: green; */
+
+  --spring-linear-curve: linear(
+      0,
+      0.003 0.3%,
+      0.013 0.6%,
+      0.029 0.9%,
+      0.05 1.2%,
+      0.077 1.5%,
+      0.109 1.8%,
+      0.2 2.5%,
+      0.293 3.1%,
+      0.396 3.7%,
+      0.789 5.8%,
+      0.949 6.7%,
+      1.092 7.6%,
+      1.2 8.4%,
+      1.246 8.8%,
+      1.286 9.2%,
+      1.321 9.6%,
+      1.35 10%,
+      1.374 10.4%,
+      1.392 10.8%,
+      1.404 11.2%,
+      1.411 11.6%,
+      1.412 11.9%,
+      1.411 12.2%,
+      1.407 12.5%,
+      1.401 12.8%,
+      1.392 13.1%,
+      1.377 13.5%,
+      1.343 14.2%,
+      1.307 14.8%,
+      1.258 15.5%,
+      1.081 17.8%,
+      1.016 18.7%,
+      0.958 19.6%,
+      0.914 20.4%,
+      0.879 21.2%,
+      0.856 21.9%,
+      0.846 22.3%,
+      0.839 22.7%,
+      0.834 23.1%,
+      0.831 23.5%,
+      0.83 24.1%,
+      0.834 24.7%,
+      0.844 25.4%,
+      0.858 26.1%,
+      0.873 26.7%,
+      0.893 27.4%,
+      0.969 29.8%,
+      0.996 30.7%,
+      1.019 31.6%,
+      1.037 32.4%,
+      1.051 33.2%,
+      1.06 33.9%,
+      1.066 34.6%,
+      1.07 35.4%,
+      1.069 36.5%,
+      1.061 37.7%,
+      1.048 39%,
+      1.007 42.2%,
+      0.989 43.8%,
+      0.977 45.5%,
+      0.971 47.2%,
+      0.972 48.4%,
+      0.975 49.6%,
+      1.004 55.7%,
+      1.009 57.4%,
+      1.012 59.1%,
+      1.011 61.5%,
+      0.998 67.5%,
+      0.995 70.8%,
+      0.996 73.4%,
+      1.002 82.5%,
+      0.999 93.5%,
+      1
+    )
+    --animation-duration: 0s; /* Set in JS */
+}
+
+.rotating-word-gradient-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    to bottom,
+    var(--theme-background-secondary),
+    transparent 5%,
+    transparent 95%,
+    var(--theme-background-secondary)
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+.rotating-word-top,
+.rotating-word-bottom {
+  /* width: 100%;
+  display: flex;
+  justify-content: space-between; */
+  line-height: 1;
+}
+
+.rotating-word-letter {
+  display: inline-block;
+  /* will animate */
+  will-change: transform, color;
+}
+
+.duringSwap .rotating-word-letter {
+  /* color: red; */
+  animation-duration: var(--animation-duration);
+  animation-timing-function: var(--spring-linear-curve);
+  /* ✅ applies "from" styles during delay AND keeps end state after */
+  animation-fill-mode: both; /* (equivalent to backwards + forwards) */
+}
+
+/* .rotating-word-top {
+  display: none;
+} */
+
+.duringSwap.rotating-word-bottom .rotating-word-letter {
+  /* color: red; */
+  animation-name: rotateUpBottom;
+}
+
+.duringSwap.rotating-word-top .rotating-word-letter {
+  /* color: red; */
+  animation-name: rotateUpTop;
+}
+
+.postSwap.rotating-word-top .rotating-word-letter {
+  /* color: blue; */
+  transform: translateY(-100%);
+  opacity: 0;
+}
+
+.postSwap.rotating-word-bottom .rotating-word-letter {
+  /* color: blue; */
+  transform: translateY(-100%);
+}
+
+.preSwap.rotating-word-bottom .rotating-word-letter {
+  /* color: green; */
+  transform: translateY(0);
+  opacity: 0;
+}
+
+.preSwap.rotating-word-top .rotating-word-letter {
+  /* color: green; */
+  transform: translateY(0);
+}
+
+@starting-style {
+  .duringSwap.rotating-word-bottom .rotating-word-letter {
+    /* color: green; */
+    transform: translateY(0);
+  }
+}
+
+@keyframes rotateUpBottom {
+  from {
+    opacity: 0;
+    transform: translateY(0);
+  }
+  30% {
+    opacity: 1;
+    /* transform: translateY(-100%); */
+  }
+  to {
+    opacity: 1;
+    transform: translateY(-100%);
+  }
+}
+
+@keyframes rotateUpTop {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  70% {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-100%);
+  }
+}
+
+.debug {
+  position: fixed;
+  top: 40vh;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1000;
+  background-color: red;
+  color: white;
+}
