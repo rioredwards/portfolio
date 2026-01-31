@@ -26,8 +26,7 @@ export function ResumeContent() {
 
       {/* Summary */}
       <p className="summary">
-        Detail-oriented software engineer dedicated to building products users
-        value and enjoy.
+        {`Detail-oriented full-stack engineer building maintainable, user-centric solutions.`}
       </p>
 
       <hr className="hr" />
@@ -141,14 +140,8 @@ export function ResumeContent() {
             <p className="entry-title">
               <strong>Fullstack Certificate</strong>, Alchemy Code Lab
             </p>
-            <p className="entry-meta">Sep 2022 - Feb 2023</p>
+            <p className="entry-meta">Feb 2023</p>
           </div>
-          <ul className="bullets">
-            <li>
-              Rigorous 6-month, full-time development training program using
-              PERN stack.
-            </li>
-          </ul>
         </div>
 
         <div className="entry">
@@ -157,11 +150,8 @@ export function ResumeContent() {
               <strong>Associate of General Studies</strong>, Portland Community
               College
             </p>
-            <p className="entry-meta">Sep 2019 - Mar 2022</p>
+            <p className="entry-meta">Mar 2022</p>
           </div>
-          <ul className="bullets">
-            <li>Focus: Computer Science, Mathematics and Biology.</li>
-          </ul>
         </div>
       </section>
     </article>

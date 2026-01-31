@@ -25,6 +25,7 @@ export function Sidebar() {
     <aside
       className="group fixed top-1/2 left-2 z-50 hidden -translate-y-1/2 text-sidebar md:block"
       aria-label="Social links"
+      id="sidebar"
     >
       <nav
         className="flex flex-col rounded-xl bg-sidebar/80 p-2 backdrop-blur-sm transition-all duration-300"

@@ -7,15 +7,6 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
-interface HeroProps {
-  title: string;
-  paragraphs?: string[];
-  buttonText?: string;
-  buttonHref?: string;
-  image: React.ReactNode;
-  className?: string;
-}
-
 function HeroImage({
   image,
   className,
@@ -113,8 +104,7 @@ export function Hero() {
   const title = "Hello, I'm Rio.";
   const paragraph = (
     <p key="1" className="text-lg leading-relaxed">
-      I&apos;m a detail-oriented software engineer dedicated to building
-      products users value and enjoy.
+      I build thoughtful software.
     </p>
   );
   const buttonText = "CONTACT";

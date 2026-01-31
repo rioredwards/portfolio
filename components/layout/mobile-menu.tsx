@@ -90,6 +90,7 @@ export function MobileMenu() {
         aria-label="Open menu"
         aria-expanded={isOpen}
         aria-controls="mobile-menu"
+        id="mobile-menu-button"
       >
         <HugeiconsIcon
           icon={Link04Icon}

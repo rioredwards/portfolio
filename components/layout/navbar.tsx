@@ -166,7 +166,10 @@ export function Navbar() {
   };
 
   return (
-    <header className="pointer-events-none fixed top-2 z-40 mx-auto flex w-full items-center justify-center">
+    <header
+      id="navbar"
+      className="pointer-events-none fixed top-2 z-40 mx-auto flex w-full items-center justify-center"
+    >
       <NavigationMenu viewport={false}>
         <div className="pointer-events-auto flex items-center gap-2 rounded-full bg-sidebar/80 px-4 py-2 text-sidebar-foreground backdrop-blur-sm">
           <NavigationMenuList className="flex-wrap">
