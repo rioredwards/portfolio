@@ -133,7 +133,7 @@ export function Hero() {
       <div
         className={cn(
           // "grid grid-cols-1 place-items-center md:grid-cols-[auto_1fr] md:grid-rows-[auto_auto] md:place-items-stretch lg:grid-cols-[1fr_max-content]",
-          "hidden items-center pt-32 pb-24 md:flex md:gap-12",
+          "hidden items-center smd:flex md:gap-12",
         )}
       >
         <HeroImage image={image} className="h-full" />
@@ -146,7 +146,7 @@ export function Hero() {
       {/* Mobile layout */}
       <div
         className={cn(
-          "mt-8 flex flex-col items-center justify-start md:hidden",
+          "flex flex-col items-center justify-center h-full min-h-128 md:hidden",
         )}
       >
         <HeroHeading title={title} className="mb-8" />

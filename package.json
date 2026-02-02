@@ -10,7 +10,11 @@
     "lint:fix": "eslint --fix",
     "format": "prettier --write .",
     "typecheck": "tsc --noEmit",
-    "typecheck:fix": "tsc --noEmit --fix"
+    "typecheck:fix": "tsc --noEmit --fix",
+    "test:e2e": "playwright test",
+    "test:e2e:ui": "playwright test --ui",
+    "test:e2e:headed": "playwright test --headed",
+    "test:e2e:debug": "playwright test --debug"
   },
   "dependencies": {
     "@hugeicons/core-free-icons": "^3.1.1",
@@ -47,6 +51,7 @@
     "yet-another-react-lightbox": "^3.28.0"
   },
   "devDependencies": {
+    "@playwright/test": "^1.58.1",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/nodemailer": "^7.0.4",
@@ -55,6 +60,7 @@
     "baseline-browser-mapping": "^2.9.18",
     "eslint": "^9",
     "eslint-config-next": "^16.0.6",
+    "playwright": "^1.58.1",
     "prettier": "^3.8.1",
     "prettier-plugin-tailwindcss": "^0.7.2",
     "tailwindcss": "^4",
