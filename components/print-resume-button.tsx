@@ -6,7 +6,7 @@ import { HugeiconsIcon } from "@hugeicons/react";
 
 export function PrintResumeButton() {
   return (
-    <Button onClick={() => window.print()} size="lg">
+    <Button id="print-resume-button" onClick={() => window.print()} size="lg">
       <HugeiconsIcon
         icon={Download04Icon}
         size={16}

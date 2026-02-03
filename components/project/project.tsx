@@ -52,7 +52,7 @@ export function Project({
       {/* Image container with parallax */}
       <div
         className={cn(
-          "relative w-full overflow-clip rounded-tl-4xl pointer-coarse:aspect-video pointer-fine:aspect-2/1",
+          "relative w-full overflow-clip rounded-t-4xl pointer-coarse:aspect-video pointer-fine:aspect-2/1",
         )}
         style={{ backgroundColor: brandColor }}
       >

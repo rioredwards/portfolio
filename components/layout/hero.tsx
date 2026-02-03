@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import profileImage from "@/public/profile.webp"; // Adjust path as needed
-import { Message02Icon } from "@hugeicons/core-free-icons";
+import { File01Icon } from "@hugeicons/core-free-icons";
 import { HugeiconsIcon } from "@hugeicons/react";
 import Image from "next/image";
 import Link from "next/link";
@@ -59,8 +59,9 @@ function HeroButton({
               </span>
             </span>
             <HugeiconsIcon
-              icon={Message02Icon}
-              className="size-8 text-accent transition-all duration-400 group-hover:scale-75 group-hover:text-primary-foreground pointer-coarse:scale-75 pointer-coarse:text-primary-foreground"
+              icon={File01Icon}
+              size={16}
+              className="text-accent transition-all duration-400 group-hover:scale-75 group-hover:text-primary-foreground pointer-coarse:scale-75 pointer-coarse:text-primary-foreground"
               color="currentColor"
               strokeWidth={2}
             />
@@ -124,38 +125,33 @@ export function Hero() {
     </p>
   );
 
-  const buttonText = "CONTACT";
-  const buttonHref = "#contact";
+  const buttonText = "RESUME";
+  const buttonHref = "/resume";
 
   return (
-    <div className="grid min-h-[calc(100vh-6rem)] place-items-center fade-in md:min-h-screen">
+    <>
       {/* Desktop layout */}
-      <div
-        className={cn(
-          // "grid grid-cols-1 place-items-center md:grid-cols-[auto_1fr] md:grid-rows-[auto_auto] md:place-items-stretch lg:grid-cols-[1fr_max-content]",
-          "hidden items-center pt-32 pb-24 md:flex md:gap-12",
-        )}
-      >
-        <HeroImage image={image} className="h-full" />
-        <div className="mt-10 flex max-w-prose-max flex-col items-start justify-end">
-          <HeroHeading title={title} className="mb-4" />
-          <div className="mb-2">{paragraph}</div>
-          <HeroButton buttonText={buttonText} buttonHref={buttonHref} />
+      <div className="hidden min-h-screen place-items-center pt-20 fade-in md:grid">
+        <div className={cn("flex items-center gap-12")}>
+          <HeroImage image={image} className="h-full" />
+          <div className="mt-10 flex max-w-prose-max flex-col items-start justify-end">
+            <HeroHeading title={title} className="mb-4" />
+            <div className="mb-2">{paragraph}</div>
+            <HeroButton buttonText={buttonText} buttonHref={buttonHref} />
+          </div>
         </div>
       </div>
       {/* Mobile layout */}
-      <div
-        className={cn(
-          "mt-8 flex flex-col items-center justify-start md:hidden",
-        )}
-      >
-        <HeroHeading title={title} className="mb-8" />
-        <HeroImage image={image} className="mb-6" />
-        <div className="mb-10 max-w-prose-max space-y-4 text-center">
-          {paragraph}
+      <div className="mt-[calc(4vh+6rem)] mb-[calc(12vh+3rem)] fade-in md:hidden">
+        <div className={cn("flex h-full flex-col items-center justify-center")}>
+          <HeroHeading title={title} className="mb-8" />
+          <HeroImage image={image} className="mb-6" />
+          <div className="mb-10 max-w-prose-max space-y-4 text-center">
+            {paragraph}
+          </div>
+          <HeroButton buttonText={buttonText} buttonHref={buttonHref} />
         </div>
-        <HeroButton buttonText={buttonText} buttonHref={buttonHref} />
       </div>
-    </div>
+    </>
   );
 }

@@ -1,4 +1,4 @@
-import { Footer, Navbar } from "@/components/layout";
+import { Footer } from "@/components/layout";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -13,7 +13,6 @@ export default function ResumeLayout({
 }>) {
   return (
     <>
-      <Navbar />
       {children}
       <Footer />
     </>

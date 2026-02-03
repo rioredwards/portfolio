@@ -55,8 +55,8 @@ export default async function Home() {
 
   return (
     <main className="min-h-screen bg-background">
-      <section id="home" className="bg-secondary pb-40">
-        <SectionContentWrapper className="py-0!">
+      <section id="home" className="bg-secondary">
+        <SectionContentWrapper className="pt-0" >
           <Hero />
         </SectionContentWrapper>
       </section>
