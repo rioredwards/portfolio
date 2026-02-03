@@ -240,13 +240,13 @@ Priority key
   - [ ] Cross-browser testing (Chrome, Firefox, Safari, Edge) ❤️
   - [ ] Mobile device testing (iOS, Android) ❤️
   - [ ] Test on different screen sizes ❤️
-  - [ ] Test with reduced motion preferences 🧡
+  - [x] Test with reduced motion preferences 🧡
   - [ ] Test with screen readers 🧡
 - [x] Favicon & App Icons ❤️
   - [x] Multiple favicon sizes (16x16, 32x32, etc.) ❤️
   - [x] Apple touch icons 🧡
-  - [ ] Android icons 🧡
-  - [ ] Web manifest for PWA (optional) 💛
+  - [x] Android icons 🧡
+  - [x] Web manifest for PWA (optional) 💛
 - [x] SEO ❤️
   - [x] Title ❤️
   - [x] Description ❤️
@@ -262,8 +262,8 @@ Priority key
   - [x] robots.txt file ❤️
   - [x] Twitter Cards 🧡
   - [x] JSON-LD structured data for Person/Portfolio 🧡
-  - [ ] Dynamic metadata per page (not just home) 🧡
-  - [ ] Language/locale tags 🧡
+  - [x] Dynamic metadata per page (not just home) 🧡
+  - [x] Language/locale tags 🧡
   - [ ] RSS feed for blog section 💛
 - [ ] Performance 🧡
       I think most of these are already handled by the framework and the build process.

@@ -1,6 +1,18 @@
 import { PrintResumeButton } from "@/components/print-resume-button";
 import { ResumeContent } from "@/components/resume-content";
 import { getResume } from "@/lib/resume";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Resume",
+  description:
+    "Rio Edwards - Software Engineer resume. Experience in full-stack web development with React, Next.js, TypeScript, and Node.js.",
+  openGraph: {
+    title: "Resume — Rio Edwards",
+    description:
+      "Rio Edwards - Software Engineer resume. Experience in full-stack web development with React, Next.js, TypeScript, and Node.js.",
+  },
+};
 
 export default async function ResumePage() {
   const resume = await getResume();

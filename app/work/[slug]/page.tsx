@@ -1,6 +1,11 @@
 import { ProjectDetailContent } from "@/components/project";
-import { getProjectSlugs, getProjectWithContent } from "@/lib/projects";
+import {
+  getProjectFrontmatter,
+  getProjectSlugs,
+  getProjectWithContent,
+} from "@/lib/projects";
 import { cn } from "@/lib/utils";
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
 interface PageProps {
@@ -10,6 +15,28 @@ interface PageProps {
 export async function generateStaticParams() {
   const slugs = getProjectSlugs();
   return slugs.map((slug) => ({ slug }));
+}
+
+export async function generateMetadata({
+  params,
+}: PageProps): Promise<Metadata> {
+  const { slug } = await params;
+  const frontmatter = getProjectFrontmatter(slug);
+
+  if (!frontmatter) {
+    return { title: "Project Not Found" };
+  }
+
+  return {
+    title: frontmatter.title,
+    description: frontmatter.description,
+    openGraph: {
+      title: frontmatter.title,
+      description: frontmatter.description,
+      type: "article",
+      images: frontmatter.image ? [{ url: frontmatter.image }] : undefined,
+    },
+  };
 }
 
 export default async function ProjectDetailPage({ params }: PageProps) {
