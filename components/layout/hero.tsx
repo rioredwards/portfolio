@@ -60,8 +60,8 @@ function HeroButton({
             </span>
             <HugeiconsIcon
               icon={File01Icon}
-              size={16}
-              className="text-accent transition-all duration-400 group-hover:scale-75 group-hover:text-primary-foreground pointer-coarse:scale-75 pointer-coarse:text-primary-foreground"
+              size={32}
+              className="size-8 text-accent transition-all duration-400 group-hover:scale-75 group-hover:text-primary-foreground pointer-coarse:scale-75 pointer-coarse:text-primary-foreground"
               color="currentColor"
               strokeWidth={2}
             />
