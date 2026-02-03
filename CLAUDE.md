@@ -43,6 +43,67 @@ bun run format   # Prettier formatting
 
 **Contact form**: Uses TanStack Form with Zod validation (`lib/dataTypes.ts`), nodemailer for email, and server actions (`lib/actions.ts`).
 
+## Content Creation
+
+### Adding a New Project
+
+1. Create `content/projects/your-project.mdx`
+2. Add frontmatter:
+
+```yaml
+---
+title: "Project Title"
+slug: "project-slug"
+icon: "/work/images/project/icon.png" # optional
+description: "Short description for cards"
+category: "Web App"
+skills:
+  - "TypeScript"
+  - "React"
+image: "/work/images/project/preview.webp"
+brandColor: "#HEX" # optional, for card accent
+links:
+  - text: "View Live"
+    url: "https://..."
+    icon: "globe"
+  - text: "Source Code"
+    url: "https://github.com/..."
+    icon: "github"
+order: 1 # lower = appears first
+---
+```
+
+3. Write MDX content below frontmatter
+4. Use `<LightboxImage src={...} alt="..." />` for clickable images
+5. Add images to `public/work/images/project-slug/`
+
+### Adding a New Blog Post
+
+1. Create `content/blogs/your-post.mdx`
+2. Add frontmatter:
+
+```yaml
+---
+title: "Blog Title"
+slug: "blog-slug"
+description: "Short description"
+icon: "ServerStack03Icon" # Hugeicon name
+date: "2024-01-15"
+tags:
+  - "Topic"
+order: 1
+---
+```
+
+3. Use `<Figure src="..." alt="..." credit="..." />` for images with attribution
+4. Add images to `public/blog/images/blog-slug/`
+
+### Available MDX Components
+
+- `<LightboxImage>` - Clickable image that opens in lightbox
+- `<Figure>` - Image with caption and credit attribution
+- Standard markdown (headings, lists, code blocks, links)
+
 ### Fonts
 
 - Geist Sans/Mono (Google Fonts)
