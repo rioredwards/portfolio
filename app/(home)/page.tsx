@@ -18,6 +18,7 @@ import { getAllBlogCards, getAllBlogsWithContent } from "@/lib/blogs";
 import { getAllProjectCards, getAllProjectsWithContent } from "@/lib/projects";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import { Fragment, Suspense } from "react";
+import { ErrorBoundary } from "@/components/ui/error-boundary";
 
 export default async function Home() {
   const projectCards = getAllProjectCards();
@@ -150,7 +151,26 @@ export default async function Home() {
           previousDecorationHeight="tall"
         >
           <SectionContentWrapper>
-            <Contact />
+            <ErrorBoundary
+              fallback={
+                <div className="rounded-2xl bg-destructive/10 p-8 text-center">
+                  <p className="text-lg font-medium text-destructive">
+                    Contact form unavailable
+                  </p>
+                  <p className="mt-2 text-muted-foreground">
+                    Please email me directly at{" "}
+                    <a
+                      href="mailto:rioredwards@gmail.com"
+                      className="underline hover:text-foreground"
+                    >
+                      rioredwards@gmail.com
+                    </a>
+                  </p>
+                </div>
+              }
+            >
+              <Contact />
+            </ErrorBoundary>
           </SectionContentWrapper>
         </SlidePanel>
       </section>

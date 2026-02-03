@@ -58,9 +58,30 @@ export default async function emailAction(
       return e.formState;
     }
 
-    // Handle email sending errors
-    // Convert error to a user-friendly message
-    const errorMessage = "An unknown error occurred.";
+    // Handle email sending errors with user-friendly messages
+    let errorMessage = "Something went wrong. Please try again later.";
+
+    if (e instanceof Error) {
+      // Check for specific error types
+      if (
+        e.message.includes("ECONNECTION") ||
+        e.message.includes("ETIMEDOUT") ||
+        e.message.includes("ENOTFOUND") ||
+        e.message.includes("fetch failed")
+      ) {
+        errorMessage =
+          "Unable to connect. Please check your internet connection and try again.";
+      } else if (
+        e.message.includes("Invalid login") ||
+        e.message.includes("credentials")
+      ) {
+        // Don't expose credential errors to users
+        errorMessage =
+          "The contact form is temporarily unavailable. Please email me directly.";
+      } else if (e.message.includes("rate limit")) {
+        errorMessage = "Too many requests. Please wait a moment and try again.";
+      }
+    }
 
     // Return error as string - will be handled by the frontend
     return errorMessage;
