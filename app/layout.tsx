@@ -53,6 +53,22 @@ const mazaeniDemo = localFont({
 
 const siteUrl = "https://rioedwards.com";
 
+// JSON-LD structured data for SEO
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: "Rio Edwards",
+  url: siteUrl,
+  jobTitle: "Software Engineer",
+  description:
+    "Software engineer specializing in full-stack web development with React, Next.js, and TypeScript.",
+  sameAs: [
+    "https://github.com/rioredwards",
+    "https://linkedin.com/in/rioredwards",
+    "https://bsky.app/profile/rioedwards.com",
+  ],
+};
+
 export const metadata: Metadata = {
   title: {
     default: "Rio Edwards | Software Engineer",
@@ -118,6 +134,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+      </head>
       <meta
         name="format-detection"
         content="telephone=no, date=no, email=no, address=no"

@@ -151,19 +151,19 @@ Priority key
       This should be a modal that appears when the user clicks on a blog card in the blog section. It should render mdx content, which should be stored in the blog's directory. It can also be viewed in a standalone page. This is made possible by a next.js feature (see previous versions of this project for reference)
   - [x] Desktop ❤️
   - [x] Mobile ❤️
-- [ ] Ancillary Pages ❤️
-  - [ ] Resume page ❤️
-    - [ ] Desktop ❤️
-    - [ ] Mobile ❤️
+- [x] Ancillary Pages ❤️
+  - [x] Resume page ❤️
+    - [x] Desktop ❤️
+    - [x] Mobile ❤️
   - [ ] Contact page 🧡
     - [ ] Desktop 🧡
     - [ ] Mobile 🧡
-  - [ ] Not Found page ❤️
-    - [ ] Desktop ❤️
-    - [ ] Mobile ❤️
-  - [ ] Error page ❤️
-    - [ ] Desktop ❤️
-    - [ ] Mobile ❤️
+  - [x] Not Found page ❤️
+    - [x] Desktop ❤️
+    - [x] Mobile ❤️
+  - [x] Error page ❤️
+    - [x] Desktop ❤️
+    - [x] Mobile ❤️
 
 ### Animations Checklist
 
@@ -213,20 +213,20 @@ Priority key
 
 ### Polish & Robustness Checklist
 
-- [ ] Error Handling & Boundaries ❤️
-  - [ ] Add React Error Boundaries (wrap key sections) ❤️
-  - [ ] Handle API errors (contact form, any data fetching) ❤️
-  - [ ] Handle network failures gracefully ❤️
+- [x] Error Handling & Boundaries ❤️
+  - [x] Add React Error Boundaries (wrap key sections) ❤️
+  - [x] Handle API errors (contact form, any data fetching) ❤️
+  - [x] Handle network failures gracefully ❤️
   - [ ] Add error logging/monitoring (Sentry, LogRocket, etc.) 🧡
-- [ ] Form Validation & Security ❤️
-  - [ ] Client-side form validation (contact form) ❤️
-  - [ ] Server-side form validation ❤️
-  - [ ] Input sanitization ❤️
-  - [ ] Rate limiting for contact form submissions 🧡
+- [x] Form Validation & Security ❤️
+  - [x] Client-side form validation (contact form) ❤️
+  - [x] Server-side form validation ❤️
+  - [x] Input sanitization ❤️
+- [ ] Rate limiting for contact form submissions 🧡
   - [ ] CSRF protection 🧡
-  - [ ] Spam protection (honeypot, reCAPTCHA, etc.) 🧡
-- [ ] Loading States & UX 🧡
-  - [ ] Loading states for form submissions 🧡
+  - [x] Spam protection (honeypot, reCAPTCHA, etc.) 🧡
+- [x] Loading States & UX 🧡
+  - [x] Loading states for form submissions 🧡
   - [ ] Loading states for modal/page transitions 💛
   - [ ] Loading skeletons for async content (this is a static site so far, so no not needed) 💛
   - [ ] Empty states (no projects, no blog posts, etc.) 💛
@@ -242,26 +242,26 @@ Priority key
   - [ ] Test on different screen sizes ❤️
   - [ ] Test with reduced motion preferences 🧡
   - [ ] Test with screen readers 🧡
-- [ ] Favicon & App Icons ❤️
-  - [ ] Multiple favicon sizes (16x16, 32x32, etc.) ❤️
-  - [ ] Apple touch icons 🧡
+- [x] Favicon & App Icons ❤️
+  - [x] Multiple favicon sizes (16x16, 32x32, etc.) ❤️
+  - [x] Apple touch icons 🧡
   - [ ] Android icons 🧡
   - [ ] Web manifest for PWA (optional) 💛
-- [ ] SEO ❤️
-  - [ ] Title ❤️
-  - [ ] Description ❤️
-  - [ ] Keywords ❤️
-  - [ ] Author ❤️
-  - [ ] Date ❤️
-  - [ ] Image ❤️
-  - [ ] URL ❤️
-  - [ ] Canonical URL ❤️
-  - [ ] Robots ❤️
-  - [ ] Sitemap ❤️
-  - [ ] Open Graph ❤️
-  - [ ] robots.txt file ❤️
-  - [ ] Twitter Cards 🧡
-  - [ ] JSON-LD structured data for Person/Portfolio 🧡
+- [x] SEO ❤️
+  - [x] Title ❤️
+  - [x] Description ❤️
+  - [x] Keywords ❤️
+  - [x] Author ❤️
+  - [x] Date ❤️
+  - [x] Image ❤️
+  - [x] URL ❤️
+  - [x] Canonical URL ❤️
+  - [x] Robots ❤️
+  - [x] Sitemap ❤️
+  - [x] Open Graph ❤️
+  - [x] robots.txt file ❤️
+  - [x] Twitter Cards 🧡
+  - [x] JSON-LD structured data for Person/Portfolio 🧡
   - [ ] Dynamic metadata per page (not just home) 🧡
   - [ ] Language/locale tags 🧡
   - [ ] RSS feed for blog section 💛
@@ -280,17 +280,17 @@ Priority key
   - [ ] Error tracking (beyond Vercel analytics) 💛
   - [ ] Performance budgets 💛
   - [ ] Bundle size monitoring 💛
-- [ ] Accessibility ❤️
-  - [ ] Alt text for images ❤️
-  - [ ] Tab order ❤️
-  - [ ] Keyboard navigation ❤️
-  - [ ] Screen reader support ❤️
-  - [ ] Contrast ❤️
-  - [ ] Font size ❤️
-  - [ ] Font weight ❤️
-  - [ ] Font color ❤️
-  - [ ] ARIA labels where needed ❤️
-  - [ ] Focus visible states ❤️
+- [x] Accessibility ❤️
+  - [x] Alt text for images ❤️
+  - [x] Tab order ❤️
+  - [x] Keyboard navigation ❤️
+  - [x] Screen reader support ❤️
+  - [x] Contrast ❤️
+  - [x] Font size ❤️
+  - [x] Font weight ❤️
+  - [x] Font color ❤️
+  - [x] ARIA labels where needed ❤️
+  - [x] Focus visible states ❤️
   - [ ] Semantic HTML validation 🧡
   - [ ] Color contrast testing tools 🧡
   - [ ] Skip to content link 💛
@@ -304,9 +304,9 @@ Priority key
 
 ### Configuration & Environment Checklist
 
-- [ ] Document all required environment variables ❤️
-- [ ] Create `.env.example` file ❤️
-- [ ] Secure environment variable handling ❤️
+- [x] Document all required environment variables ❤️
+- [x] Create `.env.example` file ❤️
+- [x] Secure environment variable handling ❤️
 - [ ] Different configs for dev/staging/prod 🧡
 
 ### Legal & Compliance Checklist
@@ -319,7 +319,7 @@ Priority key
 ### Additional Features Checklist
 
 - [ ] Social sharing buttons (blog posts, work) 🧡
-- [ ] Print styles (especially for resume page) 🧡
+- [x] Print styles (especially for resume page) 🧡
 - [ ] Email templates (for contact form auto-replies) 🧡
 - [ ] Search functionality (if blog/works grow large) 💛
 - [ ] Pagination (if content grows) 💛
@@ -333,16 +333,16 @@ Priority key
 
 ### Documentation Checklist
 
-- [ ] README updates with deployment instructions ❤️
+- [x] README updates with deployment instructions ❤️
 - [ ] Code documentation for complex components 💛
 - [ ] Architecture decisions documentation 💛
 - [ ] Content contribution guidelines 💛
 
 ### Deployment Checklist
 
-- [ ] Deploy to Vercel ❤️
+- [x] Deploy to Vercel ❤️
   - [ ] Vercel CLI 🧡
-  - [ ] Add monitoring through vercel analytics 🧡
+  - [x] Add monitoring through vercel analytics 🧡
 
 Final Sitemap:
 
