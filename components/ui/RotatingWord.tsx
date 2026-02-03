@@ -37,7 +37,6 @@ export function RotatingWord({ words, className }: RotatingWordProps) {
         }, ANIMATION_PAUSE_DURATION);
         break;
       case "duringSwap":
-        console.log("hi");
         setTimeout(() => {
           setAnimationPhase("postSwap");
         }, ANIMATION_DURATION);
@@ -49,6 +48,7 @@ export function RotatingWord({ words, className }: RotatingWordProps) {
         }, 0);
         break;
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [animationPhase]);
 
   return (

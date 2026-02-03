@@ -26,16 +26,6 @@ export function Project({
   brandColor,
   onClick,
 }: ProjectProps) {
-  // const mobileClassesContainer = cn("pointer-coarse:aspect-square");
-  // const desktopClassesContainer = cn(
-  //   "pointer-fine:hover:-translate-y-0.5 pointer-fine:hover:shadow-card-hover",
-  // );
-  // const desktopClassesImageContainer = cn("pointer-fine:rounded-t-4xl");
-  // const mobileClassesImage = cn("pointer-coarse:size-full");
-  // const desktopClassesImage = cn(
-  //   "pointer-fine:top-[16%] pointer-fine:left-[8%] pointer-fine:rounded-t-4xl pointer-fine:group-hover:-translate-y-4 pointer-fine:group-hover:scale-105 pointer-fine:group-active:translate-y-0",
-  // );
-
   return (
     <article
       onClick={onClick}
@@ -71,7 +61,7 @@ export function Project({
             // mobile classes
             "pointer-coarse:object-cover",
             // desktop classes
-            "pointer-fine:top-[16%] pointer-fine:left-[8%] pointer-fine:rounded-tl-xl pointer-fine:group-hover:-translate-y-4 pointer-fine:group-hover:scale-105 pointer-fine:group-active:translate-y-0",
+            "pointer-fine:top-[16%] pointer-fine:left-[8%] pointer-fine:rounded-tl-md pointer-fine:group-hover:-translate-y-4 pointer-fine:group-hover:scale-105 pointer-fine:group-active:translate-y-0",
           )}
           priority
         />
