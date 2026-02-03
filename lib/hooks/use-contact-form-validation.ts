@@ -5,7 +5,8 @@ import {
 } from "../contact-validation";
 import type { EmailProps } from "../dataTypes";
 
-type FieldName = keyof EmailProps;
+// Exclude honeypot field from form field names (it's not a TanStack Form field)
+type FieldName = Exclude<keyof EmailProps, "website">;
 type ValidationCaller = "onChange" | "onBlur";
 
 /**

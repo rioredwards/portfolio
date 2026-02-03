@@ -42,6 +42,13 @@ export default async function emailAction(
   ServerFormState<typeof emailFormOpts, undefined> | undefined | string
 > {
   try {
+    // Check honeypot field - if filled, silently reject (likely a bot)
+    const honeypot = formData.get("website");
+    if (honeypot && typeof honeypot === "string" && honeypot.length > 0) {
+      // Return success to not tip off the bot, but don't send email
+      return undefined;
+    }
+
     const validatedData = await serverValidate(formData);
 
     // throw Error("Test error");

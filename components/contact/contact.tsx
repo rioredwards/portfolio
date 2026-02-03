@@ -90,6 +90,17 @@ export function Contact() {
             {typeof state === "string" && (
               <Alert variant="destructive" title="Error" description={state} />
             )}
+            {/* Honeypot field - hidden from users, bots will fill it */}
+            <div aria-hidden="true" className="absolute -left-[9999px]">
+              <label htmlFor="website">Website</label>
+              <input
+                type="text"
+                id="website"
+                name="website"
+                tabIndex={-1}
+                autoComplete="off"
+              />
+            </div>
             <FieldGroup className="grid gap-x-4 gap-y-8 md:grid-cols-2">
               <form.Field
                 name="name"
