@@ -76,19 +76,25 @@ export function RotatingWord({ words, className }: RotatingWordProps) {
             </span>
           ))}
         </span>
-        <span className={`rotating-word-bottom ${animationPhase}`}>
-          {(words[nextWordIdx] as string).split("").map((letter, index) => (
-            <span
-              key={index}
-              className="rotating-word-letter"
-              style={{
-                animationDelay: `${index * LETTER_ANIMATION_DELAY + index * LETTER_ANIMATION_INDEX_DELAY}s`,
-              }}
-            >
-              {letter}
-            </span>
-          ))}
-        </span>
+        {/* Only in DOM during animation so crawlers don't see two words concatenated */}
+        {(animationPhase === "duringSwap" || animationPhase === "postSwap") && (
+          <span
+            className={`rotating-word-bottom ${animationPhase}`}
+            aria-hidden="true"
+          >
+            {(words[nextWordIdx] as string).split("").map((letter, index) => (
+              <span
+                key={index}
+                className="rotating-word-letter"
+                style={{
+                  animationDelay: `${index * LETTER_ANIMATION_DELAY + index * LETTER_ANIMATION_INDEX_DELAY}s`,
+                }}
+              >
+                {letter}
+              </span>
+            ))}
+          </span>
+        )}
       </span>
     </>
   );
