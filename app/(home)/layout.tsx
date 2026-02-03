@@ -2,8 +2,11 @@ import { Footer, SlidePanel } from "@/components/layout";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Rio Edwards | Portfolio",
-  description: "Personal portfolio of Rio Edwards",
+  title: {
+    absolute: "Rio Edwards | Portfolio",
+  },
+  description:
+    "Software engineer specializing in full-stack web development. View my projects, experience, and get in touch.",
 };
 
 export default function HomeLayout({
