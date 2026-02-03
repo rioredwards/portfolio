@@ -55,7 +55,7 @@ export default async function Home() {
   }
 
   return (
-    <main className="min-h-screen bg-background">
+    <main id="main-content" className="min-h-screen bg-background">
       <section id="home" className="bg-secondary">
         <SectionContentWrapper className="pt-0" >
           <Hero />
