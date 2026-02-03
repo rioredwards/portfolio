@@ -50,12 +50,63 @@ const mazaeniDemo = localFont({
   display: "swap",
 });
 
+const siteUrl = "https://rioedwards.com";
+
 export const metadata: Metadata = {
-  title: "Rio Edwards | Portfolio",
-  description: "Personal portfolio of Rio Edwards",
+  title: {
+    default: "Rio Edwards | Software Engineer",
+    template: "%s — Rio Edwards",
+  },
+  description:
+    "Software engineer specializing in full-stack web development. View my projects, experience, and get in touch.",
+  keywords: [
+    "software engineer",
+    "web developer",
+    "full-stack developer",
+    "React",
+    "Next.js",
+    "TypeScript",
+    "portfolio",
+    "Rio Edwards",
+  ],
+  authors: [{ name: "Rio Edwards", url: siteUrl }],
+  creator: "Rio Edwards",
+  metadataBase: new URL(siteUrl),
+  alternates: {
+    canonical: "/",
+  },
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    url: siteUrl,
+    siteName: "Rio Edwards",
+    title: "Rio Edwards | Software Engineer",
+    description:
+      "Software engineer specializing in full-stack web development. View my projects, experience, and get in touch.",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Rio Edwards | Software Engineer",
+    description:
+      "Software engineer specializing in full-stack web development. View my projects, experience, and get in touch.",
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
   icons: {
-    icon: "/favicon.ico",
-    apple: "/favicon.svg",
+    icon: [
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/favicon.svg", type: "image/svg+xml" },
+    ],
+    apple: "/apple-touch-icon.png",
   },
 };
 

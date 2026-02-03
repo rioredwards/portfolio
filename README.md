@@ -9,6 +9,22 @@ This is my portfolio website. It is built with Next.js, TypeScript, shadcn/ui, a
 3. Run `bun run dev` to start the development server
 4. Open [http://localhost:3000](http://localhost:3000) to see the result
 
+## Environment Setup
+
+Copy `.env.example` to `.env.local` and configure the following variables:
+
+```bash
+cp .env.example .env.local
+```
+
+| Variable | Description |
+|----------|-------------|
+| `GOOGLE_APP_SENDER_USERNAME` | Gmail account used to send contact form emails |
+| `GOOGLE_APP_SENDER_PASSWORD` | Gmail App Password (requires 2FA enabled) |
+| `GOOGLE_APP_RECEIVER_USERNAME` | Email address that receives contact submissions |
+
+> **Note:** You must use a Gmail [App Password](https://myaccount.google.com/apppasswords), not your regular Gmail password.
+
 ## New TODOS
 
 - The links in the navbar don't work for navigating between pagees, only within sections on the home page. I think that there should be two variants of the navbar. One is for navigating the home page (as is currently) and one is for navigating between pages. The between pages one should.
