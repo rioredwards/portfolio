@@ -1,0 +1,321 @@
+---
+title: "Ohm On The Range"
+slug: "ohm-on-the-range"
+icon: "/work/images/ohm/Ohm-logo-with-bg-1.svg"
+description: "Official site for Ohm on the Range"
+category: "Website"
+skills:
+  - "Next.js"
+  - "TypeScript"
+  - "Tailwind CSS"
+  - "shadcn/ui"
+  - "Figma"
+image: "/work/images/ohm/ohm-screenshot-3.jpg"
+brandColor: "#210457"
+links:
+  - text: "View Live Site"
+    url: "https://www.ohmontherange.net"
+    icon: "globe"
+order: 0
+---
+
+I built the official website for **Ohm on the Range**, a music, art, and wellness festival held each year at the base of [Mount Adams](link).
+
+---
+
+## Tech Stack
+
+- **Next.js** & **React**
+- **TypeScript**
+- **Tailwind CSS**
+- **shadcn/ui** & **Radix UI**
+- **particles.js**
+
+---
+
+## Overview
+
+The site is a static front-end featuring five main pages:
+
+- **Home** — hero section, upcoming lineup/announcements, get-involved CTA, and social links
+- **Lineup** — current year plus past years
+- **About** — the festivals origin story mission statement
+- **FAQ** — accordion-based, easy to skim on mobile
+- **Get Involved** — role-specific cards that route people to the application forms
+
+## My Process
+
+To kick off the project, I did some requirements gathering, design work in [Figma](link), and feedback rounds with the festival team. These discussions helped me understand the festival's brand and vision, and guided the design of the site. The goal was to capture the festival's fun, "space-cowboy" aesthetic while ensuring the site is fast, accessible, and responsive.
+
+Once the team was happy with the design, I began building the site. I kept a "MVP" approach, building the site in a way that would be easy to iterate on and improve. I shared my progress with the team for feedback and approval as I went. I maintained a shared google doc which acted a our project management tool. This allowed the team to track my progress and provide feedback without needing to learn how to use something like Asana or Notion.
+
+### Design system & branding
+
+I helped the team create a design system that matched their brand. This included a set of fonts, colors, and other design tokens. The designs all began in Figma and were then implemented in the codebase, utilizing CSS variables for consistency and easy tweaking. I also created their logo and other branding assets.
+
+## Animations & visuals
+
+### Hero carousel with “art direction”
+
+My previous work creating social media content for the team meant I already had access to hundreds of photos from their media archive—and I knew immediately that photography should be the centerpiece. This festival is visually stunning, and I wanted visitors to feel that the moment they land on the page. The hero section fills the entire viewport with a rotating carousel of full-bleed images from previous years. Selecting which photos made the cut was genuinely difficult; it was hard to narrow down so many beautiful shots. I ended up sorting by time of day and choosing a mix: golden hour scenery, nighttime laser and stage production shots, and plenty of crowd photos—because the social aspect of a music festival is core to the experience. For some images, I created separate crops for mobile and desktop to ensure the subject stayed properly framed regardless of screen size.
+
+The carousel preloads the next image and crossfades between them, which helps with performance while giving a smooth visual effect. I prototyped the transition in a raw HTML/CSS sandbox first, then translated it into the site. I bumped up against some quirks with Safari's unique implementation for rendering backdrop filters and blend modes, but I eventually got it sorted.
+
+### Background effects without stealing performance
+
+The particle background is treated as progressive enhancement—loaded in a way that doesn't block the main content. That helps keep the first paint focused on what users came for (tickets, lineup, info).
+
+### Interactive “Get Involved” cards
+
+The get-involved section uses animated cards to make the roles feel tangible (volunteer / perform / vend), while keeping the interaction straightforward: pick a role → go to the right form.
+
+The site is used by attendees, volunteers, artists, and vendors, helping them find information about the festival and ways to get involved. I worked closely with the organizers to ensure the site met their needs and was a true reflection of Ohm's brand and vision.
+
+Visually, the project gave me room to go bolder than my usual “clean/minimal” instincts. Photography is the centerpiece: the hero fills the viewport with a rotating carousel of full-bleed images from the festival archive, curated to reflect the experience (golden hour scenery, nighttime stage/laser shots, and lots of crowd energy). For key photos, I created separate mobile/desktop crops so the composition stays strong on narrow screens (“art direction”), and I tuned the transitions to feel smooth without slowing down first paint.
+
+Single-Source-of-Truth for Lineup Data
+
+One pattern I'm particularly proud of: the festival lineup data is defined once and transformed into three different outputs. The core data lives in event-data.ts as schema.org-compliant Event objects—dates, locations, organizer info, and performer lists all in one place. From there, three transformation modules derive what each consumer needs: render.ts extracts titles and images for the visual UI, screen-reader.ts flattens structured objects into human-readable strings (so a screen reader announces "Mount Adams Off-Road Park, 1807 BZ Glenwood Hwy, Glenwood, WA..." instead of raw JSON), and structured-data.ts passes through the raw schema.org objects for JSON-LD embedding. A validation check at startup ensures all three stay in sync—if you add a new year to one but forget the others, the dev server throws an error. This means I can update the 2025 lineup in one file and trust that the poster image, the accessible screen reader content, and Google's rich results all reflect the same data.
+
+The “Get Involved” page is where the site gets playful: 3D flip cards inspired by Linktree-style motion, built with real CSS 3D transforms (perspective, preserve-3d, backface-visibility) and designed to work on both hover and touch. Between the flip cards, particle background, and glowing accents, the goal was “wow factor” that doesn't get in the way—expressive, but still readable in bright sun and usable at night.
+
+Design Process & Client Collaboration
+
+I'd already been working with the Ohm team as their graphic designer and video editor—creating promo videos, posters, and Instagram content—so when they needed a website overhaul, we had an established relationship to build on. Their existing WordPress site was outdated and wasn't serving their needs, so I rebuilt everything from scratch while intentionally preserving visual coherence with what their community already recognized. I formalized their brand identity into a proper design system: solidifying colors, fonts, and tone that had existed loosely before, and creating a new logo in Figma. We went through four or five rounds of design review, with mockups shared in Figma and a Google Doc serving as a lightweight ticketing system where they could leave ideas and track progress. The breakthrough came when I got the team to sit with me in a live Figma session—watching me work while describing what they wanted in real time. That's when things clicked. The project also pushed me out of my comfort zone: I usually lean toward clean, minimal designs, but an electronic music festival demanded something flashier and bolder to match the high-energy, non-corporate, artsy vibe. With a two-week window before the lineup drop, I had to resist scope creep and focus on essentials, then layer in progressive enhancements after launch.
+
+## SEO and accessibility
+
+### Structured data + metadata
+
+The site includes structured event data (JSON-LD) so search engines can understand that it’s a festival, when it happens, where it is, and who’s involved. Key routes also have clean metadata/opengraph so sharing a lineup or “get involved” page looks correct.
+
+### Accessibility-first components
+
+I aimed for a strong baseline: semantic structure, clear headings, keyboard-friendly interactions, and accessible primitives for interactive UI (accordions, menus). The lineup and FAQs are designed to work well for screen readers and for quick scanning on phones.
+
+---
+
+## Performance notes
+
+Because the site has to work in real-world festival conditions, performance was a feature—not an afterthought. In testing, I targeted excellent Lighthouse results and a fast LCP so pages feel snappy even on mobile connections.
+
+---
+
+## Final thoughts
+
+This project was a good reminder that “simple” can still be deeply professional: a static architecture, carefully structured content, a few focused integrations, and strong performance/accessibility fundamentals. If I extend the portfolio case study further, I’d add a tech-stack diagram and a couple curated screenshots once the final assets are fully captured in the content system.
+
+---
+
+## Integrations, SEO, and accessibility
+
+Ticketing runs through Eventbrite, and applications route to role-specific Google Forms—simple, reliable tools that match the festival's workflow. SEO is handled with structured event data (JSON-LD) and route-level metadata so search engines and social shares understand what the festival is, when/where it happens, and how to participate. On the accessibility side, I leaned on semantic structure and accessible primitives for interactive UI (menus/accordions), and made sure the lineup and FAQs remain easy to navigate by keyboard and screen reader.
+
+A detail I'm especially proud of is how lineup/event information stays consistent across the site: it's defined once as structured event data, then transformed into the different shapes needed for the UI, screen-reader-friendly text, and embedded JSON-LD—so updates don't drift out of sync. Combined with a static architecture and careful performance choices, the site stays snappy and dependable in the real conditions people actually use it.
+
+---
+
+## Final thoughts
+
+This project reinforced that “simple” can still be deeply professional: a static build, a few focused integrations, high-quality content structure, and strong performance/accessibility fundamentals. It's a site that communicates clearly, looks like the festival feels, and holds up on a phone in the woods.
+
+Thanks for reading! ❤️
+
+[Back Home](/)
+
+That helped the site's lighthouse scores look like this:
+
+I had previously worked with the team as their graphic designer, and as part of this project, I helped them develop their brand and visual identity. I created a design system that was used throughout the site, and I also created the logo and other branding assets.
+
+<LightboxGallery>
+
+<LightboxImage
+  src={ImgOhmScreenshot3}
+  alt="Ohm on the Range Screenshot"
+  caption="Ohm on the Range Figma designs"
+  priority={true}
+/>
+
+<LightboxImage
+  src={ImgOhmLighthouseScores}
+  alt="Ohm on the Range Lighthouse Scores"
+  caption="Ohm on the Range Lighthouse Scores"
+  priority={true}
+/>
+
+<LightboxImage
+  src={ImgOhmLogoProgression}
+  alt="Ohm on the Range Logo Progression"
+  caption="Ohm on the Range Logo Progression"
+  priority={true}
+/>
+
+<VideoPlayer src="/work/images/ohm/Ohm-video.mp4" />
+
+</LightboxGallery>
+
+```
+// Source of truth stored as type-safe JSON+LD
+const OHM_ON_THE_RANGE_2025 = {
+  "@type": "MusicEvent",
+  "@context": "https://schema.org",
+  name: "Ohm on the Range 2025",
+  image: [
+    "https://www.ohmontherange.net/meta_photos/Ohm_Event_Thumbnail_Image_1x1.jpeg",
+    "https://www.ohmontherange.net/meta_photos/Ohm_Event_Thumbnail_Image_4x3.jpeg",
+    "https://www.ohmontherange.net/meta_photos/Ohm_Event_Thumbnail_Image_16x9.jpeg",
+  ],
+  startDate: "2025-07-31T12:00:00-07:00",
+  endDate: "2025-08-02T22:00:00-07:00",
+  eventStatus: "https://schema.org/EventScheduled",
+  eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
+  location: PLACE_1,
+  description:
+    "Journey with us for 2 days of art, music, and wellness at our home on the range 🏔️✨🌱",
+  offers: {
+    "@type": "Offer",
+    url: WEBSITE_URL,
+    price: "225",
+    priceCurrency: "USD",
+    availability: "https://schema.org/InStock",
+  },
+  organizer: { ...ORGANIZER, sameAs: [FACEBOOK_URL, INSTAGRAM_URL] },
+  url: WEBSITE_URL,
+  sameAs: [FACEBOOK_URL, INSTAGRAM_URL],
+  performer: musicGroupData[2025],
+} satisfies WithContext<Event>;
+```
+
+```
+// Years map
+const EVENTS = {
+  2025: OHM_ON_THE_RANGE_2025,
+  2024: OHM_ON_THE_RANGE_2024,
+  2023: OHM_ON_THE_RANGE_2023,
+  2022: OHM_ON_THE_RANGE_2022,
+} satisfies Record<SupportedYears, Event>;
+```
+
+```
+// Events parsed for screen-reader content
+const LINEUPS_FOR_SCREEN_READER = {
+  2025: {
+    name: EVENTS[2025].name,
+    startDate: EVENTS[2025].startDate,
+    endDate: EVENTS[2025].endDate,
+    location: locationToString(EVENTS[2025].location),
+    description: EVENTS[2025].description,
+    organizer: organizerToString(EVENTS[2025].organizer),
+    performers: EVENTS[2025].performer.map(performerToString),
+  },
+  2024: { ... },
+  2023: { ... },
+  2022:: { ... },
+} satisfies Record<SupportedYears, ScreenReadableLineupItem>;
+```
+
+```
+// Lineups array aggregates transformed data for each context (render, screenReader, and structuredData)
+const years = [2022, 2023, 2024, 2025] as SupportedYears[];
+
+const LINEUPS = years.toReversed().map((year) => ({
+  year,
+  render: render[year],
+  screenReader: screenReader[year],
+  structuredData: structuredData[year],
+}));
+```
+
+```
+// Lineup items data are mapped over and passed into LineupItem component
+<div className="mt-12 flex flex-col gap-12">
+  {LINEUPS.filter((lineup) => lineup.year !== CURRENT_YEAR).map(
+    (lineup) => (
+      <section key={lineup.year} id={`${lineup.year}`}>
+        <LineupItem {...lineup} />
+      </section>
+    )
+  )}
+</div>
+```
+
+```
+// LineupItems data are delegated to their respective components
+export function LineupItem({
+  render,
+  screenReader,
+  structuredData,
+  year,
+}: LineupItemProps) {
+  return (
+    <>
+      {render && <LineupRender lineup={render} year={year} />}
+      {screenReader && <LineupForScreenReader lineup={screenReader} />}
+      {structuredData && <LineupStructuredData event={structuredData} />}
+    </>
+  );
+}
+```
+
+```
+// LineupStructuredData component
+export function LineupStructuredData({ event }: LineupStructuredDataProps) {
+  return (
+    <Script
+      id={`structured-data-for-${event.name.replaceAll(" ", "-")}`}
+      type="application/ld+json"
+    >
+      {JSON.stringify(event)}
+    </Script>
+  );
+}
+```
+
+```
+// LineupForScreenReader component
+export function LineupForScreenReader({ lineup }: LineupCardProps) {
+  return (
+    <div className="sr-only">
+      <h3>{lineup.name} Festival Information</h3>
+      <p>Start Date: {lineup.startDate}</p>
+      <p>End Date: {lineup.endDate}</p>
+      <p>Venue: {lineup.location}</p>
+      <p>Description: {lineup.description}</p>
+      <p>Organizer: {lineup.organizer}</p>
+      <p>Performers: {lineup.performers?.join(", ")}</p>
+    </div>
+  );
+}
+```
+
+```
+// LineupRender component
+export function LineupRender({ lineup, year }: LineupRenderProps) {
+  return (
+    <Card className="group overflow-hidden transition-all duration-300 hover:scale-[1.01]">
+      <CardHeader>
+        <h3 className="font-decoration text-text1 glowing-pink text-center text-3xl md:text-4xl">
+          <a href={`#${year}`} className="hover:underline">
+            {year} LINEUP
+          </a>
+        </h3>
+      </CardHeader>
+      <CardContent className="p-4">
+        <div className="relative w-full overflow-hidden rounded-lg">
+          {lineup.image && (
+            <Image
+              src={lineup.image}
+              alt={`${lineup.title} Lineup`}
+              width={lineup.image.width}
+              height={lineup.image.height}
+              sizes="(max-width: 1024px) 80vw, 897px"
+              placeholder="blur"
+              className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-102"
+            />
+          )}
+        </div>
+      </CardContent>
+    </Card>
+  );
+}
+```

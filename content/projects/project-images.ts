@@ -8,12 +8,14 @@ import ImgDogTownMyPi from "@/public/work/images/dog-town/My-Pi.jpeg";
 import ImgDogTownTechStack from "@/public/work/images/dog-town/Tech-Stack.jpeg";
 import ImgDogTownTheSetupOg from "@/public/work/images/dog-town/The-Setup-OG.jpeg";
 
+// Ohm on the Range
+import ImgOhmLighthouseScores from "@/public/work/images/ohm/ohm-lighthouse-scores.png";
+import ImgOhmLogoProgression from "@/public/work/images/ohm/ohm-logo-progression.gif";
+import ImgOhmScreenshot3 from "@/public/work/images/ohm/ohm-screenshot-3.jpg";
+
 // Code Quest
 import ImgCodeQuestHeader from "@/public/work/images/code-quest/code-quest-header.png";
 import ImgCodeQuestPreview from "@/public/work/images/code-quest/code-quest-preview.gif";
-
-// j-scribe (j-scribe_header.png and j-scribe_preview.gif not in repo; using preview)
-import ImgJScribePreview from "@/public/work/images/j-scribe-preview.webp";
 
 export const projectImageScope = {
   ImgDogTownScreenshot,
@@ -26,4 +28,7 @@ export const projectImageScope = {
   ImgCodeQuestPreview,
   ImgDogTownDashboardScreenshot,
   ImgDogTownMeWithPups,
+  ImgOhmScreenshot3,
+  ImgOhmLogoProgression,
+  ImgOhmLighthouseScores,
 };
