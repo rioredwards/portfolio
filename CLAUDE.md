@@ -23,17 +23,21 @@ bun run format   # Prettier formatting
 - `app/` - Next.js App Router pages and layouts
 - `components/` - React components (UI primitives in `components/ui/`)
 - `content/projects/` - Project MDX files with frontmatter metadata
+- `content/blogs/` - Blog MDX files with frontmatter metadata
 - `lib/` - Utilities, data, server actions, and hooks
 - `public/work/images/` - Project images
+- `public/blog/images/` - Blog images
 - `fonts/` - Custom local fonts (Mazaeni Demo)
 
 ### Key Patterns
 
-**Data-driven content**: Blogs and testimonials are defined in `lib/*-data.ts` files. Projects are defined as MDX files in `content/projects/` with frontmatter for metadata.
+**Data-driven content**: Testimonials are defined in `lib/testimonials-data.ts`. Projects and blogs are MDX files in `content/` with frontmatter for metadata.
 
 **Project MDX system**: Projects are stored as single-source MDX files in `content/projects/`. Each file contains frontmatter (title, slug, description, category, skills, image, links, order) and MDX body content. Utility functions in `lib/projects.ts` provide `getProjectSlugs()`, `getAllProjectCards()`, `getProjectWithContent()`, and `getAllProjectsWithContent()`.
 
-**Project detail pages**: Projects can be viewed as modal overlays (on home page) or standalone pages at `/work/[slug]`. MDX content is rendered using `next-mdx-remote`.
+**Blog MDX system**: Blogs are stored as MDX files in `content/blogs/`. Each file contains frontmatter (title, slug, description, icon, date, tags, order) and MDX body content. Utility functions in `lib/blogs.ts` provide `getBlogSlugs()`, `getAllBlogCards()`, `getBlogWithContent()`, and `getAllBlogsWithContent()`.
+
+**Detail pages**: Projects and blogs can be viewed as modal overlays (on home page) or standalone pages at `/work/[slug]` and `/blog/[slug]`. MDX content is rendered using `next-mdx-remote`.
 
 **Design system**: CSS variables defined in `app/globals.css` with responsive sizing using `clamp()`. Uses Tailwind's `@theme` directive for custom tokens. Key concepts:
 
@@ -95,7 +99,7 @@ order: 1
 ---
 ```
 
-3. Use `<Figure src="..." alt="..." credit="..." />` for images with attribution
+3. Use `<Figure src="..." alt="..." credit="..." creditUrl="..." />` for images with attribution
 4. Add images to `public/blog/images/blog-slug/`
 
 ### Available MDX Components
