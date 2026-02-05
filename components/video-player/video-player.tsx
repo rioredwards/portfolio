@@ -11,6 +11,11 @@ import {
 } from "lucide-react";
 import * as React from "react";
 
+interface WebkitFullscreenVideoElement extends HTMLVideoElement {
+  webkitEnterFullscreen?: () => void;
+  webkitExitFullscreen?: () => void;
+}
+
 interface VideoPlayerProps extends React.HTMLAttributes<HTMLDivElement> {
   /** Video source URL */
   src: string;
@@ -92,28 +97,20 @@ export function VideoPlayer({
 
   const toggleFullscreen = async () => {
     const container = containerRef.current;
-    const video = videoRef.current;
+    const video = videoRef.current as WebkitFullscreenVideoElement | null;
     if (!container) return;
 
     if (!isFullscreen) {
       if (container.requestFullscreen) {
         await container.requestFullscreen();
-      } else if (
-        video &&
-        "webkitEnterFullscreen" in video &&
-        typeof (video as any).webkitEnterFullscreen === "function"
-      ) {
-        (video as any).webkitEnterFullscreen();
+      } else if (video && typeof video.webkitEnterFullscreen === "function") {
+        video.webkitEnterFullscreen();
       }
     } else {
       if (document.exitFullscreen) {
         await document.exitFullscreen();
-      } else if (
-        video &&
-        "webkitExitFullscreen" in video &&
-        typeof (video as any).webkitExitFullscreen === "function"
-      ) {
-        (video as any).webkitExitFullscreen();
+      } else if (video && typeof video.webkitExitFullscreen === "function") {
+        video.webkitExitFullscreen();
       }
     }
   };
@@ -151,7 +148,7 @@ export function VideoPlayer({
     document.addEventListener("fullscreenchange", handleFullscreenChange);
 
     // iOS Safari: fullscreen only works on the video element itself
-    const video = videoRef.current;
+    const video = videoRef.current as WebkitFullscreenVideoElement | null;
     const handleWebkitBeginFullscreen = () => setIsFullscreen(true);
     const handleWebkitEndFullscreen = () => setIsFullscreen(false);
     video?.addEventListener("webkitbeginfullscreen", handleWebkitBeginFullscreen);

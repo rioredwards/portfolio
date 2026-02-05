@@ -9,8 +9,10 @@ import ImgDogTownTechStack from "@/public/work/images/dog-town/Tech-Stack.jpeg";
 import ImgDogTownTheSetupOg from "@/public/work/images/dog-town/The-Setup-OG.jpeg";
 
 // Ohm on the Range
+import ImgOhmCarouselScreenshot from "@/public/work/images/ohm/ohm-carousel-screenshot.jpg";
 import ImgOhmLighthouseScores from "@/public/work/images/ohm/ohm-lighthouse-scores.png";
 import ImgOhmLogoProgression from "@/public/work/images/ohm/ohm-logo-progression.gif";
+import ImgOhmParticlesScreenshot from "@/public/work/images/ohm/ohm-screenshot-2.jpg";
 import ImgOhmScreenshot3 from "@/public/work/images/ohm/ohm-screenshot-3.jpg";
 
 // Code Quest
@@ -31,4 +33,6 @@ export const projectImageScope = {
   ImgOhmScreenshot3,
   ImgOhmLogoProgression,
   ImgOhmLighthouseScores,
+  ImgOhmCarouselScreenshot,
+  ImgOhmParticlesScreenshot,
 };

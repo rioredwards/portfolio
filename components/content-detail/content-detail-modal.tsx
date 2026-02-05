@@ -54,7 +54,7 @@ export function ContentDetailModal({
   }, [open, renderedContent]);
 
   return (
-    <Dialog open={true} onOpenChange={onOpenChange} modal={true}>
+    <Dialog open={open} onOpenChange={onOpenChange} modal={true}>
       <DialogContent
         className={cn(
           "max-h-[94dvh] w-full max-w-[calc(100vw-var(--spacing-content-px))] md:max-w-[calc(100vw-var(--spacing-content-px-md)*2)] lg:max-w-4xl",

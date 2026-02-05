@@ -1,5 +1,6 @@
 export { Footer } from "./footer";
 export { Hero } from "./hero";
+export { HydrationIndicator } from "./hydration-indicator";
 export { MobileMenu } from "./mobile-menu";
 export { Navbar } from "./navbar";
 export { SectionContentWrapper } from "./section-content-wrapper";

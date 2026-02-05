@@ -1,4 +1,4 @@
-import { MobileMenu, Navbar, Sidebar } from "@/components/layout";
+import { HydrationIndicator, MobileMenu, Navbar, Sidebar } from "@/components/layout";
 import { LightboxProvider } from "@/components/lightbox-image";
 import { Toaster } from "@/components/ui/sonner";
 import { Analytics } from "@vercel/analytics/next";
@@ -170,6 +170,7 @@ export default function RootLayout({
         >
           Skip to content
         </a>
+        <HydrationIndicator />
         <LightboxProvider>
           <Navbar />
           <Sidebar />

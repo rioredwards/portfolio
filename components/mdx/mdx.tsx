@@ -1,7 +1,7 @@
 import { ImageOverlay } from "@/components/image-overlay/image-overlay";
 import { LightboxGallery } from "@/components/lightbox-image/lightbox-gallery";
 import { LightboxImage } from "@/components/lightbox-image/lightbox-image";
-import { VideoPlayer } from "@/components/video-player/video-player";
+import { LightboxVideo } from "@/components/lightbox-image/lightbox-video";
 import { cn } from "@/lib/utils";
 import Image, { ImageProps } from "next/image";
 import Link from "next/link";
@@ -189,5 +189,5 @@ export const mdxComponents = {
   LightboxImage,
   LightboxGallery,
   ImageOverlay,
-  VideoPlayer,
+  LightboxVideo,
 };

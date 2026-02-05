@@ -29,6 +29,14 @@ export function Navbar() {
   const isHomePage = pathname === "/";
   const navItems = isHomePage ? homeNavItems : notHomeNavItems;
 
+  const buildUrlWithHash = (hash: string) => {
+    if (typeof window === "undefined") {
+      return hash;
+    }
+    const { pathname, search } = window.location;
+    return `${pathname}${search}${hash}`;
+  };
+
   useEffect(() => {
     if (!isHomePage) return;
 
@@ -97,7 +105,11 @@ export function Navbar() {
           if (shouldUpdateUrl) {
             // Update URL without triggering scroll - defer to avoid React render warning
             requestAnimationFrame(() => {
-              window.history.replaceState(null, "", activeSection);
+              window.history.replaceState(
+                null,
+                "",
+                buildUrlWithHash(activeSection),
+              );
             });
           }
           return activeSection;
@@ -160,7 +172,8 @@ export function Navbar() {
     const element = document.getElementById(targetId);
     if (element) {
       element.scrollIntoView({ behavior: "smooth", block: "start" });
-      window.history.pushState(null, "", href);
+      const url = buildUrlWithHash(href);
+      window.history.pushState(null, "", url);
       setActiveSection(href);
     }
   };

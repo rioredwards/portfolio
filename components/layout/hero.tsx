@@ -30,9 +30,11 @@ function HeroImage({
 function HeroButton({
   buttonText,
   buttonHref,
+  dataTestId,
 }: {
   buttonText: string;
   buttonHref: string;
+  dataTestId?: string;
 }) {
   return (
     <div className="group p-4 lg:-translate-x-4 pointer-coarse:translate-x-0">
@@ -46,7 +48,11 @@ function HeroButton({
           "h-14 w-12 group-hover:w-52 group-hover:px-6 pointer-coarse:w-52 pointer-coarse:px-6",
         )}
       >
-        <Link className="" href={buttonHref}>
+        <Link
+          className=""
+          href={buttonHref}
+          data-testid={dataTestId ?? "hero-resume-link"}
+        >
           <div className="custom-bg-ping mr-2 flex items-center gap-2">
             <span
               className={cn(
@@ -137,7 +143,11 @@ export function Hero() {
           <div className="mt-10 flex max-w-prose-max flex-col items-start justify-end">
             <HeroHeading title={title} className="mb-4" />
             <div className="mb-2">{paragraph}</div>
-            <HeroButton buttonText={buttonText} buttonHref={buttonHref} />
+            <HeroButton
+              buttonText={buttonText}
+              buttonHref={buttonHref}
+              dataTestId="hero-resume-link-desktop"
+            />
           </div>
         </div>
       </div>
@@ -149,7 +159,11 @@ export function Hero() {
           <div className="mb-10 max-w-prose-max space-y-4 text-center">
             {paragraph}
           </div>
-          <HeroButton buttonText={buttonText} buttonHref={buttonHref} />
+          <HeroButton
+            buttonText={buttonText}
+            buttonHref={buttonHref}
+            dataTestId="hero-resume-link-mobile"
+          />
         </div>
       </div>
     </>
