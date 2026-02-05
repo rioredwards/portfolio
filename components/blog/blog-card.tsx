@@ -20,6 +20,7 @@ export function BlogCard({ title, slug, description, icon }: BlogCardProps) {
 
   return (
     <button
+      data-testid="blog-card"
       onClick={handleClick}
       className={cn(
         "fade-in-scroll focus:-ring-offset-2 flex w-full cursor-pointer items-center justify-between gap-8 rounded-4xl bg-secondary px-8 py-10 text-left transition-all duration-300 ease-out outline-none hover:-translate-y-0.5 hover:scale-103 hover:shadow-card-hover focus:ring-2 focus:ring-primary focus:outline-none focus-visible:ring-4 focus-visible:ring-ring/30 focus-visible:ring-offset-2 focus-visible:ring-offset-background active:translate-y-0 active:scale-100 lg:px-14 lg:py-12",

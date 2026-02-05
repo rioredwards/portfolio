@@ -1,5 +1,13 @@
 {
   "permissions": {
-    "allow": ["Bash(bun add:*)", "Bash(curl:*)"]
+    "allow": [
+      "Bash(bun add:*)",
+      "Bash(curl:*)",
+      "Bash(npx playwright test:*)",
+      "Bash(timeout 10 npm run dev:*)",
+      "Bash(lsof:*)",
+      "Bash(xargs kill:*)",
+      "Bash(npm run test:e2e:*)"
+    ]
   }
 }

@@ -28,6 +28,7 @@ export function Project({
 }: ProjectProps) {
   return (
     <article
+      data-testid="project-card"
       onClick={onClick}
       className={cn(
         cn(

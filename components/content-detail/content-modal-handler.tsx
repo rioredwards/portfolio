@@ -1,7 +1,7 @@
 "use client";
 
 import { useRouter, useSearchParams } from "next/navigation";
-import { ReactNode, useState } from "react";
+import { ReactNode } from "react";
 import { useLightbox } from "../lightbox-image";
 
 export interface RenderedContent<TFrontmatter> {
@@ -33,18 +33,17 @@ export function ContentModalHandler<TFrontmatter>({
   renderModal,
 }: ContentModalHandlerProps<TFrontmatter>) {
   const { isOpen: isLightboxOpen } = useLightbox();
-  const [open, setOpen] = useState(true);
   const searchParams = useSearchParams();
   const router = useRouter();
 
   const slug = searchParams.get(queryParam);
   const selectedContent = slug ? contentMap.get(slug) : null;
+  const open = Boolean(slug);
 
   const handleOpenChange = (open: boolean) => {
     if (isLightboxOpen) {
       return;
     }
-    setOpen(open);
     if (!open) {
       router.push("/", { scroll: false });
     }

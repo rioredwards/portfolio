@@ -38,6 +38,7 @@ export function BlogFrontmatterSection({
             <Fragment key={idx}>
               <span
                 className={cn("text-foreground", "rounded-full py-1 text-sm")}
+                data-testid="blog-tag"
               >
                 {tag}
               </span>

@@ -13,7 +13,9 @@ export function ProjectFrontmatterSection({
         <span className="text-sm font-medium text-muted-foreground">
           Category
         </span>
-        <span className="text-foreground">{frontmatter.category}</span>
+        <span className="text-foreground" data-testid="project-category">
+          {frontmatter.category}
+        </span>
       </div>
 
       {frontmatter.skills && frontmatter.skills.length > 0 && (
@@ -27,6 +29,7 @@ export function ProjectFrontmatterSection({
                 <span
                   key={idx}
                   className={cn("text-foreground", "rounded-full py-1 text-sm")}
+                  data-testid="project-skill"
                 >
                   {/* seprated by a circle */}
                   {skill}
