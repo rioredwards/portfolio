@@ -1,24 +1,22 @@
-import type { TestimonialType } from "@/components/testimonials";
-import imgAmandaHockmuthProfile from "@/public/testamonial-images/amanda-hockmuth-profile.png";
-import imgArinWilliamsProfile from "@/public/testamonial-images/arin-williams-profile.png";
+import { Testimonial } from "@/components/testimonials";
+import profileImage1 from "@/public/testamonial-images/goose-1.png";
+import profileImage2 from "@/public/testamonial-images/goose-2.png";
 
-export const TESTIMONIALS: TestimonialType[] = [
+export const TESTIMONIALS: Testimonial[] = [
   {
-    name: "Arin Williams",
+    name: "John Doe",
     description:
-      "I have had the pleasure of working with some of the most talented software engineers around the world. Without a doubt, Rio could go to-to-toe with the very best that I've known; despite the fact that he's a selfless team player.",
-    image: imgArinWilliamsProfile, // TODO: Replace with actual testimonial image
-    jobTitle: "Product Manager",
-    company: "Comcast",
+      "Rio's pretty chill, I guess.",
+    image: profileImage1, // TODO: Replace with actual testimonial image
+    jobTitle: "Goose",
+    company: "Pond",
   },
   {
-    name: "Amanda Hockmuth",
+    name: "Jane Smith",
     description:
-      "Rio's talent is self evident, but his quiet positivity in particular, is infectious. " +
-      "His VSCode Extension 'Error Affirmations' is the perfect illustration, and my favorite extension (even over 'Prettier').",
-    image: imgAmandaHockmuthProfile, // TODO: Replace with actual testimonial image
-    jobTitle: "Software Developer",
-    company: "Code The Dream",
+      "Yeah he's alright.",
+    image: profileImage2, // TODO: Replace with actual testimonial image
+    jobTitle: "Goose",
+    company: "Park",
   },
-  // TODO: Reach out to people for more testimonials and ask them^ if they're cool with being featured here
 ];
