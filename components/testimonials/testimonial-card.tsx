@@ -1,4 +1,6 @@
 import { QuoteSvg } from "@/components/ui/quote-svg";
+import { User03Icon } from "@hugeicons/core-free-icons";
+import { HugeiconsIcon } from "@hugeicons/react";
 import Image from "next/image";
 import { Testimonial } from "./testimonial";
 
@@ -31,8 +33,16 @@ export function TestimonialCard({
 
         {/* Author info */}
         <div className="flex items-center gap-4">
-          <div className="relative h-14 w-14 shrink-0 overflow-clip rounded-full border-2">
-            <Image src={image} alt={name} fill className="object-cover" />
+          <div className="relative flex h-14 w-14 shrink-0 items-center justify-center overflow-clip rounded-full border-2 bg-muted">
+            {image ? (
+              <Image src={image} alt={name} fill className="object-cover" />
+            ) : (
+              <HugeiconsIcon
+                icon={User03Icon}
+                size={28}
+                className="text-muted-foreground"
+              />
+            )}
           </div>
           <div className="flex flex-col">
             <h3

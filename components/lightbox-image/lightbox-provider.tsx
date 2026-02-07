@@ -36,11 +36,14 @@ export function LightboxProvider({ children }: { children: React.ReactNode }) {
     setIsOpen(true);
   }, []);
 
-  const openGallery = useCallback((newSlides: LightboxSlide[], index: number) => {
-    setSlides(newSlides);
-    setCurrentIndex(index);
-    setIsOpen(true);
-  }, []);
+  const openGallery = useCallback(
+    (newSlides: LightboxSlide[], index: number) => {
+      setSlides(newSlides);
+      setCurrentIndex(index);
+      setIsOpen(true);
+    },
+    [],
+  );
 
   const close = useCallback(() => {
     setIsOpen(false);

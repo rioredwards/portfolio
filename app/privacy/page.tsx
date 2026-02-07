@@ -64,7 +64,9 @@ export default function PrivacyPolicyPage() {
         </ul>
 
         <h2>Third-Party Services</h2>
-        <p>This site is hosted on Vercel. Their privacy policy can be found at:</p>
+        <p>
+          This site is hosted on Vercel. Their privacy policy can be found at:
+        </p>
         <ul>
           <li>
             <a
@@ -81,8 +83,7 @@ export default function PrivacyPolicyPage() {
         <p>
           Since this site collects minimal, anonymized data, there is no
           personal data to request or delete. If you have questions about
-          privacy, feel free to{" "}
-          <Link href="/#contact">contact me</Link>.
+          privacy, feel free to <Link href="/#contact">contact me</Link>.
         </p>
 
         <h2>Changes</h2>

@@ -6,8 +6,5 @@ export { Navbar } from "./navbar";
 export { SectionContentWrapper } from "./section-content-wrapper";
 export { SectionHeader } from "./section-header";
 export { Sidebar } from "./sidebar";
-export {
-  SlidePanel,
-  TriangleDecoration,
-} from "./slide-panel";
+export { SlidePanel, TriangleDecoration } from "./slide-panel";
 export type { SlidePanelProps } from "./slide-panel";
