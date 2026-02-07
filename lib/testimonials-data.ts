@@ -1,6 +1,6 @@
 import type { TestimonialType } from "@/components/testimonials";
-import imgAmandaHockmuthProfile from "@/public/testamonial-images/amanda-hockmuth-profile.png";
-import imgArinWilliamsProfile from "@/public/testamonial-images/arin-williams-profile.png";
+import imgAmandaHockmuthProfile from "@/public/testimonial-images/amanda-hockmuth-profile.png";
+import imgArinWilliamsProfile from "@/public/testimonial-images/arin-williams-profile.png";
 
 export const TESTIMONIALS: TestimonialType[] = [
   {
