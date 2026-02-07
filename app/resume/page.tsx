@@ -18,7 +18,10 @@ export default async function ResumePage() {
   const resume = await getResume();
 
   return (
-    <main id="main-content" className="min-h-screen bg-secondary px-content-px py-content-py md:px-content-px-md">
+    <main
+      id="main-content"
+      className="min-h-screen bg-secondary px-content-px py-content-py md:px-content-px-md"
+    >
       <div className="mx-auto max-w-content-max-w fade-in">
         <h1
           id="page-header"

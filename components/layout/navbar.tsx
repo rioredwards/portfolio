@@ -181,7 +181,7 @@ export function Navbar() {
   return (
     <header
       id="navbar"
-      className="pointer-events-none fixed top-0 left-0 right-0 z-40 flex justify-center pt-4"
+      className="pointer-events-none fixed top-0 right-0 left-0 z-40 flex justify-center pt-4"
     >
       <NavigationMenu viewport={false}>
         <div className="pointer-events-auto flex items-center gap-2 rounded-full bg-sidebar/80 px-4 py-2 text-sidebar-foreground backdrop-blur-sm">

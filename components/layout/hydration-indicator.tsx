@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import { useEffect } from 'react';
+import { useEffect } from "react";
 
 /**
  * Marks when the client-side app has finished hydrating.
@@ -9,7 +9,7 @@ import { useEffect } from 'react';
  */
 export function HydrationIndicator() {
   useEffect(() => {
-    document.documentElement.dataset.appHydrated = 'true';
+    document.documentElement.dataset.appHydrated = "true";
     return () => {
       delete document.documentElement.dataset.appHydrated;
     };

@@ -1,22 +1,31 @@
-import { Testimonial } from "@/components/testimonials";
-import profileImage1 from "@/public/testamonial-images/goose-1.png";
-import profileImage2 from "@/public/testamonial-images/goose-2.png";
+import type { TestimonialType } from "@/components/testimonials";
+import imgAmandaHockmuthProfile from "@/public/testamonial-images/amanda-hockmuth-profile.png";
+import imgArinWilliamsProfile from "@/public/testamonial-images/arin-williams-profile.png";
 
-export const TESTIMONIALS: Testimonial[] = [
+export const TESTIMONIALS: TestimonialType[] = [
   {
-    name: "John Doe",
+    name: "Arin Williams",
     description:
-      "Rio's pretty chill, I guess.",
-    image: profileImage1, // TODO: Replace with actual testimonial image
-    jobTitle: "Goose",
-    company: "Pond",
+      "I have had the pleasure of working with some of the most talented software engineers around the world. Without a doubt, Rio could go toe-to-toe with the very best that I've known; despite the fact that he's a selfless team player.",
+    image: imgArinWilliamsProfile, // TODO: Replace with actual testimonial image
+    jobTitle: "Product Manager",
+    company: "Comcast",
   },
   {
-    name: "Jane Smith",
+    name: "Amanda Hockmuth",
     description:
-      "Yeah he's alright.",
-    image: profileImage2, // TODO: Replace with actual testimonial image
-    jobTitle: "Goose",
-    company: "Park",
+      "Rio's talent is self evident, but his quiet positivity in particular, is infectious. " +
+      "His VSCode Extension 'Error Affirmations' is the perfect illustration, and my favorite extension (even over 'Prettier').",
+    image: imgAmandaHockmuthProfile, // TODO: Replace with actual testimonial image
+    jobTitle: "Software Developer",
+    company: "Code The Dream",
   },
+  {
+    name: "Shakira Syeda",
+    description:
+      "He is, without a doubt, one of the best teachers I have ever had. I am grateful to learn and grow under his guidance!",
+    jobTitle: "Analyst",
+    company: "Seagate Technology",
+  },
+  // TODO: Reach out to people for more testimonials and ask them^ if they're cool with being featured here
 ];

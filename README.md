@@ -17,10 +17,10 @@ Copy `.env.example` to `.env.local` and configure the following variables:
 cp .env.example .env.local
 ```
 
-| Variable | Description |
-|----------|-------------|
-| `GOOGLE_APP_SENDER_USERNAME` | Gmail account used to send contact form emails |
-| `GOOGLE_APP_SENDER_PASSWORD` | Gmail App Password (requires 2FA enabled) |
+| Variable                       | Description                                     |
+| ------------------------------ | ----------------------------------------------- |
+| `GOOGLE_APP_SENDER_USERNAME`   | Gmail account used to send contact form emails  |
+| `GOOGLE_APP_SENDER_PASSWORD`   | Gmail App Password (requires 2FA enabled)       |
 | `GOOGLE_APP_RECEIVER_USERNAME` | Email address that receives contact submissions |
 
 > **Note:** You must use a Gmail [App Password](https://myaccount.google.com/apppasswords), not your regular Gmail password.

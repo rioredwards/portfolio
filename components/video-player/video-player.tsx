@@ -151,7 +151,10 @@ export function VideoPlayer({
     const video = videoRef.current as WebkitFullscreenVideoElement | null;
     const handleWebkitBeginFullscreen = () => setIsFullscreen(true);
     const handleWebkitEndFullscreen = () => setIsFullscreen(false);
-    video?.addEventListener("webkitbeginfullscreen", handleWebkitBeginFullscreen);
+    video?.addEventListener(
+      "webkitbeginfullscreen",
+      handleWebkitBeginFullscreen,
+    );
     video?.addEventListener("webkitendfullscreen", handleWebkitEndFullscreen);
 
     return () => {
