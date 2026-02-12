@@ -31,6 +31,11 @@ export function ResumeContent({ data }: ResumeContentProps) {
           <p>
             <a href={`mailto:${basics.email}`}>{basics.email}</a>
           </p>
+          {basics.url && (
+            <p>
+              <a href={basics.url}>{basics.url.replace(/^https?:\/\//, "")}</a>
+            </p>
+          )}
           {basics.phone && <p>{basics.phone}</p>}
           {basics.profiles?.map((profile) => (
             <p key={profile.network}>
