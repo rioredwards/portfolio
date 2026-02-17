@@ -56,9 +56,12 @@ export function ResumeContent({ data }: ResumeContentProps) {
           {work.map((job) => (
             <div key={`${job.name}-${job.startDate}`} className="entry">
               <div className="entry-header">
-                <p className="entry-title">
-                  <strong>{job.position}</strong>, {job.name}
-                </p>
+                <div className="entry-title-block">
+                  <span className="entry-position">
+                    <strong>{job.position}</strong>
+                  </span>
+                  <span className="entry-company">{job.name}</span>
+                </div>
                 <p className="entry-meta">
                   {formatResumeDate(job.startDate)}
                   {job.endDate && ` - ${formatResumeDate(job.endDate)}`}
@@ -112,9 +115,11 @@ export function ResumeContent({ data }: ResumeContentProps) {
                   <p className="entry-title">
                     <strong>
                       {title}
-                      {area},
-                    </strong>{" "}
-                    {subtitle}
+                      {area}
+                    </strong>
+                    {subtitle && (
+                      <span className="entry-institution">{subtitle}</span>
+                    )}
                   </p>
                   {date && (
                     <p className="entry-meta">{formatResumeDate(date)}</p>
