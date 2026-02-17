@@ -166,20 +166,18 @@
   margin-top: var(--space-md);
 }
 
+@media (max-width: 559px) {
+  .entry + .entry {
+    border-top: 1px solid color-mix(in srgb, var(--rule-color) 40%, transparent);
+    padding-top: var(--space-md);
+  }
+}
+
 .entry-header {
   display: flex;
   flex-direction: column-reverse;
   gap: var(--space-xs);
   line-height: 1.4;
-}
-
-@media (min-width: 640px) {
-  .entry-header {
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: baseline;
-    gap: var(--space-md);
-  }
 }
 
 .entry-title {
@@ -188,6 +186,75 @@
 
 .entry-title strong {
   font-weight: 600;
+}
+
+.entry-institution {
+  display: block;
+}
+
+/* Split title block (experience: position + company as separate elements) */
+.entry-title-block {
+  display: flex;
+  flex-direction: column;
+}
+
+.entry-position {
+  font-weight: 400;
+  line-height: 1.4;
+}
+
+.entry-position strong {
+  font-weight: 600;
+}
+
+.entry-company {
+  font-weight: 400;
+  line-height: 1.4;
+}
+
+@media (max-width: 559px) {
+  .entry-company::before,
+  .entry-institution::before {
+    content: "@ ";
+  }
+}
+
+/* Medium+ (≥ 560px): title+institution/company on the same line, date below */
+@media (min-width: 560px) {
+  .entry-header {
+    flex-direction: column;
+  }
+
+  .entry-title-block {
+    display: block;
+  }
+
+  .entry-position,
+  .entry-company,
+  .entry-institution {
+    display: inline;
+    white-space: nowrap;
+  }
+
+  .entry-title strong::after,
+  .entry-position::after {
+    content: ", ";
+  }
+}
+
+/* Wide (≥ 800px): date on the right, everything on one line */
+@media (min-width: 800px) {
+  .entry-header {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: var(--space-md);
+  }
+
+  .entry-title-block {
+    flex: 1;
+    min-width: 0;
+  }
 }
 
 .entry-meta {
@@ -388,6 +455,26 @@
     justify-content: space-between;
     align-items: baseline;
     gap: var(--space-md);
+  }
+
+  .entry-title-block {
+    display: block;
+    flex: 1;
+    min-width: 0;
+  }
+
+  .entry-position,
+  .entry-company {
+    display: inline;
+  }
+
+  .entry-institution {
+    display: inline;
+  }
+
+  .entry-title strong::after,
+  .entry-position::after {
+    content: ", ";
   }
 
   .entry-meta {
