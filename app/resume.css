@@ -154,7 +154,7 @@
   font-family: var(--font-mazaeni), serif;
   font-size: var(--font-section);
   font-weight: 400;
-  color: var(--heading-color);
+  color: var(--name-color);
   line-height: 1.2;
   letter-spacing: 0.01em;
   margin-bottom: var(--space-sm);
@@ -164,13 +164,8 @@
 
 .entry + .entry {
   margin-top: var(--space-md);
-}
-
-@media (max-width: 559px) {
-  .entry + .entry {
-    border-top: 1px solid color-mix(in srgb, var(--rule-color) 40%, transparent);
-    padding-top: var(--space-md);
-  }
+  border-top: 1px solid color-mix(in srgb, var(--rule-color) 40%, transparent);
+  padding-top: var(--space-md);
 }
 
 .entry-header {
@@ -391,7 +386,7 @@
   .resume {
     /* === TWEAK THESE TO SCALE EVERYTHING === */
     --print-base-font: 14pt;
-    --print-base-space: 7.2pt;
+    --print-base-space: 6pt;
 
     /* Derived font sizes */
     /* Derived font sizes (multipliers of base) */
