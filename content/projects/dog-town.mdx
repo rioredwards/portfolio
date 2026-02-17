@@ -44,35 +44,27 @@ DogTown is a self-hosted photo-sharing app running on my [Raspberry Pi](https://
   caption="DogTown Diagram"
 />
 
-<span className="prose mt-6 mb-2 font-mazaeni text-lg text-foreground">
-  Core
-</span>
-
-- **Full-stack Next.js app** - [Next.js](https://nextjs.org), [React](https://react.dev), [TypeScript](https://www.typescriptlang.org), [Tailwind CSS](https://tailwindcss.com), [shadcn](https://ui.shadcn.com), [MDX](https://mdxjs.com), [NextAuth.js](https://next-auth.js.org), [Three.js](https://threejs.org), and more...
-- **Database** - [PostgreSQL](https://www.postgresql.org), [Drizzle ORM](https://orm.drizzle.team)
-
-<span className="prose mt-6 mb-2 font-mazaeni text-lg text-foreground">
-  Supporting Services
-</span>
-
-- **AI Image Validation** - [Python](https://www.python.org), [FastAPI](https://fastapi.tiangolo.com), [OpenNSFW](https://github.com/yahoo/open_nsfw), [PyTorch](https://pytorch.org)
-- **System Profiler** - [Hono](https://hono.dev), [TypeScript](https://www.typescriptlang.org), [Node.js](https://nodejs.org)
-
-<span className="prose mt-6 mb-2 font-mazaeni text-lg text-foreground">
-  DevOps/Infra
-</span>
-
-- **Containerization** - [Docker](https://www.docker.com)
-- **CI/CD** - [GitHub Actions](https://github.com/features/actions)
-- **Helper Scripts** - [Bash](https://www.gnu.org/software/bash/), [JavaScript](https://www.javascript.com)
-- **Reverse Proxy & Caching** - [NGINX](https://nginx.org)
-
-<span className="prose mt-6 mb-2 font-mazaeni text-lg text-foreground">
-  Networking, Security, and Analytics
-</span>
-
-- **Secure Tunnel** - [Cloudflare Tunnel](https://developers.cloudflare.com/cloudflare-one/networks/connectors/cloudflare-tunnel/)
-- **Analytics** - [Umami](https://umami.is)
+<Table
+  data={{
+    headers: ["Layer", "Technology"],
+    rows: [
+      ["OS", 'Raspberry Pi OS (Debian GNU/Linux "trixie")'],
+      ["Tunnel", "Cloudflare Tunnel"],
+      [
+        "Web",
+        "Next.js, React, TypeScript, Tailwind CSS, shadcn/ui, Three.js, MDX, Drizzle ORM, NextAuth.js",
+      ],
+      ["Database", "PostgreSQL"],
+      ["AI Validation", "Python, FastAPI, OpenNSFW, PyTorch"],
+      ["System Profiler", "Hono, TypeScript, Node.js"],
+      [
+        "Infra",
+        "Docker, Docker Compose, GitHub Actions, Bash/JavaScript helper scripts, NGINX (reverse proxy + caching)",
+      ],
+      ["Analytics", "Umami"],
+    ],
+  }}
+/>
 
 ---
 
