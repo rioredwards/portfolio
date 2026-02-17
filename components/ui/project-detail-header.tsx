@@ -30,7 +30,7 @@ export function ProjectDetailHeader({
           className="h-10 w-10"
         />
       )}
-      <span className="text-3xl font-bold transition-all duration-200 group-hover:brightness-125">
+      <span className="text-3xl font-bold text-foreground transition-all duration-200 group-hover:brightness-125">
         {title}
       </span>
     </header>

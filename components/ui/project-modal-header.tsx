@@ -15,7 +15,7 @@ export function ProjectModalHeader({ title, slug, icon }: ProjectFrontmatter) {
           className="h-10 w-10"
         />
       )}
-      <span className="text-2xl font-bold transition-all duration-200 group-hover:brightness-125">
+      <span className="text-2xl font-bold text-foreground transition-all duration-200 group-hover:brightness-125">
         {title}
       </span>
     </>
