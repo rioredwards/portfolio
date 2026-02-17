@@ -15,10 +15,6 @@ import ImgOhmLogoProgression from "@/public/work/images/ohm/ohm-logo-progression
 import ImgOhmParticlesScreenshot from "@/public/work/images/ohm/ohm-screenshot-2.jpg";
 import ImgOhmScreenshot3 from "@/public/work/images/ohm/ohm-screenshot-3.jpg";
 
-// Code Quest
-import ImgCodeQuestHeader from "@/public/work/images/code-quest/code-quest-header.png";
-import ImgCodeQuestPreview from "@/public/work/images/code-quest/code-quest-preview.gif";
-
 export const projectImageScope = {
   ImgDogTownScreenshot,
   ImgDogTownTechStack,
@@ -26,8 +22,6 @@ export const projectImageScope = {
   ImgDogTownFzfCmd,
   ImgDogTownLogoProg,
   ImgDogTownMyPi,
-  ImgCodeQuestHeader,
-  ImgCodeQuestPreview,
   ImgDogTownDashboardScreenshot,
   ImgDogTownMeWithPups,
   ImgOhmScreenshot3,
