@@ -12,8 +12,8 @@ test.describe("Contact form validation", () => {
     await home.sectionHeading("Contact").scrollIntoViewIfNeeded();
   });
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   test("enforces client-side validation before enabling submit", async ({
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     page,
   }) => {
     const form = home.contactForm();

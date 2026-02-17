@@ -35,6 +35,11 @@
   --radius: calc(var(--responsive-spacing-max) * 1);
   --tracking-normal: 0em;
   --spacing: 0.25rem;
+
+  /* Panel overlap spacing: also in @theme for Tailwind utilities; here so they're
+     defined on first paint and avoid intermittent "panel below padding" layout glitch */
+  --spacing-panel-tall-extended-padding-height: 16rem;
+  --spacing-panel-short-extended-padding-height: 12rem;
 }
 
 @theme {
@@ -67,6 +72,7 @@
     from var(--theme-foreground) h calc(s * 1.3) calc(l * 1.3)
   );
   --color-card: var(--theme-background-secondary);
+  --color-body-text: var(--theme-foreground-secondary);
   --color-card-foreground: var(--theme-foreground-secondary);
   --color-popover: var(--theme-background);
   --color-popover-foreground: var(--theme-foreground);
@@ -158,7 +164,7 @@
     scroll-behavior: smooth;
   }
   body {
-    @apply overflow-x-hidden bg-secondary text-foreground;
+    @apply overflow-x-hidden bg-secondary text-body-text;
   }
 
   /* Custom scrollbar styling */
@@ -442,22 +448,15 @@
 /* Syntax highlighting colors (sugar-high) */
 :root {
   /* Syntax highlighting colors (sugar-high) */
-  --sh-class: #2d5e9d;
-  --sh-identifier: var(--theme-foreground-secondary);
-  --sh-sign: #8996a3;
-  --sh-string: #007f7a;
-  --sh-keyword: #c53920;
-  --sh-comment: #a19595;
-  --sh-jsxliterals: #6f42c1;
+  --sh-class: #36708a;
+  --sh-identifier: #5c4b3e;
+  --sh-sign: #7a6e5a;
+  --sh-string: #2e7d5b;
+  --sh-keyword: #a84232;
+  --sh-comment: #998d7b;
+  --sh-jsxliterals: #7e4e78;
   --sh-property: #2d645d;
-  --sh-entity: #22863a;
-}
-
-.dark {
-  --sh-class: #4c97f8;
-  --sh-identifier: #e0e0e0;
-  --sh-keyword: #f47067;
-  --sh-string: #0fa295;
+  --sh-entity: #3b7a42;
 }
 
 /* Selection color */
@@ -467,7 +466,7 @@
 }
 
 .prose {
-  @apply text-foreground;
+  @apply text-body-text;
   line-height: 1.65;
   text-shadow: 2px 3px 4px rgba(3, 42, 0, 0.05);
 }
@@ -479,20 +478,22 @@
 }
 
 /* Prose headings */
-.prose :where(h1, h2, h3) {
+.prose :where(h1, h2, h3, h4) {
   font-family: var(--font-mazaeni), serif;
 }
 
 .prose h1 {
   @apply mt-8 mb-4 text-4xl font-semibold text-foreground;
+  letter-spacing: -0.02em;
 }
 
 .prose h2 {
   @apply mt-8 mb-3 text-2xl font-semibold text-foreground;
+  letter-spacing: -0.015em;
 }
 
 .prose h3 {
-  @apply mt-6 mb-2 text-lg font-semibold text-foreground;
+  @apply mt-6 mb-2 text-xl font-semibold text-foreground;
 }
 
 .prose h4 {
@@ -505,16 +506,15 @@
 
 .prose h6 {
   @apply mt-4 mb-2 text-sm font-medium text-foreground;
-  font-family: var(--font-mazaeni), serif;
 }
 
 /* Prose paragraphs and text */
 .prose p {
-  @apply mb-4 leading-relaxed text-foreground/90;
+  @apply mb-4 leading-relaxed text-body-text;
 }
 
 .prose strong {
-  @apply font-semibold text-foreground;
+  @apply font-bold text-body-text;
 }
 
 .prose em {
@@ -536,16 +536,16 @@
 }
 
 .prose li {
-  @apply text-foreground/90;
+  @apply leading-relaxed text-body-text;
 }
 
 /* Prose code blocks */
 .prose pre {
-  @apply my-6 overflow-x-auto rounded-lg border border-border bg-muted px-4 py-3 text-sm;
+  @apply my-6 overflow-x-auto rounded-lg border border-border bg-background px-4 py-3 text-sm;
 }
 
 .prose code {
-  @apply rounded-md bg-muted px-1.5 py-0.5 font-mono text-sm;
+  @apply rounded-xs bg-background px-1.5 py-0.5 font-mono text-sm text-(--sh-property);
 }
 
 .prose pre code {
@@ -554,7 +554,7 @@
 }
 
 .prose code span {
-  @apply font-medium;
+  @apply font-normal;
 }
 
 /* Hide scrollbar on pre */
@@ -597,7 +597,7 @@
 
 /* Prose blockquotes */
 .prose blockquote {
-  @apply my-6 border-l-4 border-primary/30 pl-4 text-foreground/80 italic;
+  @apply my-6 border-l-4 border-primary/30 pl-5 text-body-text/85 italic;
 }
 
 /* Prose horizontal rules */

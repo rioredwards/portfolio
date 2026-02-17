@@ -36,7 +36,7 @@ export default async function Home() {
         <MDXRemote
           source={project.content}
           components={mdxComponents}
-          options={{ scope: projectImageScope }}
+          options={{ scope: projectImageScope, blockJS: false }}
         />
       ),
     });
@@ -49,7 +49,11 @@ export default async function Home() {
     renderedBlogs.set(slug, {
       frontmatter: blog.frontmatter,
       renderedContent: (
-        <MDXRemote source={blog.content} components={mdxComponents} />
+        <MDXRemote
+          source={blog.content}
+          components={mdxComponents}
+          options={{ blockJS: false }}
+        />
       ),
     });
   }

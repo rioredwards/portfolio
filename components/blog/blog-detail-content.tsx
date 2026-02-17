@@ -27,7 +27,11 @@ export function BlogDetailContent({
       {/* MDX Content */}
       <section>
         <ContentProse includeTableStyles>
-          <MDXRemote source={content} components={components} />
+          <MDXRemote
+            source={content}
+            components={components}
+            options={{ blockJS: false }}
+          />
         </ContentProse>
       </section>
     </div>

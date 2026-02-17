@@ -8,7 +8,8 @@
       "Bash(lsof:*)",
       "Bash(xargs kill:*)",
       "Bash(npm run test:e2e:*)",
-      "Bash(bun run build:*)"
+      "Bash(bun run build:*)",
+      "WebSearch"
     ]
   }
 }

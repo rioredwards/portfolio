@@ -131,7 +131,7 @@ export function Contact() {
                         onBlur={field.handleBlur}
                         onChange={(e) => field.handleChange(e.target.value)}
                         aria-invalid={isInvalid}
-                        placeholder="John Smith"
+                        placeholder="Your Name"
                         autoComplete="name"
                         required
                       />

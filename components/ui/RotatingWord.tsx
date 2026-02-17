@@ -9,10 +9,10 @@ type RotatingWordProps = {
   className?: string;
 };
 
-const ANIMATION_PAUSE_DURATION = 1000;
+const ANIMATION_PAUSE_DURATION = 1400;
 const ANIMATION_DURATION = 1500;
-const LETTER_ANIMATION_DELAY = 0.008;
-const LETTER_ANIMATION_INDEX_DELAY = 0.02;
+const LETTER_ANIMATION_DELAY = 0.05;
+const LETTER_ANIMATION_INDEX_DELAY = 0.006;
 
 type AnimationPhase = "preSwap" | "duringSwap" | "postSwap";
 
@@ -29,18 +29,27 @@ export function RotatingWord({ words, className }: RotatingWordProps) {
 
   // Progress through animation phases
   useEffect(() => {
-    // setCount((prev) => prev + 1);
     switch (animationPhase) {
       case "preSwap":
         setTimeout(() => {
           setAnimationPhase("duringSwap");
         }, ANIMATION_PAUSE_DURATION);
         break;
-      case "duringSwap":
+      case "duringSwap": {
+        // Account for the last letter's delay so every letter finishes animating
+        const maxLetters = Math.max(
+          words[currentWordIdx].length,
+          words[nextWordIdx].length,
+        );
+        const lastLetterDelay =
+          (maxLetters - 1) *
+          (LETTER_ANIMATION_DELAY + LETTER_ANIMATION_INDEX_DELAY) *
+          1000;
         setTimeout(() => {
           setAnimationPhase("postSwap");
-        }, ANIMATION_DURATION);
+        }, ANIMATION_DURATION + lastLetterDelay);
         break;
+      }
       case "postSwap":
         setTimeout(() => {
           swapWords();

@@ -31,7 +31,7 @@ export function ProjectDetailContent({
           <MDXRemote
             source={content}
             components={components}
-            options={{ scope: projectImageScope }}
+            options={{ scope: projectImageScope, blockJS: false }}
           />
         </ContentProse>
       </section>
