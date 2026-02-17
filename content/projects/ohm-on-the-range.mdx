@@ -42,7 +42,7 @@ A fast festival site where attendees, volunteers, artists, and vendors find what
 
 ## Goals and constraints
 
-This site had to do two jobs at once: capture the festival's whimsical "space-cowboy" energy, and still function as a practical tool people rely on. Most visitors arrive on mobile from social (often on weak connections), looking for one answer fast, and the details change leading up to the event and year-to-year. That drove a few clear build priorities:
+This site had to do two jobs at once: capture the festival's whimsical "space-cowboy" energy and still work as a practical tool people rely on. Most visitors arrive on mobile from social (often on weak connections), looking for one answer fast, and details change year-to-year. That drove a few clear build priorities:
 
 <Table
   data={{
@@ -74,7 +74,7 @@ This site had to do two jobs at once: capture the festival's whimsical "space-co
 
 ### Visual storytelling
 
-The festival has a great photo archive, so I leaned into that. Photography does the heavy lifting: scenery shots, lasers, crowd energy and candid moments.
+The festival has a great photo archive, so photography does the heavy lifting: scenery shots, lasers, crowd energy, candid moments.
 
 The hero uses a rotating full-bleed carousel:
 
@@ -90,7 +90,7 @@ The hero uses a rotating full-bleed carousel:
 
 ### Background effects as progressive enhancement
 
-I added a geometric particle background (particles.js), and treated it as _progressive enhancement_. It loads after first paint, so the actual content is always there first. The particles are just atmosphere; if they don't load, nothing breaks.
+I added a geometric particle background (particles.js) as _progressive enhancement_. It loads after first paint, so the actual content is always there first. The particles are just atmosphere; if they don't load, nothing breaks.
 
 <LightboxVideo
   src="/work/images/ohm/ohm-particle-background.mp4"
@@ -100,7 +100,7 @@ I added a geometric particle background (particles.js), and treated it as _progr
 
 ### Custom UI that works everywhere
 
-The "Get Involved" page uses these custom 3D flip cards (inspired by a component on Linktree's site). They use CSS 3D transforms and detect pointer type: on desktop they flip on hover, on mobile they flip on tap. I've reused this pattern on other projects since. Fancy hover effects are great, but they have to work on touch devices too.
+The "Get Involved" page uses custom 3D flip cards (inspired by a component on Linktree's site). They use CSS 3D transforms and detect pointer type: on desktop they flip on hover, on mobile they flip on tap. I've reused this pattern on other projects since. Fancy hover effects are great, but they have to work on touch devices too.
 
 <LightboxVideo
   src="/work/images/ohm/ohm-flip-cards-video.mp4"
@@ -112,9 +112,9 @@ The "Get Involved" page uses these custom 3D flip cards (inspired by a component
 
 ## Content architecture: one source, three outputs
 
-One system I'm especially proud of: lineup content is defined once and transformed into three outputs which together boost the site's SEO and accessibility.
+One system I'm especially proud of: lineup content is defined once and transformed into three outputs that boost the site's SEO and accessibility.
 
-The data is stored as typesafe, structured data (JSON+LD). The object contains dates, locations, organizer info, and performer lists all in one place. From that single source, I generate:
+The data is stored as type-safe, structured JSON-LD: dates, locations, organizer info, and performer lists, all in one place. From that single source, I generate:
 
 - `RenderableLineupItem` (UI): the visual content (titles + images)
 - `ScreenReadableLineupItem` (a11y): human-readable strings rendered with sr-only so screen readers announce meaningful text instead of raw data.
@@ -128,9 +128,9 @@ Note: the repo is private, but I put some code snippets at the bottom of this pa
 
 ## Process and collaboration
 
-I kicked off the project with requirements gathering and design exploration in Figma, then ran feedback rounds with the Ohm on the Range team to align on brand and content priorities.
+I started with requirements gathering and design exploration in Figma, then ran feedback rounds with the Ohm team to get on the same page about brand direction and content priorities.
 
-We did four formal review rounds with mockups shared in Figma and a shared Google Doc for lightweight project tracking. Things really clicked when I got the team to sit with me in a live Figma session—watching me work while describing what they wanted in real time.
+We did four formal review rounds with mockups shared in Figma and a shared Google Doc for lightweight project tracking. Things really clicked when I got the team to sit with me in a live Figma session, watching me work while describing what they wanted in real time.
 
 <LightboxImage
   src={ImgOhmScreenshot3}
@@ -176,7 +176,7 @@ Here's the lineup content pipeline at a high level:
 
 </LightboxGallery>
 ```typescript
-// Source of truth stored as type-safe JSON+LD
+// Source of truth stored as type-safe JSON-LD
 const OHM_ON_THE_RANGE_2025 = {
   "@type": "MusicEvent",
   "@context": "https://schema.org",
