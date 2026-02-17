@@ -219,10 +219,10 @@
   }
 }
 
-/* Medium+ (≥ 560px): title+institution/company on the same line, date below */
+/* Medium+ (≥ 560px): title+institution/company on the same line, date above */
 @media (min-width: 560px) {
   .entry-header {
-    flex-direction: column;
+    flex-direction: column-reverse;
   }
 
   .entry-title-block {
