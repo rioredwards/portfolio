@@ -1,8 +1,8 @@
 ---
-title: "Ohm On The Range"
+title: "Ohm on the Range"
 slug: "ohm-on-the-range"
 icon: "/work/images/ohm/Ohm-logo-with-bg-1.svg"
-description: "Official site for Ohm on the Range"
+description: "A fast, mobile-first festival website with a design system and a type-safe content pipeline (SEO + a11y built in)"
 category: "Website"
 skills:
   - "Next.js"
@@ -10,6 +10,8 @@ skills:
   - "Tailwind CSS"
   - "shadcn/ui"
   - "Figma"
+  - "Accessibility"
+  - "SEO"
 image: "/work/images/ohm/ohm-hero.jpg"
 brandColor: "#210457"
 links:
@@ -25,33 +27,46 @@ order: 0
   src={ImgOhmCarouselScreenshot}
   alt="Hero section of the Ohm on the Range website"
   caption="Hero section"
+  priority={true}
 />
 
-I built the official website for **Ohm on the Range**, a music, art, and wellness festival held each year at the base of Mount Adams.
+I built the official website for **Ohm on the Range**, a music, art, and wellness festival at the base of Mount Adams. I owned the whole thing: brand identity, logo, design system, frontend, content architecture, and launch.
 
 ---
 
-## Project snapshot
+## What it is
 
-**What it is:** A fast, mobile-first festival site where attendees, volunteers, artists, and vendors can quickly find key info—and buy tickets.
-
-**What I did:** Led an end-to-end redesign: requirements, brand + design system, implementation, and launch polish.
-
-### Tech stack
-
-- **Next.js** & **React**
-- **TypeScript**
-- **Tailwind CSS**
-- **shadcn/ui** & **Radix UI**
-- **particles.js**
+A fast festival site where attendees, volunteers, artists, and vendors find what they need quickly and buy tickets. Eventbrite handles ticketing, Google Forms handles applications. Everything else is custom.
 
 ---
 
 ## Goals and constraints
 
-The site needed to capture the festival's fun, space-cowboy energy—think neon desert + cosmic vibes—while staying fast, accessible, and mobile-first.
+This site had to do two jobs at once: capture the festival's whimsical "space-cowboy" energy, and still function as a practical tool people rely on. Most visitors arrive on mobile from social (often on weak connections), looking for one answer fast, and the details change leading up to the event and year-to-year. That drove a few clear build priorities:
 
-Most visitors arrive from social posts or word-of-mouth while they're out with friends, not sitting at a laptop. That shaped the UX: clear content hierarchy, thumb-friendly tap targets, skimmable layout, and performance tuned for mobile.
+<Table
+  data={{
+    headers: ["Constraint", "Response"],
+    rows: [
+      [
+        "Mobile-first traffic + weak connections",
+        "SSR, optimized images with mobile/desktop crops, progressive enhancement, near-perfect Lighthouse.",
+      ],
+      [
+        "Accessibility is non-negotiable",
+        "Screen-reader content generated from the same data source as the UI, semantic headings, touch-friendly targets.",
+      ],
+      [
+        "Time-sensitive info changes often",
+        "Single data source feeds UI, screen-reader layer, and JSON-LD. Modular card-based homepage makes adding lineups, announcements, or links painless.",
+      ],
+      [
+        "People want essentials immediately",
+        "Easy navigation, information architecture built around what people actually came for: dates, tickets, lineup, FAQs.",
+      ],
+    ],
+  }}
+/>
 
 ---
 
@@ -59,51 +74,55 @@ Most visitors arrive from social posts or word-of-mouth while they're out with f
 
 ### Visual storytelling
 
-The festival is visually stunning, so photography became the centerpiece. I had access to a large media archive and curated a set that tells the story at a glance: daytime scenery, nighttime stage/laser production, and lots of crowd moments (because the social side of a festival is the experience).
+The festival has a great photo archive, so I leaned into that. Photography does the heavy lifting: scenery shots, lasers, crowd energy and candid moments.
 
-The hero fills the viewport with a rotating carousel of full-bleed images. To keep framing consistent, I made separate crops for mobile and desktop on select shots.
+The hero uses a rotating full-bleed carousel:
 
-Under the hood, the carousel preloads the next image and crossfades between them for a smooth, cinematic feel. I prototyped the transition in a small HTML/CSS sandbox, then translated it into the site.
+- selective mobile/desktop crops to preserve framing
+- preloads the next image
+- smooth crossfades for a cinematic feel
 
 <LightboxVideo
   src="/work/images/ohm/ohm-carousel-video.mp4"
-  caption="Hero image carousel"
+  caption="Hero carousel (preloaded + crossfade transitions)"
   className="w-full rounded-lg"
 />
 
 ### Background effects as progressive enhancement
 
-I built a geometric particle background with particles.js and treated it as progressive enhancement—loaded so it never blocks primary content. First paint stays focused on what users came for (lineup, tickets, info), and the effect layers in once the page is usable.
+I added a geometric particle background (particles.js), and treated it as _progressive enhancement_. It loads after first paint, so the actual content is always there first. The particles are just atmosphere; if they don't load, nothing breaks.
 
 <LightboxVideo
   src="/work/images/ohm/ohm-particle-background.mp4"
-  caption="Particle background effect"
+  caption="Particle background effect (loaded without blocking core content)"
   className="w-full rounded-lg"
 />
 
-### Playful 3D flip cards
+### Custom UI that works everywhere
 
-On the “Get Involved” page, I designed and built 3D flip-cards inspired by an element on Linktree's site. They're implemented with CSS 3D transforms and work cleanly across mobile and desktop using Tailwind's `pointer-coarse` / `pointer-fine` pseudo-classes.
+The "Get Involved" page uses these custom 3D flip cards (inspired by a component on Linktree's site). They use CSS 3D transforms and detect pointer type: on desktop they flip on hover, on mobile they flip on tap. I've reused this pattern on other projects since. Fancy hover effects are great, but they have to work on touch devices too.
 
 <LightboxVideo
   src="/work/images/ohm/ohm-flip-cards-video.mp4"
-  caption="3D card flip effect"
+  caption="3D flip cards (mobile + desktop friendly)"
   className="w-full rounded-lg"
 />
 
-### Single-source-of-truth for content
+---
+
+## Content architecture: one source, three outputs
 
 One system I'm especially proud of: lineup content is defined once and transformed into three outputs which together boost the site's SEO and accessibility.
 
 The data is stored as typesafe, structured data (JSON+LD). The object contains dates, locations, organizer info, and performer lists all in one place. From that single source, I generate:
 
 - `RenderableLineupItem` (UI): the visual content (titles + images)
-- `ScreenReadableLineupItem` (a11y): human-readable strings rendered with sr-only, so screen readers announce meaningful text instead of raw data.
+- `ScreenReadableLineupItem` (a11y): human-readable strings rendered with sr-only so screen readers announce meaningful text instead of raw data.
 - `StructuredDataForLineupItem` (SEO): JSON-LD embedded via `<script>` tags for rich results.
 
 Because it's fully type-safe, adding the next year's lineup is straightforward: update one file, and the poster image, screen-reader output, and structured data all update together.
 
-> **Note:** the repo is private, but I put some code snippets at the bottom of this page if you're curious.
+Note: the repo is private, but I put some code snippets at the bottom of this page if you're curious.
 
 ---
 
@@ -116,7 +135,7 @@ We did four formal review rounds with mockups shared in Figma and a shared Googl
 <LightboxImage
   src={ImgOhmScreenshot3}
   alt="Figma mockups of the Ohm on the Range website"
-  caption="Early mockups + review rounds with the Ohm on the Range team."
+  caption="Early mockups and review rounds in Figma"
 />
 
 ### Branding and design system
@@ -126,36 +145,34 @@ I developed a design system aligned to the festival's identity: fonts, colors, a
 <LightboxImage
   src={ImgOhmLogoProgression}
   alt="Progression of the logo design"
-  caption="My logo design process"
+  caption="Logo exploration and refinement"
 />
 
 ---
 
 ## Results
 
-Within the first month of launch, the site reached 3,000+ unique visitors which was more than double the previous year's traffic.
-
-Because the site is content-heavy in the places that matter (lineup, FAQs), performance was a feature—not an afterthought. I targeted strong Lighthouse scores and a snappy feel across routes.
+First month after launch: **3,000+ unique visitors**, more than double the previous year's traffic. Lighthouse scores are near-perfect across every route, which matters when half your audience is on a phone with spotty festival-area cell service.
 
 <LightboxImage
   src={ImgOhmLighthouseScores}
-  alt="Screenshot of Lighthouse scores for the Ohm on the Range site"
-  caption="One page hits a perfect score; the rest are near-perfect."
+  alt="Lighthouse scores for the Ohm on the Range site"
+  caption="Performance as a feature (near-perfect Lighthouse scores)"
 />
-
-Tickets are purchased through an Eventbrite embed, and applications link out to Google Forms.
 
 ---
 
 ## Final thoughts
 
-This project reinforced that “simple” can still be deeply professional: a static build, carefully structured content, and strong UX fundamentals backed by real engineering decisions. The result is a site that communicates clearly, looks like the festival feels, and works seamlessly across devices.
+I'm proud of how this project came together. The content pipeline, the accessibility layer, the performance work, the brand system. It all clicked, the client was happy, and the numbers backed it up.
 
 [Back Home](/)
 
+---
+
 ## Code snippets (for the nerds)
 
-Here's how I structured the lineup content:
+Here's the lineup content pipeline at a high level:
 
 </LightboxGallery>
 ```typescript
