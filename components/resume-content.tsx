@@ -57,10 +57,10 @@ export function ResumeContent({ data }: ResumeContentProps) {
             <div key={`${job.name}-${job.startDate}`} className="entry">
               <div className="entry-header">
                 <div className="entry-title-block">
-                  <p className="entry-position">
+                  <span className="entry-position">
                     <strong>{job.position}</strong>
-                  </p>
-                  <p className="entry-company">{job.name}</p>
+                  </span>
+                  <span className="entry-company">{job.name}</span>
                 </div>
                 <p className="entry-meta">
                   {formatResumeDate(job.startDate)}
@@ -117,7 +117,9 @@ export function ResumeContent({ data }: ResumeContentProps) {
                       {title}
                       {area}
                     </strong>
-                    <span className="entry-institution">{subtitle}</span>
+                    {subtitle && (
+                      <span className="entry-institution">{subtitle}</span>
+                    )}
                   </p>
                   {date && (
                     <p className="entry-meta">{formatResumeDate(date)}</p>

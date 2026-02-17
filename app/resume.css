@@ -221,7 +221,7 @@
   }
 
   .entry-title-block {
-    gap: 2px;
+    gap: calc(var(--base-space) * 0.25);
   }
 
   .entry-company,
@@ -476,10 +476,7 @@
   }
 
   .entry-position,
-  .entry-company {
-    display: inline;
-  }
-
+  .entry-company,
   .entry-institution {
     display: inline;
   }
