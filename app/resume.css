@@ -298,7 +298,7 @@
   justify-content: space-between;
 }
 
-@media (min-width: 640px) {
+@media (min-width: 800px) {
   .skill-row {
     flex-direction: row;
     gap: var(--space-sm);
