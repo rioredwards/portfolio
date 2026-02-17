@@ -219,6 +219,23 @@
   }
 }
 
+/* Stacked layouts (< 800px): tighten hierarchy between title, company, and date */
+@media (max-width: 799px) {
+  .entry-header {
+    gap: var(--space-sm);
+  }
+
+  .entry-title-block {
+    gap: 2px;
+  }
+
+  .entry-company,
+  .entry-institution {
+    font-size: var(--font-small);
+    opacity: 0.75;
+  }
+}
+
 /* Medium+ (≥ 560px): title+institution/company on the same line, date above */
 @media (min-width: 560px) {
   .entry-header {
