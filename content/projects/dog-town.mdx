@@ -2,7 +2,7 @@
 title: "DogTown"
 slug: "dog-town"
 icon: "/work/images/dog-town/logo-256.png"
-description: "Self-hosted on my Raspberry Pi"
+description: "A self-hosted photo-sharing app: 5 Docker services, CI/CD, and an AI image validator, all on a Raspberry Pi"
 category: "Web App"
 skills:
   - "Next.js"
@@ -31,7 +31,9 @@ order: 0
   priority={true}
 />
 
-DogTown is a self-hosted photo-sharing app running on my [Raspberry Pi](https://www.raspberrypi.com). Naturally, the theme is **dogs** because dogs play a big part in my life. 🐶
+DogTown is a self-hosted photo-sharing app running on my [Raspberry Pi](https://www.raspberrypi.com). The theme is dogs, because dogs play a big part in my life. 🐶
+
+Under the hood it's five containerized services, a CI/CD pipeline, and a reverse proxy, all running on a single-board computer on my desk.
 
 ---
 
@@ -40,8 +42,8 @@ DogTown is a self-hosted photo-sharing app running on my [Raspberry Pi](https://
 <LightboxImage
   src={ImgDogTownTechStack}
   alt="Diagram showing the tech stack powering this site"
+  caption="DogTown Architecture"
   priority={true}
-  caption="DogTown Diagram"
 />
 
 <Table
@@ -68,30 +70,17 @@ DogTown is a self-hosted photo-sharing app running on my [Raspberry Pi](https://
 
 ---
 
-## Core
+## Core App
 
-### Full-stack Next.js app
-
-DogTown is a full-stack **Next.js** app built with **React + TypeScript**, styled with **Tailwind** and **shadcn/ui**, and extended with **MDX** so I can write content while still embedding custom components. It includes authentication via **NextAuth**, a clean upload flow with client-side image compression, and a dashboard with live system metrics.
-
-I treated it like a real production app: clear separation of concerns, robust design system, and optimized for performance. The result is something that feels snappy and “product-like,” even though it's running on a tiny computer in my house.
-
-### Database
-
-DogTown uses **PostgreSQL** and **Drizzle ORM** to keep the schema and queries strongly typed. The data model is fairly simple, but it's easy to extend and modify as the project grows.
+The main app is a full-stack **Next.js** site with auth via **NextAuth**, client-side image compression (plus HEIC conversion for iPhone uploads), and a live system dashboard. **PostgreSQL** with **Drizzle ORM** handles data.
 
 ---
 
-## Supporting Services
+## DogBot: AI Image Validation
 
-### AI Image Validation
+Anyone can upload photos, so the content needs to stay on-brand and safe for all audiences. I built **DogBot**: a dedicated AI image validation service.
 
-To keep user-generated content on-brand and safe for all audiences, I created **DogBot**: a an AI image validation service. Built using:
-
-- OpenNSFW (inappropriate content detection)
-- PyTorch/TorchVision (verify images contain dogs)
-
-It runs on a FastAPI server, processing images and returning `isDog` and `isNSFW` as scores/booleans. I designed it as a dedicated service so it could evolve independently from the web app.
+It runs on a **FastAPI** server with **OpenNSFW** for content moderation and **PyTorch/TorchVision** for dog detection. The API returns `isDog` and `isNSFW` as simple booleans. I designed it as its own service so it could evolve independently without bloating the main container.
 
 <LightboxVideo
   src="/work/images/dog-town/DogBot-Demo.mp4"
@@ -99,11 +88,11 @@ It runs on a FastAPI server, processing images and returning `isDog` and `isNSFW
   className="w-full rounded-lg"
 />
 
-### System Profiler
+---
 
-DogTown also includes a custom system-profiler service built with **Hono + Node.js**. It collects metrics from the PI and docker containers, which are fetched from the Next.js app streamed to the frontend in realtime.
+## System Profiler
 
-This started as a way for me to look under the hood, but evolved into it's own page with a dashboard UI made with Recharts. I also added a 3D raspberry pi model using three.js for some visual flair.
+This started as a way to peek under the hood. A small **Hono** + **Node.js** service pulls metrics from the Pi and Docker containers and streams them to the frontend over **SSE**. It grew into its own page with a **Recharts** dashboard and a 3D Raspberry Pi model in **Three.js** for some visual flair.
 
 <LightboxImage
   src={ImgDogTownDashboardScreenshot}
@@ -113,41 +102,33 @@ This started as a way for me to look under the hood, but evolved into it's own p
 
 ---
 
-## DevOps/Infra
+## Infrastructure
 
 ### Containerization
 
-Everything runs in isolated **Docker** containers, wired together with **Docker-Compose**. This enables development, staging, and production environments to stay in sync. I also have a variety of utility scripts to help with things like manual deployments, updates, and maintenance.
-
-This infrastructure speeds up development and deployment significantly and makes the app portable and easy to deploy across multiple environments.
+Everything runs in isolated **Docker** containers wired together with **Docker Compose**. Dev, staging, and production environments stay in sync. I also have utility scripts for manual deployments, updates, and maintenance when I need to SSH in.
 
 ### CI/CD
 
-I set up **GitHub Actions** to automate builds and deployments so updates are consistent and low-stress. The pipeline handles the typical steps—build, validate, and ship—so I'm not SSH'ing into the Pi at midnight to copy files around and hope for the best. It also nudged me toward better habits: keeping changes small, ensuring environments are deterministic, and treating deployments like a repeatable process rather than a one-off event.
+**GitHub Actions** automates builds and deployments so updates are consistent and low-stress. If I can't deploy confidently, I stop shipping. The CI/CD pipeline is what keeps this hobby project alive long-term.
 
-In practice, it makes the project easier to maintain over time. If I can't deploy confidently, I stop shipping—so the CI/CD work is what keeps this hobby project alive.
+### Reverse Proxy + Caching
 
-### Reverse Proxy & Caching
+**Nginx** sits in front caching images and static assets. Easy way to reduce load on the Pi and keep response times reasonable.
 
-I added **Nginx** to cache images and other static assets. This was an easy way to reduce load on the Pi and improve the overall performance of the app.
+### Networking
 
----
-
-## Networking, Security, & Analytics
-
-### Secure Tunnel
-
-DogTown is exposed to the internet through **Cloudflare Tunnel**, which means I didn't have to setup port forwarding on my router. It also provides some additional security and performance gains like DDoS protection and TLS/SSL termination.
+DogTown is exposed to the internet through **Cloudflare Tunnel**, so I didn't have to set up port forwarding on my router. It also provides DDoS protection and TLS/SSL termination for free.
 
 ### Analytics
 
-For analytics, I use **Umami**. This continues the theme of self-hosting and privacy-first. It's lightweight, privacy-friendly, and fits the self-hosted ethos of the project. It runs in a docker container and is accessible via a separate subdomain in the tunnel.
+**Umami** handles analytics. Self-hosted, privacy-friendly, runs in its own container on a separate subdomain through the tunnel.
 
 ---
 
 ## Final Thoughts
 
-I learned a lot from this project—Docker, DevOps, Linux, bash scripting, networking, and more. If you happen to be looking for ideas for your next side-project, I'd highly recommend picking up a Raspberry Pi.
+There's something satisfying about owning the full stack, from the code to the hardware sitting on my desk. No cloud provider between me and my deploys.
 
 Thanks for reading! ❤️
 
@@ -159,4 +140,4 @@ Thanks for reading! ❤️
   caption="Bonus: Me with some of my favorite pups"
 />
 
-</ LightboxGallery>
+</LightboxGallery>
