@@ -60,6 +60,9 @@ const GIST_RAW_URL =
 export async function getResume(): Promise<Resume> {
   const localPath = process.env.RESUME_LOCAL_PATH;
   if (localPath) {
+    if (process.env.NODE_ENV === "production") {
+      throw new Error("RESUME_LOCAL_PATH is not allowed in production");
+    }
     const { readFile } = await import("fs/promises");
     const { resolve } = await import("path");
     const json = await readFile(resolve(localPath), "utf-8");
