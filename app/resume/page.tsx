@@ -34,7 +34,9 @@ export default async function ResumePage() {
       </div>
 
       <div className="fixed bottom-6 left-1/2 -translate-x-1/2">
-        <PrintResumeButton />
+        <PrintResumeButton
+          filename={`${resume.basics.name?.replace(/\s+/g, "") ?? "RioEdwards"}_${resume.basics.label ?? "Resume"}_Resume`}
+        />
       </div>
     </main>
   );

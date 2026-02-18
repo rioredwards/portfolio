@@ -24,8 +24,8 @@ export function ResumeContent({ data }: ResumeContentProps) {
       {/* Header */}
       <header className="header">
         <div>
-          <h2 className="name">{basics.name.toUpperCase()}</h2>
-          <p className="role">{basics.label.toUpperCase()}</p>
+          <h2 className="name">{basics.name?.toUpperCase()}</h2>
+          <p className="role">{basics.label?.toUpperCase()}</p>
         </div>
         <address className="contact" aria-label="Contact info">
           <p>
