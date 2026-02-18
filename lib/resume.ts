@@ -45,6 +45,15 @@ export interface ResumeSkill {
   keywords?: string[];
 }
 
+export interface ResumeProject {
+  name: string;
+  startDate?: string;
+  endDate?: string;
+  description?: string;
+  highlights?: string[];
+  url?: string;
+}
+
 export interface Resume {
   $schema?: string;
   basics: ResumeBasics;
@@ -52,6 +61,7 @@ export interface Resume {
   education?: ResumeEducation[];
   certificates?: ResumeCertificate[];
   skills?: ResumeSkill[];
+  projects?: ResumeProject[];
 }
 
 const GIST_RAW_URL =

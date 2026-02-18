@@ -3,6 +3,7 @@ import {
   Resume,
   ResumeCertificate,
   ResumeEducation,
+  ResumeProject,
   formatResumeDate,
 } from "@/lib/resume";
 
@@ -11,7 +12,7 @@ interface ResumeContentProps {
 }
 
 export function ResumeContent({ data }: ResumeContentProps) {
-  const { basics, work, education, certificates, skills } = data;
+  const { basics, work, education, certificates, skills, projects } = data;
 
   // Combine certificates and education for display
   const allEducation: (ResumeEducation | ResumeCertificate)[] = [
@@ -76,6 +77,53 @@ export function ResumeContent({ data }: ResumeContentProps) {
               )}
             </div>
           ))}
+
+          {/* Projects (rendered as part of Experience section) */}
+          {projects && projects.length > 0 && (
+            <>
+              {projects.map((project: ResumeProject) => (
+                <div
+                  key={`${project.name}-${project.startDate}`}
+                  className="entry"
+                >
+                  <div className="entry-header">
+                    <div className="entry-title-block">
+                      <span className="entry-position">
+                        <strong>{project.name}</strong>
+                      </span>
+                      {project.url && (
+                        <a
+                          href={project.url}
+                          className="entry-company"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          {project.url.replace(/^https?:\/\//, "")}
+                        </a>
+                      )}
+                    </div>
+                    {project.startDate && (
+                      <p className="entry-meta">
+                        {formatResumeDate(project.startDate)}
+                        {project.endDate &&
+                          ` - ${formatResumeDate(project.endDate)}`}
+                      </p>
+                    )}
+                  </div>
+                  {project.description && (
+                    <p className="entry-description">{project.description}</p>
+                  )}
+                  {project.highlights && project.highlights.length > 0 && (
+                    <ul className="bullets">
+                      {project.highlights.map((highlight, i) => (
+                        <li key={i}>{highlight}</li>
+                      ))}
+                    </ul>
+                  )}
+                </div>
+              ))}
+            </>
+          )}
         </section>
       )}
 
