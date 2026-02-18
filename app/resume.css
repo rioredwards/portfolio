@@ -277,6 +277,11 @@
   font-size: var(--font-small);
 }
 
+.entry-description {
+  margin-top: var(--space-xs);
+  line-height: 1.5;
+}
+
 /* ===== Bullets ===== */
 
 .bullets {
