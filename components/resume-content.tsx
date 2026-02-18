@@ -1,4 +1,5 @@
 import "@/app/resume.css";
+import { parseInlineMarkdown } from "@/lib/parse-inline-markdown";
 import {
   Resume,
   ResumeCertificate,
@@ -46,7 +47,9 @@ export function ResumeContent({ data }: ResumeContentProps) {
       <hr className="hr" />
 
       {/* Summary */}
-      {basics.summary && <p className="summary">{basics.summary}</p>}
+      {basics.summary && (
+        <p className="summary">{parseInlineMarkdown(basics.summary)}</p>
+      )}
 
       <hr className="hr" />
 
@@ -71,7 +74,7 @@ export function ResumeContent({ data }: ResumeContentProps) {
               {job.highlights && job.highlights.length > 0 && (
                 <ul className="bullets">
                   {job.highlights.map((highlight, i) => (
-                    <li key={i}>{highlight}</li>
+                    <li key={i}>{parseInlineMarkdown(highlight)}</li>
                   ))}
                 </ul>
               )}
