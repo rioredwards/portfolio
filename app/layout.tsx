@@ -9,12 +9,17 @@ import { Toaster } from "@/components/ui/sonner";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import type { Metadata } from "next";
-import { DM_Mono, DM_Sans } from "next/font/google";
+import { DM_Mono, DM_Sans, Montserrat } from "next/font/google";
 import localFont from "next/font/local";
 import "./globals.css";
 
 const dmSans = DM_Sans({
   variable: "--font-dm-sans",
+  subsets: ["latin"],
+});
+
+const montserrat = Montserrat({
+  variable: "--font-montserrat",
   subsets: ["latin"],
 });
 
@@ -167,7 +172,7 @@ export default function RootLayout({
         content="width=device-width, initial-scale=1, user-scalable=no, maximum-scale=1.0"
       ></meta>
       <body
-        className={`${dmSans.variable} ${dmMono.variable} ${mazaeniDemo.variable} font-sans antialiased`}
+        className={`${dmSans.variable} ${dmMono.variable} ${mazaeniDemo.variable} ${montserrat.variable} font-sans antialiased`}
       >
         {/* Skip to content link for accessibility */}
         <a

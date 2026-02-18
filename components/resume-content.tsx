@@ -24,8 +24,8 @@ export function ResumeContent({ data }: ResumeContentProps) {
       {/* Header */}
       <header className="header">
         <div>
-          <h2 className="name">{basics.name.toUpperCase()}</h2>
-          <p className="role">{basics.label.toUpperCase()}</p>
+          <h2 className="name">{basics.name?.toUpperCase()}</h2>
+          <p className="role">{basics.label?.toUpperCase()}</p>
         </div>
         <address className="contact" aria-label="Contact info">
           <p>
@@ -79,21 +79,22 @@ export function ResumeContent({ data }: ResumeContentProps) {
         </section>
       )}
 
-      <hr className="hr" />
-
       {/* Skills */}
       {skills && skills.length > 0 && (
-        <section>
-          <h3 className="section-title">SKILLS</h3>
-          <dl className="skills-grid">
-            {skills.map((skill) => (
-              <div key={skill.name} className="skill-row">
-                <dt>{skill.name}</dt>
-                <dd>{skill.keywords?.join(", ")}</dd>
-              </div>
-            ))}
-          </dl>
-        </section>
+        <>
+          <hr className="hr" />
+          <section>
+            <h3 className="section-title">SKILLS</h3>
+            <dl className="skills-grid">
+              {skills.map((skill) => (
+                <div key={skill.name} className="skill-row">
+                  <dt>{skill.name}</dt>
+                  <dd>{skill.keywords?.join(", ")}</dd>
+                </div>
+              ))}
+            </dl>
+          </section>
+        </>
       )}
 
       <hr className="hr" />
