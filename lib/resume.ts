@@ -61,12 +61,15 @@ export async function getResume(): Promise<Resume> {
   const localPath = process.env.RESUME_LOCAL_PATH;
   if (localPath) {
     if (process.env.NODE_ENV === "production") {
-      throw new Error("RESUME_LOCAL_PATH is not allowed in production");
+      console.warn(
+        "RESUME_LOCAL_PATH is set but will not be used in production; falling back to Gist.",
+      );
+    } else {
+      const { readFile } = await import("fs/promises");
+      const { resolve } = await import("path");
+      const json = await readFile(resolve(localPath), "utf-8");
+      return JSON.parse(json);
     }
-    const { readFile } = await import("fs/promises");
-    const { resolve } = await import("path");
-    const json = await readFile(resolve(localPath), "utf-8");
-    return JSON.parse(json);
   }
 
   const res = await fetch(GIST_RAW_URL, {
