@@ -97,7 +97,7 @@
 }
 
 .name {
-  font-family: var(--font-mazaeni), serif;
+  font-family: var(--font-montserrat), "Helvetica Neue", Arial, sans-serif;
   font-size: var(--font-name);
   font-weight: 700;
   line-height: 1.1;
@@ -106,7 +106,7 @@
 }
 
 .role {
-  font-family: var(--font-mazaeni), serif;
+  font-family: var(--font-montserrat), "Helvetica Neue", Arial, sans-serif;
   font-size: var(--font-role);
   font-weight: 400;
   color: var(--heading-color);
@@ -151,13 +151,13 @@
 /* ===== Sections ===== */
 
 .section-title {
-  font-family: var(--font-mazaeni), serif;
+  font-family: var(--font-montserrat), "Helvetica Neue", Arial, sans-serif;
   font-size: var(--font-section);
   font-weight: 400;
   color: var(--name-color);
   line-height: 1.2;
   letter-spacing: 0.01em;
-  margin-bottom: var(--space-sm);
+  margin-bottom: var(--space-md);
 }
 
 /* ===== Entries (Experience/Education) ===== */
@@ -300,6 +300,7 @@
   display: flex;
   flex-direction: column;
   gap: var(--space-sm);
+  margin: 0;
 }
 
 .skill-row {
@@ -430,13 +431,13 @@
   }
 
   .name {
-    font-family: Georgia, "Times New Roman", Times, serif;
+    font-family: var(--font-montserrat), "Helvetica Neue", Arial, sans-serif;
     font-size: var(--font-name);
     letter-spacing: 0;
   }
 
   .role {
-    font-family: Georgia, "Times New Roman", Times, serif;
+    font-family: var(--font-montserrat), "Helvetica Neue", Arial, sans-serif;
     font-size: var(--font-role);
     letter-spacing: 0;
     margin-top: var(--space-xs);
@@ -457,7 +458,7 @@
   }
 
   .section-title {
-    font-family: Georgia, "Times New Roman", Times, serif;
+    font-family: var(--font-montserrat), "Helvetica Neue", Arial, sans-serif;
     font-size: var(--font-section);
     letter-spacing: 0;
     margin-bottom: var(--space-md);
