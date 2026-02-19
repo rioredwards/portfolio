@@ -163,7 +163,7 @@ export function Hero() {
   );
 
   const taglineAccessible = (
-    <p key="2" className="sr-only">
+    <p key="2" data-testid="hero-tagline-canonical" className="sr-only">
       I build thoughtful software.
     </p>
   );
