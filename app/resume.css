@@ -302,6 +302,12 @@
   margin-top: calc(var(--space-xs) * 0.5);
 }
 
+.bullets--titled li + li {
+  margin-top: var(--space-sm);
+  padding-top: var(--space-sm);
+  /* border-top: 1px solid color-mix(in srgb, var(--rule-color) 40%, transparent); */
+}
+
 .bullets li strong {
   font-weight: 600;
 }

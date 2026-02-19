@@ -76,7 +76,9 @@ export function ResumeContent({ data }: ResumeContentProps) {
                 <p className="entry-description">{job.summary}</p>
               )}
               {job.highlights && job.highlights.length > 0 && (
-                <ul className="bullets">
+                <ul
+                  className={`bullets${job.highlights[0]?.title ? "bullets--titled" : ""}`}
+                >
                   {job.highlights.map((highlight: ResumeWorkProject, i) => (
                     <li key={i}>
                       {highlight.url ? (
