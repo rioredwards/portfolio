@@ -111,44 +111,37 @@ export function Hero() {
   );
   const title = "Hello, I'm Rio.";
 
-  const verbs = ["Building", "Shipping", "Crafting", "Designing", "Creating"];
+  const verbs = ["Building", "Shipping", "Crafting", "Creating"];
 
   const adjectives = [
     "accessible",
-    "maintainable",
+    "thoughtful",
     "delightful",
     "responsive",
-    "scalable",
-    "intuitive",
-    "reliable",
-    "polished",
+    "dependable",
+    "expressive",
+    "performant",
   ];
 
-  const nouns = [
-    "software",
-    "web apps",
-    "experiences",
-    "interfaces",
-    "products",
-  ];
+  const nouns = ["software", "websites", "projects", "features", "products"];
 
   const paragraph = (
     <p
       key="1"
-      className="flex items-center justify-start gap-x-[0.25em] text-lg leading-relaxed"
+      className="flex items-center justify-start gap-x-[0.75em] text-lg leading-relaxed md:justify-start"
     >
       <RotatingWord
         words={verbs}
         direction="down"
         color="var(--color-accent)"
-        className="w-[8rem] font-bold"
+        className="w-[5.6rem] font-mono font-bold"
         pauseDuration={2000}
       />{" "}
       <RotatingWord
         words={adjectives}
         direction="up"
         color="var(--color-primary)"
-        className="w-[7.5rem] font-bold"
+        className="w-[7.3rem] font-mono font-bold"
         pauseDuration={2000}
         initialDelay={700}
       />{" "}
@@ -156,7 +149,7 @@ export function Hero() {
         words={nouns}
         direction="down"
         color="var(--color-accent)"
-        className="w-[8rem] font-bold"
+        className="w-[5.6rem] font-mono font-bold"
         pauseDuration={2000}
         initialDelay={1400}
       />
