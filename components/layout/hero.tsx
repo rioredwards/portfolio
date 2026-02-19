@@ -130,6 +130,7 @@ export function Hero() {
   const paragraph = (
     <p
       key="1"
+      aria-hidden="true"
       data-testid="hero-tagline"
       className="flex items-baseline justify-start gap-x-[0.3em] font-mono text-lg leading-relaxed font-bold md:justify-start"
     >
@@ -161,11 +162,18 @@ export function Hero() {
     </p>
   );
 
+  const taglineAccessible = (
+    <p key="2" className="sr-only">
+      I build thoughtful software.
+    </p>
+  );
+
   const buttonText = "RESUME";
   const buttonHref = "/resume";
 
   return (
     <>
+      {taglineAccessible}
       {/* Desktop layout */}
       <div className="hidden min-h-screen place-items-center pt-20 fade-in md:grid">
         <div className={cn("flex items-center gap-12")}>
