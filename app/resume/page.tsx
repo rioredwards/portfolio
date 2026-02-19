@@ -6,11 +6,11 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Resume",
   description:
-    "Rio Edwards - Software Engineer resume. Experience in full-stack web development with React, Next.js, TypeScript, and Node.js.",
+    "Product Engineer resume for Rio Edwards. Full-stack web development with React, Next.js, TypeScript, and Node.js.",
   openGraph: {
-    title: "Resume — Rio Edwards",
+    title: "Resume | Rio Edwards",
     description:
-      "Rio Edwards - Software Engineer resume. Experience in full-stack web development with React, Next.js, TypeScript, and Node.js.",
+      "Product Engineer resume for Rio Edwards. Full-stack web development with React, Next.js, TypeScript, and Node.js.",
   },
 };
 
