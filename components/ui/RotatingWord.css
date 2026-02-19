@@ -1,3 +1,9 @@
+.rotating-word-container * {
+  /* Styles applied to all children/descendants, e.g.: */
+  white-space: nowrap;
+  text-wrap: nowrap;
+}
+
 .rotating-word-container {
   position: relative;
   display: inline-flex;
@@ -86,6 +92,12 @@
     )
     --animation-duration: 0s; /* Set in JS */
 }
+
+/* @media (min-width: 768px) {
+  .rotating-word-container {
+    align-items: start;
+  }
+} */
 
 .rotating-word-gradient-overlay {
   position: absolute;

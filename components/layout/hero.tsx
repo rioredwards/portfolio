@@ -136,14 +136,14 @@ export function Hero() {
       <RotatingWord
         words={verbs}
         direction="toggle"
-        color="var(--color-accent)"
+        color="var(--color-primary)"
         className="w-[4.5rem] font-mono font-bold"
         pauseDuration={2000}
       />{" "}
       <RotatingWord
         words={adjectives}
         direction="toggle"
-        color="var(--color-primary)"
+        color="var(--color-accent)"
         className="w-[7.3rem] font-mono font-bold"
         pauseDuration={2000}
         initialDelay={initialDelay}
@@ -151,7 +151,7 @@ export function Hero() {
       <RotatingWord
         words={nouns}
         direction="toggle"
-        color="var(--color-accent)"
+        color="var(--color-primary)"
         className="w-[5.6rem] font-mono font-bold"
         pauseDuration={2000}
         initialDelay={initialDelay * 2}
