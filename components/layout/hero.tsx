@@ -111,23 +111,54 @@ export function Hero() {
   );
   const title = "Hello, I'm Rio.";
 
+  const verbs = ["build", "ship", "craft", "design", "create"];
+
   const adjectives = [
-    "thoughtful",
     "accessible",
     "maintainable",
     "delightful",
     "responsive",
     "scalable",
-    "memorable",
     "intuitive",
     "reliable",
-    "secure",
+    "polished",
+  ];
+
+  const nouns = [
+    "software",
+    "web apps",
+    "experiences",
+    "interfaces",
+    "products",
   ];
 
   const paragraph = (
     <p key="1" className="text-center text-lg leading-relaxed md:text-left">
-      I build <RotatingWord words={adjectives} className="w-32 font-bold" />{" "}
-      software.
+      I{" "}
+      <RotatingWord
+        words={verbs}
+        direction="down"
+        color="var(--color-accent)"
+        className="w-16 font-bold"
+        pauseDuration={2000}
+      />{" "}
+      <RotatingWord
+        words={adjectives}
+        direction="up"
+        color="var(--color-primary)"
+        className="w-[7.5rem] font-bold"
+        pauseDuration={2000}
+        initialDelay={700}
+      />{" "}
+      <RotatingWord
+        words={nouns}
+        direction="down"
+        color="var(--color-accent)"
+        className="w-[8rem] font-bold"
+        pauseDuration={2000}
+        initialDelay={1400}
+      />
+      .
     </p>
   );
 

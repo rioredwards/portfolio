@@ -7,6 +7,10 @@ import "./RotatingWord.css";
 type RotatingWordProps = {
   words: string[];
   className?: string;
+  direction?: "up" | "down";
+  color?: string;
+  pauseDuration?: number;
+  initialDelay?: number;
 };
 
 const ANIMATION_PAUSE_DURATION = 1400;
@@ -16,24 +20,44 @@ const LETTER_ANIMATION_INDEX_DELAY = 0.006;
 
 type AnimationPhase = "preSwap" | "duringSwap" | "postSwap";
 
-export function RotatingWord({ words, className }: RotatingWordProps) {
+export function RotatingWord({
+  words,
+  className,
+  direction = "up",
+  color,
+  pauseDuration = ANIMATION_PAUSE_DURATION,
+  initialDelay = 0,
+}: RotatingWordProps) {
   const [currentWordIdx, setCurrentWordIdx] = useState(0);
   const [nextWordIdx, setNextWordIdx] = useState(1);
   const [animationPhase, setAnimationPhase] =
     useState<AnimationPhase>("preSwap");
+  const [isInitialized, setIsInitialized] = useState(initialDelay === 0);
 
   function swapWords() {
     setCurrentWordIdx(nextWordIdx);
     setNextWordIdx((prev) => (prev + 1) % words.length);
   }
 
+  // Handle initial delay
+  useEffect(() => {
+    if (initialDelay > 0 && !isInitialized) {
+      const timer = setTimeout(() => {
+        setIsInitialized(true);
+      }, initialDelay);
+      return () => clearTimeout(timer);
+    }
+  }, [initialDelay, isInitialized]);
+
   // Progress through animation phases
   useEffect(() => {
+    if (!isInitialized) return;
+
     switch (animationPhase) {
       case "preSwap":
         setTimeout(() => {
           setAnimationPhase("duringSwap");
-        }, ANIMATION_PAUSE_DURATION);
+        }, pauseDuration);
         break;
       case "duringSwap": {
         // Account for the last letter's delay so every letter finishes animating
@@ -58,16 +82,19 @@ export function RotatingWord({ words, className }: RotatingWordProps) {
         break;
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [animationPhase]);
+  }, [animationPhase, isInitialized, pauseDuration]);
+
+  const directionClass = direction === "down" ? "rotate-down" : "rotate-up";
 
   return (
     <>
       {/* <span className="debug">{animationPhase}</span> */}
       <span
-        className={cn("rotating-word-container", className)}
+        className={cn("rotating-word-container", directionClass, className)}
         style={
           {
             "--animation-duration": `${ANIMATION_DURATION}ms`,
+            "--rotating-word-color": color,
           } as React.CSSProperties
         }
       >
