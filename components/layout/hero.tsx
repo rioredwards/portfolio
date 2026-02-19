@@ -130,6 +130,7 @@ export function Hero() {
   const paragraph = (
     <p
       key="1"
+      data-testid="hero-tagline"
       className="flex items-baseline justify-start gap-x-[0.3em] font-mono text-lg leading-relaxed font-bold md:justify-start"
     >
       I{" "}
