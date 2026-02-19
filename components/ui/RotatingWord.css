@@ -1,9 +1,15 @@
+.rotating-word-container * {
+  /* Styles applied to all children/descendants, e.g.: */
+  white-space: nowrap;
+  text-wrap: nowrap;
+}
+
 .rotating-word-container {
   position: relative;
   display: inline-flex;
   align-items: center;
   flex-direction: column;
-  height: 1.5rem;
+  height: 1.8rem;
   min-width: 1rem;
   overflow: hidden;
   /* background-color: green; */
@@ -87,6 +93,12 @@
     --animation-duration: 0s; /* Set in JS */
 }
 
+/* @media (min-width: 768px) {
+  .rotating-word-container {
+    align-items: start;
+  }
+} */
+
 .rotating-word-gradient-overlay {
   position: absolute;
   top: 0;
@@ -115,6 +127,7 @@
   display: inline-block;
   /* will animate */
   will-change: transform, color;
+  color: var(--rotating-word-color, currentColor);
 }
 
 .duringSwap .rotating-word-letter {
@@ -129,41 +142,35 @@
   display: none;
 } */
 
-.duringSwap.rotating-word-bottom .rotating-word-letter {
-  /* color: red; */
+/* ========== ROTATE UP (default) ========== */
+.rotate-up .duringSwap.rotating-word-bottom .rotating-word-letter {
   animation-name: rotateUpBottom;
 }
 
-.duringSwap.rotating-word-top .rotating-word-letter {
-  /* color: red; */
+.rotate-up .duringSwap.rotating-word-top .rotating-word-letter {
   animation-name: rotateUpTop;
 }
 
-.postSwap.rotating-word-top .rotating-word-letter {
-  /* color: blue; */
+.rotate-up .postSwap.rotating-word-top .rotating-word-letter {
   transform: translateY(-100%);
   opacity: 0;
 }
 
-.postSwap.rotating-word-bottom .rotating-word-letter {
-  /* color: blue; */
+.rotate-up .postSwap.rotating-word-bottom .rotating-word-letter {
   transform: translateY(-100%);
 }
 
-.preSwap.rotating-word-bottom .rotating-word-letter {
-  /* color: green; */
+.rotate-up .preSwap.rotating-word-bottom .rotating-word-letter {
   transform: translateY(0);
   opacity: 0;
 }
 
-.preSwap.rotating-word-top .rotating-word-letter {
-  /* color: green; */
+.rotate-up .preSwap.rotating-word-top .rotating-word-letter {
   transform: translateY(0);
 }
 
 @starting-style {
-  .duringSwap.rotating-word-bottom .rotating-word-letter {
-    /* color: green; */
+  .rotate-up .duringSwap.rotating-word-bottom .rotating-word-letter {
     transform: translateY(0);
   }
 }
@@ -175,7 +182,6 @@
   }
   30% {
     opacity: 1;
-    /* transform: translateY(-100%); */
   }
   to {
     opacity: 1;
@@ -194,6 +200,67 @@
   to {
     opacity: 0;
     transform: translateY(-100%);
+  }
+}
+
+/* ========== ROTATE DOWN ========== */
+.rotate-down .duringSwap.rotating-word-bottom .rotating-word-letter {
+  animation-name: rotateDownBottom;
+}
+
+.rotate-down .duringSwap.rotating-word-top .rotating-word-letter {
+  animation-name: rotateDownTop;
+}
+
+.rotate-down .postSwap.rotating-word-top .rotating-word-letter {
+  transform: translateY(100%);
+  opacity: 0;
+}
+
+.rotate-down .postSwap.rotating-word-bottom .rotating-word-letter {
+  transform: translateY(-100%);
+}
+
+.rotate-down .preSwap.rotating-word-bottom .rotating-word-letter {
+  transform: translateY(-200%);
+  opacity: 0;
+}
+
+.rotate-down .preSwap.rotating-word-top .rotating-word-letter {
+  transform: translateY(0);
+}
+
+@starting-style {
+  .rotate-down .duringSwap.rotating-word-bottom .rotating-word-letter {
+    transform: translateY(-200%);
+  }
+}
+
+@keyframes rotateDownBottom {
+  from {
+    opacity: 0;
+    transform: translateY(-200%);
+  }
+  30% {
+    opacity: 1;
+  }
+  to {
+    opacity: 1;
+    transform: translateY(-100%);
+  }
+}
+
+@keyframes rotateDownTop {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  70% {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+    transform: translateY(100%);
   }
 }
 

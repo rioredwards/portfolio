@@ -23,7 +23,7 @@ export class HomePage {
   }
 
   heroTagline(): Locator {
-    return this.page.getByText("I build", { exact: false }).first();
+    return this.page.getByTestId("hero-tagline-canonical");
   }
 
   resumeCta(): Locator {

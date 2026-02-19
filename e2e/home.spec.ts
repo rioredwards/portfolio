@@ -14,6 +14,7 @@ test.describe("Homepage content", () => {
 
   test("renders hero content with resume CTA", async () => {
     await expect(home.heroHeading()).toBeVisible();
+    await expect(home.heroTagline()).toBeAttached();
     await expect(home.heroTagline()).toContainText("I build");
     await expect(home.resumeCta()).toBeVisible();
     await expect(home.resumeCta()).toHaveAttribute("href", "/resume");

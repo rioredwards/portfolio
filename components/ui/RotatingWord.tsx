@@ -7,67 +7,110 @@ import "./RotatingWord.css";
 type RotatingWordProps = {
   words: string[];
   className?: string;
+  direction?: "up" | "down" | "toggle";
+  color?: string;
+  pauseDuration?: number;
+  initialDelay?: number;
 };
 
-const ANIMATION_PAUSE_DURATION = 1400;
+const BASE_ANIMATION_PAUSE_DURATION = 1400;
 const ANIMATION_DURATION = 1500;
 const LETTER_ANIMATION_DELAY = 0.05;
 const LETTER_ANIMATION_INDEX_DELAY = 0.006;
 
 type AnimationPhase = "preSwap" | "duringSwap" | "postSwap";
 
-export function RotatingWord({ words, className }: RotatingWordProps) {
+export function RotatingWord({
+  words,
+  className,
+  direction = "up",
+  color,
+  pauseDuration = BASE_ANIMATION_PAUSE_DURATION,
+  initialDelay = 0,
+}: RotatingWordProps) {
   const [currentWordIdx, setCurrentWordIdx] = useState(0);
   const [nextWordIdx, setNextWordIdx] = useState(1);
   const [animationPhase, setAnimationPhase] =
     useState<AnimationPhase>("preSwap");
+  const [isInitialized, setIsInitialized] = useState(initialDelay === 0);
+  const [currentDirection, setCurrentDirection] = useState<"up" | "down">(
+    direction === "down" ? "down" : "up",
+  );
+
+  // Account for the last letter's delay so every letter finishes animating
+  const maxLetters = Math.max(
+    words[currentWordIdx].length,
+    words[nextWordIdx].length,
+  );
+  const additionalLetterDelays =
+    (maxLetters - 1) *
+    (LETTER_ANIMATION_DELAY + LETTER_ANIMATION_INDEX_DELAY) *
+    1000;
+  const letterAnimationWithDelays = ANIMATION_DURATION + additionalLetterDelays;
+
+  const adjustedPauseDuration = pauseDuration - additionalLetterDelays;
 
   function swapWords() {
     setCurrentWordIdx(nextWordIdx);
     setNextWordIdx((prev) => (prev + 1) % words.length);
   }
 
+  // Handle initial delay
+  useEffect(() => {
+    if (initialDelay > 0 && !isInitialized) {
+      const timer = setTimeout(() => {
+        setIsInitialized(true);
+      }, initialDelay);
+      return () => clearTimeout(timer);
+    }
+  }, [initialDelay, isInitialized]);
+
   // Progress through animation phases
   useEffect(() => {
+    if (!isInitialized) return;
+
     switch (animationPhase) {
       case "preSwap":
         setTimeout(() => {
           setAnimationPhase("duringSwap");
-        }, ANIMATION_PAUSE_DURATION);
+        }, adjustedPauseDuration);
         break;
       case "duringSwap": {
-        // Account for the last letter's delay so every letter finishes animating
-        const maxLetters = Math.max(
-          words[currentWordIdx].length,
-          words[nextWordIdx].length,
-        );
-        const lastLetterDelay =
-          (maxLetters - 1) *
-          (LETTER_ANIMATION_DELAY + LETTER_ANIMATION_INDEX_DELAY) *
-          1000;
         setTimeout(() => {
           setAnimationPhase("postSwap");
-        }, ANIMATION_DURATION + lastLetterDelay);
+        }, letterAnimationWithDelays);
         break;
       }
       case "postSwap":
         setTimeout(() => {
           swapWords();
+          if (direction === "toggle") {
+            setCurrentDirection((prev) => (prev === "up" ? "down" : "up"));
+          }
           setAnimationPhase("preSwap");
         }, 0);
         break;
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [animationPhase]);
+  }, [
+    animationPhase,
+    isInitialized,
+    adjustedPauseDuration,
+    letterAnimationWithDelays,
+  ]);
+
+  const directionClass =
+    currentDirection === "down" ? "rotate-down" : "rotate-up";
 
   return (
     <>
       {/* <span className="debug">{animationPhase}</span> */}
       <span
-        className={cn("rotating-word-container", className)}
+        className={cn("rotating-word-container", directionClass, className)}
         style={
           {
             "--animation-duration": `${ANIMATION_DURATION}ms`,
+            "--rotating-word-color": color,
           } as React.CSSProperties
         }
       >

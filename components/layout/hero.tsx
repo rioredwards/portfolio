@@ -111,23 +111,60 @@ export function Hero() {
   );
   const title = "Hello, I'm Rio.";
 
+  const verbs = ["create", "deploy", "design", "author", "launch", "sculpt"];
+
   const adjectives = [
     "thoughtful",
-    "accessible",
-    "maintainable",
-    "delightful",
+    "dependable",
     "responsive",
-    "scalable",
-    "memorable",
-    "intuitive",
-    "reliable",
-    "secure",
+    "accessible",
+    "performant",
+    "expressive",
+    "delightful",
   ];
 
+  const nouns = ["products", "software", "websites", "features", "projects"];
+
+  const initialDelay = 600;
+
   const paragraph = (
-    <p key="1" className="text-center text-lg leading-relaxed md:text-left">
-      I build <RotatingWord words={adjectives} className="w-32 font-bold" />{" "}
-      software.
+    <p
+      key="1"
+      aria-hidden="true"
+      data-testid="hero-tagline"
+      className="flex items-baseline justify-start gap-x-[0.3em] font-mono text-lg leading-relaxed font-bold md:justify-start"
+    >
+      I{" "}
+      <RotatingWord
+        words={verbs}
+        direction="toggle"
+        color="var(--color-primary)"
+        className="w-[5.4rem] font-mono text-[1.35rem] font-bold"
+        pauseDuration={2000}
+      />{" "}
+      <RotatingWord
+        words={adjectives}
+        direction="toggle"
+        color="var(--color-accent)"
+        className="w-[8.75rem] font-mono text-[1.35rem] font-bold"
+        pauseDuration={2000}
+        initialDelay={initialDelay}
+      />{" "}
+      <RotatingWord
+        words={nouns}
+        direction="toggle"
+        color="var(--color-primary)"
+        className="w-[6.7rem] font-mono text-[1.35rem] font-bold"
+        pauseDuration={2000}
+        initialDelay={initialDelay * 2}
+      />
+      .
+    </p>
+  );
+
+  const taglineAccessible = (
+    <p key="2" data-testid="hero-tagline-canonical" className="sr-only">
+      I build thoughtful software.
     </p>
   );
 
@@ -136,13 +173,14 @@ export function Hero() {
 
   return (
     <>
+      {taglineAccessible}
       {/* Desktop layout */}
       <div className="hidden min-h-screen place-items-center pt-20 fade-in md:grid">
         <div className={cn("flex items-center gap-12")}>
           <HeroImage image={image} className="h-full" />
           <div className="mt-10 flex max-w-prose-max flex-col items-start justify-end">
             <HeroHeading title={title} className="mb-4" />
-            <div className="mb-2">{paragraph}</div>
+            <div className="mb-2 w-full">{paragraph}</div>
             <HeroButton
               buttonText={buttonText}
               buttonHref={buttonHref}
