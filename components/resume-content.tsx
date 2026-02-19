@@ -125,16 +125,7 @@ export function ResumeContent({ data }: ResumeContentProps) {
                       <span className="entry-position">
                         <strong>{project.name}</strong>
                       </span>
-                      {project.url && (
-                        <a
-                          href={project.url}
-                          className="entry-company"
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
-                          {project.url.replace(/^https?:\/\//, "")}
-                        </a>
-                      )}
+                      <span className="entry-company">personal project</span>
                     </div>
                     {project.startDate && (
                       <p className="entry-meta">
