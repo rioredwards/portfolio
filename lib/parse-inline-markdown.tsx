@@ -1,13 +1,15 @@
 import { ReactNode } from "react";
 
 /**
- * Parses minimal inline markdown (bold and italic only) into React elements.
- * Supports: **bold**, *italic*, _italic_
+ * Parses minimal inline markdown (bold, italic, newlines) into React elements.
+ * Supports: **bold**, *italic*, _italic_, \n (line break)
  */
 export function parseInlineMarkdown(text: string): ReactNode {
-  // Pattern matches **bold**, *italic*, or _italic_
+  if (!text) return text ?? "";
+
+  // Pattern matches **bold**, *italic*, _italic_, or \n
   // Order matters: check ** before * to avoid partial matches
-  const pattern = /(\*\*(.+?)\*\*|\*(.+?)\*|_(.+?)_)/g;
+  const pattern = /(\*\*(.+?)\*\*|\*(.+?)\*|_(.+?)_|\n)/g;
 
   const parts: ReactNode[] = [];
   let lastIndex = 0;
@@ -30,6 +32,9 @@ export function parseInlineMarkdown(text: string): ReactNode {
     } else if (match[4]) {
       // _italic_
       parts.push(<em key={key++}>{match[4]}</em>);
+    } else {
+      // \n newline
+      parts.push(<br key={key++} />);
     }
 
     lastIndex = pattern.lastIndex;

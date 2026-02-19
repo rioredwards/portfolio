@@ -164,8 +164,11 @@
 
 .entry + .entry {
   margin-top: var(--space-md);
-  border-top: 1px solid color-mix(in srgb, var(--rule-color) 40%, transparent);
+}
+
+.experience .entry + .entry {
   padding-top: var(--space-md);
+  border-top: 1px solid color-mix(in srgb, var(--rule-color) 40%, transparent);
 }
 
 .entry-header {
@@ -199,7 +202,7 @@
 }
 
 .entry-position strong {
-  font-weight: 600;
+  font-weight: 700;
 }
 
 .entry-company {
@@ -299,6 +302,27 @@
   margin-top: calc(var(--space-xs) * 0.5);
 }
 
+.bullets--titled li + li {
+  margin-top: var(--space-sm);
+  padding-top: var(--space-sm);
+  /* border-top: 1px solid color-mix(in srgb, var(--rule-color) 40%, transparent); */
+}
+
+.bullets li strong {
+  font-weight: 600;
+}
+
+/* ===== Entry Sub-line (description beneath title, project tech) ===== */
+
+.entry-tech {
+  display: block;
+  margin-top: var(--space-xs);
+}
+
+.entry-skills {
+  opacity: 0.75;
+}
+
 /* ===== Skills ===== */
 
 .skills-grid {
@@ -391,8 +415,8 @@
 
   .resume {
     /* === TWEAK THESE TO SCALE EVERYTHING === */
-    --print-base-font: 14pt;
-    --print-base-space: 6pt;
+    --print-base-font: 12pt;
+    --print-base-space: 5pt;
 
     /* Derived font sizes */
     /* Derived font sizes (multipliers of base) */

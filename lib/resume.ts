@@ -21,7 +21,14 @@ export interface ResumeWork {
   startDate: string;
   endDate?: string;
   summary?: string;
-  highlights?: string[];
+  highlights?: ResumeWorkProject[];
+}
+
+export interface ResumeWorkProject {
+  title: string;
+  description?: string;
+  tech?: string[];
+  url?: string;
 }
 
 export interface ResumeEducation {
@@ -51,6 +58,7 @@ export interface ResumeProject {
   endDate?: string;
   description?: string;
   highlights?: string[];
+  tech?: string[];
   url?: string;
 }
 
