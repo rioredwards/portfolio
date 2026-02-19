@@ -125,6 +125,8 @@ export function Hero() {
 
   const nouns = ["products", "software", "websites", "features", "projects"];
 
+  const initialDelay = 600;
+
   const paragraph = (
     <p
       key="1"
@@ -133,26 +135,26 @@ export function Hero() {
       I{" "}
       <RotatingWord
         words={verbs}
-        direction="down"
+        direction="toggle"
         color="var(--color-accent)"
         className="w-[4.5rem] font-mono font-bold"
         pauseDuration={2000}
       />{" "}
       <RotatingWord
         words={adjectives}
-        direction="up"
+        direction="toggle"
         color="var(--color-primary)"
         className="w-[7.3rem] font-mono font-bold"
         pauseDuration={2000}
-        initialDelay={700}
+        initialDelay={initialDelay}
       />{" "}
       <RotatingWord
         words={nouns}
-        direction="down"
+        direction="toggle"
         color="var(--color-accent)"
         className="w-[5.6rem] font-mono font-bold"
         pauseDuration={2000}
-        initialDelay={1400}
+        initialDelay={initialDelay * 2}
       />
       .
     </p>

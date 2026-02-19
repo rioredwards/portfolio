@@ -7,13 +7,13 @@ import "./RotatingWord.css";
 type RotatingWordProps = {
   words: string[];
   className?: string;
-  direction?: "up" | "down";
+  direction?: "up" | "down" | "toggle";
   color?: string;
   pauseDuration?: number;
   initialDelay?: number;
 };
 
-const ANIMATION_PAUSE_DURATION = 1400;
+const BASE_ANIMATION_PAUSE_DURATION = 1400;
 const ANIMATION_DURATION = 1500;
 const LETTER_ANIMATION_DELAY = 0.05;
 const LETTER_ANIMATION_INDEX_DELAY = 0.006;
@@ -25,7 +25,7 @@ export function RotatingWord({
   className,
   direction = "up",
   color,
-  pauseDuration = ANIMATION_PAUSE_DURATION,
+  pauseDuration = BASE_ANIMATION_PAUSE_DURATION,
   initialDelay = 0,
 }: RotatingWordProps) {
   const [currentWordIdx, setCurrentWordIdx] = useState(0);
@@ -33,6 +33,22 @@ export function RotatingWord({
   const [animationPhase, setAnimationPhase] =
     useState<AnimationPhase>("preSwap");
   const [isInitialized, setIsInitialized] = useState(initialDelay === 0);
+  const [currentDirection, setCurrentDirection] = useState<"up" | "down">(
+    direction === "down" ? "down" : "up",
+  );
+
+  // Account for the last letter's delay so every letter finishes animating
+  const maxLetters = Math.max(
+    words[currentWordIdx].length,
+    words[nextWordIdx].length,
+  );
+  const additionalLetterDelays =
+    (maxLetters - 1) *
+    (LETTER_ANIMATION_DELAY + LETTER_ANIMATION_INDEX_DELAY) *
+    1000;
+  const letterAnimationWithDelays = ANIMATION_DURATION + additionalLetterDelays;
+
+  const adjustedPauseDuration = pauseDuration - additionalLetterDelays;
 
   function swapWords() {
     setCurrentWordIdx(nextWordIdx);
@@ -57,34 +73,34 @@ export function RotatingWord({
       case "preSwap":
         setTimeout(() => {
           setAnimationPhase("duringSwap");
-        }, pauseDuration);
+        }, adjustedPauseDuration);
         break;
       case "duringSwap": {
-        // Account for the last letter's delay so every letter finishes animating
-        const maxLetters = Math.max(
-          words[currentWordIdx].length,
-          words[nextWordIdx].length,
-        );
-        const lastLetterDelay =
-          (maxLetters - 1) *
-          (LETTER_ANIMATION_DELAY + LETTER_ANIMATION_INDEX_DELAY) *
-          1000;
         setTimeout(() => {
           setAnimationPhase("postSwap");
-        }, ANIMATION_DURATION + lastLetterDelay);
+        }, letterAnimationWithDelays);
         break;
       }
       case "postSwap":
         setTimeout(() => {
           swapWords();
+          if (direction === "toggle") {
+            setCurrentDirection((prev) => (prev === "up" ? "down" : "up"));
+          }
           setAnimationPhase("preSwap");
         }, 0);
         break;
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [animationPhase, isInitialized, pauseDuration]);
+  }, [
+    animationPhase,
+    isInitialized,
+    adjustedPauseDuration,
+    letterAnimationWithDelays,
+  ]);
 
-  const directionClass = direction === "down" ? "rotate-down" : "rotate-up";
+  const directionClass =
+    currentDirection === "down" ? "rotate-down" : "rotate-up";
 
   return (
     <>
