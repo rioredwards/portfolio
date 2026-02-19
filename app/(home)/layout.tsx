@@ -6,7 +6,7 @@ export const metadata: Metadata = {
     absolute: "Rio Edwards | Portfolio",
   },
   description:
-    "Software engineer specializing in full-stack web development. View my projects, experience, and get in touch.",
+    "Product engineer building and shipping production software used by real teams. View my projects, experience, and get in touch.",
 };
 
 export default function HomeLayout({

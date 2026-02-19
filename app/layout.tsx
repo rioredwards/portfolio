@@ -70,9 +70,9 @@ const jsonLd = {
   "@type": "Person",
   name: "Rio Edwards",
   url: siteUrl,
-  jobTitle: "Software Engineer",
+  jobTitle: "Product Engineer",
   description:
-    "Software engineer specializing in full-stack web development with React, Next.js, and TypeScript.",
+    "Product engineer building and shipping production web and mobile apps with React, Next.js, and TypeScript.",
   sameAs: [
     "https://github.com/rioredwards",
     "https://linkedin.com/in/rioredwards",
@@ -82,12 +82,13 @@ const jsonLd = {
 
 export const metadata: Metadata = {
   title: {
-    default: "Rio Edwards | Software Engineer",
-    template: "%s — Rio Edwards",
+    default: "Rio Edwards | Product Engineer",
+    template: "%s | Rio Edwards",
   },
   description:
-    "Software engineer specializing in full-stack web development. View my projects, experience, and get in touch.",
+    "Product engineer building and shipping production software used by real teams. View my projects, experience, and get in touch.",
   keywords: [
+    "product engineer",
     "software engineer",
     "web developer",
     "full-stack developer",
@@ -112,15 +113,15 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: siteUrl,
     siteName: "Rio Edwards",
-    title: "Rio Edwards | Software Engineer",
+    title: "Rio Edwards | Product Engineer",
     description:
-      "Software engineer specializing in full-stack web development. View my projects, experience, and get in touch.",
+      "Product engineer building and shipping production software used by real teams. View my projects, experience, and get in touch.",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Rio Edwards | Software Engineer",
+    title: "Rio Edwards | Product Engineer",
     description:
-      "Software engineer specializing in full-stack web development. View my projects, experience, and get in touch.",
+      "Product engineer building and shipping production software used by real teams. View my projects, experience, and get in touch.",
   },
   robots: {
     index: true,
