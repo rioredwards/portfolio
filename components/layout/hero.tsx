@@ -111,7 +111,7 @@ export function Hero() {
   );
   const title = "Hello, I'm Rio.";
 
-  const verbs = ["build", "ship", "craft", "design", "create"];
+  const verbs = ["Building", "Shipping", "Crafting", "Designing", "Creating"];
 
   const adjectives = [
     "accessible",
@@ -133,13 +133,15 @@ export function Hero() {
   ];
 
   const paragraph = (
-    <p key="1" className="text-center text-lg leading-relaxed md:text-left">
-      I{" "}
+    <p
+      key="1"
+      className="flex items-center justify-start gap-x-[0.25em] text-lg leading-relaxed"
+    >
       <RotatingWord
         words={verbs}
         direction="down"
         color="var(--color-accent)"
-        className="w-16 font-bold"
+        className="w-[8rem] font-bold"
         pauseDuration={2000}
       />{" "}
       <RotatingWord
@@ -158,7 +160,6 @@ export function Hero() {
         pauseDuration={2000}
         initialDelay={1400}
       />
-      .
     </p>
   );
 
@@ -173,7 +174,7 @@ export function Hero() {
           <HeroImage image={image} className="h-full" />
           <div className="mt-10 flex max-w-prose-max flex-col items-start justify-end">
             <HeroHeading title={title} className="mb-4" />
-            <div className="mb-2">{paragraph}</div>
+            <div className="mb-2 w-full">{paragraph}</div>
             <HeroButton
               buttonText={buttonText}
               buttonHref={buttonHref}
