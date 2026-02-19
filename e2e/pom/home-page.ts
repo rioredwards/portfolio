@@ -103,4 +103,36 @@ export class HomePage {
   closeMobileMenuButton(): Locator {
     return this.page.getByRole("button", { name: "Close menu" });
   }
+
+  // Testimonials
+  testimonialsSection(): Locator {
+    return this.page.locator(".carousel-fade");
+  }
+
+  testimonialCards(): Locator {
+    return this.page
+      .locator('[class*="embla"]')
+      .locator("[class*='CarouselItem']");
+  }
+
+  carouselIndicators(): Locator {
+    return this.page.locator("[data-carousel-indicators]").getByRole("button");
+  }
+
+  // Lightbox
+  lightboxTrigger(): Locator {
+    return this.page.getByRole("button", { name: "View fullscreen" });
+  }
+
+  lightboxDialog(): Locator {
+    return this.page.locator(".yarl__root");
+  }
+
+  lightboxCloseButton(): Locator {
+    return this.page.locator(".yarl__button[aria-label='Close']");
+  }
+
+  lightboxImage(): Locator {
+    return this.page.locator(".yarl__slide_image img");
+  }
 }
