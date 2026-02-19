@@ -1,9 +1,11 @@
 import "@/app/resume.css";
+import { parseInlineMarkdown } from "@/lib/parse-inline-markdown";
 import {
   Resume,
   ResumeCertificate,
   ResumeEducation,
   ResumeProject,
+  ResumeWorkProject,
   formatResumeDate,
 } from "@/lib/resume";
 
@@ -46,13 +48,15 @@ export function ResumeContent({ data }: ResumeContentProps) {
       <hr className="hr" />
 
       {/* Summary */}
-      {basics.summary && <p className="summary">{basics.summary}</p>}
+      {basics.summary && (
+        <p className="summary">{parseInlineMarkdown(basics.summary)}</p>
+      )}
 
       <hr className="hr" />
 
       {/* Experience */}
       {work && work.length > 0 && (
-        <section>
+        <section className="experience">
           <h3 className="section-title">EXPERIENCE</h3>
           {work.map((job) => (
             <div key={`${job.name}-${job.startDate}`} className="entry">
@@ -68,10 +72,40 @@ export function ResumeContent({ data }: ResumeContentProps) {
                   {job.endDate && ` - ${formatResumeDate(job.endDate)}`}
                 </p>
               </div>
+              {job.summary && (
+                <p className="entry-description">{job.summary}</p>
+              )}
               {job.highlights && job.highlights.length > 0 && (
-                <ul className="bullets">
-                  {job.highlights.map((highlight, i) => (
-                    <li key={i}>{highlight}</li>
+                <ul
+                  className={
+                    job.highlights[0]?.title
+                      ? "bullets bullets--titled"
+                      : "bullets"
+                  }
+                >
+                  {job.highlights.map((highlight: ResumeWorkProject, i) => (
+                    <li key={i}>
+                      {highlight.url ? (
+                        <a href={highlight.url}>
+                          <strong>
+                            {parseInlineMarkdown(highlight.title)}
+                          </strong>
+                        </a>
+                      ) : (
+                        <strong>{parseInlineMarkdown(highlight.title)}</strong>
+                      )}
+                      {highlight.tech && highlight.tech.length > 0 && (
+                        <em className="entry-skills">
+                          {", "}
+                          {highlight.tech.join(", ")}
+                        </em>
+                      )}
+                      {highlight.description && (
+                        <span className="entry-tech">
+                          {parseInlineMarkdown(highlight.description)}
+                        </span>
+                      )}
+                    </li>
                   ))}
                 </ul>
               )}
@@ -91,16 +125,7 @@ export function ResumeContent({ data }: ResumeContentProps) {
                       <span className="entry-position">
                         <strong>{project.name}</strong>
                       </span>
-                      {project.url && (
-                        <a
-                          href={project.url}
-                          className="entry-company"
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
-                          {project.url.replace(/^https?:\/\//, "")}
-                        </a>
-                      )}
+                      <span className="entry-company">personal project</span>
                     </div>
                     {project.startDate && (
                       <p className="entry-meta">
@@ -111,14 +136,21 @@ export function ResumeContent({ data }: ResumeContentProps) {
                     )}
                   </div>
                   {project.description && (
-                    <p className="entry-description">{project.description}</p>
+                    <p className="entry-description">
+                      {parseInlineMarkdown(project.description)}
+                    </p>
                   )}
                   {project.highlights && project.highlights.length > 0 && (
                     <ul className="bullets">
                       {project.highlights.map((highlight, i) => (
-                        <li key={i}>{highlight}</li>
+                        <li key={i}>{parseInlineMarkdown(highlight)}</li>
                       ))}
                     </ul>
+                  )}
+                  {project.tech && project.tech.length > 0 && (
+                    <em className="entry-tech entry-skills">
+                      {project.tech.join(", ")}
+                    </em>
                   )}
                 </div>
               ))}
@@ -131,7 +163,7 @@ export function ResumeContent({ data }: ResumeContentProps) {
       {skills && skills.length > 0 && (
         <>
           <hr className="hr" />
-          <section>
+          <section className="skills">
             <h3 className="section-title">SKILLS</h3>
             <dl className="skills-grid">
               {skills.map((skill) => (
@@ -149,7 +181,7 @@ export function ResumeContent({ data }: ResumeContentProps) {
 
       {/* Education & Certificates */}
       {allEducation.length > 0 && (
-        <section>
+        <section className="education">
           <h3 className="section-title">EDUCATION</h3>
           {allEducation.map((item) => {
             const isCert = "issuer" in item;
