@@ -1,3 +1,5 @@
+import canonicalResume from "@/content/resume.json";
+
 // JSON Resume schema types (subset used by this portfolio)
 // Full schema: https://jsonresume.org/schema
 
@@ -25,7 +27,7 @@ export interface ResumeWork {
 }
 
 export interface ResumeWorkProject {
-  title: string;
+  title?: string;
   description?: string;
   tech?: string[];
   url?: string;
@@ -72,34 +74,19 @@ export interface Resume {
   projects?: ResumeProject[];
 }
 
-const GIST_RAW_URL =
-  "https://gist.githubusercontent.com/rioredwards/de30a258d908819312a2e48bcd191c37/raw/resume.json";
-
 export async function getResume(): Promise<Resume> {
+  // In development, RESUME_LOCAL_PATH can point to a variant JSON for generating
+  // tailored PDFs. Set it in .env.local. Output variants to resume-variants/ (gitignored).
+  // Never set this in production: it has no effect there.
   const localPath = process.env.RESUME_LOCAL_PATH;
-  if (localPath) {
-    if (process.env.NODE_ENV === "production") {
-      console.warn(
-        "RESUME_LOCAL_PATH is set but will not be used in production; falling back to Gist.",
-      );
-    } else {
-      const { readFile } = await import("fs/promises");
-      const { resolve } = await import("path");
-      const json = await readFile(resolve(localPath), "utf-8");
-      return JSON.parse(json);
-    }
+  if (localPath && process.env.NODE_ENV !== "production") {
+    const { readFile } = await import("fs/promises");
+    const { resolve } = await import("path");
+    const json = await readFile(resolve(localPath), "utf-8");
+    return JSON.parse(json);
   }
 
-  const res = await fetch(GIST_RAW_URL, {
-    signal: AbortSignal.timeout(5000),
-    next: { revalidate: 3600 }, // Revalidate every hour
-  });
-
-  if (!res.ok) {
-    throw new Error(`Failed to fetch resume: ${res.status}`);
-  }
-
-  return res.json();
+  return canonicalResume as Resume;
 }
 
 // Format ISO date string to display format (e.g., "2024-07" -> "Jul 2024")

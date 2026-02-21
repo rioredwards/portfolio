@@ -11,7 +11,15 @@ test.describe("Site navigation", () => {
     await home.waitForHydration();
   });
 
-  test("supports skipping directly to the main content", async ({ page }) => {
+  test("supports skipping directly to the main content", async ({
+    page,
+    browserName,
+  }) => {
+    // Mobile WebKit doesn't reliably handle programmatic focus + Enter on skip links
+    test.skip(
+      browserName === "webkit" && test.info().project.name === "Mobile Safari",
+      "WebKit mobile does not support programmatic skip-link activation",
+    );
     await home.skipToContentLink().focus();
     await home.skipToContentLink().press("Enter");
     await expect(page).toHaveURL(/#main-content$/);

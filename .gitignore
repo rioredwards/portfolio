@@ -2,6 +2,9 @@
 
 tmp/
 
+# Tailored resume variants for job applications (never commit these)
+resume-variants/
+
 # dependencies
 /node_modules
 /.pnp
@@ -30,6 +33,9 @@ tmp/
 # misc
 .DS_Store
 *.pem
+
+# claude code (per-developer local settings)
+.claude/settings.local.json
 
 # debug
 npm-debug.log*

@@ -1,6 +1,8 @@
-import { PrintResumeButton } from "@/components/print-resume-button";
+import { Button } from "@/components/ui/button";
 import { ResumeContent } from "@/components/resume-content";
 import { getResume } from "@/lib/resume";
+import { Download04Icon } from "@hugeicons/core-free-icons";
+import { HugeiconsIcon } from "@hugeicons/react";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -34,9 +36,21 @@ export default async function ResumePage() {
       </div>
 
       <div className="fixed bottom-6 left-1/2 -translate-x-1/2">
-        <PrintResumeButton
-          filename={`${resume.basics.name?.replace(/\s+/g, "") ?? "RioEdwards"}_${resume.basics.label?.replace(/\s+(.)/g, (_, c) => c.toUpperCase()) ?? "Resume"}_Resume`}
-        />
+        <Button asChild size="lg">
+          <a
+            href="/Rio_Edwards_Resume.pdf"
+            download="Rio_Edwards_Resume.pdf"
+            id="download-resume-link"
+          >
+            <HugeiconsIcon
+              icon={Download04Icon}
+              size={16}
+              color="currentColor"
+              strokeWidth={2}
+            />
+            Download PDF
+          </a>
+        </Button>
       </div>
     </main>
   );

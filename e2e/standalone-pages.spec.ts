@@ -15,9 +15,12 @@ test.describe("Resume page", () => {
     await expect(resumeArticle).toBeVisible();
 
     // Key sections should exist
-    await expect(resumeArticle.getByText("EXPERIENCE")).toBeVisible();
-    await expect(resumeArticle.getByText("SKILLS")).toBeVisible();
-    await expect(resumeArticle.getByText("EDUCATION")).toBeVisible();
+    await expect(
+      resumeArticle.getByRole("heading", { name: "EXPERIENCE" }),
+    ).toBeVisible();
+    await expect(
+      resumeArticle.getByRole("heading", { name: "EDUCATION" }),
+    ).toBeVisible();
 
     // Contact info should be present
     await expect(
@@ -25,13 +28,18 @@ test.describe("Resume page", () => {
     ).toBeVisible();
   });
 
-  test("has a print/download button", async ({ page }) => {
+  test("has a PDF download link", async ({ page }) => {
     await page.goto("/resume");
     await page.waitForLoadState("domcontentloaded");
 
-    // Print button should be visible and accessible
-    const printButton = page.getByRole("button", { name: /download|print/i });
-    await expect(printButton).toBeVisible();
+    // Download link should be visible and point to the static PDF
+    const downloadLink = page.getByRole("link", { name: /download pdf/i });
+    await expect(downloadLink).toBeVisible();
+    await expect(downloadLink).toHaveAttribute(
+      "href",
+      "/Rio_Edwards_Resume.pdf",
+    );
+    await expect(downloadLink).toHaveAttribute("download", /.+/);
   });
 });
 

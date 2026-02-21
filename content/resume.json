@@ -1,0 +1,123 @@
+{
+  "basics": {
+    "name": "Rio Edwards",
+    "label": "Product Engineer",
+    "email": "rioredwards@gmail.com",
+    "phone": "(971) 420-5276",
+    "url": "https://rioedwards.com",
+    "summary": "Product-minded full-stack engineer shipping production software used by real teams. I specialize in cloud-based web and mobile apps with a focus on reliability, maintainability, and security. Experienced in both startup-style builds and compliance-heavy client environments.",
+    "profiles": [
+      {
+        "network": "LinkedIn",
+        "username": "rio-edwards",
+        "url": "https://linkedin.com/in/rio-edwards"
+      }
+    ]
+  },
+  "work": [
+    {
+      "name": "Experiential",
+      "position": "Product Engineer & Co-founder",
+      "startDate": "2024-07",
+      "endDate": "2025-11",
+      "highlights": [
+        {
+          "title": "CRM Document Manager",
+          "description": "A law firm needed HIPAA-compliant file management inside HubSpot. I clarified requirements and shipped a security-first solution in _5 weeks_, leveraging TDD, JWT auth, audit logging, and transactional rollback to prevent data loss. The app is now _business-critical_ for 30+ lawyers.",
+          "tech": ["TypeScript", "React", "Express", "Node.js", "GCP"]
+        },
+        {
+          "title": "iOS Digital-Wellness App",
+          "description": "A client wanted an iOS app for digital wellness: usage tracking and Live Activities. After a feasibility study, wireframes, and designs, I delivered a 15-screen application that achieved IPC across _5 heavily sandboxed extensions_. I ran an agile cadence with clear milestones, TDD, weekly updates, and bi-weekly demos.",
+          "tech": [
+            "Swift",
+            "SwiftUI",
+            "TypeScript",
+            "Firebase",
+            "Figma",
+            "Asana"
+          ]
+        },
+        {
+          "title": "Ohm on the Range Website",
+          "description": "This music festival needed a mobile-first website that drives ticket sales. I helped them focus their brand and shipped a new site in _2 weeks_. It is performant, responsive, accessible, and SEO-optimized. This led to a _2x increase in traffic and ticket sales_ over the previous year.",
+          "tech": [
+            "Next.js",
+            "React",
+            "TypeScript",
+            "Figma",
+            "Tailwind CSS",
+            "Vercel"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Code the Dream",
+      "position": "Cohort Instructional Lead",
+      "startDate": "2024-01",
+      "endDate": "2025-06",
+      "highlights": [
+        {
+          "description": "Led 200+ students through JS/HTML/CSS/React; translated complex topics into clear patterns and delivered PR-style feedback on assignments to improve readability, correctness, and maintainability."
+        },
+        {
+          "description": "Produced 40+ hours of video lectures and dozens of learning assets (infographics, articles) to support student engagement; recognized for clear instruction, students sought out paid tutoring after I left."
+        }
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "name": "DogTown (dogtown.dog)",
+      "startDate": "2024-06",
+      "description": "Production photo-sharing app, self-hosted on a Raspberry Pi with CI/CD and observability.",
+      "highlights": [
+        "Built and operate the full stack on a Raspberry Pi with automated deploys and NGINX caching.",
+        "Safety and observability built in: AI content moderation on every upload and a live metrics dashboard."
+      ],
+      "tech": [
+        "Next.js",
+        "React",
+        "TypeScript",
+        "Node.js",
+        "Hono",
+        "Postgres/Drizzle",
+        "NextAuth",
+        "shadcn/ui",
+        "Tailwind CSS",
+        "Docker Compose",
+        "Cloudflare Tunnel",
+        "GitHub Actions",
+        "Python",
+        "FastAPI",
+        "PyTorch",
+        "Umami",
+        "SSE"
+      ],
+      "url": "https://dogtown.dog"
+    }
+  ],
+  "education": [
+    {
+      "institution": "Alchemy Code Lab",
+      "studyType": "Certificate",
+      "area": "Fullstack Development",
+      "endDate": "2023-02"
+    },
+    {
+      "institution": "Portland Community College",
+      "studyType": "Associate",
+      "area": "General Studies",
+      "endDate": "2022-03"
+    }
+  ],
+  "certificates": [
+    {
+      "name": "AWS Certified Cloud Practitioner",
+      "issuer": "AWS",
+      "date": "2024-08"
+    }
+  ],
+  "skills": []
+}

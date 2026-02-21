@@ -85,18 +85,24 @@ export function ResumeContent({ data }: ResumeContentProps) {
                 >
                   {job.highlights.map((highlight: ResumeWorkProject, i) => (
                     <li key={i}>
-                      {highlight.url ? (
-                        <a href={highlight.url}>
-                          <strong>
-                            {parseInlineMarkdown(highlight.title)}
-                          </strong>
-                        </a>
-                      ) : (
-                        <strong>{parseInlineMarkdown(highlight.title)}</strong>
+                      {highlight.title != null && highlight.title !== "" && (
+                        <>
+                          {highlight.url ? (
+                            <a href={highlight.url}>
+                              <strong>
+                                {parseInlineMarkdown(highlight.title)}
+                              </strong>
+                            </a>
+                          ) : (
+                            <strong>
+                              {parseInlineMarkdown(highlight.title)}
+                            </strong>
+                          )}
+                        </>
                       )}
                       {highlight.tech && highlight.tech.length > 0 && (
                         <em className="entry-skills">
-                          {", "}
+                          {highlight.title ? ", " : null}
                           {highlight.tech.join(", ")}
                         </em>
                       )}
