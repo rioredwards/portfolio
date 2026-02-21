@@ -1,3 +1,5 @@
+import canonicalResume from "@/content/resume.json";
+
 // JSON Resume schema types (subset used by this portfolio)
 // Full schema: https://jsonresume.org/schema
 
@@ -71,8 +73,6 @@ export interface Resume {
   skills?: ResumeSkill[];
   projects?: ResumeProject[];
 }
-
-import canonicalResume from "@/content/resume.json";
 
 export async function getResume(): Promise<Resume> {
   // In development, RESUME_LOCAL_PATH can point to a variant JSON for generating

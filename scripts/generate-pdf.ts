@@ -19,8 +19,8 @@
  * Variants are gitignored. Never overwrite public/Rio_Edwards_Resume.pdf with a variant.
  */
 
-import { writeFile } from "fs/promises";
-import { resolve } from "path";
+import { writeFile, mkdir } from "fs/promises";
+import { resolve, dirname } from "path";
 import { chromium } from "playwright";
 
 const DEFAULT_BASE_URL = "http://localhost:3000";
@@ -74,6 +74,7 @@ const pdf = await page.pdf({
   printBackground: true,
 });
 
+await mkdir(dirname(resolve(output)), { recursive: true });
 await writeFile(resolve(output), pdf);
 await browser.close();
 

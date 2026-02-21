@@ -1,10 +1,13 @@
 import { expect, test } from "@playwright/test";
 
 test.describe("Resume PDF", () => {
-  test("fits on exactly one page", async ({ page, browserName }) => {
-    // page.pdf() is only available in Chromium
-    test.skip(browserName !== "chromium", "PDF generation requires Chromium");
+  // page.pdf() is only available in Chromium
+  test.skip(
+    ({ browserName }) => browserName !== "chromium",
+    "PDF generation requires Chromium",
+  );
 
+  test("fits on exactly one page", async ({ page }) => {
     await page.goto("/resume", { waitUntil: "networkidle" });
 
     // Margins are handled via CSS html padding in resume.css. Do NOT set margin
@@ -16,7 +19,7 @@ test.describe("Resume PDF", () => {
     });
 
     // Count pages by matching /Type /Page dictionary entries (not /Type /Pages)
-    const pdfStr = Buffer.from(pdfBuffer).toString("latin1");
+    const pdfStr = pdfBuffer.toString("latin1");
     const pageMatches = pdfStr.match(/\/Type\s*\/Page\b(?!s)/g);
     const pageCount = pageMatches ? pageMatches.length : 0;
 
