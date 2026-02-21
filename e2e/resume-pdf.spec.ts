@@ -7,10 +7,11 @@ test.describe("Resume PDF", () => {
 
     await page.goto("/resume", { waitUntil: "networkidle" });
 
-    // Do not pass margin here. Margins are declared in @page CSS in resume.css.
-    // Passing margin to page.pdf() overrides @page and causes content to be clipped.
+    // Margins are handled via CSS html padding in resume.css. Do NOT set margin
+    // here or Playwright will clip the rendered content before CSS margins apply.
     const pdfBuffer = await page.pdf({
       format: "Letter",
+      margin: { top: "0", right: "0", bottom: "0", left: "0" },
       printBackground: true,
     });
 

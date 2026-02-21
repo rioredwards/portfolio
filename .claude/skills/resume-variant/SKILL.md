@@ -47,6 +47,14 @@ resume-variants/          <- gitignored, never committed
    bun generate:pdf -- --output ./resume-variants/company-name.pdf
    ```
 
+   If the variant overflows at the default CSS sizing, pass `--font` and/or `--space` to override the scale variables without touching `resume.css`:
+
+   ```bash
+   bun generate:pdf -- --output ./resume-variants/company-name.pdf --font 10pt --space 4pt
+   ```
+
+   These args inject the overrides at runtime via `page.evaluate()`. Production CSS is never modified.
+
 7. **Submit the PDF** at `resume-variants/company-name.pdf`.
 
 8. **Clean up** when done:
@@ -57,5 +65,5 @@ resume-variants/          <- gitignored, never committed
 
 - Never overwrite `public/Rio_Edwards_Resume.pdf` with a variant. That file is the production download.
 - `resume-variants/` is gitignored. Nothing in it will be committed.
-- The one-page constraint still applies to variants. If the variant overflows, tighten the content or reduce `--print-base-font` / `--print-base-space` in `app/resume.css` (but revert after if the production PDF still fits).
+- The one-page constraint still applies to variants. If the variant overflows, tighten the content or pass `--font` / `--space` to `bun generate:pdf`. Never edit `app/resume.css` for a variant.
 - The HTML page on the live site always renders from `content/resume.json`, regardless of what `RESUME_LOCAL_PATH` is set to locally.
