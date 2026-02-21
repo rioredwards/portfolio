@@ -26,7 +26,8 @@ export class HomePage {
   }
 
   heroTaglineVisible(): Locator {
-    return this.page.getByTestId("hero-tagline");
+    // The paragraph is rendered twice (desktop + mobile layouts). Target only the visible one.
+    return this.page.locator('[data-testid="hero-tagline"]:visible');
   }
 
   rotatingWordContainers(): Locator {
