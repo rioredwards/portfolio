@@ -36,6 +36,9 @@ function ImageOverlay({
     ? `${src.width} / ${src.height}`
     : undefined;
 
+  const srcString = isStaticImage ? src.src : src;
+  const isAnimatedGif = srcString.toLowerCase().endsWith(".gif");
+
   return (
     <ImageOverlayClient
       className={cn(
@@ -54,6 +57,7 @@ function ImageOverlay({
         fill
         priority={priority}
         sizes={sizes}
+        unoptimized={isAnimatedGif}
         placeholder={isStaticImage && src.blurDataURL ? "blur" : undefined}
         className={cn(
           "object-cover transition-transform duration-500 ease-out",

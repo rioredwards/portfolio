@@ -25,6 +25,14 @@ export class HomePage {
     return this.page.getByTestId("hero-tagline-canonical");
   }
 
+  heroTaglineVisible(): Locator {
+    return this.page.getByTestId("hero-tagline");
+  }
+
+  rotatingWordContainers(): Locator {
+    return this.heroTaglineVisible().locator(".rotating-word-container");
+  }
+
   resumeCta(): Locator {
     return this.page.locator(
       '[data-testid="hero-resume-link-desktop"]:visible, [data-testid="hero-resume-link-mobile"]:visible',
