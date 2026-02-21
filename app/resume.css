@@ -362,12 +362,7 @@
   color: var(--text-color);
 }
 
-/* ===== Print ===== */
-
-@page {
-  size: letter;
-  margin: 0.5in 0.55in;
-}
+/* ===== Print (used by scripts/generate-resume-pdf.ts via Playwright) ===== */
 
 @media print {
   /* Reset everything for clean print */
@@ -394,7 +389,7 @@
   #navbar,
   #sidebar,
   #page-header,
-  #print-resume-button,
+  #download-resume-link,
   .resume-actions {
     display: none !important;
   }
@@ -415,10 +410,9 @@
 
   .resume {
     /* === TWEAK THESE TO SCALE EVERYTHING === */
-    --print-base-font: 12pt;
-    --print-base-space: 5pt;
+    --print-base-font: 10.5pt;
+    --print-base-space: 4.25pt;
 
-    /* Derived font sizes */
     /* Derived font sizes (multipliers of base) */
     --font-name: calc(var(--print-base-font) * 2.25);
     --font-role: calc(var(--print-base-font) * 1.375);
@@ -440,10 +434,10 @@
     --heading-color: #222;
     --rule-color: #444;
 
-    width: 8.5in;
+    width: 100%;
     min-height: auto;
     height: auto;
-    padding: 2pt;
+    padding: 0;
     box-shadow: none;
     border-radius: 0;
     margin: 0;
