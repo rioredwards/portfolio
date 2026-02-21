@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { cn } from "../../lib/utils";
 import "./RotatingWord.css";
 
@@ -50,6 +50,13 @@ export function RotatingWord({
 
   const adjustedPauseDuration = pauseDuration - additionalLetterDelays;
 
+  // Total cycle duration is always pauseDuration + ANIMATION_DURATION (additionalLetterDelays
+  // cancels out between adjustedPauseDuration and letterAnimationWithDelays). Pinning all
+  // transitions to an absolute epoch prevents drift from accumulating across cycles.
+  const CYCLE_DURATION = pauseDuration + ANIMATION_DURATION;
+  const startTimeRef = useRef<number | null>(null);
+  const cycleCountRef = useRef(0);
+
   function swapWords() {
     setCurrentWordIdx(nextWordIdx);
     setNextWordIdx((prev) => (prev + 1) % words.length);
@@ -65,24 +72,41 @@ export function RotatingWord({
     }
   }, [initialDelay, isInitialized]);
 
-  // Progress through animation phases
+  // Progress through animation phases using absolute timing so phases never drift.
+  // Each transition fires at startTimeRef + cycleCount * CYCLE_DURATION + phaseOffset,
+  // not at "now + delay", preventing small setTimeout inaccuracies from accumulating.
   useEffect(() => {
     if (!isInitialized) return;
 
+    if (startTimeRef.current === null) {
+      startTimeRef.current = Date.now();
+    }
+
+    const cycleStart =
+      startTimeRef.current + cycleCountRef.current * CYCLE_DURATION;
+    let timerId: ReturnType<typeof setTimeout>;
+
     switch (animationPhase) {
-      case "preSwap":
-        setTimeout(() => {
-          setAnimationPhase("duringSwap");
-        }, adjustedPauseDuration);
-        break;
-      case "duringSwap": {
-        setTimeout(() => {
-          setAnimationPhase("postSwap");
-        }, letterAnimationWithDelays);
+      case "preSwap": {
+        const swapAt = cycleStart + adjustedPauseDuration;
+        timerId = setTimeout(
+          () => setAnimationPhase("duringSwap"),
+          Math.max(0, swapAt - Date.now()),
+        );
         break;
       }
-      case "postSwap":
-        setTimeout(() => {
+      case "duringSwap": {
+        const postAt =
+          cycleStart + adjustedPauseDuration + letterAnimationWithDelays;
+        timerId = setTimeout(
+          () => setAnimationPhase("postSwap"),
+          Math.max(0, postAt - Date.now()),
+        );
+        break;
+      }
+      case "postSwap": {
+        cycleCountRef.current += 1;
+        timerId = setTimeout(() => {
           swapWords();
           if (direction === "toggle") {
             setCurrentDirection((prev) => (prev === "up" ? "down" : "up"));
@@ -90,7 +114,10 @@ export function RotatingWord({
           setAnimationPhase("preSwap");
         }, 0);
         break;
+      }
     }
+
+    return () => clearTimeout(timerId);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
     animationPhase,
