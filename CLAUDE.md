@@ -114,6 +114,52 @@ order: 1
 - Playfair Display (Google Fonts)
 - Mazaeni Demo (local, in `fonts/`)
 
+### Resume
+
+The resume has two outputs that must stay in sync: the **HTML page** at `/resume` and the **static PDF** at `/Rio_Edwards_Resume.pdf`.
+
+**Key files:**
+
+- `content/resume.json` - canonical resume data (single source of truth)
+- `app/resume.css` - all resume styles, including the `@media print` block
+- `app/resume/page.tsx` - resume page component
+- `components/resume-content.tsx` - renders the resume from JSON data
+- `public/Rio_Edwards_Resume.pdf` - the committed, pre-generated PDF
+- `scripts/generate-pdf.ts` - generates the PDF from the running dev server
+- `e2e/resume-pdf.spec.ts` - asserts the PDF is exactly one page
+
+**How the PDF is generated:**
+`page.pdf()` renders the `/resume` page using `@media print` styles. Margins are declared in CSS via `@page { margin: 0.5in 0.55in; }` inside the print block in `resume.css`. The `generate-pdf.ts` script passes `margin: 0` to `page.pdf()` so Playwright does not override them.
+
+**Updating the resume (standard edits):**
+
+1. Edit `content/resume.json`
+2. Start the dev server: `bun dev`
+3. Regenerate the PDF: `bun generate:pdf`
+4. Commit both files together: `content/resume.json` + `public/Rio_Edwards_Resume.pdf`
+
+**One-page constraint:**
+`e2e/resume-pdf.spec.ts` asserts the PDF is exactly one page. If the test fails after adding content, tighten the two CSS variables at the top of the `@media print` block in `resume.css`, then regenerate:
+
+```css
+--print-base-font: 10.5pt; /* reduce to shrink all text */
+--print-base-space: 4.25pt; /* reduce to tighten all spacing */
+```
+
+All font sizes and spacing derive from these two values, so one adjustment affects the whole layout proportionally.
+
+**Generating a variant PDF for a job application:**
+
+1. `cp content/resume.json resume-variants/company-name.json`
+2. Edit `resume-variants/company-name.json` with tailored content
+3. Add `RESUME_LOCAL_PATH=./resume-variants/company-name.json` to `.env.local`
+4. `bun dev` (the page now renders the variant data)
+5. `bun generate:pdf -- --output ./resume-variants/company-name.pdf`
+6. Submit the variant PDF. The `resume-variants/` directory is gitignored.
+7. Remove `RESUME_LOCAL_PATH` from `.env.local` when done
+
+Never overwrite `public/Rio_Edwards_Resume.pdf` with a variant. The committed PDF must always match `content/resume.json`.
+
 ## Important Conventions
 
 **Icons**: Use Hugeicons, not lucide-react:
