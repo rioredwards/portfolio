@@ -7,14 +7,10 @@ test.describe("Resume PDF", () => {
 
     await page.goto("/resume", { waitUntil: "networkidle" });
 
+    // Do not pass margin here. Margins are declared in @page CSS in resume.css.
+    // Passing margin to page.pdf() overrides @page and causes content to be clipped.
     const pdfBuffer = await page.pdf({
       format: "Letter",
-      margin: {
-        top: "0.5in",
-        right: "0.55in",
-        bottom: "0.5in",
-        left: "0.55in",
-      },
       printBackground: true,
     });
 

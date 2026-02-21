@@ -34,9 +34,10 @@ const browser = await chromium.launch();
 const page = await browser.newPage();
 await page.goto(`${baseUrl}/resume`, { waitUntil: "networkidle" });
 
+// Do not pass margin here. Margins are declared in @page CSS in resume.css.
+// Passing margin to page.pdf() overrides @page and causes content to be clipped.
 const pdf = await page.pdf({
   format: "Letter",
-  margin: { top: "0.5in", right: "0.55in", bottom: "0.5in", left: "0.55in" },
   printBackground: true,
 });
 

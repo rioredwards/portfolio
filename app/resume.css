@@ -365,6 +365,14 @@
 /* ===== Print (used by scripts/generate-resume-pdf.ts via Playwright) ===== */
 
 @media print {
+  /* Declare margins here so the CSS layout engine knows the content area.
+     Playwright's page.pdf() must NOT pass its own margin option, or it
+     will override this and render at full paper width before clipping. */
+  @page {
+    size: letter;
+    margin: 0.5in 0.55in;
+  }
+
   /* Reset everything for clean print */
   *,
   *::before,
