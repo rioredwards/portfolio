@@ -9,7 +9,11 @@
       "Bash(xargs kill:*)",
       "Bash(npm run test:e2e:*)",
       "Bash(bun run build:*)",
-      "WebSearch"
+      "WebSearch",
+      "Bash(true:*)",
+      "Bash(git add:*)",
+      "Bash(bun run:*)",
+      "Bash(git commit:*)"
     ]
   }
 }

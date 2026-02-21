@@ -61,7 +61,16 @@ test.describe("Keyboard navigation", () => {
     await expect(home.mobileMenuDialog()).toBeHidden();
   });
 
-  test("Tab navigates through interactive elements", async ({ page }) => {
+  test("Tab navigates through interactive elements", async ({
+    page,
+    browserName,
+  }) => {
+    // WebKit/Safari doesn't tab-focus links by default
+    test.skip(
+      browserName === "webkit",
+      "Safari skips links during Tab navigation",
+    );
+
     // Start from skip link
     await page.keyboard.press("Tab");
 
