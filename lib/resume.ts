@@ -25,7 +25,7 @@ export interface ResumeWork {
 }
 
 export interface ResumeWorkProject {
-  title: string;
+  title?: string;
   description?: string;
   tech?: string[];
   url?: string;
