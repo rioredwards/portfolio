@@ -21,7 +21,7 @@ Guides you through editing `content/resume.json` and regenerating `public/Rio_Ed
 
 ## Steps
 
-1. **Edit the resume data** in `content/resume.json`. The schema matches the JSON Resume standard. Key sections: `basics`, `work`, `projects`, `education`, `certificates`, `skills`.
+1. **Edit the resume data** in `content/resume.json`. The schema is a custom variant of the JSON Resume standard. Do not assume the upstream spec applies exactly. The TypeScript types are the source of truth; read them in `lib/resume.ts` before making structural changes. Key sections: `basics`, `work`, `projects`, `education`, `certificates`, `skills`.
 
 2. **Start the dev server** if it is not already running:
 
