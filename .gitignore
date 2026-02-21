@@ -34,6 +34,9 @@ resume-variants/
 .DS_Store
 *.pem
 
+# claude code (per-developer local settings)
+.claude/settings.local.json
+
 # debug
 npm-debug.log*
 yarn-debug.log*
