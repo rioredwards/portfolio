@@ -168,7 +168,7 @@
 
 .experience .entry + .entry {
   padding-top: var(--space-md);
-  border-top: 1px solid color-mix(in srgb, var(--rule-color) 40%, transparent);
+  border-top: 1px solid var(--rule-color);
 }
 
 .entry-header {
@@ -441,7 +441,7 @@
     --text-color: #222;
     --name-color: #000;
     --heading-color: #222;
-    --rule-color: #444;
+    --rule-color: #ababab;
 
     width: 100%;
     min-height: auto;
