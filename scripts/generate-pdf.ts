@@ -43,39 +43,40 @@ const page = await browser.newPage();
 
 try {
   await page.goto(`${baseUrl}/resume`, { waitUntil: "networkidle" });
-} catch {
-  await browser.close();
-  console.error(`\nError: could not reach ${baseUrl}/resume`);
-  console.error(`Make sure the dev server is running first:\n\n  bun dev\n`);
-  process.exit(1);
-}
 
-// Inject CSS variable overrides for variant generation.
-// Use --font / --space args instead of editing resume.css so production CSS stays untouched.
-if (fontOverride || spaceOverride) {
-  await page.evaluate(
-    ({ font, space }) => {
-      const style = document.createElement("style");
-      style.textContent = `@media print { .resume {
+  // Inject CSS variable overrides for variant generation.
+  // Use --font / --space args instead of editing resume.css so production CSS stays untouched.
+  if (fontOverride || spaceOverride) {
+    await page.evaluate(
+      ({ font, space }) => {
+        const style = document.createElement("style");
+        style.textContent = `@media print { .resume {
         ${font ? `--print-base-font: ${font} !important;` : ""}
         ${space ? `--print-base-space: ${space} !important;` : ""}
       }}`;
-      document.head.appendChild(style);
-    },
-    { font: fontOverride, space: spaceOverride },
-  );
+        document.head.appendChild(style);
+      },
+      { font: fontOverride, space: spaceOverride },
+    );
+  }
+
+  // Margins are handled via CSS html padding in resume.css. Do NOT set margin
+  // here or Playwright will clip the rendered content before CSS margins apply.
+  const pdf = await page.pdf({
+    format: "Letter",
+    margin: { top: "0", right: "0", bottom: "0", left: "0" },
+    printBackground: true,
+  });
+
+  await mkdir(dirname(resolve(output)), { recursive: true });
+  await writeFile(resolve(output), pdf);
+
+  console.log(`PDF saved to ${output}`);
+} catch (e) {
+  console.error("\nError:", e instanceof Error ? e.message : e);
+  console.error(`Could not reach ${baseUrl}/resume or generate PDF.`);
+  console.error(`Make sure the dev server is running first:\n\n  bun dev\n`);
+  process.exit(1);
+} finally {
+  await browser.close();
 }
-
-// Margins are handled via CSS html padding in resume.css. Do NOT set margin
-// here or Playwright will clip the rendered content before CSS margins apply.
-const pdf = await page.pdf({
-  format: "Letter",
-  margin: { top: "0", right: "0", bottom: "0", left: "0" },
-  printBackground: true,
-});
-
-await mkdir(dirname(resolve(output)), { recursive: true });
-await writeFile(resolve(output), pdf);
-await browser.close();
-
-console.log(`PDF saved to ${output}`);

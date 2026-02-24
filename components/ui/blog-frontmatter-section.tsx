@@ -1,6 +1,6 @@
 import { BlogFrontmatter } from "@/lib/blogs";
-import { cn } from "@/lib/utils";
-import { Fragment } from "react/jsx-runtime";
+import { DEFAULT_LOCALE } from "@/lib/constants";
+import { TagList } from "./tag-list";
 
 export function BlogFrontmatterSection({
   frontmatter,
@@ -21,7 +21,7 @@ export function BlogFrontmatterSection({
         <div className="flex items-center gap-2 text-sm text-muted-foreground">
           {hasDate && (
             <span>
-              {new Date(frontmatter.date!).toLocaleDateString("en-US", {
+              {new Date(frontmatter.date!).toLocaleDateString(DEFAULT_LOCALE, {
                 year: "numeric",
                 month: "long",
                 day: "numeric",
@@ -32,23 +32,7 @@ export function BlogFrontmatterSection({
           {hasReadingTime && <span>{frontmatter.readingTime} min read</span>}
         </div>
       )}
-      {hasTags && (
-        <div className="flex flex-wrap items-center gap-2">
-          {frontmatter.tags!.map((tag, idx) => (
-            <Fragment key={idx}>
-              <span
-                className={cn("text-foreground", "rounded-full py-1 text-sm")}
-                data-testid="blog-tag"
-              >
-                {tag}
-              </span>
-              {idx < frontmatter.tags!.length - 1 && (
-                <span className="text-muted-foreground/40">/</span>
-              )}
-            </Fragment>
-          ))}
-        </div>
-      )}
+      {hasTags && <TagList items={frontmatter.tags!} dataTestId="blog-tag" />}
       <hr className="mt-4 mb-8 border-border/40" />
     </div>
   );

@@ -1,20 +1,33 @@
-import fs from "fs";
-import matter from "gray-matter";
-import path from "path";
+import {
+  getContentFrontmatter,
+  getContentSlugs,
+  getContentWithContent,
+  sortByOrder,
+} from "@/lib/content";
+import { z } from "zod";
 
-// Types
-export interface ProjectFrontmatter {
-  title: string;
-  slug: string;
-  icon?: string;
-  description: string;
-  category: string;
-  skills: string[];
-  image: string;
-  brandColor?: string;
-  links?: Array<{ text: string; url: string; icon?: string }>;
-  order?: number;
-}
+const projectFrontmatterSchema = z.object({
+  title: z.string().min(1, "title is required"),
+  slug: z.string().min(1, "slug is required"),
+  description: z.string().min(1, "description is required"),
+  category: z.string().min(1, "category is required"),
+  image: z.string().min(1, "image is required"),
+  icon: z.string().optional(),
+  skills: z.array(z.string()).default([]),
+  brandColor: z.string().optional(),
+  links: z
+    .array(
+      z.object({
+        text: z.string(),
+        url: z.string(),
+        icon: z.string().optional(),
+      }),
+    )
+    .default([]),
+  order: z.number().optional(),
+});
+
+export type ProjectFrontmatter = z.infer<typeof projectFrontmatterSchema>;
 
 export interface ProjectCard {
   title: string;
@@ -31,52 +44,25 @@ export interface ProjectWithContent {
   content: string;
 }
 
-const PROJECTS_DIR = path.join(process.cwd(), "content", "projects");
+const PROJECTS_DIR = "content/projects";
 
 /**
  * Get all project slugs from MDX files
  */
 export function getProjectSlugs(): string[] {
-  try {
-    const files = fs.readdirSync(PROJECTS_DIR);
-    return files
-      .filter((file) => file.endsWith(".mdx"))
-      .map((file) => file.replace(/\.mdx$/, ""));
-  } catch (error) {
-    console.error("Error reading projects directory:", error);
-    return [];
-  }
+  return getContentSlugs(PROJECTS_DIR);
 }
 
 /**
  * Get frontmatter for a single project by slug
  */
 export function getProjectFrontmatter(slug: string): ProjectFrontmatter | null {
-  try {
-    const filePath = path.join(PROJECTS_DIR, `${slug}.mdx`);
-    if (!fs.existsSync(filePath)) {
-      return null;
-    }
-
-    const fileContent = fs.readFileSync(filePath, "utf-8");
-    const { data } = matter(fileContent);
-
-    return {
-      title: data.title,
-      slug: data.slug,
-      icon: data.icon,
-      description: data.description,
-      category: data.category,
-      skills: data.skills || [],
-      image: data.image,
-      brandColor: data.brandColor,
-      links: data.links || [],
-      order: data.order,
-    };
-  } catch (error) {
-    console.error(`Error reading project ${slug}:`, error);
-    return null;
-  }
+  return getContentFrontmatter(
+    slug,
+    PROJECTS_DIR,
+    projectFrontmatterSchema,
+    "project",
+  );
 }
 
 /**
@@ -102,51 +88,19 @@ export function getAllProjectCards(): ProjectCard[] {
     }
   }
 
-  // Sort by order if specified, otherwise maintain file order
-  return projects.sort((a, b) => {
-    if (a.order !== undefined && b.order !== undefined) {
-      return a.order - b.order;
-    }
-    if (a.order !== undefined) return -1;
-    if (b.order !== undefined) return 1;
-    return 0;
-  });
+  return sortByOrder(projects);
 }
 
 /**
  * Get a project with its full MDX content
  */
 export function getProjectWithContent(slug: string): ProjectWithContent | null {
-  try {
-    const filePath = path.join(PROJECTS_DIR, `${slug}.mdx`);
-    if (!fs.existsSync(filePath)) {
-      return null;
-    }
-
-    const fileContent = fs.readFileSync(filePath, "utf-8");
-    const { data, content } = matter(fileContent);
-
-    const frontmatter: ProjectFrontmatter = {
-      title: data.title,
-      slug: data.slug,
-      icon: data.icon,
-      description: data.description,
-      category: data.category,
-      skills: data.skills || [],
-      image: data.image,
-      brandColor: data.brandColor,
-      links: data.links || [],
-      order: data.order,
-    };
-
-    return {
-      frontmatter,
-      content,
-    };
-  } catch (error) {
-    console.error(`Error reading project ${slug}:`, error);
-    return null;
-  }
+  return getContentWithContent(
+    slug,
+    PROJECTS_DIR,
+    projectFrontmatterSchema,
+    "project",
+  );
 }
 
 /**

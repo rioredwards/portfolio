@@ -1,19 +1,36 @@
-import fs from "fs";
-import matter from "gray-matter";
-import path from "path";
+import { READING_SPEED_WORDS_PER_MIN } from "@/lib/constants";
+import {
+  getContentFrontmatter,
+  getContentSlugs,
+  getContentWithContent,
+  sortByOrder,
+} from "@/lib/content";
+import { z } from "zod";
 
-// Types
-export interface BlogFrontmatter {
-  title: string;
-  slug: string;
-  description: string;
-  icon: string;
-  date?: string;
-  tags?: string[];
-  links?: Array<{ text: string; url: string; icon?: string }>;
-  order?: number;
-  readingTime?: number; // Calculated reading time in minutes
-}
+const blogFrontmatterSchema = z.object({
+  title: z.string().min(1, "title is required"),
+  slug: z.string().min(1, "slug is required"),
+  description: z.string().min(1, "description is required"),
+  icon: z.string().min(1, "icon is required"),
+  date: z.string().optional(),
+  tags: z.array(z.string()).default([]),
+  links: z
+    .array(
+      z.object({
+        text: z.string(),
+        url: z.string(),
+        icon: z.string().optional(),
+      }),
+    )
+    .default([]),
+  order: z.number().optional(),
+});
+
+export type BlogFrontmatter = z.infer<typeof blogFrontmatterSchema> & {
+  readingTime?: number; // Calculated, not from frontmatter
+};
+
+const BLOGS_DIR = "content/blogs";
 
 /**
  * Calculate estimated reading time based on word count
@@ -28,8 +45,7 @@ function calculateReadingTime(content: string): number {
     .trim();
 
   const words = plainText.split(/\s+/).filter((word) => word.length > 0).length;
-  const wordsPerMinute = 200;
-  const minutes = Math.ceil(words / wordsPerMinute);
+  const minutes = Math.ceil(words / READING_SPEED_WORDS_PER_MIN);
 
   return Math.max(1, minutes); // Minimum 1 minute
 }
@@ -46,50 +62,18 @@ export interface BlogWithContent {
   content: string;
 }
 
-const BLOGS_DIR = path.join(process.cwd(), "content", "blogs");
-
 /**
  * Get all blog slugs from MDX files
  */
 export function getBlogSlugs(): string[] {
-  try {
-    const files = fs.readdirSync(BLOGS_DIR);
-    return files
-      .filter((file) => file.endsWith(".mdx"))
-      .map((file) => file.replace(/\.mdx$/, ""));
-  } catch (error) {
-    console.error("Error reading blogs directory:", error);
-    return [];
-  }
+  return getContentSlugs(BLOGS_DIR);
 }
 
 /**
  * Get frontmatter for a single blog by slug
  */
 export function getBlogFrontmatter(slug: string): BlogFrontmatter | null {
-  try {
-    const filePath = path.join(BLOGS_DIR, `${slug}.mdx`);
-    if (!fs.existsSync(filePath)) {
-      return null;
-    }
-
-    const fileContent = fs.readFileSync(filePath, "utf-8");
-    const { data } = matter(fileContent);
-
-    return {
-      title: data.title,
-      slug: data.slug,
-      description: data.description,
-      icon: data.icon,
-      date: data.date,
-      tags: data.tags || [],
-      links: data.links || [],
-      order: data.order,
-    };
-  } catch (error) {
-    console.error(`Error reading blog ${slug}:`, error);
-    return null;
-  }
+  return getContentFrontmatter(slug, BLOGS_DIR, blogFrontmatterSchema, "blog");
 }
 
 /**
@@ -112,50 +96,23 @@ export function getAllBlogCards(): BlogCard[] {
     }
   }
 
-  // Sort by order if specified, otherwise maintain file order
-  return blogs.sort((a, b) => {
-    if (a.order !== undefined && b.order !== undefined) {
-      return a.order - b.order;
-    }
-    if (a.order !== undefined) return -1;
-    if (b.order !== undefined) return 1;
-    return 0;
-  });
+  return sortByOrder(blogs);
 }
 
 /**
  * Get a blog with its full MDX content
  */
 export function getBlogWithContent(slug: string): BlogWithContent | null {
-  try {
-    const filePath = path.join(BLOGS_DIR, `${slug}.mdx`);
-    if (!fs.existsSync(filePath)) {
-      return null;
-    }
-
-    const fileContent = fs.readFileSync(filePath, "utf-8");
-    const { data, content } = matter(fileContent);
-
-    const frontmatter: BlogFrontmatter = {
-      title: data.title,
-      slug: data.slug,
-      description: data.description,
-      icon: data.icon,
-      date: data.date,
-      tags: data.tags || [],
-      links: data.links || [],
-      order: data.order,
+  return getContentWithContent(
+    slug,
+    BLOGS_DIR,
+    blogFrontmatterSchema,
+    "blog",
+    (data, content) => ({
+      ...data,
       readingTime: calculateReadingTime(content),
-    };
-
-    return {
-      frontmatter,
-      content,
-    };
-  } catch (error) {
-    console.error(`Error reading blog ${slug}:`, error);
-    return null;
-  }
+    }),
+  );
 }
 
 /**

@@ -14,6 +14,7 @@ import {
 } from "@/components/project/index";
 import { projectImageScope } from "@/content/projects/project-images";
 import { getBlogIcon } from "@/lib/blog-icons";
+import { CONTACT_EMAIL } from "@/lib/constants";
 import { getAllBlogCards, getAllBlogsWithContent } from "@/lib/blogs";
 import { getAllProjectCards, getAllProjectsWithContent } from "@/lib/projects";
 import { MDXRemote } from "next-mdx-remote/rsc";
@@ -41,8 +42,6 @@ export default async function Home() {
       ),
     });
   }
-
-  console.log("Page.tsx");
 
   const renderedBlogs = new Map<string, RenderedBlog>();
   for (const [slug, blog] of blogsWithContent) {
@@ -164,10 +163,10 @@ export default async function Home() {
                   <p className="mt-2 text-muted-foreground">
                     Please email me directly at{" "}
                     <a
-                      href="mailto:rioredwards@gmail.com"
+                      href={`mailto:${CONTACT_EMAIL}`}
                       className="underline hover:text-foreground"
                     >
-                      rioredwards@gmail.com
+                      {CONTACT_EMAIL}
                     </a>
                   </p>
                 </div>

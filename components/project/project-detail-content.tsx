@@ -1,10 +1,10 @@
 import { ContentProse } from "@/components/content-detail/content-prose";
+import { ProjectFrontmatterSection } from "@/components/ui/project-frontmatter-section";
 import { projectImageScope } from "@/content/projects/project-images";
 import { ProjectFrontmatter } from "@/lib/projects";
 import { useMDXComponents } from "@/mdx-components";
 import { MDXRemote } from "next-mdx-remote/rsc";
-import { ProjectDetailHeader } from "@/components/ui/project-detail-header";
-import { ProjectFrontmatterSection } from "@/components/ui/project-frontmatter-section";
+import { DetailHeader } from "../ui/detail-header";
 
 interface ProjectDetailContentProps {
   frontmatter: ProjectFrontmatter;
@@ -21,7 +21,13 @@ export function ProjectDetailContent({
     <div>
       {/* Header Section: Logo, Title, Links, Tags */}
       <div>
-        <ProjectDetailHeader {...frontmatter} />
+        <DetailHeader
+          title={frontmatter.title}
+          slug={frontmatter.slug}
+          basePath="/work"
+          links={frontmatter.links}
+          icon={frontmatter.icon}
+        />
         <ProjectFrontmatterSection frontmatter={frontmatter} />
       </div>
 

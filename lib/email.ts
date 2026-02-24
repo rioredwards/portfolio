@@ -31,12 +31,19 @@ export async function sendEmail({
   email,
   message,
 }: EmailProps): Promise<void> {
+  const from = process.env.GOOGLE_APP_SENDER_USERNAME;
+  const to = process.env.GOOGLE_APP_RECEIVER_USERNAME;
+  if (!from || !to) {
+    throw new Error(
+      "Email configuration incomplete: sender or receiver missing",
+    );
+  }
+
   const transporter = getTransporter();
 
-  // Set up email data
   const mailOptions = {
-    from: process.env.GOOGLE_APP_SENDER_USERNAME!,
-    to: process.env.GOOGLE_APP_RECEIVER_USERNAME!,
+    from,
+    to,
     subject: `Portfolio Contact: ${name} (${email})`,
     text: `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`,
     replyTo: email, // Allow replying directly to the sender

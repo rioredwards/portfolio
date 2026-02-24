@@ -1,8 +1,8 @@
-import { cn } from "@/lib/utils";
 import { ImageOverlay } from "@/components/image-overlay/image-overlay";
 import { LightboxImageClient } from "@/components/lightbox-image/lightbox-image-client";
 import { LightboxTrigger } from "@/components/lightbox-image/lightbox-trigger";
 import type { LightboxSlide } from "@/components/lightbox-image/types";
+import { cn } from "@/lib/utils";
 import { Maximize } from "lucide-react";
 import { StaticImageData } from "next/image";
 

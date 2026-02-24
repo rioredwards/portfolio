@@ -1,7 +1,7 @@
 import canonicalResume from "@/content/resume.json";
+import { DEFAULT_LOCALE } from "./constants";
 
-// JSON Resume schema types (subset used by this portfolio)
-// Full schema: https://jsonresume.org/schema
+// JSON Resume schema types (modified version of https://jsonresume.org/schema)
 
 export interface ResumeBasics {
   name: string;
@@ -80,10 +80,17 @@ export async function getResume(): Promise<Resume> {
   // Never set this in production: it has no effect there.
   const localPath = process.env.RESUME_LOCAL_PATH;
   if (localPath && process.env.NODE_ENV !== "production") {
-    const { readFile } = await import("fs/promises");
-    const { resolve } = await import("path");
-    const json = await readFile(resolve(localPath), "utf-8");
-    return JSON.parse(json);
+    try {
+      const { readFile } = await import("fs/promises");
+      const { resolve } = await import("path");
+      const json = await readFile(resolve(localPath), "utf-8");
+      return JSON.parse(json) as Resume;
+    } catch (e) {
+      const msg = e instanceof Error ? e.message : String(e);
+      throw new Error(
+        `Failed to load resume from RESUME_LOCAL_PATH (${localPath}): ${msg}`,
+      );
+    }
   }
 
   return canonicalResume as Resume;
@@ -95,5 +102,8 @@ export function formatResumeDate(dateStr: string): string {
   if (!month) return year;
 
   const date = new Date(parseInt(year), parseInt(month) - 1);
-  return date.toLocaleDateString("en-US", { month: "short", year: "numeric" });
+  return date.toLocaleDateString(DEFAULT_LOCALE, {
+    month: "short",
+    year: "numeric",
+  });
 }

@@ -63,7 +63,9 @@ export function Contact() {
             id="contact-form"
             suppressHydrationWarning={true}
             className="fade-in-scroll flex-1 space-y-8"
-            action={action as never}
+            action={
+              action as never /* TanStack Form + useActionState typing workaround */
+            }
             onSubmit={async () => {
               await form.handleSubmit();
             }}

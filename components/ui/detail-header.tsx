@@ -1,19 +1,48 @@
 import { cn } from "@/lib/utils";
+import Image from "next/image";
 import Link from "next/link";
 import { Button } from "./button";
 import { LinkIcon } from "./link-icon";
 
-interface BlogDetailHeaderProps {
-  title: string;
-  slug: string;
-  links?: { text: string; url: string; icon?: string }[];
+export interface DetailHeaderLink {
+  text: string;
+  url: string;
+  icon?: string;
 }
 
-export function BlogDetailHeader({
+interface DetailHeaderProps {
+  title: string;
+  slug: string;
+  basePath: "/work" | "/blog";
+  links?: DetailHeaderLink[];
+  icon?: string;
+}
+
+/** Shared header for project and blog detail pages: title, optional icon, link buttons. */
+export function DetailHeader({
   title,
   slug,
+  basePath,
   links,
-}: BlogDetailHeaderProps) {
+  icon,
+}: DetailHeaderProps) {
+  const titleContent = (
+    <header className="flex items-center gap-4">
+      {icon && (
+        <Image
+          src={icon}
+          alt={title}
+          width={42}
+          height={42}
+          className="h-10 w-10"
+        />
+      )}
+      <span className="text-3xl font-bold text-foreground transition-all duration-200 group-hover:brightness-125">
+        {title}
+      </span>
+    </header>
+  );
+
   return (
     <div
       className={cn(
@@ -22,10 +51,11 @@ export function BlogDetailHeader({
       )}
     >
       <h1 style={{ fontFamily: "var(--font-mazaeni), serif" }}>
-        <Link href={`/blog/${slug}`} className="group flex items-center gap-4">
-          <span className="text-3xl font-bold text-foreground transition-all duration-200 group-hover:brightness-125">
-            {title}
-          </span>
+        <Link
+          href={`${basePath}/${slug}`}
+          className="group flex items-center gap-4"
+        >
+          {titleContent}
         </Link>
       </h1>
       {links && links.length > 0 && (
