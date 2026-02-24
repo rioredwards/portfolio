@@ -1,116 +1,219 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "Resume",
   "type": "object",
-  "required": [
-    "basics",
-    "summary",
-    "experience",
-    "education",
-    "skills",
-    "projects"
-  ],
-  "additionalProperties": false,
   "properties": {
-    "$schema": { "type": "string" },
+    "$schema": {
+      "type": "string"
+    },
     "basics": {
       "type": "object",
-      "required": ["name", "title", "email", "phone", "linkedIn"],
-      "additionalProperties": false,
       "properties": {
-        "name": { "type": "string" },
-        "title": { "type": "string" },
-        "email": { "type": "string", "format": "email" },
-        "phone": { "type": "string" },
-        "linkedIn": { "type": "string", "format": "uri" }
-      }
+        "name": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string",
+          "format": "email",
+          "pattern": "^(?!\\.)(?!.*\\.\\.)([A-Za-z0-9_'+\\-\\.]*)[A-Za-z0-9_+-]@([A-Za-z0-9][A-Za-z0-9\\-]*\\.)+[A-Za-z]{2,}$"
+        },
+        "phone": {
+          "type": "string"
+        },
+        "linkedIn": {
+          "type": "string",
+          "format": "uri"
+        }
+      },
+      "required": ["name", "title", "email", "phone", "linkedIn"],
+      "additionalProperties": false
     },
-    "summary": { "type": "string" },
+    "summary": {
+      "type": "string"
+    },
     "experience": {
       "type": "array",
       "items": {
-        "type": "object",
-        "required": ["name", "title", "startDate"],
-        "additionalProperties": false,
-        "properties": {
-          "name": { "type": "string" },
-          "title": { "type": "string" },
-          "startDate": { "type": "string", "pattern": "^\\d{4}(-\\d{2})?$" },
-          "endDate": { "type": "string", "pattern": "^\\d{4}(-\\d{2})?$" },
-          "projects": {
-            "type": "array",
-            "items": { "$ref": "#/$defs/project" }
+        "anyOf": [
+          {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "title": {
+                "type": "string"
+              },
+              "startDate": {
+                "type": "string",
+                "pattern": "^\\d{4}(-\\d{2})?$"
+              },
+              "endDate": {
+                "type": "string",
+                "pattern": "^\\d{4}(-\\d{2})?$"
+              },
+              "projects": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "title": {
+                      "type": "string"
+                    },
+                    "description": {
+                      "type": "string"
+                    },
+                    "tech": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "url": {
+                      "type": "string",
+                      "format": "uri"
+                    }
+                  },
+                  "required": ["title", "description", "tech"],
+                  "additionalProperties": false
+                }
+              }
+            },
+            "required": ["name", "title", "startDate", "projects"],
+            "additionalProperties": false
           },
-          "highlights": {
-            "type": "array",
-            "items": { "type": "string" }
+          {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "title": {
+                "type": "string"
+              },
+              "startDate": {
+                "type": "string",
+                "pattern": "^\\d{4}(-\\d{2})?$"
+              },
+              "endDate": {
+                "type": "string",
+                "pattern": "^\\d{4}(-\\d{2})?$"
+              },
+              "highlights": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            },
+            "required": ["name", "title", "startDate", "highlights"],
+            "additionalProperties": false
           }
-        },
-        "oneOf": [{ "required": ["projects"] }, { "required": ["highlights"] }]
+        ]
       }
     },
     "education": {
       "type": "array",
       "items": {
         "type": "object",
-        "required": ["institution", "certificate", "date"],
-        "additionalProperties": false,
         "properties": {
-          "institution": { "type": "string" },
-          "certificate": { "type": "string" },
-          "date": { "type": "string", "pattern": "^\\d{4}(-\\d{2})?$" }
-        }
+          "institution": {
+            "type": "string"
+          },
+          "certificate": {
+            "type": "string"
+          },
+          "date": {
+            "type": "string",
+            "pattern": "^\\d{4}(-\\d{2})?$"
+          }
+        },
+        "required": ["institution", "certificate", "date"],
+        "additionalProperties": false
       }
     },
     "skills": {
-      "oneOf": [
+      "anyOf": [
         {
           "type": "object",
+          "properties": {
+            "Languages": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "Frameworks & Libraries": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "Cloud & Infrastructure": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "Tools & Practices": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
           "required": [
             "Languages",
             "Frameworks & Libraries",
             "Cloud & Infrastructure",
             "Tools & Practices"
           ],
-          "additionalProperties": false,
-          "properties": {
-            "Languages": { "type": "array", "items": { "type": "string" } },
-            "Frameworks & Libraries": {
-              "type": "array",
-              "items": { "type": "string" }
-            },
-            "Cloud & Infrastructure": {
-              "type": "array",
-              "items": { "type": "string" }
-            },
-            "Tools & Practices": {
-              "type": "array",
-              "items": { "type": "string" }
-            }
-          }
+          "additionalProperties": false
         },
         {
           "type": "array",
-          "items": { "type": "string" }
+          "items": {
+            "type": "string"
+          }
         }
       ]
     },
-    "projects": {
+    "sideProjects": {
       "type": "array",
-      "items": { "$ref": "#/$defs/project" }
-    }
-  },
-  "$defs": {
-    "project": {
-      "type": "object",
-      "required": ["title", "description", "tech"],
-      "additionalProperties": false,
-      "properties": {
-        "title": { "type": "string" },
-        "description": { "type": "string" },
-        "tech": { "type": "array", "items": { "type": "string" } },
-        "url": { "type": "string", "format": "uri" }
+      "items": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "tech": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "url": {
+            "type": "string",
+            "format": "uri"
+          }
+        },
+        "required": ["title", "description", "tech"],
+        "additionalProperties": false
       }
     }
-  }
+  },
+  "required": [
+    "basics",
+    "summary",
+    "experience",
+    "education",
+    "skills",
+    "sideProjects"
+  ],
+  "additionalProperties": false
 }

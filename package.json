@@ -17,6 +17,7 @@
     "test:e2e:headed": "playwright test --headed",
     "test:e2e:debug": "playwright test --debug",
     "generate:pdf": "bun scripts/generate-pdf.ts",
+    "generate:resume-schema": "bun scripts/generate-resume-schema.ts",
     "prepare": "husky"
   },
   "dependencies": {

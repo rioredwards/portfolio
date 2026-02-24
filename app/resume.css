@@ -208,6 +208,7 @@
 .entry-company {
   font-weight: 400;
   line-height: 1.4;
+  font-style: italic;
 }
 
 @media (max-width: 559px) {
@@ -251,9 +252,12 @@
     white-space: nowrap;
   }
 
+  .project-item strong::after,
   .entry-title strong::after,
   .entry-position::after {
     content: ", ";
+    font-weight: 400;
+    opacity: 0.75;
   }
 }
 
@@ -321,6 +325,13 @@
 
 .entry-skills {
   opacity: 0.75;
+  display: block;
+}
+
+@media (min-width: 800px) {
+  .entry-skills {
+    display: inline;
+  }
 }
 
 /* ===== Skills ===== */
@@ -360,6 +371,8 @@
 
 .skills-grid dd {
   color: var(--text-color);
+  opacity: 0.75;
+  font-style: italic;
 }
 
 /* ===== Print (used by scripts/generate-resume-pdf.ts via Playwright) ===== */
@@ -519,9 +532,12 @@
     display: inline;
   }
 
+  .project-item strong::after,
   .entry-title strong::after,
   .entry-position::after {
     content: ", ";
+    font-weight: 400;
+    opacity: 0.75;
   }
 
   .entry-meta {
