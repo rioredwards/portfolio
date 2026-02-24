@@ -1,222 +1,161 @@
 import "@/app/resume.css";
 import { parseInlineMarkdown } from "@/lib/parse-inline-markdown";
-import {
-  Resume,
-  ResumeCertificate,
-  ResumeEducation,
-  ResumeProject,
-  ResumeWorkProject,
-  formatResumeDate,
-} from "@/lib/resume";
+import { formatResumeDate, Resume, ResumeProject } from "@/lib/resume";
 
 interface ResumeContentProps {
   data: Resume;
 }
 
-export function ResumeContent({ data }: ResumeContentProps) {
-  const { basics, work, education, certificates, skills, projects } = data;
+function ProjectItem({ title, description, tech, url }: ResumeProject) {
+  return (
+    <div className="project-item">
+      {url ? (
+        <a href={url}>
+          <strong>{parseInlineMarkdown(title)}</strong>
+        </a>
+      ) : (
+        <strong>{parseInlineMarkdown(title)}</strong>
+      )}
+      <em className="entry-skills">{tech.join(", ")}</em>
+      {description && (
+        <span className="entry-tech">{parseInlineMarkdown(description)}</span>
+      )}
+    </div>
+  );
+}
 
-  // Combine certificates and education for display
-  const allEducation: (ResumeEducation | ResumeCertificate)[] = [
-    ...(certificates ?? []),
-    ...(education ?? []),
-  ];
+export function ResumeContent({ data }: ResumeContentProps) {
+  const { basics, summary, experience, education, skills, sideProjects } = data;
 
   return (
     <article className="resume" aria-label="Resume">
       {/* Header */}
       <header className="header">
         <div>
-          <h2 className="name">{basics.name?.toUpperCase()}</h2>
-          <p className="role">{basics.label?.toUpperCase()}</p>
+          <h2 className="name">{basics.name.toUpperCase()}</h2>
+          <p className="role">{basics.title.toUpperCase()}</p>
         </div>
         <address className="contact" aria-label="Contact info">
+          <p>{basics.phone}</p>
           <p>
             <a href={`mailto:${basics.email}`}>{basics.email}</a>
           </p>
-          {basics.phone && <p>{basics.phone}</p>}
-          {basics.profiles?.map((profile) => (
-            <p key={profile.network}>
-              <a href={profile.url}>
-                {profile.url.replace(/^https?:\/\//, "")}
-              </a>
-            </p>
-          ))}
+          <p>
+            <a href={basics.linkedIn}>
+              {basics.linkedIn.replace(/^https?:\/\//, "")}
+            </a>
+          </p>
         </address>
       </header>
 
       <hr className="hr" />
 
       {/* Summary */}
-      {basics.summary && (
-        <p className="summary">{parseInlineMarkdown(basics.summary)}</p>
-      )}
+      <p className="summary">{parseInlineMarkdown(summary)}</p>
 
       <hr className="hr" />
 
       {/* Experience */}
-      {work && work.length > 0 && (
-        <section className="experience">
-          <h3 className="section-title">EXPERIENCE</h3>
-          {work.map((job) => (
-            <div key={`${job.name}-${job.startDate}`} className="entry">
-              <div className="entry-header">
-                <div className="entry-title-block">
-                  <span className="entry-position">
-                    <strong>{job.position}</strong>
-                  </span>
-                  <span className="entry-company">{job.name}</span>
-                </div>
-                <p className="entry-meta">
-                  {formatResumeDate(job.startDate)}
-                  {job.endDate && ` - ${formatResumeDate(job.endDate)}`}
-                </p>
+      <section className="experience">
+        <h3 className="section-title">EXPERIENCE</h3>
+        {experience.map((job) => (
+          <div key={`${job.name}-${job.startDate}`} className="entry">
+            <div className="entry-header">
+              <div className="entry-title-block">
+                <span className="entry-position">
+                  <strong>{job.title}</strong>
+                </span>
+                <span className="entry-company">{job.name}</span>
               </div>
-              {job.summary && (
-                <p className="entry-description">{job.summary}</p>
-              )}
-              {job.highlights && job.highlights.length > 0 && (
-                <ul
-                  className={
-                    job.highlights[0]?.title
-                      ? "bullets bullets--titled"
-                      : "bullets"
-                  }
-                >
-                  {job.highlights.map((highlight: ResumeWorkProject, i) => (
-                    <li key={i}>
-                      {highlight.title != null && highlight.title !== "" && (
-                        <>
-                          {highlight.url ? (
-                            <a href={highlight.url}>
-                              <strong>
-                                {parseInlineMarkdown(highlight.title)}
-                              </strong>
-                            </a>
-                          ) : (
-                            <strong>
-                              {parseInlineMarkdown(highlight.title)}
-                            </strong>
-                          )}
-                        </>
-                      )}
-                      {highlight.tech && highlight.tech.length > 0 && (
-                        <em className="entry-skills">
-                          {highlight.title ? ", " : null}
-                          {highlight.tech.join(", ")}
-                        </em>
-                      )}
-                      {highlight.description && (
-                        <span className="entry-tech">
-                          {parseInlineMarkdown(highlight.description)}
-                        </span>
-                      )}
-                    </li>
-                  ))}
-                </ul>
-              )}
+              <p className="entry-meta">
+                {formatResumeDate(job.startDate)}
+                {job.endDate && ` - ${formatResumeDate(job.endDate)}`}
+              </p>
             </div>
-          ))}
 
-          {/* Projects (rendered as part of Experience section) */}
-          {projects && projects.length > 0 && (
-            <>
-              {projects.map((project: ResumeProject) => (
-                <div
-                  key={`${project.name}-${project.startDate}`}
-                  className="entry"
-                >
-                  <div className="entry-header">
-                    <div className="entry-title-block">
-                      <span className="entry-position">
-                        <strong>{project.name}</strong>
-                      </span>
-                      <span className="entry-company">personal project</span>
-                    </div>
-                    {project.startDate && (
-                      <p className="entry-meta">
-                        {formatResumeDate(project.startDate)}
-                        {project.endDate &&
-                          ` - ${formatResumeDate(project.endDate)}`}
-                      </p>
-                    )}
-                  </div>
-                  {project.description && (
-                    <p className="entry-description">
-                      {parseInlineMarkdown(project.description)}
-                    </p>
-                  )}
-                  {project.highlights && project.highlights.length > 0 && (
-                    <ul className="bullets">
-                      {project.highlights.map((highlight, i) => (
-                        <li key={i}>{parseInlineMarkdown(highlight)}</li>
-                      ))}
-                    </ul>
-                  )}
-                  {project.tech && project.tech.length > 0 && (
-                    <em className="entry-tech entry-skills">
-                      {project.tech.join(", ")}
-                    </em>
-                  )}
-                </div>
-              ))}
-            </>
-          )}
-        </section>
-      )}
+            <ul
+              className={
+                "projects" in job ? "bullets bullets--titled" : "bullets"
+              }
+            >
+              {"highlights" in job &&
+                job.highlights.map((highlight, i) => (
+                  <li key={i}>{parseInlineMarkdown(highlight)}</li>
+                ))}
+              {"projects" in job &&
+                job.projects.map((project, i) => (
+                  <li key={i}>
+                    <ProjectItem {...project} />
+                  </li>
+                ))}
+            </ul>
+          </div>
+        ))}
+        {/* sideProjects */}
+        <div className="entry">
+          <div className="entry-header">
+            <div className="entry-title-block">
+              <span>
+                <strong>Personal Projects</strong>
+              </span>
+            </div>
+          </div>
+
+          <ul className="bullets">
+            {sideProjects.map((project, i) => (
+              <li key={i}>
+                <ProjectItem {...project} />
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
 
       {/* Skills */}
-      {skills && skills.length > 0 && (
-        <>
-          <hr className="hr" />
-          <section className="skills">
-            <h3 className="section-title">SKILLS</h3>
-            <dl className="skills-grid">
-              {skills.map((skill) => (
-                <div key={skill.name} className="skill-row">
-                  <dt>{skill.name}</dt>
-                  <dd>{skill.keywords?.join(", ")}</dd>
-                </div>
-              ))}
-            </dl>
-          </section>
-        </>
-      )}
+      <>
+        <hr className="hr" />
+        <section className="skills">
+          <h3 className="section-title">SKILLS</h3>
+          {/* Just the Core Skills, no categories - Saves space */}
+          <dl className="skills-grid">
+            {Array.isArray(skills) ? (
+              <div className="skill-row">
+                <dt>Core Stack</dt>
+                <dd>{skills.join(", ")}</dd>
+              </div>
+            ) : (
+              <>
+                {Object.entries(skills).map(([category, skills]) => (
+                  <div key={category} className="skill-row">
+                    <dt>{category}</dt>
+                    <dd>{skills.join(", ")}</dd>
+                  </div>
+                ))}
+              </>
+            )}
+          </dl>
+        </section>
+      </>
 
       <hr className="hr" />
 
       {/* Education & Certificates */}
-      {allEducation.length > 0 && (
-        <section className="education">
-          <h3 className="section-title">EDUCATION</h3>
-          {allEducation.map((item) => {
-            const isCert = "issuer" in item;
-            const title = isCert ? item.name : `${item.studyType}`;
-            const subtitle = isCert ? item.issuer : item.institution;
-            const area = !isCert && item.area ? ` in ${item.area}` : "";
-            const date = isCert ? item.date : item.endDate;
-
-            return (
-              <div key={title + subtitle} className="entry">
-                <div className="entry-header">
-                  <p className="entry-title">
-                    <strong>
-                      {title}
-                      {area}
-                    </strong>
-                    {subtitle && (
-                      <span className="entry-institution">{subtitle}</span>
-                    )}
-                  </p>
-                  {date && (
-                    <p className="entry-meta">{formatResumeDate(date)}</p>
-                  )}
-                </div>
+      <section className="education">
+        <h3 className="section-title">EDUCATION</h3>
+        {education.map((item) => {
+          return (
+            <div key={item.institution} className="entry">
+              <div className="entry-header">
+                <p className="entry-title">
+                  <strong>{item.certificate}</strong>
+                  <span className="entry-institution">{item.institution}</span>
+                </p>
+                <p className="entry-meta">{formatResumeDate(item.date)}</p>
               </div>
-            );
-          })}
-        </section>
-      )}
+            </div>
+          );
+        })}
+      </section>
     </article>
   );
 }
