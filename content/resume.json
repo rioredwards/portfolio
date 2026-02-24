@@ -3,11 +3,13 @@
   "basics": {
     "name": "Rio Edwards",
     "title": "Product Engineer",
+    "location": "Portland, OR",
     "email": "rioredwards@gmail.com",
     "phone": "(971) 420-5276",
+    "website": "https://rioedwards.com",
     "linkedIn": "https://linkedin.com/in/rio-edwards"
   },
-  "summary": "Product-minded full-stack engineer shipping production software used by real teams. I specialize in cloud-based web and mobile apps with a focus on reliability, maintainability, and security. Experienced in both startup-style builds and compliance-heavy client environments.",
+  "summary": "Full-stack engineer with 2+ years shipping maintainable web and mobile software. Comfortable owning UI, APIs, data, and deployment across startup builds and compliance-heavy environments.",
   "experience": [
     {
       "name": "Experiential",
@@ -22,7 +24,7 @@
         },
         {
           "title": "iOS Digital-Wellness App",
-          "description": "A client wanted an iOS app for digital wellness: usage tracking and Live Activities. After a feasibility study, wireframes, and designs, I delivered a 15-screen application that achieved IPC across _5 heavily sandboxed extensions_. I ran an agile cadence with clear milestones, TDD, weekly updates, and bi-weekly demos.",
+          "description": "A client wanted an iOS app for digital wellness: usage tracking and Live Activities. After a feasibility study, wireframes, and designs, I delivered a 15-screen application that achieved inter-process communication across _5 heavily sandboxed extensions_. I ran an agile cadence with clear milestones, TDD, and weekly updates.",
           "tech": [
             "Swift",
             "SwiftUI",
@@ -34,7 +36,7 @@
         },
         {
           "title": "Ohm on the Range Website",
-          "description": "This music festival needed a mobile-first website that drives ticket sales. I helped them focus their brand and shipped a new site in _2 weeks_. It is performant, responsive, accessible, and SEO-optimized. This led to a _2x increase in traffic and ticket sales_ over the previous year.",
+          "description": "This music festival needed a mobile-first website that drives ticket sales. I helped them focus their brand and shipped a new site in _2 weeks_. It is performant, responsive, accessible, and SEO-optimized. This led to a _2x increase in traffic_ over the previous year.",
           "tech": [
             "Next.js",
             "React",
@@ -52,23 +54,20 @@
       "startDate": "2024-01",
       "endDate": "2025-06",
       "highlights": [
-        "Led 200+ students through JS/HTML/CSS/React; translated complex topics into clear patterns and delivered PR-style feedback on assignments to improve readability, correctness, and maintainability.",
-        "Produced 40+ hours of video lectures and dozens of learning assets (infographics, articles) to support student engagement; recognized for clear instruction, students sought out paid tutoring after I left."
+        "Led 200+ students through JavaScript, HTML/CSS, and React; produced 40+ hours of lectures and delivered PR-style feedback to improve readability and correctness."
       ]
     }
   ],
   "sideProjects": [
     {
       "title": "DogTown (dogtown.dog)",
-      "description": "Built and operate the full stack on a Raspberry Pi with automated deploys and NGINX caching.Safety and observability built in: AI content moderation on every upload and a live metrics dashboard.",
+      "description": "Photo-sharing web app self-hosted on a Raspberry Pi with CI/CD, automated deploys, and analytics. A custom AI-powered moderation service plus a live metrics dashboard improves safety and observability.",
       "tech": [
         "Next.js",
         "TypeScript",
         "Node.js",
         "Postgres/Drizzle",
-        "Tailwind CSS",
         "Python",
-        "FastAPI",
         "Docker",
         "Cloudflare"
       ],
@@ -93,13 +92,22 @@
     }
   ],
   "skills": [
-    "TypeScript",
-    "React",
-    "Node.js",
-    "Express",
-    "GCP",
-    "Firebase",
-    "Figma",
-    "Asana"
+    {
+      "category": "Core Stack",
+      "skills": [
+        "TypeScript",
+        "Python",
+        "SQL",
+        "React",
+        "Next.js",
+        "Node.js",
+        "Express",
+        "Docker",
+        "AWS",
+        "Tailwind CSS",
+        "Jest",
+        "Figma"
+      ]
+    }
   ]
 }

@@ -16,6 +16,9 @@ function ProjectItem({ title, description, tech, url }: ResumeProject) {
       ) : (
         <strong>{parseInlineMarkdown(title)}</strong>
       )}
+      <span className="entry-sep" aria-hidden="true">
+        ,{" "}
+      </span>
       <em className="entry-skills">{tech.join(", ")}</em>
       {description && (
         <span className="entry-tech">{parseInlineMarkdown(description)}</span>
@@ -34,12 +37,20 @@ export function ResumeContent({ data }: ResumeContentProps) {
         <div>
           <h2 className="name">{basics.name.toUpperCase()}</h2>
           <p className="role">{basics.title.toUpperCase()}</p>
+          {basics.location && <p className="location">{basics.location}</p>}
         </div>
         <address className="contact" aria-label="Contact info">
           <p>{basics.phone}</p>
           <p>
             <a href={`mailto:${basics.email}`}>{basics.email}</a>
           </p>
+          {basics.website && (
+            <p>
+              <a href={basics.website}>
+                {basics.website.replace(/^https?:\/\//, "")}
+              </a>
+            </p>
+          )}
           <p>
             <a href={basics.linkedIn}>
               {basics.linkedIn.replace(/^https?:\/\//, "")}
@@ -64,6 +75,9 @@ export function ResumeContent({ data }: ResumeContentProps) {
               <div className="entry-title-block">
                 <span className="entry-position">
                   <strong>{job.title}</strong>
+                </span>
+                <span className="entry-sep" aria-hidden="true">
+                  ,{" "}
                 </span>
                 <span className="entry-company">{job.name}</span>
               </div>
@@ -118,21 +132,12 @@ export function ResumeContent({ data }: ResumeContentProps) {
           <h3 className="section-title">SKILLS</h3>
           {/* Just the Core Skills, no categories - Saves space */}
           <dl className="skills-grid">
-            {Array.isArray(skills) ? (
-              <div className="skill-row">
-                <dt>Core Stack</dt>
-                <dd>{skills.join(", ")}</dd>
+            {skills.map((skill) => (
+              <div key={skill.category} className="skill-row">
+                <dt>{skill.category}</dt>
+                <dd>{skill.skills.join(", ")}</dd>
               </div>
-            ) : (
-              <>
-                {Object.entries(skills).map(([category, skills]) => (
-                  <div key={category} className="skill-row">
-                    <dt>{category}</dt>
-                    <dd>{skills.join(", ")}</dd>
-                  </div>
-                ))}
-              </>
-            )}
+            ))}
           </dl>
         </section>
       </>
@@ -148,6 +153,9 @@ export function ResumeContent({ data }: ResumeContentProps) {
               <div className="entry-header">
                 <p className="entry-title">
                   <strong>{item.certificate}</strong>
+                  <span className="entry-sep" aria-hidden="true">
+                    ,{" "}
+                  </span>
                   <span className="entry-institution">{item.institution}</span>
                 </p>
                 <p className="entry-meta">{formatResumeDate(item.date)}</p>

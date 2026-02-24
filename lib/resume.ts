@@ -1,15 +1,17 @@
-import { z } from "zod";
 import canonicalResume from "@/content/resume.json";
+import { z } from "zod";
 import { DEFAULT_LOCALE } from "./constants";
 
-// Resume Zod schemas — single source of truth for types, runtime validation,
+// Resume Zod schemas: single source of truth for types, runtime validation,
 // and JSON Schema generation (see scripts/generate-resume-schema.ts).
 
 export const resumeBasicsSchema = z.object({
   name: z.string(),
   title: z.string(),
+  location: z.string().optional(),
   email: z.string().email(),
   phone: z.string(),
+  website: z.string().url().optional(),
   linkedIn: z.string().url(),
 });
 
@@ -40,15 +42,10 @@ export const resumeEducationSchema = z.object({
   date: z.string().regex(datePattern, "Expected YYYY or YYYY-MM"),
 });
 
-export const resumeSkillsSchema = z.union([
-  z.object({
-    Languages: z.array(z.string()),
-    "Frameworks & Libraries": z.array(z.string()),
-    "Cloud & Infrastructure": z.array(z.string()),
-    "Tools & Practices": z.array(z.string()),
-  }),
-  z.array(z.string()),
-]);
+export const resumeSkillsSchema = z.object({
+  category: z.string(),
+  skills: z.array(z.string()),
+});
 
 export const resumeSchema = z.object({
   $schema: z.string().optional(),
@@ -56,7 +53,7 @@ export const resumeSchema = z.object({
   summary: z.string(),
   experience: z.array(resumeExperienceSchema),
   education: z.array(resumeEducationSchema),
-  skills: resumeSkillsSchema,
+  skills: z.array(resumeSkillsSchema),
   sideProjects: z.array(resumeProjectSchema),
 });
 
@@ -68,24 +65,36 @@ export type ResumeEducation = z.infer<typeof resumeEducationSchema>;
 export type ResumeSkills = z.infer<typeof resumeSkillsSchema>;
 export type Resume = z.infer<typeof resumeSchema>;
 
+// Temp file path written by generate-pdf --input to override resume without restarting the server.
+const RESUME_TEMP_PATH = "./resume-variants/current.json";
+
 export async function getResume(): Promise<Resume> {
-  // In development, RESUME_LOCAL_PATH can point to a variant JSON for generating
-  // tailored PDFs. Set it in .env.local. Output variants to resume-variants/ (gitignored).
-  // Never set this in production: it has no effect there.
+  // In development, resume data is resolved in this priority order:
+  //   1. RESUME_LOCAL_PATH env var (explicit override, fails loudly if missing)
+  //   2. resume-variants/current.json (written by generate-pdf --input, cleaned up after)
+  //   3. content/resume.json (canonical, used in production and as fallback)
   const localPath = process.env.RESUME_LOCAL_PATH;
   let raw: unknown;
 
-  if (localPath && process.env.NODE_ENV !== "production") {
-    try {
-      const { readFile } = await import("fs/promises");
-      const { resolve } = await import("path");
-      const json = await readFile(resolve(localPath), "utf-8");
-      raw = JSON.parse(json);
-    } catch (e) {
-      const msg = e instanceof Error ? e.message : String(e);
-      throw new Error(
-        `Failed to load resume from RESUME_LOCAL_PATH (${localPath}): ${msg}`,
-      );
+  if (process.env.NODE_ENV !== "production") {
+    const { readFile } = await import("fs/promises");
+    const { resolve } = await import("path");
+
+    if (localPath) {
+      try {
+        raw = JSON.parse(await readFile(resolve(localPath), "utf-8"));
+      } catch (e) {
+        const msg = e instanceof Error ? e.message : String(e);
+        throw new Error(
+          `Failed to load resume from RESUME_LOCAL_PATH (${localPath}): ${msg}`,
+        );
+      }
+    } else {
+      try {
+        raw = JSON.parse(await readFile(resolve(RESUME_TEMP_PATH), "utf-8"));
+      } catch {
+        raw = canonicalResume;
+      }
     }
   } else {
     raw = canonicalResume;

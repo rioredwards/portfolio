@@ -115,6 +115,12 @@
   letter-spacing: 0.01em;
 }
 
+.location {
+  font-size: var(--font-small);
+  color: var(--heading-color);
+  margin-top: var(--space-xs);
+}
+
 .contact {
   font-size: var(--font-small);
   font-style: normal;
@@ -251,13 +257,17 @@
     display: inline;
     white-space: nowrap;
   }
+}
 
-  .project-item strong::after,
-  .entry-title strong::after,
-  .entry-position::after {
-    content: ", ";
-    font-weight: 400;
-    opacity: 0.75;
+.entry-sep {
+  display: none;
+  font-weight: 400;
+  opacity: 0.75;
+}
+
+@media (min-width: 560px) {
+  .entry-sep {
+    display: inline;
   }
 }
 
@@ -456,6 +466,8 @@
     --heading-color: #222;
     --rule-color: #ababab;
 
+    --body-font: "Helvetica Neue", Arial, Helvetica, sans-serif;
+
     width: 100%;
     min-height: auto;
     height: auto;
@@ -476,13 +488,13 @@
   }
 
   .name {
-    font-family: var(--font-montserrat), "Helvetica Neue", Arial, sans-serif;
+    font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
     font-size: var(--font-name);
     letter-spacing: 0;
   }
 
   .role {
-    font-family: var(--font-montserrat), "Helvetica Neue", Arial, sans-serif;
+    font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
     font-size: var(--font-role);
     letter-spacing: 0;
     margin-top: var(--space-xs);
@@ -503,7 +515,7 @@
   }
 
   .section-title {
-    font-family: var(--font-montserrat), "Helvetica Neue", Arial, sans-serif;
+    font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
     font-size: var(--font-section);
     letter-spacing: 0;
     margin-bottom: var(--space-md);
@@ -532,12 +544,22 @@
     display: inline;
   }
 
-  .project-item strong::after,
-  .entry-title strong::after,
-  .entry-position::after {
-    content: ", ";
-    font-weight: 400;
-    opacity: 0.75;
+  /* Remove opacity stacking contexts: they cause text to emit out of order in PDF */
+  .entry-sep {
+    display: inline;
+    opacity: 1;
+    color: #666;
+  }
+
+  .entry-skills {
+    display: inline;
+    opacity: 1;
+    color: #666;
+  }
+
+  .skills-grid dd {
+    opacity: 1;
+    color: #666;
   }
 
   .entry-meta {
