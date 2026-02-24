@@ -1,77 +1,63 @@
 import canonicalResume from "@/content/resume.json";
 import { DEFAULT_LOCALE } from "./constants";
 
-// JSON Resume schema types (modified version of https://jsonresume.org/schema)
+// JSON Resume schema types (inspired by https://jsonresume.org/schema)
 
 export interface ResumeBasics {
   name: string;
-  label: string;
+  title: string;
   email: string;
-  phone?: string;
-  url?: string;
-  summary?: string;
-  profiles?: {
-    network: string;
-    username: string;
-    url: string;
-  }[];
+  phone: string;
+  linkedIn: string;
 }
 
-export interface ResumeWork {
+interface ResumeExperienceBase {
   name: string;
-  position: string;
+  title: string;
   startDate: string;
   endDate?: string;
-  summary?: string;
-  highlights?: ResumeWorkProject[];
 }
 
-export interface ResumeWorkProject {
-  title?: string;
-  description?: string;
-  tech?: string[];
+interface ResumeExperienceWithProjects extends ResumeExperienceBase {
+  projects: ResumeProject[];
+}
+
+interface ResumeExperienceWithHighlights extends ResumeExperienceBase {
+  highlights: string[];
+}
+
+export type ResumeExperience =
+  | ResumeExperienceWithProjects
+  | ResumeExperienceWithHighlights;
+
+export interface ResumeProject {
+  title: string;
+  description: string;
+  tech: string[];
   url?: string;
 }
 
 export interface ResumeEducation {
   institution: string;
-  area?: string;
-  studyType?: string;
-  startDate?: string;
-  endDate?: string;
+  certificate: string;
+  date: string;
 }
 
-export interface ResumeCertificate {
-  name: string;
-  issuer: string;
-  date?: string;
-  url?: string;
-}
-
-export interface ResumeSkill {
-  name: string;
-  level?: string;
-  keywords?: string[];
-}
-
-export interface ResumeProject {
-  name: string;
-  startDate?: string;
-  endDate?: string;
-  description?: string;
-  highlights?: string[];
-  tech?: string[];
-  url?: string;
+export interface ResumeSkills {
+  Languages: string[];
+  "Frameworks & Libraries": string[];
+  "Cloud & Infrastructure": string[];
+  "Tools & Practices": string[];
 }
 
 export interface Resume {
-  $schema?: string;
+  $schema: string;
   basics: ResumeBasics;
-  work?: ResumeWork[];
-  education?: ResumeEducation[];
-  certificates?: ResumeCertificate[];
-  skills?: ResumeSkill[];
-  projects?: ResumeProject[];
+  summary: string;
+  experience: ResumeExperience[];
+  education: ResumeEducation[];
+  skills: ResumeSkills | string[];
+  projects: ResumeProject[];
 }
 
 export async function getResume(): Promise<Resume> {
@@ -93,7 +79,7 @@ export async function getResume(): Promise<Resume> {
     }
   }
 
-  return canonicalResume as Resume;
+  return canonicalResume as unknown as Resume;
 }
 
 // Format ISO date string to display format (e.g., "2024-07" -> "Jul 2024")

@@ -1,4 +1,5 @@
 {
+  "$schema": "./resume.schema.json",
   "basics": {
     "name": "Rio Edwards",
     "label": "Product Engineer",
