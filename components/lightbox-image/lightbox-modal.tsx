@@ -6,6 +6,7 @@ import Lightbox from "yet-another-react-lightbox";
 import Captions from "yet-another-react-lightbox/plugins/captions";
 import "yet-another-react-lightbox/plugins/captions.css";
 import Video from "yet-another-react-lightbox/plugins/video";
+import Zoom from "yet-another-react-lightbox/plugins/zoom";
 import "yet-another-react-lightbox/styles.css";
 
 interface LightboxModalProps {
@@ -27,7 +28,7 @@ export function LightboxModal({
       close={onClose}
       slides={slides}
       index={index}
-      plugins={[Video, Captions]}
+      plugins={[Video, Captions, Zoom]}
       render={{
         slide: NextJsImageSlide,
       }}
