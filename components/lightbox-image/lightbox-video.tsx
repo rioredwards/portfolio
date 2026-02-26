@@ -1,8 +1,9 @@
-import { LightboxTrigger } from "@/components/lightbox-image/lightbox-trigger";
+"use client";
+
+import { useLightbox } from "@/components/lightbox-image/lightbox-provider";
 import type { LightboxSlide } from "@/components/lightbox-image/types";
 import { VideoPlayer } from "@/components/video-player/video-player";
 import { cn } from "@/lib/utils";
-import { Maximize } from "lucide-react";
 
 interface LightboxVideoProps {
   src: string;
@@ -35,10 +36,19 @@ export function LightboxVideo({
   showVolumeToggle = false,
   rounded = "2xl",
 }: LightboxVideoProps) {
+  const { openSingle, openGallery } = useLightbox();
   const slide: LightboxSlide = {
     type: "video",
     sources: [{ src, type: "video/mp4" }],
     description: caption,
+  };
+
+  const handleFullscreenChange = (isFullscreen: boolean) => {
+    if (!isFullscreen && gallery && gallery.length > 0) {
+      openGallery(gallery, galleryIndex);
+    } else if (!isFullscreen && !gallery && slide) {
+      openSingle(slide);
+    }
   };
 
   return (
@@ -53,19 +63,10 @@ export function LightboxVideo({
           muted={muted}
           showProgress={showProgress}
           showVolumeToggle={showVolumeToggle}
-          showFullscreen={!enableLightbox}
+          showFullscreen={enableLightbox}
+          onFullscreenChange={handleFullscreenChange}
           rounded={rounded}
         />
-        {enableLightbox && (
-          <LightboxTrigger
-            {...(gallery && gallery.length > 0
-              ? { slides: gallery, index: galleryIndex }
-              : { slide })}
-            aria-label="View fullscreen"
-          >
-            <DefaultMaximizeIcon />
-          </LightboxTrigger>
-        )}
       </div>
       {caption && (
         <figcaption className="mt-2 text-center text-sm text-muted-foreground italic">
@@ -73,21 +74,5 @@ export function LightboxVideo({
         </figcaption>
       )}
     </figure>
-  );
-}
-
-function DefaultMaximizeIcon() {
-  return (
-    <div className="absolute top-4 right-4 z-20">
-      <div
-        className={cn(
-          "flex h-10 w-10 cursor-pointer items-center justify-center rounded-full",
-          "bg-white/10 backdrop-blur-sm hover:bg-white/20",
-          "transition-all duration-200 hover:scale-105 active:scale-95",
-        )}
-      >
-        <Maximize className="h-5 w-5 fill-white text-white" />
-      </div>
-    </div>
   );
 }

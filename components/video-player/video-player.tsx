@@ -10,6 +10,7 @@ import {
   VolumeX,
 } from "lucide-react";
 import * as React from "react";
+import { useEffect } from "react";
 
 interface WebkitFullscreenVideoElement extends HTMLVideoElement {
   webkitEnterFullscreen?: () => void;
@@ -39,7 +40,11 @@ interface VideoPlayerProps extends React.HTMLAttributes<HTMLDivElement> {
   onEnded?: () => void;
   /** Callback when play state changes */
   onPlayStateChange?: (isPlaying: boolean) => void;
+  /** Callback when fullscreen state changes */
+  onFullscreenChange?: (isFullscreen: boolean) => void;
 }
+
+const HIDE_CONTROLS_TIMEOUT = 2500;
 
 const roundedVariants = {
   none: "rounded-none",
@@ -65,6 +70,7 @@ export function VideoPlayer({
   rounded = "2xl",
   onEnded,
   onPlayStateChange,
+  onFullscreenChange,
   ...props
 }: VideoPlayerProps) {
   const videoRef = React.useRef<HTMLVideoElement>(null);
@@ -96,6 +102,40 @@ export function VideoPlayer({
     }
   };
 
+  const showControlsOnTimeout = () => {
+    setShowControls(true);
+    setIsHovering(true);
+    if (hideControlsTimeout.current) {
+      clearTimeout(hideControlsTimeout.current);
+    }
+    hideControlsTimeout.current = setTimeout(() => {
+      setShowControls(false);
+      setIsHovering(false);
+    }, HIDE_CONTROLS_TIMEOUT);
+  };
+
+  const handleMouseMoveOverParentElement = () => {
+    showControlsOnTimeout();
+  };
+
+  const onMouseEnterParentElement = () => {
+    showControlsOnTimeout();
+  };
+
+  const onMouseLeaveParentElement = () => {
+    if (hideControlsTimeout.current) {
+      clearTimeout(hideControlsTimeout.current);
+    }
+    setIsHovering(false);
+    setShowControls(false);
+  };
+
+  useEffect(() => {}, [showControls, isHovering]);
+
+  const onClickParentElement = () => {
+    togglePlay();
+  };
+
   const toggleMute = () => {
     if (!videoRef.current) return;
     videoRef.current.muted = !isMuted;
@@ -122,6 +162,17 @@ export function VideoPlayer({
     }
   };
 
+  const onClickFullscreen = () => {
+    if (onFullscreenChange && typeof onFullscreenChange === "function") {
+      // if using a custom fullscreen callback, call it and return
+      onFullscreenChange(isFullscreen);
+      return;
+    } else {
+      // otherwise, toggle fullscreen normally
+      toggleFullscreen();
+    }
+  };
+
   const handleTimeUpdate = () => {
     if (!videoRef.current) return;
     const { currentTime, duration } = videoRef.current;
@@ -138,19 +189,12 @@ export function VideoPlayer({
     videoRef.current.currentTime = percent * duration;
   };
 
-  const handleMouseMove = () => {
-    setShowControls(true);
-    if (hideControlsTimeout.current) {
-      clearTimeout(hideControlsTimeout.current);
+  useEffect(() => {
+    // if using a custom fullscreen callback, don't listen for fullscreen changes. This is handled by the callback itself.
+    if (onFullscreenChange && typeof onFullscreenChange === "function") {
+      return;
     }
-    hideControlsTimeout.current = setTimeout(() => {
-      if (!isHovering) {
-        setShowControls(false);
-      }
-    }, 2500);
-  };
 
-  React.useEffect(() => {
     const handleFullscreenChange = () => {
       setIsFullscreen(!!document.fullscreenElement);
     };
@@ -180,7 +224,7 @@ export function VideoPlayer({
         clearTimeout(hideControlsTimeout.current);
       }
     };
-  }, []);
+  }, [onFullscreenChange]);
 
   return (
     <div
@@ -192,16 +236,10 @@ export function VideoPlayer({
         className,
       )}
       {...props}
-      onMouseMove={handleMouseMove}
-      onMouseEnter={() => {
-        setIsHovering(true);
-        setShowControls(true);
-      }}
-      onMouseLeave={() => {
-        setIsHovering(false);
-        setShowControls(false);
-      }}
-      onClick={togglePlay}
+      onMouseMove={handleMouseMoveOverParentElement}
+      onMouseEnter={onMouseEnterParentElement}
+      onMouseLeave={onMouseLeaveParentElement}
+      onClick={onClickParentElement}
     >
       <video
         ref={videoRef}
@@ -317,7 +355,7 @@ export function VideoPlayer({
 
           {showFullscreen && (
             <button
-              onClick={toggleFullscreen}
+              onClick={onClickFullscreen}
               className={cn(
                 "flex h-10 w-10 cursor-pointer items-center justify-center rounded-full",
                 "bg-white/10 backdrop-blur-sm hover:bg-white/20",
