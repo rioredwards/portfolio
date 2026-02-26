@@ -27,7 +27,7 @@ export function DetailHeader({
   icon,
 }: DetailHeaderProps) {
   const titleContent = (
-    <header className="flex items-center gap-4">
+    <span className="flex items-center gap-4">
       {icon && (
         <Image
           src={icon}
@@ -40,7 +40,7 @@ export function DetailHeader({
       <span className="text-3xl font-bold text-foreground transition-all duration-200 group-hover:brightness-125">
         {title}
       </span>
-    </header>
+    </span>
   );
 
   return (

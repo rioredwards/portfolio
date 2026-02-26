@@ -1,9 +1,9 @@
 import { ContentProse } from "@/components/content-detail/content-prose";
 import { BlogFrontmatterSection } from "@/components/ui/blog-frontmatter-section";
+import { DetailHeader } from "@/components/ui/detail-header";
 import { BlogFrontmatter } from "@/lib/blogs";
 import { useMDXComponents } from "@/mdx-components";
 import { MDXRemote } from "next-mdx-remote/rsc";
-import { DetailHeader } from "../ui/detail-header";
 
 interface BlogDetailContentProps {
   frontmatter: BlogFrontmatter;
