@@ -31,7 +31,8 @@ export function DetailHeader({
       {icon && (
         <Image
           src={icon}
-          alt={title}
+          alt=""
+          aria-hidden="true"
           width={42}
           height={42}
           className="h-10 w-10"
