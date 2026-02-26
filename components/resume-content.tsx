@@ -106,23 +106,25 @@ export function ResumeContent({ data }: ResumeContentProps) {
           </div>
         ))}
         {/* sideProjects */}
-        <div className="entry">
-          <div className="entry-header">
-            <div className="entry-title-block">
-              <span>
-                <strong>Personal Projects</strong>
-              </span>
+        {sideProjects && (
+          <div className="entry">
+            <div className="entry-header">
+              <div className="entry-title-block">
+                <span>
+                  <strong>Personal Projects</strong>
+                </span>
+              </div>
             </div>
-          </div>
 
-          <ul className="bullets">
-            {sideProjects.map((project, i) => (
-              <li key={i}>
-                <ProjectItem {...project} />
-              </li>
-            ))}
-          </ul>
-        </div>
+            <ul className="bullets">
+              {sideProjects.map((project, i) => (
+                <li key={i}>
+                  <ProjectItem {...project} />
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
       </section>
 
       {/* Skills */}

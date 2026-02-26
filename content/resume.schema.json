@@ -187,13 +187,6 @@
       }
     }
   },
-  "required": [
-    "basics",
-    "summary",
-    "experience",
-    "education",
-    "skills",
-    "sideProjects"
-  ],
+  "required": ["basics", "summary", "experience", "education", "skills"],
   "additionalProperties": false
 }

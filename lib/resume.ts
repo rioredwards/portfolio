@@ -54,7 +54,7 @@ export const resumeSchema = z.object({
   experience: z.array(resumeExperienceSchema),
   education: z.array(resumeEducationSchema),
   skills: z.array(resumeSkillsSchema),
-  sideProjects: z.array(resumeProjectSchema),
+  sideProjects: z.array(resumeProjectSchema).optional(),
 });
 
 // Infer types from Zod schemas

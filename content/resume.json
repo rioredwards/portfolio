@@ -9,22 +9,22 @@
     "website": "https://rioedwards.com",
     "linkedIn": "https://linkedin.com/in/rio-edwards"
   },
-  "summary": "Full-stack engineer with 2+ years shipping maintainable web and mobile software. Comfortable owning UI, APIs, data, and deployment across startup builds and compliance-heavy environments.",
+  "summary": "Full-stack engineer with _2+ years_ shipping maintainable web and mobile software. Comfortable owning UI, APIs, data, and deployment across startup builds and compliance-heavy environments.",
   "experience": [
     {
       "name": "Experiential",
-      "title": "Product Engineer & Co-founder",
+      "title": "Co-founder & Product Engineer",
       "startDate": "2024-07",
       "endDate": "2025-11",
       "projects": [
         {
           "title": "CRM Document Manager",
-          "description": "A law firm needed HIPAA-compliant file management inside HubSpot. I clarified requirements and shipped a security-first solution in _5 weeks_, leveraging TDD, JWT auth, audit logging, and transactional rollback to prevent data loss. The app is now _business-critical_ for 30+ lawyers.",
+          "description": "A law firm needed HIPAA-compliant file management inside HubSpot. I clarified requirements and shipped a security-first solution in _5 weeks_, leveraging TDD, JWT auth, audit logging, and transactional rollback to prevent data loss. The app is now business-critical and used daily by _30+ lawyers_.",
           "tech": ["TypeScript", "React", "Express", "Node.js", "GCP"]
         },
         {
           "title": "iOS Digital-Wellness App",
-          "description": "A client wanted an iOS app for digital wellness: usage tracking and Live Activities. After a feasibility study, wireframes, and designs, I delivered a 15-screen application that achieved inter-process communication across _5 heavily sandboxed extensions_. I ran an agile cadence with clear milestones, TDD, and weekly updates.",
+          "description": "A client wanted an iOS app for digital wellness: usage tracking and Live Activities. After a feasibility study plus wireframes and designs, I delivered a _15-screen_ application that achieved inter-process communication across _5 heavily sandboxed extensions_. I ran an agile cadence with clear milestones, TDD, and weekly updates.",
           "tech": [
             "Swift",
             "SwiftUI",
@@ -36,7 +36,7 @@
         },
         {
           "title": "Ohm on the Range Website",
-          "description": "This music festival needed a mobile-first website that drives ticket sales. I helped them focus their brand and shipped a new site in _2 weeks_. It is performant, responsive, accessible, and SEO-optimized. This led to a _2x increase in traffic_ over the previous year.",
+          "description": "This music festival needed a mobile-first website that drives ticket sales. I helped them focus their brand and shipped a new site in _2 weeks_. It is performant, responsive, accessible, and SEO-optimized. This contributed to a _2x increase_ in traffic and ticket sales compared to the previous year.",
           "tech": [
             "Next.js",
             "React",
@@ -54,22 +54,23 @@
       "startDate": "2024-01",
       "endDate": "2025-06",
       "highlights": [
-        "Led 200+ students through JavaScript, HTML/CSS, and React; produced 40+ hours of lectures and delivered PR-style feedback to improve readability and correctness."
+        "Led _200+ students_ through JavaScript, HTML/CSS, and React; produced _40+ hours_ of lectures and delivered PR-style feedback to improve readability and correctness."
       ]
     }
   ],
   "sideProjects": [
     {
       "title": "DogTown (dogtown.dog)",
-      "description": "Photo-sharing web app self-hosted on a Raspberry Pi with CI/CD, automated deploys, and analytics. A custom AI-powered moderation service plus a live metrics dashboard improves safety and observability.",
+      "description": "Built and currently self-host a full-stack photo-sharing app on a Raspberry Pi. It includes a Next.js core with a PostgreSQL database, AI image moderation, analytics, and a system profiler that powers a live metrics dashboard for observability. It deploys through Docker Compose with CI/CD via GitHub Actions.",
       "tech": [
         "Next.js",
         "TypeScript",
         "Node.js",
-        "Postgres/Drizzle",
+        "PostgreSQL",
         "Python",
         "Docker",
-        "Cloudflare"
+        "Cloudflare",
+        "NGINX"
       ],
       "url": "https://dogtown.dog"
     }
@@ -77,7 +78,7 @@
   "education": [
     {
       "institution": "Alchemy Code Lab",
-      "certificate": "Certificate in Fullstack Development",
+      "certificate": "Certificate in Full-Stack Development",
       "date": "2023-02"
     },
     {
@@ -99,12 +100,12 @@
         "Python",
         "SQL",
         "React",
+        "Tailwind CSS",
         "Next.js",
         "Node.js",
         "Express",
         "Docker",
         "AWS",
-        "Tailwind CSS",
         "Jest",
         "Figma"
       ]
