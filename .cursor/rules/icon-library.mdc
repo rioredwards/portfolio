@@ -1,6 +1,6 @@
 # Icon Library Preference
 
-**ALWAYS use Hugeicons instead of lucide-react for icons in this project.**
+**ALWAYS use Hugeicons instead of lucide-react for new icons in this project. Existing icons should be left alone.**
 
 ## Import Pattern
 
@@ -22,7 +22,5 @@ import { HugeiconsIcon } from "@hugeicons/react";
 
 ## Notes
 
-- Never import from `lucide-react`
-- Always use the `HugeiconsIcon` wrapper component from `@hugeicons/react`
 - Import icon definitions from `@hugeicons/core-free-icons`
 - Common icon names follow patterns like `Cancel01Icon`, `Close01Icon`, `CheckmarkCircle02Icon`, etc.

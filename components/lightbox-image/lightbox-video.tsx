@@ -1,7 +1,7 @@
-import { cn } from "@/lib/utils";
-import { VideoPlayer } from "@/components/video-player/video-player";
 import { LightboxTrigger } from "@/components/lightbox-image/lightbox-trigger";
 import type { LightboxSlide } from "@/components/lightbox-image/types";
+import { VideoPlayer } from "@/components/video-player/video-player";
+import { cn } from "@/lib/utils";
 import { Maximize } from "lucide-react";
 
 interface LightboxVideoProps {

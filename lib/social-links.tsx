@@ -1,4 +1,5 @@
 import { File01Icon, Mail01Icon } from "@hugeicons/core-free-icons";
+import { CONTACT_EMAIL } from "./constants";
 import { HugeiconsIcon } from "@hugeicons/react";
 import { SiBluesky, SiGithub, SiLinkedin, SiYoutube } from "react-icons/si";
 
@@ -24,7 +25,7 @@ export function getSocialLinks(iconSize: string = "size-5"): SocialLink[] {
       href: "#",
       label: "Email",
       copyToClipboard: true,
-      copyValue: "rioredwards@gmail.com",
+      copyValue: CONTACT_EMAIL,
     },
     {
       icon: <SiGithub className={iconSize} />,

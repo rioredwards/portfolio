@@ -81,12 +81,19 @@ export function VideoPlayer({
     if (!videoRef.current) return;
     if (isPlaying) {
       videoRef.current.pause();
+      setIsPlaying(false);
+      onPlayStateChange?.(false);
     } else {
-      videoRef.current.play();
+      videoRef.current
+        .play()
+        .then(() => {
+          setIsPlaying(true);
+          onPlayStateChange?.(true);
+        })
+        .catch(() => {
+          /* autoplay blocked, user can click */
+        });
     }
-    const newState = !isPlaying;
-    setIsPlaying(newState);
-    onPlayStateChange?.(newState);
   };
 
   const toggleMute = () => {
@@ -117,16 +124,18 @@ export function VideoPlayer({
 
   const handleTimeUpdate = () => {
     if (!videoRef.current) return;
-    const percent =
-      (videoRef.current.currentTime / videoRef.current.duration) * 100;
-    setProgress(percent);
+    const { currentTime, duration } = videoRef.current;
+    if (!Number.isFinite(duration) || duration <= 0) return;
+    setProgress((currentTime / duration) * 100);
   };
 
   const handleProgressClick = (e: React.MouseEvent<HTMLDivElement>) => {
     if (!videoRef.current) return;
+    const { duration } = videoRef.current;
+    if (!Number.isFinite(duration) || duration <= 0) return;
     const rect = e.currentTarget.getBoundingClientRect();
     const percent = (e.clientX - rect.left) / rect.width;
-    videoRef.current.currentTime = percent * videoRef.current.duration;
+    videoRef.current.currentTime = percent * duration;
   };
 
   const handleMouseMove = () => {

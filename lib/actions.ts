@@ -9,6 +9,15 @@ import {
 import { emailSchema } from "./dataTypes";
 import { sendEmail } from "./email";
 
+const ERROR_MESSAGES = {
+  generic: "Something went wrong. Please try again later.",
+  connection:
+    "Unable to connect. Please check your internet connection and try again.",
+  unavailable:
+    "The contact form is temporarily unavailable. Please email me directly.",
+  rateLimit: "Too many requests. Please wait a moment and try again.",
+} as const;
+
 // Create the server action that will infer the types of the form from `emailFormOpts`
 const serverValidate = createServerValidate({
   ...emailFormOpts,
@@ -20,7 +29,8 @@ const serverValidate = createServerValidate({
       const fieldErrors: Record<string, string[]> = {};
 
       result.error.issues.forEach((issue) => {
-        const field = issue.path[0] as string;
+        const raw = issue.path[0];
+        const field = typeof raw === "string" ? raw : undefined;
         if (field) {
           if (!fieldErrors[field]) {
             fieldErrors[field] = [];
@@ -51,8 +61,6 @@ export default async function emailAction(
 
     const validatedData = await serverValidate(formData);
 
-    // throw Error("Test error");
-
     // Send email
     await sendEmail(validatedData);
 
@@ -66,27 +74,23 @@ export default async function emailAction(
     }
 
     // Handle email sending errors with user-friendly messages
-    let errorMessage = "Something went wrong. Please try again later.";
+    let errorMessage: string = ERROR_MESSAGES.generic;
 
     if (e instanceof Error) {
-      // Check for specific error types
       if (
         e.message.includes("ECONNECTION") ||
         e.message.includes("ETIMEDOUT") ||
         e.message.includes("ENOTFOUND") ||
         e.message.includes("fetch failed")
       ) {
-        errorMessage =
-          "Unable to connect. Please check your internet connection and try again.";
+        errorMessage = ERROR_MESSAGES.connection;
       } else if (
         e.message.includes("Invalid login") ||
         e.message.includes("credentials")
       ) {
-        // Don't expose credential errors to users
-        errorMessage =
-          "The contact form is temporarily unavailable. Please email me directly.";
+        errorMessage = ERROR_MESSAGES.unavailable;
       } else if (e.message.includes("rate limit")) {
-        errorMessage = "Too many requests. Please wait a moment and try again.";
+        errorMessage = ERROR_MESSAGES.rateLimit;
       }
     }
 

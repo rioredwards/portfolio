@@ -1,6 +1,6 @@
 import { ContentProse } from "@/components/content-detail/content-prose";
-import { BlogDetailHeader } from "@/components/ui/blog-detail-header";
 import { BlogFrontmatterSection } from "@/components/ui/blog-frontmatter-section";
+import { DetailHeader } from "@/components/ui/detail-header";
 import { BlogFrontmatter } from "@/lib/blogs";
 import { useMDXComponents } from "@/mdx-components";
 import { MDXRemote } from "next-mdx-remote/rsc";
@@ -20,7 +20,12 @@ export function BlogDetailContent({
     <div>
       {/* Header Section */}
       <div>
-        <BlogDetailHeader {...frontmatter} />
+        <DetailHeader
+          title={frontmatter.title}
+          slug={frontmatter.slug}
+          basePath="/blog"
+          links={frontmatter.links}
+        />
         <BlogFrontmatterSection frontmatter={frontmatter} />
       </div>
 

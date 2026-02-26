@@ -1,34 +1,30 @@
 {
+  "$schema": "./resume.schema.json",
   "basics": {
     "name": "Rio Edwards",
-    "label": "Product Engineer",
+    "title": "Product Engineer",
+    "location": "Portland, OR",
     "email": "rioredwards@gmail.com",
     "phone": "(971) 420-5276",
-    "url": "https://rioedwards.com",
-    "summary": "Product-minded full-stack engineer shipping production software used by real teams. I specialize in cloud-based web and mobile apps with a focus on reliability, maintainability, and security. Experienced in both startup-style builds and compliance-heavy client environments.",
-    "profiles": [
-      {
-        "network": "LinkedIn",
-        "username": "rio-edwards",
-        "url": "https://linkedin.com/in/rio-edwards"
-      }
-    ]
+    "website": "https://rioedwards.com",
+    "linkedIn": "https://linkedin.com/in/rio-edwards"
   },
-  "work": [
+  "summary": "Full-stack engineer with _2+ years_ shipping maintainable web and mobile software. Comfortable owning UI, APIs, data, and deployment across startup builds and compliance-heavy environments.",
+  "experience": [
     {
       "name": "Experiential",
-      "position": "Product Engineer & Co-founder",
+      "title": "Co-founder & Product Engineer",
       "startDate": "2024-07",
       "endDate": "2025-11",
-      "highlights": [
+      "projects": [
         {
           "title": "CRM Document Manager",
-          "description": "A law firm needed HIPAA-compliant file management inside HubSpot. I clarified requirements and shipped a security-first solution in _5 weeks_, leveraging TDD, JWT auth, audit logging, and transactional rollback to prevent data loss. The app is now _business-critical_ for 30+ lawyers.",
+          "description": "A law firm needed HIPAA-compliant file management inside HubSpot. I clarified requirements and shipped a security-first solution in _5 weeks_, leveraging TDD, JWT auth, audit logging, and transactional rollback to prevent data loss. The app is now business-critical and used daily by _30+ lawyers_.",
           "tech": ["TypeScript", "React", "Express", "Node.js", "GCP"]
         },
         {
           "title": "iOS Digital-Wellness App",
-          "description": "A client wanted an iOS app for digital wellness: usage tracking and Live Activities. After a feasibility study, wireframes, and designs, I delivered a 15-screen application that achieved IPC across _5 heavily sandboxed extensions_. I ran an agile cadence with clear milestones, TDD, weekly updates, and bi-weekly demos.",
+          "description": "A client wanted an iOS app for digital wellness: usage tracking and Live Activities. After a feasibility study plus wireframes and designs, I delivered a _15-screen_ application that achieved inter-process communication across _5 heavily sandboxed extensions_. I ran an agile cadence with clear milestones, TDD, and weekly updates.",
           "tech": [
             "Swift",
             "SwiftUI",
@@ -40,7 +36,7 @@
         },
         {
           "title": "Ohm on the Range Website",
-          "description": "This music festival needed a mobile-first website that drives ticket sales. I helped them focus their brand and shipped a new site in _2 weeks_. It is performant, responsive, accessible, and SEO-optimized. This led to a _2x increase in traffic and ticket sales_ over the previous year.",
+          "description": "This music festival needed a mobile-first website that drives ticket sales. I helped them focus their brand and shipped a new site in _2 weeks_. It is performant, responsive, accessible, and SEO-optimized. This contributed to a _2x increase_ in traffic and ticket sales compared to the previous year.",
           "tech": [
             "Next.js",
             "React",
@@ -54,46 +50,27 @@
     },
     {
       "name": "Code the Dream",
-      "position": "Cohort Instructional Lead",
+      "title": "Cohort Instructional Lead",
       "startDate": "2024-01",
       "endDate": "2025-06",
       "highlights": [
-        {
-          "description": "Led 200+ students through JS/HTML/CSS/React; translated complex topics into clear patterns and delivered PR-style feedback on assignments to improve readability, correctness, and maintainability."
-        },
-        {
-          "description": "Produced 40+ hours of video lectures and dozens of learning assets (infographics, articles) to support student engagement; recognized for clear instruction, students sought out paid tutoring after I left."
-        }
+        "Led _200+ students_ through JavaScript, HTML/CSS, and React; produced _40+ hours_ of lectures and delivered PR-style feedback to improve readability and correctness."
       ]
     }
   ],
-  "projects": [
+  "sideProjects": [
     {
-      "name": "DogTown (dogtown.dog)",
-      "startDate": "2024-06",
-      "description": "Production photo-sharing app, self-hosted on a Raspberry Pi with CI/CD and observability.",
-      "highlights": [
-        "Built and operate the full stack on a Raspberry Pi with automated deploys and NGINX caching.",
-        "Safety and observability built in: AI content moderation on every upload and a live metrics dashboard."
-      ],
+      "title": "DogTown (dogtown.dog)",
+      "description": "Built and currently self-host a full-stack photo-sharing app on a Raspberry Pi. It includes a Next.js core with a PostgreSQL database, AI image moderation, analytics, and a system profiler that powers a live metrics dashboard for observability. It deploys through Docker Compose with CI/CD via GitHub Actions.",
       "tech": [
         "Next.js",
-        "React",
         "TypeScript",
         "Node.js",
-        "Hono",
-        "Postgres/Drizzle",
-        "NextAuth",
-        "shadcn/ui",
-        "Tailwind CSS",
-        "Docker Compose",
-        "Cloudflare Tunnel",
-        "GitHub Actions",
+        "PostgreSQL",
         "Python",
-        "FastAPI",
-        "PyTorch",
-        "Umami",
-        "SSE"
+        "Docker",
+        "Cloudflare",
+        "NGINX"
       ],
       "url": "https://dogtown.dog"
     }
@@ -101,23 +78,37 @@
   "education": [
     {
       "institution": "Alchemy Code Lab",
-      "studyType": "Certificate",
-      "area": "Fullstack Development",
-      "endDate": "2023-02"
+      "certificate": "Certificate in Full-Stack Development",
+      "date": "2023-02"
+    },
+    {
+      "institution": "Amazon Web Services",
+      "certificate": "AWS Certified Cloud Practitioner",
+      "date": "2024-08"
     },
     {
       "institution": "Portland Community College",
-      "studyType": "Associate",
-      "area": "General Studies",
-      "endDate": "2022-03"
+      "certificate": "Associate in General Studies",
+      "date": "2022-03"
     }
   ],
-  "certificates": [
+  "skills": [
     {
-      "name": "AWS Certified Cloud Practitioner",
-      "issuer": "AWS",
-      "date": "2024-08"
+      "category": "Core Stack",
+      "skills": [
+        "TypeScript",
+        "Python",
+        "SQL",
+        "React",
+        "Tailwind CSS",
+        "Next.js",
+        "Node.js",
+        "Express",
+        "Docker",
+        "AWS",
+        "Jest",
+        "Figma"
+      ]
     }
-  ],
-  "skills": []
+  ]
 }
