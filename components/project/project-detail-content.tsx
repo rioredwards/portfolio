@@ -4,7 +4,7 @@ import { projectImageScope } from "@/content/projects/project-images";
 import { ProjectFrontmatter } from "@/lib/projects";
 import { useMDXComponents } from "@/mdx-components";
 import { MDXRemote } from "next-mdx-remote/rsc";
-import { DetailHeader } from "../ui/detail-header";
+import { DetailHeader } from "@/components/ui/detail-header";
 
 interface ProjectDetailContentProps {
   frontmatter: ProjectFrontmatter;
