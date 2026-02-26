@@ -10,7 +10,7 @@ import ImgDogTownTheSetupOg from "@/public/work/images/dog-town/The-Setup-OG.jpe
 
 // Ohm on the Range
 import ImgOhmCarouselScreenshot from "@/public/work/images/ohm/ohm-carousel-screenshot.jpg";
-import ImgOhmLighthouseScores from "@/public/work/images/ohm/ohm-lighthouse-scores.png";
+import ImgOhmLighthouseScores from "@/public/work/images/ohm/ohm-lighthouse-scores.jpg";
 import ImgOhmLogoProgression from "@/public/work/images/ohm/ohm-logo-progression.gif";
 import ImgOhmParticlesScreenshot from "@/public/work/images/ohm/ohm-screenshot-2.jpg";
 import ImgOhmScreenshot3 from "@/public/work/images/ohm/ohm-screenshot-3.jpg";
