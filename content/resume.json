@@ -9,7 +9,7 @@
     "website": "https://rioedwards.com",
     "linkedIn": "https://linkedin.com/in/rio-edwards"
   },
-  "summary": "Full-stack engineer with _2+ years_ shipping maintainable web and mobile software. Comfortable owning UI, APIs, data, and deployment across startup builds and compliance-heavy environments.",
+  "summary": "Typescript-first full-stack engineer with _3+ years_ shipping maintainable web and mobile software. Comfortable owning UI, APIs, data, and deployment across startup builds and compliance-heavy environments.",
   "experience": [
     {
       "name": "Experiential",
@@ -20,7 +20,16 @@
         {
           "title": "CRM Document Manager",
           "description": "A law firm needed HIPAA-compliant file management inside HubSpot. I clarified requirements and shipped a security-first solution in _5 weeks_, leveraging TDD, JWT auth, audit logging, and transactional rollback to prevent data loss. The app is now business-critical and used daily by _30+ lawyers_.",
-          "tech": ["TypeScript", "React", "Express", "Node.js", "GCP"]
+          "tech": [
+            "TypeScript",
+            "React",
+            "Express",
+            "Node.js",
+            "Jest",
+            "Firebase",
+            "REST API",
+            "GCP"
+          ]
         },
         {
           "title": "iOS Digital-Wellness App",
@@ -36,14 +45,16 @@
         },
         {
           "title": "Ohm on the Range Website",
-          "description": "This music festival needed a mobile-first website that drives ticket sales. I helped them focus their brand and shipped a new site in _2 weeks_. It is performant, responsive, accessible, and SEO-optimized. This contributed to a _2x increase_ in traffic and ticket sales compared to the previous year.",
+          "description": "This music festival needed a mobile-first website that drives ticket sales. I helped focus their brand and shipped a new Next.js site in _2 weeks_. It is performant, accessible, and SEO optimized, with perfect Lighthouse scores on all pages. This contributed to a _2x increase_ in traffic and ticket sales year-over-year.",
           "tech": [
             "Next.js",
             "React",
             "TypeScript",
-            "Figma",
             "Tailwind CSS",
-            "Vercel"
+            "Shadcn/ui",
+            "Vercel",
+            "Vite",
+            "Figma"
           ]
         }
       ]
@@ -100,8 +111,8 @@
         "Python",
         "SQL",
         "React",
-        "Tailwind CSS",
         "Next.js",
+        "Tailwind CSS",
         "Node.js",
         "Express",
         "Docker",
