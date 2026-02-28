@@ -9,12 +9,12 @@
   --rule-color: var(--theme-border);
 
   /* Fonts */
-  --body-font: var(--font-dm-sans);
+  --body-font: "Helvetica Neue", Arial, Helvetica, sans-serif;
   --heading-font: var(--font-mazaeni);
 
   /* === TWEAK THESE TO SCALE EVERYTHING === */
-  --base-font: 16px;
-  --base-space: 0.5rem;
+  --base-font: 13.5px;
+  --base-space: 0.4rem;
 
   /* Derived font sizes (multipliers of base) */
   --font-name: calc(var(--base-font) * 2.25);
