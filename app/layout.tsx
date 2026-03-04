@@ -8,9 +8,10 @@ import { LightboxProvider } from "@/components/lightbox-image";
 import { Toaster } from "@/components/ui/sonner";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { DM_Mono, DM_Sans, Montserrat } from "next/font/google";
 import localFont from "next/font/local";
+import { metaDescription } from "../lib/meta";
 import "./globals.css";
 
 const dmSans = DM_Sans({
@@ -71,8 +72,7 @@ const jsonLd = {
   name: "Rio Edwards",
   url: siteUrl,
   jobTitle: "Product Engineer",
-  description:
-    "Product engineer building and shipping production web and mobile apps with React, Next.js, and TypeScript.",
+  description: metaDescription,
   sameAs: [
     "https://github.com/rioredwards",
     "https://linkedin.com/in/rioredwards",
@@ -80,18 +80,24 @@ const jsonLd = {
   ],
 };
 
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+};
+
 export const metadata: Metadata = {
   title: {
     default: "Rio Edwards | Product Engineer",
-    template: "%s | Rio Edwards",
+    template: "Rio Edwards | %s",
   },
-  description:
-    "Product engineer building and shipping production software used by real teams. View my projects, experience, and get in touch.",
+  description: metaDescription,
   keywords: [
     "product engineer",
+    "frontend engineer",
     "software engineer",
+    "full-stack engineer",
+    "developer",
     "web developer",
-    "full-stack developer",
     "React",
     "Next.js",
     "TypeScript",
@@ -114,14 +120,12 @@ export const metadata: Metadata = {
     url: siteUrl,
     siteName: "Rio Edwards",
     title: "Rio Edwards | Product Engineer",
-    description:
-      "Product engineer building and shipping production software used by real teams. View my projects, experience, and get in touch.",
+    description: metaDescription,
   },
   twitter: {
     card: "summary_large_image",
     title: "Rio Edwards | Product Engineer",
-    description:
-      "Product engineer building and shipping production software used by real teams. View my projects, experience, and get in touch.",
+    description: metaDescription,
   },
   robots: {
     index: true,
@@ -163,15 +167,11 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
+        <meta
+          name="format-detection"
+          content="telephone=no, date=no, email=no, address=no"
+        />
       </head>
-      <meta
-        name="format-detection"
-        content="telephone=no, date=no, email=no, address=no"
-      />
-      <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1, user-scalable=no, maximum-scale=1.0"
-      ></meta>
       <body
         className={`${dmSans.variable} ${dmMono.variable} ${mazaeniDemo.variable} ${montserrat.variable} font-sans antialiased`}
       >
@@ -190,8 +190,8 @@ export default function RootLayout({
           {children}
           <Toaster />
         </LightboxProvider>
-        <Analytics />
-        <SpeedInsights />
+        {process.env.VERCEL_ENV && <Analytics />}
+        {process.env.VERCEL_ENV && <SpeedInsights />}
       </body>
     </html>
   );

@@ -69,7 +69,7 @@ export function LightboxVideo({
         />
       </div>
       {caption && (
-        <figcaption className="mt-2 text-center text-sm text-muted-foreground italic">
+        <figcaption className="mt-2 text-center text-sm text-secondary-foreground italic">
           {caption}
         </figcaption>
       )}

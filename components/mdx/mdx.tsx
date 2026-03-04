@@ -136,9 +136,17 @@ interface FigureProps {
   caption?: string;
   credit?: string;
   creditUrl?: string;
+  priority?: boolean;
 }
 
-export function Figure({ src, alt, caption, credit, creditUrl }: FigureProps) {
+export function Figure({
+  src,
+  alt,
+  caption,
+  credit,
+  creditUrl,
+  priority,
+}: FigureProps) {
   return (
     <figure className="my-6 w-full">
       <Image
@@ -147,11 +155,12 @@ export function Figure({ src, alt, caption, credit, creditUrl }: FigureProps) {
         width={800}
         height={600}
         className="w-full rounded-lg"
+        priority={priority}
       />
       {(caption || credit) && (
-        <figcaption className="mt-2 w-full text-center text-sm text-muted-foreground">
+        <figcaption className="mt-2 w-full text-center text-sm text-secondary-foreground">
           {caption}
-          {caption && credit && " — "}
+          {caption && credit && ", "}
           {credit &&
             (creditUrl ? (
               <a

@@ -22,7 +22,9 @@ export function TagList({ items, dataTestId, className }: TagListProps) {
             {item}
           </span>
           {idx < items.length - 1 && (
-            <span className="text-muted-foreground/40">/</span>
+            <span className="text-muted-foreground/40" aria-hidden="true">
+              /
+            </span>
           )}
         </Fragment>
       ))}

@@ -1,0 +1,10 @@
+{
+  "version": 1,
+  "skills": {
+    "performance-lighthouse-runner": {
+      "source": "jeremylongshore/claude-code-plugins-plus-skills",
+      "sourceType": "github",
+      "computedHash": "61cd34e1957ce564b21e5107bb1032bc30780dacd83b7db46a3a6728ea3eabd0"
+    }
+  }
+}

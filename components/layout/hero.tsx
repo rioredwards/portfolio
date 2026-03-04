@@ -88,7 +88,7 @@ function HeroHeading({
   return (
     <h1
       className={cn(
-        "text-center text-[clamp(3rem,14vw,5rem)] leading-16 font-black tracking-tight text-foreground md:text-left md:text-6xl lg:text-7xl",
+        "text-center text-[clamp(3rem,14vw,4.3125rem)] leading-16 font-black tracking-tight text-foreground md:text-left md:text-6xl lg:text-6xl",
         className,
       )}
       style={{ fontFamily: "var(--font-mazaeni), serif" }}
@@ -107,6 +107,7 @@ export function Hero() {
       className="object-cover"
       priority
       placeholder="blur"
+      sizes="(max-width: 768px) 256px, 320px"
     />
   );
   const title = "Hello, I'm Rio.";
@@ -175,10 +176,10 @@ export function Hero() {
     <>
       {taglineAccessible}
       {/* Desktop layout */}
-      <div className="hidden min-h-screen place-items-center pt-20 fade-in md:grid">
+      <div className="hidden min-h-screen place-items-center pt-20 md:grid">
         <div className={cn("flex items-center gap-12")}>
           <HeroImage image={image} className="h-full" />
-          <div className="mt-10 flex max-w-prose-max flex-col items-start justify-end">
+          <div className="mt-10 flex max-w-prose-max flex-col items-start justify-end fade-in">
             <HeroHeading title={title} className="mb-4" />
             <div className="mb-2 w-full">{paragraph}</div>
             <HeroButton
@@ -190,11 +191,11 @@ export function Hero() {
         </div>
       </div>
       {/* Mobile layout */}
-      <div className="mt-[calc(4vh+6rem)] mb-[calc(12vh+3rem)] fade-in md:hidden">
+      <div className="mt-[calc(4vh+6rem)] mb-[calc(12vh+3rem)] md:hidden">
         <div className={cn("flex h-full flex-col items-center justify-center")}>
-          <HeroHeading title={title} className="mb-8" />
+          <HeroHeading title={title} className="mb-8 fade-in" />
           <HeroImage image={image} className="mb-6" />
-          <div className="mb-10 max-w-prose-max space-y-4 text-center">
+          <div className="mb-10 max-w-prose-max space-y-4 text-center fade-in">
             {paragraph}
           </div>
           <HeroButton

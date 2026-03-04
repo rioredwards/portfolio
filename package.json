@@ -57,6 +57,13 @@
     "yet-another-react-lightbox": "^3.28.0",
     "zod": "^4.3.6"
   },
+  "browserslist": [
+    ">0.5%",
+    "last 2 versions",
+    "Firefox ESR",
+    "not dead",
+    "not ie <= 11"
+  ],
   "devDependencies": {
     "@playwright/test": "^1.58.1",
     "@tailwindcss/postcss": "^4",

@@ -237,7 +237,6 @@
   .entry-company,
   .entry-institution {
     font-size: var(--font-small);
-    opacity: 0.75;
   }
 }
 
@@ -262,7 +261,6 @@
 .entry-sep {
   display: none;
   font-weight: 400;
-  opacity: 0.75;
 }
 
 @media (min-width: 560px) {
@@ -334,7 +332,6 @@
 }
 
 .entry-skills {
-  opacity: 0.75;
   display: block;
 }
 
@@ -381,7 +378,6 @@
 
 .skills-grid dd {
   color: var(--text-color);
-  opacity: 0.75;
   font-style: italic;
 }
 

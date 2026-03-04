@@ -448,15 +448,15 @@
 /* Syntax highlighting colors (sugar-high) */
 :root {
   /* Syntax highlighting colors (sugar-high) */
-  --sh-class: #36708a;
+  --sh-class: #2c5f72;
   --sh-identifier: #5c4b3e;
-  --sh-sign: #7a6e5a;
-  --sh-string: #2e7d5b;
-  --sh-keyword: #a84232;
-  --sh-comment: #998d7b;
+  --sh-sign: #5e5242;
+  --sh-string: #216047;
+  --sh-keyword: #9e3a28;
+  --sh-comment: #6b5d4d;
   --sh-jsxliterals: #7e4e78;
   --sh-property: #2d645d;
-  --sh-entity: #3b7a42;
+  --sh-entity: #2c5f34;
 }
 
 /* Selection color */

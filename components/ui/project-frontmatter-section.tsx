@@ -9,7 +9,7 @@ export function ProjectFrontmatterSection({
   return (
     <div className="flex flex-col gap-4">
       <div className="flex flex-col gap-1">
-        <span className="text-sm font-medium text-muted-foreground">
+        <span className="text-sm font-medium text-secondary-foreground">
           Category
         </span>
         <span className="text-foreground" data-testid="project-category">
@@ -19,7 +19,7 @@ export function ProjectFrontmatterSection({
 
       {frontmatter.skills && frontmatter.skills.length > 0 && (
         <div className="flex flex-col gap-2">
-          <span className="text-sm font-medium text-muted-foreground">
+          <span className="text-sm font-medium text-secondary-foreground">
             Skills
           </span>
           <TagList items={frontmatter.skills} dataTestId="project-skill" />
