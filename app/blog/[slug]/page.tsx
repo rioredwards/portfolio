@@ -28,10 +28,10 @@ export async function generateMetadata({
   }
 
   return {
-    title: frontmatter.title,
+    title: "Rio Edwards | " + frontmatter.title,
     description: frontmatter.description,
     openGraph: {
-      title: frontmatter.title,
+      title: "Rio Edwards | " + frontmatter.title,
       description: frontmatter.description,
       type: "article",
     },
