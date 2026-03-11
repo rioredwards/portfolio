@@ -1,11 +1,6 @@
 {
   "profile": "web",
-  "targets": [
-    "openclaw",
-    "claude",
-    "cursor",
-    "agents"
-  ],
+  "targets": ["openclaw", "claude", "cursor", "agents"],
   "includeGlobal": true,
   "extraSkills": []
 }
