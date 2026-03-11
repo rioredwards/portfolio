@@ -1,15 +1,15 @@
 {
-  "$schema": "./resume.schema.json",
+  "$schema": "../../../../Coding/portfolio/content/resume.schema.json",
   "basics": {
     "name": "Rio Edwards",
-    "title": "Product Engineer",
+    "title": "Frontend Engineer",
     "location": "Portland, OR",
     "email": "rioredwards@gmail.com",
     "phone": "(971) 420-5276",
     "website": "https://rioedwards.com",
     "linkedIn": "https://linkedin.com/in/rio-edwards"
   },
-  "summary": "Typescript-first full-stack engineer with _3+ years_ shipping maintainable web and mobile software. Comfortable owning UI, APIs, data, and deployment across startup builds and compliance-heavy environments.",
+  "summary": "TypeScript-first frontend engineer with _3+ years_ shipping React apps with accessible UX, automated testing, and scalable component architecture. Comfortable in fast-moving startups and compliance-heavy environments.",
   "experience": [
     {
       "name": "Experiential",
@@ -19,28 +19,16 @@
       "projects": [
         {
           "title": "CRM Document Manager",
-          "description": "A law firm needed HIPAA-compliant file management inside HubSpot. I clarified requirements and shipped a security-first solution in _5 weeks_, leveraging TDD, JWT auth, audit logging, and transactional rollback to prevent data loss. The app is now business-critical and used daily by _30+ lawyers_.",
+          "description": "A law firm needed HIPAA-compliant file management inside HubSpot. I shipped a security-first solution in _5 weeks_: a React file-tree UI with move and delete flows and an iframe-based multi-file uploader with per-file progress and retries, secured by JWT auth. Now business-critical and used daily by _30+ lawyers_.",
           "tech": [
             "TypeScript",
             "React",
-            "Express",
-            "Node.js",
             "Jest",
+            "Node.js",
+            "Express",
             "Firebase",
-            "REST API",
-            "GCP"
-          ]
-        },
-        {
-          "title": "iOS Digital-Wellness App",
-          "description": "A client wanted an iOS app for digital wellness: usage tracking and Live Activities. After a feasibility study plus wireframes and designs, I delivered a _15-screen_ application that achieved inter-process communication across _5 heavily sandboxed extensions_. I ran an agile cadence with clear milestones, TDD, and weekly updates.",
-          "tech": [
-            "Swift",
-            "SwiftUI",
-            "TypeScript",
-            "Firebase",
-            "Figma",
-            "Asana"
+            "GCP",
+            "REST API"
           ]
         },
         {
@@ -65,23 +53,33 @@
       "startDate": "2024-01",
       "endDate": "2025-06",
       "highlights": [
-        "Led _200+ students_ through JavaScript, HTML/CSS, and React; produced _40+ hours_ of lectures and delivered PR-style feedback to improve readability and correctness."
+        "Taught _200+ students_ web development (_JavaScript, HTML/CSS, React_), translated complex topics into clear patterns, and delivered PR-style feedback on code quality and maintainability.",
+        "Produced _40+ hours_ of lectures plus learning assets (videos, infographics, articles), and partnered with staff to calibrate expectations, surface blockers early, and keep the cohort on track."
+      ]
+    },
+    {
+      "name": "Code for PDX",
+      "title": "Frontend Engineer",
+      "startDate": "2023-09",
+      "endDate": "2024-11",
+      "highlights": [
+        "Contributed dozens of accessible, responsive React components to a civic-tech open-source codebase, working within an agile, TDD-enforced CI pipeline."
       ]
     }
   ],
   "sideProjects": [
     {
-      "title": "DogTown (dogtown.dog)",
+      "title": "DogTown",
       "description": "Built and currently self-host a full-stack photo-sharing app on a Raspberry Pi. It includes a Next.js core with a PostgreSQL database, AI image moderation, analytics, and a system profiler that powers a live metrics dashboard for observability. It deploys through Docker Compose with CI/CD via GitHub Actions.",
       "tech": [
-        "Next.js",
         "TypeScript",
-        "Node.js",
+        "Next.js",
         "PostgreSQL",
-        "Python",
         "Docker",
+        "Python",
+        "NGINX",
         "Cloudflare",
-        "NGINX"
+        "GitHub Actions"
       ],
       "url": "https://dogtown.dog"
     }
@@ -108,16 +106,16 @@
       "category": "Core Stack",
       "skills": [
         "TypeScript",
-        "Python",
-        "SQL",
         "React",
         "Next.js",
+        "HTML",
+        "CSS",
         "Tailwind CSS",
+        "shadcn/ui",
         "Node.js",
-        "Express",
-        "Docker",
-        "AWS",
         "Jest",
+        "React Testing Library",
+        "Playwright",
         "Figma"
       ]
     }
