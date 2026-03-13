@@ -1,7 +1,9 @@
 import { Footer, SectionContentWrapper } from "@/components/layout";
+import { PaginationNav } from "@/components/pagination-nav";
 import { getBlogIcon } from "@/lib/blog-icons";
 import { getAllBlogCards, getAllBlogsWithContent } from "@/lib/blogs";
 import { DEFAULT_LOCALE } from "@/lib/constants";
+import { paginateItems, parsePageParam } from "@/lib/pagination";
 import { cn } from "@/lib/utils";
 import type { Metadata } from "next";
 import Link from "next/link";
@@ -30,9 +32,21 @@ function formatPublishedDate(date?: string) {
   }).format(new Date(`${date}T00:00:00Z`));
 }
 
-export default function BlogIndexPage() {
+const BLOGS_PER_PAGE = 6;
+
+interface BlogIndexPageProps {
+  searchParams?: Promise<{ page?: string | string[] }>;
+}
+
+export default async function BlogIndexPage({
+  searchParams,
+}: BlogIndexPageProps) {
+  const resolvedSearchParams = await searchParams;
   const blogs = getAllBlogCards();
   const blogsWithContent = getAllBlogsWithContent();
+  const totalPages = Math.max(1, Math.ceil(blogs.length / BLOGS_PER_PAGE));
+  const currentPage = parsePageParam(resolvedSearchParams?.page, totalPages);
+  const paginatedBlogs = paginateItems(blogs, currentPage, BLOGS_PER_PAGE);
 
   return (
     <>
@@ -54,7 +68,17 @@ export default function BlogIndexPage() {
           </header>
 
           <section aria-label="Blog posts list" className="space-y-5">
-            {blogs.map((blog) => {
+            <div className="flex flex-col gap-2 text-sm text-muted-foreground sm:flex-row sm:items-center sm:justify-between">
+              <p>
+                Showing {paginatedBlogs.startIndex + 1}-
+                {paginatedBlogs.endIndex} of {paginatedBlogs.totalItems} posts
+              </p>
+              <p>
+                Page {paginatedBlogs.currentPage} of {paginatedBlogs.totalPages}
+              </p>
+            </div>
+
+            {paginatedBlogs.items.map((blog) => {
               const blogWithContent = blogsWithContent.get(blog.slug);
               const publishedDate = formatPublishedDate(
                 blogWithContent?.frontmatter.date,
@@ -121,6 +145,11 @@ export default function BlogIndexPage() {
                 </Link>
               );
             })}
+            <PaginationNav
+              basePath="/blog"
+              currentPage={paginatedBlogs.currentPage}
+              totalPages={paginatedBlogs.totalPages}
+            />
           </section>
         </SectionContentWrapper>
       </main>

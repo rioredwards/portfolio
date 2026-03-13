@@ -1,4 +1,6 @@
 import { SectionContentWrapper } from "@/components/layout";
+import { PaginationNav } from "@/components/pagination-nav";
+import { paginateItems, parsePageParam } from "@/lib/pagination";
 import { getAllProjectCards } from "@/lib/projects";
 import { cn } from "@/lib/utils";
 import type { Metadata } from "next";
@@ -18,8 +20,27 @@ export const metadata: Metadata = {
   },
 };
 
-export default function WorkIndexPage() {
+const PROJECTS_PER_PAGE = 6;
+
+interface WorkIndexPageProps {
+  searchParams?: Promise<{ page?: string | string[] }>;
+}
+
+export default async function WorkIndexPage({
+  searchParams,
+}: WorkIndexPageProps) {
+  const resolvedSearchParams = await searchParams;
   const projects = getAllProjectCards();
+  const totalPages = Math.max(
+    1,
+    Math.ceil(projects.length / PROJECTS_PER_PAGE),
+  );
+  const currentPage = parsePageParam(resolvedSearchParams?.page, totalPages);
+  const paginatedProjects = paginateItems(
+    projects,
+    currentPage,
+    PROJECTS_PER_PAGE,
+  );
 
   return (
     <main id="main-content" className="min-h-screen bg-secondary">
@@ -40,7 +61,19 @@ export default function WorkIndexPage() {
         </header>
 
         <section aria-label="Projects list" className="space-y-6">
-          {projects.map((project) => (
+          <div className="flex flex-col gap-2 text-sm text-muted-foreground sm:flex-row sm:items-center sm:justify-between">
+            <p>
+              Showing {paginatedProjects.startIndex + 1}-
+              {paginatedProjects.endIndex} of {paginatedProjects.totalItems}{" "}
+              projects
+            </p>
+            <p>
+              Page {paginatedProjects.currentPage} of{" "}
+              {paginatedProjects.totalPages}
+            </p>
+          </div>
+
+          {paginatedProjects.items.map((project) => (
             <Link
               key={project.slug}
               href={`/work/${project.slug}`}
@@ -107,6 +140,11 @@ export default function WorkIndexPage() {
               </article>
             </Link>
           ))}
+          <PaginationNav
+            basePath="/work"
+            currentPage={paginatedProjects.currentPage}
+            totalPages={paginatedProjects.totalPages}
+          />
         </section>
       </SectionContentWrapper>
     </main>
