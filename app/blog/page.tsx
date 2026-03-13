@@ -1,9 +1,11 @@
+import { FilterChipGroup } from "@/components/filter-chip-group";
 import { Footer, SectionContentWrapper } from "@/components/layout";
 import { PaginationNav } from "@/components/pagination-nav";
 import { getBlogIcon } from "@/lib/blog-icons";
 import { getAllBlogCards, getAllBlogsWithContent } from "@/lib/blogs";
 import { DEFAULT_LOCALE } from "@/lib/constants";
 import { paginateItems, parsePageParam } from "@/lib/pagination";
+import { readSingleParam } from "@/lib/query-params";
 import { cn } from "@/lib/utils";
 import type { Metadata } from "next";
 import Link from "next/link";
@@ -35,18 +37,42 @@ function formatPublishedDate(date?: string) {
 const BLOGS_PER_PAGE = 6;
 
 interface BlogIndexPageProps {
-  searchParams?: Promise<{ page?: string | string[] }>;
+  searchParams?: Promise<{
+    page?: string | string[];
+    tag?: string | string[];
+  }>;
 }
 
 export default async function BlogIndexPage({
   searchParams,
 }: BlogIndexPageProps) {
   const resolvedSearchParams = await searchParams;
+  const selectedTag = readSingleParam(resolvedSearchParams?.tag);
   const blogs = getAllBlogCards();
   const blogsWithContent = getAllBlogsWithContent();
-  const totalPages = Math.max(1, Math.ceil(blogs.length / BLOGS_PER_PAGE));
+  const tagOptions = [
+    ...new Set(
+      Array.from(blogsWithContent.values()).flatMap(
+        (blog) => blog.frontmatter.tags ?? [],
+      ),
+    ),
+  ];
+  const filteredBlogs = selectedTag
+    ? blogs.filter((blog) => {
+        const blogWithContent = blogsWithContent.get(blog.slug);
+        return (blogWithContent?.frontmatter.tags ?? []).includes(selectedTag);
+      })
+    : blogs;
+  const totalPages = Math.max(
+    1,
+    Math.ceil(filteredBlogs.length / BLOGS_PER_PAGE),
+  );
   const currentPage = parsePageParam(resolvedSearchParams?.page, totalPages);
-  const paginatedBlogs = paginateItems(blogs, currentPage, BLOGS_PER_PAGE);
+  const paginatedBlogs = paginateItems(
+    filteredBlogs,
+    currentPage,
+    BLOGS_PER_PAGE,
+  );
 
   return (
     <>
@@ -68,15 +94,30 @@ export default async function BlogIndexPage({
           </header>
 
           <section aria-label="Blog posts list" className="space-y-5">
+            <FilterChipGroup
+              title="Filter by tag"
+              basePath="/blog"
+              paramName="tag"
+              selectedValue={selectedTag}
+              options={tagOptions.map((tag) => ({ label: tag, value: tag }))}
+            />
+
             <div className="flex flex-col gap-2 text-sm text-muted-foreground sm:flex-row sm:items-center sm:justify-between">
               <p>
-                Showing {paginatedBlogs.startIndex + 1}-
-                {paginatedBlogs.endIndex} of {paginatedBlogs.totalItems} posts
+                {paginatedBlogs.totalItems === 0
+                  ? "No posts match this filter"
+                  : `Showing ${paginatedBlogs.startIndex + 1}-${paginatedBlogs.endIndex} of ${paginatedBlogs.totalItems} posts`}
               </p>
               <p>
                 Page {paginatedBlogs.currentPage} of {paginatedBlogs.totalPages}
               </p>
             </div>
+
+            {paginatedBlogs.totalItems === 0 ? (
+              <div className="rounded-4xl border border-border/60 bg-background p-8 text-secondary-foreground">
+                Try a different tag.
+              </div>
+            ) : null}
 
             {paginatedBlogs.items.map((blog) => {
               const blogWithContent = blogsWithContent.get(blog.slug);
@@ -149,6 +190,7 @@ export default async function BlogIndexPage({
               basePath="/blog"
               currentPage={paginatedBlogs.currentPage}
               totalPages={paginatedBlogs.totalPages}
+              query={{ tag: selectedTag }}
             />
           </section>
         </SectionContentWrapper>

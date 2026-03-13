@@ -1,7 +1,9 @@
+import { FilterChipGroup } from "@/components/filter-chip-group";
 import { SectionContentWrapper } from "@/components/layout";
 import { PaginationNav } from "@/components/pagination-nav";
 import { paginateItems, parsePageParam } from "@/lib/pagination";
 import { getAllProjectCards } from "@/lib/projects";
+import { readSingleParam } from "@/lib/query-params";
 import { cn } from "@/lib/utils";
 import type { Metadata } from "next";
 import Image from "next/image";
@@ -23,21 +25,29 @@ export const metadata: Metadata = {
 const PROJECTS_PER_PAGE = 6;
 
 interface WorkIndexPageProps {
-  searchParams?: Promise<{ page?: string | string[] }>;
+  searchParams?: Promise<{
+    page?: string | string[];
+    category?: string | string[];
+  }>;
 }
 
 export default async function WorkIndexPage({
   searchParams,
 }: WorkIndexPageProps) {
   const resolvedSearchParams = await searchParams;
+  const selectedCategory = readSingleParam(resolvedSearchParams?.category);
   const projects = getAllProjectCards();
+  const categories = [...new Set(projects.map((project) => project.category))];
+  const filteredProjects = selectedCategory
+    ? projects.filter((project) => project.category === selectedCategory)
+    : projects;
   const totalPages = Math.max(
     1,
-    Math.ceil(projects.length / PROJECTS_PER_PAGE),
+    Math.ceil(filteredProjects.length / PROJECTS_PER_PAGE),
   );
   const currentPage = parsePageParam(resolvedSearchParams?.page, totalPages);
   const paginatedProjects = paginateItems(
-    projects,
+    filteredProjects,
     currentPage,
     PROJECTS_PER_PAGE,
   );
@@ -61,17 +71,34 @@ export default async function WorkIndexPage({
         </header>
 
         <section aria-label="Projects list" className="space-y-6">
+          <FilterChipGroup
+            title="Filter by category"
+            basePath="/work"
+            paramName="category"
+            selectedValue={selectedCategory}
+            options={categories.map((category) => ({
+              label: category,
+              value: category,
+            }))}
+          />
+
           <div className="flex flex-col gap-2 text-sm text-muted-foreground sm:flex-row sm:items-center sm:justify-between">
             <p>
-              Showing {paginatedProjects.startIndex + 1}-
-              {paginatedProjects.endIndex} of {paginatedProjects.totalItems}{" "}
-              projects
+              {paginatedProjects.totalItems === 0
+                ? "No projects match this filter"
+                : `Showing ${paginatedProjects.startIndex + 1}-${paginatedProjects.endIndex} of ${paginatedProjects.totalItems} projects`}
             </p>
             <p>
               Page {paginatedProjects.currentPage} of{" "}
               {paginatedProjects.totalPages}
             </p>
           </div>
+
+          {paginatedProjects.totalItems === 0 ? (
+            <div className="rounded-4xl border border-border/60 bg-background p-8 text-secondary-foreground">
+              Try a different category.
+            </div>
+          ) : null}
 
           {paginatedProjects.items.map((project) => (
             <Link
@@ -144,6 +171,7 @@ export default async function WorkIndexPage({
             basePath="/work"
             currentPage={paginatedProjects.currentPage}
             totalPages={paginatedProjects.totalPages}
+            query={{ category: selectedCategory }}
           />
         </section>
       </SectionContentWrapper>

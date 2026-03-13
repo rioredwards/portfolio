@@ -1,3 +1,4 @@
+import { buildQueryHref, type QueryValue } from "@/lib/query-params";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 
@@ -5,20 +6,25 @@ interface PaginationNavProps {
   basePath: string;
   currentPage: number;
   totalPages: number;
+  query?: Record<string, QueryValue>;
 }
 
-function buildPageHref(basePath: string, page: number) {
-  if (page <= 1) {
-    return basePath;
-  }
-
-  return `${basePath}?page=${page}`;
+function buildPageHref(
+  basePath: string,
+  page: number,
+  query?: Record<string, QueryValue>,
+) {
+  return buildQueryHref(basePath, {
+    ...query,
+    page: page <= 1 ? null : page,
+  });
 }
 
 export function PaginationNav({
   basePath,
   currentPage,
   totalPages,
+  query,
 }: PaginationNavProps) {
   if (totalPages <= 1) {
     return null;
@@ -36,7 +42,7 @@ export function PaginationNav({
     >
       <div className="flex items-center gap-3 self-start sm:self-auto">
         <Link
-          href={buildPageHref(basePath, currentPage - 1)}
+          href={buildPageHref(basePath, currentPage - 1, query)}
           aria-disabled={currentPage === 1}
           className={cn(
             "rounded-full border border-border/70 bg-background px-5 py-2 text-sm font-semibold uppercase transition-colors",
@@ -48,7 +54,7 @@ export function PaginationNav({
           Previous
         </Link>
         <Link
-          href={buildPageHref(basePath, currentPage + 1)}
+          href={buildPageHref(basePath, currentPage + 1, query)}
           aria-disabled={currentPage === totalPages}
           className={cn(
             "rounded-full border border-border/70 bg-background px-5 py-2 text-sm font-semibold uppercase transition-colors",
@@ -68,7 +74,7 @@ export function PaginationNav({
           return (
             <Link
               key={pageNumber}
-              href={buildPageHref(basePath, pageNumber)}
+              href={buildPageHref(basePath, pageNumber, query)}
               aria-current={isCurrentPage ? "page" : undefined}
               className={cn(
                 "flex h-10 min-w-10 items-center justify-center rounded-full border px-3 text-sm font-semibold transition-colors",
