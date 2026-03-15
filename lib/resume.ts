@@ -65,40 +65,8 @@ export type ResumeEducation = z.infer<typeof resumeEducationSchema>;
 export type ResumeSkills = z.infer<typeof resumeSkillsSchema>;
 export type Resume = z.infer<typeof resumeSchema>;
 
-// Temp file path written by generate-pdf --input to override resume without restarting the server.
-const RESUME_TEMP_PATH = "./resume-variants/current.json";
-
 export async function getResume(): Promise<Resume> {
-  // In development, resume data is resolved in this priority order:
-  //   1. RESUME_LOCAL_PATH env var (explicit override, fails loudly if missing)
-  //   2. resume-variants/current.json (written by generate-pdf --input, cleaned up after)
-  //   3. content/resume.json (canonical, used in production and as fallback)
-  const localPath = process.env.RESUME_LOCAL_PATH;
-  let raw: unknown;
-
-  if (process.env.NODE_ENV !== "production") {
-    const { readFile } = await import("fs/promises");
-    const { resolve } = await import("path");
-
-    if (localPath) {
-      try {
-        raw = JSON.parse(await readFile(resolve(localPath), "utf-8"));
-      } catch (e) {
-        const msg = e instanceof Error ? e.message : String(e);
-        throw new Error(
-          `Failed to load resume from RESUME_LOCAL_PATH (${localPath}): ${msg}`,
-        );
-      }
-    } else {
-      try {
-        raw = JSON.parse(await readFile(resolve(RESUME_TEMP_PATH), "utf-8"));
-      } catch {
-        raw = canonicalResume;
-      }
-    }
-  } else {
-    raw = canonicalResume;
-  }
+  const raw = canonicalResume;
 
   const result = resumeSchema.safeParse(raw);
   if (!result.success) {

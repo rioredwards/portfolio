@@ -2,9 +2,6 @@
 
 tmp/
 
-# Tailored resume variants for job applications (never commit these)
-resume-variants/
-
 # dependencies
 /node_modules
 /.pnp
