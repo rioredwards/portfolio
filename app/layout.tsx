@@ -4,6 +4,7 @@ import {
   Navbar,
   Sidebar,
 } from "@/components/layout";
+import { InterviewBot } from "@/components/interview-bot/InterviewBot";
 import { LightboxProvider } from "@/components/lightbox-image";
 import { Toaster } from "@/components/ui/sonner";
 import { Analytics } from "@vercel/analytics/next";
@@ -189,6 +190,7 @@ export default function RootLayout({
           <MobileMenu />
           {children}
           <Toaster />
+          <InterviewBot />
         </LightboxProvider>
         {process.env.VERCEL_ENV && <Analytics />}
         {process.env.VERCEL_ENV && <SpeedInsights />}
