@@ -34,7 +34,10 @@ export function useInterviewBot() {
       });
 
       if (!res.ok) {
-        throw new Error(`Server error: ${res.status}`);
+        const body = await res.json().catch(() => null);
+        const message =
+          body?.error ?? "Failed to reach the bot. Please try again.";
+        throw new Error(message);
       }
 
       const data = await res.json();
@@ -43,7 +46,11 @@ export function useInterviewBot() {
         { role: "assistant", content: data.reply },
       ]);
     } catch (err) {
-      setError("Failed to reach the bot. Please try again.");
+      setError(
+        err instanceof Error
+          ? err.message
+          : "Failed to reach the bot. Please try again.",
+      );
       console.error(err);
     } finally {
       setIsLoading(false);
