@@ -18,11 +18,34 @@ function HeroImage({
   return (
     <div
       className={cn(
-        "relative aspect-square min-h-64 min-w-64 shrink-0 overflow-hidden rounded-full border-4 border-border/50",
+        "relative aspect-square min-h-64 min-w-64 shrink-0",
         className,
       )}
     >
-      {image}
+      {/* Outer glow ring - subtle animated pulse */}
+      <div
+        className="absolute inset-[-12px] rounded-full opacity-60"
+        style={{
+          background:
+            "radial-gradient(circle, var(--color-primary) 0%, transparent 70%)",
+          filter: "blur(20px)",
+          animation: "heroGlow 4s ease-in-out infinite",
+        }}
+      />
+      {/* Secondary accent glow */}
+      <div
+        className="absolute inset-[-8px] rounded-full opacity-40"
+        style={{
+          background:
+            "radial-gradient(circle, var(--color-accent) 0%, transparent 60%)",
+          filter: "blur(16px)",
+          animation: "heroGlow 4s ease-in-out infinite 2s",
+        }}
+      />
+      {/* Image container */}
+      <div className="relative h-full w-full overflow-hidden rounded-full border-4 border-border/50 shadow-lg">
+        {image}
+      </div>
     </div>
   );
 }
