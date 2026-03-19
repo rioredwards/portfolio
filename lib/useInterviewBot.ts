@@ -8,7 +8,7 @@ export interface ChatMessage {
 }
 
 const BOT_URL =
-  process.env.NEXT_PUBLIC_INTERVIEW_BOT_URL ?? "http://localhost:3000";
+  process.env.NEXT_PUBLIC_INTERVIEW_BOT_URL ?? "http://localhost:1807";
 
 function generateSessionId(): string {
   return `${Date.now()}-${Math.random().toString(36).slice(2, 9)}`;
