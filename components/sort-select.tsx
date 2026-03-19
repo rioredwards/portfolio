@@ -20,8 +20,8 @@ export function SortSelect({
   const router = useRouter();
 
   return (
-    <label className="flex items-center gap-2 text-sm text-muted-foreground">
-      <span className="font-medium">Sort:</span>
+    <label className="flex items-center gap-2 text-xs text-muted-foreground sm:text-sm">
+      <span className="font-semibold tracking-[0.18em] uppercase">Sort</span>
       <select
         value={currentValue ?? ""}
         onChange={(e) => {
@@ -34,7 +34,7 @@ export function SortSelect({
             }),
           );
         }}
-        className="rounded-full border border-border/70 bg-background px-4 py-2 text-sm font-medium text-foreground transition-colors hover:border-background-hover-border hover:bg-secondary"
+        className="rounded-full border border-border/70 bg-background/85 px-4 py-2 text-sm font-semibold text-foreground shadow-[inset_0_1px_0_rgba(255,255,255,0.4)] transition-all duration-300 hover:border-primary/35 hover:bg-secondary focus:border-primary focus-visible:ring-4 focus-visible:ring-ring/25 focus-visible:outline-none"
       >
         {options.map((option) => (
           <option key={option.value} value={option.value}>
