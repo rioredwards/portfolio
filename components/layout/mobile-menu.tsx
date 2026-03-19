@@ -83,10 +83,10 @@ export function MobileMenu() {
 
   return (
     <>
-      {/* Floating button - bottom right */}
+      {/* Floating button - bottom left */}
       <button
         onClick={() => setIsOpen(true)}
-        className="mm-btn fixed right-6 bottom-6 z-50 flex items-center justify-center rounded-full bg-foreground text-background shadow-lg transition-all hover:scale-110 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:outline-none md:hidden"
+        className="mm-btn fixed bottom-6 left-6 z-50 flex items-center justify-center rounded-full bg-foreground text-background shadow-lg transition-all hover:scale-110 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:outline-none md:hidden"
         aria-label="Open menu"
         aria-expanded={isOpen}
         aria-controls="mobile-menu"

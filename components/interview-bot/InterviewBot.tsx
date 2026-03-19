@@ -61,6 +61,8 @@ export function InterviewBot() {
   const { messages, isLoading, error, sendMessage, reset } = useInterviewBot();
   const bottomRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLTextAreaElement>(null);
+  const panelRef = useRef<HTMLDivElement>(null);
+  const toggleRef = useRef<HTMLButtonElement>(null);
 
   // Scroll to bottom on new messages
   useEffect(() => {
@@ -72,6 +74,28 @@ export function InterviewBot() {
     if (open) {
       setTimeout(() => inputRef.current?.focus(), 100);
     }
+  }, [open]);
+
+  useEffect(() => {
+    if (!open) return;
+
+    function handlePointerDown(event: MouseEvent | TouchEvent) {
+      const target = event.target as Node | null;
+      if (!target) return;
+
+      if (panelRef.current?.contains(target)) return;
+      if (toggleRef.current?.contains(target)) return;
+
+      setOpen(false);
+    }
+
+    document.addEventListener("mousedown", handlePointerDown);
+    document.addEventListener("touchstart", handlePointerDown);
+
+    return () => {
+      document.removeEventListener("mousedown", handlePointerDown);
+      document.removeEventListener("touchstart", handlePointerDown);
+    };
   }, [open]);
 
   function handleSubmit(e?: React.FormEvent) {
@@ -97,17 +121,18 @@ export function InterviewBot() {
   const hasMessages = messages.length > 0;
 
   return (
-    <div className="fixed right-4 bottom-20 z-40 flex flex-col items-end gap-3 md:right-6 md:bottom-6 md:z-50">
+    <div className="fixed right-4 bottom-6 z-50 flex flex-col items-end gap-3 md:right-6">
       {/* Chat window */}
       <AnimatePresence>
         {open && (
           <motion.div
             key="chat-window"
+            ref={panelRef}
             initial={{ opacity: 0, y: 16, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 16, scale: 0.95 }}
             transition={{ duration: 0.25, ease: [0.23, 1, 0.32, 1] }}
-            className="flex h-[min(520px,calc(100dvh-8rem))] w-[calc(100vw-2rem)] max-w-[380px] flex-col overflow-hidden rounded-2xl border border-border/60 bg-background shadow-[0_8px_40px_-8px_rgba(0,0,0,0.15)]"
+            className="flex h-[min(520px,calc(100dvh-8rem))] w-[calc(100vw-2rem)] max-w-[380px] flex-col overflow-hidden rounded-xl border border-border/60 bg-background shadow-[0_8px_40px_-8px_rgba(0,0,0,0.15)]"
           >
             {/* Header */}
             <div className="relative flex items-center gap-3 border-b border-border/40 px-4 py-3">
@@ -120,10 +145,10 @@ export function InterviewBot() {
                 />
               </div>
               <div className="min-w-0 flex-1">
-                <p className="font-serif text-[15px] leading-tight font-semibold tracking-tight text-foreground">
+                <p className="font-serif text-base leading-tight font-semibold tracking-tight text-foreground">
                   Chat with Rio
                 </p>
-                <p className="text-[11px] leading-tight text-body-text/60">
+                <p className="text-xs leading-tight text-body-text/60">
                   AI-powered, answers on Rio&apos;s behalf
                 </p>
               </div>
@@ -172,10 +197,10 @@ export function InterviewBot() {
                         strokeWidth={1.5}
                       />
                     </div>
-                    <p className="font-serif text-sm font-medium text-foreground">
+                    <p className="font-serif text-base font-medium text-foreground">
                       Ask me anything
                     </p>
-                    <p className="mt-1 text-[11px] leading-snug text-body-text/50">
+                    <p className="mt-1 text-xs leading-snug text-body-text/50">
                       Background, projects, experience, or how this bot works.
                     </p>
                   </div>
@@ -184,7 +209,7 @@ export function InterviewBot() {
                       <button
                         key={q}
                         onClick={() => handleSuggestion(q)}
-                        className="w-full cursor-pointer rounded-xl border border-border/50 bg-secondary/50 px-3 py-2.5 text-left text-[12px] leading-snug text-body-text/70 transition-all duration-150 hover:border-primary/20 hover:bg-secondary hover:text-foreground"
+                        className="w-full cursor-pointer rounded-lg border border-border/50 bg-secondary/50 px-3 py-2.5 text-left text-sm leading-snug text-body-text/70 transition-all duration-150 hover:border-primary/20 hover:bg-secondary hover:text-foreground"
                       >
                         {q}
                       </button>
@@ -211,10 +236,10 @@ export function InterviewBot() {
                   {msg.role === "assistant" && <BotAvatar />}
                   <div
                     className={cn(
-                      "max-w-[82%] rounded-2xl px-3.5 py-2.5 text-[13px] leading-relaxed",
+                      "max-w-[82%] rounded-xl px-3.5 py-2.5 text-sm leading-relaxed",
                       msg.role === "user"
-                        ? "rounded-br-md bg-primary text-primary-foreground"
-                        : "rounded-bl-md bg-secondary/80 text-body-text",
+                        ? "rounded-br-sm bg-primary text-primary-foreground"
+                        : "rounded-bl-sm bg-secondary/80 text-body-text",
                     )}
                   >
                     {msg.role === "assistant" ? (
@@ -239,10 +264,10 @@ export function InterviewBot() {
                             </ol>
                           ),
                           li: ({ children }) => (
-                            <li className="text-[13px]">{children}</li>
+                            <li className="text-sm">{children}</li>
                           ),
                           code: ({ children }) => (
-                            <code className="rounded bg-primary/5 px-1 py-0.5 font-mono text-[11px] text-foreground">
+                            <code className="rounded bg-primary/5 px-1 py-0.5 font-mono text-xs text-foreground">
                               {children}
                             </code>
                           ),
@@ -275,7 +300,7 @@ export function InterviewBot() {
                   className="flex gap-2"
                 >
                   <BotAvatar />
-                  <div className="rounded-2xl rounded-bl-md bg-secondary/80 px-3.5 py-2.5">
+                  <div className="rounded-xl rounded-bl-sm bg-secondary/80 px-3.5 py-2.5">
                     <TypingIndicator />
                   </div>
                 </motion.div>
@@ -297,38 +322,49 @@ export function InterviewBot() {
             {/* Input */}
             <form
               onSubmit={handleSubmit}
-              className="flex items-end gap-2 border-t border-border/40 bg-secondary/30 px-3 py-3"
+              className="border-t border-border/40 bg-secondary/30 px-3 py-3"
             >
               <label htmlFor="interview-bot-input" className="sr-only">
                 Ask Rio a question
               </label>
-              <textarea
-                id="interview-bot-input"
-                ref={inputRef}
-                value={input}
-                onChange={(e) => setInput(e.target.value)}
-                onKeyDown={handleKeyDown}
-                placeholder="Ask a question..."
-                rows={1}
-                className="max-h-24 flex-1 resize-none overflow-y-auto rounded-xl border border-border/40 bg-background px-3 py-2 text-[13px] transition-colors outline-none placeholder:text-body-text/30 focus:border-primary/30 focus:ring-1 focus:ring-ring/30"
-                style={{ fieldSizing: "content" } as React.CSSProperties}
-              />
-              <motion.div whileTap={{ scale: 0.92 }}>
-                <Button
-                  type="submit"
-                  size="icon-sm"
-                  disabled={!input.trim() || isLoading}
-                  className="shrink-0 rounded-xl shadow-sm"
-                  aria-label="Send message"
-                >
-                  <HugeiconsIcon
-                    icon={ArrowUp01Icon}
-                    size={16}
-                    color="currentColor"
-                    strokeWidth={2.5}
-                  />
-                </Button>
-              </motion.div>
+              <div className="flex items-end gap-1.5 rounded-lg border border-border/40 bg-background px-3 py-1.5 transition-colors focus-within:border-primary/30 focus-within:ring-1 focus-within:ring-ring/30">
+                <textarea
+                  id="interview-bot-input"
+                  ref={inputRef}
+                  value={input}
+                  onChange={(e) => setInput(e.target.value)}
+                  onKeyDown={handleKeyDown}
+                  placeholder="Ask a question..."
+                  rows={1}
+                  className="max-h-24 flex-1 resize-none overflow-y-auto bg-transparent py-1 text-sm outline-none placeholder:text-body-text/30"
+                  style={{ fieldSizing: "content" } as React.CSSProperties}
+                />
+                <AnimatePresence>
+                  {input.trim() && (
+                    <motion.div
+                      initial={{ scale: 0, opacity: 0 }}
+                      animate={{ scale: 1, opacity: 1 }}
+                      exit={{ scale: 0, opacity: 0 }}
+                      transition={{ duration: 0.12, ease: "easeOut" }}
+                    >
+                      <Button
+                        type="submit"
+                        size="icon-xs"
+                        disabled={isLoading}
+                        className="mb-0.5 shrink-0 rounded-full"
+                        aria-label="Send message"
+                      >
+                        <HugeiconsIcon
+                          icon={ArrowUp01Icon}
+                          size={14}
+                          color="currentColor"
+                          strokeWidth={2.5}
+                        />
+                      </Button>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
             </form>
           </motion.div>
         )}
@@ -337,6 +373,7 @@ export function InterviewBot() {
       {/* Toggle FAB */}
       <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
         <Button
+          ref={toggleRef}
           size="icon-xl"
           onClick={() => setOpen((v) => !v)}
           className="rounded-full shadow-[0_4px_20px_-4px_rgba(0,0,0,0.2)] transition-shadow hover:shadow-[0_6px_28px_-4px_rgba(0,0,0,0.25)]"
