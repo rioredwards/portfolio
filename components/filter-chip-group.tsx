@@ -1,4 +1,4 @@
-import { buildQueryHref } from "@/lib/query-params";
+import { buildQueryHref, type QueryValue } from "@/lib/query-params";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 
@@ -13,6 +13,7 @@ interface FilterChipGroupProps {
   paramName: string;
   selectedValue?: string;
   options: FilterOption[];
+  preserveParams?: Record<string, QueryValue>;
 }
 
 export function FilterChipGroup({
@@ -21,6 +22,7 @@ export function FilterChipGroup({
   paramName,
   selectedValue,
   options,
+  preserveParams,
 }: FilterChipGroupProps) {
   return (
     <div className="space-y-3">
@@ -29,7 +31,7 @@ export function FilterChipGroup({
       </p>
       <div className="flex flex-wrap gap-2">
         <Link
-          href={buildQueryHref(basePath, { [paramName]: null, page: null })}
+          href={buildQueryHref(basePath, { ...preserveParams, [paramName]: null, page: null })}
           aria-current={!selectedValue ? "true" : undefined}
           className={cn(
             "rounded-full border px-4 py-2 text-sm font-medium transition-colors",
@@ -47,6 +49,7 @@ export function FilterChipGroup({
             <Link
               key={option.value}
               href={buildQueryHref(basePath, {
+                ...preserveParams,
                 [paramName]: option.value,
                 page: null,
               })}

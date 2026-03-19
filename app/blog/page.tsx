@@ -1,11 +1,15 @@
 import { FilterChipGroup } from "@/components/filter-chip-group";
 import { Footer, SectionContentWrapper } from "@/components/layout";
 import { PaginationNav } from "@/components/pagination-nav";
+import { SearchInput } from "@/components/search-input";
+import { SortSelect } from "@/components/sort-select";
 import { getBlogIcon } from "@/lib/blog-icons";
 import { getAllBlogCards, getAllBlogsWithContent } from "@/lib/blogs";
 import { DEFAULT_LOCALE } from "@/lib/constants";
 import { paginateItems, parsePageParam } from "@/lib/pagination";
 import { readSingleParam } from "@/lib/query-params";
+import { searchBlogs } from "@/lib/search";
+import { BLOG_SORT_OPTIONS, sortBlogs } from "@/lib/sorting";
 import { cn } from "@/lib/utils";
 import type { Metadata } from "next";
 import Link from "next/link";
@@ -40,6 +44,8 @@ interface BlogIndexPageProps {
   searchParams?: Promise<{
     page?: string | string[];
     tag?: string | string[];
+    sort?: string | string[];
+    q?: string | string[];
   }>;
 }
 
@@ -48,6 +54,8 @@ export default async function BlogIndexPage({
 }: BlogIndexPageProps) {
   const resolvedSearchParams = await searchParams;
   const selectedTag = readSingleParam(resolvedSearchParams?.tag);
+  const selectedSort = readSingleParam(resolvedSearchParams?.sort);
+  const searchQuery = readSingleParam(resolvedSearchParams?.q);
   const blogs = getAllBlogCards();
   const blogsWithContent = getAllBlogsWithContent();
   const tagOptions = [
@@ -63,13 +71,23 @@ export default async function BlogIndexPage({
         return (blogWithContent?.frontmatter.tags ?? []).includes(selectedTag);
       })
     : blogs;
+  const searchedBlogs = searchBlogs(
+    filteredBlogs,
+    searchQuery,
+    (blog) => blogsWithContent.get(blog.slug)?.frontmatter.tags ?? [],
+  );
+  const sortedBlogs = sortBlogs(
+    searchedBlogs,
+    selectedSort,
+    (blog) => blogsWithContent.get(blog.slug)?.frontmatter.date,
+  );
   const totalPages = Math.max(
     1,
-    Math.ceil(filteredBlogs.length / BLOGS_PER_PAGE),
+    Math.ceil(sortedBlogs.length / BLOGS_PER_PAGE),
   );
   const currentPage = parsePageParam(resolvedSearchParams?.page, totalPages);
   const paginatedBlogs = paginateItems(
-    filteredBlogs,
+    sortedBlogs,
     currentPage,
     BLOGS_PER_PAGE,
   );
@@ -100,22 +118,43 @@ export default async function BlogIndexPage({
               paramName="tag"
               selectedValue={selectedTag}
               options={tagOptions.map((tag) => ({ label: tag, value: tag }))}
+              preserveParams={{ sort: selectedSort, q: searchQuery }}
             />
 
-            <div className="flex flex-col gap-2 text-sm text-muted-foreground sm:flex-row sm:items-center sm:justify-between">
+            <SearchInput
+              basePath="/blog"
+              currentValue={searchQuery}
+              placeholder="Search posts..."
+              preserveParams={{ tag: selectedTag, sort: selectedSort }}
+            />
+
+            <div className="flex flex-col gap-3 text-sm text-muted-foreground sm:flex-row sm:items-center sm:justify-between">
               <p>
                 {paginatedBlogs.totalItems === 0
-                  ? "No posts match this filter"
+                  ? searchQuery
+                    ? "No posts match your search"
+                    : "No posts match this filter"
                   : `Showing ${paginatedBlogs.startIndex + 1}-${paginatedBlogs.endIndex} of ${paginatedBlogs.totalItems} posts`}
               </p>
-              <p>
-                Page {paginatedBlogs.currentPage} of {paginatedBlogs.totalPages}
-              </p>
+              <div className="flex items-center gap-4">
+                <SortSelect
+                  basePath="/blog"
+                  currentValue={selectedSort}
+                  options={BLOG_SORT_OPTIONS}
+                  preserveParams={{ tag: selectedTag, q: searchQuery }}
+                />
+                <p>
+                  Page {paginatedBlogs.currentPage} of{" "}
+                  {paginatedBlogs.totalPages}
+                </p>
+              </div>
             </div>
 
             {paginatedBlogs.totalItems === 0 ? (
               <div className="rounded-4xl border border-border/60 bg-background p-8 text-secondary-foreground">
-                Try a different tag.
+                {searchQuery
+                  ? "Try a different keyword or clear filters."
+                  : "Try a different tag."}
               </div>
             ) : null}
 
@@ -190,7 +229,7 @@ export default async function BlogIndexPage({
               basePath="/blog"
               currentPage={paginatedBlogs.currentPage}
               totalPages={paginatedBlogs.totalPages}
-              query={{ tag: selectedTag }}
+              query={{ tag: selectedTag, sort: selectedSort, q: searchQuery }}
             />
           </section>
         </SectionContentWrapper>
