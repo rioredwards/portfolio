@@ -31,7 +31,11 @@ export function FilterChipGroup({
       </p>
       <div className="flex flex-wrap gap-2">
         <Link
-          href={buildQueryHref(basePath, { ...preserveParams, [paramName]: null, page: null })}
+          href={buildQueryHref(basePath, {
+            ...preserveParams,
+            [paramName]: null,
+            page: null,
+          })}
           aria-current={!selectedValue ? "true" : undefined}
           className={cn(
             "rounded-full border px-4 py-2 text-sm font-medium transition-colors",

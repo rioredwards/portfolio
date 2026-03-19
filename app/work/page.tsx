@@ -201,7 +201,11 @@ export default async function WorkIndexPage({
             basePath="/work"
             currentPage={paginatedProjects.currentPage}
             totalPages={paginatedProjects.totalPages}
-            query={{ category: selectedCategory, sort: selectedSort, q: searchQuery }}
+            query={{
+              category: selectedCategory,
+              sort: selectedSort,
+              q: searchQuery,
+            }}
           />
         </section>
       </SectionContentWrapper>
