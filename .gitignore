@@ -34,6 +34,9 @@ tmp/
 # claude code (per-developer local settings)
 .claude/settings.local.json
 
+# agent tooling config (per-developer local settings)
+.agent-context.json
+
 # debug
 npm-debug.log*
 yarn-debug.log*
