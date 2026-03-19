@@ -49,7 +49,7 @@ export class HomePage {
   }
 
   sectionHeading(title: string): Locator {
-    return this.page.getByRole("heading", { name: title });
+    return this.page.getByRole("heading", { name: title, exact: true });
   }
 
   projectCards(): Locator {
