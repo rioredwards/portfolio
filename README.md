@@ -17,11 +17,12 @@ Copy `.env.example` to `.env.local` and configure the following variables:
 cp .env.example .env.local
 ```
 
-| Variable                       | Description                                     |
-| ------------------------------ | ----------------------------------------------- |
-| `GOOGLE_APP_SENDER_USERNAME`   | Gmail account used to send contact form emails  |
-| `GOOGLE_APP_SENDER_PASSWORD`   | Gmail App Password (requires 2FA enabled)       |
-| `GOOGLE_APP_RECEIVER_USERNAME` | Email address that receives contact submissions |
+| Variable                        | Description                                     |
+| ------------------------------- | ----------------------------------------------- |
+| `GOOGLE_APP_SENDER_USERNAME`    | Gmail account used to send contact form emails  |
+| `GOOGLE_APP_SENDER_PASSWORD`    | Gmail App Password (requires 2FA enabled)       |
+| `GOOGLE_APP_RECEIVER_USERNAME`  | Email address that receives contact submissions |
+| `NEXT_PUBLIC_INTERVIEW_BOT_URL` | Interview bot API base URL (must be absolute)   |
 
 > **Note:** You must use a Gmail [App Password](https://myaccount.google.com/apppasswords), not your regular Gmail password.
 
@@ -61,3 +62,7 @@ bun run lint:fix      # ESLint with auto-fix
 bun run format        # Format with Prettier
 bun run test:e2e      # Run Playwright e2e tests
 ```
+
+## Deployment
+
+Use `DEPLOYMENT_RUNBOOK.md` for deployment steps, environment mapping, and incident fixes.
