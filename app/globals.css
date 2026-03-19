@@ -374,14 +374,39 @@
   }
 }
 
-@keyframes heroGlow {
+/* Hero image glow effect */
+.hero-glow-container {
+  pointer-events: none;
+}
+
+.hero-glow-primary {
+  animation: heroGlowPrimary 4s ease-in-out infinite;
+}
+
+.hero-glow-accent {
+  animation: heroGlowAccent 4s ease-in-out infinite 1s;
+}
+
+@keyframes heroGlowPrimary {
   0%,
   100% {
-    opacity: 0.4;
+    opacity: 0.35;
     transform: scale(1);
   }
   50% {
-    opacity: 0.7;
+    opacity: 0.55;
+    transform: scale(1.08);
+  }
+}
+
+@keyframes heroGlowAccent {
+  0%,
+  100% {
+    opacity: 0.3;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.5;
     transform: scale(1.05);
   }
 }

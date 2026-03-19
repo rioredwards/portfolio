@@ -22,28 +22,13 @@ function HeroImage({
         className,
       )}
     >
-      {/* Outer glow ring - subtle animated pulse */}
-      <div
-        className="absolute inset-[-12px] rounded-full opacity-60"
-        style={{
-          background:
-            "radial-gradient(circle, var(--color-primary) 0%, transparent 70%)",
-          filter: "blur(20px)",
-          animation: "heroGlow 4s ease-in-out infinite",
-        }}
-      />
-      {/* Secondary accent glow */}
-      <div
-        className="absolute inset-[-8px] rounded-full opacity-40"
-        style={{
-          background:
-            "radial-gradient(circle, var(--color-accent) 0%, transparent 60%)",
-          filter: "blur(16px)",
-          animation: "heroGlow 4s ease-in-out infinite 2s",
-        }}
-      />
+      {/* Glow container - needs to be larger than image and positioned behind */}
+      <div className="hero-glow-container absolute -inset-6 z-0">
+        <div className="hero-glow-primary absolute inset-0 rounded-full bg-primary/50 blur-2xl" />
+        <div className="hero-glow-accent absolute inset-2 rounded-full bg-accent/40 blur-xl" />
+      </div>
       {/* Image container */}
-      <div className="relative h-full w-full overflow-hidden rounded-full border-4 border-border/50 shadow-lg">
+      <div className="relative z-10 h-full w-full overflow-hidden rounded-full border-4 border-border/50 shadow-xl ring-1 ring-primary/10">
         {image}
       </div>
     </div>
