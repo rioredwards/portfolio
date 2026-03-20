@@ -133,10 +133,10 @@ function ChatHeaderAvatar() {
         />
       </div>
       <span
-        className="custom-bg-ping-always absolute right-0 bottom-0 block size-[10px] rounded-full border border-background bg-[var(--theme-ring)] shadow-none"
+        className="custom-bg-ping-always absolute right-0 bottom-0 block size-[10px] rounded-full border border-background bg-(--theme-ring) shadow-none"
         aria-hidden
       >
-        <span className="custom-bg-ping block size-full rounded-full bg-[var(--theme-ring)]" />
+        <span className="custom-bg-ping block size-full rounded-full bg-(--theme-ring)" />
       </span>
     </div>
   );
