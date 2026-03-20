@@ -249,7 +249,7 @@ export function InterviewBot() {
             RioBot
           </p>
           <p className="mt-0.5 text-sm leading-tight text-body-text/55">
-            Like Rio but lower latency
+            Twice the smarts, half the sentience!
           </p>
         </div>
         <Button
