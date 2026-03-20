@@ -281,6 +281,11 @@
     padding-top: clamp(6px, 1.6svh, 12px);
     padding-bottom: clamp(6px, 1.6svh, 12px);
   }
+  .profile-ring {
+    box-shadow:
+      0 0 0 4px var(--theme-background-secondary),
+      0 0 0 6px color-mix(in oklab, var(--theme-shadow-color), transparent 94%);
+  }
   .angled-border-sm {
     border-top-right-radius: var(--radius-md);
     border-bottom-left-radius: var(--radius-md);

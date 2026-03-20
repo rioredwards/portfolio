@@ -185,122 +185,124 @@ export function MobileMenu() {
               </Button>
             </motion.div>
 
-            {/* Content - centered */}
-            <div className="mm-py flex h-full flex-col items-center justify-center px-6">
-              {/* Profile picture */}
-              <motion.div
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: 0.08, duration: 0.35, ease: "easeOut" }}
-                className="mm-mb-small shrink-0"
-              >
-                <div className="mm-img relative overflow-hidden rounded-full shadow-[0_0_0_4px_var(--theme-background-secondary),0_0_0_5px_var(--theme-background-primary)]">
-                  <Image
-                    src={profileImage}
-                    alt="Rio Edwards"
-                    fill
-                    className="object-cover"
-                    priority
-                  />
-                </div>
-              </motion.div>
+            {/* Content - centered, scrollable on overflow */}
+            <div className="mm-py flex h-full flex-col overflow-y-auto px-6">
+              <div className="my-auto flex w-full flex-col items-center">
+                {/* Profile picture */}
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ delay: 0.08, duration: 0.35, ease: "easeOut" }}
+                  className="mm-mb-small shrink-0"
+                >
+                  <div className="profile-ring mm-img relative overflow-hidden rounded-full">
+                    <Image
+                      src={profileImage}
+                      alt="Rio Edwards"
+                      fill
+                      className="object-cover"
+                      priority
+                    />
+                  </div>
+                </motion.div>
 
-              {/* Name */}
-              <motion.h2
-                initial={{ opacity: 0, y: 8 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.14, duration: 0.3 }}
-                className="mm-mb-small text-2xl font-bold text-foreground sm:text-3xl"
-                style={{ fontFamily: "var(--font-mazaeni), serif" }}
-              >
-                Rio Edwards
-              </motion.h2>
+                {/* Name */}
+                <motion.h2
+                  initial={{ opacity: 0, y: 8 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.14, duration: 0.3 }}
+                  className="mm-mb-small text-2xl font-bold text-foreground sm:text-3xl"
+                  style={{ fontFamily: "var(--font-mazaeni), serif" }}
+                >
+                  Rio Edwards
+                </motion.h2>
 
-              {/* Title */}
-              <motion.p
-                initial={{ opacity: 0, y: 8 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.18, duration: 0.3 }}
-                className="mm-mb-medium text-lg text-secondary-foreground sm:text-xl"
-              >
-                Developer / Designer / Creator
-              </motion.p>
+                {/* Title */}
+                <motion.p
+                  initial={{ opacity: 0, y: 8 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.18, duration: 0.3 }}
+                  className="mm-mb-medium text-lg text-secondary-foreground sm:text-xl"
+                >
+                  Developer / Designer / Creator
+                </motion.p>
 
-              {/* Social links */}
-              <nav
-                className="mm-gap flex w-full max-w-sm flex-col"
-                aria-label="Social media and contact links"
-              >
-                {socialLinks.map((link, index) => {
-                  const isExternal = link.href.startsWith("http");
-                  const isEmail = link.copyToClipboard && link.copyValue;
-                  const ariaLabel = isExternal
-                    ? `${link.label}, opens in a new tab`
-                    : link.label;
+                {/* Social links */}
+                <nav
+                  className="mm-gap flex w-full max-w-sm flex-col"
+                  aria-label="Social media and contact links"
+                >
+                  {socialLinks.map((link, index) => {
+                    const isExternal = link.href.startsWith("http");
+                    const isEmail = link.copyToClipboard && link.copyValue;
+                    const ariaLabel = isExternal
+                      ? `${link.label}, opens in a new tab`
+                      : link.label;
 
-                  const handleClick = async (e: React.MouseEvent) => {
-                    if (isEmail) {
-                      e.preventDefault();
-                      try {
-                        await navigator.clipboard.writeText(link.copyValue!);
-                        setCopiedEmail(true);
-                        toast.success(`${link.label} copied to clipboard!`);
-                        setTimeout(() => {
-                          closeMenu();
-                        }, 1500);
-                      } catch {
-                        toast.error("Failed to copy to clipboard");
+                    const handleClick = async (e: React.MouseEvent) => {
+                      if (isEmail) {
+                        e.preventDefault();
+                        try {
+                          await navigator.clipboard.writeText(link.copyValue!);
+                          setCopiedEmail(true);
+                          toast.success(`${link.label} copied to clipboard!`);
+                          setTimeout(() => {
+                            closeMenu();
+                          }, 1500);
+                        } catch {
+                          toast.error("Failed to copy to clipboard");
+                        }
+                      } else {
+                        closeMenu();
                       }
-                    } else {
-                      closeMenu();
-                    }
-                  };
+                    };
 
-                  return (
-                    <motion.div
-                      key={index}
-                      initial={{ opacity: 0, y: 12 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{
-                        delay: 0.22 + index * 0.05,
-                        duration: 0.3,
-                        ease: "easeOut",
-                      }}
-                    >
-                      <Link
-                        href={link.href}
-                        target={isExternal ? "_blank" : undefined}
-                        rel={isExternal ? "noopener noreferrer" : undefined}
-                        onClick={handleClick}
-                        className="mm-link grid grid-cols-[2rem_1fr_2rem] items-center rounded-2xl border border-border/50 bg-background px-4 text-foreground shadow-sm transition-all hover:shadow-md focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:outline-none active:scale-[0.98]"
-                        aria-label={ariaLabel}
+                    return (
+                      <motion.div
+                        key={index}
+                        initial={{ opacity: 0, y: 12 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{
+                          delay: 0.22 + index * 0.05,
+                          duration: 0.3,
+                          ease: "easeOut",
+                        }}
                       >
-                        <span
-                          className="flex size-8 items-center justify-center rounded-lg bg-primary/8"
-                          aria-hidden="true"
+                        <Link
+                          href={link.href}
+                          target={isExternal ? "_blank" : undefined}
+                          rel={isExternal ? "noopener noreferrer" : undefined}
+                          onClick={handleClick}
+                          className="mm-link grid grid-cols-[2rem_1fr_2rem] items-center rounded-2xl border border-border/50 bg-background px-4 text-foreground shadow-sm transition-all hover:shadow-md focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:outline-none active:scale-[0.98]"
+                          aria-label={ariaLabel}
                         >
-                          {isEmail && copiedEmail ? (
-                            <HugeiconsIcon
-                              icon={Tick01Icon}
-                              size={20}
-                              color="currentColor"
-                              strokeWidth={2}
-                            />
-                          ) : (
-                            link.icon
-                          )}
-                        </span>
-                        <span
-                          className="text-center text-base font-bold"
-                          style={{ fontFamily: "var(--font-mazaeni), serif" }}
-                        >
-                          {isEmail && copiedEmail ? "Copied" : link.label}
-                        </span>
-                      </Link>
-                    </motion.div>
-                  );
-                })}
-              </nav>
+                          <span
+                            className="flex size-8 items-center justify-center rounded-lg bg-primary/8"
+                            aria-hidden="true"
+                          >
+                            {isEmail && copiedEmail ? (
+                              <HugeiconsIcon
+                                icon={Tick01Icon}
+                                size={20}
+                                color="currentColor"
+                                strokeWidth={2}
+                              />
+                            ) : (
+                              link.icon
+                            )}
+                          </span>
+                          <span
+                            className="text-center text-base font-bold"
+                            style={{ fontFamily: "var(--font-mazaeni), serif" }}
+                          >
+                            {isEmail && copiedEmail ? "Copied" : link.label}
+                          </span>
+                        </Link>
+                      </motion.div>
+                    );
+                  })}
+                </nav>
+              </div>
             </div>
           </motion.div>
         )}
