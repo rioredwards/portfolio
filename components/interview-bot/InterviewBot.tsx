@@ -284,14 +284,20 @@ export function InterviewBot() {
             initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.3, delay: 0.1 }}
-            className="flex min-h-full w-full max-w-full flex-col items-center justify-start gap-5 px-2 pt-8"
+            className="flex min-h-full w-full max-w-full flex-col items-center justify-center gap-5 px-2 pt-8"
           >
             <div className="w-full text-center">
               {/* Fixed frame keeps sparkles inside scroll area (avoids overflow-y clip). */}
-              <div className="relative mx-auto mb-4 flex h-[5.75rem] w-[5.75rem] shrink-0 items-center justify-center">
-                <SparkleAccent size={20} className="absolute top-0 right-0" />
-                <SparkleAccent size={12} className="absolute bottom-0 left-0" />
-                <div className="flex size-[4.25rem] items-center justify-center rounded-[1.35rem] border border-border/35 bg-[color-mix(in_oklab,var(--theme-foreground-primary)_38%,var(--theme-background-secondary)_62%)] [corner-shape:squircle]">
+              <div className="relative mx-auto mb-6 flex h-23 w-23 shrink-0 items-center justify-center">
+                <SparkleAccent
+                  size={20}
+                  className="absolute top-0 right-0 text-primary/30"
+                />
+                <SparkleAccent
+                  size={12}
+                  className="absolute bottom-0 left-0 text-primary/30"
+                />
+                <div className="flex size-20 items-center justify-center rounded-[1.35rem] border border-border/35 bg-[color-mix(in_oklab,var(--theme-foreground-primary)_38%,var(--theme-background-secondary)_62%)] [corner-shape:squircle]">
                   <HugeiconsIcon
                     icon={BubbleChatIcon}
                     size={28}
