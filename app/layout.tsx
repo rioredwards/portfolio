@@ -84,6 +84,7 @@ const jsonLd = {
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
+  interactiveWidget: "resizes-content",
 };
 
 export const metadata: Metadata = {
@@ -171,10 +172,6 @@ export default function RootLayout({
         <meta
           name="format-detection"
           content="telephone=no, date=no, email=no, address=no"
-        />
-        <meta
-          name="viewport"
-          content="width=device-width, initial-scale=1, interactive-widget=resizes-content"
         />
       </head>
       <body
