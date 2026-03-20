@@ -51,8 +51,8 @@ export function SearchInput({
     <div className="relative">
       <HugeiconsIcon
         icon={Search01Icon}
-        size={16}
-        className="pointer-events-none absolute top-1/2 left-4 -translate-y-1/2 text-muted-foreground"
+        size={18}
+        className="pointer-events-none absolute top-1/2 left-4 -translate-y-1/2 text-muted-foreground/80"
         strokeWidth={2}
       />
       <input
@@ -60,7 +60,7 @@ export function SearchInput({
         value={value}
         onChange={(e) => handleChange(e.target.value)}
         placeholder={placeholder}
-        className="w-full rounded-2xl border border-border/70 bg-background/85 py-3 pr-10 pl-10 text-sm font-medium text-foreground shadow-[inset_0_1px_0_rgba(255,255,255,0.35)] transition-all duration-300 placeholder:text-muted-foreground hover:border-primary/35 hover:bg-background focus:border-primary focus:outline-none focus-visible:ring-4 focus-visible:ring-ring/25"
+        className="h-12 w-full rounded-full border border-border/70 bg-background/90 py-2 pr-10 pl-12 text-base font-medium text-foreground shadow-[inset_0_1px_0_rgba(255,255,255,0.35)] transition-all duration-300 placeholder:text-muted-foreground/80 hover:border-primary/35 focus:border-primary focus:outline-none focus-visible:ring-4 focus-visible:ring-ring/25 md:text-[0.95rem]"
       />
       {value ? (
         <button

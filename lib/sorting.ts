@@ -6,9 +6,10 @@ export interface SortOption {
 }
 
 export const WORK_SORT_OPTIONS: SortOption[] = [
-  { label: "Curated", value: "" },
-  { label: "Name (A-Z)", value: "name" },
-  { label: "Category", value: "category" },
+  { label: "Most Recent", value: "recent" },
+  { label: "Oldest First", value: "oldest" },
+  { label: "A-Z", value: "name_asc" },
+  { label: "Z-A", value: "name_desc" },
 ];
 
 export const BLOG_SORT_OPTIONS: SortOption[] = [
@@ -22,16 +23,15 @@ export function sortProjects<
   T extends { title: string; category: string; order?: number },
 >(items: T[], sortValue?: string): T[] {
   switch (sortValue) {
-    case "name":
-      return [...items].sort((a, b) => a.title.localeCompare(b.title));
-    case "category":
-      return [...items].sort(
-        (a, b) =>
-          a.category.localeCompare(b.category) ||
-          a.title.localeCompare(b.title),
-      );
-    default:
+    case "oldest":
       return sortByOrder(items);
+    case "name_asc":
+      return [...items].sort((a, b) => a.title.localeCompare(b.title));
+    case "name_desc":
+      return [...items].sort((a, b) => b.title.localeCompare(a.title));
+    case "recent":
+    default:
+      return sortByOrder(items).reverse();
   }
 }
 

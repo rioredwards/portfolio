@@ -81,10 +81,10 @@ export function FilterChipGroup({
         })}
         aria-current={!selectedValue ? "true" : undefined}
         className={cn(
-          "rounded-full border px-3 py-1.5 text-xs font-semibold tracking-[0.09em] uppercase transition-all duration-300 sm:px-4 sm:py-2 sm:text-sm",
+          "rounded-full border px-4 py-2 text-sm font-medium whitespace-nowrap transition-all duration-300",
           !selectedValue
             ? "border-primary bg-primary text-primary-foreground shadow-card"
-            : "border-border/70 bg-background/80 text-secondary-foreground hover:-translate-y-0.5 hover:border-primary/40 hover:bg-secondary",
+            : "border-border/70 bg-tertiary/55 text-secondary-foreground hover:-translate-y-0.5 hover:border-primary/40 hover:bg-tertiary",
         )}
       >
         All
@@ -102,10 +102,10 @@ export function FilterChipGroup({
             })}
             aria-current={isSelected ? "true" : undefined}
             className={cn(
-              "rounded-full border px-3 py-1.5 text-xs font-semibold tracking-[0.09em] whitespace-nowrap uppercase transition-all duration-300 sm:px-4 sm:py-2 sm:text-sm",
+              "rounded-full border px-4 py-2 text-sm font-medium whitespace-nowrap transition-all duration-300",
               isSelected
                 ? "border-primary bg-primary text-primary-foreground shadow-card"
-                : "border-border/70 bg-background/80 text-secondary-foreground hover:-translate-y-0.5 hover:border-primary/40 hover:bg-secondary",
+                : "border-border/70 bg-tertiary/55 text-secondary-foreground hover:-translate-y-0.5 hover:border-primary/40 hover:bg-tertiary",
             )}
           >
             {option.label}
@@ -117,14 +117,12 @@ export function FilterChipGroup({
 
   return (
     <div className="space-y-3">
-      <p className="text-xs font-semibold tracking-[0.22em] text-muted-foreground uppercase">
-        {title}
-      </p>
+      <p className="sr-only">{title}</p>
       {singleRowScrollable ? (
         <div className="relative">
           <div
             ref={scrollRef}
-            className="flex gap-2 overflow-x-auto px-0 [scrollbar-width:none] sm:px-10 [&::-webkit-scrollbar]:hidden"
+            className="flex gap-2 overflow-x-auto px-0 pb-1 [scrollbar-width:none] sm:px-10 [&::-webkit-scrollbar]:hidden"
           >
             {chips}
           </div>

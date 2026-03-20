@@ -2,11 +2,13 @@ import { FilterChipGroup } from "@/components/filter-chip-group";
 import { SectionContentWrapper } from "@/components/layout";
 import { PaginationNav } from "@/components/pagination-nav";
 import { SearchInput } from "@/components/search-input";
+import { SortSelect } from "@/components/sort-select";
+import { ViewModeToggle } from "@/components/view-mode-toggle";
 import { paginateItems, parsePageParam } from "@/lib/pagination";
-import { getAllProjectCards } from "@/lib/projects";
+import { getAllProjectCards, type ProjectCard } from "@/lib/projects";
 import { readSingleParam } from "@/lib/query-params";
 import { searchProjects } from "@/lib/search";
-import { sortProjects } from "@/lib/sorting";
+import { sortProjects, WORK_SORT_OPTIONS } from "@/lib/sorting";
 import { cn } from "@/lib/utils";
 import type { Metadata } from "next";
 import Image from "next/image";
@@ -32,6 +34,8 @@ interface WorkIndexPageProps {
     page?: string | string[];
     category?: string | string[];
     q?: string | string[];
+    sort?: string | string[];
+    view?: string | string[];
   }>;
 }
 
@@ -41,13 +45,27 @@ export default async function WorkIndexPage({
   const resolvedSearchParams = await searchParams;
   const selectedCategory = readSingleParam(resolvedSearchParams?.category);
   const searchQuery = readSingleParam(resolvedSearchParams?.q);
+  const requestedSort = readSingleParam(resolvedSearchParams?.sort);
+  const requestedView = readSingleParam(resolvedSearchParams?.view);
+
+  const selectedSort = WORK_SORT_OPTIONS.some(
+    (option) => option.value === requestedSort,
+  )
+    ? requestedSort
+    : "recent";
+  const selectedView = requestedView === "list" ? "list" : "grid";
+  const sortParam = selectedSort === "recent" ? null : selectedSort;
+  const viewParam = selectedView === "grid" ? null : selectedView;
+
   const projects = getAllProjectCards();
-  const categories = [...new Set(projects.map((project) => project.category))];
+  const categories = [
+    ...new Set(projects.map((project) => project.category)),
+  ].sort((a, b) => a.localeCompare(b));
   const filteredProjects = selectedCategory
     ? projects.filter((project) => project.category === selectedCategory)
     : projects;
   const searchedProjects = searchProjects(filteredProjects, searchQuery);
-  const sortedProjects = sortProjects(searchedProjects);
+  const sortedProjects = sortProjects(searchedProjects, selectedSort);
   const totalPages = Math.max(
     1,
     Math.ceil(sortedProjects.length / PROJECTS_PER_PAGE),
@@ -65,48 +83,79 @@ export default async function WorkIndexPage({
       className="relative min-h-screen overflow-hidden bg-secondary"
     >
       <div className="pointer-events-none absolute inset-0">
-        <div className="absolute -top-10 right-[8%] h-80 w-80 rounded-full bg-primary/10 blur-3xl" />
-        <div className="absolute top-[28rem] -left-24 h-72 w-72 rounded-full bg-tertiary/35 blur-3xl" />
+        <div className="absolute -top-14 right-[8%] h-80 w-80 rounded-full bg-primary/12 blur-3xl" />
+        <div className="absolute top-[24rem] -left-24 h-72 w-72 rounded-full bg-tertiary/35 blur-3xl" />
       </div>
 
-      <SectionContentWrapper className="relative space-y-10 pt-30 pb-16 md:space-y-12 md:pt-36">
-        <header className="grid gap-8 pb-7 lg:grid-cols-[1fr] lg:items-end">
-          <div className="space-y-5">
-            <p className="text-xs font-semibold tracking-[0.26em] text-muted-foreground uppercase">
-              Project Index
-            </p>
-            <h1 className="font-mazaeni text-5xl leading-none text-foreground sm:text-6xl md:text-7xl">
+      <div className="sticky top-18 z-30 border-b border-border/55 bg-secondary/92 backdrop-blur-md">
+        <SectionContentWrapper className="relative py-5 md:py-6">
+          <div className="space-y-1">
+            <h1 className="font-mazaeni text-4xl leading-none text-foreground sm:text-5xl">
               Work
             </h1>
-            <p className="max-w-prose-max text-lg leading-relaxed text-secondary-foreground sm:text-xl">
-              A curated list of products, experiments, and client systems. Each
-              entry links to a full breakdown.
+            <p className="max-w-prose-max text-sm text-secondary-foreground/78 sm:text-base">
+              Products, experiments, and shipped systems.
             </p>
           </div>
-        </header>
+        </SectionContentWrapper>
+      </div>
 
-        <section aria-label="Projects list" className="space-y-8">
-          <div className="sticky top-18 z-20 -mx-content-px bg-secondary/92 px-content-px pt-2 pb-5 backdrop-blur sm:-mx-content-px md:-mx-content-px-md md:px-content-px-md">
-            <div className="space-y-4">
-              <SearchInput
+      <SectionContentWrapper className="relative space-y-8 py-8 md:py-10">
+        <section aria-label="Projects list" className="space-y-5">
+          <SearchInput
+            basePath="/work"
+            currentValue={searchQuery}
+            placeholder="Search projects..."
+            preserveParams={{
+              category: selectedCategory,
+              sort: sortParam,
+              view: viewParam,
+            }}
+          />
+
+          <FilterChipGroup
+            title="Filter by category"
+            basePath="/work"
+            paramName="category"
+            selectedValue={selectedCategory}
+            options={categories.map((category) => ({
+              label: category,
+              value: category,
+            }))}
+            preserveParams={{
+              q: searchQuery,
+              sort: sortParam,
+              view: viewParam,
+            }}
+            singleRowScrollable
+          />
+
+          <div className="flex flex-col gap-3 border-b border-border/60 pb-4 sm:flex-row sm:items-center sm:justify-between">
+            <p className="text-sm text-muted-foreground">
+              <span className="font-semibold text-foreground">
+                {sortedProjects.length}
+              </span>{" "}
+              projects found
+            </p>
+            <div className="flex items-center gap-2">
+              <SortSelect
                 basePath="/work"
-                currentValue={searchQuery}
-                placeholder="Search projects..."
+                currentValue={selectedSort}
+                options={WORK_SORT_OPTIONS}
                 preserveParams={{
                   category: selectedCategory,
+                  q: searchQuery,
+                  view: viewParam,
                 }}
               />
-              <FilterChipGroup
-                title="Filter by category"
+              <ViewModeToggle
                 basePath="/work"
-                paramName="category"
-                selectedValue={selectedCategory}
-                options={categories.map((category) => ({
-                  label: category,
-                  value: category,
-                }))}
-                preserveParams={{ q: searchQuery }}
-                singleRowScrollable
+                currentValue={selectedView}
+                preserveParams={{
+                  category: selectedCategory,
+                  q: searchQuery,
+                  sort: sortParam,
+                }}
               />
             </div>
           </div>
@@ -119,88 +168,38 @@ export default async function WorkIndexPage({
             </div>
           ) : null}
 
-          <ol className="m-0 list-none divide-y divide-border/55 border-y border-border/55 p-0 [&>li]:w-full [&>li]:max-w-none">
-            {paginatedProjects.items.map((project, index) => {
-              const isOdd = index % 2 === 1;
-
-              return (
-                <li key={project.slug} className="w-full">
-                  <Link
-                    href={`/work/${project.slug}`}
-                    className={cn(
-                      "group block py-8 transition-colors duration-300",
-                      "focus-visible:ring-4 focus-visible:ring-ring/30 focus-visible:ring-offset-2 focus-visible:ring-offset-secondary focus-visible:outline-none",
-                    )}
-                  >
-                    <article
-                      className={cn(
-                        "grid items-center gap-8 lg:gap-12",
-                        isOdd
-                          ? "lg:grid-cols-[20rem_minmax(0,1fr)]"
-                          : "lg:grid-cols-[minmax(0,1fr)_20rem]",
-                      )}
-                    >
-                      <div className={cn("space-y-5", isOdd && "lg:order-2")}>
-                        <div className="flex flex-wrap items-center gap-3">
-                          <span className="rounded-full border border-primary/25 bg-tertiary/80 px-4 py-1.5 text-xs font-semibold tracking-[0.16em] text-tertiary-foreground uppercase">
-                            {project.category}
-                          </span>
-                          <span className="text-sm text-muted-foreground">
-                            /work/{project.slug}
-                          </span>
-                        </div>
-
-                        <div className="space-y-3">
-                          <h2 className="font-mazaeni text-3xl leading-tight text-foreground transition-colors duration-300 group-hover:text-primary-hover sm:text-4xl">
-                            {project.title}
-                          </h2>
-                          <p className="max-w-prose-max text-base leading-relaxed text-secondary-foreground sm:text-lg">
-                            {project.description}
-                          </p>
-                        </div>
-
-                        <div className="flex flex-wrap gap-2">
-                          {project.skills.map((skill) => (
-                            <span
-                              key={skill}
-                              className="rounded-full border border-border/70 bg-secondary/75 px-3 py-1.5 text-sm font-medium text-secondary-foreground"
-                            >
-                              {skill}
-                            </span>
-                          ))}
-                        </div>
-
-                        <div className="inline-flex items-center gap-2 text-xs font-semibold tracking-[0.18em] text-foreground uppercase transition-transform duration-300 group-hover:translate-x-1">
-                          View project
-                          <span aria-hidden="true">→</span>
-                        </div>
-                      </div>
-
-                      <div
-                        className={cn(
-                          "relative h-56 overflow-hidden rounded-4xl border border-border/45 shadow-card",
-                          isOdd && "lg:order-1",
-                        )}
-                      >
-                        <div
-                          className="absolute inset-0"
-                          style={{ backgroundColor: project.brandColor }}
-                        />
-                        <Image
-                          src={project.image}
-                          alt={`${project.title} preview`}
-                          fill
-                          sizes="(max-width: 1024px) 100vw, 20rem"
-                          className="object-cover object-top transition-transform duration-500 ease-out group-hover:scale-[1.04]"
-                          priority={index < 2}
-                        />
-                        <div className="pointer-events-none absolute inset-0 bg-gradient-to-tr from-black/10 via-transparent to-white/10" />
-                      </div>
-                    </article>
-                  </Link>
-                </li>
-              );
-            })}
+          <ol
+            className={cn(
+              "m-0 list-none p-0",
+              selectedView === "grid"
+                ? "grid gap-5 border-t border-border/55 pt-5 sm:grid-cols-2 lg:grid-cols-3"
+                : "space-y-3 border-t border-border/55 pt-5",
+            )}
+          >
+            {paginatedProjects.items.map((project, index) => (
+              <li
+                key={project.slug}
+                className={cn(selectedView === "grid" && "h-full")}
+              >
+                <Link
+                  href={`/work/${project.slug}`}
+                  className={cn(
+                    "group block transition-transform duration-300 outline-none",
+                    "focus-visible:ring-4 focus-visible:ring-ring/30 focus-visible:ring-offset-2 focus-visible:ring-offset-secondary focus-visible:outline-none",
+                    selectedView === "grid" && "h-full",
+                  )}
+                >
+                  {selectedView === "grid" ? (
+                    <CompactProjectCard
+                      project={project}
+                      priority={index < 3}
+                    />
+                  ) : (
+                    <ListProjectCard project={project} priority={index < 2} />
+                  )}
+                </Link>
+              </li>
+            ))}
           </ol>
 
           <PaginationNav
@@ -210,6 +209,8 @@ export default async function WorkIndexPage({
             query={{
               category: selectedCategory,
               q: searchQuery,
+              sort: sortParam,
+              view: viewParam,
             }}
           />
           <p className="pt-2 text-sm text-muted-foreground">
@@ -222,5 +223,111 @@ export default async function WorkIndexPage({
         </section>
       </SectionContentWrapper>
     </main>
+  );
+}
+
+function CompactProjectCard({
+  project,
+  priority,
+}: {
+  project: ProjectCard;
+  priority?: boolean;
+}) {
+  return (
+    <article className="flex h-full flex-col overflow-hidden rounded-3xl border border-border/65 bg-card shadow-card transition-all duration-300 pointer-fine:group-hover:-translate-y-1 pointer-fine:group-hover:shadow-card-hover">
+      <div
+        className="relative aspect-video overflow-hidden"
+        style={{ backgroundColor: project.brandColor }}
+      >
+        <Image
+          src={project.image}
+          alt={`${project.title} preview`}
+          fill
+          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+          className="object-cover transition-transform duration-500 ease-out group-hover:scale-[1.04]"
+          priority={priority}
+        />
+        <span className="absolute bottom-3 left-3 rounded-full bg-background/88 px-3 py-1 text-xs font-medium text-foreground backdrop-blur-sm">
+          {project.category}
+        </span>
+      </div>
+
+      <div className="flex flex-1 flex-col gap-3 p-4">
+        <h2 className="font-mazaeni text-2xl leading-none text-foreground transition-colors duration-300 group-hover:text-primary-hover">
+          {project.title}
+        </h2>
+        <p className="line-clamp-2 text-sm leading-relaxed text-secondary-foreground">
+          {project.description}
+        </p>
+        <div className="mt-auto flex flex-wrap gap-1.5 pt-1">
+          {project.skills.slice(0, 3).map((skill) => (
+            <span
+              key={skill}
+              className="rounded-full bg-tertiary/80 px-2.5 py-1 text-xs font-medium text-tertiary-foreground"
+            >
+              {skill}
+            </span>
+          ))}
+          {project.skills.length > 3 ? (
+            <span className="rounded-full bg-tertiary/80 px-2.5 py-1 text-xs font-medium text-muted-foreground">
+              +{project.skills.length - 3}
+            </span>
+          ) : null}
+        </div>
+      </div>
+    </article>
+  );
+}
+
+function ListProjectCard({
+  project,
+  priority,
+}: {
+  project: ProjectCard;
+  priority?: boolean;
+}) {
+  return (
+    <article className="flex flex-col gap-4 rounded-2xl border border-border/65 bg-card p-3 shadow-card transition-all duration-300 sm:flex-row sm:items-center sm:gap-5 sm:p-4 pointer-fine:group-hover:shadow-card-hover">
+      <div
+        className="relative aspect-video w-full shrink-0 overflow-hidden rounded-xl sm:w-52"
+        style={{ backgroundColor: project.brandColor }}
+      >
+        <Image
+          src={project.image}
+          alt={`${project.title} preview`}
+          fill
+          sizes="(max-width: 640px) 100vw, 13rem"
+          className="object-cover transition-transform duration-500 ease-out group-hover:scale-[1.04]"
+          priority={priority}
+        />
+      </div>
+
+      <div className="min-w-0 flex-1 space-y-2.5">
+        <div className="flex flex-wrap items-center gap-2">
+          <span className="rounded-full border border-primary/25 bg-tertiary/80 px-3 py-1 text-xs font-medium text-tertiary-foreground">
+            {project.category}
+          </span>
+          <span className="text-xs text-muted-foreground">
+            /work/{project.slug}
+          </span>
+        </div>
+        <h2 className="truncate font-mazaeni text-2xl leading-none text-foreground transition-colors duration-300 group-hover:text-primary-hover">
+          {project.title}
+        </h2>
+        <p className="line-clamp-2 text-sm leading-relaxed text-secondary-foreground">
+          {project.description}
+        </p>
+        <div className="hidden flex-wrap gap-1.5 sm:flex">
+          {project.skills.slice(0, 4).map((skill) => (
+            <span
+              key={skill}
+              className="rounded-full bg-tertiary/80 px-2.5 py-1 text-xs font-medium text-tertiary-foreground"
+            >
+              {skill}
+            </span>
+          ))}
+        </div>
+      </div>
+    </article>
   );
 }
