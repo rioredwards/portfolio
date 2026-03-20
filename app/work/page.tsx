@@ -1,5 +1,6 @@
 import { FilterChipGroup } from "@/components/filter-chip-group";
 import { SectionContentWrapper } from "@/components/layout";
+import { ListPageHeader } from "@/components/list-page-header";
 import { PaginationNav } from "@/components/pagination-nav";
 import { SearchInput } from "@/components/search-input";
 import { SortSelect } from "@/components/sort-select";
@@ -81,14 +82,10 @@ export default async function WorkIndexPage({
   return (
     <main id="main-content" className="relative min-h-screen bg-secondary">
       <SectionContentWrapper className="relative mt-[8rem] pt-4 pb-12 md:pt-5 md:pb-16">
-        <header className="mb-5 md:mb-6">
-          <h1 className="font-mazaeni text-4xl leading-none text-foreground sm:text-5xl">
-            Work
-          </h1>
-          <p className="mt-1.5 max-w-prose-max text-sm tracking-wide text-secondary-foreground/70 sm:text-[0.95rem]">
-            Products, experiments, and shipped systems.
-          </p>
-        </header>
+        <ListPageHeader
+          title="Work"
+          subtitle="Products, experiments, and shipped systems."
+        />
 
         <section aria-label="Projects list" className="space-y-3.5">
           <SearchInput
