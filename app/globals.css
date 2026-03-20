@@ -260,10 +260,6 @@
 
 @layer utilities {
   /* Mobile menu responsive helpers (scale with viewport height) */
-  .mm-btn {
-    width: clamp(48px, 9svh, 56px);
-    height: clamp(48px, 9svh, 56px);
-  }
   .mm-img {
     width: clamp(96px, 24svh, 160px);
     height: clamp(96px, 24svh, 160px);
@@ -324,6 +320,18 @@
   .custom-bg-ping {
     position: relative;
     z-index: 1; /* above the ping */
+  }
+
+  /* Same ::after motion as coarse .custom-bg-ping-wrapper, always on (e.g. presence dot).
+     Do not set position here — host uses absolute (or relative) so ::after insets resolve correctly. */
+  .custom-bg-ping-always::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: inherit;
+    border-radius: inherit;
+    z-index: 0;
+    animation: customPingAnimation 1.6s ease-in-out infinite;
   }
 }
 
@@ -610,20 +618,26 @@
   margin-top: 0 !important;
 }
 
-/* Interview bot chat scrollbar */
+/* RioBot scroll pane — same tokens as @layer base scrollbars (nested overflow needs explicit webkit selectors). */
 .interview-bot-messages {
   scrollbar-width: thin;
-  scrollbar-color: var(--theme-border) transparent;
+  scrollbar-color: color-mix(in oklab, var(--theme-border), transparent 30%)
+    var(--theme-background-secondary);
 }
 .interview-bot-messages::-webkit-scrollbar {
-  width: 4px;
+  width: 10px;
+  height: 10px;
 }
 .interview-bot-messages::-webkit-scrollbar-track {
-  background: transparent;
+  background: var(--theme-background-secondary);
 }
 .interview-bot-messages::-webkit-scrollbar-thumb {
   background: var(--theme-border);
-  border-radius: 4px;
+  border-radius: 999px;
+  border: 2px solid var(--theme-background-secondary);
+}
+.interview-bot-messages::-webkit-scrollbar-thumb:hover {
+  background: var(--theme-ring);
 }
 
 /* 

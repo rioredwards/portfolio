@@ -1,26 +1,83 @@
 "use client";
 
 import {
+  ArrowDown01Icon,
+  Briefcase01Icon,
   BubbleChatIcon,
-  Cancel01Icon,
-  ArrowUp01Icon,
+  CodeSimpleIcon,
   Delete02Icon,
-  SparklesIcon,
+  SentIcon,
 } from "@hugeicons/core-free-icons";
 import { HugeiconsIcon } from "@hugeicons/react";
+import { PawPrint } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
 import { useEffect, useRef, useState } from "react";
 import ReactMarkdown from "react-markdown";
 
 import { Button } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
 import { useInterviewBot } from "@/lib/useInterviewBot";
+import { cn } from "@/lib/utils";
 
-const SUGGESTED_QUESTIONS = [
-  "What's Rio's tech stack?",
-  "Tell me about DogTown",
-  "What's Rio's work experience?",
+const SUGGESTED_QUESTIONS: {
+  text: string;
+  icon: React.ReactNode;
+  color: string;
+}[] = [
+  {
+    text: "What's Rio's tech stack?",
+    icon: (
+      <HugeiconsIcon
+        icon={CodeSimpleIcon}
+        size={64}
+        color="currentColor"
+        className="size-6"
+        strokeWidth={2}
+      />
+    ),
+    color: "#2F645E",
+  },
+  {
+    text: "Tell me about DogTown",
+    icon: <PawPrint className="size-6" />,
+    color: "#8E5140",
+  },
+  {
+    text: "What's Rio's work experience?",
+    icon: (
+      <HugeiconsIcon
+        icon={Briefcase01Icon}
+        size={64}
+        color="currentColor"
+        className="size-6"
+        strokeWidth={2}
+      />
+    ),
+    color: "#006985",
+  },
 ];
+
+/** Filled 4-point sparkle — cardinal orientation, concave sides (controls pulled toward center). */
+function SparkleAccent({
+  size,
+  className,
+}: {
+  size: number;
+  className?: string;
+}) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
+      fill="currentColor"
+      className={cn("pointer-events-none text-primary", className)}
+      aria-hidden
+    >
+      <path d="M12 1.1Q14.35 9.35 22.62 12Q14.35 14.65 12 22.9Q9.65 14.65 1.38 12Q9.65 9.35 12 1.1z" />
+    </svg>
+  );
+}
 
 function TypingIndicator() {
   return (
@@ -42,12 +99,16 @@ function TypingIndicator() {
   );
 }
 
+/** Squircle avatar for assistant rows — matches header / empty-state language */
 function BotAvatar() {
   return (
-    <div className="flex size-6 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary">
+    <div
+      className="flex size-6 shrink-0 items-center justify-center rounded-xl border border-border/35 bg-neutral-100 text-primary [corner-shape:squircle]"
+      aria-hidden
+    >
       <HugeiconsIcon
-        icon={SparklesIcon}
-        size={13}
+        icon={BubbleChatIcon}
+        size={14}
         color="currentColor"
         strokeWidth={2}
       />
@@ -55,8 +116,34 @@ function BotAvatar() {
   );
 }
 
+function ChatHeaderAvatar() {
+  return (
+    <div
+      className="relative size-10 shrink-0"
+      role="img"
+      aria-label="RioBot, online"
+    >
+      <div className="flex size-10 items-center justify-center rounded-2xl border border-border/45 bg-neutral-100 shadow-[0_1px_0_rgba(0,0,0,0.04)] [corner-shape:squircle]">
+        <HugeiconsIcon
+          icon={BubbleChatIcon}
+          size={20}
+          color="var(--color-primary)"
+          strokeWidth={2}
+        />
+      </div>
+      <span
+        className="custom-bg-ping-always absolute right-0 bottom-0 block size-[10px] rounded-full border border-background bg-[var(--theme-ring)] shadow-none"
+        aria-hidden
+      >
+        <span className="custom-bg-ping block size-full rounded-full bg-[var(--theme-ring)]" />
+      </span>
+    </div>
+  );
+}
+
 export function InterviewBot() {
   const [open, setOpen] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [input, setInput] = useState("");
   const { messages, isLoading, error, sendMessage, reset } = useInterviewBot();
   const bottomRef = useRef<HTMLDivElement>(null);
@@ -71,9 +158,9 @@ export function InterviewBot() {
 
   // Focus input when opened
   useEffect(() => {
-    if (open) {
-      setTimeout(() => inputRef.current?.focus(), 100);
-    }
+    if (!open) return;
+    const id = window.setTimeout(() => inputRef.current?.focus(), 100);
+    return () => window.clearTimeout(id);
   }, [open]);
 
   useEffect(() => {
@@ -98,12 +185,42 @@ export function InterviewBot() {
     };
   }, [open]);
 
+  useEffect(() => {
+    function handleMobileMenuState(event: Event) {
+      const customEvent = event as CustomEvent<{ open: boolean }>;
+      const nextOpen = Boolean(customEvent.detail?.open);
+      setIsMobileMenuOpen(nextOpen);
+      if (nextOpen) {
+        setOpen(false);
+      }
+    }
+
+    window.addEventListener("mobile-menu:open-change", handleMobileMenuState);
+
+    return () => {
+      window.removeEventListener(
+        "mobile-menu:open-change",
+        handleMobileMenuState,
+      );
+    };
+  }, []);
+
+  useEffect(() => {
+    window.dispatchEvent(
+      new CustomEvent("interview-bot:open-change", {
+        detail: { open },
+      }),
+    );
+  }, [open]);
+
   function handleSubmit(e?: React.FormEvent) {
     e?.preventDefault();
     const text = input.trim();
     if (!text || isLoading) return;
     setInput("");
     sendMessage(text);
+    /* Dismiss onscreen keyboard after send (Enter or submit button) on mobile. */
+    requestAnimationFrame(() => inputRef.current?.blur());
   }
 
   function handleKeyDown(e: React.KeyboardEvent<HTMLTextAreaElement>) {
@@ -121,7 +238,7 @@ export function InterviewBot() {
   const hasMessages = messages.length > 0;
 
   return (
-    <div className="fixed right-4 bottom-6 z-50 flex flex-col items-end gap-3 md:right-6">
+    <div className="fixed right-6 bottom-6 z-50 flex flex-col items-end gap-3">
       {/* Chat window */}
       <AnimatePresence>
         {open && (
@@ -132,24 +249,17 @@ export function InterviewBot() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 16, scale: 0.95 }}
             transition={{ duration: 0.25, ease: [0.23, 1, 0.32, 1] }}
-            className="flex h-[min(520px,calc(100dvh-8rem))] w-[calc(100vw-2rem)] max-w-[380px] flex-col overflow-hidden rounded-xl border border-border/60 bg-background shadow-[0_8px_40px_-8px_rgba(0,0,0,0.15)]"
+            className="flex h-[min(620px,calc(100dvh-8rem))] w-[calc(100vw-2rem)] max-w-[380px] flex-col overflow-hidden rounded-xl border border-border/60 bg-background shadow-[0_8px_40px_-8px_rgba(0,0,0,0.15)]"
           >
             {/* Header */}
             <div className="relative flex items-center gap-3 border-b border-border/40 px-4 py-3">
-              <div className="flex size-9 shrink-0 items-center justify-center rounded-full bg-primary">
-                <HugeiconsIcon
-                  icon={BubbleChatIcon}
-                  size={16}
-                  color="var(--color-primary-foreground)"
-                  strokeWidth={2}
-                />
-              </div>
+              <ChatHeaderAvatar />
               <div className="min-w-0 flex-1">
-                <p className="font-serif text-base leading-tight font-semibold tracking-tight text-foreground">
-                  Chat with Rio
+                <p className="font-sans text-xl leading-tight font-bold tracking-tight text-foreground">
+                  RioBot
                 </p>
-                <p className="text-xs leading-tight text-body-text/60">
-                  AI-powered, answers on Rio&apos;s behalf
+                <p className="mt-0.5 text-sm leading-tight text-body-text/55">
+                  Like Rio but lower latency
                 </p>
               </div>
               {hasMessages && (
@@ -163,7 +273,7 @@ export function InterviewBot() {
                 >
                   <HugeiconsIcon
                     icon={Delete02Icon}
-                    size={15}
+                    size={24}
                     color="currentColor"
                     strokeWidth={2}
                   />
@@ -173,12 +283,12 @@ export function InterviewBot() {
 
             {/* Messages */}
             <div
-              className="interview-bot-messages flex-1 space-y-4 overflow-y-auto px-4 py-4"
+              className="interview-bot-messages flex-1 space-y-4 overflow-y-auto bg-secondary px-4 py-4"
               role="log"
               aria-live="polite"
               aria-relevant="additions text"
               aria-busy={isLoading}
-              aria-label="Interview bot conversation"
+              aria-label="RioBot conversation"
             >
               {/* Empty state with suggestions */}
               {!hasMessages && !isLoading && (
@@ -186,33 +296,49 @@ export function InterviewBot() {
                   initial={{ opacity: 0, y: 8 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.3, delay: 0.1 }}
-                  className="flex h-full flex-col items-center justify-center gap-5 px-2"
+                  className="flex min-h-full w-full max-w-full flex-col items-center justify-start gap-5 px-2 pt-8"
                 >
-                  <div className="text-center">
-                    <div className="mx-auto mb-3 flex size-10 items-center justify-center rounded-full bg-primary/8">
-                      <HugeiconsIcon
-                        icon={SparklesIcon}
+                  <div className="w-full text-center">
+                    {/* Fixed frame keeps sparkles inside scroll area (avoids overflow-y clip). */}
+                    <div className="relative mx-auto mb-4 flex h-[5.75rem] w-[5.75rem] shrink-0 items-center justify-center">
+                      <SparkleAccent
                         size={20}
-                        color="var(--color-primary)"
-                        strokeWidth={1.5}
+                        className="absolute top-0 right-0"
                       />
+                      <SparkleAccent
+                        size={12}
+                        className="absolute bottom-0 left-0"
+                      />
+                      <div className="flex size-[4.25rem] items-center justify-center rounded-[1.35rem] border border-border/35 bg-[color-mix(in_oklab,var(--theme-foreground-primary)_38%,var(--theme-background-secondary)_62%)] [corner-shape:squircle]">
+                        <HugeiconsIcon
+                          icon={BubbleChatIcon}
+                          size={28}
+                          color="var(--color-primary)"
+                          strokeWidth={2}
+                        />
+                      </div>
                     </div>
-                    <p className="font-serif text-base font-medium text-foreground">
+                    <p className="font-sans text-base font-semibold text-foreground">
                       Ask me anything
                     </p>
-                    <p className="mt-1 text-xs leading-snug text-body-text/50">
-                      Background, projects, experience, or how this bot works.
-                    </p>
                   </div>
-                  <div className="flex w-full flex-col gap-2">
+                  <div className="flex w-full max-w-80 flex-col items-stretch gap-4">
                     {SUGGESTED_QUESTIONS.map((q) => (
-                      <button
-                        key={q}
-                        onClick={() => handleSuggestion(q)}
-                        className="w-full cursor-pointer rounded-lg border border-border/50 bg-secondary/50 px-3 py-2.5 text-left text-sm leading-snug text-body-text/70 transition-all duration-150 hover:border-primary/20 hover:bg-secondary hover:text-foreground"
+                      <Button
+                        key={q.text}
+                        type="button"
+                        variant="outline"
+                        disabled={isLoading}
+                        onClick={() => handleSuggestion(q.text)}
+                        className="grid h-auto w-full grid-cols-[32px_1fr] justify-center gap-2 rounded-full border-2 bg-transparent px-15 py-4 text-left text-base leading-snug font-semibold whitespace-normal shadow-none hover:bg-foreground/6 dark:hover:bg-foreground/10"
+                        style={{
+                          borderColor: q.color,
+                          color: q.color,
+                        }}
                       >
-                        {q}
-                      </button>
+                        {q.icon}
+                        {q.text}
+                      </Button>
                     ))}
                   </div>
                 </motion.div>
@@ -229,7 +355,7 @@ export function InterviewBot() {
                     ease: "easeOut",
                   }}
                   className={cn(
-                    "flex gap-2",
+                    "flex items-end gap-2",
                     msg.role === "user" ? "justify-end" : "justify-start",
                   )}
                 >
@@ -239,7 +365,7 @@ export function InterviewBot() {
                       "max-w-[82%] rounded-xl px-3.5 py-2.5 text-sm leading-relaxed",
                       msg.role === "user"
                         ? "rounded-br-sm bg-primary text-primary-foreground"
-                        : "rounded-bl-sm bg-secondary/80 text-body-text",
+                        : "rounded-bl-sm bg-tertiary/80 text-body-text",
                     )}
                   >
                     {msg.role === "assistant" ? (
@@ -297,10 +423,10 @@ export function InterviewBot() {
                 <motion.div
                   initial={{ opacity: 0, y: 6 }}
                   animate={{ opacity: 1, y: 0 }}
-                  className="flex gap-2"
+                  className="flex items-end gap-2"
                 >
                   <BotAvatar />
-                  <div className="rounded-xl rounded-bl-sm bg-secondary/80 px-3.5 py-2.5">
+                  <div className="rounded-xl rounded-bl-sm bg-tertiary/80 px-3.5 py-2.5">
                     <TypingIndicator />
                   </div>
                 </motion.div>
@@ -327,16 +453,17 @@ export function InterviewBot() {
               <label htmlFor="interview-bot-input" className="sr-only">
                 Ask Rio a question
               </label>
-              <div className="flex items-end gap-1.5 rounded-lg border border-border/40 bg-background px-3 py-1.5 transition-colors focus-within:border-primary/30 focus-within:ring-1 focus-within:ring-ring/30">
+              <div className="flex items-center gap-2 rounded-2xl border border-border/40 bg-secondary px-3 py-2 transition-colors focus-within:border-primary/30 focus-within:ring-1 focus-within:ring-ring/30 md:gap-2 md:px-3 md:py-1.5">
                 <textarea
                   id="interview-bot-input"
                   ref={inputRef}
                   value={input}
                   onChange={(e) => setInput(e.target.value)}
                   onKeyDown={handleKeyDown}
+                  enterKeyHint="send"
                   placeholder="Ask a question..."
                   rows={1}
-                  className="max-h-24 flex-1 resize-none overflow-y-auto bg-transparent py-1 text-sm outline-none placeholder:text-body-text/30"
+                  className="max-h-24 min-h-[calc(max(16px,1rem)+var(--spacing)*2)] flex-1 resize-none overflow-y-auto bg-transparent p-0 text-[max(16px,1rem)] leading-snug outline-none placeholder:text-body-text/30 md:min-h-0 md:py-1 md:text-sm"
                   style={{ fieldSizing: "content" } as React.CSSProperties}
                 />
                 <AnimatePresence>
@@ -346,19 +473,20 @@ export function InterviewBot() {
                       animate={{ scale: 1, opacity: 1 }}
                       exit={{ scale: 0, opacity: 0 }}
                       transition={{ duration: 0.12, ease: "easeOut" }}
+                      className="flex shrink-0 items-center justify-center"
                     >
                       <Button
                         type="submit"
-                        size="icon-xs"
+                        size="icon-sm"
                         disabled={isLoading}
-                        className="mb-0.5 shrink-0 rounded-full"
+                        className="shrink-0 rounded-full"
                         aria-label="Send message"
                       >
                         <HugeiconsIcon
-                          icon={ArrowUp01Icon}
-                          size={14}
+                          icon={SentIcon}
+                          size={24}
                           color="currentColor"
-                          strokeWidth={2.5}
+                          strokeWidth={2}
                         />
                       </Button>
                     </motion.div>
@@ -371,13 +499,17 @@ export function InterviewBot() {
       </AnimatePresence>
 
       {/* Toggle FAB */}
-      <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+      <motion.div
+        whileHover={{ scale: 1.05 }}
+        whileTap={{ scale: 0.95 }}
+        className={cn(isMobileMenuOpen && "hidden md:block")}
+      >
         <Button
           ref={toggleRef}
           size="icon-xl"
           onClick={() => setOpen((v) => !v)}
-          className="rounded-full shadow-[0_4px_20px_-4px_rgba(0,0,0,0.2)] transition-shadow hover:shadow-[0_6px_28px_-4px_rgba(0,0,0,0.25)]"
-          aria-label={open ? "Close chat" : "Chat with Rio's AI"}
+          className="rounded-2xl bg-primary shadow-[0_4px_20px_-4px_rgba(0,0,0,0.2)] transition-shadow hover:shadow-[0_6px_28px_-4px_rgba(0,0,0,0.25)]"
+          aria-label={open ? "Close RioBot" : "Open RioBot"}
         >
           <AnimatePresence mode="wait" initial={false}>
             <motion.span
@@ -389,8 +521,9 @@ export function InterviewBot() {
               className="flex items-center justify-center"
             >
               <HugeiconsIcon
-                icon={open ? Cancel01Icon : BubbleChatIcon}
-                size={22}
+                icon={open ? ArrowDown01Icon : BubbleChatIcon}
+                size={24}
+                className="size-5"
                 color="currentColor"
                 strokeWidth={2}
               />

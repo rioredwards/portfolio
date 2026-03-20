@@ -17,9 +17,12 @@ const socialLinks = getSocialLinks();
 
 export function MobileMenu() {
   const [isOpen, setIsOpen] = useState(false);
+  const [isChatOpen, setIsChatOpen] = useState(false);
   const [copiedEmail, setCopiedEmail] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
+
+  const closeMenu = () => setIsOpen(false);
 
   // Handle ESC key to close menu
   useEffect(() => {
@@ -81,12 +84,43 @@ export function MobileMenu() {
     }
   }, [copiedEmail]);
 
+  useEffect(() => {
+    function handleInterviewBotState(event: Event) {
+      const customEvent = event as CustomEvent<{ open: boolean }>;
+      const nextOpen = Boolean(customEvent.detail?.open);
+      setIsChatOpen(nextOpen);
+      if (nextOpen) {
+        setIsOpen(false);
+      }
+    }
+
+    window.addEventListener(
+      "interview-bot:open-change",
+      handleInterviewBotState,
+    );
+
+    return () => {
+      window.removeEventListener(
+        "interview-bot:open-change",
+        handleInterviewBotState,
+      );
+    };
+  }, []);
+
+  useEffect(() => {
+    window.dispatchEvent(
+      new CustomEvent("mobile-menu:open-change", {
+        detail: { open: isOpen },
+      }),
+    );
+  }, [isOpen]);
+
   return (
     <>
       {/* Floating button - bottom left */}
       <button
         onClick={() => setIsOpen(true)}
-        className="mm-btn fixed bottom-6 left-6 z-50 flex items-center justify-center rounded-full bg-foreground text-background shadow-lg transition-all hover:scale-110 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:outline-none md:hidden"
+        className={`fixed bottom-6 left-6 z-50 size-12 items-center justify-center rounded-full bg-foreground text-background shadow-lg transition-all hover:scale-110 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:outline-none md:hidden ${isChatOpen ? "hidden" : "flex"}`}
         aria-label="Open menu"
         aria-expanded={isOpen}
         aria-controls="mobile-menu"
@@ -95,6 +129,7 @@ export function MobileMenu() {
         <HugeiconsIcon
           icon={Link04Icon}
           size={24}
+          className="size-5"
           color="currentColor"
           strokeWidth={2}
           aria-hidden="true"
@@ -114,7 +149,7 @@ export function MobileMenu() {
           {/* Close button - top right */}
           <button
             ref={closeButtonRef}
-            onClick={() => setIsOpen(false)}
+            onClick={closeMenu}
             className="absolute top-6 right-6 z-10 flex h-10 w-10 items-center justify-center rounded-full text-foreground transition-colors hover:opacity-70 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:outline-none"
             aria-label="Close menu"
           >
@@ -176,13 +211,13 @@ export function MobileMenu() {
                       toast.success(`${link.label} copied to clipboard!`);
                       // Don't close menu immediately, let user see the "copied" state
                       setTimeout(() => {
-                        setIsOpen(false);
+                        closeMenu();
                       }, 1500);
                     } catch {
                       toast.error("Failed to copy to clipboard");
                     }
                   } else {
-                    setIsOpen(false);
+                    closeMenu();
                   }
                 };
 
