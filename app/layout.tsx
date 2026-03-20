@@ -172,11 +172,10 @@ export default function RootLayout({
           name="format-detection"
           content="telephone=no, date=no, email=no, address=no"
         />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta
           name="viewport"
           content="width=device-width, initial-scale=1, interactive-widget=resizes-content"
-        ></meta>
+        />
       </head>
       <body
         className={`${dmSans.variable} ${dmMono.variable} ${mazaeniDemo.variable} ${montserrat.variable} font-sans antialiased`}

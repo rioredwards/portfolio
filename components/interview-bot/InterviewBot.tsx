@@ -5,6 +5,7 @@ import {
   Briefcase01Icon,
   BubbleChatIcon,
   CodeSimpleIcon,
+  Refresh01Icon,
   SentIcon,
 } from "@hugeicons/core-free-icons";
 import { HugeiconsIcon } from "@hugeicons/react";
@@ -146,7 +147,7 @@ export function InterviewBot() {
   const [open, setOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [input, setInput] = useState("");
-  const { messages, isLoading, error, sendMessage } = useInterviewBot();
+  const { messages, isLoading, error, sendMessage, reset } = useInterviewBot();
   const bottomRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLTextAreaElement>(null);
   const panelRef = useRef<HTMLDivElement>(null);
@@ -252,6 +253,22 @@ export function InterviewBot() {
             Twice the smarts, half the sentience!
           </p>
         </div>
+        {hasMessages && (
+          <Button
+            variant="ghost"
+            size="icon-sm"
+            onClick={reset}
+            aria-label="New conversation"
+            className="text-body-text/50 hover:bg-foreground/10 hover:text-foreground"
+          >
+            <HugeiconsIcon
+              icon={Refresh01Icon}
+              size={18}
+              color="currentColor"
+              strokeWidth={2}
+            />
+          </Button>
+        )}
         <Button
           variant="ghost"
           size="icon"
@@ -335,7 +352,7 @@ export function InterviewBot() {
         {/* Message list */}
         {messages.map((msg, i) => (
           <motion.div
-            key={i}
+            key={`${msg.role}-${i}`}
             initial={{ opacity: 0, y: 6 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{

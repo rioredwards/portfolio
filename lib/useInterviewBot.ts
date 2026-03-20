@@ -79,7 +79,7 @@ export function useInterviewBot() {
           sessionId.current,
           controller.signal,
         ),
-        2000,
+        800,
       );
 
       if (requestId !== requestIdRef.current) return;
