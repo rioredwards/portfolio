@@ -21,6 +21,12 @@ async function postInterviewBotChat(
   sessionId: string,
   signal: AbortSignal,
 ): Promise<{ reply: string }> {
+  // POST /chat contract:
+  // Request body: { message: string, sessionId: string }
+  // Success response: { reply: string }
+  // Error response: { error?: string }
+  // No documented rate limit yet. Callers should avoid rapid sends and surface
+  // server error text when available.
   const res = await fetch(`${baseUrl}/chat`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },

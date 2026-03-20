@@ -154,6 +154,12 @@ export function InterviewBot() {
   const toggleRef = useRef<HTMLButtonElement>(null);
   const isDesktop = useMediaQuery("(min-width: 768px)");
 
+  useEffect(() => {
+    return () => {
+      reset();
+    };
+  }, [reset]);
+
   // Scroll to bottom on new messages
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: "smooth" });
