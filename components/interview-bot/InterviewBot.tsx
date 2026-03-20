@@ -30,7 +30,7 @@ const SUGGESTED_QUESTIONS: {
         icon={CodeSimpleIcon}
         size={64}
         color="currentColor"
-        className="size-6"
+        className="size-6 md:size-5"
         strokeWidth={2}
       />
     ),
@@ -38,7 +38,7 @@ const SUGGESTED_QUESTIONS: {
   },
   {
     text: "Tell me about DogTown",
-    icon: <PawPrint className="size-6" />,
+    icon: <PawPrint className="size-6 md:size-5" />,
     color: "#8E5140",
   },
   {
@@ -48,7 +48,7 @@ const SUGGESTED_QUESTIONS: {
         icon={Briefcase01Icon}
         size={64}
         color="currentColor"
-        className="size-6"
+        className="size-6 md:size-5"
         strokeWidth={2}
       />
     ),
@@ -249,7 +249,7 @@ export function InterviewBot() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 16, scale: 0.95 }}
             transition={{ duration: 0.25, ease: [0.23, 1, 0.32, 1] }}
-            className="flex h-[min(620px,calc(100dvh-8rem))] w-[calc(100vw-2rem)] max-w-[380px] flex-col overflow-hidden rounded-xl border border-border/60 bg-background shadow-[0_8px_40px_-8px_rgba(0,0,0,0.15)]"
+            className="flex h-[min(38rem,calc(100dvh-8rem))] w-[calc(100vw-2rem)] max-w-[380px] flex-col overflow-hidden rounded-xl border border-border/60 bg-background shadow-[0_8px_40px_-8px_rgba(0,0,0,0.15)] md:w-md md:max-w-none"
           >
             {/* Header */}
             <div className="relative flex items-center gap-3 border-b border-border/40 px-4 py-3">
@@ -269,7 +269,7 @@ export function InterviewBot() {
                   onClick={reset}
                   title="Clear conversation"
                   aria-label="Clear conversation"
-                  className="text-body-text/40 hover:text-destructive"
+                  className="text-body-text/40 hover:bg-destructive/10 hover:text-destructive"
                 >
                   <HugeiconsIcon
                     icon={Delete02Icon}
@@ -330,7 +330,7 @@ export function InterviewBot() {
                         variant="outline"
                         disabled={isLoading}
                         onClick={() => handleSuggestion(q.text)}
-                        className="grid h-auto w-full grid-cols-[32px_1fr] justify-center gap-2 rounded-full border-2 bg-transparent px-15 py-4 text-left text-base leading-snug font-semibold whitespace-normal shadow-none hover:bg-foreground/6 dark:hover:bg-foreground/10"
+                        className="grid h-auto w-full grid-cols-[32px_1fr] justify-center gap-2 rounded-full border-2 bg-transparent px-15 py-4 text-left text-base leading-snug font-semibold whitespace-normal shadow-none hover:bg-foreground/10 md:text-sm"
                         style={{
                           borderColor: q.color,
                           color: q.color,

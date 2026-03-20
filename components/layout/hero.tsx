@@ -147,7 +147,7 @@ export function Hero() {
         words={adjectives}
         direction="toggle"
         color="var(--color-accent)"
-        className="w-[8.75rem] font-mono text-[1.35rem] font-bold"
+        className="w-35 font-mono text-[1.35rem] font-bold"
         pauseDuration={2000}
         initialDelay={initialDelay}
       />{" "}

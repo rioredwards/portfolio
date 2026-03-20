@@ -15,6 +15,39 @@ function generateSessionId(): string {
   return `${Date.now()}-${Math.random().toString(36).slice(2, 9)}`;
 }
 
+async function postInterviewBotChat(
+  baseUrl: string,
+  message: string,
+  sessionId: string,
+  signal: AbortSignal,
+): Promise<{ reply: string }> {
+  const res = await fetch(`${baseUrl}/chat`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ message, sessionId }),
+    signal,
+  });
+
+  if (!res.ok) {
+    const body = (await res.json().catch(() => null)) as {
+      error?: string;
+    } | null;
+    throw new Error(
+      body?.error ?? "Failed to reach the bot. Please try again.",
+    );
+  }
+
+  return (await res.json()) as { reply: string };
+}
+
+function sleep(ms: number) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+async function withMinimumDelay<T>(p: Promise<T>, ms: number): Promise<T> {
+  return Promise.all([p, sleep(ms)]).then(([value]) => value);
+}
+
 export function useInterviewBot() {
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -39,22 +72,16 @@ export function useInterviewBot() {
     setError(null);
 
     try {
-      // POST /chat expects { message, sessionId } and returns { reply }.
-      const res = await fetch(`${BOT_URL}/chat`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ message: text, sessionId: sessionId.current }),
-        signal: controller.signal,
-      });
+      const data = await withMinimumDelay(
+        postInterviewBotChat(
+          BOT_URL,
+          text,
+          sessionId.current,
+          controller.signal,
+        ),
+        2000,
+      );
 
-      if (!res.ok) {
-        const body = await res.json().catch(() => null);
-        const message =
-          body?.error ?? "Failed to reach the bot. Please try again.";
-        throw new Error(message);
-      }
-
-      const data = await res.json();
       if (requestId !== requestIdRef.current) return;
       setMessages((prev) => [
         ...prev,
