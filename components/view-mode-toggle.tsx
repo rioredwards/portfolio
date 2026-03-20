@@ -30,7 +30,7 @@ export function ViewModeToggle({
 
   return (
     <div
-      className="inline-flex items-center rounded-full border border-border/70 bg-background/90 p-1"
+      className="inline-flex h-9 items-center rounded-full border border-border/60 bg-background/80 p-0.5"
       role="tablist"
       aria-label="Choose project view"
     >
@@ -40,7 +40,7 @@ export function ViewModeToggle({
         aria-selected={selectedView === "grid"}
         onClick={() => navigate("grid")}
         className={cn(
-          "rounded-full px-3 py-1.5 text-xs font-semibold transition-colors sm:px-3.5",
+          "h-full cursor-pointer rounded-full px-3.5 text-xs font-semibold transition-colors",
           selectedView === "grid"
             ? "bg-primary text-primary-foreground"
             : "text-muted-foreground hover:text-foreground",
@@ -54,7 +54,7 @@ export function ViewModeToggle({
         aria-selected={selectedView === "list"}
         onClick={() => navigate("list")}
         className={cn(
-          "rounded-full px-3 py-1.5 text-xs font-semibold transition-colors sm:px-3.5",
+          "h-full cursor-pointer rounded-full px-3.5 text-xs font-semibold transition-colors",
           selectedView === "list"
             ? "bg-primary text-primary-foreground"
             : "text-muted-foreground hover:text-foreground",

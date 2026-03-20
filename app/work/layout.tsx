@@ -3,7 +3,7 @@ import { metaDescription } from "@/lib/meta";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Work | Rio Edwards",
+  title: "Work",
   description: metaDescription,
 };
 

@@ -18,7 +18,7 @@ const workIndexDescription =
   "Browse all of Rio Edwards' software projects, case studies, and shipped product work.";
 
 export const metadata: Metadata = {
-  title: "Work | Rio Edwards",
+  title: "Work",
   description: workIndexDescription,
   openGraph: {
     title: "Work | Rio Edwards",
@@ -76,32 +76,21 @@ export default async function WorkIndexPage({
     currentPage,
     PROJECTS_PER_PAGE,
   );
+  const hasResults = paginatedProjects.totalItems > 0;
 
   return (
-    <main
-      id="main-content"
-      className="relative min-h-screen overflow-hidden bg-secondary"
-    >
-      <div className="pointer-events-none absolute inset-0">
-        <div className="absolute -top-14 right-[8%] h-80 w-80 rounded-full bg-primary/12 blur-3xl" />
-        <div className="absolute top-[24rem] -left-24 h-72 w-72 rounded-full bg-tertiary/35 blur-3xl" />
-      </div>
+    <main id="main-content" className="relative min-h-screen bg-secondary">
+      <SectionContentWrapper className="relative mt-[8rem] pt-4 pb-12 md:pt-5 md:pb-16">
+        <header className="mb-5 md:mb-6">
+          <h1 className="font-mazaeni text-4xl leading-none text-foreground sm:text-5xl">
+            Work
+          </h1>
+          <p className="mt-1.5 max-w-prose-max text-sm tracking-wide text-secondary-foreground/70 sm:text-[0.95rem]">
+            Products, experiments, and shipped systems.
+          </p>
+        </header>
 
-      <div className="sticky top-18 z-30 border-b border-border/55 bg-secondary/92 backdrop-blur-md">
-        <SectionContentWrapper className="relative py-5 md:py-6">
-          <div className="space-y-1">
-            <h1 className="font-mazaeni text-4xl leading-none text-foreground sm:text-5xl">
-              Work
-            </h1>
-            <p className="max-w-prose-max text-sm text-secondary-foreground/78 sm:text-base">
-              Products, experiments, and shipped systems.
-            </p>
-          </div>
-        </SectionContentWrapper>
-      </div>
-
-      <SectionContentWrapper className="relative space-y-8 py-8 md:py-10">
-        <section aria-label="Projects list" className="space-y-5">
+        <section aria-label="Projects list" className="space-y-3.5">
           <SearchInput
             basePath="/work"
             currentValue={searchQuery}
@@ -130,12 +119,12 @@ export default async function WorkIndexPage({
             singleRowScrollable
           />
 
-          <div className="flex flex-col gap-3 border-b border-border/60 pb-4 sm:flex-row sm:items-center sm:justify-between">
-            <p className="text-sm text-muted-foreground">
-              <span className="font-semibold text-foreground">
+          <div className="flex flex-col gap-2 pt-1 sm:flex-row sm:items-center sm:justify-between">
+            <p className="text-xs tracking-wide text-muted-foreground sm:text-sm">
+              <span className="font-semibold text-secondary-foreground">
                 {sortedProjects.length}
               </span>{" "}
-              projects found
+              projects
             </p>
             <div className="flex items-center gap-2">
               <SortSelect
@@ -160,66 +149,74 @@ export default async function WorkIndexPage({
             </div>
           </div>
 
-          {paginatedProjects.totalItems === 0 ? (
-            <div className="border-y border-border/60 py-10 text-secondary-foreground">
+          {!hasResults ? (
+            <div className="rounded-2xl border border-border/60 bg-card/45 px-5 py-8 text-secondary-foreground">
               {searchQuery
                 ? "Try a different keyword or clear filters."
                 : "Try a different category."}
             </div>
           ) : null}
 
-          <ol
-            className={cn(
-              "m-0 list-none p-0",
-              selectedView === "grid"
-                ? "grid gap-5 border-t border-border/55 pt-5 sm:grid-cols-2 lg:grid-cols-3"
-                : "space-y-3 border-t border-border/55 pt-5",
-            )}
-          >
-            {paginatedProjects.items.map((project, index) => (
-              <li
-                key={project.slug}
-                className={cn(selectedView === "grid" && "h-full")}
+          {hasResults ? (
+            <>
+              <ol
+                className={cn(
+                  "m-0 list-none p-0 [&>li]:w-full [&>li]:max-w-none",
+                  selectedView === "grid"
+                    ? "grid gap-5 pt-5 sm:grid-cols-2 lg:grid-cols-3"
+                    : "space-y-3 pt-5",
+                )}
               >
-                <Link
-                  href={`/work/${project.slug}`}
-                  className={cn(
-                    "group block transition-transform duration-300 outline-none",
-                    "focus-visible:ring-4 focus-visible:ring-ring/30 focus-visible:ring-offset-2 focus-visible:ring-offset-secondary focus-visible:outline-none",
-                    selectedView === "grid" && "h-full",
-                  )}
-                >
-                  {selectedView === "grid" ? (
-                    <CompactProjectCard
-                      project={project}
-                      priority={index < 3}
-                    />
-                  ) : (
-                    <ListProjectCard project={project} priority={index < 2} />
-                  )}
-                </Link>
-              </li>
-            ))}
-          </ol>
+                {paginatedProjects.items.map((project, index) => (
+                  <li
+                    key={project.slug}
+                    className={cn(
+                      "w-full",
+                      selectedView === "grid" && "h-full",
+                    )}
+                  >
+                    <Link
+                      href={`/work/${project.slug}`}
+                      className={cn(
+                        "group block w-full transition-transform duration-300 outline-none",
+                        "focus-visible:ring-4 focus-visible:ring-ring/30 focus-visible:ring-offset-2 focus-visible:ring-offset-secondary focus-visible:outline-none",
+                        selectedView === "grid" && "h-full",
+                      )}
+                    >
+                      {selectedView === "grid" ? (
+                        <CompactProjectCard
+                          project={project}
+                          priority={index < 3}
+                        />
+                      ) : (
+                        <ListProjectCard
+                          project={project}
+                          priority={index < 2}
+                        />
+                      )}
+                    </Link>
+                  </li>
+                ))}
+              </ol>
 
-          <PaginationNav
-            basePath="/work"
-            currentPage={paginatedProjects.currentPage}
-            totalPages={paginatedProjects.totalPages}
-            query={{
-              category: selectedCategory,
-              q: searchQuery,
-              sort: sortParam,
-              view: viewParam,
-            }}
-          />
-          <p className="pt-2 text-sm text-muted-foreground">
-            {paginatedProjects.totalItems === 0
-              ? searchQuery
-                ? "No projects match your search"
-                : "No projects match this filter"
-              : `Showing ${paginatedProjects.startIndex + 1}-${paginatedProjects.endIndex} of ${paginatedProjects.totalItems}`}
-          </p>
+              <div className="pt-6">
+                <PaginationNav
+                  basePath="/work"
+                  currentPage={paginatedProjects.currentPage}
+                  totalPages={paginatedProjects.totalPages}
+                  query={{
+                    category: selectedCategory,
+                    q: searchQuery,
+                    sort: sortParam,
+                    view: viewParam,
+                  }}
+                />
+              </div>
+              <p className="pt-2 text-sm text-muted-foreground">
+                {`Showing ${paginatedProjects.startIndex + 1}-${paginatedProjects.endIndex} of ${paginatedProjects.totalItems}`}
+              </p>
+            </>
+          ) : null}
         </section>
       </SectionContentWrapper>
     </main>
@@ -287,7 +284,7 @@ function ListProjectCard({
   priority?: boolean;
 }) {
   return (
-    <article className="flex flex-col gap-4 rounded-2xl border border-border/65 bg-card p-3 shadow-card transition-all duration-300 sm:flex-row sm:items-center sm:gap-5 sm:p-4 pointer-fine:group-hover:shadow-card-hover">
+    <article className="flex w-full flex-col gap-4 rounded-2xl border border-border/65 bg-card p-3 shadow-card transition-all duration-300 sm:flex-row sm:items-center sm:gap-5 sm:p-4 pointer-fine:group-hover:shadow-card-hover">
       <div
         className="relative aspect-video w-full shrink-0 overflow-hidden rounded-xl sm:w-52"
         style={{ backgroundColor: project.brandColor }}

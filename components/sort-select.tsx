@@ -34,7 +34,7 @@ export function SortSelect({
             }),
           );
         }}
-        className="h-11 rounded-full border border-border/70 bg-background/90 px-4 text-sm font-semibold text-foreground shadow-[inset_0_1px_0_rgba(255,255,255,0.35)] transition-all duration-300 hover:border-primary/35 focus:border-primary focus-visible:ring-4 focus-visible:ring-ring/25 focus-visible:outline-none"
+        className="h-9 cursor-pointer rounded-full border border-border/60 bg-background/80 px-3.5 text-xs font-semibold text-secondary-foreground transition-all duration-200 hover:border-primary/30 hover:text-foreground focus:border-primary focus-visible:ring-4 focus-visible:ring-ring/25 focus-visible:outline-none sm:text-sm"
       >
         {options.map((option) => (
           <option key={option.value} value={option.value}>

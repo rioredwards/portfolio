@@ -81,10 +81,10 @@ export function FilterChipGroup({
         })}
         aria-current={!selectedValue ? "true" : undefined}
         className={cn(
-          "rounded-full border px-4 py-2 text-sm font-medium whitespace-nowrap transition-all duration-300",
+          "rounded-full border px-3.5 py-1.5 text-xs font-medium whitespace-nowrap transition-all duration-200 sm:text-sm",
           !selectedValue
             ? "border-primary bg-primary text-primary-foreground shadow-card"
-            : "border-border/70 bg-tertiary/55 text-secondary-foreground hover:-translate-y-0.5 hover:border-primary/40 hover:bg-tertiary",
+            : "border-border/55 bg-tertiary/45 text-secondary-foreground hover:border-primary/35 hover:bg-tertiary/70",
         )}
       >
         All
@@ -102,10 +102,10 @@ export function FilterChipGroup({
             })}
             aria-current={isSelected ? "true" : undefined}
             className={cn(
-              "rounded-full border px-4 py-2 text-sm font-medium whitespace-nowrap transition-all duration-300",
+              "rounded-full border px-3.5 py-1.5 text-xs font-medium whitespace-nowrap transition-all duration-200 sm:text-sm",
               isSelected
                 ? "border-primary bg-primary text-primary-foreground shadow-card"
-                : "border-border/70 bg-tertiary/55 text-secondary-foreground hover:-translate-y-0.5 hover:border-primary/40 hover:bg-tertiary",
+                : "border-border/55 bg-tertiary/45 text-secondary-foreground hover:border-primary/35 hover:bg-tertiary/70",
             )}
           >
             {option.label}
@@ -122,24 +122,24 @@ export function FilterChipGroup({
         <div className="relative">
           <div
             ref={scrollRef}
-            className="flex gap-2 overflow-x-auto px-0 pb-1 [scrollbar-width:none] sm:px-10 [&::-webkit-scrollbar]:hidden"
+            className="flex gap-2 overflow-x-auto px-0 pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
           >
             {chips}
           </div>
 
           {canScrollLeft ? (
-            <div className="pointer-events-none absolute top-0 bottom-0 left-0 hidden w-18 bg-gradient-to-r from-secondary via-secondary/88 to-transparent sm:block" />
+            <div className="pointer-events-none absolute top-0 bottom-0 left-0 hidden w-10 bg-gradient-to-r from-secondary via-secondary/88 to-transparent sm:block" />
           ) : null}
 
           {canScrollRight ? (
-            <div className="pointer-events-none absolute top-0 right-0 bottom-0 hidden w-18 bg-gradient-to-l from-secondary via-secondary/88 to-transparent sm:block" />
+            <div className="pointer-events-none absolute top-0 right-0 bottom-0 hidden w-10 bg-gradient-to-l from-secondary via-secondary/88 to-transparent sm:block" />
           ) : null}
 
           {canScrollLeft ? (
             <button
               type="button"
               onClick={() => scrollChips("left")}
-              className="absolute top-1/2 left-0 hidden h-8 w-8 -translate-y-1/2 items-center justify-center rounded-full border border-border/70 bg-background/90 text-foreground transition-colors hover:border-primary/35 hover:bg-secondary sm:inline-flex"
+              className="absolute top-1/2 -left-4 hidden h-8 w-8 -translate-y-1/2 items-center justify-center rounded-full border border-border/70 bg-background/90 text-foreground transition-colors hover:border-primary/35 hover:bg-secondary sm:inline-flex"
               aria-label="Scroll filters left"
             >
               <HugeiconsIcon icon={ArrowLeft01Icon} size={16} strokeWidth={2} />
@@ -150,7 +150,7 @@ export function FilterChipGroup({
             <button
               type="button"
               onClick={() => scrollChips("right")}
-              className="absolute top-1/2 right-0 hidden h-8 w-8 -translate-y-1/2 items-center justify-center rounded-full border border-border/70 bg-background/90 text-foreground transition-colors hover:border-primary/35 hover:bg-secondary sm:inline-flex"
+              className="absolute top-1/2 -right-4 hidden h-8 w-8 -translate-y-1/2 items-center justify-center rounded-full border border-border/70 bg-background/90 text-foreground transition-colors hover:border-primary/35 hover:bg-secondary sm:inline-flex"
               aria-label="Scroll filters right"
             >
               <HugeiconsIcon
