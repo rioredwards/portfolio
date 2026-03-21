@@ -58,9 +58,10 @@ export default defineConfig({
 
   /* Run your local dev server before starting the tests */
   webServer: {
-    command: "bun run dev --hostname 127.0.0.1 --port 3100",
+    command:
+      "bun run build && bun run start -- --hostname 127.0.0.1 --port 3100",
     url: "http://127.0.0.1:3100",
-    reuseExistingServer: !process.env.CI,
+    reuseExistingServer: process.env.PW_REUSE_SERVER === "1",
     timeout: 120_000,
   },
 });

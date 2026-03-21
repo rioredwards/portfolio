@@ -72,8 +72,8 @@ export class HomePage {
     return this.page.getByRole("dialog");
   }
 
-  closeDialogButton(): Locator {
-    return this.page.getByRole("button", { name: "Close" });
+  closeDialogButton(container?: Locator): Locator {
+    return (container ?? this.dialog()).getByRole("button", { name: "Close" });
   }
 
   contactForm(): Locator {

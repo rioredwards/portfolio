@@ -30,23 +30,23 @@ test.describe("Project and blog modals", () => {
       new RegExp(`\\?project=${primaryProject.slug}`),
     );
 
+    const modal = home.dialog();
+
     await expect(
-      home
-        .dialog()
-        .getByRole("heading", { level: 1, name: primaryProject.title }),
+      modal.getByRole("heading", { level: 1, name: primaryProject.title }),
     ).toBeVisible();
-    await expect(home.dialog().getByTestId("project-category")).toHaveText(
+    await expect(modal.getByTestId("project-category")).toHaveText(
       primaryProject.category,
     );
     if (primaryProjectFrontmatter.skills.length > 0) {
-      await expect(
-        home.dialog().getByTestId("project-skill").first(),
-      ).toHaveText(primaryProjectFrontmatter.skills[0]);
+      await expect(modal.getByTestId("project-skill").first()).toHaveText(
+        primaryProjectFrontmatter.skills[0],
+      );
     }
 
-    await home.closeDialogButton().click();
+    await home.closeDialogButton(modal).click();
 
-    await expect(home.dialog()).toHaveCount(0);
+    await expect(modal).toBeHidden();
     await expect(page).toHaveURL(/\/$/);
   });
 
@@ -59,18 +59,20 @@ test.describe("Project and blog modals", () => {
     await card.click();
     await expect(page).toHaveURL(new RegExp(`\\?blog=${primaryBlog.slug}`));
 
+    const modal = home.dialog();
+
     await expect(
-      home.dialog().getByRole("heading", { level: 1, name: primaryBlog.title }),
+      modal.getByRole("heading", { level: 1, name: primaryBlog.title }),
     ).toBeVisible();
     if (primaryBlogFrontmatter.tags?.length) {
-      await expect(home.dialog().getByTestId("blog-tag").first()).toHaveText(
+      await expect(modal.getByTestId("blog-tag").first()).toHaveText(
         primaryBlogFrontmatter.tags[0],
       );
     }
 
-    await home.closeDialogButton().click();
+    await home.closeDialogButton(modal).click();
 
-    await expect(home.dialog()).toHaveCount(0);
+    await expect(modal).toBeHidden();
     await expect(page).toHaveURL(/\/$/);
   });
 
