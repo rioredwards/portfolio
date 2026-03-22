@@ -63,7 +63,9 @@ test.describe("Lightbox via modal", () => {
     await projectCard.click();
 
     // Wait for modal to open
-    const modal = page.getByRole("dialog");
+    const modal = page.getByRole("dialog", {
+      name: new RegExp(primaryProject.title),
+    });
     await expect(modal).toBeVisible();
 
     // Modal should contain figure elements
@@ -94,7 +96,9 @@ test.describe("Lightbox via modal", () => {
     await projectCard.click();
 
     // Wait for modal to open
-    const modal = page.getByRole("dialog");
+    const modal = page.getByRole("dialog", {
+      name: new RegExp(primaryProject.title),
+    });
     await expect(modal).toBeVisible({ timeout: 10000 });
 
     // Find the image group within the modal

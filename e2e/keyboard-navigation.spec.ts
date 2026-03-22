@@ -19,7 +19,9 @@ test.describe("Keyboard navigation", () => {
     await card.click();
 
     // Modal should be open
-    const modal = home.dialog();
+    const modal = page.getByRole("dialog", {
+      name: new RegExp(primaryProject.title),
+    });
     await expect(modal).toBeVisible();
 
     // Press Escape to close
@@ -36,7 +38,9 @@ test.describe("Keyboard navigation", () => {
     await card.click();
 
     // Modal should be open
-    const modal = home.dialog();
+    const modal = page.getByRole("dialog", {
+      name: new RegExp(primaryBlog.title),
+    });
     await expect(modal).toBeVisible();
 
     // Press Escape to close
@@ -98,7 +102,9 @@ test.describe("Focus trap in modals", () => {
     await card.click();
 
     // Modal should be open
-    const modal = home.dialog();
+    const modal = page.getByRole("dialog", {
+      name: new RegExp(primaryProject.title),
+    });
     await expect(modal).toBeVisible();
 
     // Tab through the modal elements multiple times
