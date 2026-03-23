@@ -199,9 +199,12 @@ export function RioBotChatPanel({ onClose, className }: RioBotChatPanelProps) {
       <div className="relative flex items-center gap-2.5 border-b border-border/40 px-4 py-2.5">
         <ChatHeaderAvatar />
         <div className="min-w-0 flex-1">
-          <p className="font-sans text-[1.05rem] leading-tight font-bold tracking-tight text-foreground">
+          <a
+            href="/riobot"
+            className="font-sans text-[1.05rem] leading-tight font-bold tracking-tight text-foreground hover:text-primary transition-colors"
+          >
             RioBot
-          </p>
+          </a>
           <p className="mt-px text-xs leading-tight text-body-text/45">
             Twice the smarts, half the sentience!
           </p>
