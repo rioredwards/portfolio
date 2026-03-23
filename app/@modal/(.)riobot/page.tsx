@@ -15,7 +15,7 @@ export default function RioBotModal() {
     <Dialog open onOpenChange={(open) => !open && handleClose()}>
       <DialogContent
         showCloseButton={false}
-        className="flex h-[min(42rem,calc(100dvh-4rem))] w-full max-w-lg flex-col gap-0 overflow-hidden rounded-xl p-0 top-1/2 -translate-y-1/2"
+        className="flex h-[min(36rem,calc(100dvh-4rem))] w-full max-w-lg flex-col gap-0 overflow-hidden rounded-xl p-0 top-1/2 -translate-y-1/2"
       >
         <DialogTitle className="sr-only">RioBot Chat</DialogTitle>
         <RioBotChatPanel onClose={handleClose} className="flex-1" />

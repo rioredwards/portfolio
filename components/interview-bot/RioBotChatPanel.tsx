@@ -3,9 +3,10 @@
 import {
   Briefcase01Icon,
   BubbleChatIcon,
-  Cancel01Icon, CodeSimpleIcon,
+  Cancel01Icon,
+  CodeSimpleIcon,
   Refresh01Icon,
-  SentIcon
+  SentIcon,
 } from "@hugeicons/core-free-icons";
 import { HugeiconsIcon } from "@hugeicons/react";
 import { PawPrint } from "lucide-react";
@@ -29,7 +30,7 @@ const SUGGESTED_QUESTIONS: {
         icon={CodeSimpleIcon}
         size={64}
         color="currentColor"
-        className="size-6 md:size-5"
+        className="size-5 md:size-4"
         strokeWidth={2}
       />
     ),
@@ -37,7 +38,7 @@ const SUGGESTED_QUESTIONS: {
   },
   {
     text: "Tell me about DogTown",
-    icon: <PawPrint className="size-6 md:size-5" />,
+    icon: <PawPrint className="size-5 md:size-4" />,
     color: "#8E5140",
   },
   {
@@ -47,7 +48,7 @@ const SUGGESTED_QUESTIONS: {
         icon={Briefcase01Icon}
         size={64}
         color="currentColor"
-        className="size-6 md:size-5"
+        className="size-5 md:size-4"
         strokeWidth={2}
       />
     ),
@@ -98,11 +99,11 @@ function TypingIndicator() {
   );
 }
 
-/** Squircle avatar for assistant rows — matches header / empty-state language */
+/** Squircle avatar for assistant rows */
 function BotAvatar() {
   return (
     <div
-      className="flex size-6 shrink-0 items-center justify-center rounded-xl border border-border/35 bg-neutral-100 text-primary [corner-shape:squircle]"
+      className="flex size-6 shrink-0 items-center justify-center rounded-lg border border-border/35 bg-neutral-100 text-primary [corner-shape:squircle]"
       aria-hidden
     >
       <HugeiconsIcon
@@ -118,20 +119,20 @@ function BotAvatar() {
 function ChatHeaderAvatar() {
   return (
     <div
-      className="relative size-10 shrink-0"
+      className="relative size-8 shrink-0"
       role="img"
       aria-label="RioBot, online"
     >
-      <div className="flex size-10 items-center justify-center rounded-2xl border border-border/45 bg-neutral-100 shadow-[0_1px_0_rgba(0,0,0,0.04)] [corner-shape:squircle]">
+      <div className="flex size-8 items-center justify-center rounded-xl border border-border/45 bg-neutral-100 shadow-[0_1px_0_rgba(0,0,0,0.04)] [corner-shape:squircle]">
         <HugeiconsIcon
           icon={BubbleChatIcon}
-          size={20}
+          size={16}
           color="var(--color-primary)"
           strokeWidth={2}
         />
       </div>
       <span
-        className="custom-bg-ping-always absolute right-0 bottom-0 block size-[10px] rounded-full border border-background bg-(--theme-ring) shadow-none"
+        className="custom-bg-ping-always absolute -right-px -bottom-px block size-[9px] rounded-full border-[1.5px] border-background bg-(--theme-ring) shadow-none"
         aria-hidden
       >
         <span className="custom-bg-ping block size-full rounded-full bg-(--theme-ring)" />
@@ -195,13 +196,13 @@ export function RioBotChatPanel({ onClose, className }: RioBotChatPanelProps) {
   return (
     <div className={cn("flex flex-col overflow-hidden", className)}>
       {/* Header */}
-      <div className="relative flex items-center gap-3 border-b border-border/40 px-4 py-3">
+      <div className="relative flex items-center gap-2.5 border-b border-border/40 px-4 py-2.5">
         <ChatHeaderAvatar />
         <div className="min-w-0 flex-1">
-          <p className="font-sans text-xl leading-tight font-bold tracking-tight text-foreground">
+          <p className="font-sans text-[1.05rem] leading-tight font-bold tracking-tight text-foreground">
             RioBot
           </p>
-          <p className="mt-0.5 text-sm leading-tight text-body-text/55">
+          <p className="mt-px text-xs leading-tight text-body-text/45">
             Twice the smarts, half the sentience!
           </p>
         </div>
@@ -211,13 +212,13 @@ export function RioBotChatPanel({ onClose, className }: RioBotChatPanelProps) {
             size="icon-sm"
             onClick={reset}
             aria-label="New conversation"
-            className="text-body-text/50 hover:bg-foreground/10 hover:text-foreground size-10"
+            className="size-8 text-body-text/40 hover:bg-foreground/8 hover:text-foreground"
           >
             <HugeiconsIcon
               icon={Refresh01Icon}
               size={32}
               color="currentColor"
-              className="size-5"
+              className="size-4"
               strokeWidth={2}
             />
           </Button>
@@ -229,13 +230,13 @@ export function RioBotChatPanel({ onClose, className }: RioBotChatPanelProps) {
             onClick={onClose}
             title="Close"
             aria-label="Close RioBot"
-            className="text-body-text/50 hover:bg-destructive/10 hover:text-destructive/50 size-10"
+            className="size-8 text-body-text/40 hover:bg-destructive/8 hover:text-destructive/50"
           >
             <HugeiconsIcon
               icon={Cancel01Icon}
               size={32}
               color="currentColor"
-              className="size-6"
+              className="size-5"
               strokeWidth={2}
             />
           </Button>
@@ -244,7 +245,7 @@ export function RioBotChatPanel({ onClose, className }: RioBotChatPanelProps) {
 
       {/* Messages */}
       <div
-        className="interview-bot-messages flex-1 space-y-4 overflow-y-auto bg-secondary px-4 py-4"
+        className="interview-bot-messages flex-1 space-y-4 overflow-y-auto bg-secondary px-4 py-3"
         role="log"
         aria-live="polite"
         aria-relevant="additions text"
@@ -257,32 +258,32 @@ export function RioBotChatPanel({ onClose, className }: RioBotChatPanelProps) {
             initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.3, delay: 0.1 }}
-            className="flex min-h-full w-full max-w-full flex-col items-center justify-center gap-5 px-2 pt-8"
+            className="flex min-h-full w-full max-w-full flex-col items-center justify-center gap-3.5 px-2 pb-4"
           >
             <div className="w-full text-center">
-              <div className="relative mx-auto mb-6 flex h-23 w-23 shrink-0 items-center justify-center">
+              <div className="relative mx-auto mb-4 flex h-[4.5rem] w-[4.5rem] shrink-0 items-center justify-center">
                 <SparkleAccent
-                  size={20}
-                  className="absolute top-0 right-0 text-primary/30"
+                  size={17}
+                  className="absolute top-0 right-0 text-primary/25"
                 />
                 <SparkleAccent
-                  size={12}
-                  className="absolute bottom-0 left-0 text-primary/30"
+                  size={10}
+                  className="absolute bottom-0 left-0 text-primary/25"
                 />
-                <div className="flex size-20 items-center justify-center rounded-[1.35rem] border border-border/35 bg-[color-mix(in_oklab,var(--theme-foreground-primary)_38%,var(--theme-background-secondary)_62%)] [corner-shape:squircle]">
+                <div className="flex size-16 items-center justify-center rounded-[1.1rem] border border-border/30 bg-[color-mix(in_oklab,var(--theme-foreground-primary)_38%,var(--theme-background-secondary)_62%)] [corner-shape:squircle]">
                   <HugeiconsIcon
                     icon={BubbleChatIcon}
-                    size={28}
+                    size={24}
                     color="var(--color-primary)"
                     strokeWidth={2}
                   />
                 </div>
               </div>
-              <p className="font-sans text-base font-semibold text-foreground">
+              <p className="font-sans text-sm font-semibold text-foreground">
                 Ask me anything
               </p>
             </div>
-            <div className="flex w-full max-w-80 flex-col items-stretch gap-4">
+            <div className="flex w-full max-w-72 flex-col items-stretch gap-2.5">
               {SUGGESTED_QUESTIONS.map((q) => (
                 <Button
                   key={q.text}
@@ -290,9 +291,9 @@ export function RioBotChatPanel({ onClose, className }: RioBotChatPanelProps) {
                   variant="outline"
                   disabled={isLoading}
                   onClick={() => handleSuggestion(q.text)}
-                  className="grid h-auto w-full grid-cols-[32px_1fr] justify-center gap-2 rounded-full border-2 bg-transparent px-15 py-4 text-left text-base leading-snug font-semibold whitespace-normal shadow-none hover:bg-foreground/10 md:text-sm"
+                  className="grid h-auto w-full grid-cols-[24px_1fr] items-center gap-2 rounded-full border bg-transparent px-5 py-2.5 text-left text-[0.8rem] leading-snug font-medium whitespace-normal shadow-none hover:bg-foreground/6 md:text-[0.8rem]"
                   style={{
-                    borderColor: q.color,
+                    borderColor: `color-mix(in oklab, ${q.color}, transparent 50%)`,
                     color: q.color,
                   }}
                 >
@@ -322,7 +323,7 @@ export function RioBotChatPanel({ onClose, className }: RioBotChatPanelProps) {
             {msg.role === "assistant" && <BotAvatar />}
             <div
               className={cn(
-                "max-w-[82%] rounded-xl px-3.5 py-2.5 text-sm leading-relaxed",
+                "max-w-[82%] rounded-lg px-3.5 py-2.5 text-sm leading-relaxed",
                 msg.role === "user"
                   ? "rounded-br-sm bg-primary text-primary-foreground"
                   : "rounded-bl-sm bg-tertiary/80 text-body-text",
@@ -386,7 +387,7 @@ export function RioBotChatPanel({ onClose, className }: RioBotChatPanelProps) {
             className="flex items-end gap-2"
           >
             <BotAvatar />
-            <div className="rounded-xl rounded-bl-sm bg-tertiary/80 px-3.5 py-2.5">
+            <div className="rounded-lg rounded-bl-sm bg-tertiary/80 px-3.5 py-2.5">
               <TypingIndicator />
             </div>
           </motion.div>
@@ -408,12 +409,12 @@ export function RioBotChatPanel({ onClose, className }: RioBotChatPanelProps) {
       {/* Input */}
       <form
         onSubmit={handleSubmit}
-        className="border-t border-border/40 bg-secondary/30 px-3 py-3"
+        className="border-t border-border/30 bg-secondary/30 px-3 py-2"
       >
         <label htmlFor="interview-bot-input" className="sr-only">
           Ask Rio a question
         </label>
-        <div className="flex items-center gap-2 rounded-2xl border border-border/40 bg-secondary px-3 py-2 transition-colors focus-within:border-primary/30 focus-within:ring-1 focus-within:ring-ring/30 md:gap-2 md:px-3 md:py-1.5">
+        <div className="flex items-center gap-2 rounded-xl border border-border/35 bg-secondary px-3 py-1.5 transition-colors focus-within:border-primary/30 focus-within:ring-1 focus-within:ring-ring/30">
           <textarea
             id="interview-bot-input"
             ref={inputRef}
@@ -423,7 +424,7 @@ export function RioBotChatPanel({ onClose, className }: RioBotChatPanelProps) {
             enterKeyHint="send"
             placeholder="Ask a question..."
             rows={1}
-            className="max-h-24 min-h-[calc(max(16px,1rem)+var(--spacing)*2)] flex-1 resize-none overflow-y-auto bg-transparent p-0 text-[max(16px,1rem)] leading-snug outline-none placeholder:text-body-text/30 md:min-h-0 md:py-1 md:text-sm"
+            className="max-h-24 min-h-[calc(max(16px,1rem)+var(--spacing)*2)] flex-1 resize-none overflow-y-auto bg-transparent p-0 text-[max(16px,1rem)] leading-snug outline-none placeholder:text-body-text/25 md:min-h-0 md:py-0.5 md:text-sm"
             style={{ fieldSizing: "content" } as React.CSSProperties}
           />
           <motion.div
