@@ -1,12 +1,11 @@
 "use client";
 
 import {
-  ArrowDown01Icon,
   Briefcase01Icon,
   BubbleChatIcon,
-  CodeSimpleIcon,
+  Cancel01Icon, CodeSimpleIcon,
   Refresh01Icon,
-  SentIcon,
+  SentIcon
 } from "@hugeicons/core-free-icons";
 import { HugeiconsIcon } from "@hugeicons/react";
 import { PawPrint } from "lucide-react";
@@ -212,12 +211,13 @@ export function RioBotChatPanel({ onClose, className }: RioBotChatPanelProps) {
             size="icon-sm"
             onClick={reset}
             aria-label="New conversation"
-            className="text-body-text/50 hover:bg-foreground/10 hover:text-foreground"
+            className="text-body-text/50 hover:bg-foreground/10 hover:text-foreground size-10"
           >
             <HugeiconsIcon
               icon={Refresh01Icon}
-              size={18}
+              size={32}
               color="currentColor"
+              className="size-5"
               strokeWidth={2}
             />
           </Button>
@@ -229,13 +229,14 @@ export function RioBotChatPanel({ onClose, className }: RioBotChatPanelProps) {
             onClick={onClose}
             title="Close"
             aria-label="Close RioBot"
-            className="text-body-text/50 hover:bg-foreground/10 hover:text-foreground"
+            className="text-body-text/50 hover:bg-destructive/10 hover:text-destructive/50 size-10"
           >
             <HugeiconsIcon
-              icon={ArrowDown01Icon}
-              size={24}
+              icon={Cancel01Icon}
+              size={32}
               color="currentColor"
-              strokeWidth={2.5}
+              className="size-6"
+              strokeWidth={2}
             />
           </Button>
         )}
@@ -425,32 +426,29 @@ export function RioBotChatPanel({ onClose, className }: RioBotChatPanelProps) {
             className="max-h-24 min-h-[calc(max(16px,1rem)+var(--spacing)*2)] flex-1 resize-none overflow-y-auto bg-transparent p-0 text-[max(16px,1rem)] leading-snug outline-none placeholder:text-body-text/30 md:min-h-0 md:py-1 md:text-sm"
             style={{ fieldSizing: "content" } as React.CSSProperties}
           />
-          <AnimatePresence>
-            {input.trim() && (
-              <motion.div
-                initial={{ scale: 0, opacity: 0 }}
-                animate={{ scale: 1, opacity: 1 }}
-                exit={{ scale: 0, opacity: 0 }}
-                transition={{ duration: 0.12, ease: "easeOut" }}
-                className="flex shrink-0 items-center justify-center"
-              >
-                <Button
-                  type="submit"
-                  size="icon-sm"
-                  disabled={isLoading}
-                  className="shrink-0 rounded-full"
-                  aria-label="Send message"
-                >
-                  <HugeiconsIcon
-                    icon={SentIcon}
-                    size={24}
-                    color="currentColor"
-                    strokeWidth={2}
-                  />
-                </Button>
-              </motion.div>
-            )}
-          </AnimatePresence>
+          <motion.div
+            animate={{
+              scale: input.trim() ? 1 : 0,
+              opacity: input.trim() ? 1 : 0,
+            }}
+            transition={{ duration: 0.12, ease: "easeOut" }}
+            className="flex shrink-0 items-center justify-center"
+          >
+            <Button
+              type="submit"
+              size="icon-sm"
+              disabled={isLoading || !input.trim()}
+              className="shrink-0 rounded-full"
+              aria-label="Send message"
+            >
+              <HugeiconsIcon
+                icon={SentIcon}
+                size={24}
+                color="currentColor"
+                strokeWidth={2}
+              />
+            </Button>
+          </motion.div>
         </div>
       </form>
     </div>
