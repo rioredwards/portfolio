@@ -3,7 +3,7 @@
 import { BubbleChatIcon } from "@hugeicons/core-free-icons";
 import { HugeiconsIcon } from "@hugeicons/react";
 import { motion } from "motion/react";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 import { Button } from "@/components/ui/button";
@@ -11,7 +11,9 @@ import { cn } from "@/lib/utils";
 
 export function InterviewBot() {
   const router = useRouter();
+  const pathname = usePathname();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const isOnRiobotPage = pathname === "/riobot";
 
   useEffect(() => {
     function handleMobileMenuState(event: Event) {
@@ -43,7 +45,10 @@ export function InterviewBot() {
       <motion.div
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
-        className={cn(isMobileMenuOpen && "hidden md:block")}
+        className={cn(
+          isOnRiobotPage && "hidden",
+          isMobileMenuOpen && !isOnRiobotPage && "hidden md:block",
+        )}
       >
         <Button
           size="icon-xl"
