@@ -3,7 +3,8 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "RioBot",
-  description: "Ask RioBot anything about Rio Edwards — his work, tech stack, and projects.",
+  description:
+    "Ask RioBot anything about Rio Edwards — his work, tech stack, and projects.",
 };
 
 export default function RioBotPage() {
