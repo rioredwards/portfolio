@@ -8,6 +8,7 @@ import {
 } from "@/components/ui/navigation-menu";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 const navItems = [
   { label: "Home", href: "/" },
@@ -16,6 +17,16 @@ const navItems = [
 ];
 
 export function Navbar() {
+  const pathname = usePathname();
+
+  function isActiveLink(href: string): boolean {
+    if (href === "/") {
+      return pathname === "/";
+    }
+
+    return pathname === href || pathname.startsWith(`${href}/`);
+  }
+
   return (
     <header
       id="navbar"
@@ -25,6 +36,7 @@ export function Navbar() {
         <div className="pointer-events-auto flex items-center gap-2 rounded-full bg-sidebar/80 px-4 py-2 text-sidebar-foreground backdrop-blur-sm">
           <NavigationMenuList className="flex-wrap">
             {navItems.map((item) => {
+              const isActive = isActiveLink(item.href);
               const linkClasses = cn(
                 // Override NavigationMenuLink defaults
                 "flex! flex-row! items-center gap-0! rounded-full!",
@@ -40,7 +52,11 @@ export function Navbar() {
 
               return (
                 <NavigationMenuItem key={item.href}>
-                  <NavigationMenuLink asChild>
+                  <NavigationMenuLink
+                    asChild
+                    data-active={isActive ? "true" : undefined}
+                    aria-current={isActive ? "page" : undefined}
+                  >
                     {item.hardNav ? (
                       <a href={item.href} className={linkClasses}>
                         {item.label}

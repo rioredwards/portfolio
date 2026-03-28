@@ -1,5 +1,9 @@
 import { defineConfig, devices } from "@playwright/test";
 
+const playwrightHost = "127.0.0.1";
+const playwrightPort = process.env.PLAYWRIGHT_PORT ?? "3100";
+const playwrightBaseUrl = `http://${playwrightHost}:${playwrightPort}`;
+
 /**
  * See https://playwright.dev/docs/test-configuration.
  */
@@ -20,7 +24,7 @@ export default defineConfig({
   timeout: 60_000,
   use: {
     /* Base URL to use in actions like `await page.goto('/')`. */
-    baseURL: "http://127.0.0.1:3100",
+    baseURL: playwrightBaseUrl,
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: "on-first-retry",
@@ -58,9 +62,8 @@ export default defineConfig({
 
   /* Run your local dev server before starting the tests */
   webServer: {
-    command:
-      "bun run build && bun run start -- --hostname 127.0.0.1 --port 3100",
-    url: "http://127.0.0.1:3100",
+    command: `bun run build && bun run start -- --hostname ${playwrightHost} --port ${playwrightPort}`,
+    url: playwrightBaseUrl,
     reuseExistingServer: process.env.PW_REUSE_SERVER === "1",
     timeout: 120_000,
   },
