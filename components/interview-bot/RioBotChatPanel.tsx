@@ -5,13 +5,14 @@ import {
   BubbleChatIcon,
   Cancel01Icon,
   CodeSimpleIcon,
+  MoreHorizontalIcon,
   Refresh01Icon,
   SentIcon,
 } from "@hugeicons/core-free-icons";
 import { HugeiconsIcon } from "@hugeicons/react";
 import { PawPrint } from "lucide-react";
-import { motion } from "motion/react";
-import { useEffect, useRef, useState } from "react";
+import { AnimatePresence, motion } from "motion/react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import ReactMarkdown from "react-markdown";
 
 import { Button } from "@/components/ui/button";
@@ -30,7 +31,7 @@ const SUGGESTED_QUESTIONS: {
         icon={CodeSimpleIcon}
         size={64}
         color="currentColor"
-        className="size-5 md:size-4"
+        className="size-5"
         strokeWidth={2}
       />
     ),
@@ -38,7 +39,7 @@ const SUGGESTED_QUESTIONS: {
   },
   {
     text: "Tell me about DogTown",
-    icon: <PawPrint className="size-5 md:size-4" />,
+    icon: <PawPrint className="size-5" />,
     color: "#8E5140",
   },
   {
@@ -48,7 +49,7 @@ const SUGGESTED_QUESTIONS: {
         icon={Briefcase01Icon}
         size={64}
         color="currentColor"
-        className="size-5 md:size-4"
+        className="size-5"
         strokeWidth={2}
       />
     ),
@@ -155,10 +156,33 @@ export function RioBotChatPanel({
   className,
 }: RioBotChatPanelProps) {
   const [input, setInput] = useState("");
+  const [menuOpen, setMenuOpen] = useState(false);
   const { messages, isLoading, error, sendMessage, reset } = useInterviewBot();
   const bottomRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLTextAreaElement>(null);
+  const menuRef = useRef<HTMLDivElement>(null);
+  const menuBtnRef = useRef<HTMLButtonElement>(null);
   const full = variant === "full";
+
+  // Close menu on outside click
+  const handleClickOutside = useCallback((e: MouseEvent) => {
+    if (
+      menuRef.current &&
+      !menuRef.current.contains(e.target as Node) &&
+      menuBtnRef.current &&
+      !menuBtnRef.current.contains(e.target as Node)
+    ) {
+      setMenuOpen(false);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (menuOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+      return () =>
+        document.removeEventListener("mousedown", handleClickOutside);
+    }
+  }, [menuOpen, handleClickOutside]);
 
   useEffect(() => {
     return () => {
@@ -204,69 +228,61 @@ export function RioBotChatPanel({
   const contentWidth = full ? "mx-auto w-full max-w-2xl" : "";
 
   return (
-    <div className={cn("flex flex-col overflow-hidden", className)}>
-      {/* Header */}
-      <div
-        className={cn(
-          "border-b border-border/40",
-          full ? "px-6 py-3" : "px-4 py-2.5",
-        )}
-      >
-        <div
-          className={cn(
-            "relative flex items-center gap-2.5",
-            contentWidth,
-          )}
-        >
-          <ChatHeaderAvatar />
-          <div className="min-w-0 flex-1">
-            <a
-              href="/riobot"
-              className="font-sans text-[1.05rem] leading-tight font-bold tracking-tight text-foreground transition-colors hover:text-primary"
-            >
-              RioBot
-            </a>
-            <p className="mt-px text-xs leading-tight text-body-text/45">
-              Twice the smarts, half the sentience!
-            </p>
+    <div className={cn("flex flex-col", !full && "overflow-hidden", className)}>
+      {/* Header — compact (modal) only */}
+      {!full && (
+        <div className="border-b border-border/40 px-4 py-2.5">
+          <div className="relative flex items-center gap-2.5">
+            <ChatHeaderAvatar />
+            <div className="min-w-0 flex-1">
+              <a
+                href="/riobot"
+                className="font-sans text-[1.05rem] leading-tight font-bold tracking-tight text-foreground transition-colors hover:text-primary"
+              >
+                RioBot
+              </a>
+              <p className="mt-px text-xs leading-tight text-body-text/45">
+                Twice the smarts, half the sentience!
+              </p>
+            </div>
+            {hasMessages && (
+              <Button
+                variant="ghost"
+                size="icon-sm"
+                onClick={reset}
+                aria-label="New conversation"
+                className="size-8 text-body-text/40 hover:bg-foreground/8 hover:text-foreground"
+              >
+                <HugeiconsIcon
+                  icon={Refresh01Icon}
+                  size={32}
+                  color="currentColor"
+                  className="size-4"
+                  strokeWidth={2}
+                />
+              </Button>
+            )}
+            {onClose && (
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={onClose}
+                title="Close"
+                aria-label="Close RioBot"
+                className="size-8 text-body-text/40 hover:bg-destructive/8 hover:text-destructive/50"
+              >
+                <HugeiconsIcon
+                  icon={Cancel01Icon}
+                  size={32}
+                  color="currentColor"
+                  className="size-5"
+                  strokeWidth={2}
+                />
+              </Button>
+            )}
           </div>
-          {hasMessages && (
-            <Button
-              variant="ghost"
-              size="icon-sm"
-              onClick={reset}
-              aria-label="New conversation"
-              className="size-8 text-body-text/40 hover:bg-foreground/8 hover:text-foreground"
-            >
-              <HugeiconsIcon
-                icon={Refresh01Icon}
-                size={32}
-                color="currentColor"
-                className="size-4"
-                strokeWidth={2}
-              />
-            </Button>
-          )}
-          {onClose && (
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={onClose}
-              title="Close"
-              aria-label="Close RioBot"
-              className="size-8 text-body-text/40 hover:bg-destructive/8 hover:text-destructive/50"
-            >
-              <HugeiconsIcon
-                icon={Cancel01Icon}
-                size={32}
-                color="currentColor"
-                className="size-5"
-                strokeWidth={2}
-              />
-            </Button>
-          )}
         </div>
-      </div>
+      )}
 
       {/* Messages */}
       <div
@@ -283,41 +299,73 @@ export function RioBotChatPanel({
         <div
           className={cn(
             "space-y-4 py-3",
-            full ? "mx-auto w-full max-w-2xl px-6" : "px-4",
+            full ? "mx-auto w-full max-w-2xl px-6 pt-16" : "px-4",
+            !hasMessages && "flex min-h-full flex-col",
           )}
         >
           {/* Empty state with suggestions */}
           {!hasMessages && !isLoading && (
             <motion.div
-              initial={{ opacity: 0, y: 8 }}
+              initial={full ? false : { opacity: 0, y: 8 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.3, delay: 0.1 }}
-              className="flex min-h-full w-full max-w-full flex-col items-center justify-center gap-3.5 px-2 pb-4"
+              className={cn(
+                "flex w-full max-w-full flex-1 flex-col items-center justify-center px-2 pb-4",
+                full ? "gap-6" : "gap-3.5",
+              )}
             >
               <div className="w-full text-center">
-                <div className="relative mx-auto mb-4 flex h-[4.5rem] w-[4.5rem] shrink-0 items-center justify-center">
+                <div
+                  className={cn(
+                    "relative mx-auto flex shrink-0 items-center justify-center",
+                    full ? "mb-5 h-28 w-28" : "mb-4 h-[4.5rem] w-[4.5rem]",
+                  )}
+                >
                   <SparkleAccent
-                    size={17}
+                    size={full ? 24 : 17}
                     className="absolute top-0 right-0 text-primary/25"
                   />
                   <SparkleAccent
-                    size={10}
+                    size={full ? 14 : 10}
                     className="absolute bottom-0 left-0 text-primary/25"
                   />
-                  <div className="flex size-16 items-center justify-center rounded-[1.1rem] border border-border/30 bg-[color-mix(in_oklab,var(--theme-foreground-primary)_38%,var(--theme-background-secondary)_62%)] [corner-shape:squircle]">
+                  <div
+                    className={cn(
+                      "flex items-center justify-center border border-border/30 bg-[color-mix(in_oklab,var(--theme-foreground-primary)_38%,var(--theme-background-secondary)_62%)] [corner-shape:squircle]",
+                      full
+                        ? "size-24 rounded-[1.5rem]"
+                        : "size-16 rounded-[1.1rem]",
+                    )}
+                  >
                     <HugeiconsIcon
                       icon={BubbleChatIcon}
-                      size={24}
+                      size={full ? 36 : 24}
                       color="var(--color-primary)"
                       strokeWidth={2}
                     />
                   </div>
                 </div>
-                <p className="font-sans text-sm font-semibold text-foreground">
-                  Ask me anything
-                </p>
+                {full ? (
+                  <>
+                    <h1 className="font-sans text-xl font-bold tracking-tight text-foreground">
+                      RioBot
+                    </h1>
+                    <p className="mt-1 text-sm text-body-text/50">
+                      Twice the smarts, half the sentience!
+                    </p>
+                  </>
+                ) : (
+                  <p className="font-sans text-sm font-semibold text-foreground">
+                    Ask me anything
+                  </p>
+                )}
               </div>
-              <div className="flex w-full max-w-72 flex-col items-stretch gap-2.5">
+              <div
+                className={cn(
+                  "flex flex-col items-stretch",
+                  full ? "w-full max-w-sm gap-3" : "w-full max-w-72 gap-2.5",
+                )}
+              >
                 {SUGGESTED_QUESTIONS.map((q) => (
                   <Button
                     key={q.text}
@@ -325,7 +373,12 @@ export function RioBotChatPanel({
                     variant="outline"
                     disabled={isLoading}
                     onClick={() => handleSuggestion(q.text)}
-                    className="grid h-auto w-full grid-cols-[24px_1fr] items-center gap-2 rounded-full border bg-transparent px-5 py-2.5 text-left text-[0.8rem] leading-snug font-medium whitespace-normal shadow-none hover:bg-foreground/6 md:text-[0.8rem]"
+                    className={cn(
+                      "grid h-auto w-full items-center rounded-full border bg-transparent text-left leading-snug font-medium whitespace-normal shadow-none hover:bg-foreground/6",
+                      full
+                        ? "grid-cols-[28px_1fr] gap-2.5 px-6 py-3.5 text-[0.9rem]"
+                        : "grid-cols-[24px_1fr] gap-2 px-5 py-2.5 text-[0.8rem] md:text-[0.8rem]",
+                    )}
                     style={{
                       borderColor: `color-mix(in oklab, ${q.color}, transparent 50%)`,
                       color: q.color,
@@ -450,13 +503,10 @@ export function RioBotChatPanel({
       </div>
 
       {/* Input */}
-      <form
-        onSubmit={handleSubmit}
+      <div
         className={cn(
           "border-t border-border/30",
-          full
-            ? "bg-background px-6 py-3"
-            : "bg-secondary/30 px-3 py-2",
+          full ? "bg-background px-6 py-3" : "bg-secondary/30 px-3 py-2",
         )}
       >
         <div className={contentWidth}>
@@ -465,10 +515,61 @@ export function RioBotChatPanel({
           </label>
           <div
             className={cn(
-              "flex items-center gap-2 border border-border/35 bg-secondary px-3 transition-colors focus-within:border-primary/30 focus-within:ring-1 focus-within:ring-ring/30",
-              full ? "rounded-2xl py-2.5" : "rounded-xl py-1.5",
+              "flex items-center gap-2 border border-border/35 bg-secondary transition-colors focus-within:border-primary/30 focus-within:ring-1 focus-within:ring-ring/30",
+              full
+                ? "rounded-2xl py-1.5 pr-3 pl-1.5"
+                : "rounded-xl px-3 py-1.5",
             )}
           >
+            {full && (
+              <div className="relative shrink-0">
+                <button
+                  ref={menuBtnRef}
+                  type="button"
+                  onClick={() => setMenuOpen((v) => !v)}
+                  className="flex items-center justify-center rounded-full p-1.5 text-body-text/40 transition-colors hover:bg-foreground/8 hover:text-foreground"
+                  aria-label="Chat options"
+                  aria-expanded={menuOpen}
+                >
+                  <HugeiconsIcon
+                    icon={MoreHorizontalIcon}
+                    size={20}
+                    color="currentColor"
+                    strokeWidth={2}
+                  />
+                </button>
+                <AnimatePresence>
+                  {menuOpen && (
+                    <motion.div
+                      ref={menuRef}
+                      initial={{ opacity: 0, y: 6, scale: 0.95 }}
+                      animate={{ opacity: 1, y: 0, scale: 1 }}
+                      exit={{ opacity: 0, y: 6, scale: 0.95 }}
+                      transition={{ duration: 0.15, ease: "easeOut" }}
+                      className="absolute bottom-full left-0 z-[60] mb-2 min-w-44 rounded-xl border border-border/40 bg-secondary p-1 shadow-lg"
+                    >
+                      <button
+                        type="button"
+                        onClick={() => {
+                          reset();
+                          setMenuOpen(false);
+                          inputRef.current?.focus();
+                        }}
+                        className="flex w-full items-center gap-2.5 rounded-lg px-3 py-2 text-sm font-medium text-foreground transition-colors hover:bg-foreground/8"
+                      >
+                        <HugeiconsIcon
+                          icon={Refresh01Icon}
+                          size={16}
+                          color="currentColor"
+                          strokeWidth={2}
+                        />
+                        New conversation
+                      </button>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+            )}
             <textarea
               id="interview-bot-input"
               ref={inputRef}
@@ -490,9 +591,10 @@ export function RioBotChatPanel({
               className="flex shrink-0 items-center justify-center"
             >
               <Button
-                type="submit"
+                type="button"
                 size="icon-sm"
                 disabled={isLoading || !input.trim()}
+                onClick={() => handleSubmit()}
                 className="shrink-0 rounded-full"
                 aria-label="Send message"
               >
@@ -506,7 +608,7 @@ export function RioBotChatPanel({
             </motion.div>
           </div>
         </div>
-      </form>
+      </div>
     </div>
   );
 }
