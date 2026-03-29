@@ -66,3 +66,42 @@ Use `brew info --json=v2 --cask <name>` to retrieve metadata non-interactively.
 - See Also: ERR-20260304-001
 
 ---
+
+## [ERR-20260328-001] eslint_missing_test_results_dir
+
+**Logged**: 2026-03-28T15:45:00-07:00
+**Priority**: medium
+**Status**: resolved
+**Area**: tests
+
+### Summary
+
+`npm run lint` failed in the RioBot worktree because ESLint tried to scan Playwright output directories that did not exist yet.
+
+### Error
+
+```text
+Error: ENOENT: no such file or directory, scandir '/Users/rioredwards/dev/portfolio/.claude/worktrees/ribot-parallel-routes/test-results'
+```
+
+### Context
+
+- Command attempted: `npm run lint`
+- Worktree: `/Users/rioredwards/dev/portfolio/.claude/worktrees/ribot-parallel-routes`
+- Cause: `eslint.config.mjs` did not ignore `test-results/**` or `playwright-report/**`
+
+### Suggested Fix
+
+Ignore Playwright output directories in `eslint.config.mjs` so lint does not depend on whether test artifacts happen to exist.
+
+### Metadata
+
+- Reproducible: yes
+- Related Files: `eslint.config.mjs`
+
+### Resolution
+
+- **Resolved**: 2026-03-28T15:45:00-07:00
+- **Notes**: Added `test-results/**` and `playwright-report/**` to `globalIgnores`, then reran lint successfully.
+
+---
