@@ -12,14 +12,17 @@ import { HugeiconsIcon } from "@hugeicons/react";
 import { AnimatePresence, motion } from "motion/react";
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { toast } from "sonner";
 
 const socialLinks = getSocialLinks();
 
 export function MobileMenu() {
+  const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
   const [isChatOpen, setIsChatOpen] = useState(false);
+  const isOnRiobotPage = pathname === "/riobot";
   const [copiedEmail, setCopiedEmail] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
@@ -123,7 +126,7 @@ export function MobileMenu() {
       <motion.div
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
-        className={`fixed bottom-6 left-6 z-50 md:hidden ${isChatOpen ? "hidden" : "block"}`}
+        className={`fixed bottom-6 left-6 z-50 md:hidden ${isChatOpen || isOnRiobotPage ? "hidden" : "block"}`}
       >
         <Button
           onClick={() => setIsOpen(true)}

@@ -623,26 +623,25 @@
   margin-top: 0 !important;
 }
 
-/* RioBot scroll pane — same tokens as @layer base scrollbars (nested overflow needs explicit webkit selectors). */
+/* RioBot scroll pane — thin, receding scrollbar that stays out of the way. */
 .interview-bot-messages {
   scrollbar-width: thin;
-  scrollbar-color: color-mix(in oklab, var(--theme-border), transparent 30%)
-    var(--theme-background-secondary);
+  scrollbar-color: color-mix(in oklab, var(--theme-border), transparent 55%)
+    transparent;
 }
 .interview-bot-messages::-webkit-scrollbar {
-  width: 10px;
-  height: 10px;
+  width: 6px;
+  height: 6px;
 }
 .interview-bot-messages::-webkit-scrollbar-track {
-  background: var(--theme-background-secondary);
+  background: transparent;
 }
 .interview-bot-messages::-webkit-scrollbar-thumb {
-  background: var(--theme-border);
+  background: color-mix(in oklab, var(--theme-border), transparent 40%);
   border-radius: 999px;
-  border: 2px solid var(--theme-background-secondary);
 }
 .interview-bot-messages::-webkit-scrollbar-thumb:hover {
-  background: var(--theme-ring);
+  background: var(--theme-border);
 }
 
 /* 

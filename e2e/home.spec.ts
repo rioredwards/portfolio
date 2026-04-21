@@ -51,4 +51,19 @@ test.describe("Homepage content", () => {
     await expect(home.sectionHeading("Contact")).toBeVisible();
     await expect(home.contactForm()).toBeVisible();
   });
+
+  test("opens the RioBot modal from the floating FAB", async ({ page }) => {
+    await page.getByRole("button", { name: "Open RioBot" }).click();
+
+    await expect(page).toHaveURL(/\/riobot$/);
+    await expect(
+      page.getByRole("dialog", { name: /RioBot Chat/i }),
+    ).toBeVisible();
+    await expect(
+      page.getByRole("button", { name: "Close RioBot" }),
+    ).toBeVisible();
+    await expect(
+      page.getByRole("button", { name: "Chat options" }),
+    ).toHaveCount(0);
+  });
 });

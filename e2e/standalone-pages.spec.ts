@@ -75,6 +75,25 @@ test.describe("Privacy page", () => {
   });
 });
 
+test.describe("RioBot page", () => {
+  test("renders the standalone RioBot layout with chat options", async ({
+    page,
+  }) => {
+    await page.goto("/riobot");
+    await page.waitForLoadState("domcontentloaded");
+
+    await expect(
+      page.getByRole("heading", { name: "RioBot", level: 1 }),
+    ).toBeVisible();
+    await expect(
+      page.getByRole("button", { name: "Chat options" }),
+    ).toBeVisible();
+    await expect(
+      page.getByRole("dialog", { name: /RioBot Chat/i }),
+    ).toHaveCount(0);
+  });
+});
+
 test.describe("404 Not Found page", () => {
   test("renders 404 content for unknown routes", async ({ page }) => {
     await page.goto("/this-page-does-not-exist-12345");

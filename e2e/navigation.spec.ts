@@ -41,6 +41,25 @@ test.describe("Site navigation", () => {
   });
 });
 
+test("shows the current page as active in the page navigation", async ({
+  page,
+}) => {
+  const navTargets = [
+    { url: "/", label: "Home" },
+    { url: "/resume", label: "Resume" },
+    { url: "/riobot", label: "RioBot" },
+  ];
+
+  for (const target of navTargets) {
+    await page.goto(target.url, { waitUntil: "domcontentloaded" });
+
+    const activeLink = page.getByRole("link", { name: target.label }).first();
+
+    await expect(activeLink).toHaveAttribute("data-active", "true");
+    await expect(activeLink).toHaveAttribute("aria-current", "page");
+  }
+});
+
 test.describe("Mobile navigation", () => {
   test.use({ viewport: { width: 430, height: 900 } });
 
