@@ -70,7 +70,7 @@ export function ResumeContent({ data }: ResumeContentProps) {
       <section className="experience">
         <h3 className="section-title">EXPERIENCE</h3>
         {experience.map((job) => (
-          <div key={`${job.name}-${job.startDate}`} className="entry">
+          <div key={job.id ?? `${job.name}-${job.startDate}`} className="entry">
             <div className="entry-header">
               <div className="entry-title-block">
                 <span className="entry-position">
@@ -97,8 +97,8 @@ export function ResumeContent({ data }: ResumeContentProps) {
                   <li key={i}>{parseInlineMarkdown(highlight)}</li>
                 ))}
               {"projects" in job &&
-                job.projects.map((project, i) => (
-                  <li key={i}>
+                job.projects.map((project) => (
+                  <li key={project.id ?? project.title}>
                     <ProjectItem {...project} />
                   </li>
                 ))}
@@ -151,7 +151,10 @@ export function ResumeContent({ data }: ResumeContentProps) {
         <h3 className="section-title">EDUCATION</h3>
         {education.map((item) => {
           return (
-            <div key={item.institution} className="entry">
+            <div
+              key={item.id ?? `${item.institution}-${item.certificate}`}
+              className="entry"
+            >
               <div className="entry-header">
                 <p className="entry-title">
                   <strong>{item.certificate}</strong>

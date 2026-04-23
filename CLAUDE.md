@@ -128,7 +128,7 @@ The resume page renders data from `content/resume.json`. PDF generation is handl
 
 ## Important Conventions
 
-**Icons**: Use Hugeicons, not lucide-react:
+**Icons**: Prefer Hugeicons, but lucide-react is also fine:
 
 ```typescript
 import { IconName } from "@hugeicons/core-free-icons";

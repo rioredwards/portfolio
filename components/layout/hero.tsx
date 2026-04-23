@@ -138,14 +138,14 @@ export function Hero() {
       I{" "}
       <RotatingWord
         words={verbs}
-        direction="toggle"
+        direction="up"
         color="var(--color-primary)"
         className="w-[5.4rem] font-mono text-[1.35rem] font-bold"
         pauseDuration={2000}
       />{" "}
       <RotatingWord
         words={adjectives}
-        direction="toggle"
+        direction="up"
         color="var(--color-accent)"
         className="w-35 font-mono text-[1.35rem] font-bold"
         pauseDuration={2000}
@@ -153,7 +153,7 @@ export function Hero() {
       />{" "}
       <RotatingWord
         words={nouns}
-        direction="toggle"
+        direction="up"
         color="var(--color-primary)"
         className="w-[6.7rem] font-mono text-[1.35rem] font-bold"
         pauseDuration={2000}
@@ -165,7 +165,7 @@ export function Hero() {
 
   const taglineAccessible = (
     <p key="2" data-testid="hero-tagline-canonical" className="sr-only">
-      I build thoughtful software.
+      I build thoughtful user interfaces and web experiences.
     </p>
   );
 

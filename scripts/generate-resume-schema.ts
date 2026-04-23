@@ -9,9 +9,12 @@
 import { z } from "zod";
 import { writeFile } from "fs/promises";
 import { resolve } from "path";
-import { resumeSchema } from "../lib/resume";
+import { careerResumeInputSchema } from "../lib/resume";
 
-const jsonSchema = z.toJSONSchema(resumeSchema, { target: "draft-07" });
+/** Career-app resume on disk (see content/resume.json). Portfolio also accepts legacy `resumeSchema` at runtime. */
+const jsonSchema = z.toJSONSchema(careerResumeInputSchema, {
+  target: "draft-07",
+});
 
 const output = resolve("content/resume.schema.json");
 await writeFile(output, JSON.stringify(jsonSchema, null, 2) + "\n");

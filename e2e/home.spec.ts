@@ -16,7 +16,7 @@ test.describe("Homepage content", () => {
     await expect(home.heroHeading()).toBeVisible();
     await expect(home.heroTagline()).toBeAttached();
     await expect(home.heroTagline()).toContainText(
-      "I build thoughtful software.",
+      "I build thoughtful user interfaces and web experiences.",
     );
     await expect(home.resumeCta()).toBeVisible();
     await expect(home.resumeCta()).toHaveAttribute("href", "/resume");

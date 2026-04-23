@@ -1,1 +1,1 @@
-export const metaDescription = `Typescript-first full-stack engineer with 3+ years shipping maintainable web and mobile software. View my projects, experience, and get in touch.`;
+export const metaDescription = `TypeScript-first frontend engineer with 3+ years shipping React apps with accessible UX, reusable components, and scalable design systems. Comfortable in fast-moving startups and compliance-heavy environments. View my projects, experience, and get in touch.`;

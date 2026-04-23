@@ -72,7 +72,7 @@ const jsonLd = {
   "@type": "Person",
   name: "Rio Edwards",
   url: siteUrl,
-  jobTitle: "Product Engineer",
+  jobTitle: "Frontend Engineer",
   description: metaDescription,
   sameAs: [
     "https://github.com/rioredwards",
@@ -89,20 +89,20 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
   title: {
-    default: "Rio Edwards | Product Engineer",
+    default: "Rio Edwards | Frontend Engineer",
     template: "Rio Edwards | %s",
   },
   description: metaDescription,
   keywords: [
-    "product engineer",
     "frontend engineer",
+    "React developer",
     "software engineer",
-    "full-stack engineer",
-    "developer",
-    "web developer",
-    "React",
-    "Next.js",
     "TypeScript",
+    "web developer",
+    "UI developer",
+    "Next.js",
+    "React",
+    "accessibility",
     "portfolio",
     "Rio Edwards",
   ],
@@ -121,12 +121,12 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: siteUrl,
     siteName: "Rio Edwards",
-    title: "Rio Edwards | Product Engineer",
+    title: "Rio Edwards | Frontend Engineer",
     description: metaDescription,
   },
   twitter: {
     card: "summary_large_image",
-    title: "Rio Edwards | Product Engineer",
+    title: "Rio Edwards | Frontend Engineer",
     description: metaDescription,
   },
   robots: {

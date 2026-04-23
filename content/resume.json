@@ -1,51 +1,48 @@
 {
-  "$schema": "./resume.schema.json",
+  "meta": {
+    "slug": "frontend-engineer",
+    "base": "frontend-engineer.json",
+    "targetRole": "Frontend Engineer",
+    "company": "General",
+    "updatedAt": "2026-03-11"
+  },
   "basics": {
     "name": "Rio Edwards",
-    "title": "Product Engineer",
+    "title": "Frontend Engineer",
     "location": "Portland, OR",
     "email": "rioredwards@gmail.com",
     "phone": "(971) 420-5276",
     "website": "https://rioedwards.com",
     "linkedIn": "https://linkedin.com/in/rio-edwards"
   },
-  "summary": "Typescript-first full-stack engineer with _3+ years_ shipping maintainable web and mobile software. Comfortable owning UI, APIs, data, and deployment across startup builds and compliance-heavy environments.",
+  "summary": "TypeScript-first frontend engineer with _3+ years_ shipping React apps with accessible UX, reusable components, and scalable design systems. Comfortable in fast-moving startups and compliance-heavy environments.",
   "experience": [
     {
-      "name": "Experiential",
-      "title": "Co-founder & Product Engineer",
+      "id": "experiential",
+      "company": "Experiential",
+      "title": "Frontend Engineer",
       "startDate": "2024-07",
       "endDate": "2025-11",
       "projects": [
         {
+          "id": "crm-document-manager",
           "title": "CRM Document Manager",
-          "description": "A law firm needed HIPAA-compliant file management inside HubSpot. I clarified requirements and shipped a security-first solution in _5 weeks_, leveraging TDD, JWT auth, audit logging, and transactional rollback to prevent data loss. The app is now business-critical and used daily by _30+ lawyers_.",
+          "description": "A law firm needed HIPAA-compliant file management inside HubSpot. I shipped a security-first solution in _5 weeks_: a React file-tree UI with move and delete flows and an iframe-based multi-file uploader with per-file progress and retries, secured by JWT auth. Now business-critical and used daily by _30+ lawyers_.",
           "tech": [
             "TypeScript",
             "React",
-            "Express",
-            "Node.js",
             "Jest",
+            "Node.js",
+            "Express",
             "Firebase",
-            "REST API",
-            "GCP"
+            "GCP",
+            "REST API"
           ]
         },
         {
-          "title": "iOS Digital-Wellness App",
-          "description": "A client wanted an iOS app for digital wellness: usage tracking and Live Activities. After a feasibility study plus wireframes and designs, I delivered a _15-screen_ application that achieved inter-process communication across _5 heavily sandboxed extensions_. I ran an agile cadence with clear milestones, TDD, and weekly updates.",
-          "tech": [
-            "Swift",
-            "SwiftUI",
-            "TypeScript",
-            "Firebase",
-            "Figma",
-            "Asana"
-          ]
-        },
-        {
+          "id": "ohm-on-the-range-website",
           "title": "Ohm on the Range Website",
-          "description": "This music festival needed a mobile-first website that drives ticket sales. I helped focus their brand and shipped a new Next.js site in _2 weeks_. It is performant, accessible, and SEO optimized, with perfect Lighthouse scores on all pages. This contributed to a _2x increase_ in traffic and ticket sales year-over-year.",
+          "description": "This music festival needed a mobile-first website that drives ticket sales. I helped focus their brand and shipped a new Next.js site in _2 weeks_. It is performant, accessible, and SEO optimized, with perfect Lighthouse scores on all pages. This contributed to a _20% increase_ in traffic and ticket sales year-over-year.",
           "tech": [
             "Next.js",
             "React",
@@ -56,68 +53,79 @@
             "Vite",
             "Figma"
           ]
+        },
+        {
+          "id": "talerra-travel-app",
+          "title": "Talerra Travel App",
+          "description": "My co-founder and I built a travel app for long-form, photo-rich storytelling. I built the entire client in React Native and TypeScript: a WYSIWYG editor, layout-aware image components, and a responsive styling system. It ships to iOS and web from a single codebase.",
+          "tech": [
+            "TypeScript",
+            "Expo",
+            "NX Monorepo",
+            "React Native",
+            "Auth0",
+            "REST API",
+            "AWS"
+          ]
         }
       ]
     },
     {
-      "name": "Code the Dream",
+      "id": "code-the-dream",
+      "company": "Code the Dream",
       "title": "Cohort Instructional Lead",
       "startDate": "2024-01",
       "endDate": "2025-06",
       "highlights": [
-        "Led _200+ students_ through JavaScript, HTML/CSS, and React; produced _40+ hours_ of lectures and delivered PR-style feedback to improve readability and correctness."
+        "Taught _200+ students_ web development (_JavaScript, HTML/CSS, React_), translated complex topics into clear patterns, and delivered PR-style feedback on code quality and maintainability.",
+        "Produced _40+ hours_ of lectures plus learning assets (videos, infographics, articles), and partnered with staff to calibrate expectations, surface blockers early, and keep the cohort on track."
       ]
-    }
-  ],
-  "sideProjects": [
+    },
     {
-      "title": "DogTown (dogtown.dog)",
-      "description": "Built and currently self-host a full-stack photo-sharing app on a Raspberry Pi. It includes a Next.js core with a PostgreSQL database, AI image moderation, analytics, and a system profiler that powers a live metrics dashboard for observability. It deploys through Docker Compose with CI/CD via GitHub Actions.",
-      "tech": [
-        "Next.js",
-        "TypeScript",
-        "Node.js",
-        "PostgreSQL",
-        "Python",
-        "Docker",
-        "Cloudflare",
-        "NGINX"
-      ],
-      "url": "https://dogtown.dog"
+      "id": "code-for-pdx",
+      "company": "Code for PDX",
+      "title": "Frontend Engineer",
+      "startDate": "2023-09",
+      "endDate": "2024-11",
+      "highlights": [
+        "Contributed dozens of accessible, responsive React components to a civic-tech open-source codebase, working within an agile, TDD-enforced CI pipeline."
+      ]
     }
   ],
   "education": [
     {
+      "id": "certificate-in-full-stack-development",
       "institution": "Alchemy Code Lab",
-      "certificate": "Certificate in Full-Stack Development",
+      "credential": "Certificate in Full-Stack Development",
       "date": "2023-02"
     },
     {
+      "id": "aws-certified-cloud-practitioner",
       "institution": "Amazon Web Services",
-      "certificate": "AWS Certified Cloud Practitioner",
+      "credential": "AWS Certified Cloud Practitioner",
       "date": "2024-08"
     },
     {
+      "id": "associate-in-general-studies",
       "institution": "Portland Community College",
-      "certificate": "Associate in General Studies",
+      "credential": "Associate in General Studies",
       "date": "2022-03"
     }
   ],
   "skills": [
     {
-      "category": "Core Stack",
-      "skills": [
+      "label": "Core Stack",
+      "items": [
         "TypeScript",
-        "Python",
-        "SQL",
         "React",
         "Next.js",
+        "HTML",
+        "CSS",
         "Tailwind CSS",
-        "Node.js",
-        "Express",
-        "Docker",
-        "AWS",
+        "shadcn/ui",
+        "Redux Toolkit",
         "Jest",
+        "Vite",
         "Figma"
       ]
     }
