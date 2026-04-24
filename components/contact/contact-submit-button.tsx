@@ -24,7 +24,7 @@ export function ContactSubmitButton({
 
   if (success) {
     return (
-      <Button type="submit" disabled={true} size="default" variant="default">
+      <Button type="submit" disabled={true} size="lg" variant="default">
         <HugeiconsIcon
           icon={CheckmarkCircle02Icon}
           size={16}
@@ -40,7 +40,7 @@ export function ContactSubmitButton({
     <Button
       type="submit"
       disabled={!canSubmit || pending || success}
-      size="default"
+      size="lg"
       className="bg-accent hover:bg-accent-hover pointer-coarse:bg-accent-hover"
       variant="default"
     >
@@ -74,7 +74,7 @@ export function ContactSubmitButton({
             color="currentColor"
             strokeWidth={2}
           />
-          Send
+          Send message
         </>
       )}
     </Button>

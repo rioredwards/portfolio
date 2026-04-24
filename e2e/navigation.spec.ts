@@ -45,6 +45,7 @@ test.describe("Site navigation", () => {
     const navTargets = [
       { url: "/", label: "Home" },
       { url: "/resume", label: "Resume" },
+      { url: "/contact", label: "Contact" },
       { url: "/riobot", label: "RioBot" },
     ];
 

@@ -16,6 +16,7 @@ const navItems = [
   { label: "Blog", href: "/blog" },
   { label: "Resume", href: "/resume" },
   { label: "RioBot", href: "/riobot", hardNav: true },
+  { label: "Contact", href: "/contact" },
 ];
 
 export function Navbar() {
