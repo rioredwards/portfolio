@@ -1,3 +1,4 @@
+import { ChipOverflowRow } from "@/components/chip-overflow-row";
 import { FilterChipGroup } from "@/components/filter-chip-group";
 import { SectionContentWrapper } from "@/components/layout";
 import { ListPageHeader } from "@/components/list-page-header";
@@ -295,20 +296,13 @@ function CompactProjectCard({
         <p className="line-clamp-2 text-sm leading-relaxed text-secondary-foreground">
           {project.description}
         </p>
-        <div className="mt-auto flex flex-wrap gap-1.5 pt-1">
-          {project.skills.slice(0, 3).map((skill) => (
-            <span
-              key={skill}
-              className="rounded-full bg-tertiary/80 px-2.5 py-1 text-xs font-medium text-tertiary-foreground"
-            >
-              {skill}
-            </span>
-          ))}
-          {project.skills.length > 3 ? (
-            <span className="rounded-full bg-tertiary/80 px-2.5 py-1 text-xs font-medium text-muted-foreground">
-              +{project.skills.length - 3}
-            </span>
-          ) : null}
+        <div className="mt-auto">
+          <ChipOverflowRow
+            items={project.skills}
+            className="pt-1"
+            chipClassName="rounded-full bg-tertiary/80 px-2.5 py-1 text-xs font-medium text-tertiary-foreground"
+            moreClassName="rounded-full bg-tertiary/80 px-2.5 py-1 text-xs font-medium text-muted-foreground"
+          />
         </div>
       </div>
     </article>
@@ -348,16 +342,12 @@ function ListProjectCard({
         <p className="line-clamp-2 text-sm leading-relaxed text-secondary-foreground">
           {project.description}
         </p>
-        <div className="hidden flex-wrap gap-1.5 sm:flex">
-          {project.skills.slice(0, 4).map((skill) => (
-            <span
-              key={skill}
-              className="rounded-full bg-tertiary/80 px-2.5 py-1 text-xs font-medium text-tertiary-foreground"
-            >
-              {skill}
-            </span>
-          ))}
-        </div>
+        <ChipOverflowRow
+          items={project.skills}
+          className="pt-1"
+          chipClassName="rounded-full bg-tertiary/80 px-2.5 py-1 text-xs font-medium text-tertiary-foreground"
+          moreClassName="rounded-full bg-tertiary/80 px-2.5 py-1 text-xs font-medium text-muted-foreground"
+        />
       </div>
     </article>
   );

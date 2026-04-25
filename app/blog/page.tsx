@@ -1,4 +1,5 @@
 import { BlogModalHandler, type RenderedBlog } from "@/components/blog";
+import { ChipOverflowRow } from "@/components/chip-overflow-row";
 import { FilterChipGroup } from "@/components/filter-chip-group";
 import { Footer, SectionContentWrapper } from "@/components/layout";
 import { ListPageHeader } from "@/components/list-page-header";
@@ -258,21 +259,12 @@ function BlogPostCard({
         </p>
 
         {tags.length > 0 ? (
-          <div className="flex flex-wrap gap-1.5 pt-1">
-            {tags.slice(0, 4).map((tag) => (
-              <span
-                key={tag}
-                className="rounded-full bg-tertiary/80 px-2.5 py-1 text-xs font-medium text-tertiary-foreground"
-              >
-                {tag}
-              </span>
-            ))}
-            {tags.length > 4 ? (
-              <span className="rounded-full bg-tertiary/80 px-2.5 py-1 text-xs font-medium text-muted-foreground">
-                +{tags.length - 4}
-              </span>
-            ) : null}
-          </div>
+          <ChipOverflowRow
+            items={tags}
+            className="pt-1"
+            chipClassName="rounded-full bg-tertiary/80 px-2.5 py-1 text-xs font-medium text-tertiary-foreground"
+            moreClassName="rounded-full bg-tertiary/80 px-2.5 py-1 text-xs font-medium text-muted-foreground"
+          />
         ) : null}
       </div>
     </article>
