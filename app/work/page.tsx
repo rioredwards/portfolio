@@ -28,7 +28,7 @@ export const metadata: Metadata = {
   },
 };
 
-const PROJECTS_PER_PAGE = 6;
+const PROJECTS_PER_PAGE = 9;
 
 interface WorkIndexPageProps {
   searchParams?: Promise<{
@@ -228,7 +228,7 @@ function CompactProjectCard({
   priority?: boolean;
 }) {
   return (
-    <article className="flex h-full flex-col overflow-hidden rounded-3xl border border-border/65 bg-card shadow-card transition-all duration-300 pointer-fine:group-hover:-translate-y-1 pointer-fine:group-hover:shadow-card-hover">
+    <article className="flex h-full flex-col overflow-hidden rounded-2xl border border-border/65 bg-card shadow-card transition-all duration-300 pointer-fine:group-hover:-translate-y-1 pointer-fine:group-hover:shadow-card-hover">
       <div
         className="relative aspect-video overflow-hidden"
         style={{ backgroundColor: project.brandColor }}
@@ -281,9 +281,9 @@ function ListProjectCard({
   priority?: boolean;
 }) {
   return (
-    <article className="flex w-full flex-col gap-4 rounded-2xl border border-border/65 bg-card p-3 shadow-card transition-all duration-300 sm:flex-row sm:items-center sm:gap-5 sm:p-4 pointer-fine:group-hover:shadow-card-hover">
+    <article className="flex w-full flex-col gap-4 rounded-xl border border-border/65 bg-card p-3 shadow-card transition-all duration-300 [--outer-padding:0.75rem] [--outer-radius:var(--radius-xl)] sm:flex-row sm:items-stretch sm:gap-5 sm:p-4 sm:[--outer-padding:1rem] pointer-fine:group-hover:shadow-card-hover">
       <div
-        className="relative aspect-video w-full shrink-0 overflow-hidden rounded-xl sm:w-52"
+        className="rounded-inset relative aspect-video w-full shrink-0 overflow-hidden sm:aspect-auto sm:w-52 sm:self-stretch"
         style={{ backgroundColor: project.brandColor }}
       >
         <Image
@@ -297,14 +297,9 @@ function ListProjectCard({
       </div>
 
       <div className="min-w-0 flex-1 space-y-2.5">
-        <div className="flex flex-wrap items-center gap-2">
-          <span className="rounded-full border border-primary/25 bg-tertiary/80 px-3 py-1 text-xs font-medium text-tertiary-foreground">
-            {project.category}
-          </span>
-          <span className="text-xs text-muted-foreground">
-            /work/{project.slug}
-          </span>
-        </div>
+        <p className="text-xs font-medium tracking-widest text-muted-foreground uppercase">
+          {project.category}
+        </p>
         <h2 className="truncate font-mazaeni text-2xl leading-none text-foreground transition-colors duration-300 group-hover:text-primary-hover">
           {project.title}
         </h2>

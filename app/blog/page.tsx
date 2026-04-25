@@ -38,7 +38,7 @@ function formatPublishedDate(date?: string) {
   }).format(new Date(`${date}T00:00:00Z`));
 }
 
-const BLOGS_PER_PAGE = 6;
+const BLOGS_PER_PAGE = 9;
 
 interface BlogIndexPageProps {
   searchParams?: Promise<{
@@ -204,7 +204,7 @@ function BlogPostCard({
   tags: string[];
 }) {
   return (
-    <article className="flex w-full flex-col gap-4 rounded-2xl border border-border/65 bg-card p-4 shadow-card transition-all duration-300 sm:flex-row sm:items-start sm:gap-5 sm:p-5 pointer-fine:group-hover:shadow-card-hover">
+    <article className="flex w-full flex-col gap-4 rounded-xl border border-border/65 bg-card p-4 shadow-card transition-all duration-300 sm:flex-row sm:items-start sm:gap-5 sm:p-5 pointer-fine:group-hover:shadow-card-hover">
       <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-border/50 bg-secondary/80 text-foreground">
         {getBlogIcon(blog.icon)}
       </div>
