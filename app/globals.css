@@ -259,6 +259,17 @@
 }
 
 @layer utilities {
+  /* Concentric (inset) border-radius: inner_r = outer_r - gap.
+     Parent sets --outer-radius and --outer-padding, child uses .rounded-inset.
+     Example:
+       <div class="rounded-xl p-4 [--outer-radius:var(--radius-xl)] [--outer-padding:1rem]">
+         <div class="rounded-inset">...</div>
+       </div>
+  */
+  .rounded-inset {
+    border-radius: max(0px, calc(var(--outer-radius) - var(--outer-padding)));
+  }
+
   /* Mobile menu responsive helpers (scale with viewport height) */
   .mm-img {
     width: clamp(96px, 24svh, 160px);

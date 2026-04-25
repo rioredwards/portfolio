@@ -48,9 +48,24 @@ lib/           # Utilities, data, server actions, and hooks
 public/        # Static assets (images, fonts)
 ```
 
+## Site routes
+
+| Path           | Description                                                          |
+| -------------- | -------------------------------------------------------------------- |
+| `/`            | Home                                                                 |
+| `/work`        | Project index (search, category filter, sort, grid/list, pagination) |
+| `/work/[slug]` | Project case study                                                   |
+| `/blog`        | Blog index (search, tag filter, pagination)                          |
+| `/blog/[slug]` | Blog post                                                            |
+| `/resume`      | Resume                                                               |
+| `/riobot`      | Interview bot (separate app surface)                                 |
+| `/privacy`     | Privacy policy                                                       |
+
+Main navigation (`components/layout/navbar.tsx`): Home, Work, Blog, Resume, RioBot.
+
 ## Resume
 
-The resume page at `/resume` renders data from `content/resume.json`. PDF generation is handled in a separate project.
+The resume page at `/resume` renders from `content/resume.json`. The site also serves a static PDF at `public/Rio_Edwards_Resume.pdf` (linked from the resume page). PDF generation is not part of this repo—create or update the file elsewhere, then commit it when it should match the JSON.
 
 ## Available Scripts
 

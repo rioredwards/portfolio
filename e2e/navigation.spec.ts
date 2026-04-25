@@ -25,18 +25,17 @@ test.describe("Site navigation", () => {
     await expect(page).toHaveURL(/#main-content$/);
   });
 
-  test("anchors in the main navigation update the URL hash", async ({
+  test("main navigation links to Work and Blog list pages", async ({
     page,
   }) => {
     const navTargets = [
-      { label: "Work", hash: "#work" },
-      { label: "Blog", hash: "#blog" },
-      { label: "Contact", hash: "#contact" },
+      { label: "Work", path: /\/work$/ },
+      { label: "Blog", path: /\/blog$/ },
     ];
 
     for (const target of navTargets) {
       await home.navigationLink(target.label).click();
-      await expect(page).toHaveURL(new RegExp(`${target.hash}$`));
+      await expect(page).toHaveURL(target.path);
     }
   });
 

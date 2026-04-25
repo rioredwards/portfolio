@@ -1,3 +1,4 @@
+import { ChipOverflowRow } from "@/components/chip-overflow-row";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
 import "./project.css";
@@ -79,16 +80,13 @@ export function Project({
         <p className="max-w-prose leading-relaxed text-secondary-foreground">
           {description}
         </p>
-        <div className="flex flex-wrap gap-2 pt-1">
-          {skills.map((skill) => (
-            <span
-              key={skill}
-              className="rounded-full bg-tertiary px-4 py-1.5 text-sm font-medium text-tertiary-foreground transition-colors"
-            >
-              {skill}
-            </span>
-          ))}
-        </div>
+        <ChipOverflowRow
+          items={skills}
+          gapClassName="gap-2"
+          className="pt-1"
+          chipClassName="rounded-full bg-tertiary px-4 py-1.5 text-sm font-medium text-tertiary-foreground transition-colors"
+          moreClassName="rounded-full bg-tertiary/90 px-4 py-1.5 text-sm font-medium text-muted-foreground"
+        />
       </article>
     </article>
   );
