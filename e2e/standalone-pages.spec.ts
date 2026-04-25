@@ -1,5 +1,40 @@
 import { expect, test } from "@playwright/test";
 
+test.describe("Contact page", () => {
+  test("renders contact form with expected fields", async ({ page }) => {
+    await page.goto("/contact");
+    await page.waitForLoadState("domcontentloaded");
+
+    await expect(
+      page.getByRole("heading", { name: /let.?s talk/i, level: 1 }),
+    ).toBeVisible();
+
+    const form = page.locator("#contact-form");
+    await expect(form).toBeVisible();
+    await expect(form.getByLabel("Full Name")).toBeVisible();
+    await expect(form.getByLabel("Email")).toBeVisible();
+    await expect(form.getByLabel("Message")).toBeVisible();
+  });
+
+  test("contact page omits the testimonials carousel", async ({ page }) => {
+    await page.goto("/contact");
+    await page.waitForLoadState("domcontentloaded");
+
+    await expect(page.locator('[aria-roledescription="carousel"]')).toHaveCount(
+      0,
+    );
+  });
+
+  test("contact page is linked from the navbar", async ({ page }) => {
+    await page.goto("/contact");
+    await page.waitForLoadState("domcontentloaded");
+
+    const contactLink = page.getByRole("link", { name: "Contact" }).first();
+    await expect(contactLink).toHaveAttribute("data-active", "true");
+    await expect(contactLink).toHaveAttribute("aria-current", "page");
+  });
+});
+
 test.describe("Resume page", () => {
   test("renders resume content with expected sections", async ({ page }) => {
     await page.goto("/resume");

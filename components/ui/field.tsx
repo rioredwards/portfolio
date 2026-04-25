@@ -231,7 +231,10 @@ function FieldError({
     <div
       role="alert"
       data-slot="field-error"
-      className={cn("text-sm font-normal text-destructive", className)}
+      className={cn(
+        "flex items-center gap-1.5 text-sm font-normal text-destructive",
+        className,
+      )}
       {...props}
     >
       <HugeiconsIcon

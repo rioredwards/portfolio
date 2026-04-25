@@ -61,7 +61,7 @@ public/        # Static assets (images, fonts)
 | `/riobot`      | Interview bot (separate app surface)                                 |
 | `/privacy`     | Privacy policy                                                       |
 
-Main navigation (`components/layout/navbar.tsx`): Home, Work, Blog, Resume, RioBot.
+Main navigation (`components/layout/navbar.tsx`): Home, Work, Blog, Resume, Contact.
 
 ## Resume
 

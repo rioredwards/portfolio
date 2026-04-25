@@ -15,7 +15,7 @@ const navItems = [
   { label: "Work", href: "/work" },
   { label: "Blog", href: "/blog" },
   { label: "Resume", href: "/resume" },
-  { label: "RioBot", href: "/riobot", hardNav: true },
+  { label: "Contact", href: "/contact" },
 ];
 
 export function Navbar() {
@@ -60,15 +60,9 @@ export function Navbar() {
                     data-active={isActive ? "true" : undefined}
                     aria-current={isActive ? "page" : undefined}
                   >
-                    {item.hardNav ? (
-                      <a href={item.href} className={linkClasses}>
-                        {item.label}
-                      </a>
-                    ) : (
-                      <Link href={item.href} className={linkClasses}>
-                        {item.label}
-                      </Link>
-                    )}
+                    <Link href={item.href} className={linkClasses}>
+                      {item.label}
+                    </Link>
                   </NavigationMenuLink>
                 </NavigationMenuItem>
               );
