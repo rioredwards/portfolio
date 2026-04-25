@@ -1,19 +1,31 @@
 import { FilterChipGroup } from "@/components/filter-chip-group";
 import { SectionContentWrapper } from "@/components/layout";
 import { ListPageHeader } from "@/components/list-page-header";
+import { mdxComponents } from "@/components/mdx";
 import { PaginationNav } from "@/components/pagination-nav";
+import {
+  ProjectModalHandler,
+  type RenderedProject,
+} from "@/components/project/index";
 import { SearchInput } from "@/components/search-input";
 import { SortSelect } from "@/components/sort-select";
 import { ViewModeToggle } from "@/components/view-mode-toggle";
+import { projectImageScope } from "@/content/projects/project-images";
 import { paginateItems, parsePageParam } from "@/lib/pagination";
-import { getAllProjectCards, type ProjectCard } from "@/lib/projects";
-import { readSingleParam } from "@/lib/query-params";
+import {
+  getAllProjectCards,
+  getAllProjectsWithContent,
+  type ProjectCard,
+} from "@/lib/projects";
+import { buildQueryHref, readSingleParam } from "@/lib/query-params";
 import { searchProjects } from "@/lib/search";
 import { sortProjects, WORK_SORT_OPTIONS } from "@/lib/sorting";
 import { cn } from "@/lib/utils";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import { MDXRemote } from "next-mdx-remote/rsc";
+import { Suspense } from "react";
 
 const workIndexDescription =
   "Browse all of Rio Edwards' software projects, case studies, and shipped product work.";
@@ -78,6 +90,29 @@ export default async function WorkIndexPage({
     PROJECTS_PER_PAGE,
   );
   const hasResults = paginatedProjects.totalItems > 0;
+
+  const projectsWithContent = getAllProjectsWithContent();
+  const renderedProjects = new Map<string, RenderedProject>();
+  for (const [slug, project] of projectsWithContent) {
+    renderedProjects.set(slug, {
+      frontmatter: project.frontmatter,
+      renderedContent: (
+        <MDXRemote
+          source={project.content}
+          components={mdxComponents}
+          options={{ scope: projectImageScope, blockJS: false }}
+        />
+      ),
+    });
+  }
+
+  const workListQuery = {
+    category: selectedCategory,
+    q: searchQuery,
+    sort: sortParam,
+    view: viewParam,
+    page: currentPage > 1 ? currentPage : null,
+  };
 
   return (
     <main id="main-content" className="relative min-h-screen bg-secondary">
@@ -173,7 +208,10 @@ export default async function WorkIndexPage({
                     )}
                   >
                     <Link
-                      href={`/work/${project.slug}`}
+                      href={buildQueryHref("/work", {
+                        ...workListQuery,
+                        project: project.slug,
+                      })}
                       className={cn(
                         "group block w-full transition-transform duration-300 outline-none",
                         "focus-visible:ring-4 focus-visible:ring-ring/30 focus-visible:ring-offset-2 focus-visible:ring-offset-secondary focus-visible:outline-none",
@@ -216,6 +254,10 @@ export default async function WorkIndexPage({
           ) : null}
         </section>
       </SectionContentWrapper>
+
+      <Suspense>
+        <ProjectModalHandler projectsMap={renderedProjects} />
+      </Suspense>
     </main>
   );
 }

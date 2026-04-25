@@ -1,18 +1,22 @@
+import { BlogModalHandler, type RenderedBlog } from "@/components/blog";
 import { FilterChipGroup } from "@/components/filter-chip-group";
 import { Footer, SectionContentWrapper } from "@/components/layout";
 import { ListPageHeader } from "@/components/list-page-header";
+import { mdxComponents } from "@/components/mdx";
 import { PaginationNav } from "@/components/pagination-nav";
 import { SearchInput } from "@/components/search-input";
 import { getBlogIcon } from "@/lib/blog-icons";
 import { getAllBlogCards, getAllBlogsWithContent } from "@/lib/blogs";
 import { DEFAULT_LOCALE } from "@/lib/constants";
 import { paginateItems, parsePageParam } from "@/lib/pagination";
-import { readSingleParam } from "@/lib/query-params";
+import { buildQueryHref, readSingleParam } from "@/lib/query-params";
 import { searchBlogs } from "@/lib/search";
 import { sortBlogs } from "@/lib/sorting";
 import { cn } from "@/lib/utils";
 import type { Metadata } from "next";
 import Link from "next/link";
+import { MDXRemote } from "next-mdx-remote/rsc";
+import { Suspense } from "react";
 
 const blogIndexDescription =
   "Browse all of Rio Edwards' blog posts, writing, and technical explainers.";
@@ -91,6 +95,26 @@ export default async function BlogIndexPage({
   );
   const hasResults = paginatedBlogs.totalItems > 0;
 
+  const renderedBlogs = new Map<string, RenderedBlog>();
+  for (const [slug, blog] of blogsWithContent) {
+    renderedBlogs.set(slug, {
+      frontmatter: blog.frontmatter,
+      renderedContent: (
+        <MDXRemote
+          source={blog.content}
+          components={mdxComponents}
+          options={{ blockJS: false }}
+        />
+      ),
+    });
+  }
+
+  const blogListQuery = {
+    tag: selectedTag,
+    q: searchQuery,
+    page: currentPage > 1 ? currentPage : null,
+  };
+
   return (
     <>
       <main id="main-content" className="relative min-h-screen bg-secondary">
@@ -153,7 +177,10 @@ export default async function BlogIndexPage({
                     return (
                       <li key={blog.slug} className="w-full">
                         <Link
-                          href={`/blog/${blog.slug}`}
+                          href={buildQueryHref("/blog", {
+                            ...blogListQuery,
+                            blog: blog.slug,
+                          })}
                           className={cn(
                             "group block w-full transition-transform duration-300 outline-none",
                             "focus-visible:ring-4 focus-visible:ring-ring/30 focus-visible:ring-offset-2 focus-visible:ring-offset-secondary focus-visible:outline-none",
@@ -186,6 +213,10 @@ export default async function BlogIndexPage({
             ) : null}
           </section>
         </SectionContentWrapper>
+
+        <Suspense>
+          <BlogModalHandler blogsMap={renderedBlogs} />
+        </Suspense>
       </main>
       <Footer />
     </>
