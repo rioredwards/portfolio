@@ -128,7 +128,7 @@ export default async function BlogIndexPage({
             <SearchInput
               basePath="/blog"
               currentValue={searchQuery}
-              placeholder="Search posts..."
+              placeholder="Search by title, tag, or description…"
               preserveParams={{ tag: selectedTag }}
             />
 

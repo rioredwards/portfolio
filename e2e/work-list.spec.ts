@@ -55,7 +55,9 @@ test.describe("Work list page", () => {
   });
 
   test("search input updates URL and filters results", async ({ page }) => {
-    const searchInput = page.getByPlaceholder("Search projects...");
+    const searchInput = page.getByPlaceholder(
+      "Search by name, category, or technology…",
+    );
     await expect(searchInput).toBeVisible();
 
     await searchInput.fill("zzzznotfound");

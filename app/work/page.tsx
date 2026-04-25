@@ -126,7 +126,7 @@ export default async function WorkIndexPage({
           <SearchInput
             basePath="/work"
             currentValue={searchQuery}
-            placeholder="Search projects..."
+            placeholder="Search by name, category, or technology…"
             preserveParams={{
               category: selectedCategory,
               sort: sortParam,

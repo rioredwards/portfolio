@@ -54,7 +54,9 @@ test.describe("Blog list page", () => {
   });
 
   test("search input updates URL and filters results", async ({ page }) => {
-    const searchInput = page.getByPlaceholder("Search posts...");
+    const searchInput = page.getByPlaceholder(
+      "Search by title, tag, or description…",
+    );
     await expect(searchInput).toBeVisible();
 
     await searchInput.fill("zzzznotfound");
@@ -80,7 +82,9 @@ test.describe("Blog list page", () => {
     await expect(page).toHaveURL(/tag=/);
 
     // Set search
-    const searchInput = page.getByPlaceholder("Search posts...");
+    const searchInput = page.getByPlaceholder(
+      "Search by title, tag, or description…",
+    );
     await searchInput.fill("test");
     await page.waitForURL(/q=test/);
 
@@ -95,7 +99,9 @@ test.describe("Blog list page", () => {
     await page.goto("/blog?q=hello");
     await page.waitForLoadState("domcontentloaded");
 
-    const searchInput = page.getByPlaceholder("Search posts...");
+    const searchInput = page.getByPlaceholder(
+      "Search by title, tag, or description…",
+    );
     await expect(searchInput).toHaveValue("hello");
   });
 });
