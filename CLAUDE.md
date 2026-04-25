@@ -116,38 +116,17 @@ order: 1
 
 ### Resume
 
-The resume has two outputs: the **HTML page** at `/resume` and the **static PDF** at `/Rio_Edwards_Resume.pdf`. Both are driven by `content/resume.json`.
+The resume page renders data from `content/resume.json`. A static PDF at `public/Rio_Edwards_Resume.pdf` is served for download. PDF generation is handled outside this project.
 
 **Key files:**
 
 - `content/resume.json` - canonical resume data (single source of truth)
-- `app/resume.css` - all resume styles, including the `@media print` block
+- `app/resume.css` - resume styles (including `@media print` for browser printing)
 - `app/resume/page.tsx` - resume page component
 - `components/resume-content.tsx` - renders the resume from JSON data
-- `public/Rio_Edwards_Resume.pdf` - the committed, pre-generated PDF
-- `scripts/generate-pdf.ts` - generates the PDF from the running dev server
+- `public/Rio_Edwards_Resume.pdf` - static PDF served to visitors
 
-**How the PDF is generated:**
-`page.pdf()` renders the `/resume` page using `@media print` styles. Margins are declared in CSS via `@page { margin: 0.5in 0.55in; }` inside the print block in `resume.css`. The `generate-pdf.ts` script passes `margin: 0` to `page.pdf()` so Playwright does not override them.
-
-**Updating the resume (standard edits):**
-
-1. Edit `content/resume.json`
-2. Start the dev server: `bun dev`
-3. Regenerate the PDF: `bun generate:pdf`
-4. Commit both files together: `content/resume.json` + `public/Rio_Edwards_Resume.pdf`
-
-**Generating a variant PDF for a job application:**
-
-1. `cp content/resume.json resume-variants/company-name.json`
-2. Edit `resume-variants/company-name.json` with tailored content
-3. Add `RESUME_LOCAL_PATH=./resume-variants/company-name.json` to `.env.local`
-4. `bun dev` (the page now renders the variant data)
-5. `bun generate:pdf -- --output ./resume-variants/company-name.pdf`
-6. Submit the variant PDF. The `resume-variants/` directory is gitignored.
-7. Remove `RESUME_LOCAL_PATH` from `.env.local` when done
-
-Never overwrite `public/Rio_Edwards_Resume.pdf` with a variant. The committed PDF must always match `content/resume.json`.
+**Updating the resume:** Edit `content/resume.json`. When the public PDF should reflect those changes, replace `public/Rio_Edwards_Resume.pdf` using your external PDF workflow and commit both files together.
 
 ## Important Conventions
 

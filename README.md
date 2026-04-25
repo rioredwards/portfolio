@@ -50,43 +50,7 @@ public/        # Static assets (images, fonts)
 
 ## Resume
 
-The resume has two outputs: the HTML page at `/resume` and a static PDF download. Both are driven by `content/resume.json`.
-
-### Updating the resume
-
-```bash
-# 1. Edit the resume data
-open content/resume.json
-
-# 2. Start the dev server
-bun dev
-
-# 3. Regenerate the PDF
-bun generate:pdf
-
-# 4. Commit both files together
-git add content/resume.json public/Rio_Edwards_Resume.pdf
-git commit -m "..."
-```
-
-### Generating a variant for a job application
-
-```bash
-# 1. Copy the base resume and tailor it
-cp content/resume.json resume-variants/company-name.json
-
-# 2. Point the dev server at the variant
-echo "RESUME_LOCAL_PATH=./resume-variants/company-name.json" >> .env.local
-bun dev
-
-# 3. Generate the variant PDF (gitignored)
-bun generate:pdf -- --output ./resume-variants/company-name.pdf
-
-# 4. Clean up when done
-# Remove RESUME_LOCAL_PATH from .env.local
-```
-
-`resume-variants/` is gitignored. Never commit a variant PDF as `public/Rio_Edwards_Resume.pdf`.
+The resume page at `/resume` renders from `content/resume.json`. The site also serves a static PDF at `public/Rio_Edwards_Resume.pdf` (linked from the resume page). PDF generation is not part of this repo—create or update the file elsewhere, then commit it when it should match the JSON.
 
 ## Available Scripts
 
