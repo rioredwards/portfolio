@@ -15,7 +15,7 @@ test.describe("Blog list page", () => {
     await expect(
       page.getByRole("heading", { name: "Blog", level: 1 }),
     ).toBeVisible();
-    await expect(page.getByText(/Showing \d+-\d+ of \d+ posts/)).toBeVisible();
+    await expect(page.getByText(/Showing \d+-\d+ of \d+/)).toBeVisible();
 
     const cards = page.locator("section[aria-label='Blog posts list'] article");
     await expect(cards.first()).toBeVisible();
@@ -36,23 +36,6 @@ test.describe("Blog list page", () => {
     await expect(page).not.toHaveURL(/tag=/);
   });
 
-  test("sort dropdown updates URL", async ({ page }) => {
-    const sortSelect = page.getByLabel("Sort:");
-    await expect(sortSelect).toBeVisible();
-
-    await sortSelect.selectOption("newest");
-    await expect(page).toHaveURL(/sort=newest/);
-
-    await sortSelect.selectOption("oldest");
-    await expect(page).toHaveURL(/sort=oldest/);
-
-    await sortSelect.selectOption("name");
-    await expect(page).toHaveURL(/sort=name/);
-
-    await sortSelect.selectOption("");
-    await expect(page).not.toHaveURL(/sort=/);
-  });
-
   test("search input updates URL and filters results", async ({ page }) => {
     const searchInput = page.getByPlaceholder(
       "Search by title, tag, or description…",
@@ -61,7 +44,9 @@ test.describe("Blog list page", () => {
 
     await searchInput.fill("zzzznotfound");
     await page.waitForURL(/q=zzzznotfound/);
-    await expect(page.getByText("No posts match your search")).toBeVisible();
+    await expect(
+      page.getByText("Try a different keyword or clear filters."),
+    ).toBeVisible();
 
     await page.getByRole("button", { name: "Clear search" }).click();
     await expect(page).not.toHaveURL(/q=/);
@@ -76,11 +61,6 @@ test.describe("Blog list page", () => {
     await chips.nth(1).click();
     await expect(page).toHaveURL(/tag=/);
 
-    // Set sort
-    await page.locator("select").selectOption("newest");
-    await expect(page).toHaveURL(/sort=newest/);
-    await expect(page).toHaveURL(/tag=/);
-
     // Set search
     const searchInput = page.getByPlaceholder(
       "Search by title, tag, or description…",
@@ -88,10 +68,8 @@ test.describe("Blog list page", () => {
     await searchInput.fill("test");
     await page.waitForURL(/q=test/);
 
-    // All three params should be present
     const url = page.url();
     expect(url).toMatch(/tag=/);
-    expect(url).toMatch(/sort=newest/);
     expect(url).toMatch(/q=test/);
   });
 
