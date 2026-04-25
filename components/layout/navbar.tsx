@@ -12,6 +12,8 @@ import { usePathname } from "next/navigation";
 
 const navItems = [
   { label: "Home", href: "/" },
+  { label: "Work", href: "/work" },
+  { label: "Blog", href: "/blog" },
   { label: "Resume", href: "/resume" },
   { label: "RioBot", href: "/riobot", hardNav: true },
 ];

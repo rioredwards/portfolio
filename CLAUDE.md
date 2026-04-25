@@ -37,6 +37,8 @@ bun run format   # Prettier formatting
 
 **Blog MDX system**: Blogs are stored as MDX files in `content/blogs/`. Each file contains frontmatter (title, slug, description, icon, date, tags, order) and MDX body content. Utility functions in `lib/blogs.ts` provide `getBlogSlugs()`, `getAllBlogCards()`, `getBlogWithContent()`, and `getAllBlogsWithContent()`.
 
+**List pages**: All projects and posts are browseable at `/work` and `/blog` (URL-driven search, filters, and pagination; work also supports sort and grid/list view).
+
 **Detail pages**: Projects and blogs can be viewed as modal overlays (on home page) or standalone pages at `/work/[slug]` and `/blog/[slug]`. MDX content is rendered using `next-mdx-remote`.
 
 **Design system**: CSS variables defined in `app/globals.css` with responsive sizing using `clamp()`. Uses Tailwind's `@theme` directive for custom tokens. Key concepts:

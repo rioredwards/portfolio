@@ -1,5 +1,7 @@
 # List Pages Spec
 
+**Status:** Shipped. Index routes: `app/work/page.tsx`, `app/blog/page.tsx`. Linked from `components/layout/navbar.tsx` and included in `app/sitemap.ts`.
+
 ## Feature Summary
 
 Add resource index pages for portfolio content so the site supports both:
