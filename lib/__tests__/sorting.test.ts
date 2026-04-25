@@ -9,19 +9,29 @@ describe("sortProjects", () => {
     { title: "Beta", category: "CLI Tool" },
   ];
 
-  it("sorts by order (curated) by default", () => {
+  it("sorts by recent (reverse curated order) by default", () => {
     const result = sortProjects(projects);
     expect(result.map((p) => p.title)).toEqual([
-      "Alpha",
-      "Zebra",
-      "Mango",
       "Beta",
+      "Mango",
+      "Zebra",
+      "Alpha",
     ]);
   });
 
-  it("sorts by order when given an invalid sort value", () => {
+  it("sorts by recent when given an invalid sort value", () => {
     const result = sortProjects(projects, "invalid");
     expect(result.map((p) => p.title)).toEqual([
+      "Beta",
+      "Mango",
+      "Zebra",
+      "Alpha",
+    ]);
+  });
+
+  it("sorts by curated order for oldest", () => {
+    const result = sortProjects(projects, "oldest");
+    expect(result.map((p) => p.title)).toEqual([
       "Alpha",
       "Zebra",
       "Mango",
@@ -29,8 +39,8 @@ describe("sortProjects", () => {
     ]);
   });
 
-  it("sorts by name alphabetically", () => {
-    const result = sortProjects(projects, "name");
+  it("sorts by name A-Z", () => {
+    const result = sortProjects(projects, "name_asc");
     expect(result.map((p) => p.title)).toEqual([
       "Alpha",
       "Beta",
@@ -39,19 +49,19 @@ describe("sortProjects", () => {
     ]);
   });
 
-  it("sorts by category then name", () => {
-    const result = sortProjects(projects, "category");
+  it("sorts by name Z-A", () => {
+    const result = sortProjects(projects, "name_desc");
     expect(result.map((p) => p.title)).toEqual([
-      "Alpha",
-      "Beta",
-      "Mango",
       "Zebra",
+      "Mango",
+      "Beta",
+      "Alpha",
     ]);
   });
 
   it("does not mutate the original array", () => {
     const original = [...projects];
-    sortProjects(projects, "name");
+    sortProjects(projects, "name_asc");
     expect(projects).toEqual(original);
   });
 });

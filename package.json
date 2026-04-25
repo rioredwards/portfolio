@@ -11,7 +11,6 @@
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "typecheck": "tsc --noEmit",
-    "typecheck:fix": "tsc --noEmit --fix",
     "test": "vitest run",
     "test:watch": "vitest",
     "test:e2e": "playwright test",
@@ -19,7 +18,15 @@
     "test:e2e:headed": "playwright test --headed",
     "test:e2e:debug": "playwright test --debug",
     "generate:resume-schema": "bun scripts/generate-resume-schema.ts",
-    "prepare": "husky"
+    "prepare": "husky",
+    "pre-commit": "lint-staged"
+  },
+  "lint-staged": {
+    "*.{js,jsx,mjs,cjs,ts,tsx}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.{css,json,md,mdx,yml,yaml}": "prettier --write"
   },
   "dependencies": {
     "@hugeicons/core-free-icons": "^3.1.1",
@@ -78,6 +85,7 @@
     "eslint": "^9",
     "eslint-config-next": "^16.0.6",
     "husky": "^9.1.7",
+    "lint-staged": "^16.4.0",
     "playwright": "^1.58.1",
     "prettier": "^3.8.1",
     "prettier-plugin-tailwindcss": "^0.7.2",
