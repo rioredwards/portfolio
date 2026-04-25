@@ -225,6 +225,7 @@ export function Contact({
                             onChange={(e) => field.handleChange(e.target.value)}
                             placeholder="Let's chat!"
                             rows={6}
+                            maxLength={100}
                             aria-invalid={isInvalid}
                             required
                           />

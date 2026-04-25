@@ -24,6 +24,9 @@ export const validateMessage = (val: string): string | undefined => {
   if (!val || val.trim().length === 0) {
     return "Message is required.";
   }
+  if (val.length > 100) {
+    return "Message must not exceed 100 characters.";
+  }
   return undefined;
 };
 
