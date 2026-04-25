@@ -15,9 +15,7 @@ test.describe("Work list page", () => {
     await expect(
       page.getByRole("heading", { name: "Work", level: 1 }),
     ).toBeVisible();
-    await expect(
-      page.getByText(/Showing \d+-\d+ of \d+ projects/),
-    ).toBeVisible();
+    await expect(page.getByText(/Showing \d+-\d+ of \d+/)).toBeVisible();
 
     const cards = page.locator("section[aria-label='Projects list'] article");
     await expect(cards.first()).toBeVisible();
@@ -33,9 +31,7 @@ test.describe("Work list page", () => {
     await chips.nth(1).click();
 
     await expect(page).toHaveURL(/category=/);
-    await expect(
-      page.getByText(/Showing \d+-\d+ of \d+ projects/),
-    ).toBeVisible();
+    await expect(page.getByText(/Showing \d+-\d+ of \d+/)).toBeVisible();
 
     // "All" chip should clear the filter
     await filterSection.getByRole("link", { name: "All" }).click();
@@ -43,14 +39,14 @@ test.describe("Work list page", () => {
   });
 
   test("sort dropdown updates URL and preserves filter", async ({ page }) => {
-    const sortSelect = page.getByLabel("Sort:");
+    const sortSelect = page.getByLabel("Sort projects");
     await expect(sortSelect).toBeVisible();
 
-    await sortSelect.selectOption("name");
-    await expect(page).toHaveURL(/sort=name/);
+    await sortSelect.selectOption("name_asc");
+    await expect(page).toHaveURL(/sort=name_asc/);
 
-    // Select curated (default) clears the sort param
-    await sortSelect.selectOption("");
+    // Most Recent (curated default) clears the sort param
+    await sortSelect.selectOption("recent");
     await expect(page).not.toHaveURL(/sort=/);
   });
 
@@ -62,7 +58,9 @@ test.describe("Work list page", () => {
 
     await searchInput.fill("zzzznotfound");
     await page.waitForURL(/q=zzzznotfound/);
-    await expect(page.getByText("No projects match your search")).toBeVisible();
+    await expect(
+      page.getByText("Try a different keyword or clear filters."),
+    ).toBeVisible();
 
     // Clear search
     await page.getByRole("button", { name: "Clear search" }).click();
@@ -75,25 +73,27 @@ test.describe("Work list page", () => {
     // Check if pagination exists (might not with few items)
     const nextButton = page
       .getByRole("navigation", { name: "Pagination" })
-      .getByRole("link", { name: "Next" });
+      .getByRole("link", { name: "Next page" });
+    if ((await nextButton.count()) === 0) return;
     const isDisabled = await nextButton.getAttribute("aria-disabled");
 
     if (isDisabled === "true") return;
 
     // Set a sort param first
-    await page.getByLabel("Sort:").selectOption("name");
-    await page.waitForURL(/sort=name/);
+    await page.getByLabel("Sort projects").selectOption("name_asc");
+    await page.waitForURL(/sort=name_asc/);
 
     // Navigate to page 2
     await nextButton.click();
     await expect(page).toHaveURL(/page=2/);
-    await expect(page).toHaveURL(/sort=name/);
+    await expect(page).toHaveURL(/sort=name_asc/);
   });
 
   test("changing filter resets to page 1", async ({ page }) => {
     const nextButton = page
       .getByRole("navigation", { name: "Pagination" })
-      .getByRole("link", { name: "Next" });
+      .getByRole("link", { name: "Next page" });
+    if ((await nextButton.count()) === 0) return;
     const isDisabled = await nextButton.getAttribute("aria-disabled");
 
     if (isDisabled === "true") return;
