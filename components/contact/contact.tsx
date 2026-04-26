@@ -225,13 +225,13 @@ export function Contact({
                             onChange={(e) => field.handleChange(e.target.value)}
                             placeholder="Let's chat!"
                             rows={6}
-                            maxLength={100}
+                            maxLength={1000}
                             aria-invalid={isInvalid}
                             required
                           />
                           <InputGroupAddon align="block-end">
                             <InputGroupText className="tabular-nums">
-                              {field.state.value.length}/100 characters
+                              {field.state.value.length}/1,000 characters
                             </InputGroupText>
                           </InputGroupAddon>
                         </InputGroup>
