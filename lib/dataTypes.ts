@@ -13,7 +13,7 @@ export const emailSchema = z.object({
   message: z
     .string()
     .min(1, "Message is required.")
-    .max(100, "Message must not exceed 100 characters."),
+    .max(1000, "Message must not exceed 1000 characters."),
   // Honeypot field - should always be empty (bots fill this in)
   website: z.string().max(0, "Invalid submission.").optional(),
 });

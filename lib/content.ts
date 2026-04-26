@@ -3,6 +3,8 @@ import matter from "gray-matter";
 import path from "path";
 import { z } from "zod";
 
+export { sortByOrder } from "@/lib/sorting";
+
 /**
  * Get all content slugs from a directory of MDX files.
  */
@@ -83,17 +85,4 @@ export function getContentWithContent<T, U = T>(
     console.error(`Error reading ${context} ${slug}:`, error);
     return null;
   }
-}
-
-/**
- * Sort items by optional order field (lower first, items with order before those without).
- */
-export function sortByOrder<T extends { order?: number }>(items: T[]): T[] {
-  return [...items].sort((a, b) => {
-    if (a.order !== undefined && b.order !== undefined)
-      return a.order - b.order;
-    if (a.order !== undefined) return -1;
-    if (b.order !== undefined) return 1;
-    return 0;
-  });
 }
