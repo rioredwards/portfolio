@@ -14,20 +14,20 @@ export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
 export default async function Image() {
-  const [mazaeniFont, dmSans500, dmSans700] = await Promise.all([
+  const [mazaeniFont, dmSans400, dmSans700] = await Promise.all([
     readFile(join(process.cwd(), "fonts", "Mazaeni-ExtraBold.ttf")),
     fetch(
-      "https://fonts.gstatic.com/s/dmsans/v15/rP2Hp2ywxg089UriCZOIHTWEBlw.ttf",
+      "https://fonts.gstatic.com/s/dmsans/v17/rP2tp2ywxg089UriI5-g4vlH9VoD8CmcqZG40F9JadbnoEwAopxhTg.ttf",
     ).then((res) => res.arrayBuffer()),
     fetch(
-      "https://fonts.gstatic.com/s/dmsans/v15/rP2Hp2ywxg089UriCZ2IHTWEBlwu.ttf",
+      "https://fonts.gstatic.com/s/dmsans/v17/rP2tp2ywxg089UriI5-g4vlH9VoD8CmcqZG40F9JadbnoEwARZthTg.ttf",
     ).then((res) => res.arrayBuffer()),
   ]);
 
   return new ImageResponse(
     <div
       style={{
-        background: BG,
+        background: `radial-gradient(ellipse at center, #f5ece0 0%, ${BG} 100%)`,
         width: "100%",
         height: "100%",
         display: "flex",
@@ -37,18 +37,6 @@ export default async function Image() {
         position: "relative",
       }}
     >
-      {/* Subtle radial glow behind the card */}
-      <div
-        style={{
-          position: "absolute",
-          width: "800px",
-          height: "400px",
-          background:
-            "radial-gradient(ellipse at center, rgba(45, 100, 93, 0.08) 0%, transparent 70%)",
-          display: "flex",
-        }}
-      />
-
       {/* RioBot title */}
       <div
         style={{
@@ -70,16 +58,7 @@ export default async function Image() {
             background: FG,
           }}
         >
-          <svg
-            width="32"
-            height="32"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="#fdfbf6"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
+          <svg width="30" height="30" viewBox="0 0 24 24" fill="#fdfbf6">
             <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
           </svg>
         </div>
@@ -154,54 +133,57 @@ export default async function Image() {
       <div
         style={{
           position: "absolute",
-          bottom: "195px",
-          right: "250px",
+          top: "365px",
+          left: "690px",
           display: "flex",
           filter: "drop-shadow(0 2px 4px rgba(0,0,0,0.15))",
         }}
       >
-        <svg width="40" height="48" viewBox="0 0 24 24" fill="#1a1a1a">
+        <svg width="36" height="44" viewBox="0 0 24 24" fill="#1a1a1a">
           <path d="M5.5 3.21V20.8c0 .45.54.67.85.35l4.86-4.86a.5.5 0 0 1 .35-.15h6.87c.48 0 .72-.58.38-.92L5.88 2.77a.5.5 0 0 0-.85.35l.47.09z" />
         </svg>
       </div>
 
-      {/* Decorative sparkles */}
+      {/* Decorative sparkles - matching reference positions */}
+      {/* Top right teal sparkle */}
       <div
         style={{
           position: "absolute",
-          top: "110px",
+          top: "100px",
+          right: "140px",
+          display: "flex",
+          color: "rgba(45, 100, 93, 0.35)",
+        }}
+      >
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12 0L14.59 9.41L24 12L14.59 14.59L12 24L9.41 14.59L0 12L9.41 9.41L12 0Z" />
+        </svg>
+      </div>
+      {/* Upper right gray/teal sparkle */}
+      <div
+        style={{
+          position: "absolute",
+          top: "160px",
           right: "200px",
           display: "flex",
-          color: "rgba(45, 100, 93, 0.2)",
+          color: "rgba(92, 75, 62, 0.2)",
         }}
       >
-        <svg width="36" height="36" viewBox="0 0 24 24" fill="currentColor">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
           <path d="M12 0L14.59 9.41L24 12L14.59 14.59L12 24L9.41 14.59L0 12L9.41 9.41L12 0Z" />
         </svg>
       </div>
+      {/* Bottom left gold sparkle */}
       <div
         style={{
           position: "absolute",
-          bottom: "140px",
-          left: "160px",
+          bottom: "150px",
+          left: "180px",
           display: "flex",
-          color: "rgba(45, 100, 93, 0.15)",
+          color: "rgba(218, 183, 115, 0.5)",
         }}
       >
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-          <path d="M12 0L14.59 9.41L24 12L14.59 14.59L12 24L9.41 14.59L0 12L9.41 9.41L12 0Z" />
-        </svg>
-      </div>
-      <div
-        style={{
-          position: "absolute",
-          top: "180px",
-          left: "120px",
-          display: "flex",
-          color: "rgba(218, 183, 115, 0.3)",
-        }}
-      >
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
           <path d="M12 0L14.59 9.41L24 12L14.59 14.59L12 24L9.41 14.59L0 12L9.41 9.41L12 0Z" />
         </svg>
       </div>
@@ -217,9 +199,9 @@ export default async function Image() {
         },
         {
           name: "DM Sans",
-          data: dmSans500,
+          data: dmSans400,
           style: "normal",
-          weight: 500,
+          weight: 400,
         },
         {
           name: "DM Sans",
