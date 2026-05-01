@@ -19,8 +19,8 @@ function collectSlides(node: React.ReactNode): LightboxSlide[] {
           ? {
               src: props.src,
               alt: props.alt,
-              width: 1000,
-              height: 1000,
+              width: typeof props.width === "number" ? props.width : 1000,
+              height: typeof props.height === "number" ? props.height : 1000,
               description: props.caption,
             }
           : { ...props.src, alt: props.alt, description: props.caption };

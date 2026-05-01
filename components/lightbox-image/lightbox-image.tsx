@@ -14,6 +14,9 @@ export interface LightboxImageProps {
   gallery?: LightboxSlide[];
   galleryIndex?: number;
   priority?: boolean;
+  /** Required for correct aspect with string `src` (static imports carry dimensions automatically). */
+  width?: number;
+  height?: number;
   className?: string;
   sizes?: string;
   maximizeIcon?: React.ReactNode;
@@ -27,6 +30,8 @@ export function LightboxImage({
   gallery,
   galleryIndex = 0,
   priority = false,
+  width,
+  height,
   className,
   sizes = "(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 640px",
   maximizeIcon,
@@ -35,7 +40,14 @@ export function LightboxImage({
 
   const slide: LightboxSlide = isStaticImage
     ? { ...src, alt, description: caption }
-    : { src, alt, description: caption };
+    : {
+        src,
+        alt,
+        description: caption,
+        ...(typeof width === "number" && typeof height === "number"
+          ? { width, height }
+          : {}),
+      };
 
   return (
     <figure className="my-6 size-full">
@@ -48,6 +60,8 @@ export function LightboxImage({
         <ImageOverlay
           src={src}
           alt={alt}
+          width={width}
+          height={height}
           sizes={sizes}
           priority={priority}
           className={cn("size-full", className)}
