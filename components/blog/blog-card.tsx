@@ -40,8 +40,10 @@ export function BlogCard({ title, slug, description, icon }: BlogCardProps) {
       </div>
 
       {/* Icon bubble */}
-      <div className="flex h-24 w-24 shrink-0 items-center justify-center rounded-full bg-background">
-        <div className="text-foreground">{icon}</div>
+      <div className="flex h-24 w-24 shrink-0 items-center justify-center rounded-full bg-background transition-transform duration-300 ease-out group-hover:scale-110 group-hover:rotate-3">
+        <div className="text-foreground transition-transform duration-300 ease-out group-hover:scale-95">
+          {icon}
+        </div>
       </div>
     </button>
   );

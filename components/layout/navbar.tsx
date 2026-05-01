@@ -43,12 +43,12 @@ export function Navbar() {
                 // Override NavigationMenuLink defaults
                 "flex! shrink-0 flex-row! items-center gap-0! rounded-full!",
                 // Custom styling with proper padding
-                "cursor-pointer px-4! py-1.5! text-sm font-medium transition-colors",
+                "relative cursor-pointer px-4! py-1.5! text-sm font-medium transition-colors",
                 "max-[390px]:px-2.5!",
                 // Hover/active states
                 "hover:bg-background/50 hover:text-primary-hover",
                 "focus:bg-transparent focus:text-primary-hover",
-                "data-[active=true]:bg-background/50 data-[active=true]:text-primary-hover",
+                "data-[active=true]:bg-background/50 data-[active=true]:font-semibold data-[active=true]:text-primary-hover",
                 // Focus visible for accessibility
                 "focus-visible:text-primary-hover focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:outline-none",
               );

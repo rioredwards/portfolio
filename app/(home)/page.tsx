@@ -128,6 +128,18 @@ export default async function Home() {
           fill="secondary"
         >
           <SectionHeader title="Blog" />
+          <SectionContentWrapper className="pt-0 pb-8">
+            <p className="mx-auto max-w-prose-max text-center leading-relaxed text-body-text">
+              Lessons learned, experiments tried, and thoughts on building
+              better software.{" "}
+              <Link
+                href="/blog"
+                className="text-primary no-underline hover:underline focus:underline focus:outline-none"
+              >
+                Read all posts&nbsp;&rarr;
+              </Link>
+            </p>
+          </SectionContentWrapper>
         </SlidePanel>
         <SlidePanel
           orientation="right"
@@ -159,6 +171,12 @@ export default async function Home() {
           previousDecorationHeight="tall"
         >
           <SectionHeader title="Contact" />
+          <SectionContentWrapper className="pt-0 pb-8">
+            <p className="mx-auto max-w-prose-max text-center leading-relaxed text-body-text">
+              Have a project in mind or just want to connect? I&apos;d love to
+              hear from you.
+            </p>
+          </SectionContentWrapper>
         </SlidePanel>
         <SlidePanel
           orientation="left"
