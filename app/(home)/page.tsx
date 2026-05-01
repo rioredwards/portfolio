@@ -18,6 +18,7 @@ import { CONTACT_EMAIL } from "@/lib/constants";
 import { getAllBlogCards, getAllBlogsWithContent } from "@/lib/blogs";
 import { getAllProjectCards, getAllProjectsWithContent } from "@/lib/projects";
 import { MDXRemote } from "next-mdx-remote/rsc";
+import Link from "next/link";
 import { Fragment, Suspense } from "react";
 import { ErrorBoundary } from "@/components/ui/error-boundary";
 
@@ -72,7 +73,19 @@ export default async function Home() {
           previousDecorationHeight={"short"}
           fill="secondary"
         >
-          <SectionHeader title="Work" />
+          <SectionHeader title="Featured Work" />
+          <SectionContentWrapper className="pt-0 pb-8">
+            <p className="mx-auto max-w-prose-max text-center leading-relaxed text-body-text">
+              A curated selection of projects that show how I approach frontend
+              craft, product thinking, and end-to-end delivery.{" "}
+              <Link
+                href="/work"
+                className="text-primary no-underline hover:underline focus:underline focus:outline-none"
+              >
+                Explore all work&nbsp;&rarr;
+              </Link>
+            </p>
+          </SectionContentWrapper>
         </SlidePanel>
         {projectCards.map((project, index) => (
           <Fragment key={`${project.title}-${index}`}>
