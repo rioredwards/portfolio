@@ -15,6 +15,11 @@ import ImgOhmLogoProgression from "@/public/work/images/ohm/ohm-logo-progression
 import ImgOhmParticlesScreenshot from "@/public/work/images/ohm/ohm-screenshot-2.jpg";
 import ImgOhmScreenshot3 from "@/public/work/images/ohm/ohm-screenshot-3.jpg";
 
+// CRM Document Manager
+import ImgCrmDocumentManagerDiagramArchitecture from "@/public/work/images/crm-document-manager/diagram-architecture.png";
+import ImgCrmDocumentManagerDiagramEmbedContext from "@/public/work/images/crm-document-manager/diagram-embed-context.png";
+import ImgCrmDocumentManagerDiagramAuthFlow from "@/public/work/images/crm-document-manager/diagram-auth-flow.png";
+
 export const projectImageScope = {
   ImgDogTownScreenshot,
   ImgDogTownTechStack,
@@ -29,4 +34,7 @@ export const projectImageScope = {
   ImgOhmLighthouseScores,
   ImgOhmCarouselScreenshot,
   ImgOhmParticlesScreenshot,
+  ImgCrmDocumentManagerDiagramArchitecture,
+  ImgCrmDocumentManagerDiagramEmbedContext,
+  ImgCrmDocumentManagerDiagramAuthFlow,
 };

@@ -8,6 +8,9 @@ import Image, { StaticImageData } from "next/image";
 export interface ImageOverlayProps extends ImageOverlayClientProps {
   src: string | StaticImageData;
   alt: string;
+  /** With string `src`, intrinsic aspect ratio is unknown unless you pass these (or use a static import). */
+  width?: number;
+  height?: number;
   sizes?: string;
   priority?: boolean;
   overlayClassName?: string;
@@ -20,6 +23,8 @@ export interface ImageOverlayProps extends ImageOverlayClientProps {
 function ImageOverlay({
   src,
   alt,
+  width: intrinsicWidth,
+  height: intrinsicHeight,
   sizes,
   priority = false,
   className,
@@ -35,6 +40,11 @@ function ImageOverlay({
   const staticAspectRatio = isStaticImage
     ? `${src.width} / ${src.height}`
     : undefined;
+  const explicitAspectRatio =
+    typeof intrinsicWidth === "number" && typeof intrinsicHeight === "number"
+      ? `${intrinsicWidth} / ${intrinsicHeight}`
+      : undefined;
+  const aspectRatio = staticAspectRatio ?? explicitAspectRatio;
 
   const srcString = isStaticImage ? src.src : src;
   const isAnimatedGif = srcString.toLowerCase().endsWith(".gif");
@@ -42,11 +52,12 @@ function ImageOverlay({
   return (
     <ImageOverlayClient
       className={cn(
-        "group/overlay relative aspect-square cursor-pointer overflow-hidden rounded-2xl shadow-lg",
+        "group/overlay relative cursor-pointer overflow-hidden rounded-2xl shadow-lg",
+        aspectRatio ? "" : "aspect-square",
         className,
       )}
       style={{
-        ...(staticAspectRatio ? { aspectRatio: staticAspectRatio } : {}),
+        ...(aspectRatio ? { aspectRatio } : {}),
         ...clientProps.style,
       }}
       {...clientProps}

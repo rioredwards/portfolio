@@ -1,0 +1,159 @@
+---
+title: "CRM Document Manager"
+slug: "crm-document-manager"
+description: "HIPAA-compliant document management inside HubSpot, used daily by 30+ professionals"
+category: "Web App"
+skills:
+  - "TypeScript"
+  - "React"
+  - "Node.js"
+  - "Firebase"
+  - "Jest"
+  - "HubSpot"
+  - "Security & Compliance"
+  - "JWT Auth"
+  - "File Uploads"
+  - "Multipart Streaming"
+  - "Audit Trails"
+  - "Transactional Rollback"
+image: "/work/images/crm-document-manager/preview.png"
+brandColor: "#FF7A59"
+order: 0
+---
+
+<LightboxGallery>
+
+**NOTE:** Because the underlying work is under NDA, the figures in this case study are conceptual diagrams, not screenshots of production UI or source code.
+
+<LightboxImage
+  src={ImgCrmDocumentManagerDiagramEmbedContext}
+  alt="Conceptual diagram (not a product screenshot) of a CRM claim record with an embedded document management surface and supporting services"
+  caption="Overview: claim record, embedded app card, and upload surface"
+  priority={true}
+/>
+
+A law firm migrating off a legacy CRM needed to manage case documents inside HubSpot: upload, browse, organize, move, delete, all without switching tools. I built a HIPAA-compliant document manager embedded directly in claim records. Thirty-plus professionals use it daily.
+
+---
+
+## Project snapshot
+
+- **Timeline:** ~5 weeks (Sep-Oct 2025)
+- **Users:** 30+ professionals using it daily
+- **My role:** Built the app card UI, backend APIs, embedded uploader, and security/compliance design end-to-end
+- **Core constraint:** HubSpot's extension API doesn't expose a native file upload component, and the built-in uploader has a per-record file count limit
+
+---
+
+## The problem
+
+During a CRM migration, the firm needed an in-CRM workflow to manage case documents:
+
+- Upload and organize documents by claim category
+- Move documents without breaking structure
+- Delete documents safely, including GDPR-compliant deletes
+- Maintain an audit trail for every action: who did what, when
+
+This had to live inside HubSpot so the team could work directly from claim records.
+
+---
+
+## Constraints (and the decisions they forced)
+
+### 1) HubSpot's limited file upload capabilities
+
+HubSpot has a native file upload component, but it has some limitations: critically, it has a per-record file count limit which would have been hit by the firm's caseload. This was the initial constraint which led to building a custom App Card component.
+
+The next problem was that HubSpot's app card API doesn't include a file upload component. It's a constrained environment with no arbitrary HTML/CSS/JavaScript — but it does provide a UI component that renders an iFrame, which made a custom uploader possible.
+
+**Decision:** Build a separate Vite + React upload app hosted on Firebase Hosting, opened in a HubSpot modal. Drag-and-drop, category selection, progress UX, up to 20 files at 250MB each.
+
+One more wrinkle: files over 32MB can't go through Google Cloud Functions because of an HTTP/1.1 request-size cap on Cloud Run. The upload endpoint runs on Firebase App Hosting instead, using Express over HTTP/2 to bypass the limit.
+
+### 2) Multi-system trust boundaries
+
+Four systems needed to trust each other:
+
+1. HubSpot app card (user-facing UI)
+2. Firebase Cloud Functions (auth + file operations)
+3. Firebase App Hosting (upload endpoint)
+4. iFrame upload app (hosted on Firebase Hosting)
+
+**Decision:** Multi-hop auth chain: HubSpot-signed request → backend validates and issues a short-lived JWT → every downstream operation validates JWT claims (issuer, audience, user identity).
+
+---
+
+## Architecture
+
+<LightboxImage
+  src={ImgCrmDocumentManagerDiagramArchitecture}
+  alt="Architecture diagram: HubSpot app card, Firebase Cloud Functions, Firebase App Hosting upload endpoint, and the iFrame upload app on Firebase Hosting"
+  caption="System architecture: app card, APIs, and separate upload surface"
+/>
+
+- **HubSpot app card (React/TS):** File tree, navigation, move/delete flows. Clean state modeling and predictable fetch patterns so the UI stays consistent after uploads that happen in a separate surface.
+- **Firebase Cloud Functions (Node/TS):** Auth validation and JWT issuance, file listing with pagination, move/folder creation, GDPR-compliant deletion. Structured logging designed to avoid capturing sensitive information.
+- **Firebase App Hosting (Express/HTTP/2):** Upload endpoint, bypassing the Cloud Run HTTP/1.1 request-size cap for large files. Busboy handles streaming multipart parsing.
+- **Embedded upload app (Vite + React, Firebase Hosting):** Drag-and-drop uploads, category selection, progress UX, serial upload handling, context and token parsing, secure handoff back to the extension.
+
+Jest test suites cover the critical auth and file operation paths.
+
+---
+
+## Security, compliance, and auditability
+
+<LightboxImage
+  src={ImgCrmDocumentManagerDiagramAuthFlow}
+  alt="Auth flow diagram: HubSpot HMAC validation, short-lived JWT issuance, and validation on subsequent requests including the iFrame uploader"
+  caption="Multi-hop auth: HubSpot → backend → iFrame (tokens via URL hash, not in logs)"
+/>
+
+### Multi-hop auth chain
+
+- Initial extension load validated with **HubSpot HMAC v3 signature verification**, including replay protection (stale requests rejected)
+- Backend issues a **short-lived JWT**
+- Every subsequent operation validates JWT claims (issuer, audience, user identity)
+
+### Secure iFrame token handoff
+
+The uploader receives auth context via **URL hash fragments** (client-only), so tokens never appear in server logs or referrer headers.
+
+### Audit trail on every operation
+
+Every file operation (upload, move, delete) creates an audit note on the relevant HubSpot record.
+
+### Rollback and consistency
+
+If an operation partially succeeds, the system cleans up:
+
+- Upload succeeds but audit note fails → uploaded file is rolled back
+- Delete succeeds but note fails → note cleanup is attempted (no "phantom audit")
+
+Partial success gets treated as failure.
+
+### Logging
+
+Structured logging was set up to avoid capturing sensitive information (names, emails, claim details) in Firebase/GCP logs.
+
+---
+
+## Shipping in two phases
+
+The project shipped in two phases:
+
+- **Phase 1:** Upload modal and uploader shipped first. The team could start working before the browsing and organizing flows were ready.
+- **Phase 2:** Full file tree, navigation, move, delete, and folder flows.
+
+Shipping the uploader first was the right call. The team got immediate value, and I got real usage signals before finishing the second half of the system.
+
+---
+
+## Outcome
+
+A production system used daily by a real professional team, delivered in ~5 weeks under compliance and platform constraints. The work I'm proudest of was turning a constrained CRM extension environment into something that felt like a real document management tool: secure, usable, and integrated into the team's daily workflow.
+
+---
+
+[Back Home](/)
+
+</LightboxGallery>
