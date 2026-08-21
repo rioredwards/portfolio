@@ -24,7 +24,7 @@ const walk = (dir: string): string[] =>
 for (const diffPath of walk("test-results").sort()) {
   const dir = diffPath.slice(0, -diffPath.split("/").pop()!.length - 1);
   const name = basename(diffPath, "-diff.png");
-  const project = basename(dir).replace(/^visual-.*-visual-/, ""); // visual-home-visual-chromium
+  const project = basename(dir).replace(/^visual-.*-visual-/, "").replace(/-retry\d+$/, ""); // visual-home-visual-chromium
   const { data, info } = await sharp(diffPath)
     .raw()
     .toBuffer({ resolveWithObject: true });
