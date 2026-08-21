@@ -9,6 +9,10 @@ const playwrightBaseUrl = `http://${playwrightHost}:${playwrightPort}`;
  */
 export default defineConfig({
   testDir: "./e2e",
+  /* @visual snapshots (e2e/visual.spec.ts) only run with VISUAL=1 — CI's `visual` job. */
+  grepInvert: process.env.VISUAL ? undefined : /@visual/,
+  /* One baseline per project, no platform suffix: baselines are CI-generated (Linux) only. */
+  snapshotPathTemplate: "{testDir}/__screenshots__/{projectName}/{arg}{ext}",
   /* Run tests in files in parallel */
   fullyParallel: true,
   /* Fail the build on CI if you accidentally left test.only in the source code. */
