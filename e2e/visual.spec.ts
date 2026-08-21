@@ -1,4 +1,5 @@
 import { expect, test, type Page } from "@playwright/test";
+import { HomePage } from "./pom/home-page";
 import { primaryBlog, primaryProject } from "./support/site-data";
 
 // Visual snapshots for PR review. Baselines live in e2e/__screenshots__ and are
@@ -27,9 +28,8 @@ for (const [name, path] of Object.entries(routes)) {
   test(`${name} @visual`, async ({ page }) => {
     await page.emulateMedia({ reducedMotion: "reduce" });
     await page.goto(path, { waitUntil: "networkidle" });
-    await page.waitForFunction(
-      () => document.documentElement.dataset.appHydrated === "true",
-    );
+    // Hydration flag is set in the root layout, so it covers every route.
+    await new HomePage(page).waitForHydration();
     await expect(page).toHaveScreenshot(`${name}.png`, {
       fullPage: true,
       animations: "disabled",

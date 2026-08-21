@@ -81,6 +81,7 @@ bun run test:e2e      # Run Playwright e2e tests
 UI screenshots: every PR's `visual` CI job regenerates `e2e/__screenshots__` (Linux container)
 and commits them to the PR branch, so changed routes show as image diffs in _Files changed_.
 Don't run `--update-snapshots` locally — macOS pixels never match the CI baselines.
+That bot commit doesn't re-run CI, so the PR head shows no checks until you push again.
 
 ## Deployment
 
