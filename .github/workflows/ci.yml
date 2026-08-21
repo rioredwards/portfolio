@@ -59,3 +59,44 @@ jobs:
           name: playwright-report
           path: playwright-report/
           retention-days: 30
+
+  visual:
+    name: Visual snapshots → PR branch
+    # Regenerates e2e/__screenshots__ in a pinned Linux container and commits
+    # them to the PR branch so GitHub's image diff shows UI changes. Never
+    # fails on pixel diffs; GITHUB_TOKEN pushes don't re-trigger CI.
+    if: ${{ !github.event.pull_request.head.repo.fork }}
+    runs-on: ubuntu-latest
+    container: mcr.microsoft.com/playwright:v1.58.1-noble
+    permissions:
+      contents: write
+    env:
+      HUSKY: 0
+      SKIP_ENV_VALIDATION: true
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref }}
+
+      # Checkout inside a container leaves the workspace owned by another uid.
+      - run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+
+      - name: Install dependencies
+        run: bun install --frozen-lockfile
+
+      - name: Capture screenshots
+        run: bunx playwright test --grep @visual --project chromium --project "Mobile Chrome" --update-snapshots
+        env:
+          VISUAL: 1
+
+      - name: Commit updated screenshots
+        uses: stefanzweifel/git-auto-commit-action@v7
+        with:
+          commit_message: "chore(visual): update screenshots"
+          file_pattern: e2e/__screenshots__/**
