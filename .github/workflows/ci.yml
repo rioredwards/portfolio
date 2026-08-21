@@ -70,6 +70,7 @@ jobs:
     container: mcr.microsoft.com/playwright:v1.58.1-noble
     permissions:
       contents: write
+      pull-requests: write
     env:
       HUSKY: 0
       SKIP_ENV_VALIDATION: true
@@ -89,7 +90,17 @@ jobs:
       - name: Install dependencies
         run: bun install --frozen-lockfile
 
-      - name: Capture screenshots
+      # Pass 1 compares against the committed baselines so Playwright writes
+      # *-diff.png for changed routes. Mismatches are expected, never fatal.
+      - name: Compare against baselines
+        run: bunx playwright test --grep @visual --project chromium --project "Mobile Chrome" || true
+        env:
+          VISUAL: 1
+
+      - name: Crop diffs to the changed band
+        run: bun e2e/support/visual-diffs.ts "https://raw.githubusercontent.com/${{ github.repository }}/visual-diffs/pr-${{ github.event.number }}/${{ github.run_id }}"
+
+      - name: Update baselines
         run: bunx playwright test --grep @visual --project chromium --project "Mobile Chrome" --update-snapshots
         env:
           VISUAL: 1
@@ -99,3 +110,24 @@ jobs:
         with:
           commit_message: "chore(visual): update screenshots"
           file_pattern: e2e/__screenshots__/**
+
+      # Crops live on an orphan branch so they never pollute main; the comment
+      # embeds them via raw URLs (renders inline on public repos).
+      - name: Publish diff crops
+        run: |
+          set -e
+          dest="pr-${{ github.event.number }}/${{ github.run_id }}"
+          tmp=$(mktemp -d)
+          git -C "$tmp" init -q -b visual-diffs
+          git -C "$tmp" config user.name github-actions && git -C "$tmp" config user.email github-actions@github.com
+          git -C "$tmp" remote add origin "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git"
+          git -C "$tmp" fetch -q origin visual-diffs && git -C "$tmp" checkout -q visual-diffs || true
+          mkdir -p "$tmp/$dest" && cp -r visual-diffs/. "$tmp/$dest/" && rm -f "$tmp/$dest/comment.md"
+          git -C "$tmp" add -A && git -C "$tmp" commit -qm "visual diffs for PR #${{ github.event.number }} run ${{ github.run_id }}" || exit 0
+          git -C "$tmp" push -q origin visual-diffs
+
+      - name: Comment on PR
+        uses: marocchino/sticky-pull-request-comment@v2
+        with:
+          header: visual-diffs
+          path: visual-diffs/comment.md
