@@ -8,7 +8,7 @@ export function Footer() {
     <footer className="mx-auto flex max-w-content-max-w flex-col items-start justify-between gap-8 px-content-px py-content-py text-secondary-foreground md:flex-row md:items-center md:px-content-px-md">
       {/* Left copy */}
       <div className="space-y-1 text-sm">
-        <p className="font-semibold">Designed and Developed by</p>
+        <p className="font-semibold">VALIDATE #35 — Designed and Developed by</p>
         <p>Rio Edwards</p>
         <p>©{new Date().getFullYear()}</p>
       </div>
