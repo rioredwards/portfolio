@@ -59,3 +59,15 @@ jobs:
           name: playwright-report
           path: playwright-report/
           retention-days: 30
+
+  visual:
+    name: Visual diffs
+    if: ${{ !github.event.pull_request.head.repo.fork }}
+    permissions:
+      contents: write
+      pull-requests: write
+    uses: rioredwards/visual-diffs-action/.github/workflows/visual-diffs.yml@main
+    with:
+      container: mcr.microsoft.com/playwright:v1.58.1-noble
+      install-command: npm install -g bun && HUSKY=0 bun install --frozen-lockfile
+      test-command: VISUAL=1 SKIP_ENV_VALIDATION=true bunx playwright test --grep @visual --project chromium --project "Mobile Chrome"
